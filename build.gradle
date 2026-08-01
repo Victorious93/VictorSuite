@@ -1,0 +1,44 @@
+buildscript {
+    // ZeroTermux add {@
+    ext.kotlin_version = '2.2.0'
+    // @}
+    repositories {
+        mavenCentral()
+        google()
+        // ZeroTermux add {@
+        maven { url 'https://jitpack.io' }
+        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/" }
+        //maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { setUrl("https://maven.aliyun.com/repository/public") }
+        maven { setUrl("https://maven.aliyun.com/repository/google") }
+        // @}
+
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.13.2"
+        // ZeroTermux add {@
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        // @}
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        // ZeroTermux add {@
+        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/" }
+        //maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { setUrl("https://maven.aliyun.com/repository/public") }
+        maven { setUrl("https://maven.aliyun.com/repository/google") }
+        // @}
+    }
+}
+// ZeroTermux add {@
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+// @}
