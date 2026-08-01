@@ -125,6 +125,8 @@
             click="java:com.termux.zerocore.config.mainmenu.config.QEMUClickConfig" />
         <item tag="ZT设置"
             click="java:com.termux.zerocore.config.mainmenu.config.ZTSettingsClickConfig" />
+        <item tag="插件管理"
+            click="java:com.termux.zerocore.config.mainmenu.config.PluginManagerClickConfig" />
     </group>
 
     <group name="X11功能">

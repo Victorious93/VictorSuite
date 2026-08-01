@@ -1313,6 +1313,23 @@
     <string name="zt_usage_habits_ztermux">设置成功VictorSuite使用习惯,更改配置请到设置</string>
 
     <string name="zt_guide">双击屏幕边缘弹出左/右菜单栏\n如果你设置了ZT使用习惯,则为音量+-键\n如果打开左/右侧栏无法关闭此窗口\n长按此处强制关闭</string>
+
+    <!-- 插件管理器 (com.termux.zerocore.plugin) -->
+    <string name="plugin_manager_title">插件管理</string>
+    <string name="plugin_none_registered">暂无已注册的插件。请在 remote/plugins/main.json 中添加条目，或本地注册一个——详见 PLUGINS.md。</string>
+    <string name="plugin_configure">配置</string>
+    <string name="plugin_launch">启动</string>
+    <string name="plugin_state_enabled">已启用</string>
+    <string name="plugin_state_disabled">已禁用</string>
+    <string name="plugin_authorized_use_title">确认授权使用</string>
+    <string name="plugin_authorized_use_message">我确认已获授权在此环境中使用\"%1$s\"，并且只会将其用于我有权测试的系统和目标。</string>
+    <string name="plugin_authorized_use_confirm">我确认</string>
+    <string name="plugin_not_enabled_msg">请先启用此插件。</string>
+    <string name="plugin_entry_point_missing_msg">未在磁盘上找到入口文件，请自行安装到：%1$s</string>
+    <string name="plugin_launch_sent_msg">命令已发送到终端。</string>
+    <string name="plugin_config_saved_msg">设置已保存。</string>
+    <string name="plugin_fetch_failed_msg">无法加载插件清单。</string>
+    <string name="plugin_enable_failed_msg">无法启用插件：%1$s</string>
 </resources>
 
 

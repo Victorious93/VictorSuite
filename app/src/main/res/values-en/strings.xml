@@ -1311,4 +1311,21 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="zt_usage_habits_termux">Termux usage habit set successfully. Please go to settings to change the configuration.</string>
     <string name="zt_usage_habits_ztermux">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
     <string name="zt_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the ZT usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
+
+    <!-- Plugin manager (com.termux.zerocore.plugin) -->
+    <string name="plugin_manager_title">Plugin Manager</string>
+    <string name="plugin_none_registered">No plugins registered yet. Add an entry to remote/plugins/main.json, or register one locally — see PLUGINS.md.</string>
+    <string name="plugin_configure">Configure</string>
+    <string name="plugin_launch">Launch</string>
+    <string name="plugin_state_enabled">Enabled</string>
+    <string name="plugin_state_disabled">Disabled</string>
+    <string name="plugin_authorized_use_title">Confirm authorized use</string>
+    <string name="plugin_authorized_use_message">I confirm I am authorized to use \"%1$s\" in this environment, and will only use it against systems and targets I have permission to test.</string>
+    <string name="plugin_authorized_use_confirm">I confirm</string>
+    <string name="plugin_not_enabled_msg">Enable this plugin first.</string>
+    <string name="plugin_entry_point_missing_msg">Entry point not found on disk. Install the tool yourself under: %1$s</string>
+    <string name="plugin_launch_sent_msg">Command sent to terminal.</string>
+    <string name="plugin_config_saved_msg">Settings saved.</string>
+    <string name="plugin_fetch_failed_msg">Could not load the plugin manifest.</string>
+    <string name="plugin_enable_failed_msg">Could not enable plugin: %1$s</string>
 </resources>
