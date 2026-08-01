@@ -8,6 +8,7 @@ version-controlled the same way as the rest of the codebase.
 
 - `repository/main.json` — module/expansion-pack manifest (`ZDYDataBean` schema)
 - `on_line_sh/main.json` — online shell-script manifest (`OnLineShBean` schema)
+- `plugins/main.json` — plugin manifest (`PluginManifest` schema, see `/PLUGINS.md`)
 
-Both currently ship empty (`"data": []`) — add entries here, via a reviewed
+All currently ship empty (`"data": []`) — add entries here, via a reviewed
 PR, when there's real content to publish.
