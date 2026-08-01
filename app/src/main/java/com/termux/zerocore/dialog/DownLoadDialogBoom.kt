@@ -65,7 +65,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
         service_name?.let {
             it.paint!!.flags = Paint.UNDERLINE_TEXT_FLAG
             it.setOnClickListener {
-                UUtils.startUrl(HTTPIP.IP + "/repository/main/")
+                UUtils.startUrl("https://github.com/Victorious93/VictorSuite/tree/main/remote/repository")
             }
         }
         mDownLoadMuTILS = DownLoadMuTILS()

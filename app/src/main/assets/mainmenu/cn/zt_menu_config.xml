@@ -21,7 +21,7 @@
         1.click: 调用ZT内部的 JAVA 类
         示例: click="java:com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig"
         2.或跳转到网址页
-        click="jumpUrl:www.baidu.com"
+        click="jumpUrl:www.example.com"
         3.或执行shell语句
         click="ztShell:cd ~ && pkg update"
         4.如果需要直接执行,请修改此配置项
@@ -57,7 +57,7 @@
         <item tag="跳转网址"
             name="跳转网址"
             icon=""
-            click="jumpUrl:https://www.baidu.com" />
+            click="jumpUrl:https://www.example.com" />
         <item tag="占位,什么都不做"
             name="占位菜单"
             icon=""
@@ -89,18 +89,18 @@
         <item tag="在线脚本"
             name="在线脚本"
             icon=""
-            click="shellUrl:https://od.ixcmstudio.cn/on_line_sh/main.json" />
+            click="shellUrl:https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote/on_line_sh/main.json" />
 
         <item tag="下载站"
             name="下载站"
             icon=""
-            click="downloadUrl:https://od.ixcmstudio.cn/repository/main.json" />
+            click="downloadUrl:https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote/repository/main.json" />
 
         <item tag="应用内打开URL"
             name="应用内URL"
             icon=""
             activityTitle="百度一下"
-            click="appWebUrl:https://www.baidu.com" />
+            click="appWebUrl:https://www.example.com" />
 
     </group>
     <!--#######################可删除#########################-->

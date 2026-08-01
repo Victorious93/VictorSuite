@@ -948,8 +948,6 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
         ab.setTitle(UUtils.getString(R.string.获取镜像));
 
-        //链接: https://pan.baidu.com/s/17l6_bJ3EQN41I7Axs0USvQ 提取码: bxht
-
         ab.setMessage(UUtils.getString(R.string.是否前往下载系统));
 
         ab.setPositiveButton(UUtils.getString(R.string.前往), new DialogInterface.OnClickListener() {
@@ -958,8 +956,10 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
                 ab.create().dismiss();
 
+                // Official Microsoft download page instead of an unverifiable
+                // personal Baidu Netdisk mirror of unknown provenance.
                 Intent intent = new Intent();
-                intent.setData(Uri.parse("https://pan.baidu.com/s/18Ro-q9XMkowNZ1MWrTWCPw"));//Url 就是你要打开的网址
+                intent.setData(Uri.parse("https://www.microsoft.com/software-download/windows11"));
                 intent.setAction(Intent.ACTION_VIEW);
                 startActivity(intent); //启动浏览器
 

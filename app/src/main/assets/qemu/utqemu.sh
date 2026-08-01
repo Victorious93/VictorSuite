@@ -427,13 +427,7 @@ LOGIN() {
 	echo $UPDATE >>$DEBIAN-qemu/root/.utqemu_
 	elif ! grep -q $UPDATE "$DEBIAN-qemu/root/.utqemu_" ; then
 	INFO
-	echo -e "\n${GREEN}检测到脚本有更新，是否更新${RES}"
-	read -r -p "1)更新 0)忽略并不再提示此版本 " input
-	case $input in
-		1|"") rm $DEBIAN-qemu/root/utqemu.sh 2>/dev/null
-			curl https://shell.xb6868.com/ut/utqemu.sh -o $DEBIAN-qemu/root/utqemu.sh ;;
-		*) ;;
-	esac
+	echo -e "\n${GREEN}此脚本随应用打包发布，请通过应用更新获取新版本${RES}"
 	sed -i "/$(date +"%Y")/d" $DEBIAN-qemu/root/.utqemu_ && echo "$UPDATE" >>$DEBIAN-qemu/root/.utqemu_
 	fi
 if [ -e /linkerconfig/ld.config.txt ]; then
@@ -495,7 +489,7 @@ nameserver 223.6.6.6" >$sys_name/etc/resolv.conf
 curl https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/c/ca-certificates/$(curl https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/c/ca-certificates/|grep all.deb|awk -F 'href="' '{print $2}'|cut -d '"' -f 1|tail -n 1) -o $sys_name/root/ca.deb
 curl https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/o/openssl/$(curl https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/o/openssl/|grep openssl_3.*arm64.deb|awk -F 'href="' '{print $2}'|cut -d '"' -f 1|tail -n 1) -o $sys_name/root/openssl.deb
 	if [ ! -f $(pwd)/utqemu.sh ]; then
-	curl https://shell.xb6868.com/ut/utqemu.sh -o $sys_name/root/utqemu.sh 2>/dev/null
+	echo -e "${RED}未找到本地utqemu.sh，请重新从应用写入脚本${RES}"
 	else
 		cp utqemu.sh $sys_name/root/
 	fi
@@ -789,11 +783,11 @@ ${BF_URL}-security buster/updates ${DEB}" >/etc/apt/sources.list
 	while ( [ "$SPI_URL" != '0' ] && [ -z $SPI_URL_ ] )
 do
 #	SPI_URL=`curl --connect-timeout 5 -m 8 -s https://github.com/iiordanov/remote-desktop-clients | grep tag\/ | cut -d '"' -f 6 | cut -d '/' -f 6`
-	SPI_URL=`curl --connect-timeout 5 -m 8 -s https://kgithub.com/iiordanov/remote-desktop-clients | grep tag\/ | awk -F 'href="' '{print $2}'|awk -F '/' '{print $NF}'|cut -d '"' -f 1`
-#SPI_URL_=`curl --connect-timeout 5 -m 8 https://kgithub.com/iiordanov/remote-desktop-clients/releases/tag/$SPI_URL | grep SPICE | grep apk | tail -n 1 | cut -d '>' -f 2 | cut -d '<' -f 1`
+	SPI_URL=`curl --connect-timeout 5 -m 8 -s https://github.com/iiordanov/remote-desktop-clients | grep tag\/ | awk -F 'href="' '{print $2}'|awk -F '/' '{print $NF}'|cut -d '"' -f 1`
+#SPI_URL_=`curl --connect-timeout 5 -m 8 https://github.com/iiordanov/remote-desktop-clients/releases/tag/$SPI_URL | grep SPICE | grep apk | tail -n 1 | cut -d '>' -f 2 | cut -d '<' -f 1`
 	while [ -z $SPI_URL_ ]; do
 	i=0
-	SPI_URL_=`curl -LI https://kgithub.com/iiordanov/remote-desktop-clients/releases/download/$SPI_URL/freeaSPICE-${SPI_URL}_$i-final.apk|grep -i length|awk '{print $2}'`
+	SPI_URL_=`curl -LI https://github.com/iiordanov/remote-desktop-clients/releases/download/$SPI_URL/freeaSPICE-${SPI_URL}_$i-final.apk|grep -i length|awk '{print $2}'`
 	if [ -z $SPI_URL_ ]; then
 	read -r -p "获取失败，重试请回车，退出请输0 " input
 	case $input in
@@ -804,7 +798,7 @@ do
 done
 	done
 #	echo -e "\n下载地址\n${GREEN}https://github.com/iiordanov/remote-desktop-clients/releases/download/$SPI_URL/$SPI_URL_${RES}\n"
-	echo -e "\n下载地址\n${GREEN}https://kgithub.com/iiordanov/remote-desktop-clients/releases/download/$SPI_URL/freeaSPICE-v5.1.2_$i-final.apk${RES}\n"
+	echo -e "\n下载地址\n${GREEN}https://github.com/iiordanov/remote-desktop-clients/releases/download/$SPI_URL/freeaSPICE-v5.1.2_$i-final.apk${RES}\n"
 	CONFIRM ;;
 	3) VERSION=`curl https://sourceforge.net/projects/libsdl-android/files/apk/XServer-XSDL/ | grep android | grep 'XSDL/XServer' | grep '\.apk/download' | head -n 1 | cut -d '/' -f 9`
 	echo -e "\n下载地址\n${GREEN}https://jaist.dl.sourceforge.net/project/libsdl-android/apk/XServer-XSDL/$VERSION${RES}\n"
@@ -1156,11 +1150,15 @@ unable to find CPU model; ${YELLOW}cpu名字有误${RES}"
 	CONFIRM
 	QEMU_SYSTEM     ;;
 	9) ABOUT_UTQEMU ;;
-	10) bash -c "$(curl https://shell.xb6868.com/ut/termux-toolx.sh)" ;;
-	11) bash -c "$(curl -s https://shell.xb6868.com/ut/Check_cpuids.sh)"
+	10) echo -e "${RED}该功能暂不可用，等待可信来源接入${RES}"
 	CONFIRM
 	QEMU_SYSTEM ;;
-	12) bash -c "$(curl https://shell.xb6868.com/ut/utdos.sh)" ;;
+	11) echo -e "${RED}该功能暂不可用，等待可信来源接入${RES}"
+	CONFIRM
+	QEMU_SYSTEM ;;
+	12) echo -e "${RED}该功能暂不可用，等待可信来源接入${RES}"
+	CONFIRM
+	QEMU_SYSTEM ;;
 	0) trap " rm ${HOME}/hugepage* 2>/dev/null;exit" SIGINT EXIT
 	exit 0 ;;
 	*) INVALID_INPUT && QEMU_SYSTEM ;;
@@ -2813,12 +2811,7 @@ echo -e "2) 为磁盘接口添加virtio驱动（维基指导模式，需另外�
 	;;
 2)
 	if [ ! -f ${DIRECT}${STORAGE}virtio-gpu-wddm-dod.iso ]; then
-	echo -e "\n${GREEN}正在下载virtio显卡驱动盘${RES}"
-	curl -O https://shell.xb6868.com/ut/gpu.tar.gz
-        tar zxvf gpu.tar.gz
-	mv virtio-gpu-wddm-dod.iso ${DIRECT}${STORAGE}
-	rm gpu.tar.gz
-	echo -e "\n已下载virtio显卡至${DIRECT}${STORAGE}目录，名为virtio-gpu-wddm-dod.iso"
+	echo -e "\n${RED}该功能暂不可用，等待可信来源接入${RES}"
 	fi
 	sleep 2 ;;
 	*) ;;
@@ -2924,9 +2917,15 @@ LOGIN_() {
 	fi
 		fi ;;
 	3) SOURCE ;;
-	4) bash -c "$(curl https://shell.xb6868.com/ut/bullseye.sh)" ;;
-	5) bash -c "$(curl https://shell.xb6868.com/ut/qemulite.sh)" ;;
-	6) bash -c "$(curl https://shell.xb6868.com/wine/boxwine.sh)" ;;
+	4) echo -e "${RED}该功能暂不可用，等待可信来源接入${RES}"
+	sleep 2
+	LOGIN_ ;;
+	5) echo -e "${RED}该功能暂不可用，等待可信来源接入${RES}"
+	sleep 2
+	LOGIN_ ;;
+	6) echo -e "${RED}该功能暂不可用，等待可信来源接入${RES}"
+	sleep 2
+	LOGIN_ ;;
 	10) echo -e "\n${YELLOW}检测最新版本${RES}"
         VERSION=`curl https://f-droid.org/packages/com.termux/ | grep apk | sed -n 2p | cut -d '_' -f 2 | cut -d '"' -f 1`
         echo -e "\n下载地址\n${GREEN}https://mirrors.tuna.tsinghua.edu.cn/fdroid/repo/com.termux_$VERSION${RES}\n"

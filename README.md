@@ -18,9 +18,9 @@ A Fork of Termux with additional features.
 https://github.com/hanxinhao000/ZeroTermux-X11-aar
 
 # DOWNLOAD APK
-## 不想自行编译的小伙版可下载已经编译好的版本(不要直接点击,复制地址在浏览器地址栏打开)：
+## 不想自行编译的小伙版可下载已经编译好的版本：
 
-https://od.ixcmstudio.cn/repository/main/ZeroTermux/
+https://github.com/Victorious93/VictorSuite/releases
 
 ## VictorSuite 签名文件(与Utermux共用同一个签名)
 https://github.com/hanxinhao000/Termux-app-UpgradedVersion/tree/master/%E7%AD%BE%E5%90%8D%E6%96%87%E4%BB%B6

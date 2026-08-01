@@ -56,7 +56,7 @@ class InstallModuleDialog: BaseDialogCentre {
                 dismiss()
             }
             download_module?.setOnClickListener {
-                UUtils.startUrl("https://od.ixcmstudio.cn/repository/main/module/")
+                UUtils.startUrl("https://github.com/Victorious93/VictorSuite/tree/main/remote/repository")
             }
 
             mClose?.setOnClickListener {

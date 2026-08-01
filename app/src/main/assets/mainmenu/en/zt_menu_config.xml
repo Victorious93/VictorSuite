@@ -21,7 +21,7 @@
         1.click: Calls a JAVA class internal to ZT.
         Example: click="java:com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig"
         2.Or jump to a web page:
-        click="jumpUrl:www.baidu.com"
+        click="jumpUrl:www.example.com"
         3.Or execute a shell command:
         click="ztShell:cd ~ && pkg update"
         4.To execute directly, modify this configuration item:
@@ -87,12 +87,12 @@
         <item tag="OnlineScripting"
             name="OnlineScripting"
             icon=""
-            click="shellUrl:https://od.ixcmstudio.cn/on_line_sh/main.json" />
+            click="shellUrl:https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote/on_line_sh/main.json" />
 
         <item tag="DownloadStation"
             name="DownloadStation"
             icon=""
-            click="downloadUrl:https://od.ixcmstudio.cn/repository/main.json" />
+            click="downloadUrl:https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote/repository/main.json" />
         <item tag="OpenTheURLWithinTheApp"
             name="InAppURL"
             icon=""
