@@ -61,7 +61,7 @@ import static com.termux.shared.termux.TermuxConstants.TERMUX_STAGING_PREFIX_DIR
  * <p/>
  * (5.2) For every other zip entry, extract it into $STAGING_PREFIX and set execute permissions if necessary.
  */
-// ZeroTermux add {@
+// VictorSuite add {@
 //final class TermuxInstaller {
 public final class TermuxInstaller {
 // @}
@@ -280,7 +280,7 @@ public final class TermuxInstaller {
                 TermuxUtils.getTermuxDebugMarkdownString(activity),
             true, false, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES, true);
     }
-    // ZeroTermux add {@
+    // VictorSuite add {@
 	// static void setupStorageSymlinks(final Context context) {
     public static void setupStorageSymlinks(final Context context) {
 	// @}
@@ -393,7 +393,7 @@ public final class TermuxInstaller {
     public static native byte[] getZip();
 
 
-     // ZeroTermux add {@
+     // VictorSuite add {@
     public static String determineTermuxArchName() {
         // Note that we cannot use System.getProperty("os.arch") since that may give e.g. "aarch64"
         // while a 64-bit runtime may not be installed (like on the Samsung Galaxy S5 Neo).

@@ -33,8 +33,8 @@ import com.termux.zerocore.bean.Data
 import com.termux.zerocore.bean.ZDYDataBean
 import com.termux.zerocore.http.HTTPIP
 import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.url.FileUrl.zeroTermuxApk
-import com.termux.zerocore.url.FileUrl.zeroTermuxData
+import com.termux.zerocore.url.FileUrl.victorSuiteApk
+import com.termux.zerocore.url.FileUrl.victorSuiteData
 import com.termux.zerocore.utils.DownLoadMuTILS
 import java.io.File
 import java.util.*
@@ -109,15 +109,15 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
     public fun createWJ(){
 
 
-        if (!zeroTermuxData.exists()) {
-            val mkdirs = zeroTermuxData.mkdirs()
+        if (!victorSuiteData.exists()) {
+            val mkdirs = victorSuiteData.mkdirs()
             if(!mkdirs){
                 UUtils.showMsg(UUtils.getString(R.string.无法创建))
                 dismiss()
             }
         }
-        if (!zeroTermuxApk.exists()) {
-            val mkdirs = zeroTermuxApk.mkdirs()
+        if (!victorSuiteApk.exists()) {
+            val mkdirs = victorSuiteApk.mkdirs()
             if(!mkdirs){
                 UUtils.showMsg(UUtils.getString(R.string.无法创建1))
                 dismiss()
@@ -158,14 +158,14 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
             val data = mList!![position]
             holder.name?.text = data.name
 
-            var file:File = File("${FileUrl.zeroTermuxData}/${data.fileName}")
-            var tempFile:File = File("${FileUrl.zeroTermuxData}/${data.fileName}.0.part")
+            var file:File = File("${FileUrl.victorSuiteData}/${data.fileName}")
+            var tempFile:File = File("${FileUrl.victorSuiteData}/${data.fileName}.0.part")
             if(data.type == "apk"){
-                file = File("${FileUrl.zeroTermuxApk}/${data.fileName}")
-                tempFile = File("${FileUrl.zeroTermuxApk}/${data.fileName}.0.part")
+                file = File("${FileUrl.victorSuiteApk}/${data.fileName}")
+                tempFile = File("${FileUrl.victorSuiteApk}/${data.fileName}.0.part")
             }else{
-                 file = File("${FileUrl.zeroTermuxData}/${data.fileName}")
-                tempFile = File("${FileUrl.zeroTermuxData}/${data.fileName}.0.part")
+                 file = File("${FileUrl.victorSuiteData}/${data.fileName}")
+                tempFile = File("${FileUrl.victorSuiteData}/${data.fileName}.0.part")
             }
 
             UUtils.showLog("文件查看--------------------------------------------------")
@@ -283,12 +283,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                                         data.id = Aria.download(mDownLoadDialogBoom)
                                             .load("$ip${data.download}") //读取下载地址
-                                            .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                            .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                             .create()
                                     }else{
                                         data.id = Aria.download(mDownLoadDialogBoom)
                                             .load("$ip${data.download}") //读取下载地址
-                                            .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                            .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                             .create()
                                     }
 
@@ -314,12 +314,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                                             data.id = Aria.download(mDownLoadDialogBoom)
                                                 .load("$ip${data.download}") //读取下载地址
-                                                .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                                .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                                 .create()
                                         }else{
                                             data.id = Aria.download(mDownLoadDialogBoom)
                                                 .load("$ip${data.download}") //读取下载地址
-                                                .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                                .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                                 .create()
                                         }
 
@@ -346,12 +346,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                                     data.id = Aria.download(mDownLoadDialogBoom)
                                         .load("$ip${data.download}") //读取下载地址
-                                        .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                        .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                         .create()
                                 }else{
                                     data.id = Aria.download(mDownLoadDialogBoom)
                                         .load("$ip${data.download}") //读取下载地址
-                                        .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                        .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                         .create()
                                 }
 
@@ -371,12 +371,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                                 data.id = Aria.download(mDownLoadDialogBoom)
                                     .load("$ip${data.download}") //读取下载地址
-                                    .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                    .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                     .create()
                             }else{
                                 data.id = Aria.download(mDownLoadDialogBoom)
                                     .load("$ip${data.download}") //读取下载地址
-                                    .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                    .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                     .create()
                             }
 
@@ -432,12 +432,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                                         data.id = Aria.download(mDownLoadDialogBoom)
                                             .load("$ip${data.download}") //读取下载地址
-                                            .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                            .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                             .create()
                                     }else{
                                         data.id = Aria.download(mDownLoadDialogBoom)
                                             .load("$ip${data.download}") //读取下载地址
-                                            .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                            .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                             .create()
                                     }
 
@@ -463,12 +463,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                                             data.id = Aria.download(mDownLoadDialogBoom)
                                                 .load("$ip${data.download}") //读取下载地址
-                                                .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                                .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                                 .create()
                                         }else{
                                             data.id = Aria.download(mDownLoadDialogBoom)
                                                 .load("$ip${data.download}") //读取下载地址
-                                                .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                                .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                                 .create()
                                         }
 
@@ -490,12 +490,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                 if(data.type == "apk"){
                                     data.id = Aria.download(mDownLoadDialogBoom)
                                         .load("$ip${data.download}") //读取下载地址
-                                        .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                        .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                         .create()
                                 }else{
                                     data.id = Aria.download(mDownLoadDialogBoom)
                                         .load("$ip${data.download}") //读取下载地址
-                                        .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                        .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                         .create()
                                 }
                                 holder.download?.setImageResource(R.mipmap.jiazai)
@@ -515,12 +515,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                             if(data.type == "apk"){
                                 data.id = Aria.download(mDownLoadDialogBoom)
                                     .load("$ip${data.download}") //读取下载地址
-                                    .setFilePath("${FileUrl.zeroTermuxApk}/${data.fileName}") //设置文件保存的完整路径
+                                    .setFilePath("${FileUrl.victorSuiteApk}/${data.fileName}") //设置文件保存的完整路径
                                     .create()
                             }else{
                                 data.id = Aria.download(mDownLoadDialogBoom)
                                     .load("$ip${data.download}") //读取下载地址
-                                    .setFilePath("${FileUrl.zeroTermuxData}/${data.fileName}") //设置文件保存的完整路径
+                                    .setFilePath("${FileUrl.victorSuiteData}/${data.fileName}") //设置文件保存的完整路径
                                     .create()
                             }
                             holder.download?.setImageResource(R.mipmap.jiazai)
@@ -587,12 +587,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
 
 
-            if (!zeroTermuxData.exists()) {
+            if (!victorSuiteData.exists()) {
                 Aria.download(this).stopAllTask();
                 data.isRun = false
                 holder.download?.setImageResource(R.mipmap.download)
             }
-            if (!zeroTermuxApk.exists()) {
+            if (!victorSuiteApk.exists()) {
                 data.isRun = false
                 Aria.download(this).stopAllTask();
                 holder.download?.setImageResource(R.mipmap.download)

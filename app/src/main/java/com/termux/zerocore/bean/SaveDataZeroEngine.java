@@ -37,7 +37,7 @@ public class SaveDataZeroEngine {
         return sb.toString();
     }
     public static String FTP_SDCARD_ROOT = FileIOUtils.INSTANCE.getSdcardPath();
-    public static String FTP_ZERO_TERMUX_FILE = FileIOUtils.INSTANCE.getFilePath();
+    public static String FTP_VICTOR_SUITE_FILE = FileIOUtils.INSTANCE.getFilePath();
 
     public static String TAG = "SaveDataZeroEngine";
     public static void putStringData(Context mContext, String key, String values) {

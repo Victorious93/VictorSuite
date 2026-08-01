@@ -28,7 +28,7 @@ import com.zp.z_file.util.ZFileUUtils;
 
 import java.io.File;
 
-public class ZeroTermuxX11Settings extends AppCompatActivity {
+public class VictorSuiteX11Settings extends AppCompatActivity {
     // 内部通道
     private CardView internal_passage;
     // 外部通道
@@ -44,7 +44,7 @@ public class ZeroTermuxX11Settings extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zero_termux_x11_settings);
+        setContentView(R.layout.activity_victor_suite_x11_settings);
         internal_passage = findViewById(R.id.internal_passage);
         external_channels = findViewById(R.id.external_channels);
         x11_settings_title = findViewById(R.id.x11_settings_title);
@@ -245,7 +245,7 @@ public class ZeroTermuxX11Settings extends AppCompatActivity {
         SwitchDialog switchDialog = new SwitchDialog(this);
         switchDialog.createSwitchDialog(getString(R.string.x11_dialog_reset));
         switchDialog.getOk().setOnClickListener(view -> {
-            new Intent(ZeroTermuxX11Settings.this, TermuxService.class).setAction("com.termux.service_stop");
+            new Intent(VictorSuiteX11Settings.this, TermuxService.class).setAction("com.termux.service_stop");
             System.exit(0);
             finish();
         });

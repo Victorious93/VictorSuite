@@ -55,7 +55,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_about_zerotermux"
+                            android:text="@string/zt_about_victorsuite"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -64,7 +64,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_about_zerotermux_note"
+                            android:text="@string/zt_about_victorsuite_note"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -111,7 +111,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_about_zerotermux_core_manage"
+                            android:text="@string/zt_about_victorsuite_core_manage"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -120,7 +120,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_about_zerotermux_core_manage_note"
+                            android:text="@string/zt_about_victorsuite_core_manage_note"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 

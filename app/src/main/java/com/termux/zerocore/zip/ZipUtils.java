@@ -134,14 +134,14 @@ public class ZipUtils {
                         fos.close();
                         is.close();
                         String name = targetFile.getName();
-                        if (!TextUtils.isEmpty(name) &&  name.contains("_zerotermux_link")) {
+                        if (!TextUtils.isEmpty(name) &&  name.contains("_victorsuite_link")) {
                             String fileString = UUtils.getFileStringNotNewFile(targetFile);
                             Log.d("TAG", "unZipxxxxx  fileString: " + fileString);
                             try {
                                 String[] split = fileString.split(",");
                                 if (split.length == 2) {
                                     targetFile.delete();
-                                    termuxSymlink(split[1].trim(), targetFile.getAbsolutePath().replace("_zerotermux_link", ""));
+                                    termuxSymlink(split[1].trim(), targetFile.getAbsolutePath().replace("_victorsuite_link", ""));
                                 } else {
                                     Log.d("TAG", "unZipxxxxx error path name: " + fileString);
                                 }
@@ -649,7 +649,7 @@ public class ZipUtils {
                     fileThisSize += file.length();
                     // 向zip输出流中添加一个zip实体，构造器中name为zip实体的文件的名字
                     zipNameListener.zip(file.getAbsolutePath(), 0, 0);
-                    zos.putNextEntry(new ZipEntry(name + "_zerotermux_link"));
+                    zos.putNextEntry(new ZipEntry(name + "_victorsuite_link"));
                     // copy文件到zip输出流中
                     int len;
                     FileInputStream in = new FileInputStream(file);
@@ -680,7 +680,7 @@ public class ZipUtils {
         try {
             Log.d("TAG", "workSymbolicLinkFile AbsolutePath: " + symbolicLinkFile.getAbsolutePath());
             Log.d("TAG", "workSymbolicLinkFile CanonicalPath: " + symbolicLinkFile.getCanonicalPath());
-            File file = new File(symbolicLinkFile.getParentFile(), "zerotermux_link_" + symbolicLinkFile.getName());
+            File file = new File(symbolicLinkFile.getParentFile(), "victorsuite_link_" + symbolicLinkFile.getName());
             String absolutePath = symbolicLinkFile.getAbsolutePath();
             String canonicalPath = symbolicLinkFile.getCanonicalPath();
             UUtils.setFileString(file, absolutePath + "," + canonicalPath);

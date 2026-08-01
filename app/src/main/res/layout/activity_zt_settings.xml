@@ -394,7 +394,7 @@
                         android:textColor="@color/color_ffffff"
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:text="@string/about_zerotermux"
+                        android:text="@string/about_victorsuite"
                         android:layout_height="wrap_content"/>
 
                     <TextView
@@ -403,7 +403,7 @@
                         android:textColor="@color/md_grey_500"
                         android:textStyle="bold"
                         android:textSize="13sp"
-                        android:text="@string/about_zerotermux_note"
+                        android:text="@string/about_victorsuite_note"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 

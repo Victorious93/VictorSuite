@@ -24,7 +24,7 @@ import com.termux.shared.logger.Logger;
 import com.termux.shared.view.ViewUtils;
 import com.termux.R;
 import com.termux.x11.MainActivity;
-import com.termux.zerocore.view.ZeroTermuxBackLayout;
+import com.termux.zerocore.view.VictorSuiteBackLayout;
 
 /**
  * The {@link TermuxActivity} relies on {@link android.view.WindowManager.LayoutParams#SOFT_INPUT_ADJUST_RESIZE)}
@@ -67,9 +67,9 @@ import com.termux.zerocore.view.ZeroTermuxBackLayout;
  * hidden part equals the `header_height`. The updates to margins may cause a jitter in some cases
  * when the view is redrawn if the margin is incorrect, but logic has been implemented to avoid that.
  */
- // ZeroTermux add {@
+ // VictorSuite add {@
  //public class TermuxActivityRootView extends LinearLayout implements ViewTreeObserver.OnGlobalLayoutListener {
-public class TermuxActivityRootView extends ZeroTermuxBackLayout implements ViewTreeObserver.OnGlobalLayoutListener {
+public class TermuxActivityRootView extends VictorSuiteBackLayout implements ViewTreeObserver.OnGlobalLayoutListener {
 // @}
     public TermuxActivity mActivity;
     public Integer marginBottom;
@@ -288,7 +288,7 @@ public class TermuxActivityRootView extends ZeroTermuxBackLayout implements View
             return v.onApplyWindowInsets(insets);
         }
     }
-    // ZeroTermux add {@
+    // VictorSuite add {@
     public View getBack_color() {
         return this.getBackColor();
     }

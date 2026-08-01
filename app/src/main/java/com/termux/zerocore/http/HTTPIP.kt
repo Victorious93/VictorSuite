@@ -7,6 +7,6 @@ object HTTPIP {
     //论坛
     public const val ZERO_BBS = "https://termbbs.ixcm.org/"
     // GITHUB Version
-    public const val GITHUB_VERSION = "https://api.github.com/repos/hanxinhao000/ZeroTermux/releases/latest"
+    public const val GITHUB_VERSION = "https://api.github.com/repos/hanxinhao000/VictorSuite/releases/latest"
 
 }

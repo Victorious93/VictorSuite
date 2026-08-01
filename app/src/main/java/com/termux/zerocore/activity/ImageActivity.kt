@@ -9,7 +9,7 @@ import com.lcw.library.imagepicker.ImagePicker
 import com.termux.R
 import com.termux.shared.logger.Logger
 import com.termux.zerocore.data.UsbFileData
-import com.termux.zerocore.loader.ZeroTermuxImageLoader
+import com.termux.zerocore.loader.VictorSuiteImageLoader
 import com.termux.zerocore.utils.FileIOUtils
 import java.io.File
 
@@ -35,7 +35,7 @@ class ImageActivity : AppCompatActivity() {
                         .showImage(true) //设置是否展示图片
                         .showVideo(false) //设置是否展示视频
                         .setSingleType(true) //设置图片视频不能同时选择
-                        .setImageLoader( ZeroTermuxImageLoader())//设置自定义图片加载器
+                        .setImageLoader( VictorSuiteImageLoader())//设置自定义图片加载器
                         .setMaxCount(1) //设置最大选择图片数目(默认为1，单选)
                         .start(
                             this@ImageActivity,
@@ -48,7 +48,7 @@ class ImageActivity : AppCompatActivity() {
                         .showCamera(false) //设置是否显示拍照按钮
                         .showImage(false) //设置是否展示图片
                         .showVideo(true) //设置是否展示视频
-                        .setImageLoader( ZeroTermuxImageLoader())
+                        .setImageLoader( VictorSuiteImageLoader())
                         .setMaxCount(1) //设置最大选择图片数目(默认为1，单选)
                         .start(
                             this@ImageActivity,

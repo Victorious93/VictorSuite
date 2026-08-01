@@ -30,9 +30,9 @@ import com.topjohnwu.superuser.Shell
 import com.zp.z_file.util.LogUtils
 import java.io.File
 
-class ZeroTermuxDeepSeekSettingsActivity : AppCompatActivity() {
+class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
     companion object {
-        public val TAG = ZeroTermuxDeepSeekSettingsActivity::class.java.simpleName
+        public val TAG = VictorSuiteDeepSeekSettingsActivity::class.java.simpleName
     }
 
     private val mKeyClick by lazy { findViewById<EditText>(R.id.key_click) }
@@ -50,7 +50,7 @@ class ZeroTermuxDeepSeekSettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_zero_termux_deep_seek_settings)
+        setContentView(R.layout.activity_victor_suite_deep_seek_settings)
         initView()
         initStatus()
     }
@@ -167,7 +167,7 @@ class ZeroTermuxDeepSeekSettingsActivity : AppCompatActivity() {
         mDeepSeekKeySummary.text = getKeyClickText(UUtils.getString(R.string.deepseek_settings_key_edit_info_keyword),
             UUtils.getString(R.string.deepseek_settings_key_edit_info), object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    startActivity(Intent(this@ZeroTermuxDeepSeekSettingsActivity, ZeroTermuxDeepSeekKeyActivity::class.java))
+                    startActivity(Intent(this@VictorSuiteDeepSeekSettingsActivity, VictorSuiteDeepSeekKeyActivity::class.java))
                 }
             })
         mDeepSeekKeySummary.movementMethod = LinkMovementMethod.getInstance()

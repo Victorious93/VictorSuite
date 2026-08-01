@@ -28,7 +28,7 @@ class DeveloperActivity : AppCompatActivity() {
         setContentView(R.layout.activity_developer)
         findViewById<Button>(R.id.create_files).setOnClickListener {
             val file = File(FileUrl.mainAppUrl, "files1")
-            val file1 = File(FileUrl.zeroTermuxHome, "files")
+            val file1 = File(FileUrl.victorSuiteHome, "files")
             if (!file1.exists()) {
                 file1.mkdirs()
             }

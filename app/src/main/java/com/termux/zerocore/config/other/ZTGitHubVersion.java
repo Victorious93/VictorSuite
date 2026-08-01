@@ -54,9 +54,9 @@ public class ZTGitHubVersion {
                             JsonObject rootObject = rootElement.getAsJsonObject();
                             // 获取顶层的name字段
                             String gitName = rootObject.get("name").getAsString();
-                            String locationName = "ZeroTermux-" + BuildConfig.VERSION_NAME;
+                            String locationName = "VictorSuite-" + BuildConfig.VERSION_NAME;
                             LogUtils.i(TAG, "onSuccess gitName: " + gitName + " ,locationName: " + locationName);
-                            if (!TextUtils.isEmpty(gitName) && gitName.trim().startsWith("ZeroTermux") &&  !TextUtils.equals(gitName, locationName)) {
+                            if (!TextUtils.isEmpty(gitName) && gitName.trim().startsWith("VictorSuite") &&  !TextUtils.equals(gitName, locationName)) {
                                 UUtils.runOnUIThread(() -> textView.setVisibility(View.VISIBLE));
                             } else {
                                 UUtils.runOnUIThread(() -> textView.setVisibility(View.GONE));

@@ -17,7 +17,7 @@ import com.termux.app.TermuxActivity
 import com.termux.zerocore.bean.ClipboardBean
 import com.termux.zerocore.bean.ItemMenuBean
 import com.termux.zerocore.dialog.adapter.CommonCommandsAdapter
-import com.termux.zerocore.settings.ZeroTermuxSettingsActivity
+import com.termux.zerocore.settings.VictorSuiteSettingsActivity
 import com.termux.zerocore.utils.FileIOUtils
 
 class CommonCommandsDialog : BaseDialogDown {
@@ -101,7 +101,7 @@ class CommonCommandsDialog : BaseDialogDown {
         }
         settings_img?.let {
             it.setOnClickListener {
-                mContext.startActivity(Intent(mContext, ZeroTermuxSettingsActivity::class.java))
+                mContext.startActivity(Intent(mContext, VictorSuiteSettingsActivity::class.java))
             }
         }
     }

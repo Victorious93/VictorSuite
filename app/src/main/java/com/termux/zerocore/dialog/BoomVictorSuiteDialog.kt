@@ -10,11 +10,11 @@ import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.termux.R
 import com.termux.zerocore.bean.ZeroRunCommandBean
 import com.termux.zerocore.data.LinuxCommandData
-import com.termux.zerocore.dialog.adapter.BoomZeroTermuxAdapter
+import com.termux.zerocore.dialog.adapter.BoomVictorSuiteAdapter
 import com.termux.zerocore.popuwindow.NginxPopuWindow
 import com.termux.zerocore.popuwindow.WebStartPopuWindow
 
-class BoomZeroTermuxDialog : BaseDialogDown {
+class BoomVictorSuiteDialog : BaseDialogDown {
 
     private var recycler_view:RecyclerView? = null
 
@@ -33,20 +33,20 @@ class BoomZeroTermuxDialog : BaseDialogDown {
         var mList:ArrayList<ZeroRunCommandBean> = LinuxCommandData.getZeroRunCommandBeanData()
 
 
-        val boomZeroTermuxAdapter = BoomZeroTermuxAdapter(mList, mContext as Activity)
+        val boomVictorSuiteAdapter = BoomVictorSuiteAdapter(mList, mContext as Activity)
 
-        boomZeroTermuxAdapter.setDissListener(object : BoomZeroTermuxAdapter.DissListener{
+        boomVictorSuiteAdapter.setDissListener(object : BoomVictorSuiteAdapter.DissListener{
             override fun close() {
                 dismiss()
             }
         })
 
-        recycler_view!!.adapter = boomZeroTermuxAdapter
+        recycler_view!!.adapter = boomVictorSuiteAdapter
     }
 
     override fun getContentView(): Int {
 
-        return R.layout.dialog_zero_termux
+        return R.layout.dialog_victor_suite
     }
 
 

@@ -1,4 +1,4 @@
-package com.termux.view.zerotermux;
+package com.termux.view.victorsuite;
 
 import android.content.Context;
 import android.content.SharedPreferences;

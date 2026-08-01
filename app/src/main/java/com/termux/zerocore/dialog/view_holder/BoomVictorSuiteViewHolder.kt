@@ -6,7 +6,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.termux.R
 
-class BoomZeroTermuxViewHolder : RecyclerView.ViewHolder {
+class BoomVictorSuiteViewHolder : RecyclerView.ViewHolder {
     public var msg:TextView? = null
     public var title:TextView? = null
     public var msg_card:CardView? = null

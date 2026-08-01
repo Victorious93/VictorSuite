@@ -123,7 +123,7 @@ public final class ExtraKeysView extends GridLayout {
     public static final int ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR = R.attr.extraKeysButtonActiveBackgroundColor;
 
     /** Defines the default fallback value for {@link #mButtonTextColor} if {@link #ATTR_BUTTON_TEXT_COLOR} is undefined. */
-    // ZeroTermux add {@
+    // VictorSuite add {@
 	public static int DEFAULT_BUTTON_TEXT_COLOR = 0xFFFFFFFF;
 	// @}
     /** Defines the default fallback value for {@link #mButtonActiveTextColor} if {@link #ATTR_BUTTON_ACTIVE_TEXT_COLOR} is undefined. */
@@ -685,7 +685,7 @@ public final class ExtraKeysView extends GridLayout {
     }
 
     //初始化颜色
-	// ZeroTermux add {@
+	// VictorSuite add {@
     public void setColorButton() {
         for (int i = 0; i < getChildCount(); i++) {
             Button childAt = (Button) getChildAt(i);

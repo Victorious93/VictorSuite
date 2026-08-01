@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.termux.R;
-import com.termux.zerocore.settings.ZeroTermuxX11Settings;
+import com.termux.zerocore.settings.VictorSuiteX11Settings;
 
 public class X11SettingsClickConfig extends BaseMenuClickConfig {
     @Override
@@ -28,6 +28,6 @@ public class X11SettingsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public void onClick(View view, Context context) {
-        context.startActivity(new Intent(context, ZeroTermuxX11Settings.class));
+        context.startActivity(new Intent(context, VictorSuiteX11Settings.class));
     }
 }

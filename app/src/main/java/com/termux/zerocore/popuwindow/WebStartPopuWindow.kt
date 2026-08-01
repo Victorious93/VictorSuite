@@ -18,7 +18,7 @@ import com.hjq.permissions.XXPermissions
 import com.termux.R
 import com.termux.zerocore.dialog.LoadingDialog
 import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.url.FileUrl.zeroTermuxApk
+import com.termux.zerocore.url.FileUrl.victorSuiteApk
 import java.io.File
 import java.io.InputStream
 
@@ -162,8 +162,8 @@ class WebStartPopuWindow : BasePuPuWindow {
                 .request(object : OnPermissionCallback {
                     override fun onGranted(permissions: List<String>, all: Boolean) {
                         if (all) {
-                            if (!zeroTermuxApk.exists()) {
-                                zeroTermuxApk.mkdirs()
+                            if (!victorSuiteApk.exists()) {
+                                victorSuiteApk.mkdirs()
                             }
                             val file1 = File(Environment.getExternalStorageDirectory(), "/xinhao/apk/$fileName.apk")
                             val loadingDialog = LoadingDialog(mContext)

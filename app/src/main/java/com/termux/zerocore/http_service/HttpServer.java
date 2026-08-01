@@ -139,8 +139,8 @@ public class HttpServer extends NanoHTTPD {
                 File[] files = rootFile.listFiles();
                 File file1 = new File(FileUrl.INSTANCE.getMainFilesUrl(),  "css1.css");
                 answer = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; " +
-                    "charset=utf-8\"><title> ZeroTermux File Browser</title><link rel=\"stylesheet\" href=\"" + file1.getAbsolutePath() + "\"  type=\"text/css\"/>" +
-                    "<div id=\"title111\">ZeroTermux File Browser</div>";
+                    "charset=utf-8\"><title> VictorSuite File Browser</title><link rel=\"stylesheet\" href=\"" + file1.getAbsolutePath() + "\"  type=\"text/css\"/>" +
+                    "<div id=\"title111\">VictorSuite File Browser</div>";
 
                 if (files != null && files.length > 0) {
                     Arrays.sort(

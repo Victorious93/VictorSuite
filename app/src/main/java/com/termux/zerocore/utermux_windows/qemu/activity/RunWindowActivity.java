@@ -270,7 +270,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                                     FileNameDialog fileNameDialog = new FileNameDialog(RunWindowActivity.this);
                                     fileNameDialog.setOnSaveFileNameListener(name -> {
                                         fileNameDialog.dismiss();
-                                        UUtils.setFileString(new File(FileUrl.INSTANCE.getZeroTermuxWindowsConfig(), name), string13);
+                                        UUtils.setFileString(new File(FileUrl.INSTANCE.getVictorSuiteWindowsConfig(), name), string13);
                                     });
                                     fileNameDialog.show();
                                 });

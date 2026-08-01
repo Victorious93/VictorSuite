@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 import cn.hotapk.fastandrutils.utils.FUtils;
 import okhttp3.OkHttpClient;
 
-// ZeroTermux add {@
+// VictorSuite add {@
 //public class TermuxApplication extends Application {
 public class TermuxApplication extends XHApplication {
 // @}
@@ -64,7 +64,7 @@ public class TermuxApplication extends XHApplication {
         Logger.logDebug("Starting Application");
 
         // Set TermuxBootstrap.TERMUX_APP_PACKAGE_MANAGER and TermuxBootstrap.TERMUX_APP_PACKAGE_VARIANT
-        // ZeroTermux add {@
+        // VictorSuite add {@
 		//TermuxBootstrap.setTermuxPackageManagerAndVariant(BuildConfig.TERMUX_PACKAGE_VARIANT);
 		TermuxBootstrap.setTermuxPackageManagerAndVariant("apt-android-7");
 		// @}
@@ -104,7 +104,7 @@ public class TermuxApplication extends XHApplication {
             TermuxShellEnvironment.writeEnvironmentToFile(this);
         }
 
-        // ZeroTermux add {@
+        // VictorSuite add {@
         onCreateInit();
         // @}
     }
@@ -118,7 +118,7 @@ public class TermuxApplication extends XHApplication {
         preferences.setLogLevel(null, preferences.getLogLevel());
     }
 
-    /***************************************** ZERO TERMUX START ******************************************/
+    /***************************************** VICTOR SUITE START ******************************************/
     private String collectExceptionInfo(Exception extra) {
         ByteArrayOutputStream byteArrayOutput = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(byteArrayOutput);
@@ -175,7 +175,7 @@ public class TermuxApplication extends XHApplication {
         }).start();*/
 		// @}
     }
-    /***************************************** ZERO TERMUX END ******************************************/
+    /***************************************** VICTOR SUITE END ******************************************/
 
 }
 

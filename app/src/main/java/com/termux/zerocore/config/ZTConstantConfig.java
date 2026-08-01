@@ -7,7 +7,7 @@ public class ZTConstantConfig {
     }
 
     public @interface URL {
-        public static final String ZT_GITHUB_URL =  "https://github.com/hanxinhao000/ZeroTermux/releases";
+        public static final String ZT_GITHUB_URL =  "https://github.com/hanxinhao000/VictorSuite/releases";
 
     }
 }

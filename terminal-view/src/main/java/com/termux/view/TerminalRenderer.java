@@ -22,7 +22,7 @@ public final class TerminalRenderer {
     final int mTextSize;
     final Typeface mTypeface;
     private final Paint mTextPaint = new Paint();
-	// ZeroTermux add {@
+	// VictorSuite add {@
     public static int COLOR_TEXT = Color.parseColor("#ffffff");
 	// @}
     /** The width of a single mono spaced character obtained by {@link Paint#measureText(String)} on a single 'X'. */
@@ -233,7 +233,7 @@ public final class TerminalRenderer {
             mTextPaint.setUnderlineText(underline);
             mTextPaint.setTextSkewX(italic ? -0.35f : 0.f);
             mTextPaint.setStrikeThruText(strikeThrough);
-			// ZeroTermux add {@
+			// VictorSuite add {@
             //mTextPaint.setColor(foreColor);
             if (foreColor == -1) {
                 mTextPaint.setColor(COLOR_TEXT);
@@ -255,7 +255,7 @@ public final class TerminalRenderer {
     public int getFontLineSpacing() {
         return mFontLineSpacing;
     }
-    // ZeroTermux add {@
+    // VictorSuite add {@
     private void initColor(){
 
 

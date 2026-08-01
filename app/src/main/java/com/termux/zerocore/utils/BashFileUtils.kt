@@ -20,11 +20,11 @@ object BashFileUtils {
         if (startCommand == null || startCommand.isEmpty()) {
             val arrayList = LinkedList<String>()
             arrayList.addAll(lines)
-            arrayList.add(arrayList.size, "# ZeroTermux[Start]")
+            arrayList.add(arrayList.size, "# VictorSuite[Start]")
             list.forEach {
                 arrayList.add(arrayList.size, it)
             }
-            arrayList.add(arrayList.size, "# ZeroTermux[End]")
+            arrayList.add(arrayList.size, "# VictorSuite[End]")
             LogUtils.d(TAG, "getStartCommand add command 1:$arrayList")
             file.printWriter().use { out ->
                 arrayList.forEach {
@@ -39,8 +39,8 @@ object BashFileUtils {
             LogUtils.d(TAG, "getStartCommand bash.bashrc ZT Command is:$startCommand")
             var end = 0
             for (i in lines.indices) {
-                if (lines[i].contains("ZeroTermux[End]")) {
-                    LogUtils.d(TAG, "getStartCommand ZeroTermux[Start] is:$end")
+                if (lines[i].contains("VictorSuite[End]")) {
+                    LogUtils.d(TAG, "getStartCommand VictorSuite[Start] is:$end")
                     end = i - 1
                 }
             }
@@ -78,17 +78,17 @@ object BashFileUtils {
         var start = 0
         var end = 0
         for (i in lines.indices) {
-            if (lines[i].contains("ZeroTermux[Start]")) {
-                LogUtils.d(TAG, "getStartCommand ZeroTermux[Start] is:$start")
+            if (lines[i].contains("VictorSuite[Start]")) {
+                LogUtils.d(TAG, "getStartCommand VictorSuite[Start] is:$start")
                 start = i + 1
             }
-            if (lines[i].contains("ZeroTermux[End]")) {
-                LogUtils.d(TAG, "getStartCommand ZeroTermux[End] is:$end")
+            if (lines[i].contains("VictorSuite[End]")) {
+                LogUtils.d(TAG, "getStartCommand VictorSuite[End] is:$end")
                 end = i - 1
             }
         }
         if (start == 0 && end == 0) {
-            LogUtils.d(TAG, "getStartCommand ZeroTermux[End][Start] not find!")
+            LogUtils.d(TAG, "getStartCommand VictorSuite[End][Start] not find!")
             return null
         }
         val arrayList = ArrayList<String>()

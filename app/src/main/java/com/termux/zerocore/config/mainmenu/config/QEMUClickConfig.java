@@ -121,9 +121,9 @@ public class QEMUClickConfig extends BaseMenuClickConfig implements MenuLeftPopu
                         @Override
                         public void onGranted(List<String> permissions, boolean all) {
                             if (all) {
-                                File zeroTermuxShare = FileUrl.INSTANCE.getZeroTermuxShare();
-                                if (!zeroTermuxShare.exists()) {
-                                    zeroTermuxShare.mkdirs();
+                                File victorSuiteShare = FileUrl.INSTANCE.getVictorSuiteShare();
+                                if (!victorSuiteShare.exists()) {
+                                    victorSuiteShare.mkdirs();
                                 }
                                 UUtils.writerFile("qemu/qemu_win7.sh", new File(FileUrl.INSTANCE.getMainHomeUrl(), "/qemu_win7.sh"));
                                 com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunWin7Sh());
@@ -154,9 +154,9 @@ public class QEMUClickConfig extends BaseMenuClickConfig implements MenuLeftPopu
                         @Override
                         public void onGranted(List<String> permissions, boolean all) {
                             if (all) {
-                                File zeroTermuxShare = FileUrl.INSTANCE.getZeroTermuxShare();
-                                if (!zeroTermuxShare.exists()) {
-                                    zeroTermuxShare.mkdirs();
+                                File victorSuiteShare = FileUrl.INSTANCE.getVictorSuiteShare();
+                                if (!victorSuiteShare.exists()) {
+                                    victorSuiteShare.mkdirs();
                                 }
                                 UUtils.writerFile("qemu/qemu_winxp.sh", new File(FileUrl.INSTANCE.getMainHomeUrl(), "/qemu_winxp.sh"));
                                 com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunWinXPSh());

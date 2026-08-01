@@ -1,10 +1,10 @@
-#name: 编译ZeroTermux
+#name: 编译VictorSuite
 #
 #on:
 #  push:
 #    branches: [ "main", "master" ]
 #    tags:
-#      - 'ZeroTermux-*'
+#      - 'VictorSuite-*'
 #      - 'v*'
 #      - '[0-9]*'
 #  pull_request:
@@ -71,7 +71,7 @@
 #            echo "APP_NAME=$TAG_NAME" >> $GITHUB_ENV
 #            echo "Detected Tag: $TAG_NAME"
 #          else
-#            echo "APP_NAME=ZeroTermux-Nightly" >> $GITHUB_ENV
+#            echo "APP_NAME=VictorSuite-Nightly" >> $GITHUB_ENV
 #            echo "Detected Branch build, using default name."
 #          fi
 #
@@ -93,7 +93,7 @@
 #      - name: 上传 APK
 #        uses: actions/upload-artifact@v4
 #        with:
-#          name: ZeroTermux-All-APKs
+#          name: VictorSuite-All-APKs
 #          path: |
 #            app/build/outputs/apk/release/*.apk
 #            app/build/outputs/apk/debug/*.apk

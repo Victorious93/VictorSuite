@@ -1,10 +1,10 @@
 #!/system/bin/sh
-#################ZeroTermux###########
-#    ZeroTermux Shell 增加会话脚本     #
+#################VictorSuite###########
+#    VictorSuite Shell 增加会话脚本     #
 ######################################
 pid=$$
-shell_ZeroTermux() {
-echo ">>>>>>>>>>>>>>>>>shell_ZeroTermux"
+shell_VictorSuite() {
+echo ">>>>>>>>>>>>>>>>>shell_VictorSuite"
 export PREFIX='/data/data/com.termux/files/usr'
 export HOME='/data/data/com.termux/files/home'
 export LD_LIBRARY_PATH='/data/data/com.termux/files/usr/lib'
