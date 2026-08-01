@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#000"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="#fff"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:textStyle="bold"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            android:id="@+id/error_text"
+            android:text="@string/zt_app_crash"
+            android:layout_height="match_parent" />
+
+    </ScrollView>
+
+</LinearLayout>

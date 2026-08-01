@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Monet: on Android 12+ (API 31+) these accent colors are derived from the
+     system wallpaper via the OS dynamic-color palette instead of the static
+     hex values in values/colors.xml. -->
+<resources>
+    <color name="main_accent">@android:color/system_accent1_600</color>
+    <color name="highlight_accent">@android:color/system_accent2_200</color>
+    <color name="opposite_accent">@android:color/system_accent3_200</color>
+    <color name="background_accent">@android:color/system_neutral1_50</color>
+    <color name="hint_accent">@android:color/system_accent2_300</color>
+
+    <color name="icon_accent">@android:color/system_accent2_700</color>
+    <color name="icon_accent_bg">@android:color/system_accent1_100</color>
+
+    <color name="icon_opposite_accent">@android:color/system_accent3_700</color>
+    <color name="icon_opposite_accent_bg">@android:color/system_accent3_100</color>
+
+    <color name="icon_neutral_accent">@android:color/system_neutral1_700</color>
+    <color name="icon_neutral_accent_bg">@android:color/system_neutral1_100</color>
+</resources>
