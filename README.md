@@ -1,55 +1,56 @@
-VictorSuite is a non-profit fork of the Termux ecosystem, created by merging the ZeroTermux codebase. It is intended solely for personal learning, experimentation, and technical collaboration.
-
-Its primary enhancements include backup and restore functionality, container switching, runtime source selection, and support for Linux distributions such as Ubuntu and Kali.
-
-VictorSuite also provides a separately distributed internal-channel X11 AAR, along with prebuilt APKs and a shared signing key compatible with Utermux for convenience. Application icons are sourced from the public Alibaba Iconfont library.
-
-This project is released under the GNU General Public License (GPL). Users are solely responsible for any recovery packages, modules, or third-party content they install or distribute. VictorSuite must not be used for commercial purposes or any unlawful activities.
-
-The project gratefully acknowledges the developers of the various Termux-family projects and the Android open-source libraries that make VictorSuite possible. While this acknowledgment may not include every contributor, their work is sincerely appreciated. Voluntary financial support may be provided through the payment methods listed in the original repository.
-
-Thanks to:
-
-https://github.com/termux/termux-app
-
-https://github.com/termux/termux-tasker
-
-https://github.com/termux/termux-api
-
-https://github.com/termux/termux-styling
-
-https://github.com/termux/termux-packages
-
-https://github.com/termux/termux-styling
-
-https://github.com/Lichenwei-Dev/ImagePicker
-
-https://github.com/BryleHelll/android-vshell
-
-https://github.com/Justson/AgentWeb
-
-https://github.com/getActivity/XXPermissions
-
-https://github.com/magnusja/libaums
-
-https://github.com/rtugeek/ColorSeekBar
-
-https://github.com/jeasonlzy/ImagePicker
-
-https://github.com/bumptech/glide
-
-https://github.com/tsl0922/ttyd
-
-https://github.com/filebrowser/filebrowser
-
-https://www.iconfont.cn/
-
-https://github.com/ppareit/swiftp
-
-https://github.com/gyf-dev/ImmersionBar
-
-https://github.com/570622566/FNetServer
-
-https://github.com/testica/codeeditor
 
 
+VictorSuite is a community-driven, non-profit enhancement of the Termux ecosystem, created by merging the ZeroTermux codebase and expanding it with additional tools for Linux environment management, automation, and recovery. It is intended exclusively for personal learning, experimentation, and technical collaboration.
+
+Rather than replacing Termux, VictorSuite builds upon it by providing a more organized, feature-rich, and user-friendly experience for running Linux on Android. Its goal is to simplify setup, improve portability, and streamline advanced workflows through an integrated suite of management tools.
+
+Features
+
+- One-command installation and initial configuration.
+- Backup and restoration of Termux environments and user data.
+- Installation and management of multiple Linux distributions, including Ubuntu and Kali.
+- Fast switching between installed Linux containers.
+- Runtime repository and package source selection.
+- Automated environment provisioning and maintenance.
+- Modular architecture for future expansion and additional integrations.
+- Optimized workflows for developers, Linux enthusiasts, security researchers, students, and advanced Android users.
+- Separately distributed internal-channel X11 AAR support.
+- Prebuilt APK releases.
+- Shared signing key compatibility with Utermux for user convenience.
+
+Licensing and Third-Party Content
+
+VictorSuite is released under the GNU General Public License (GPL).
+
+Application icons are provided by the public Alibaba Iconfont library.
+
+Users are solely responsible for any recovery packages, modules, or other third-party software they install, modify, or distribute while using VictorSuite. This project must not be used for commercial purposes or for any unlawful activities.
+
+Acknowledgements
+
+VictorSuite is built upon the work of numerous open-source projects and libraries. Their contributions make this project possible, and while this list may not include every contributor, their work is sincerely appreciated.
+
+Special thanks to:
+
+- Termux
+- Termux:Tasker
+- Termux:API
+- Termux:Styling
+- Termux Packages
+- ImagePicker (Lichenwei-Dev)
+- Android VShell
+- AgentWeb
+- XXPermissions
+- libaums
+- ColorSeekBar
+- ImagePicker (jeasonlzy)
+- Glide
+- ttyd
+- File Browser
+- Swiftp
+- ImmersionBar
+- FNetServer
+- CodeEditor
+- Alibaba Iconfont
+
+Voluntary financial support for the original upstream projects may be provided through the payment methods listed in their respective repositories. We encourage users to support the maintainers whose work forms the foundation of the Termux ecosystem and its related open-source libraries.
