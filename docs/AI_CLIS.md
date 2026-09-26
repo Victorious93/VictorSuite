@@ -12,7 +12,10 @@ run from the VictorSuite terminal:
 
 ## Quick start
 
-From the VictorSuite shell (as the normal user, not root):
+In the app, open the menu and tap **AI CLIs** in the ZT features section.
+That copies the bundled script to `~/ai-cli-setup.sh` and runs it in the
+terminal. You can also run it from the VictorSuite shell yourself (as the
+normal user, not root):
 
 ```sh
 bash scripts/ai-cli-setup.sh                 # all four
