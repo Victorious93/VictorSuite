@@ -45,6 +45,9 @@ jobs:
         run: ./gradlew :app:assembleDebug --stacktrace
 
       - name: Upload debug APKs
+        # The APK build above is the check. A full Actions storage quota on the
+        # account should not turn a successful build red.
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: VictorSuite-debug-apks
