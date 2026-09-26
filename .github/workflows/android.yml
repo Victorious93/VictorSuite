@@ -26,6 +26,10 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # The action's default also installs the legacy 'tools' package, which
+          # current sdkmanager no longer offers ("Failed to find package 'tools'").
+          packages: 'platform-tools'
 
       - name: Install required SDK components
         run: |
