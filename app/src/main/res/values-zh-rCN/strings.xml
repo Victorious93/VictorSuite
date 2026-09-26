@@ -485,7 +485,7 @@
     <string name="本机IP">本机IP</string>
 
     <string name="Zero功能">Zero功能</string>
-    <string name="ZeroTermux内置功能">VictorSuite 脚本区域(长按打开作者地址)</string>
+    <string name="VictorSuite内置功能">VictorSuite 脚本区域(长按打开作者地址)</string>
     <string name="内置nginx">Nginx(内置)</string>
     <string name="Nginx开关">Nginx开关</string>
     <string name="访问linux目录">访问linux目录</string>
@@ -504,7 +504,7 @@
     <string name="MyServer">MyServer</string>
     <string name="Termux_ADB">Termux-ADB</string>
     <string name="实验功能">实验功能</string>
-    <string name="ZeroTermux实验功能">VictorSuite 实验功能</string>
+    <string name="VictorSuite实验功能">VictorSuite 实验功能</string>
     <string name="网络ADB">网络ADB(ROOT)</string>
     <string name="网络ADBNo">网络ADB(无ROOT)</string>
     <string name="没有找到本机的ROOT权限">没有找到本机的ROOT权限,是否强制继续?</string>
@@ -666,7 +666,7 @@
     <string name="当前文件下载已被禁止">当前文件下载已被禁止</string>
     <string name="此脚本数据错误">此脚本数据错误,请尝试联系管理员</string>
 
-    <string name="ZeroTermux论坛">ZeroTermux论坛</string>
+    <string name="VictorSuite论坛">VictorSuite论坛</string>
     <string name="Zero论坛">Zero论坛</string>
 
     <string name="美化设置">美化设置</string>
@@ -717,7 +717,7 @@
     <string name="font_name">字体名称:</string>
     <string name="font_instance">字体示例:</string>
     <string name="font_path">字体路径:</string>
-    <string name="instance_zero">ZeroTermux|中文字体</string>
+    <string name="instance_zero">VictorSuite|中文字体</string>
 
     <string name="clipboard_text">注意：此剪贴板只会记录APP内的内容</string>
     <string name="clipboard_title">剪贴板标题:</string>
@@ -751,7 +751,7 @@
 
     <string name="telegram_group">Telegram</string>
 
-    <string name="opne_in_zerotermux">使用VictorSuite打开</string>
+    <string name="opne_in_victorsuite">使用VictorSuite打开</string>
 
     <string name="move_file_to_zt">移动文件到VictorSuite</string>
 
@@ -924,8 +924,8 @@
     <string name="zt_settings_note">VictorSuite 相关设置选项</string>
     <string name="container_settings">容器设置</string>
     <string name="container_settings_note">应用容器内应用程序，只针对当前容器设置</string>
-    <string name="about_zerotermux">关于VictorSuite</string>
-    <string name="about_zerotermux_note">版本信息、鸣谢、GITHUB</string>
+    <string name="about_victorsuite">关于VictorSuite</string>
+    <string name="about_victorsuite_note">版本信息、鸣谢、GITHUB</string>
     <string name="termux_settings">Termux原生设置</string>
     <string name="termux_settings_note">进入Termux原生设置内容</string>
     <string name="install_termux_software">安装/还原Termux官方软件</string>
@@ -944,16 +944,16 @@
     <string name="bottom_keyboard_settings">设置键盘规则</string>
     <string name="bottom_keyboard_settings_note">输入个性化的键盘规则,提高输入效率</string>
     <string name="log_output">输出LOG到存储卡</string>
-    <string name="log_output_note">输出LOG文件到\n【/xinhao/ZeroTermuxLog/ZeroTermux.log】\n可能影响性能请谨慎开启!!!!</string>
+    <string name="log_output_note">输出LOG文件到\n【/xinhao/VictorSuiteLog/VictorSuite.log】\n可能影响性能请谨慎开启!!!!</string>
     <string name="zt_about">关于VictorSuite</string>
-    <string name="zt_about_zerotermux">ZeroTermux GITHUB</string>
-    <string name="zt_about_zerotermux_note">跳转到ZeroTermux GITHUB页面</string>
-    <string name="zt_about_zerotermux_core_manage">ZeroCoreManage GITHUB(扩展引擎)</string>
-    <string name="zt_about_zerotermux_core_manage_note">跳转到ZeroTermux GITHUB页面\nZeroTermux的额外扩展引擎包</string>
+    <string name="zt_about_victorsuite">VictorSuite GITHUB</string>
+    <string name="zt_about_victorsuite_note">跳转到VictorSuite GITHUB页面</string>
+    <string name="zt_about_victorsuite_core_manage">ZeroCoreManage GITHUB(扩展引擎)</string>
+    <string name="zt_about_victorsuite_core_manage_note">跳转到VictorSuite GITHUB页面\nVictorSuite的额外扩展引擎包</string>
     <string name="zt_about_card_title">VictorSuite</string>
     <string name="zt_about_card_title_note">VictorSuite 是基于Termux二次开发，增加了\n相对于Termux没有的的辅助功能，方便快速上手\n此软件可相当于一个微型linux系统,可额外安装\n其他发行版本如：Ubuntu、CentOs等</string>
     <string name="zeroCore_about_card_title">ZeroCoreManage</string>
-    <string name="zeroCore_about_card_title_note">ZeroCoreManage 是基于ZeroTermux的扩展包,对于\nZeroTermux功能的扩展,目的是为了减小ZeroTermux\n的软件包大小,不安装此扩展包ZeroTermux依旧可以正常运行\n引擎额外内容:\n\n1. 内置键盘\n2. WEB访问内存卡\n3. X86 Alpine</string>
+    <string name="zeroCore_about_card_title_note">ZeroCoreManage 是基于VictorSuite的扩展包,对于\nVictorSuite功能的扩展,目的是为了减小VictorSuite\n的软件包大小,不安装此扩展包VictorSuite依旧可以正常运行\n引擎额外内容:\n\n1. 内置键盘\n2. WEB访问内存卡\n3. X86 Alpine</string>
     <string name="zt_developer">开发/贡献</string>
     <string name="zt_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn 等(排名不分先后)</string>
     <string name="zt_install">还原/扩展官方版本</string>
@@ -1307,12 +1307,29 @@
     <string name="zt_usage_habits_content">注意(使用习惯相关选项可以在ZT设置重新自定义)\n
         选择一个使用习惯\n
         termux(按键完全使用原生)\n
-        ZeroTermux(按键完全使用ZT布局)\n
+        VictorSuite(按键完全使用ZT布局)\n
         请选择一个使用习惯</string>
     <string name="zt_usage_habits_termux">设置成功Termux使用习惯,更改配置请到设置</string>
-    <string name="zt_usage_habits_ztermux">设置成功ZeroTermux使用习惯,更改配置请到设置</string>
+    <string name="zt_usage_habits_ztermux">设置成功VictorSuite使用习惯,更改配置请到设置</string>
 
     <string name="zt_guide">双击屏幕边缘弹出左/右菜单栏\n如果你设置了ZT使用习惯,则为音量+-键\n如果打开左/右侧栏无法关闭此窗口\n长按此处强制关闭</string>
+
+    <!-- 插件管理器 (com.termux.zerocore.plugin) -->
+    <string name="plugin_manager_title">插件管理</string>
+    <string name="plugin_none_registered">暂无已注册的插件。请在 remote/plugins/main.json 中添加条目，或本地注册一个——详见 PLUGINS.md。</string>
+    <string name="plugin_configure">配置</string>
+    <string name="plugin_launch">启动</string>
+    <string name="plugin_state_enabled">已启用</string>
+    <string name="plugin_state_disabled">已禁用</string>
+    <string name="plugin_authorized_use_title">确认授权使用</string>
+    <string name="plugin_authorized_use_message">我确认已获授权在此环境中使用\"%1$s\"，并且只会将其用于我有权测试的系统和目标。</string>
+    <string name="plugin_authorized_use_confirm">我确认</string>
+    <string name="plugin_not_enabled_msg">请先启用此插件。</string>
+    <string name="plugin_entry_point_missing_msg">未在磁盘上找到入口文件，请自行安装到：%1$s</string>
+    <string name="plugin_launch_sent_msg">命令已发送到终端。</string>
+    <string name="plugin_config_saved_msg">设置已保存。</string>
+    <string name="plugin_fetch_failed_msg">无法加载插件清单。</string>
+    <string name="plugin_enable_failed_msg">无法启用插件：%1$s</string>
 </resources>
 
 

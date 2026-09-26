@@ -58,7 +58,7 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
         mM30.setOnClickListener(this)
         mOther.setOnClickListener(this)
         val ztTimerBean = TimerSetManage.get().getZTTimerBean()
-        mStartSwitchEnvironmentSwitch.isChecked = TimerSetManage.get().getZTTimerBean().isZeroTermux
+        mStartSwitchEnvironmentSwitch.isChecked = TimerSetManage.get().getZTTimerBean().isVictorSuite
         mStartTimerSwitch.isChecked = mLibSuManage!!.isRun
         if (TimerSetManage.get().getZTTimerBean().timerNumber != TimerBean.TIMER_OTHER) {
             switchIndex(ztTimerBean.timerNumber)
@@ -110,7 +110,7 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
                 }
                 mStartSwitchEnvironmentSwitch -> {
                     val ztTimerBean = TimerSetManage.get().getZTTimerBean()
-                    ztTimerBean.setIsZeroTermux(mStartSwitchEnvironmentSwitch.isChecked)
+                    ztTimerBean.setIsVictorSuite(mStartSwitchEnvironmentSwitch.isChecked)
                     TimerSetManage.get().setZTTimerBean(ztTimerBean)
                     environmentString()
                 }
@@ -124,8 +124,8 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
 
     private fun environmentString() {
         val ztTimerBean = TimerSetManage.get().getZTTimerBean()
-        mStartSwitchEnvironmentSum.text = if (ztTimerBean.isZeroTermux) {
-            "${UUtils.getString(R.string.zt_timer_environment_sum)} ZeroTermux"
+        mStartSwitchEnvironmentSum.text = if (ztTimerBean.isVictorSuite) {
+            "${UUtils.getString(R.string.zt_timer_environment_sum)} VictorSuite"
         } else {
             "${UUtils.getString(R.string.zt_timer_environment_sum)} Shell"
         }

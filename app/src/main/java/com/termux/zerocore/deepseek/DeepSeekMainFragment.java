@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.termux.R;
-import com.termux.zerocore.deepseek.activity.ZeroTermuxDeepSeekSettingsActivity;
+import com.termux.zerocore.deepseek.activity.VictorSuiteDeepSeekSettingsActivity;
 import com.termux.zerocore.deepseek.data.ChatDatabaseHelper;
 import com.termux.zerocore.deepseek.data.ChatSession;
 import com.termux.zerocore.deepseek.data.ChatSessionAdapter;
@@ -74,7 +74,7 @@ public class DeepSeekMainFragment extends Fragment {
             mRecyclerView.setVisibility(View.VISIBLE);
         }
         mSettingsImageView.setOnClickListener(view -> {
-            getContext().startActivity(new Intent(getContext(), ZeroTermuxDeepSeekSettingsActivity.class));
+            getContext().startActivity(new Intent(getContext(), VictorSuiteDeepSeekSettingsActivity.class));
         });
     }
 

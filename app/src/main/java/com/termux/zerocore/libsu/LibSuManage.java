@@ -92,7 +92,7 @@ public class LibSuManage {
         Shell.enableVerboseLogging = BuildConfig.DEBUG;
         Shell.setDefaultBuilder(Shell.Builder.create()
             .setFlags(Shell.FLAG_REDIRECT_STDERR)
-            .setInitializers(ZeroTermuxInitializer.class)
+            .setInitializers(VictorSuiteInitializer.class)
         );
     }
 
@@ -226,11 +226,11 @@ public class LibSuManage {
 
 
 
-    static class ZeroTermuxInitializer extends Shell.Initializer {
+    static class VictorSuiteInitializer extends Shell.Initializer {
         @Override
         public boolean onInit(@NonNull Context context, @NonNull Shell shell) {
             // Load our init script
-            LogUtils.e(TAG, "ZeroTermuxInitializer init.....");
+            LogUtils.e(TAG, "VictorSuiteInitializer init.....");
             InputStream bashrc = context.getResources().openRawResource(R.raw.bashrc);
             shell.newJob().add(bashrc).exec();
             return true;
@@ -313,6 +313,6 @@ public class LibSuManage {
     }
 
     private String getLogName() {
-        return "ZeroTermuxTimer_" + System.currentTimeMillis() + ".log";
+        return "VictorSuiteTimer_" + System.currentTimeMillis() + ".log";
     }
 }

@@ -9,8 +9,8 @@ import com.termux.app.TermuxInstaller
 import com.termux.zerocore.shell.ExeCommand
 import com.termux.zerocore.url.FileUrl
 import com.termux.zerocore.utils.Z7ExtracatUtils
-import com.zp.z_file.zerotermux.StartTarGzListener
-import com.zp.z_file.zerotermux.ZTConfig
+import com.zp.z_file.victorsuite.StartTarGzListener
+import com.zp.z_file.victorsuite.ZTConfig
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException

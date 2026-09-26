@@ -255,12 +255,12 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP || unicodeChar == 'p' /* previous */) {
                 mTermuxTerminalSessionActivityClient.switchToSession(false);
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                // ZeroTermux add {@
+                // VictorSuite add {@
                 // mActivity.getDrawer().openDrawer(Gravity.LEFT);
                 mActivity.getDrawer().smoothRightOpen();
                 // @}
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-                // ZeroTermux add {@
+                // VictorSuite add {@
                 // mActivity.getDrawer().closeDrawers();
                 mActivity.getDrawer().smoothClose();
                 // @}
@@ -318,7 +318,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             return false;
         } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             mVirtualControlKeyDown = down;
-			// ZeroTermux add {@
+			// VictorSuite add {@
             if (mKeyUpDown != null) {
                 mKeyUpDown.keyDown(keyCode);
             }
@@ -326,7 +326,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             mVirtualFnKeyDown = down;
-            // ZeroTermux add {@
+            // VictorSuite add {@
             if (mKeyUpDown != null) {
                 mKeyUpDown.keyDown(keyCode);
             }
@@ -817,7 +817,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             session.getEmulator().paste(text);
     }
     /**
-     * ZeroTermux
+     * VictorSuite
      */
     public interface KeyUpDown {
         void keyDown(int key);

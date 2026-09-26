@@ -19,38 +19,38 @@ import com.termux.R;
 import com.termux.x11.MainActivity;
 import com.termux.zerocore.ftp.utils.UserSetManage;
 
-public class ZeroTermuxBackLayout extends RelativeLayout {
+public class VictorSuiteBackLayout extends RelativeLayout {
     private View back_color;
     private ImageView back_img;
     private CustomerVideoView back_video;
     private FrameLayout x11_view;
     private MainActivity mMainActivity;
 
-    public ZeroTermuxBackLayout(Context context) {
+    public VictorSuiteBackLayout(Context context) {
         super(context);
     }
 
-    public ZeroTermuxBackLayout(Context context, AttributeSet attrs) {
+    public VictorSuiteBackLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         initLayout(context);
     }
 
-    public ZeroTermuxBackLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VictorSuiteBackLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initLayout(context);
     }
 
-    public ZeroTermuxBackLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public VictorSuiteBackLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initLayout(context);
     }
 
 
     /**
-     * ZeroTermux
+     * VictorSuite
      */
     private void initLayout(Context mContext) {
-        View viewLay = UUtils.getViewLay(R.layout.layout_zero_termux);
+        View viewLay = UUtils.getViewLay(R.layout.layout_victor_suite);
         back_color = viewLay.findViewById(R.id.back_color);
         back_img = viewLay.findViewById(R.id.back_img);
         back_video = viewLay.findViewById(R.id.back_video);

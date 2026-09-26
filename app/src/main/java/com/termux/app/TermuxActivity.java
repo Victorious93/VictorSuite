@@ -146,7 +146,7 @@ import com.termux.zerocore.utils.WindowUtils;
 import com.termux.zerocore.view.BoomWindow;
 import com.termux.zerocore.zero.engine.ZeroCoreManage;
 import com.zp.z_file.ui.ZFileListFragment;
-import com.zp.z_file.zerotermux.ZTConfig;
+import com.zp.z_file.victorsuite.ZTConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -181,7 +181,7 @@ import io.noties.markwon.Markwon;
  * </ul>
  * about memory leaks.
  */
- // ZeroTermux add {@
+ // VictorSuite add {@
  //public final class TermuxActivity extends AppCompatActivity implements ServiceConnection {
 public final class TermuxActivity extends AppCompatActivity implements ServiceConnection, View.OnClickListener, TerminalView.DoubleClickListener, SingletonCommunicationUtils.SingletonCommunicationListener {
  //@}
@@ -207,7 +207,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
      * The {@link TerminalSessionClient} interface implementation to allow for communication between
      * {@link TerminalSession} and {@link TermuxActivity}.
      */
-	// ZeroTermux modify {@
+	// VictorSuite modify {@
     public TermuxTerminalSessionActivityClient mTermuxTerminalSessionActivityClient;
 	// @}
 
@@ -280,7 +280,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private boolean mIsInvalidState;
 
     private int mNavBarHeight;
-	// ZeroTermux modify {@
+	// VictorSuite modify {@
 	//  private float mTerminalToolbarDefaultHeight;
     private int mTerminalToolbarDefaultHeight;
     public boolean mInternalPassage;
@@ -357,8 +357,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
         setTerminalToolbarView(savedInstanceState);
 
-        // ZeroTermux add {@
-        initZeroTermux();
+        // VictorSuite add {@
+        initVictorSuite();
         // @}
         setSettingsButtonView();
 
@@ -438,7 +438,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         TermuxCrashUtils.notifyAppCrashFromCrashLogFile(this, LOG_TAG);
 
         mIsOnResumeAfterOnCreate = false;
-        // ZeroTermux add OTG{@
+        // VictorSuite add OTG{@
         onResumeInit();
 		// @}
 
@@ -470,7 +470,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         removeTermuxActivityRootViewGlobalLayoutListener();
 
         unregisterTermuxActivityBroadcastReceiver();
-        // ZeroTermux add {@
+        // VictorSuite add {@
         //getDrawer().closeDrawers();
         getDrawer().smoothClose();
         // @}
@@ -495,7 +495,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         } catch (Exception e) {
             // ignore.
         }
-        // ZeroTermux add {@
+        // VictorSuite add {@
         onDestroyInit();
         //  unregisterReceiver(mUsbReceiver);
 		// @}
@@ -523,7 +523,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mTermuxService = ((TermuxService.LocalBinder) service).service;
 
         setTermuxSessionsListView();
-        // ZeroTermux add {@
+        // VictorSuite add {@
         fragmentManager(0);
         locaBroadcast();
 		// @}
@@ -534,7 +534,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             if (mIsVisible) {
                 TermuxInstaller.setupBootstrapIfNeeded(TermuxActivity.this, () -> {
                     if (mTermuxService == null) return; // Activity might have been destroyed.
-                    // ZeroTermux add {@
+                    // VictorSuite add {@
                     initCommand();
                     // @}
                     try {
@@ -631,7 +631,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
         if (mTermuxTerminalViewClient != null)
             mTermuxTerminalViewClient.onCreate();
-		// ZeroTermux add {@
+		// VictorSuite add {@
         if (mTermuxTerminalViewClient != null) {
             mTermuxTerminalViewClient.setKeyUpDown(key -> {
                 if (UserSetManage.Companion.get()
@@ -783,7 +783,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     private void setToggleKeyboardView() {
         findViewById(R.id.toggle_keyboard_button).setOnClickListener(v -> {
-		  // ZeroTermux add {@
+		  // VictorSuite add {@
           /*  mTermuxTerminalViewClient.onToggleSoftKeyboardRequest();
             getDrawer().closeDrawers();*/
             indexSwitch(0);
@@ -795,7 +795,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             toggleTerminalToolbar();
             return true;
         });
-		  // ZeroTermux add {@
+		  // VictorSuite add {@
         findViewById(R.id.select_new_session_button).setOnClickListener(v -> {
             indexSwitch(1);
         });
@@ -810,7 +810,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     @SuppressLint("RtlHardcoded")
     @Override
     public void onBackPressed() {
-        // ZeroTermux add {@
+        // VictorSuite add {@
        // if (getDrawer().isDrawerOpen(Gravity.LEFT)) {
        //     getDrawer().closeDrawers();
         if (getDrawer().isOpened()) {
@@ -1009,7 +1009,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (requestCode == PermissionUtils.REQUEST_GRANT_STORAGE_PERMISSION) {
             requestStoragePermission(true);
         }
-        // ZeroTermux add {@
+        // VictorSuite add {@
         onActivityResultZtInit(requestCode, resultCode, data);
         // @}
     }
@@ -1049,7 +1049,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mExtraKeysView = extraKeysView;
     }
 
-    // ZeroTermux add {@
+    // VictorSuite add {@
     public SlidingConsumer getDrawer() {
         return mSlidingConsumer;
     }
@@ -1144,7 +1144,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         unregisterReceiver(mTermuxActivityBroadcastReceiver);
     }
 
-	// ZeroTermux modify {@
+	// VictorSuite modify {@
     //    private void fixTermuxActivityBroadcastReceiverIntent(Intent intent) {
     //    if (intent == null) return;
 	private boolean fixTermuxActivityBroadcastReceiverIntent(Intent intent) {
@@ -1155,7 +1155,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             intent.removeExtra(TERMUX_ACTIVITY.EXTRA_RELOAD_STYLE);
             intent.setAction(TERMUX_ACTIVITY.ACTION_REQUEST_PERMISSIONS);
         }
-		// ZeroTermux add {@
+		// VictorSuite add {@
         resBroadcastReceiever(extraReloadStyle);
 
         if ("readsms".equals(extraReloadStyle) || "contactperson".equals(extraReloadStyle)) {
@@ -1177,7 +1177,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             if (intent == null) return;
 
             if (mIsVisible) {
-				// ZeroTermux modify {@
+				// VictorSuite modify {@
 				//fixTermuxActivityBroadcastReceiverIntent(intent);
                 if (fixTermuxActivityBroadcastReceiverIntent(intent)) {
                     return;
@@ -1232,7 +1232,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         // will be called again. Extra keys input text, terminal sessions and transcripts will be preserved.
         if (recreateActivity) {
             Logger.logDebug(LOG_TAG, "Recreating activity");
-            // ZeroTermux TODO 目前重新创建当前activity会导致页面被finish掉，暂时注掉此处，后续版本分析详细原因
+            // VictorSuite TODO 目前重新创建当前activity会导致页面被finish掉，暂时注掉此处，后续版本分析详细原因
             // {@
             // TermuxActivity.this.recreate();
             restartActivity();
@@ -1251,10 +1251,10 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         return intent;
     }
 
-    /***************************************** ZERO TERMUX START ******************************************/
-    // 以下是ZeroTermux 新增内容
+    /***************************************** VICTOR SUITE START ******************************************/
+    // 以下是VictorSuite 新增内容
 
-    // ZeroTermux add {@
+    // VictorSuite add {@
     private MainMenuAdapter mMainMenuAdapter;
     private ScrollView scrollView_main;
     private LinearLayout file_layout;
@@ -1449,7 +1449,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
     }
 
-    // ZeroTermux modify {@
+    // VictorSuite modify {@
     //private void setExtraKeysViewVisible(boolean visible) {
     public void setExtraKeysViewVisible(boolean visible) {
         // @}
@@ -1720,7 +1720,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     //创建目录
     private void createFiles() {
 
-        if (!FileUrl.INSTANCE.getZeroTermuxHome().exists()) {
+        if (!FileUrl.INSTANCE.getVictorSuiteHome().exists()) {
             /**
              *
              * 防止某些手机重复显示此Dialog
@@ -1747,47 +1747,47 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                             public void onGranted(List<String> permissions, boolean all) {
                                 if (all) {
 
-                                    if (!FileUrl.INSTANCE.getZeroTermuxHome().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxHome().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteHome().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteHome().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxData().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxData().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteData().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteData().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxApk().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxApk().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteApk().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteApk().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxWindows().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxWindows().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteWindows().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteWindows().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxCommand().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxCommand().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteCommand().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteCommand().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxFont().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxFont().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteFont().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteFont().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxIso().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxIso().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteIso().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteIso().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxMysql().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxMysql().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteMysql().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteMysql().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxOnlineSystem().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxOnlineSystem().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteOnlineSystem().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteOnlineSystem().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxQemu().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxQemu().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteQemu().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteQemu().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxServer().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxServer().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteServer().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteServer().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxShare().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxShare().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteShare().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteShare().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxSystem().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxSystem().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteSystem().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteSystem().mkdirs();
                                     }
-                                    if (!FileUrl.INSTANCE.getZeroTermuxWebConfig().exists()) {
-                                        FileUrl.INSTANCE.getZeroTermuxWebConfig().mkdirs();
+                                    if (!FileUrl.INSTANCE.getVictorSuiteWebConfig().exists()) {
+                                        FileUrl.INSTANCE.getVictorSuiteWebConfig().mkdirs();
                                     }
                                     UUtils.showMsg("ok");
                                 } else {
@@ -2201,7 +2201,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mBeautifySettingDialog.setCancelable(true);
     }
 
-    // ZeroTermux add {@
+    // VictorSuite add {@
     private static final String TAG = "TermuxActivity";
     private OTGManager mOTGManager;
     private Handler mHandler = new Handler() {
@@ -2289,7 +2289,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         initListMenu(XMLMainMenuConfig.getXmlMainMenuCategoryDatas(TermuxActivity.this));
     }
 
-    private void initZeroTermux() {
+    private void initVictorSuite() {
         mInternalPassage = UserSetManage.Companion.get().getZTUserBean().isInternalPassage();
         initSmartSwipe();
         mOTGManager = new OTGManager();
@@ -2322,7 +2322,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         localBroadcastManager.registerReceiver(messageReceiver, filter);
         SingletonCommunicationUtils.getInstance().setSingletonCommunicationListener(this);
     }
-	// ZeroTermux add {@
+	// VictorSuite add {@
     private void initStatusBarHeight() {
         int statusBarHeight = UUtils.getStatusBarHeight(this);
         int navigationBarHeight = UUtils.getNavigationBarHeight(this);
@@ -2428,7 +2428,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mCommonCommandsDialog.setCancelable(true);
         mCommonCommandsDialog.setFindKey(findKey);
     }
-    // ZeroTermux add {@
+    // VictorSuite add {@
     private void regMainViewKeyDown() {
         if (mMainActivity != null) {
             mMainActivity.setMainActivityOnKeyDown((keyCode, keyEvent) -> {
@@ -2597,9 +2597,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     // @}
 
     private void onResumeInit() {
-        //初始化ZeroTermux 引擎
+        //初始化VictorSuite 引擎
         Logger.logVerbose(LOG_TAG, "onResume");
-        // ZeroTermux add {@
+        // VictorSuite add {@
         VideoUtils.getInstance().onResume();
         initUserData();
         if (mInternalPassage && mMainActivity != null) {
@@ -2613,7 +2613,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         registerReceiver(mUsbReceiver, filter);
     }
 
-	 // ZeroTermux add {@
+	 // VictorSuite add {@
     private void initUserData() {
         ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
         if (ztUserBean.isOpenDownloadFileServices()) {
@@ -2626,7 +2626,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
     //@}
 
-  // ZeroTermux add {@
+  // VictorSuite add {@
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -2749,5 +2749,5 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     }
 
-    /***************************************** ZERO TERMUX END ******************************************/
+    /***************************************** VICTOR SUITE END ******************************************/
 }

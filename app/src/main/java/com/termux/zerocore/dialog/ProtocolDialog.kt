@@ -76,7 +76,7 @@ class ProtocolDialog : BaseDialogCentre, View.OnFocusChangeListener {
             UUtils.showMsg(UUtils.getString(R.string.zt_usage_habits_termux))
             switchDialog.dismiss()
         }
-        switchDialog.cancel?.text = "ZeroTermux"
+        switchDialog.cancel?.text = "VictorSuite"
         switchDialog.cancel?.setOnClickListener {
             UUtils.showMsg(UUtils.getString(R.string.zt_usage_habits_ztermux))
             switchDialog.dismiss()

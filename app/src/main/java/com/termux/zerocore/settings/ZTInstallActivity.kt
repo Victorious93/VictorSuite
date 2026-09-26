@@ -13,7 +13,7 @@ import com.hjq.permissions.XXPermissions
 import com.termux.R
 import com.termux.zerocore.dialog.LoadingDialog
 import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.url.FileUrl.zeroTermuxApk
+import com.termux.zerocore.url.FileUrl.victorSuiteApk
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -130,8 +130,8 @@ class ZTInstallActivity : AppCompatActivity(), View.OnClickListener {
                         all: Boolean
                     ) {
                         if (all) {
-                            if (!zeroTermuxApk.exists()) {
-                                zeroTermuxApk.mkdirs()
+                            if (!victorSuiteApk.exists()) {
+                                victorSuiteApk.mkdirs()
                             }
                             val file1 = File(
                                 Environment.getExternalStorageDirectory(),

@@ -30,7 +30,7 @@ public class ZeroBBsClickConfig extends BaseMenuClickConfig {
     @Override
     public void onClick(View view, Context context) {
         Intent intent2 = new Intent(context, WebViewActivity.class);
-        intent2.putExtra("title", "ZeroTermux 论坛");
+        intent2.putExtra("title", "VictorSuite 论坛");
         intent2.putExtra("content", HTTPIP.ZERO_BBS);
         context.startActivity(intent2);
     }

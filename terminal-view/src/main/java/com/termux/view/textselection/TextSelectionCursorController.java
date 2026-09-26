@@ -18,7 +18,7 @@ import com.termux.terminal.TerminalBuffer;
 import com.termux.terminal.WcWidth;
 import com.termux.view.R;
 import com.termux.view.TerminalView;
-import com.termux.view.zerotermux.SaveData;
+import com.termux.view.victorsuite.SaveData;
 
 public class TextSelectionCursorController implements CursorController {
 
@@ -33,7 +33,7 @@ public class TextSelectionCursorController implements CursorController {
 
     private ActionMode mActionMode;
     public final int ACTION_COPY = 1;
-	// ZeroTermux add {@
+	// VictorSuite add {@
    // public final int ACTION_PASTE = 2;
    // public final int ACTION_MORE = 3;
     public final int ACTION_ADD = 2;
@@ -121,12 +121,12 @@ public class TextSelectionCursorController implements CursorController {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 int show = MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT;
-				// ZeroTermux add {@
+				// VictorSuite add {@
                 String data = SaveData.getData(SaveData.TOOL, mEndHandle.getContext());
 				// @}
                 ClipboardManager clipboard = (ClipboardManager) terminalView.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 menu.add(Menu.NONE, ACTION_COPY, Menu.NONE, R.string.copy_text).setShowAsAction(show);
-				// ZeroTermux add {@
+				// VictorSuite add {@
                 menu.add(Menu.NONE, ACTION_ADD, Menu.NONE, R.string.add_text).setShowAsAction(show);
                 menu.add(Menu.NONE, ENABLE_TOOLBOX, Menu.NONE, R.string.enable_toolbox).setEnabled(data != null && !(data.isEmpty()) &&!(data.equals("def"))).setShowAsAction(show);
                 // @}
@@ -166,7 +166,7 @@ public class TextSelectionCursorController implements CursorController {
                         // otherwise handles will show above popup
                         terminalView.stopTextSelectionMode();
                         terminalView.showContextMenu();
-						// ZeroTermux add {@
+						// VictorSuite add {@
                         break;
                     case ACTION_ADD:
                         if (mAddCommend != null) {
@@ -431,7 +431,7 @@ public class TextSelectionCursorController implements CursorController {
     public boolean isSelectionEndDragged() {
         return mEndHandle.isDragging();
     }
-	 // ZeroTermux add {@
+	 // VictorSuite add {@
     public AddCommend getAddCommend() {
         return mAddCommend;
     }

@@ -23,36 +23,38 @@ object FileUrl {
 
 
     //主目录
-    public val zeroTermuxHome = File(Environment.getExternalStorageDirectory(), "/xinhao/")
+    public val victorSuiteHome = File(Environment.getExternalStorageDirectory(), "/xinhao/")
     //恢复目录
-    public val zeroTermuxData = File(Environment.getExternalStorageDirectory(), "/xinhao/data/")
+    public val victorSuiteData = File(Environment.getExternalStorageDirectory(), "/xinhao/data/")
     //APK目录
-    public val zeroTermuxApk = File(Environment.getExternalStorageDirectory(), "/xinhao/apk/")
+    public val victorSuiteApk = File(Environment.getExternalStorageDirectory(), "/xinhao/apk/")
     //windows目录
-    public val zeroTermuxWindows = File(Environment.getExternalStorageDirectory(), "/xinhao/windows/")
+    public val victorSuiteWindows = File(Environment.getExternalStorageDirectory(), "/xinhao/windows/")
    //命令目录
-    public val zeroTermuxCommand = File(Environment.getExternalStorageDirectory(), "/xinhao/command/")
+    public val victorSuiteCommand = File(Environment.getExternalStorageDirectory(), "/xinhao/command/")
    //字体目录
-    public val zeroTermuxFont = File(Environment.getExternalStorageDirectory(), "/xinhao/font")
+    public val victorSuiteFont = File(Environment.getExternalStorageDirectory(), "/xinhao/font")
    //iso目录
-    public val zeroTermuxIso = File(Environment.getExternalStorageDirectory(), "/xinhao/iso")
+    public val victorSuiteIso = File(Environment.getExternalStorageDirectory(), "/xinhao/iso")
    //mysql目录
-    public val zeroTermuxMysql = File(Environment.getExternalStorageDirectory(), "/xinhao/mysql")
+    public val victorSuiteMysql = File(Environment.getExternalStorageDirectory(), "/xinhao/mysql")
     //online_system 目录
-    public val zeroTermuxOnlineSystem = File(Environment.getExternalStorageDirectory(), "/xinhao/online_system")
+    public val victorSuiteOnlineSystem = File(Environment.getExternalStorageDirectory(), "/xinhao/online_system")
    //qemu目录
-    public val zeroTermuxQemu = File(Environment.getExternalStorageDirectory(), "/xinhao/qemu")
+    public val victorSuiteQemu = File(Environment.getExternalStorageDirectory(), "/xinhao/qemu")
+   //插件安装目录 (see com.termux.zerocore.plugin) - each plugin gets a subdirectory named by its id
+    public val victorSuitePlugins = File(Environment.getExternalStorageDirectory(), "/xinhao/plugins")
    //server目录
-    public val zeroTermuxServer = File(Environment.getExternalStorageDirectory(), "/xinhao/server")
+    public val victorSuiteServer = File(Environment.getExternalStorageDirectory(), "/xinhao/server")
    //share目录
-    public val zeroTermuxShare = File(Environment.getExternalStorageDirectory(), "/xinhao/share")
+    public val victorSuiteShare = File(Environment.getExternalStorageDirectory(), "/xinhao/share")
     //system目录
-    public val zeroTermuxSystem = File(Environment.getExternalStorageDirectory(), "/xinhao/system")
+    public val victorSuiteSystem = File(Environment.getExternalStorageDirectory(), "/xinhao/system")
     //web_config
-    public val zeroTermuxWebConfig = File(Environment.getExternalStorageDirectory(), "/xinhao/web_config")
+    public val victorSuiteWebConfig = File(Environment.getExternalStorageDirectory(), "/xinhao/web_config")
     //模块包目录
-    public val zeroTermuxModule = File(Environment.getExternalStorageDirectory(), "/xinhao/module")
-     val zeroTermuxWindowsConfig = File(Environment.getExternalStorageDirectory(), "/xinhao/windows_config/")
+    public val victorSuiteModule = File(Environment.getExternalStorageDirectory(), "/xinhao/module")
+     val victorSuiteWindowsConfig = File(Environment.getExternalStorageDirectory(), "/xinhao/windows_config/")
 
     //官方 sources 路径[源路径]
     public val sourcesUrl = "${TermuxConstants.TERMUX_FILES_DIR_PATH}/usr/etc/apt/sources.list"

@@ -132,8 +132,8 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
         var cunt = mLibSuManage!!.cunt
         mLibSuManage!!.cunt = cunt + 1
         mTimerBean =  TimerSetManage.get().getZTTimerBean()
-        if (mTimerBean!!.isZeroTermux) {
-            mLibSuManage?.shellCommandExec("shell_ZeroTermux")
+        if (mTimerBean!!.isVictorSuite) {
+            mLibSuManage?.shellCommandExec("shell_VictorSuite")
         } else {
             mLibSuManage?.shellCommandExec("shell_Android")
         }

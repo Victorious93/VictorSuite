@@ -1,6 +1,6 @@
 #!/system/bin/sh
-#################ZeroTermux###########
-#    ZeroTermux Shell 启动会话脚本     #
+#################VictorSuite###########
+#    VictorSuite Shell 启动会话脚本     #
 ######################################
 export PREFIX='/data/data/com.termux/files/usr'
 export HOME='/data/data/com.termux/files/home'

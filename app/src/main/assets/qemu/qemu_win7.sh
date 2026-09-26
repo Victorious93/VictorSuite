@@ -21,30 +21,15 @@ echo ""
 echo "本程序是为了测试qemu的研究与适用性,切勿用作于非法用途"
 echo "This program is to test the research and applicability of qemu, and should not be used for illegal purposes"
 echo ""
-echo "十秒钟后开始安装，请阅读"
 echo "---------------------------------------------------------"
-sleep 10
-echo "[*]开始安装"
-
-cd ~
-
-pkg update -y
-
-pkg install wget proot git -y
-
-wget http://od.ixcmstudio.cn/repository/main/windows/win7P.tar.gz
-
-tar zxvf win7P.tar.gz
-
-rm win7P.tar.gz
-
-chmod 777 start-win7.sh
-
-./start-win7.sh
-
-
-
-echo "安装完成！即将启动(start-win7.sh)"
-echo "The installation is complete! About to start (start-win7.sh)"
-sleep 2
+echo ""
+echo "此快捷安装已停用：之前的镜像来源无法验证版权与完整性"
+echo "This quick-install has been disabled: the previous image source"
+echo "could not be verified for licensing or integrity."
+echo ""
+echo "请从微软官方获取合法的 Windows 安装介质，并使用「获取镜像」流程"
+echo "Please obtain legitimate Windows installation media from Microsoft"
+echo "directly (see the in-app \"Get Image\" option), then set up the"
+echo "QEMU virtual machine manually with utqemu.sh."
+echo "---------------------------------------------------------"
 

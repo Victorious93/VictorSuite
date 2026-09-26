@@ -91,19 +91,19 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.settings.ZeroTermuxSettingsActivity"
+            android:name=".zerocore.settings.VictorSuiteSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".zerocore.deepseek.activity.ZeroTermuxDeepSeekSettingsActivity"
+        <activity android:name=".zerocore.deepseek.activity.VictorSuiteDeepSeekSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <activity android:name=".zerocore.deepseek.activity.ZeroTermuxDeepSeekKeyActivity"
+        <activity android:name=".zerocore.deepseek.activity.VictorSuiteDeepSeekKeyActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".zerocore.settings.ZeroTermuxX11Settings"
+            android:name=".zerocore.settings.VictorSuiteX11Settings"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
@@ -283,7 +283,7 @@
             android:name=".filepicker.TermuxFileReceiverActivity"
             android:excludeFromRecents="true"
             android:exported="false"
-            android:label="@string/opne_in_zerotermux"
+            android:label="@string/opne_in_victorsuite"
             android:noHistory="true"
             android:resizeableActivity="true"
             android:taskAffinity="${TERMUX_PACKAGE_NAME}.filereceiver"
@@ -293,7 +293,7 @@
             android:name=".filepicker.TermuxFileShareReceiverActivity"
             android:enabled="true"
             android:exported="true"
-            android:label="@string/opne_in_zerotermux"
+            android:label="@string/opne_in_victorsuite"
             android:targetActivity=".filepicker.TermuxFileReceiverActivity">
 
             <!-- Accept multiple file types when sending. -->
@@ -316,7 +316,7 @@
             android:name=".filepicker.TermuxFileViewReceiverActivity"
             android:enabled="true"
             android:exported="true"
-            android:label="@string/opne_in_zerotermux"
+            android:label="@string/opne_in_victorsuite"
             android:targetActivity=".filepicker.TermuxFileReceiverActivity">
 
             <!-- Accept multiple file types to let Termux be usable as generic file viewer. -->

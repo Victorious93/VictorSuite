@@ -384,7 +384,7 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
             TerminalSession newTerminalSession = newTermuxSession.getTerminalSession();
             setCurrentSession(newTerminalSession);
 
-            // ZeroTermux add {@
+            // VictorSuite add {@
             //  mActivity.getDrawer().smoothClose();
             //  mActivity.getDrawer().closeDrawers();
             // @}
@@ -521,7 +521,7 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
     }
 
     public void updateBackgroundColor() {
-        // ZeroTermux.add {@
+        // VictorSuite.add {@
         //造成新建会话底部按钮消失
        // if (!mActivity.isVisible() && mActivity.getDrawer().isOpened()) return;
        // TerminalSession session = mActivity.getCurrentSession();

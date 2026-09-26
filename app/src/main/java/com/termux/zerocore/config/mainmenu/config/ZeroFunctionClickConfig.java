@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.termux.R;
-import com.termux.zerocore.dialog.BoomZeroTermuxDialog;
+import com.termux.zerocore.dialog.BoomVictorSuiteDialog;
 
 public class ZeroFunctionClickConfig extends BaseMenuClickConfig {
     @Override
@@ -27,8 +27,8 @@ public class ZeroFunctionClickConfig extends BaseMenuClickConfig {
 
     @Override
     public void onClick(View view, Context context) {
-        BoomZeroTermuxDialog boomZeroTermuxDialog = new BoomZeroTermuxDialog(context);
-        boomZeroTermuxDialog.show();
-        boomZeroTermuxDialog.setCancelable(true);
+        BoomVictorSuiteDialog boomVictorSuiteDialog = new BoomVictorSuiteDialog(context);
+        boomVictorSuiteDialog.show();
+        boomVictorSuiteDialog.setCancelable(true);
     }
 }

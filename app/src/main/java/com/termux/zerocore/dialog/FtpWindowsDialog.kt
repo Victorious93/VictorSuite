@@ -210,7 +210,7 @@ class FtpWindowsDialog : BaseDialogCentre {
             }
             FtpWindowsDialogConstant.ROOT_PATH_ZERO_HOME -> {
                 if (isInit) {
-                    SaveDataZeroEngine.putStringData(UUtils.getContext(), SaveDataZeroEngine.FTP_CHROOT, SaveDataZeroEngine.FTP_ZERO_TERMUX_FILE)
+                    SaveDataZeroEngine.putStringData(UUtils.getContext(), SaveDataZeroEngine.FTP_CHROOT, SaveDataZeroEngine.FTP_VICTOR_SUITE_FILE)
                 }
                 mZeroRoot?.setBackgroundResource(R.drawable.shape_line_8cff5a)
              //   FTP_CONFIG.PATH = mainFilesUrl

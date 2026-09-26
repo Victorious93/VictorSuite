@@ -89,7 +89,7 @@ public class TermuxTerminalExtraKeys extends TerminalExtraKeys {
             if(mTermuxTerminalViewClient != null)
                 mTermuxTerminalViewClient.onToggleSoftKeyboardRequest();
         } else if ("DRAWER".equals(key)) {
-            // ZeroTermux add {@
+            // VictorSuite add {@
             // DrawerLayout drawerLayout = mTermuxTerminalViewClient.getActivity().getDrawer();
             // if (drawerLayout.isDrawerOpen(Gravity.LEFT))
             //     drawerLayout.closeDrawer(Gravity.LEFT);

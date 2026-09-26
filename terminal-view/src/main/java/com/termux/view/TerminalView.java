@@ -256,7 +256,7 @@ public final class TerminalView extends View {
                     startTextSelectionMode(event);
                 }
 
-                // ZeroTermux add {@
+                // VictorSuite add {@
                 if(mOnLongClickListener!= null){
                     mOnLongClickListener.onLong();
                 }
@@ -607,7 +607,7 @@ public final class TerminalView extends View {
         }
         return false;
     }
-	// ZeroTermux add {@
+	// VictorSuite add {@
     private long doubleClick = 0;
 	// @}
     @SuppressLint("ClickableViewAccessibility")
@@ -615,7 +615,7 @@ public final class TerminalView extends View {
     @TargetApi(23)
     public boolean onTouchEvent(MotionEvent event) {
 
-        // ZeroTermux add {@
+        // VictorSuite add {@
         //判断双击
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if((System.currentTimeMillis() - doubleClick) < 260){
@@ -1532,7 +1532,7 @@ public final class TerminalView extends View {
         }
     }
 
-    // ZeroTermux add {@
+    // VictorSuite add {@
     public void sendTextToTerminal(String text) {
         stopTextSelectionMode();
         final int textLengthInChars = text.length();
@@ -1704,7 +1704,7 @@ public final class TerminalView extends View {
         }
     }
 
-    /***************************************** ZERO TERMUX START ******************************************/
+    /***************************************** VICTOR SUITE START ******************************************/
 
     private  DoubleClickListener mDoubleClickListener;
     private  ActionPointer2ClickListener mActionPointer2ClickListener;
@@ -1751,5 +1751,5 @@ public final class TerminalView extends View {
     public TextSelectionCursorController getTextSelectionCursorControllerView() {
         return getTextSelectionCursorController();
     }
-    /***************************************** ZERO TERMUX END ******************************************/
+    /***************************************** VICTOR SUITE END ******************************************/
 }

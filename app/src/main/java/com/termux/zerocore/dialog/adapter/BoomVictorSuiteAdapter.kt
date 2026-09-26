@@ -11,11 +11,11 @@ import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.zerocore.bean.ZeroRunCommandBean
 import com.termux.zerocore.dialog.LoadingDialog
-import com.termux.zerocore.dialog.view_holder.BoomZeroTermuxViewHolder
+import com.termux.zerocore.dialog.view_holder.BoomVictorSuiteViewHolder
 import com.termux.zerocore.url.FileUrl.mainHomeUrl
 import java.io.File
 
-class BoomZeroTermuxAdapter : RecyclerView.Adapter<BoomZeroTermuxViewHolder> {
+class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
     private var mList:ArrayList<ZeroRunCommandBean>? = null
 
@@ -29,11 +29,11 @@ class BoomZeroTermuxAdapter : RecyclerView.Adapter<BoomZeroTermuxViewHolder> {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoomZeroTermuxViewHolder {
-       return BoomZeroTermuxViewHolder(UUtils.getViewLayViewGroup(R.layout.item_boom_zero_termux,parent))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoomVictorSuiteViewHolder {
+       return BoomVictorSuiteViewHolder(UUtils.getViewLayViewGroup(R.layout.item_boom_victor_suite,parent))
     }
 
-    override fun onBindViewHolder(holder: BoomZeroTermuxViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BoomVictorSuiteViewHolder, position: Int) {
 
         val zeroRunCommandBean = mList!![position]
 

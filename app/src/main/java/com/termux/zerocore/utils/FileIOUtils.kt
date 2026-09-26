@@ -410,7 +410,7 @@ object FileIOUtils {
     }
 
     public fun getLogPath(): String {
-        return getSdcardPath() + "/xinhao/ZeroTermuxLog"
+        return getSdcardPath() + "/xinhao/VictorSuiteLog"
     }
 
     public fun isLogPath(): Boolean {
@@ -482,7 +482,7 @@ object FileIOUtils {
         val fileHtmlPATH = File(getHomePath(UUtils.getContext()), HTML_PATH)
         val fileXinHaoPATH = File(getHomePath(UUtils.getContext()), XINHAO_PATH)
 
-        val file1 = File(FileUrl.zeroTermuxHome, "web_config")
+        val file1 = File(FileUrl.victorSuiteHome, "web_config")
 
         if (!fileZtLinkPATH.exists()) {
             fileZtLinkPATH.mkdirs()
@@ -492,7 +492,7 @@ object FileIOUtils {
         }
         try {
             Os.symlink(file1.absolutePath, fileHtmlPATH.absolutePath)
-            Os.symlink(FileUrl.zeroTermuxHome.absolutePath, fileXinHaoPATH.absolutePath)
+            Os.symlink(FileUrl.victorSuiteHome.absolutePath, fileXinHaoPATH.absolutePath)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -517,13 +517,13 @@ object FileIOUtils {
     }
     //获取模块包路径
     public fun getModuleFiles(): ArrayList<File>? {
-        if (!FileUrl.zeroTermuxModule.exists()) {
-            if (!FileUrl.zeroTermuxModule.mkdirs()) {
-                LogUtils.d(TAG, "getModuleFiles create folder is fail, path: " + FileUrl.zeroTermuxModule.absolutePath)
+        if (!FileUrl.victorSuiteModule.exists()) {
+            if (!FileUrl.victorSuiteModule.mkdirs()) {
+                LogUtils.d(TAG, "getModuleFiles create folder is fail, path: " + FileUrl.victorSuiteModule.absolutePath)
                 return null
             }
         }
-        val listFiles = FileUrl.zeroTermuxModule.listFiles()
+        val listFiles = FileUrl.victorSuiteModule.listFiles()
         if (listFiles == null || listFiles.isEmpty()) {
             LogUtils.d(TAG, "getModuleFiles module listFiles is empty ")
             return null

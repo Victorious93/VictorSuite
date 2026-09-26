@@ -19,7 +19,7 @@ import com.termux.zerocore.bosybox.BusyBoxManager;
 import com.termux.zerocore.developer.DeveloperActivity;
 import com.termux.zerocore.utils.FileHttpUtils;
 import com.termux.zerocore.utils.Z7ExtracatUtils;
-import com.zp.z_file.zerotermux.ZTConfig;
+import com.zp.z_file.victorsuite.ZTConfig;
 
 import java.io.File;
 

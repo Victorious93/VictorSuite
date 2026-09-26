@@ -16,7 +16,6 @@ import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.zerocore.code.CodeString;
 import com.termux.zerocore.dialog.LoadingDialog;
-import com.termux.zerocore.dialog.SwitchDialog;
 import com.termux.zerocore.popuwindow.MenuLeftPopuListWindow;
 import com.termux.zerocore.url.FileUrl;
 import com.termux.zerocore.utermux_windows.qemu.activity.RunWindowActivity;
@@ -72,42 +71,26 @@ public class QEMUClickConfig extends BaseMenuClickConfig implements MenuLeftPopu
     @Override
     public void itemClick(int id, int index, @Nullable MenuLeftPopuListWindow mMenuLeftPopuListWindow) {
         switch (id) {
-            case 5:
-                SwitchDialog msgQemuLine = switchDialogShow(UUtils.getString(R.string.选择方式), UUtils.getString(R.string.要获取最新版本), mContext);
-                msgQemuLine.show();
-                msgQemuLine.getOk().setText(UUtils.getString(R.string.线上脚本));
-                msgQemuLine.getOk().setOnClickListener(new View.OnClickListener() {
+            case 5: {
+                // Always use the script bundled in the app's own assets rather than
+                // fetching and executing a script from a third-party server at runtime.
+                LoadingDialog loadingDialog = new LoadingDialog(mContext);
+                loadingDialog.show();
+                new Thread(new Runnable() {
                     @Override
-                    public void onClick(View v) {
-                        msgQemuLine.dismiss();
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunLineQemu() + "\n");
-
-                    }
-                });
-                msgQemuLine.getCancel().setText(UUtils.getString(R.string.本地脚本));
-                msgQemuLine.getCancel().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        msgQemuLine.dismiss();
-                        LoadingDialog loadingDialog = new LoadingDialog(mContext);
-                        loadingDialog.show();
-                        new Thread(new Runnable() {
+                    public void run() {
+                        UUtils.writerFile("qemu/utqemu.sh", new File(FileUrl.INSTANCE.getMainHomeUrl(), "/utqemu.sh"));
+                        ((Activity) mContext).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                UUtils.writerFile("qemu/utqemu.sh", new File(FileUrl.INSTANCE.getMainHomeUrl(), "/utqemu.sh"));
-                                ((Activity) mContext).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunQemuSh());
-                                        loadingDialog.dismiss();
-                                    }
-                                });
+                                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunQemuSh());
+                                loadingDialog.dismiss();
                             }
-                        }).start();
+                        });
                     }
-                });
-                msgQemuLine.setCancelable(true);
+                }).start();
                 break;
+            }
 
             case 501:
                 mContext.startActivity(new Intent(mContext, RunWindowActivity.class));
@@ -121,9 +104,9 @@ public class QEMUClickConfig extends BaseMenuClickConfig implements MenuLeftPopu
                         @Override
                         public void onGranted(List<String> permissions, boolean all) {
                             if (all) {
-                                File zeroTermuxShare = FileUrl.INSTANCE.getZeroTermuxShare();
-                                if (!zeroTermuxShare.exists()) {
-                                    zeroTermuxShare.mkdirs();
+                                File victorSuiteShare = FileUrl.INSTANCE.getVictorSuiteShare();
+                                if (!victorSuiteShare.exists()) {
+                                    victorSuiteShare.mkdirs();
                                 }
                                 UUtils.writerFile("qemu/qemu_win7.sh", new File(FileUrl.INSTANCE.getMainHomeUrl(), "/qemu_win7.sh"));
                                 com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunWin7Sh());
@@ -154,9 +137,9 @@ public class QEMUClickConfig extends BaseMenuClickConfig implements MenuLeftPopu
                         @Override
                         public void onGranted(List<String> permissions, boolean all) {
                             if (all) {
-                                File zeroTermuxShare = FileUrl.INSTANCE.getZeroTermuxShare();
-                                if (!zeroTermuxShare.exists()) {
-                                    zeroTermuxShare.mkdirs();
+                                File victorSuiteShare = FileUrl.INSTANCE.getVictorSuiteShare();
+                                if (!victorSuiteShare.exists()) {
+                                    victorSuiteShare.mkdirs();
                                 }
                                 UUtils.writerFile("qemu/qemu_winxp.sh", new File(FileUrl.INSTANCE.getMainHomeUrl(), "/qemu_winxp.sh"));
                                 com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunWinXPSh());

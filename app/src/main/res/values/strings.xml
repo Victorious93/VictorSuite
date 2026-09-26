@@ -496,7 +496,7 @@ error</string>
     <string name="本机IP">Local IP</string>
 
     <string name="Zero功能">Zero function</string>
-    <string name="ZeroTermux内置功能">VictorSuite command area (long press to open author address)</string>
+    <string name="VictorSuite内置功能">VictorSuite command area (long press to open author address)</string>
     <string name="内置nginx">Nginx (built-in)</string>
     <string name="Nginx开关">Nginx switch</string>
     <string name="访问linux目录">Access linux directory</string>
@@ -516,7 +516,7 @@ error</string>
     <string name="MyServer">MyServer</string>
     <string name="Termux_ADB">Termux-ADB</string>
     <string name="实验功能">ExperimentalFunction</string>
-    <string name="ZeroTermux实验功能">VictorSuite ExperimentalFunction</string>
+    <string name="VictorSuite实验功能">VictorSuite ExperimentalFunction</string>
     <string name="网络ADB">Network ADB(ROOT)</string>
     <string name="网络ADBNo">Network ADB (no ROOT)</string>
     <string name="没有找到本机的ROOT权限">The ROOT permission of the machine is not found. Do you want to force it to continue?</string>
@@ -670,7 +670,7 @@ Reset successfully</string>
     <string name="本地脚本">Local script</string>
     <string name="请双击命令窗口试试">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
     <string name="Zero论坛">Zero BBS</string>
-    <string name="ZeroTermux论坛">ZeroTermux bbs</string>
+    <string name="VictorSuite论坛">VictorSuite bbs</string>
 
     <string name="在线脚本">Online script</string>
     <string name="在线脚本服务器名称">Server Name</string>
@@ -729,7 +729,7 @@ Reset successfully</string>
     <string name="font_name">fontName:</string>
     <string name="font_instance">fontInstance:</string>
     <string name="font_path">fontPath:</string>
-    <string name="instance_zero">ZeroTermux|ABCD</string>
+    <string name="instance_zero">VictorSuite|ABCD</string>
 
     <string name="clipboard_text">Note: This clipboard will only record the content within the APP</string>
     <string name="clipboard_title">Clipboard Title:</string>
@@ -763,7 +763,7 @@ Reset successfully</string>
 
     <string name="telegram_group">Telegram</string>
 
-    <string name="opne_in_zerotermux">Open In VictorSuite</string>
+    <string name="opne_in_victorsuite">Opne In Victorsuite</string>
 
     <string name="move_file_to_zt">Copy File To VictorSuite</string>
 
@@ -932,8 +932,8 @@ Reset successfully</string>
     <string name="zt_settings_note">VictorSuite Related settings options</string>
     <string name="container_settings">Container settings</string>
     <string name="container_settings_note">Applications within the application container are only set for the current container.</string>
-    <string name="about_zerotermux">About VictorSuite</string>
-    <string name="about_zerotermux_note">Version information, acknowledgments, GITHUB</string>
+    <string name="about_victorsuite">About VictorSuite</string>
+    <string name="about_victorsuite_note">Version information, acknowledgments, GITHUB</string>
     <string name="termux_settings">Termux native settings</string>
     <string name="termux_settings_note">Enter the Termux native settings content</string>
     <string name="install_termux_software">Install/restore Termux official software</string>
@@ -952,16 +952,16 @@ Reset successfully</string>
     <string name="bottom_keyboard_settings">Set keyboard rules</string>
     <string name="bottom_keyboard_settings_note">Enter personalized keyboard rules to improve input efficiency</string>
     <string name="log_output">Output LOG to memory card</string>
-    <string name="log_output_note">Output the LOG file to\n[/xinhao/ZeroTermuxLog/ZeroTermux.log]\nIt may affect performance, please enable it with caution!!!!</string>
+    <string name="log_output_note">Output the LOG file to\n[/xinhao/VictorSuiteLog/VictorSuite.log]\nIt may affect performance, please enable it with caution!!!!</string>
     <string name="zt_about">About VictorSuite</string>
-    <string name="zt_about_zerotermux">ZeroTermux GITHUB</string>
-    <string name="zt_about_zerotermux_note">Jump to ZeroTermux GITHUB page</string>
-    <string name="zt_about_zerotermux_core_manage">ZeroCoreManage GITHUB (extension engine)</string>
-    <string name="zt_about_zerotermux_core_manage_note">Jump to ZeroTermux GITHUB page\nAdditional extension engine package for ZeroTermux</string>
+    <string name="zt_about_victorsuite">VictorSuite GITHUB</string>
+    <string name="zt_about_victorsuite_note">Jump to VictorSuite GITHUB page</string>
+    <string name="zt_about_victorsuite_core_manage">ZeroCoreManage GITHUB (extension engine)</string>
+    <string name="zt_about_victorsuite_core_manage_note">Jump to VictorSuite GITHUB page\nAdditional extension engine package for VictorSuite</string>
     <string name="zt_about_card_title">VictorSuite</string>
     <string name="zt_about_card_title_note">VictorSuite is a secondary development based on Termux, adding\nauxiliary functions that are not available in Termux, making it easy to get started quickly\nThis software can be equivalent to a mini-linux system and can be additionally installed\nOther distributions such as: Ubuntu, CentOs, etc.</string>
     <string name="zeroCore_about_card_title">ZeroCoreManage</string>
-    <string name="zeroCore_about_card_title_note">ZeroCoreManage is an expansion pack based on ZeroTermux. The purpose of extending the ZeroTermux function is to reduce the size of the ZeroTermux software package. ZeroTermux can still run normally without installing this expansion pack. Extra engine content:\n\n1. Built-in Keyboard\n2. WEB access memory card\n3. X86 Alpine</string>
+    <string name="zeroCore_about_card_title_note">ZeroCoreManage is an expansion pack based on VictorSuite. The purpose of extending the VictorSuite function is to reduce the size of the VictorSuite software package. VictorSuite can still run normally without installing this expansion pack. Extra engine content:\n\n1. Built-in Keyboard\n2. WEB access memory card\n3. X86 Alpine</string>
     <string name="zt_developer">Development/Contribution</string>
     <string name="zt_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn etc (in no particular order)</string>
     <string name="zt_install">Restore/expand official version</string>
@@ -1306,9 +1306,26 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="zt_usage_habits_content">Note (Usage habit related options can be re-customized in ZT settings)\n
         Choose a usage habit\n
         termux (Buttons follow the native layout completely)\n
-        ZeroTermux (Buttons follow the ZT layout completely)\n
+        VictorSuite (Buttons follow the ZT layout completely)\n
         Please select a usage habit</string>
     <string name="zt_usage_habits_termux">Termux usage habit set successfully. Please go to settings to change the configuration.</string>
-    <string name="zt_usage_habits_ztermux">ZeroTermux usage habit set successfully. Please go to settings to change the configuration.</string>
+    <string name="zt_usage_habits_ztermux">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
     <string name="zt_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the ZT usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
+
+    <!-- Plugin manager (com.termux.zerocore.plugin) -->
+    <string name="plugin_manager_title">Plugin Manager</string>
+    <string name="plugin_none_registered">No plugins registered yet. Add an entry to remote/plugins/main.json, or register one locally — see PLUGINS.md.</string>
+    <string name="plugin_configure">Configure</string>
+    <string name="plugin_launch">Launch</string>
+    <string name="plugin_state_enabled">Enabled</string>
+    <string name="plugin_state_disabled">Disabled</string>
+    <string name="plugin_authorized_use_title">Confirm authorized use</string>
+    <string name="plugin_authorized_use_message">I confirm I am authorized to use \"%1$s\" in this environment, and will only use it against systems and targets I have permission to test.</string>
+    <string name="plugin_authorized_use_confirm">I confirm</string>
+    <string name="plugin_not_enabled_msg">Enable this plugin first.</string>
+    <string name="plugin_entry_point_missing_msg">Entry point not found on disk. Install the tool yourself under: %1$s</string>
+    <string name="plugin_launch_sent_msg">Command sent to terminal.</string>
+    <string name="plugin_config_saved_msg">Settings saved.</string>
+    <string name="plugin_fetch_failed_msg">Could not load the plugin manifest.</string>
+    <string name="plugin_enable_failed_msg">Could not enable plugin: %1$s</string>
 </resources>

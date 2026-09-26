@@ -30,7 +30,7 @@
               android:textStyle="bold"
               android:id="@+id/service_name"
               android:textColor="@color/color_ffffff"
-              android:text="@string/ZeroTermux内置功能"
+              android:text="@string/VictorSuite内置功能"
               android:layout_height="wrap_content"/>
 
 

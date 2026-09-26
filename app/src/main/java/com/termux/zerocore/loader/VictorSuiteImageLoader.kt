@@ -8,7 +8,7 @@ import com.example.xh_lib.utils.UUtils
 import com.lcw.library.imagepicker.utils.ImageLoader
 import com.termux.R
 
-class ZeroTermuxImageLoader :  ImageLoader{
+class VictorSuiteImageLoader :  ImageLoader{
 
     private val mOptions: RequestOptions = RequestOptions()
         .centerCrop()
