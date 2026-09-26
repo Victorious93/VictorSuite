@@ -5,6 +5,7 @@ import android.content.Context;
 import com.termux.R;
 import com.termux.zerocore.config.BaseConfig;
 import com.termux.zerocore.config.mainmenu.config.AdbShellRunClickConfig;
+import com.termux.zerocore.config.mainmenu.config.AiCliSetupClickConfig;
 import com.termux.zerocore.config.mainmenu.config.AndroidIdeClickConfig;
 import com.termux.zerocore.config.mainmenu.config.ApkAnalysisClickConfig;
 import com.termux.zerocore.config.mainmenu.config.BackupRestoreClickConfig;
@@ -160,6 +161,7 @@ public class MainMenuConfig implements BaseConfig {
         ztFeaturesClicks.add(new HeadscaleClickConfig());
         ztFeaturesClicks.add(new ApkAnalysisClickConfig());
         ztFeaturesClicks.add(new AndroidIdeClickConfig());
+        ztFeaturesClicks.add(new AiCliSetupClickConfig());
         ztFeaturesClicks.add(new WebDataClickConfig());
         // ztFeaturesClicks.add(new ZeroFunctionClickConfig());
         ztFeaturesClicks.add(new PhoneSmsClickConfig());
