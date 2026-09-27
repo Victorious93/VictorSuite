@@ -146,7 +146,7 @@ import com.termux.zerocore.utils.WindowUtils;
 import com.termux.zerocore.view.BoomWindow;
 import com.termux.zerocore.zero.engine.ZeroCoreManage;
 import com.zp.z_file.ui.ZFileListFragment;
-import com.zp.z_file.victorsuite.ZTConfig;
+import com.zp.z_file.zerotermux.ZTConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
