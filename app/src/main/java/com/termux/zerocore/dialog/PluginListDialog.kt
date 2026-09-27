@@ -9,6 +9,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.blockchain.ub.utils.httputils.BaseHttpUtils
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
 import com.example.xh_lib.utils.UUtils
