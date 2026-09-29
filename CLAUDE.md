@@ -4,6 +4,12 @@ No `CLAUDE.md`/`CODEX.md` existed before this file (2026-09-27). Read this
 first; update the **PROJECT STATE** section at the end of every session so
 the next one doesn't have to re-derive what's here.
 
+See `ARCHITECTURE.md` for the module/component status table and
+`BUILD_PLAN.md` for the phased build plan (dependencies, acceptance
+criteria, next phase). This file stays the short orientation entry point;
+the other two carry the detail so they don't drift out of sync with each
+other.
+
 ## What this repo is
 
 A GPL-licensed Android app: a merge of the ZeroTermux codebase with Termux
@@ -61,10 +67,29 @@ finding above already meets the bar for action.
       gate (`register` → always `DISABLED` → `acknowledgeAuthorizedUse` →
       `enable`) enforced independently in both the registry and the
       launcher.
-  - [ ] **Explicitly PLANNED, not yet built** (per `PLUGINS.md` itself):
-        package-management UI, a terminal/GUI shell for browsing/launching
-        registered plugins, a settings screen backed by
-        `PluginConfigField`/`PluginConfigStore`.
+- [x] **Correction to this file's own 2026-09-27 draft:** that draft said
+      the browsing/launching UI and settings screen were "explicitly
+      PLANNED, not yet built," citing `PLUGINS.md`'s "Planned in later
+      PRs" note. Verified 2026-09-29 by reading the files directly: they
+      already exist in the same squashed `main` commit (`PluginManagerClickConfig.kt`
+      wires a "Plugin Manager" menu entry to `PluginListDialog.kt`, a real
+      `RecyclerView`-backed list with enable/disable toggling — including
+      the authorized-use confirmation dialog — configure and launch
+      actions per plugin; `PluginConfigDialog.kt` renders a settings form
+      from `PluginConfigField`/`PluginConfigStore` dynamically per plugin.
+      All three layouts (`dialog_plugin_list.xml`, `item_plugin.xml`,
+      `dialog_plugin_config.xml`) and their string resources exist too.
+      `PLUGINS.md` itself was not updated when these shipped — don't
+      trust its "Planned in later PRs" line without checking the code.
+      **Still genuinely missing:** a package-*management* UI (install/
+      update/remove the plugin's actual binary) — `PluginProcessLauncher`
+      still only looks for an entry point the user placed on disk
+      themselves; nothing here downloads or installs one. **No test
+      coverage exists for any of this** — no unit tests under
+      `app/src/test` and no instrumented tests reference `plugin` or
+      `Plugin*` (verified by search, 2026-09-29); this environment has no
+      Android SDK to add or run instrumented tests, so any coverage added
+      here needs a session with a real SDK.
 - [x] AI CLI setup script (`scripts/ai-cli-setup.sh`, `docs/AI_CLIS.md`) —
       installs `pi`, GitHub Copilot CLI, OpenAI Codex CLI, and the Hugging
       Face CLI (three of the four via an Ubuntu `proot-distro` container,
@@ -88,14 +113,17 @@ than assume.
 
 ## What to do next
 
-Nothing scheduled beyond what's marked planned above. Before starting any
-of it:
+See `BUILD_PLAN.md` for the full phased plan. Short version, unchanged
+priority order:
 1. **Highest priority, blocking-severity:** act on the signing-key exposure
    above — decide whether the key is already burned (any real distributed
    build?) and either rotate it (accepting the update-path break) or, at
-   minimum, stop it from being committed going forward.
-2. If continuing the plugin framework: package-management UI is the next
-   unbuilt piece named in `PLUGINS.md`.
+   minimum, stop it from being committed going forward. **Still present
+   as of 2026-09-29** — `phone.jks` and its hardcoded fallback passwords
+   are unchanged in `app/build.gradle`.
+2. If continuing the plugin framework: a real package-management UI
+   (install/update/remove a plugin's binary) plus test coverage — the
+   browsing/settings UI is done (see correction above).
 3. If continuing the AI CLI work: get it onto a real device and verify the
    specific open items `docs/AI_CLIS.md` lists — don't mark it done on the
    strength of the dry-run alone.
