@@ -4,6 +4,8 @@ VictorSuite is a community-driven, non-profit enhancement of the Termux ecosyste
 
 Rather than replacing Termux, VictorSuite builds upon it by providing a more organized, feature-rich, and user-friendly experience for running Linux on Android. Its goal is to simplify setup, improve portability, and streamline advanced workflows through an integrated suite of management tools.
 
+> Fleet note: VictorSuite is also planned as the third companion Android app in [Victorious93/droidcommand-AI](https://github.com/Victorious93/droidcommand-AI)'s app fleet, alongside Victorious93/hackeraiETC and Victorious93/Pentest-Swarm-AI — see that repo's `docs/ARCHITECTURE.md` §8 and `docs/AUDIT_2026-09-05.md` for status. This is a forward-looking roadmap entry only: no `core-victorsuite` module or integration code exists in droidcommand-AI yet, and nothing below about VictorSuite's own scope, GPL license, or Termux/ZeroTermux lineage changes because of it.
+
 Features
 
 - One-command installation and initial configuration.
