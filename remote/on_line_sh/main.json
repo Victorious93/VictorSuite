@@ -6,6 +6,18 @@
       "isDownload": "0",
       "name": "Fedora (proot)",
       "note": "Bootstraps a minimal Fedora root filesystem under proot and installs a 'startfedora' launcher. Downloads the image from a third-party GitLab mirror (not VictorSuite-hosted) — verify you trust that mirror before running."
+    },
+    {
+      "download": "/on_line_sh/scripts/install-kali-nethunter-rootless.sh",
+      "isDownload": "0",
+      "name": "Kali NetHunter Rootless",
+      "note": "Runs Kali's own official NetHunter Rootless installer (no root required). Requires the NetHunter-Store app, NetHunter-KeX client and Hacker's Keyboard to be installed from the Play/NetHunter store first — see kali.org/docs/nethunter/nethunter-rootless."
+    },
+    {
+      "download": "/on_line_sh/scripts/install-blackarch-proot.sh",
+      "isDownload": "0",
+      "name": "BlackArch (proot)",
+      "note": "Installs Arch Linux via Termux's official proot-distro, then downloads BlackArch's official strap.sh to layer BlackArch on top. Not an official BlackArch/Termux combination — the script pauses so you can verify strap.sh's checksum against blackarch.org before it is run."
     }
   ],
   "home": "https://github.com/Victorious93/VictorSuite",
