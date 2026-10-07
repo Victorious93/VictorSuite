@@ -1,9 +1,16 @@
 {
   "code": 200,
-  "data": [],
+  "data": [
+    {
+      "download": "/on_line_sh/scripts/install-fedora-proot.sh",
+      "isDownload": "0",
+      "name": "Fedora (proot)",
+      "note": "Bootstraps a minimal Fedora root filesystem under proot and installs a 'startfedora' launcher. Downloads the image from a third-party GitLab mirror (not VictorSuite-hosted) — verify you trust that mirror before running."
+    }
+  ],
   "home": "https://github.com/Victorious93/VictorSuite",
   "ip": "https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote",
-  "msg": "No online scripts are currently published. Scripts will be added here, reviewed and version-controlled, as they become available.",
+  "msg": "Scripts are reviewed and version-controlled in this repo before publishing.",
   "serviceName": "VictorSuite",
   "versionName": "1.0.0"
 }
