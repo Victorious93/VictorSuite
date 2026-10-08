@@ -14,6 +14,12 @@
       "note": "Runs Kali's own official NetHunter Rootless installer (no root required). Requires the NetHunter-Store app, NetHunter-KeX client and Hacker's Keyboard to be installed from the Play/NetHunter store first — see kali.org/docs/nethunter/nethunter-rootless."
     },
     {
+      "download": "/on_line_sh/scripts/install-kali-proot.sh",
+      "isDownload": "0",
+      "name": "Kali Linux Rootless (proot)",
+      "note": "Installs Kali's official kalilinux/kali-rolling Docker Hub image as a rootless proot-distro container named 'kali'. Minimal userland; add tools with apt (e.g. kali-tools-top10). Needs a recent proot-distro with OCI image support. Does not need the NetHunter apps."
+    },
+    {
       "download": "/on_line_sh/scripts/install-blackarch-proot.sh",
       "isDownload": "0",
       "name": "BlackArch (proot)",
