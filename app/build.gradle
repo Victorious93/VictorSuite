@@ -202,16 +202,16 @@ android {
     }*/
     signingConfigs {
         release {
-            keyAlias System.getenv("KEY_ALIAS") ?: 'phone1'
-            keyPassword System.getenv("KEY_PASSWORD") ?: '654321'
+            keyAlias System.getenv("KEY_ALIAS") ?: 'victorsuite2026'
+            keyPassword System.getenv("KEY_PASSWORD") ?: 'NAUyixvOiNV7oCD0z5VO'
             storeFile rootProject.file("phone.jks")
-            storePassword System.getenv("STORE_PASSWORD") ?: '123456'
+            storePassword System.getenv("STORE_PASSWORD") ?: 'cWlnwRbqOwC8NkL3nYaM'
         }
         debug {
-            keyAlias System.getenv("KEY_ALIAS") ?: 'phone1'
-            keyPassword System.getenv("KEY_PASSWORD") ?: '654321'
+            keyAlias System.getenv("KEY_ALIAS") ?: 'victorsuite2026'
+            keyPassword System.getenv("KEY_PASSWORD") ?: 'NAUyixvOiNV7oCD0z5VO'
             storeFile rootProject.file("phone.jks")
-            storePassword System.getenv("STORE_PASSWORD") ?: '123456'
+            storePassword System.getenv("STORE_PASSWORD") ?: 'cWlnwRbqOwC8NkL3nYaM'
         }
     }
     // @}
