@@ -2,7 +2,7 @@
 
 **Status:** planning only. No features implemented in this document’s PR.  
 **Owner:** Don Victor (GitHub [Victorious93](https://github.com/Victorious93)).  
-**Scope of this document:** one Android APK that combines VictorSuite’s Termux/Linux environment with RootForge OS’s GUI toolkit; a standalone Termux-native CLI that does not need the APK; a later PC-first edition; and Termux:API functionality built into the merged app behind a Settings toggle.
+**Scope of this document:** one Android APK that combines VictorSuite’s Termux/Linux environment with RootForge OS’s GUI toolkit; a standalone Termux-native CLI that does not need the APK; a later PC-first edition; Termux:API functionality built into the merged app behind a Settings toggle; **admin/client mode** between two phones that both run that APK (USB-C and same-LAN Wi-Fi first); and **remote / internet control** as a later milestone (signaling or owner-hosted VPN, optional TURN, E2E so a relay cannot read the shell).
 
 Inventories below are grounded in code as of:
 
@@ -26,6 +26,7 @@ Ship **one sideload APK** a user installs instead of Termux + ZeroTermux-style e
 1. VictorSuite terminal, bootstrap, proot containers, backup/restore, plugins, X11, FTP, etc.
 2. RootForge Compose Material 3 toolkit (ADB / fastboot / EDL over USB OTG, module builder, root-patching workflows, recovery, logs).
 3. `termux-clipboard-get`, `termux-notification`, `termux-battery-status`, `termux-sensor`, `termux-camera-photo`, `termux-location`, `termux-sms-*`, and the rest of the `termux-*` API commands, **when a Settings toggle is on**, with no separate Termux:API APK.
+4. **Admin/client mode:** two phones both running this APK; one is Administrator, the other Client; only the admin drives the client (remote shell/terminal, Termux:API on the client if that toggle is on, `su` if Magisk/KernelSU/APatch granted). **Ship USB-C + same-LAN Wi-Fi first** (§11). **Remote over the internet is a later milestone** (§12): discovery/signaling or owner-hosted VPN, optional TURN/relay, end-to-end encryption, short-lived session tokens, per-session client approve, kill switch.
 
 Termux-only users continue to `git clone` RootForge OS and run its CLI/scripts in stock Termux (or VictorSuite) without that APK.
 
@@ -37,6 +38,8 @@ A later **PC-first** Linux/Windows edition uses the same Kotlin `:core` and the 
 - Building the Debian live ISO inside VictorSuite CI.
 - Replacing Magisk/KernelSU/APatch with a custom patcher (RootForge’s Android app already delegates patching to those apps on the **target** phone).
 - Changing droidcommand-ai in the same PR as the APK merge (protocol stays; DCA needs a small follow-up).
+- Using ZeroTermux’s unauthenticated TCP **19951** (`ZTSocketService`) as the admin/client channel — that service is a cautionary existing control plane, not a base to extend (see §11).
+- Letting an admin flash/unlock the client through this mode (that remains the **USB toolkit host→target** path, which does not require the app on the far phone).
 
 ---
 
@@ -551,15 +554,20 @@ The merged APK must not become a gate for (A) or (B).
 ```
 TermuxActivity (drawer — existing MainMenuConfig)
 ├── (existing ZeroTermux categories)
-└── NEW category CODE_ROOTFORGE = "Root toolkit"
-    ├── Dashboard          → start RootForgeToolkitActivity at Destination.Dashboard
-    ├── ADB (USB target)
-    ├── Fastboot
-    ├── EDL
-    ├── Root / Patching
-    ├── Module builder     (name: "Root module builder")
-    ├── Recovery
-    └── Logs (USB)
+├── NEW category CODE_ROOTFORGE = "Root toolkit"
+│   ├── Dashboard          → start RootForgeToolkitActivity at Destination.Dashboard
+│   ├── ADB (USB target)
+│   ├── Fastboot
+│   ├── EDL
+│   ├── Root / Patching
+│   ├── Module builder     (name: "Root module builder")
+│   ├── Recovery
+│   └── Logs (USB)
+└── NEW category CODE_PEER = "Admin / Client"   (see §11)
+    ├── This phone’s role: Off | Client | Administrator
+    ├── Pair (QR / PIN) / Revoke
+    ├── Remote terminal          (admin only, after pairing)
+    └── Client capabilities      (admin: filtered action list)
 
 Settings
 ├── VictorSuiteSettingsActivity  (existing switches)
@@ -568,7 +576,13 @@ Settings
 │           └── “Open system permission settings”
 ├── Termux SettingsActivity      (upstream)
 │     └── Termux:API row → same toggle (do not hide when companion missing)
-└── RootForge Settings screen    (pairing, node id, USB RSA fingerprint)
+├── RootForge Settings screen    (DCA pairing, node id, USB RSA fingerprint)
+└── Peer Settings                (listen on LAN, USB tunnel, audit log, revoke)
+      └── Settings → Remote (Milestone 8)
+            ├── Connect Tailscale account
+            ├── Headscale URL + preauth key
+            ├── Mesh status / peer hostname
+            └── USB + plain LAN never require this
 ```
 
 `RootForgeToolkitActivity` hosts `RootForgeUi()` in Compose. Back returns to the terminal session (do not destroy the session). Optional: extra-keys row button “Toolkit”.
@@ -599,16 +613,338 @@ After merge, **one APK is both**:
 5. **Independence rule unchanged:** turning DCA off, or never pairing, must not disable terminal, toolkit GUI, or Termux:API toggle.
 6. Do **not** add a `BIND_ROOTFORGE` signature permission (RootForge docs already forbid sharing a signing key with DCA).
 7. ZT TCP 19951 is a **third** control plane (LAN JSON → shell). Out of scope for DCA. Do not wire it to the bridge.
+8. **Admin/client (§11) is a fourth control plane**, phone-to-phone, both running this APK. It **reuses the bridge JSON envelope and tier model** but is **not** DCA and **not** `rootforge.adb.*` (those talk to a USB target that need not run this app). DCA must not chain through an admin onto a client unless both sides opt in (default: no chaining).
 
 SSH `rootforge bridge` on a Debian/Termux rootfs node is unchanged (CLI lives in RootForge).
 
 ---
 
-## 11. Phased migration
+## 11. Admin / Client dual-phone mode
+
+Two phones **both run the merged APK**. The owner sets one as **Administrator** and the other as **Client**. Control is **one-way**: only the admin sends operations; the client executes (after pairing and prompts) and returns results. The client never gains a control session on the admin.
+
+This is **not** the existing RootForge USB toolkit. Keep the three USB/remote stories distinct in the UI:
+
+| Mode | Who runs this APK | What the far device is | Plane |
+|---|---|---|---|
+| **Toolkit host → target** (today’s RootForge `:app`) | Host only | Any Android phone (ADB / fastboot / EDL). May be bricked, no app required | Kotlin USB wire protocol (`AdbConnection`, `FastbootClient`, Sahara/Firehose) |
+| **Admin → client** (this section) | **Both** | A live merged-app install | App TLS protocol (`peer.*` ops). USB-C is a **tunnel**, not raw `adb shell` |
+| **OTG mass-storage** (today’s `OTGManager`) | This phone | USB flash drive | libaums |
+
+Conflating toolkit `rootforge.adb.shell` with admin remote-shell would skip the client’s Termux:API toggle, root prompts, and revoke — because `adbd` is uid `shell` and does not consult this app.
+
+### 11.1 Roles and capability detection
+
+Settings → **This phone’s role**: `Off` (default) | `Client` | `Administrator`. A phone cannot be both. Switching to Client starts the listen path (LAN and/or USB tunnel). Switching to Administrator does **not** start a server.
+
+On connect, the admin calls `peer.capabilities.get` (read tier). The client answers with what is **true right now**, not what the APK could theoretically do:
+
+```json
+{
+  "node_id": "rf-…",
+  "role": "client",
+  "protocol_major": 1,
+  "rooted": false,
+  "su_manager": "none",
+  "su_granted": false,
+  "termux_api": false,
+  "prefix_ready": true,
+  "operations": ["peer.capabilities.get", "peer.shell.user", "peer.session.open"]
+}
+```
+
+Detection (grounded in code that already exists on VictorSuite):
+
+| Flag | How | Do not |
+|---|---|---|
+| `rooted` / `su_granted` | **libsu** (`com.github.topjohnwu.libsu`, already a `:app` dependency; `LibSuManage` wraps `Shell`). Treat as rooted only if a shell can run `id` and uid is 0 **and** the user has granted this app su (Magisk/KernelSU/APatch prompt). | Do not trust RootBeer alone (`OpenTurnNetworkAdbClickConfig` uses `RootBeer.isRooted` today — that is a heuristic, not a grant). |
+| `su_manager` | Package present + working `su`: Magisk (`com.topjohnwu.magisk` / `su` with Magisk applet), KernelSU (`me.weishu.kernelsu` / `ksud`), APatch. Probe, don’t assume. | Don’t advertise `peer.shell.root` if `su` exists but this app is denied. |
+| `termux_api` | The **embedded** Settings toggle from §5, not `isTermuxAPIAppInstalled("com.termux.api")`. | Don’t list camera/SMS ops if the toggle is off — even if permissions linger in system Settings. |
+| `prefix_ready` | `$PREFIX` exists (normal Termux bootstrap). User shell is `APP_SHELL` / `TermuxSession`, already used by `RUN_COMMAND`. | |
+
+The admin UI **hides** actions whose names are absent from `operations[]`. Re-fetch capabilities on reconnect, on client toggle change (client pushes `peer.event.capabilities`), and after su grant/deny.
+
+If the client is unrooted: show user-level shell, remote terminal, and Termux:API actions that the client’s toggle currently allows. If rooted and `su_granted`: additionally show root shell and labelled “root” actions. Never show fastboot/EDL/unlock here (wrong mode).
+
+### 11.2 Command schema (shared envelope, new namespace)
+
+Reuse RootForge’s **wire envelope** in `:core` (`Protocol.kt`: `BridgeRequest` / `BridgeResponse`, `BRIDGE_PROTOCOL_MAJOR = 1`, `ErrorCategory`, `Tier` READ / CONTROL / DESTRUCTIVE). Do **not** invent a second JSON shape. Do **not** reuse the `rootforge.*` operation names — those mean “USB target on this host”.
+
+New operations (all executed **on the client**, results returned to the admin):
+
+| Name | Tier | Meaning |
+|---|---|---|
+| `peer.capabilities.get` | read | Flags + allowed op list above |
+| `peer.session.open` / `.resize` / `.close` | control | Remote PTY attached to a `TermuxSession` on the client; bytes are a binary framed stream on the same TLS connection (JSON for control, length-prefixed PTY data). Admin renders with existing `:terminal-view` |
+| `peer.shell.user` | control | One-shot `APP_SHELL` in `$PREFIX` (same runner as `RUN_COMMAND`) |
+| `peer.shell.root` | **destructive** + **root grant** | libsu `Shell.cmd`. Client shows a **per-capability** prompt (“Allow Administrator to run root commands?”) the first time, and again if the admin’s pairing id rotates. Optional “ask every time” |
+| `peer.termux_api.invoke` | control | `api_method` + extras, dispatched through the **embedded** `TermuxApiReceiver` path. Fails with `bridge_disabled`-style error if the client Termux:API toggle is off. Sensitive methods (SmsSend, CameraPhoto, Location, Record, Contacts, CallLog) require an **extra** client prompt even after pairing |
+| `peer.pairing.revoke` | control (client local UI only) | Not callable by the admin; listed so the schema is honest. Admin calling it is `denied_by_user` |
+
+Same gates as `BridgeExecutor.process()`, in order: size cap → well-formed JSON → `protocol_major` → `target_node_id` is this client → **role is Client and listen enabled** → caller is the **paired admin identity** (TLS cert, not Android UID) → op in the advertised list → parameters → tier prompt → execute under `timeout_ms`.
+
+`ApprovalCenter` already implements “nobody answers ⇒ deny” and typed phrases for destructive USB ops. Reuse it on the **client** for `peer.shell.root` and sensitive Termux:API methods. Typed `FLASH` phrases stay on the toolkit path; root peer ops use an Allow/Deny (+ optional typed `ROOT`) so the client owner is not mixing flash vocabulary with su.
+
+Put the op table and envelope in `:core` so desktop/Docker *could* later be an Administrator (PC-first). The **Client listen server and PTY** stay in the Android `:app` (needs `TermuxSession`, libsu, Termux:API). That split is what keeps requirement (3) possible: a PC admin talking to a phone client over the same `peer.*` schema, without Termux on the PC.
+
+### 11.3 Transports
+
+One protocol, two pipes. The client is always the TLS **server** (the device that must approve pairing). The admin is the TLS **client**. That encoding is what makes reverse-control hard: an admin phone does not accept `peer.*` on a listen port.
+
+**Wi-Fi / LAN (primary for v1)**
+
+- Client binds `127.0.0.1` plus, only if “Allow LAN” is on, the LAN address (not `0.0.0.0` on public/cellular by default — cellular listen is off unless a separate toggle says so).
+- TLS 1.3, app-generated keypair per install (store like RootForge `nodeId`: once, 16+ random bytes / AndroidKeyStore if API allows).
+- Discovery: optional mDNS (`_victorsuite-peer._tcp`) advertising `node_id` and a short pairing token hash — **not** enough to connect. Manual “enter IP:port” always available.
+- **Do not** extend `ZTSocketService` (port **19951**, cleartext JSON, no auth, `ServerSocket` on all interfaces, dispatches into Termux). Leave it as a legacy LAN feature or disable it when Peer listen is on so two servers are not confused. Open decision whether to deprecate 19951.
+
+**USB-C (reuse USB/ADB as a tunnel only)**
+
+RootForge already implements USB Host ADB on the **admin** (the phone with OTG). Use that to **reach a port**, not to be the shell:
+
+1. Client has USB debugging on; accepts the RSA dialog (fingerprint already shown on RootForge Settings).
+2. Admin’s existing `AdbConnection` runs `adb reverse tcp:<peer> tcp:<peer>` (or `forward` if roles of USB host require it) to the client’s **localhost TLS port**.
+3. Admin opens TLS to `127.0.0.1:<peer>` — same pairing/encryption as Wi-Fi.
+4. If USB debugging is off, this path is unavailable; the UI says so. Do not require the client to be rooted to use USB-C admin/client.
+
+Do **not** v1: USB gadget on the client, AOA accessory protocol, or “admin types into `adb shell`”. Those either need root on the client or bypass §11.2.
+
+USB toolkit (fastboot/EDL) remains a **different** drawer category. A cable plugged in should ask: “Android target (flash/ADB toolkit)” vs “Paired client (this app)” vs “USB storage”.
+
+### 11.4 Pairing, auth, encryption, revoke, audit
+
+**Pairing (always approved on the client, in person):**
+
+1. Client role on, shows a rotating QR (node_id, TLS SPKI pin, short-lived pairing secret, LAN IP if any) **and** a 6–8 digit PIN.
+2. Admin scans QR or types PIN + client address.
+3. Client UI: “Allow **this** Administrator (pin `sha256:…`) to control this phone? They will get: user shell, [Termux:API if on], [root if su granted].” Default deny. Timeout deny (`ApprovalCenter`).
+4. On allow: store `PairedAdmin { nodeId, spkiPin, pairedAtMs, grants: [shell.user, termux_api?, shell.root?] }` in a **peer pairing store** (same idea as `PairingStore`, different key — TLS SPKI, not Android package+cert). `PairingStore` today is for **DCA-on-this-phone**; do not overload it.
+5. Mutual TLS: admin presents its cert; client pins it. Client presents its cert; admin pins it. A later cert change is `CERT_CHANGED` / pending again (`PairingStore` already has this for packages).
+
+**QR/PIN risks:** a malicious QR can point at an attacker “client”. The admin must show the **client-rendered** node id / first-run fingerprint and the client must show the **admin** fingerprint; both humans compare (short SAS, like Signal). PIN is rate-limited (lockout after N failures; pairing secret expires in minutes).
+
+**Per-capability grants:** pairing is not a blanket root. `shell.root` starts unset. First `peer.shell.root` raises a client prompt. Sensitive Termux:API methods each have a grant bit (or a group: “sensors”, “camera”, “sms”). Admin UI never shows a button the grant list + capabilities would refuse.
+
+**One-tap revoke (client):** Settings → Peer → Revoke. Drops the TLS session (`SSLSocket.close`), deletes the paired admin, disables nothing else (Termux:API toggle and su grant to *this app* stay — those are local). Admin sees `not_paired` on the next call. Revoke is **local** and works with LAN unplugged.
+
+**Audit log (client, append-only JSONL):** reuse the `PluginLogger` pattern (`filesDir/plugin_logs/plugin_audit.jsonl`, rotate ~2 MB) as `peer_audit.jsonl`: pairing allow/deny, revoke, each `peer.*` op (name, admin node_id, tier, result category, **not** full shell transcripts or secrets). The admin must not have an op to wipe this file. A Settings screen lists recent lines (PluginLogger already has `readRecent`).
+
+RootForge CLI `core/audit.py` is host-side flashing; don’t mix those files.
+
+### 11.5 Relation to droidcommand-ai
+
+| Controller | Bound how | Can it drive a **peer client**? |
+|---|---|---|
+| DCA `core-termux` | `RUN_COMMAND` on **this** phone | No. Stays on-device Termux. |
+| DCA `core-rootforge` | Messenger `ai.rootforge.os.action.BRIDGE` on **this** phone | **Default no.** Ops remain `rootforge.*` (USB target on this host). |
+| Admin phone | TLS `peer.*` | Yes, after client pairing. |
+| DCA chained via admin | — | **Forbidden unless** a future explicit grant exists on **both** admin (“allow DCA to use paired clients”) **and** client (“allow controllers of my admin”). Default both off. A DCA `peer.relay` op must not be added in v1. |
+
+Identity systems stay separate on purpose:
+
+- Messenger pairing: Android UID → `packageName` + signing cert (`CallerIdentity` in `PairingStore.kt`).
+- Peer pairing: TLS SPKI + `node_id`.
+- DCA must not be recorded as a `PairedAdmin`.
+
+If we later want a PC (RootForge desktop / Docker API) as Administrator, it is a TLS admin, not DCA. Desktop already has `HeadlessApi` bearer tokens — those are **not** peer pairing; do not treat `ROOTFORGE_API_TOKEN` as a phone-admin credential.
+
+### 11.6 Security risks (this feature)
+
+This is the highest-risk feature in the merge: a remote shell + optional `su` + optional SMS/camera APIs. Treat it like a product-shaped RAT unless the defaults stay off.
+
+| Risk | Why it is real in this codebase | Mitigation |
+|---|---|---|
+| Cleartext LAN shell | `ZTSocketService` already listens on **19951** with no TLS/auth and feeds Termux | Do not reuse it. Consider disabling 19951 while Peer is on. Peer listen default **off**. |
+| Raw `adb shell` as the remote terminal | RootForge USB ADB is built to run shell on a target | USB is tunnel-only (§11.3). No `peer.*` over plaintext adbd. |
+| Reverse control | Symmetric protocol or both roles listening | Admin does not bind the peer server. Client rejects `peer.*` unless `role==client`. Admin’s toolkit USB ops are local. |
+| Pairing phishing / QR | User scans a QR from chat | SAS fingerprint compare; short-lived PIN; always a client-side Allow screen. |
+| MITM on LAN | mDNS / “enter IP” | TLS 1.3 + pinned SPKI; first pairing is TOFU plus human SAS, not silent TOFU. |
+| RootBeer false positive | VS already uses it for wireless ADB | libsu uid 0 + grant for `peer.shell.root`. |
+| Capability lie / stale UI | Toggle changed after connect | Client pushes capability events; admin hides unknown ops; server re-checks every call. |
+| Termux:API remotely (SMS, camera, location) | §5 embed puts those in **this** APK | Extra per-method grants; toggle off ⇒ ops disappear; audit. Prefer **not** exposing SmsSend/Camera remotely in v1 (open decision). |
+| Prompt fatigue | “Allow root?” every command | First-time grant with “always / this session / never”; still log every invoke. Default “this session”. |
+| Audit wipe | Admin deletes evidence | No remote delete; file mode private; rotate only. |
+| Revoke not killing sockets | Sticky `START_STICKY` servers (ZT already sticky) | Revoke closes the `SSLServerSocket` accept loop and all sessions before returning. |
+| Cellular listen | Phone as a server on public IP / CGNAT leak | LAN-only default; cellular bind opt-in, warned. |
+| DCA → admin → client pivot | Messenger is local but DCA is powerful | No relay op in v1 (§11.5). |
+| Play/OEM “remote control” heuristics | INTERNET + USB host + SMS + a listen server | Sideload; feature off by default; don’t claim Play. |
+| Hostiles on the same Wi-Fi | Pairing secret brute force | Rate limit, expiry, no connect without pin **and** TLS pin. |
+
+v1 exit criteria must include a hostile-review of the listen path (at least: unauthenticated connect refused; revoke drops session; client with role Off accepts nothing).
+
+Internet-scale threats (stolen admin phone, malicious relay, NAT, always-on agent) are **out of v1** and are specified in §12. Do not add a cloud listen URL, TURN, or “works over LTE” into the USB/LAN milestone.
+
+---
+
+## 12. Remote / Internet control
+
+§11 is **same-link**: USB-C cable or the same L2/L3 LAN. This section is everything **beyond** that: phones on different networks, CGNAT, guest Wi-Fi, cellular. The `peer.*` schema, one-way roles, capability advertisement, and pairing store do **not** change. Only how the TLS client finds the TLS server, and what sits in the middle, changes.
+
+**Phasing (hard):** ship USB + same-LAN first (Milestone 7). Internet remote is Milestone 8, after an explicit architecture choice. Do not put a public signaling hostname in the APK “just in case.”
+
+Neither repo implements a relay today. What *does* exist and should be reused or not confused:
+
+| Existing | Use for internet remote? |
+|---|---|
+| RootForge USB ADB / `AdbConnection` | No. Local USB only. |
+| `ZTSocketService` :19951 | **No.** Cleartext, no auth. |
+| Docker `HeadlessApi` / `ROOTFORGE_API_TOKEN` on `127.0.0.1:8787` | Pattern only (bearer token, localhost). Not a phone-to-phone relay. |
+| VictorSuite **Headscale / Tailnet** drawer (`HeadscaleClickConfig`: official Tailscale **userspace** binaries, SOCKS/HTTP proxy `127.0.0.1:1055`, user-supplied Headscale login server) | **Strong candidate for architecture A** (mesh VPN). Already rootless. |
+| RootForge `join_headscale.sh` | Same idea on Debian ISO / chroot; `curl\|sh` still a known smell (`docs/REVIEW.md`). Not in the PRoot flavour (`termux/build-rootfs.sh` excludes it). |
+
+### 12.1 Same LAN (Milestone 7 — specified here so internet does not reopen it)
+
+This is the v1 peer transport. Restated as the contract internet remote must **keep**:
+
+1. **Discovery:** mDNS `_victorsuite-peer._tcp` (or `_rootforge-peer._tcp` — open naming) advertising `node_id` + pairing-token **hash** only. Manual `IP:port` always works. mDNS is not authentication.
+2. **Pairing:** QR (node_id, TLS SPKI pin, short-lived secret, LAN IP) **or** PIN. Approved on the **client**. SAS fingerprint compare. Rate-limited PIN. Secret expires in minutes.
+3. **Transport:** TLS 1.3, mutual auth, **pinned device keys** (per-install keypair in AndroidKeyStore / same lifetime as RootForge `nodeId`). Admin is TLS client; client is TLS server. No `peer.*` listen on the admin.
+4. **Capabilities:** `peer.capabilities.get` as in §11.1 (`rooted`, `su_manager`, `su_granted`, `termux_api`, `prefix_ready`, `operations[]`). Admin UI shows only advertised actions.
+
+USB-C remains the ADB **port tunnel** to that same localhost TLS server (§11.3), not a second protocol.
+
+### 12.2 Remote over the internet (Milestone 8)
+
+NAT and CGNAT mean the client usually cannot accept a public TCP connect. Three architecture families; pick **one** before writing code. They can share the same `peer.*` TLS payload.
+
+```
+                    paired earlier on LAN/USB
+   Admin phone                              Client phone
+   (TLS client,                              (TLS server
+    no peer listen)                           of last resort)
+         |                                          |
+         |  1. session token / signaling            |
+         |  2. hole-punch or join VPN               |
+         |  3. E2E TLS (relay sees ciphertext)      |
+         v                                          v
+   ┌─────────────────────────────────────────────┐
+   │  A mesh VPN   or   B signaling+TURN         │
+   │  (Headscale/Tailscale/WireGuard)            │
+   │  or C owner-hosted reverse-proxy with E2E   │
+   └─────────────────────────────────────────────┘
+```
+
+**Architecture A — Tailscale / Headscale mesh (preferred internet path).**  
+Optional in-app support: both phones join the same tailnet, overlay IPs make the client look like LAN, then Milestone 7 `peer.*` TLS runs unchanged (`100.x.y.z:peer`). **USB-C and plain same-LAN admin/client must keep working with Tailscale completely off / uninstalled.** Details, UX, licensing, and the bundle-vs-APK choice: **§12.2.1**.
+
+This is the recommended M8 default because VictorSuite already has a Headscale/userspace Tailscale drawer (`HeadscaleClickConfig`) and RootForge already has `join_headscale.sh`. Architectures B (TURN) and C (VPS reverse tunnel) stay fallbacks if the owner rejects a mesh.
+
+**Architecture B — discovery/signaling + optional TURN.**  
+A small signaling service (WebSocket or HTTPS) stores “client `node_id` is reachable at …” and issues **short-lived session tokens**. Phones attempt peer-to-peer (ICE-like). If NAT wins, both connect to a **TURN/relay** that forwards opaque bytes. Requirements:
+
+- Relay is a **dumb pipe**. It authenticates the session token, then forwards length-prefixed TLS records. It must not terminate `peer.*` TLS. Keys stay on the two phones (same SPKI pins as LAN pairing).
+- Tokens: random, single-use or ≤ few minutes, bound to `(admin_node_id, client_node_id, session_id)`, signed by the signaling key or issued as a PAKE output. Stolen token ≠ long-term pairing.
+- Signaling sees metadata (who wants whom, timestamps, IPs). It must not see PTY bytes. Log retention is an owner policy.
+
+**Architecture C — reverse tunnel to an owner VPS.**  
+Client maintains an outbound TLS connection to a box the owner runs (`ssh -R`, WireGuard endpoint, or a dedicated reverse-proxy). Admin connects to that box. Still **E2E-encrypt** to the phone; the VPS is a relay, not a second `BridgeExecutor`.
+
+**Do not** ship a Victorious-operated multi-tenant cloud in v1 of internet remote unless the owner explicitly chooses it (open decision 16). A cloud that can terminate TLS is a malicious-relay scenario by construction.
+
+**Session rules (all of A/B/C):**
+
+| Rule | Behaviour |
+|---|---|
+| Pairing | Still happens in person on USB/LAN first. Internet does **not** replace QR/PIN. It only **uses** an existing `PairedAdmin` pin. |
+| New remote session | Client shows **Approve this session?** (admin fingerprint, network path: VPN / relay / direct, requested caps). Timeout deny. Separate from the original pairing grant. |
+| Short-lived session token | Issued at approve; dies on idle timeout, revoke, or wall-clock TTL (recommend 15–60 min idle, hard cap e.g. 12 h). |
+| Always-on agent | **Off** by default. If enabled: foreground service + persistent notification (“Client: waiting for Administrator”), idle timeout still applies, cellular data warning. |
+| Kill switch / revoke | **Either side.** Client: existing one-tap revoke (§11.4) plus “End session now.” Admin: “Disconnect and forget this client” (drops keys locally; client should refuse the old pin). Signaling (if B) gets a revoke so tokens stop. Works offline for the local half; syncs when online. |
+| Capability advertisement | Same `peer.capabilities.get`. Path type (`usb` / `lan` / `vpn` / `relay`) is metadata for the admin UI, not extra power. |
+| Root over internet | Default **off** even if `su_granted` on LAN. Open decision whether remote root needs a second factor (see §15). |
+
+Foreground service is required on modern Android for an always-on listen; `targetSdk` 28 is slightly more lenient than 35, but a visible notification is still the honest UX.
+
+### 12.2.1 Preferred internet path: optional Tailscale and Headscale
+
+**Recommendation:** include **optional** in-app Tailscale (official coordination) **and** Headscale (self-hosted control plane) as the preferred way for admin/client to work across the internet. They are not required to use the merged app, the USB toolkit, Termux, or same-LAN peer control.
+
+Neither binary is a shell relay. Tailscale/Headscale carry **WireGuard** (and Tailscale DERP relays encrypted WireGuard frames). `peer.*` still uses **device-pinned TLS inside** that overlay. Coordination servers and DERP **must not** see PTY/JSON. Do not add a Victorious “shell proxy” in front of this.
+
+**UX — Settings → Remote** (only if role is Client or Administrator; default all off):
+
+| Control | Behaviour |
+|---|---|
+| **Connect Tailscale account** | Official Tailscale login (OAuth / auth URL). Same account (or tailnet ACL that allows the two nodes) on admin and client. |
+| **Headscale** | User pastes **login server URL** (`https://headscale.example.com`) **and** a **preauth key**. Matches today’s `HeadscaleClickConfig` dialog (URL required; key optional today for interactive login — for in-app Remote, **require the preauth key** so the terminal is not the login UI). |
+| **Mesh status** | Connected / connecting / off; tailnet name; this node’s hostname and `100.x` address; last error. |
+| **Peer phone hostname** | On the admin: list tailnet peers, highlight the paired client’s hostname/`node_id` when it is online on the mesh. Do not treat “seen on Tailscale” as paired — pairing is still USB/LAN QR/PIN. |
+| **Disconnect** | Leaves the tailnet; USB and LAN peer keep working. |
+
+USB-C and plain LAN **ignore this screen**. No Tailscale process, no SOCKS proxy, no `BIND_VPN_SERVICE` for those paths.
+
+**How to implement (prefer library / userspace, fallback to the Tailscale app):**
+
+1. **Preferred:** Tailscale **userspace networking** (what `HeadscaleClickConfig` already does: `tailscaled --tun=userspace-networking`, SOCKS5/HTTP on `127.0.0.1:1055`) **or** the official **Tailscale Android library / libtailscale** if it can run without a second APK. Admin’s `peer.*` TLS client then dials the client’s overlay IP **via that local SOCKS proxy**. No `VpnService` ⇒ no Android VPN consent sheet and a weaker Play VPN-policy surface.
+2. **Fallback:** if `com.tailscale.ipn` (official Tailscale Android app) is installed and its VPN is up, detect it (`PackageManager` + overlay route / Tailscale local API if documented) and dial `100.x` directly. Do not force users to uninstall that app. Show “Using Tailscale app” vs “Using built-in userspace” in status.
+3. **Do not** require the Tailscale APK for Headscale (the official app does not point at arbitrary Headscale URLs as a first-class in-app flow). Headscale stays URL + preauth key in **this** app.
+4. Stop fetching **unpinned** “latest” tarballs from `pkgs.tailscale.com` (current `HeadscaleClickConfig` script). Pin a version + SHA-256, same rule as RootForge hooks.
+
+Replace the drawer-only Headscale menu with this Settings → Remote surface (or keep the drawer as a shortcut to the same settings). One implementation, not two login paths.
+
+**Licensing**
+
+| Piece | License / terms | APK effect |
+|---|---|---|
+| Tailscale open client (`tailscale/tailscale`, typically **BSD-3-Clause**) | Compatible with GPLv3 if notices are kept | OK to link/bundle **if** the owner uses the OSS client, not a proprietary blob without a grant |
+| Tailscale Android app / Play listing | Tailscale’s ToS for **their** coordination server | Using `controlplane.tailscale.com` is a **SaaS** relationship, not a license to rebrand Tailscale |
+| Headscale (`juanfont/headscale`, **BSD-3-Clause**) | Self-hosted; compatible | This APK is only a **client**; we do not bundle the Headscale **server** |
+| Current VS download of static `tailscale`/`tailscaled` tarballs | Redistribution of those binaries needs the BSD notice and a pin | Supply-chain: pin + checksum |
+
+BSD-3-Clause is GPLv3-compatible. Still add notices to `LICENSE.md`. Do not strip Tailscale trademarks from their login UI.
+
+**Play policy (VPN)**
+
+- A real TUN (`VpnService` / `BIND_VPN_SERVICE`) triggers Google Play’s VPN app policy (disclosure, always-on VPN behaviour, no stealth). The merged APK is **already** not Play-bound (§5.6); declaring VPN makes a future Play flavour even less likely.
+- Userspace-networking + SOCKS **avoids** `VpnService` but also **does not** capture all device traffic — only what this app dials through 1055. That is what we want for admin/client (shell stays in-app).
+- Fallback to the official Tailscale APK puts VPN permission on **their** app, which is the cleanest Play story if the owner ever wants one.
+
+**Open decision (also §15 #22):** **bundle userspace Tailscale** (pinned `tailscaled` or libtailscale inside this APK) **vs require the Tailscale app** for official Tailscale, and only bundle userspace for Headscale. Recommendation: **bundle userspace for both** so Headscale works without a second APK; detect the official app as a fallback for Tailscale.com accounts.
+
+### 12.3 Threat model and mitigations
+
+Internet remote expands §11.6. Treat the following as design constraints, not a later hardening pass.
+
+| Threat | What happens | Mitigation |
+|---|---|---|
+| **Stolen admin phone** | Thief opens the app and reaches every paired client | Biometric / credential lock **before** any `peer.*` connect (Android `BiometricPrompt`); short session TTL; client “Approve this session” so a thief also needs the client unlocked or the always-on grant; admin-side revoke from a second device if we store a recovery pin (optional); OS device-wipe still wins. Do not keep the TLS private key outside AndroidKeyStore. |
+| **Malicious relay / VPN operator** | Operator of Headscale, TURN, or VPS inspects or injects | Device-level TLS with pins from LAN pairing; relay forwards ciphertext only; no “TLS offload” on the server; certificate change ⇒ `CERT_CHANGED` / re-pair in person. Headscale/Tailscale already encrypts the overlay; still keep `peer.*` TLS inside it. |
+| **MITM** (guest Wi-Fi, captive portal, hostile LTE) | Fake signaling, fake mDNS leftover, downgrade | No plaintext `peer.*`. No TOFU on a new network: pins come from the in-person pairing. Signaling TLS pinned or at least SPKI-backed. Refuse a session whose token signer is unknown. |
+| **Runaway root commands** | Stolen admin or buggy loop issues `peer.shell.root` | Remote root grant separate from LAN grant; rate limits (e.g. N root ops / window); `ApprovalCenter` typed `ROOT` on the **client** for destructive/root; optional **admin** biometric per root op; idle timeout kills the PTY; audit every invoke. |
+| **Always-on agent as implant** | Client listens on the public internet 24/7 | Default off; notification that cannot be fully hidden; idle timeout; LAN-only unless Internet remote is explicitly enabled; no cellular bind by default (§11.6). |
+| **Stolen client phone** | Thief disables revoke or exfiltrates audit | Keys in AndroidKeyStore (hardware-backed where present); revoke from admin still invalidates tokens at signaling; audit is local and not remotely deletable. |
+| **Token theft** | Copy of a session token from logs or backup | Short TTL, single session binding, redaction (RootForge already redacts `tskey-auth-*` in CLI logs — apply the same to peer tokens in `peer_audit.jsonl`). |
+| **Audit split-brain** | Client offline, admin forges history | Canonical log is **on the client**. When online, client may **push** a hash-chained tail to the admin (append-only sync). Admin cannot push entries back. |
+
+**Audit log synced when online:** client remains source of truth (`peer_audit.jsonl`). Sync is optional, admin-pull or client-push of signed batches over the already-pinned TLS session (never via the relay’s API). If sync fails, the client log is still complete.
+
+### 12.4 Phasing relative to the rest of the merge
+
+| When | What ships | What is forbidden |
+|---|---|---|
+| Milestone 7 (after Termux:API embed so capabilities are real) | USB tunnel + same-LAN mDNS/QR/PIN, mutual TLS, capability UI, local revoke, local audit | Any hostname of a cloud/signaling service in the APK; TURN; “works on cellular”; always-on without a notification |
+| Milestone 8 (Tailscale/Headscale preferred; B/C only if owner rejects mesh) | Settings → Remote; optional Tailscale login or Headscale URL+preauth key; mesh status + peer hostname; `peer.*` TLS on overlay IPs; session tokens; per-session approve; idle timeout; kill switch both sides | Terminating `peer.*` TLS on Tailscale/Headscale/DERP; requiring Tailscale for USB/LAN; unpinned `pkgs.tailscale.com` downloads |
+
+A PC admin (RootForge `:desktop`) over internet is the same Milestone 8 protocol — another reason `peer.*` lives in `:core`.
+
+### 12.5 Open decisions (internet) — also listed in §15
+
+These block Milestone 8 only; Milestone 7 can ship without them.
+
+1. **Self-host only vs optional cloud** — Headscale/VPS the owner runs, vs a Victorious-operated signaling/TURN, vs Tailscale SaaS. Recommendation: **self-host first** (A or C); no multi-tenant cloud in the first internet release.
+2. **Which VPN/mesh** if A — **resolved in recommendation: optional in-app Tailscale + Headscale** (§12.2.1). Remaining: bundle userspace vs require the Tailscale APK (decision 22).
+3. **If B: who runs TURN** — owner VPS image (could live in RootForge `docker/`) vs a commercial TURN vs none (fail if P2P fails).
+4. **Remote root** — allowed at all over internet? If yes, **second factor**: client typed `ROOT` every time, admin biometric every time, or both?
+5. **Always-on agent** — in M8 or later? Default timeout values?
+6. **Naming** — mDNS type and product string (`victorsuite-peer` vs `rootforge-peer`).
+
+---
+
+## 13. Phased migration
 
 ### Milestone 0 — Decisions and legal (no APK behaviour change)
 
-- Owner answers open decisions in §13.
+- Owner answers open decisions in §15.
 - Add a `LICENSE` to RootForge OS (GPLv3-or-later or Apache-2.0 + GPL scripts — see §8).
 - Spike: Compose toolkit Activity hosted from a throwaway branch of VictorSuite on minSdk 23 vs 26.
 - Spike: `includeBuild` of `rootforge-os/android-app`.
@@ -678,9 +1014,36 @@ Already mostly built as RootForge `:desktop` + Docker (PR #49). Post-merge work 
 
 **The merge keeps PC-first possible by not putting Termux, zerocore, or Termux:API on the `:core` / `:toolkit-ui` / `:desktop` class path.**
 
+### Milestone 7 — Admin/client over USB + same LAN
+
+Depends on M2 (toolkit USB for the tunnel) and M4 (Termux:API flag in capabilities). Can start UI/protocol work in parallel after M2.
+
+- Role picker Off / Client / Administrator; client is TLS server, admin is not.
+- mDNS + QR/PIN pairing, mutual TLS, SPKI pins, `peer.*` in `:core`.
+- USB-C = `AdbConnection` port reverse/forward to localhost TLS, not raw `adb shell`.
+- Capability-filtered admin UI; libsu for `rooted`; extra prompts for `peer.shell.root`.
+- One-tap revoke; `peer_audit.jsonl`; hostile checks (unauthenticated connect refused).
+- No internet/signaling/TURN in this milestone.
+
+**Exit:** two emulators or two phones on one LAN complete pairing and a user-level remote shell; revoke drops the session; role Off accepts nothing. USB tunnel tested if a host/target pair exists; otherwise documented as unverified.
+
+### Milestone 8 — Remote over internet (later)
+
+Blocked on remaining §12.5 / §15 decisions (bundle vs Tailscale APK, remote root 2FA). Preferred implementation is **A**: optional in-app Tailscale + Headscale (§12.2.1).
+
+- Settings → Remote: Tailscale account **or** Headscale URL + preauth key; mesh status; peer hostname. USB/LAN still work with this off.
+- Dial `peer.*` TLS to overlay IPs (userspace SOCKS or detected Tailscale VPN). Pin Tailscale binaries; do not curl “latest”.
+- Short-lived session tokens; client approve **each** new remote session; idle timeout; kill switch both sides.
+- E2E `peer.*` TLS so a relay cannot read PTY/JSON.
+- Optional always-on client agent with visible notification.
+- Optional audit-log sync (client is source of truth).
+- Biometric gate on the admin before connect; rate limits on root ops.
+
+**Exit:** a paired pair on **different** networks (e.g. Wi-Fi + cellular, or two NATs) gets a session; a test relay/VPN operator with dump capability cannot read shell traffic; revoke from either side ends it; stolen-token-after-TTL fails.
+
 ---
 
-## 12. Risks
+## 14. Risks
 
 | Risk | Severity | Mitigation |
 |---|---|---|
@@ -701,10 +1064,14 @@ Already mostly built as RootForge `:desktop` + Docker (PR #49). Post-merge work 
 | CI time (NDK Termux + Compose) | Slow VS workflow | `includeBuild` only `:core` + toolkit modules; do not build `:desktop` on VS CI. |
 | ZeroTermux engine APK missing | Features already fail-soft | Unchanged. |
 | Real USB / Termux:API hardware untested | Honesty | Keep RF’s Certain/Likely/Guessing language in READMEs. |
+| Admin/client listen path (LAN) | Remote shell | Default off; TLS+pinning; never reuse port 19951 (§11.6). |
+| Internet remote / relay | Stolen admin, malicious relay, MITM, runaway root | Milestone 8 only; E2E pins; session approve; biometric on admin; 2FA for remote root (owner decision) (§12.3). |
+| Always-on client agent | Implant-shaped UX / Play heuristics | Off by default; persistent notification; idle timeout. |
+| Headscale `curl\|sh` | RF `join_headscale.sh` still unpinned | Pin installer before using it as architecture A. |
 
 ---
 
-## 13. Open decisions for the owner
+## 15. Open decisions for the owner
 
 1. **Combined product name** — keep launcher “VictorSuite”, switch to “RootForge”, or a new name? Package stays `com.termux` regardless.
 2. **RootForge license** — GPL-3.0-or-later (simplest with Termux) vs Apache-2.0 for Kotlin `:core`/desktop and GPL for scripts/ISO. Must pick before distributing a merged APK.
@@ -720,9 +1087,17 @@ Already mostly built as RootForge `:desktop` + Docker (PR #49). Post-merge work 
 12. **Helper strategy for M4** — invest in patched C `termux-api` for all ABIs up front, or MIT shim first (no `termux-usb` FD passing) then C helper?
 13. **Raise VictorSuite `targetSdk` later?** — not in this program; confirm.
 14. **F-Droid** — out of scope unless the owner wants a public, reproducible, blob-stripped flavour.
+15. **Internet remote architecture (blocks M8 only)** — **A** owner-hosted mesh VPN (Headscale/Tailscale/WireGuard; VS already has userspace Headscale), **B** signaling + optional TURN, or **C** reverse tunnel to a VPS. Recommendation: evaluate **A** first so Milestone 7 TLS is unchanged.
+16. **Self-host only vs optional cloud** — owner-run Headscale/VPS vs Tailscale SaaS vs a Victorious-operated signaling/TURN. Recommendation: **self-host first**; no multi-tenant cloud in the first internet release.
+17. **If B: who runs TURN** — RootForge `docker/` image on a VPS, commercial TURN, or fail closed when P2P fails.
+18. **Remote root** — allow `peer.shell.root` over internet at all? If yes, second factor: client typed `ROOT` every time, admin biometric every time, or both? Recommendation: **both**, and default the remote-root grant **off**.
+19. **Always-on client agent** — include in M8 or later; idle/session TTLs.
+20. **mDNS / product service name** — `_victorsuite-peer._tcp` vs `_rootforge-peer._tcp`.
+21. **Expose SmsSend / Camera over `peer.termux_api` in v1** — recommendation: **no** (LAN or internet).
+22. **Bundle userspace Tailscale vs require the Tailscale app** — for Settings → Remote. Recommendation: **bundle pinned userspace** (`tailscaled --tun=userspace-networking` or official libtailscale) so Headscale works with no second APK; **detect `com.tailscale.ipn`** as a fallback for Tailscale.com. USB/LAN never depend on either.
 
 ---
 
-## 14. Recommended approach (short)
+## 16. Recommended approach (short)
 
-Keep **VictorSuite as the APK home** (`com.termux`, GPLv3, terminal-first). Consume RootForge’s **Kotlin `:core` + toolkit UI/Android** through a submodule/composite build. Leave RootForge public as the **CLI / ISO / desktop / Docker** home so `git clone` + `PYTHONPATH` never needs the APK. Embed **Termux:API as a library** with a **default-off Settings toggle**, a **retargeted helper**, disabled components, and honest permission revoke (platform-limited). Do not target Play. License RootForge before anyone else receives the APK. Split RootForge’s Android module so desktop never sees Termux. Point droidcommand-ai at the existing bridge **action** inside `com.termux` while leaving `RUN_COMMAND` untouched.
+Keep **VictorSuite as the APK home** (`com.termux`, GPLv3, terminal-first). Consume RootForge’s **Kotlin `:core` + toolkit UI/Android** through a submodule/composite build. Leave RootForge public as the **CLI / ISO / desktop / Docker** home so `git clone` + `PYTHONPATH` never needs the APK. Embed **Termux:API as a library** with a **default-off Settings toggle**. Admin/client is a fourth control plane (`peer.*` on the same JSON envelope, not `rootforge.adb.*` and not DCA): **USB + same-LAN first** (mDNS, QR/PIN, pinned TLS, capability UI); **internet later** via **optional in-app Tailscale (official) and Headscale (URL + preauth key)** so shell traffic stays on the WireGuard mesh plus device TLS — not a third-party shell relay. USB/LAN work with Tailscale off. Do not target Play. License RootForge before anyone else receives the APK. Point droidcommand-ai at the existing bridge **action** inside `com.termux` while leaving `RUN_COMMAND` untouched; no DCA→client relay in v1.
