@@ -1,8 +1,19 @@
-# VictorSuite × RootForge OS — two apps, one suite
+# Victorious Suite — two apps, one suite
 
 **Status:** planning only. No features implemented in this document’s PR.  
 **Owner:** Don Victor (GitHub [Victorious93](https://github.com/Victorious93)).  
+**Suite name:** **Victorious Suite** (two Android APKs: VictorSuite + RootForge).  
 **Decision:** **do not merge into one APK.** VictorSuite stays on `targetSdk` 28 so Termux exec / `$PREFIX` keep working. RootForge stays on a modern `targetSdk` so USB host and storage permissions work. The product is a **suite**: two sideload APKs, one shared Kotlin library, one JSON command schema, matching branding and signing, and a deep-link handoff.
+
+**Owner locks** (2026-10-14 — also §16):
+
+| Lock | Decision |
+|---|---|
+| Suite name | **Victorious Suite** |
+| RootForge license | **Apache-2.0** for shared Kotlin `:core`; **GPL-3.0** for the rest (Android app, scripts, ISO; desktop follows the rest) |
+| `:core` delivery | **git submodule / Gradle `includeBuild`** into VictorSuite first; Maven publish later |
+| Tailscale | **Bundle pinned userspace** networking in RootForge; **fallback** to the official Tailscale app if installed |
+| Still owner-gated | VictorSuite **package name / `com.termux` migration** and **signing keystore rotation** — do not invent a choice |
 
 **Supersedes** the earlier one-APK `docs/MERGE_PLAN.md` (that path is now a stub).
 
@@ -25,7 +36,7 @@ ZeroTermux research: [hanxinhao000/ZeroTermux](https://github.com/hanxinhao000/Z
 
 ### Goal
 
-Ship **two sideload APKs** that form one suite. Users may install either app alone; together they share branding, signing lineage, a command schema, and a handoff.
+Ship **two sideload APKs** that form **Victorious Suite**. Users may install either app alone; together they share branding, signing lineage, a command schema, and a handoff.
 
 | App | Owns |
 |---|---|
@@ -34,10 +45,10 @@ Ship **two sideload APKs** that form one suite. Users may install either app alo
 
 **Shared (not a third APK):**
 
-1. RootForge’s Kotlin **`:core`** as a shared library (published Maven artifact **or** git submodule / `includeBuild`). JVM only — no Android SDK, no Termux.
+1. RootForge’s Kotlin **`:core`** as a shared library. **First:** git submodule / Gradle `includeBuild` of `rootforge-os/android-app` into VictorSuite (schema constants / extras only — not RF UI). **Later:** Maven publish. JVM only — no Android SDK, no Termux.
 2. **One JSON command schema** (`BridgeRequest` / `BridgeResponse`, `BRIDGE_PROTOCOL_MAJOR = 1`) so [droidcommand-ai](https://github.com/Victorious93/droidcommand-AI) talks to both apps the same way (`RUN_COMMAND` on VictorSuite, Messenger `ai.rootforge.os.action.BRIDGE` on RootForge, `peer.*` on RootForge for phone-to-phone).
 3. VictorSuite **deep link / “Open in RootForge”** handoff (drawer items launch RootForge destinations; if RootForge is missing, offer sideload).
-4. **Matching branding and signing** (suite look; same publisher key lineage — not a shared `sharedUserId`).
+4. **Matching branding** under **Victorious Suite** and matching publisher signing (not a shared `sharedUserId`). Signing *key* rotation is still owner-gated (§2.1).
 
 Termux-only users continue to `git clone` RootForge OS and run its CLI/scripts in stock Termux (or VictorSuite) **without either toolkit APK**.
 
@@ -152,9 +163,9 @@ These are **in this repo**, independent of RootForge, and should be decided befo
 
 Resolution is currently “whatever Gradle picks,” which is a latent break for a `:core` `includeBuild` or any Compose-adjacent AndroidX bump. Owner approval: collapse to **one version each** (recommend Material 1.12.x, Guava 31.x or a single 24.x if 31 is unused, AppCompat 1.6.x) in a dedicated hygiene PR before suite work.
 
-**2. Package name `com.termux` clash.** Keeping `com.termux` means VictorSuite **cannot coexist with official Termux**. That is load-bearing for PREFIX, `RUN_COMMAND`, and `core-termux`. Renaming would require rewriting bootstrap paths, helper retargets, and a DCA follow-up. **Owner approval:** keep `com.termux` (recommended) **or** plan a migration. RootForge’s `ai.rootforge.os` does **not** clash with either.
+**2. Package name `com.termux` clash — still owner-gated.** Keeping `com.termux` means VictorSuite **cannot coexist with official Termux**. That is load-bearing for PREFIX, `RUN_COMMAND`, and `core-termux`. Renaming would require rewriting bootstrap paths, helper retargets, and a DCA follow-up. RootForge’s `ai.rootforge.os` does **not** clash with either. **Do not invent a keep-vs-migrate choice** until the owner locks it.
 
-**3. Committed signing key.** `phone.jks` is in the tree. `app/build.gradle` embeds fallback `storePassword` / `keyPassword` (`123456` / `654321`, alias `phone1`) when env vars are unset. This is a **secret in git** and a supply-chain issue. Official Termux plugins will never share UID with this key. Suite “matching signing” must not mean “keep publishing the leaked ZeroTermux key.” **Owner approval:** rotate to a new Victorious keystore (CI secrets only, remove `phone.jks` from git, accept that existing installs will not upgrade in place) **or** keep the committed key for UTermux-compat upgrades and accept the leak. Matching RootForge signing (same publisher, **different** keystore from DCA) is a separate decision once this is settled.
+**3. Committed signing key — still owner-gated.** `phone.jks` is in the tree. `app/build.gradle` embeds fallback `storePassword` / `keyPassword` (`123456` / `654321`, alias `phone1`) when env vars are unset. This is a **secret in git** and a supply-chain issue. Official Termux plugins will never share UID with this key. Suite “matching signing” must not mean “keep publishing the leaked ZeroTermux key.” Options (owner must pick): rotate to a new Victorious keystore (CI secrets only, remove `phone.jks` from git, existing installs will not upgrade in place) **or** keep the committed key for UTermux-compat upgrades and accept the leak. Matching RootForge signing (same publisher, **different** keystore from DCA) follows this choice. **Do not invent a rotate-vs-keep choice.**
 
 ---
 
@@ -239,7 +250,7 @@ Dashboard, ADB, Fastboot, EDL, Root/Patching, Module Builder, Recovery, Logs/Ter
 
 ### License
 
-**No `LICENSE` file.** README states redistribution terms are undefined. Third-party bits fetched at ISO build time keep their own licenses. This is an **open decision** and a blocker before advertising the public repo as open source or publishing `:core` as an artifact that VictorSuite (GPLv3) or DCA may depend on.
+**No `LICENSE` file in the tree today.** Owner lock: add **Apache-2.0** on shared Kotlin `:core`; **GPL-3.0** on the rest of RootForge (Android `:app`, scripts, ISO; desktop follows the rest). Third-party bits fetched at ISO build time keep their own licenses. Applying those files on RootForge `main` is Milestone 0 work, not an open product choice. Apache-2.0 `:core` is GPLv3-compatible, so VictorSuite may link it.
 
 ### Tests / CI
 
@@ -393,7 +404,7 @@ F-Droid: possible in principle for Termux:API, but VictorSuite is private, uses 
 
 - Termux:API **app sources = GPLv3**. Copying them into this GPLv3 APK is compatible. Keep headers; add Termux:API to `LICENSE.md`; pin the upstream commit.
 - `termux-api-package` helper/scripts = **MIT**. Keep the MIT notice on the overlay.
-- RootForge `:core` is **not** required inside VictorSuite for the embed. If VictorSuite later depends on `:core` for shared schema constants, RootForge must have a GPLv3-compatible license first (§9).
+- RootForge `:core` is **not** required inside VictorSuite for the embed. If VictorSuite later depends on `:core` for shared schema constants, that is **Apache-2.0** (owner lock) — GPLv3-compatible. Apply the LICENSE files on RootForge `main` before the submodule pin (M0 / M1).
 
 ---
 
@@ -413,8 +424,8 @@ F-Droid: possible in principle for Termux:API, but VictorSuite is private, uses 
 | Compose vs Views | AppCompat / data binding | Compose Material 3 | **No hybrid APK.** Handoff is an Intent, not a `ComposeView` inside TermuxActivity. |
 | INTERNET | Yes | No today | VS keeps INTERNET. RF adds INTERNET when admin/client or Tailscale ships. Toolkit flash code still must not use the network. |
 | droidcommand | `RUN_COMMAND` / `core-termux` | Messenger bridge / `core-rootforge` | **Both stay.** One JSON envelope in `:core` (§11). |
-| Signing | `phone.jks` (committed) | CI env keystore | Matching **publisher** lineage after owner approval on the leaked VS key (§2.1). Never share a key with DCA. |
-| Public vs private | Private | Public | Do not move Termux sources into public RootForge. Publish `:core` from RootForge; publish VictorSuite APK from this repo. |
+| Signing | `phone.jks` (committed) | CI env keystore | Matching **publisher** lineage **after** the still-gated keystore decision (§2.1). Never share a key with DCA. |
+| Public vs private | Private | Public | Do not move Termux sources into public RootForge. Consume `:core` via submodule / `includeBuild` first; Maven later. Publish VictorSuite APK from this repo. |
 | Headscale / Tailscale | Drawer `HeadscaleClickConfig` (unpinned userspace) | `join_headscale.sh` on ISO/chroot | **RF Settings → Remote** is the admin/client mesh. Pin binaries. VS drawer becomes a handoff or a Termux-only proxy. |
 | Gradle style | Groovy, duplicated deps | Kotlin DSL | Dedupe VS first (§2.1). RF Gradle stays in the public repo. |
 
@@ -442,11 +453,13 @@ Do **not** `includeBuild` RootForge `:app` into VictorSuite — that re-creates 
 ```
 VictorSuite (private)                         RootForge OS (public)
 ├── :terminal-emulator                        ├── android-app/
-├── :terminal-view                            │     :core            # shared JVM library (publish or submodule)
-├── :termux-shared                            │     :app             # ai.rootforge.os — toolkit + peer + Remote
-├── :termux-api-lib   (later)                 │     :desktop         # PC-first, same :core
-├── :app              # com.termux            ├── CLI / ISO / termux/ / docker/
-└── docs/SUITE_PLAN.md                        └── (optional) published :core Maven coordinate
+├── :terminal-view                            │     :core            # Apache-2.0 JVM library
+├── :termux-shared                            │     :app             # GPL-3.0 — toolkit + peer + Remote
+├── :termux-api-lib   (later)                 │     :desktop         # PC-first, same :core (GPL-3.0 with the rest)
+├── :app              # com.termux            ├── CLI / ISO / termux/ / docker/   # GPL-3.0
+├── third_party/rootforge-os  (submodule)     └── (later) published :core Maven coordinate
+│     └── includeBuild android-app           # :core only; do not include :app
+└── docs/SUITE_PLAN.md
 
 droidcommand-ai (separate)
 ├── core-termux       → RUN_COMMAND on com.termux
@@ -469,10 +482,11 @@ VictorSuite `:app` depends on **`:core` only if needed** for shared schema const
 
 | Item | Value |
 |---|---|
-| VictorSuite `applicationId` / `sharedUserId` | **`com.termux`** (unless the owner approves a rename — §2.1 / §16) |
+| Suite name | **Victorious Suite** |
+| VictorSuite `applicationId` / `sharedUserId` | **`com.termux` today** — keep-vs-migrate is **still owner-gated** (§2.1 / §16) |
 | RootForge `applicationId` | **`ai.rootforge.os`** (debug `.debug`) |
-| VictorSuite launcher | **VictorSuite** until the owner picks a suite brand |
-| RootForge launcher | **RootForge** (own LAUNCHER — this is a real second app) |
+| VictorSuite launcher | **VictorSuite** (app inside Victorious Suite) |
+| RootForge launcher | **RootForge** (own LAUNCHER — second app in Victorious Suite) |
 | Handoff | `ai.rootforge.os.action.OPEN` (or documented `https` / custom-scheme deep links) with `destination` extra (`adb`, `fastboot`, `edl`, `peer`, `remote`, …) |
 | Bridge service | Stays in **RootForge**: action **`ai.rootforge.os.action.BRIDGE`** |
 | Termux:API receiver | VictorSuite only, disabled by default |
@@ -495,7 +509,7 @@ VictorSuite `:app` depends on **`:core` only if needed** for shared schema const
    APK                 (RF repo)         APK (this repo)
 ```
 
-Consumption options (open decision): **publish `:core` to Maven** (GitHub Packages / Maven Central once licensed) **or** git submodule / `includeBuild` of `rootforge-os/android-app` pinned to a commit. Prefer a published artifact once CI exists so VictorSuite does not clone the ISO tree.
+**Owner lock:** consume `:core` first via **git submodule + Gradle `includeBuild('third_party/rootforge-os/android-app')`**, pinned to a RootForge commit, **`:core` only** (do not pull RF `:app` / Compose toolkit into VictorSuite). **Maven publish later** (GitHub Packages / Maven Central) once that pipeline exists — not a blocker for M1. Sparse-checkout / submodule `android-app/` only is preferred so VictorSuite CI does not clone the ISO tree if git allows it; otherwise pin and do not `includeBuild` anything but `:core`.
 
 Shell/Python tooling is **not** compiled into either APK. VictorSuite may offer “Install RootForge CLI into this environment” → `git clone` + `dev-env.sh` (convenience, not required). RootForge USB workflows stay in Kotlin; do not exec `rootforge` from the APK for flashes.
 
@@ -545,7 +559,7 @@ If `PackageManager` cannot resolve `ai.rootforge.os` (or `.debug` during develop
 
 RootForge may offer the reverse for terminal work: “Open in VictorSuite” → `com.termux` `MAIN` or a documented extra (create session / run command). That is how a remote-admin flow that needs a real PTY reaches Termux without embedding it.
 
-**Matching branding:** same product wordmark / colour tokens in both launchers and the handoff dialogs. **Matching signing:** same publisher certificate lineage (after §2.1), so Android’s “same developer” story is honest. Not `sharedUserId`. Signature permission across the two apps is allowed for a private suite IPC (PTY session service) **if** both are signed with that lineage; do not use a signature permission that would also bind DCA.
+**Matching branding:** **Victorious Suite** wordmark / colour tokens in both launchers and the handoff dialogs. **Matching signing:** same publisher certificate lineage **after** the still-gated keystore decision (§2.1), so Android’s “same developer” story is honest. Not `sharedUserId`. Signature permission across the two apps is allowed for a private suite IPC (PTY session service) **if** both are signed with that lineage; do not use a signature permission that would also bind DCA.
 
 ---
 
@@ -557,19 +571,20 @@ RootForge may offer the reverse for terminal work: “Open in VictorSuite” →
 | terminal-emulator / terminal-view | Apache-2.0 | Compatible. |
 | Termux:API app sources | GPLv3 | Compatible in VictorSuite; keep notices. |
 | termux-api-package helper | MIT | Compatible; patched overlay OK. |
-| RootForge OS | **None today** | **Cannot publish `:core` (or ship it inside any GPLv3 APK) until RootForge has a GPLv3-compatible license.** |
+| RootForge Kotlin `:core` | **Apache-2.0** (owner lock) | GPLv3-compatible. VictorSuite may link it. Notices required. |
+| RootForge Android `:app`, scripts, ISO, desktop | **GPL-3.0** (owner lock — “the rest”) | Separate works from VictorSuite unless linked. Apply LICENSE files on RF `main` in M0. |
 | Compose / AndroidX / kotlinx | Apache-2.0 | Compatible. |
-| Tailscale OSS client | typically BSD-3-Clause | Compatible in RootForge if notices kept (§13.2.1). |
+| Tailscale OSS client | typically BSD-3-Clause | Compatible in RootForge if notices kept (§13.2.1). **Bundle pinned userspace** (owner lock). |
 | Headscale server | BSD-3-Clause | Not bundled; clients only. |
 
 **What GPLv3 does *not* force:**
 
-- Two APKs are **separate works** if they only talk by Intent / documented IPC and do not link each other’s GPLv3 objects. VictorSuite does not become a RootForge derivative merely because it deep-links. If VictorSuite **links** `:core`, `:core` needs a GPLv3-compatible license and VictorSuite’s corresponding source includes that version of `:core`.
-- The **Python CLI and bash scripts**, distributed as source from a public git clone, can remain a separate work. They still need an explicit license.
-- The **desktop app** links `:core` + Compose UI, **not** Termux. If `:core` is Apache-2.0, the desktop can be Apache-2.0. If `:core` is GPLv3, the desktop is GPLv3 too. Recommendation: license RootForge **GPL-3.0-or-later** for simplicity, **or** Apache-2.0 for `:core`/desktop and GPL-3.0 for scripts.
+- Two APKs are **separate works** if they only talk by Intent / documented IPC and do not link each other’s GPLv3 objects. VictorSuite does not become a RootForge derivative merely because it deep-links. If VictorSuite **links** Apache-2.0 `:core`, corresponding source for the VS APK includes that `:core` version (Apache notices, not a GPL relicense of `:core`).
+- The **Python CLI and bash scripts** are GPL-3.0 with the rest of RootForge; they remain a separate work from the VictorSuite APK because they are not linked into it.
+- The **desktop app** links Apache-2.0 `:core` + Compose UI, **not** Termux. Owner lock puts desktop with **the rest → GPL-3.0**. Apache-2.0 `:core` may still be used by Apache or GPL consumers.
 - Private VictorSuite remaining private is allowed under GPLv3 **until you distribute the APK**. Recipients of the APK are entitled to corresponding source (including Termux:API and any linked `:core`).
 
-**Do not** relicense Termux or Termux:API. **Do not** keep RootForge unlicensed.
+**Do not** relicense Termux or Termux:API. Apply the RootForge split license in M0; do not leave the public repo unlicensed.
 
 ---
 
@@ -888,7 +903,7 @@ Neither binary is a shell relay. Tailscale/Headscale carry **WireGuard** (DERP r
 
 USB-C and plain LAN **ignore this screen**. No Tailscale process, no SOCKS proxy, no `BIND_VPN_SERVICE` for those paths.
 
-**How to implement (prefer library / userspace, fallback to the Tailscale app):**
+**How to implement (owner lock: bundle pinned userspace; fallback to the Tailscale app):**
 
 1. **Preferred:** Tailscale **userspace networking** (`tailscaled --tun=userspace-networking`, SOCKS5/HTTP on `127.0.0.1:1055`) **or** the official **Tailscale Android library / libtailscale** if it can run without a second APK. Admin’s `peer.*` TLS client dials the client’s overlay IP **via that local SOCKS proxy**. No `VpnService` ⇒ no Android VPN consent sheet and a weaker Play VPN-policy surface.
 2. **Fallback:** if `com.tailscale.ipn` (official Tailscale Android app) is installed and its VPN is up, detect it (`PackageManager` + overlay route / Tailscale local API if documented) and dial `100.x` directly. Do not force users to uninstall that app. Show “Using Tailscale app” vs “Using built-in userspace” in status.
@@ -913,7 +928,7 @@ BSD-3-Clause is GPLv3-compatible. Add notices to RootForge `LICENSE` once it exi
 - Userspace-networking + SOCKS **avoids** `VpnService` but does **not** capture all device traffic — only what RootForge dials through 1055. That is what we want (shell stays in-app / suite IPC).
 - Fallback to the official Tailscale APK puts VPN permission on **their** app, which is the cleanest Play story if the owner ever wants one.
 
-**Open decision (also §16 #22):** **bundle userspace Tailscale** (pinned `tailscaled` or libtailscale inside **RootForge**) **vs require the Tailscale app** for official Tailscale, and only bundle userspace for Headscale. Recommendation: **bundle userspace for both** so Headscale works without a second APK; detect the official app as a fallback for Tailscale.com accounts. USB/LAN never depend on either. VictorSuite does not bundle a second copy.
+**Owner lock (also §16):** **bundle pinned userspace** Tailscale (`tailscaled --tun=userspace-networking` or official libtailscale inside **RootForge**) so Headscale works with no second APK; **fallback** to the official Tailscale app (`com.tailscale.ipn`) if it is installed. USB/LAN never depend on either. VictorSuite does not bundle a second copy.
 
 ### 13.3 Threat model and mitigations
 
@@ -945,7 +960,7 @@ A PC admin (RootForge `:desktop`) over internet is the same Milestone 8 protocol
 These block Milestone 8 only; Milestone 7 can ship without them.
 
 1. **Self-host only vs optional cloud** — Headscale/VPS the owner runs, vs a Victorious-operated signaling/TURN, vs Tailscale SaaS. Recommendation: **self-host first**; no multi-tenant cloud in the first internet release.
-2. **Which VPN/mesh** if A — **resolved: optional in-app Tailscale + Headscale in RootForge** (§13.2.1). Remaining: bundle userspace vs require the Tailscale APK (decision 22).
+2. **Which VPN/mesh** if A — **resolved:** optional in-app Tailscale + Headscale in RootForge (§13.2.1). **Resolved:** bundle pinned userspace; fallback to the official Tailscale app if installed.
 3. **If B: who runs TURN** — owner VPS image (RootForge `docker/`) vs commercial TURN vs none.
 4. **Remote root** — allowed over internet? Second factor: client typed `ROOT`, admin biometric, or both?
 5. **Always-on agent** — in M8 or later? Default timeout values?
@@ -959,26 +974,26 @@ Tracks can run in parallel after Milestone 0. VictorSuite CI must **not** start 
 
 ### Milestone 0 — Decisions, legal, VictorSuite hygiene (no product behaviour required)
 
-- Owner answers open decisions in §16, especially §2.1 (Gradle dedupe, `com.termux` clash, committed signing key).
-- Add a `LICENSE` to RootForge OS (GPLv3-or-later or Apache-2.0 `:core` + GPL scripts — see §8).
+- Remaining owner-gated items in §16: Gradle dedupe versions, `com.termux` clash, signing keystore rotation. Do not invent those.
+- Add LICENSE files on RootForge OS: **Apache-2.0** for `:core`, **GPL-3.0** for the rest (app, scripts, ISO, desktop) — owner lock, implementation only.
 - Document Termux CLI checkout path in RootForge (`termux/dev-env.sh` + README). Unblocks the git-clone requirement immediately; needs neither APK.
 - Hygiene PR on VictorSuite: single Material / Guava / AppCompat versions (blocked on owner approval of the target versions).
 
-**Exit:** licenses chosen; CLI checkout documented on RootForge `main`; VS dep policy recorded; signing/package decisions recorded.
+**Exit:** RootForge LICENSE files on `main`; CLI checkout documented; VS dep policy recorded. Package-name and keystore decisions may still be open — do not block CLI docs or RF license files on them.
 
 ### Milestone 1 — Shared `:core` contract (no UX merge)
 
-- Publish `:core` (Maven) **or** pin a submodule / `includeBuild` consumed only for schema constants — **not** for embedding RF UI in VS.
+- Pin RootForge as a **git submodule** and Gradle **`includeBuild`** of `android-app`, consuming **`:core` only** (schema constants / extras — **not** RF UI). Maven publish is later, not this milestone.
 - Freeze `BRIDGE_PROTOCOL_MAJOR = 1` envelope + namespace table (§11) in RootForge docs.
 - VictorSuite USB host `required=false` (standalone bugfix).
 
-**Exit:** `:core` is consumable as a library; VS debug APK still behaves as today’s VictorSuite; RF APK still behaves as today’s toolkit.
+**Exit:** `:core` compiles into the VS debug APK via composite build; VS behaviour otherwise unchanged; RF APK still behaves as today’s toolkit.
 
 ### Milestone 2 — Suite handoff (two launchers)
 
 - RootForge exported `OPEN` action + destination extras.
 - VictorSuite drawer category “RootForge” → deep links; missing-app dialog.
-- Matching branding tokens (colours / wordmark) in both apps.
+- Matching **Victorious Suite** branding tokens (colours / wordmark) in both apps.
 - Apply matching signing **only after** §2.1 approval (do not keep leaking `phone.jks` into a new RF keystore).
 - Reverse handoff: RootForge “Open in VictorSuite” for terminal.
 
@@ -1039,7 +1054,7 @@ Depends on M1 (schema in `:core`) and M4 (Termux:API flag via VS IPC). UI/protoc
 
 ### Milestone 8 — Remote over internet (RootForge, later)
 
-Blocked on remaining §13.5 / §16 decisions (bundle vs Tailscale APK, remote root 2FA). Preferred implementation is **A**: optional in-app Tailscale + Headscale in RootForge (§13.2.1).
+Blocked on remaining §13.5 / §16 decisions (remote root 2FA, always-on, TURN if B). Tailscale path is **locked**: bundled pinned userspace in RootForge, fallback to the official app if installed. Preferred architecture is **A** (§13.2.1).
 
 - RootForge Settings → Remote: Tailscale account **or** Headscale URL + preauth key; mesh status; peer hostname. USB/LAN still work with this off.
 - Dial `peer.*` TLS to overlay IPs (userspace SOCKS or detected Tailscale VPN). Pin binaries; do not curl “latest.”
@@ -1060,7 +1075,7 @@ Blocked on remaining §13.5 / §16 decisions (bundle vs Tailscale APK, remote ro
 |---|---|---|
 | Raising VictorSuite `targetSdk` “to match RootForge” | Breaks Termux exec / helper / PREFIX | **Do not.** This is the reason for two APKs. |
 | Lowering RootForge `targetSdk` to 28 for a future merge | Breaks USB/storage permissions | **Do not.** Keep RF modern. |
-| GPLv3 VictorSuite linking unlicensed `:core` | Legal blocker | License RootForge before VS depends on `:core`. Deep links alone do not require a link. |
+| GPLv3 VictorSuite linking `:core` before LICENSE files exist | Legal hygiene | Apply Apache-2.0 on `:core` and GPL-3.0 on the rest in M0 before the VS submodule pin. Deep links alone do not require a link. |
 | Committed `phone.jks` + passwords in Gradle | Key leak, fake updates | Owner approval §2.1; prefer rotate + CI secrets. |
 | `com.termux` vs official Termux | Cannot coexist | Owner approval to keep (recommended) or migrate. RF does not clash. |
 | Duplicate Material / Guava / AppCompat | Silent Gradle resolution, future `includeBuild` pain | Hygiene PR in M0. |
@@ -1084,56 +1099,54 @@ Blocked on remaining §13.5 / §16 decisions (bundle vs Tailscale APK, remote ro
 
 ## 16. Open decisions for the owner
 
-**Resolved by this rewrite**
+**Resolved (architecture + owner locks)**
 
-- **One APK vs two.** **Two apps, one suite.** VictorSuite stays `targetSdk` 28; RootForge stays modern.
-- **Sunset `ai.rootforge.os`?** **No.** It is the toolkit + peer APK.
-- **Raise VictorSuite `targetSdk` in this program?** **No.**
+- **One APK vs two.** **Two apps, one suite** (Victorious Suite). VictorSuite stays `targetSdk` 28; RootForge stays modern. **`ai.rootforge.os` is not sunset.** Do **not** raise VictorSuite `targetSdk`.
+- **Suite name.** **Victorious Suite.** App launchers remain VictorSuite and RootForge.
+- **RootForge license.** **Apache-2.0** for shared Kotlin `:core`; **GPL-3.0** for the rest (Android app, scripts, ISO; desktop follows the rest). Apply files in M0.
+- **`:core` delivery.** **git submodule / Gradle `includeBuild`** into VictorSuite first (`:core` only). Maven publish later.
+- **Tailscale.** **Bundle pinned userspace** networking in RootForge; **fallback** to the official Tailscale app (`com.tailscale.ipn`) if installed. USB/LAN never depend on either.
 
-**VictorSuite prerequisites (block M0 / M2 signing)**
+**Still owner-gated — do not invent**
 
-1. **Gradle dep dedupe** — collapse Material (1.12.0 vs 1.2.1), Guava (24.1-jre vs 31.0.1-jre), AppCompat (1.6.1 vs 1.2.0) to one version each. Recommend Material 1.12.x, one Guava line, AppCompat 1.6.x.
-2. **Keep `com.termux` vs rename** — clash with official Termux. Recommendation: **keep** (PREFIX, `RUN_COMMAND`, `core-termux`).
-3. **Committed `phone.jks` + plaintext fallback passwords** — rotate to CI secrets (existing installs will not upgrade) **or** keep for UTermux-compat and accept the leak. Suite matching signing follows this choice.
+1. **VictorSuite package name / `com.termux` migration.** Clash with official Termux. Keep is load-bearing for PREFIX, `RUN_COMMAND`, `core-termux`; rename needs bootstrap + DCA work. No keep-vs-migrate lock yet.
+2. **Signing keystore rotation.** Committed `phone.jks` + plaintext fallback passwords vs rotate to CI secrets (existing installs would not upgrade). Matching publisher signing for the suite follows this. No rotate-vs-keep lock yet.
+3. **Gradle dep dedupe target versions** — collapse Material (1.12.0 vs 1.2.1), Guava (24.1-jre vs 31.0.1-jre), AppCompat (1.6.1 vs 1.2.0) to one version each. Need owner sign-off on *which* versions.
+4. **Matching signing implementation** (after #2) — one Victorious upload key for both APKs vs two keys in the same publisher account. Never share with DCA.
 
-**Product and legal**
+**Still open (product / later milestones)**
 
-4. **Suite / launcher names** — keep “VictorSuite” + “RootForge”, or a shared suite name with two subtitles? Packages stay `com.termux` and `ai.rootforge.os` regardless (unless #2 migrates).
-5. **RootForge license** — GPL-3.0-or-later (simplest) vs Apache-2.0 for Kotlin `:core`/desktop and GPL for scripts/ISO. Must pick before publishing `:core` or linking it into VictorSuite.
-6. **Matching signing implementation** — one Victorious upload key for both APKs (after #3) vs two keys in the same publisher account. Never share with DCA.
-7. **`:core` consumption** — published Maven artifact vs submodule / `includeBuild` of `android-app` only. Recommendation: **publish** once licensed so VS does not clone the ISO tree.
-8. **Brand of the Termux:API toggle** — “Termux:API”, “Device API”, or “Android API commands”? Default **off** regardless.
-9. **SMS / call log / camera in VS v1** — full Termux:API surface, or a reduced set with a second “sensitive APIs” toggle?
-10. **Play-safe flavour** — never, or later stripped VS and/or RF? Recommendation: **never** for the full apps; sideload only.
-11. **Corresponding source** — make VictorSuite public, or keep private and attach source archives to APK releases?
-12. **DCA follow-up** — owner to schedule a droidcommand-ai PR: one envelope, two transports; do not look for the bridge inside `com.termux`.
-13. **Keep ZT TCP 19951?** — out of scope, but confirm it stays on VictorSuite. Recommendation: leave it, disable while RF Peer is on if we can hand off a “stop 19951” extra.
-14. **Helper strategy for M4** — patched C `termux-api` for all ABIs up front, or MIT shim first (no `termux-usb` FD passing) then C helper?
-15. **F-Droid** — out of scope unless the owner wants a public, reproducible, blob-stripped VictorSuite flavour.
-16. **`peer.shell.user` if VictorSuite is missing on the client** — deny (`prefix_not_ready`) vs a limited RootForge `sh`. Recommendation: **deny**.
-17. **VS Headscale drawer after RF Remote ships** — delete, keep as Termux-only userspace, or shortcut to RootForge? Recommendation: **shortcut** (“Open in RootForge”).
+5. **Brand of the Termux:API toggle** — “Termux:API”, “Device API”, or “Android API commands”? Default **off** regardless.
+6. **SMS / call log / camera in VS v1** — full Termux:API surface, or a reduced set with a second “sensitive APIs” toggle?
+7. **Play-safe flavour** — never, or later stripped VS and/or RF? Recommendation: **never** for the full apps; sideload only.
+8. **Corresponding source** — make VictorSuite public, or keep private and attach source archives to APK releases?
+9. **DCA follow-up** — owner to schedule a droidcommand-ai PR: one envelope, two transports; do not look for the bridge inside `com.termux`.
+10. **Keep ZT TCP 19951?** — out of scope, but confirm it stays on VictorSuite. Recommendation: leave it, disable while RF Peer is on if we can hand off a “stop 19951” extra.
+11. **Helper strategy for M4** — patched C `termux-api` for all ABIs up front, or MIT shim first (no `termux-usb` FD passing) then C helper?
+12. **F-Droid** — out of scope unless the owner wants a public, reproducible, blob-stripped VictorSuite flavour.
+13. **`peer.shell.user` if VictorSuite is missing on the client** — deny (`prefix_not_ready`) vs a limited RootForge `sh`. Recommendation: **deny**.
+14. **VS Headscale drawer after RF Remote ships** — delete, keep as Termux-only userspace, or shortcut to RootForge? Recommendation: **shortcut** (“Open in RootForge”).
 
-**Internet (block M8 only)**
+**Internet (block M8 only; Tailscale bundle is locked)**
 
-18. **Internet remote architecture** — **A** mesh VPN (Headscale/Tailscale; preferred, in RootForge), **B** signaling + optional TURN, or **C** reverse tunnel to a VPS.
-19. **Self-host only vs optional cloud** — owner-run Headscale/VPS vs Tailscale SaaS vs a Victorious-operated signaling/TURN. Recommendation: **self-host first**.
-20. **If B: who runs TURN** — RootForge `docker/` image, commercial TURN, or fail closed.
-21. **Remote root** — allow `peer.shell.root` over internet? If yes, second factor: client typed `ROOT`, admin biometric, or both? Recommendation: **both**, default remote-root grant **off**.
-22. **Always-on client agent** — include in M8 or later; idle/session TTLs.
-23. **mDNS / product service name** — `_rootforge-peer._tcp` (recommended) vs `_victorsuite-peer._tcp`.
-24. **Expose SmsSend / Camera over `peer.termux_api` in v1** — recommendation: **no** (LAN or internet).
-25. **Bundle userspace Tailscale vs require the Tailscale app** — in RootForge Settings → Remote. Recommendation: **bundle pinned userspace** (`tailscaled --tun=userspace-networking` or official libtailscale) so Headscale works with no second APK; **detect `com.tailscale.ipn`** as a fallback for Tailscale.com. USB/LAN never depend on either. VictorSuite does not bundle a second copy.
+15. **Internet remote architecture** — **A** mesh VPN (Headscale/Tailscale in RootForge; preferred), **B** signaling + optional TURN, or **C** reverse tunnel to a VPS.
+16. **Self-host only vs optional cloud** — owner-run Headscale/VPS vs Tailscale SaaS vs a Victorious-operated signaling/TURN. Recommendation: **self-host first**.
+17. **If B: who runs TURN** — RootForge `docker/` image, commercial TURN, or fail closed.
+18. **Remote root** — allow `peer.shell.root` over internet? If yes, second factor: client typed `ROOT`, admin biometric, or both? Recommendation: **both**, default remote-root grant **off**.
+19. **Always-on client agent** — include in M8 or later; idle/session TTLs.
+20. **mDNS / product service name** — `_rootforge-peer._tcp` (recommended) vs `_victorious-suite-peer._tcp`.
+21. **Expose SmsSend / Camera over `peer.termux_api` in v1** — recommendation: **no** (LAN or internet).
 
 ---
 
 ## 17. Recommended approach (short)
 
-**Two apps, one suite.** Do not merge APKs: VictorSuite must stay on `targetSdk` 28 for Termux exec; RootForge needs a modern `targetSdk` for USB host and storage.
+**Victorious Suite: two apps, one suite.** Do not merge APKs: VictorSuite must stay on `targetSdk` 28 for Termux exec; RootForge needs a modern `targetSdk` for USB host and storage.
 
-- **VictorSuite** (`com.termux`) owns the terminal, proot, X11, plugins, backup/restore, and the **default-off Termux:API toggle**.
+- **VictorSuite** (`com.termux` today) owns the terminal, proot, X11, plugins, backup/restore, and the **default-off Termux:API toggle**.
 - **RootForge** (`ai.rootforge.os`) owns ADB / fastboot / EDL, root patching, module builder, recovery, and **admin/client** (USB + LAN first; internet later).
-- **Shared:** Kotlin `:core` (published artifact or submodule), **one JSON envelope** so droidcommand-ai talks to both the same way (`RUN_COMMAND` vs Messenger `BRIDGE` vs `peer.*`), VictorSuite **“Open in RootForge”** deep links, matching branding and publisher signing.
-- **Prerequisites on this repo (owner approval):** dedupe Material / Guava / AppCompat; decide the `com.termux` clash; decide the committed `phone.jks`.
+- **Shared:** Kotlin `:core` (**Apache-2.0**; git submodule / `includeBuild` first, Maven later), **one JSON envelope** so droidcommand-ai talks to both the same way (`RUN_COMMAND` vs Messenger `BRIDGE` vs `peer.*`), VictorSuite **“Open in RootForge”** deep links, **Victorious Suite** branding. Rest of RootForge is **GPL-3.0**.
+- **Still owner-gated:** `com.termux` keep-vs-migrate; signing keystore rotation. Dedupe Material / Guava / AppCompat versions also needs a pick.
 - Keep the **git-clone CLI** and the **PC-first** desktop (`:core` + `:desktop`, no Termux on that classpath).
-- **Internet:** optional in-app **Tailscale (official)** and **Headscale (URL + preauth key)** in RootForge Settings → Remote so shell traffic stays on the WireGuard mesh plus device TLS — not a third-party shell relay. USB/LAN work with Tailscale off.
-- Do not target Play. License RootForge before publishing `:core`. No DCA→client relay in v1. Do not raise VictorSuite `targetSdk`.
+- **Internet:** optional in-app **Tailscale** and **Headscale** in RootForge Settings → Remote. **Bundle pinned userspace**; fallback to the official Tailscale app if installed. Shell stays on the WireGuard mesh plus device TLS. USB/LAN work with Tailscale off.
+- Do not target Play. Apply RootForge LICENSE files in M0. No DCA→client relay in v1. Do not raise VictorSuite `targetSdk`.
