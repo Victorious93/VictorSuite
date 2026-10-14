@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/logo-512.png" alt="VictorSuite logo" width="200">
+
 # VictorSuite
 
 **A Termux-based Android Linux environment with ZeroTermux-era management tools — containers, backup/restore, plugins, X11, and automation.**
