@@ -103,6 +103,12 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
+            android:name=".zerocore.hak5.Hak5CompanionActivity"
+            android:exported="false"
+            android:label="@string/hak5_companion_title"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
             android:name=".zerocore.settings.VictorSuiteX11Settings"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

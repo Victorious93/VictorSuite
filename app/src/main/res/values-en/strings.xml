@@ -1328,4 +1328,49 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="plugin_config_saved_msg">Settings saved.</string>
     <string name="plugin_fetch_failed_msg">Could not load the plugin manifest.</string>
     <string name="plugin_enable_failed_msg">Could not enable plugin: %1$s</string>
+
+    <!-- Hak5 Companion (Phase 1) -->
+    <string name="hak5_companion_title">Hak5 Companion</string>
+    <string name="hak5_companion_subtitle">WiFi Pineapple Tetra over Wi‑Fi/LAN (authorized testing only). Plunder Bug capture lives in RootForge.</string>
+    <string name="hak5_gate_warning_title">Authorized use required</string>
+    <string name="hak5_gate_warning_message">This companion talks to Hak5 hardware you own or are authorized to test. Unauthorized wireless interception or offensive activity is illegal and out of scope. Features stay locked until you acknowledge ownership or written permission.</string>
+    <string name="hak5_gate_dialog_title">Confirm authorized use</string>
+    <string name="hak5_gate_dialog_message">I own this network/device or have written permission to test it.\n\nBy confirming, you enable the Hak5 companion for authorized security testing only. Nothing will auto-attack; every state-changing action will ask for confirmation.</string>
+    <string name="hak5_gate_ack_button">I own this network/device or have written permission</string>
+    <string name="hak5_gate_ack_done">Authorized use recorded. Companion unlocked.</string>
+    <string name="hak5_gate_status_locked">Locked — acknowledge authorized use to continue.</string>
+    <string name="hak5_gate_status_ok">Authorized use acknowledged at %1$s</string>
+    <string name="hak5_connection_section">Pineapple connection</string>
+    <string name="hak5_host_label">Management host / IP</string>
+    <string name="hak5_port_label">Port</string>
+    <string name="hak5_token_label">API token (from Pineapple API Tokens module)</string>
+    <string name="hak5_token_hint">Paste token — stored encrypted</string>
+    <string name="hak5_token_saved_hint">Token saved (leave blank to keep)</string>
+    <string name="hak5_save_settings">Save</string>
+    <string name="hak5_check_connection">Check connection</string>
+    <string name="hak5_host_required">Host is required</string>
+    <string name="hak5_settings_saved">Settings saved</string>
+    <string name="hak5_status_section">Status</string>
+    <string name="hak5_status_unknown">Reachability: not checked yet</string>
+    <string name="hak5_status_online">Reachability: ONLINE</string>
+    <string name="hak5_status_offline">Reachability: OFFLINE</string>
+    <string name="hak5_status_never_checked">Tap “Check connection” while on the Pineapple management network.</string>
+    <string name="hak5_status_last_checked">Last checked: %1$s</string>
+    <string name="hak5_checking">Checking management endpoint…</string>
+    <string name="hak5_firmware_detected">Firmware: %1$s</string>
+    <string name="hak5_firmware_unknown_limited">Unknown firmware — limited mode</string>
+    <string name="hak5_firmware_n_a">Firmware: n/a (unreachable)</string>
+    <string name="hak5_caps_confirmed">Confirmed read-only actions: %1$d</string>
+    <string name="hak5_api_shape_unconfirmed">Device reachable but 6th-gen /api/ shape not confirmed (token may be required).</string>
+    <string name="hak5_plunder_section">Plunder Bug</string>
+    <string name="hak5_plunder_title">Plunder Bug (RootForge)</string>
+    <string name="hak5_plunder_message">USB capture and pcap viewing are handled in RootForge. Tap to open RootForge, or install it if missing. No USB code runs in VictorSuite.</string>
+    <string name="hak5_plunder_missing_title">RootForge not installed</string>
+    <string name="hak5_plunder_missing_message">Plunder Bug support lives in RootForge (ai.rootforge.os). Install RootForge to capture from the USB tap, then return here for Pineapple HTTP features.</string>
+    <string name="hak5_plunder_sideload">Open sideload / releases</string>
+    <string name="hak5_no_auto_attack">Safety: never auto-attack. State-changing Pineapple actions (Phase 2) will always require per-action confirmation.</string>
+    <string name="hak5_revoke_gate">Revoke authorization / clear token</string>
+    <string name="hak5_revoke_gate_message">This locks the companion again and clears the stored API token. Continue?</string>
+    <string name="hak5_revoke_done">Authorization revoked; token cleared.</string>
+
 </resources>

@@ -123,6 +123,9 @@
             click="java:com.termux.zerocore.config.mainmenu.config.ZTSettingsClickConfig" />
         <item tag="Plugin Manager"
             click="java:com.termux.zerocore.config.mainmenu.config.PluginManagerClickConfig" />
+        <item tag="Hak5 Companion"
+            name="Hak5 Companion"
+            click="java:com.termux.zerocore.config.mainmenu.config.Hak5CompanionClickConfig" />
     </group>
 
     <group name="X11 Functions">

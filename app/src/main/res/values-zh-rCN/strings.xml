@@ -1330,6 +1330,51 @@
     <string name="plugin_config_saved_msg">设置已保存。</string>
     <string name="plugin_fetch_failed_msg">无法加载插件清单。</string>
     <string name="plugin_enable_failed_msg">无法启用插件：%1$s</string>
+
+    <!-- Hak5 Companion (Phase 1) -->
+    <string name="hak5_companion_title">Hak5 配套工具</string>
+    <string name="hak5_companion_subtitle">通过 Wi‑Fi/LAN 连接 WiFi Pineapple Tetra（仅限授权测试）。Plunder Bug 抓包在 RootForge 中。</string>
+    <string name="hak5_gate_warning_title">需要确认授权使用</string>
+    <string name="hak5_gate_warning_message">本配套工具仅用于您拥有或已获书面授权测试的 Hak5 设备。未经授权的无线拦截或攻击行为违法且不在范围内。确认授权前功能保持锁定。</string>
+    <string name="hak5_gate_dialog_title">确认授权使用</string>
+    <string name="hak5_gate_dialog_message">我拥有此网络/设备，或已获得书面授权进行测试。\n\n确认后将仅为授权安全测试启用 Hak5 配套功能。不会自动攻击；任何改变状态的操作都需要单独确认。</string>
+    <string name="hak5_gate_ack_button">我拥有此网络/设备或已获书面授权</string>
+    <string name="hak5_gate_ack_done">已记录授权使用。配套功能已解锁。</string>
+    <string name="hak5_gate_status_locked">已锁定 — 请先确认授权使用。</string>
+    <string name="hak5_gate_status_ok">已于 %1$s 确认授权使用</string>
+    <string name="hak5_connection_section">Pineapple 连接</string>
+    <string name="hak5_host_label">管理主机 / IP</string>
+    <string name="hak5_port_label">端口</string>
+    <string name="hak5_token_label">API 令牌（来自 Pineapple API Tokens 模块）</string>
+    <string name="hak5_token_hint">粘贴令牌 — 加密存储</string>
+    <string name="hak5_token_saved_hint">令牌已保存（留空保持不变）</string>
+    <string name="hak5_save_settings">保存</string>
+    <string name="hak5_check_connection">检查连接</string>
+    <string name="hak5_host_required">需要填写主机</string>
+    <string name="hak5_settings_saved">设置已保存</string>
+    <string name="hak5_status_section">状态</string>
+    <string name="hak5_status_unknown">可达性：尚未检查</string>
+    <string name="hak5_status_online">可达性：在线</string>
+    <string name="hak5_status_offline">可达性：离线</string>
+    <string name="hak5_status_never_checked">请在 Pineapple 管理网络上点击“检查连接”。</string>
+    <string name="hak5_status_last_checked">上次检查：%1$s</string>
+    <string name="hak5_checking">正在检查管理端点…</string>
+    <string name="hak5_firmware_detected">固件：%1$s</string>
+    <string name="hak5_firmware_unknown_limited">未知固件 — 受限模式</string>
+    <string name="hak5_firmware_n_a">固件：不可用（不可达）</string>
+    <string name="hak5_caps_confirmed">已确认只读操作：%1$d</string>
+    <string name="hak5_api_shape_unconfirmed">设备可达，但未确认第 6 代 /api/ 形态（可能需要令牌）。</string>
+    <string name="hak5_plunder_section">Plunder Bug</string>
+    <string name="hak5_plunder_title">Plunder Bug（RootForge）</string>
+    <string name="hak5_plunder_message">USB 抓包与 pcap 查看由 RootForge 处理。点此打开 RootForge；若未安装则引导安装。VictorSuite 不含 USB 代码。</string>
+    <string name="hak5_plunder_missing_title">未安装 RootForge</string>
+    <string name="hak5_plunder_missing_message">Plunder Bug 支持位于 RootForge（ai.rootforge.os）。安装 RootForge 后再进行 USB 抓包；Pineapple HTTP 功能仍在本应用中。</string>
+    <string name="hak5_plunder_sideload">打开安装 / 发布页</string>
+    <string name="hak5_no_auto_attack">安全：永不自动攻击。改变状态的 Pineapple 操作（第 2 阶段）将始终需要逐项确认。</string>
+    <string name="hak5_revoke_gate">撤销授权 / 清除令牌</string>
+    <string name="hak5_revoke_gate_message">将再次锁定配套功能并清除已存 API 令牌。继续？</string>
+    <string name="hak5_revoke_done">已撤销授权；令牌已清除。</string>
+
 </resources>
 
 
