@@ -1,6 +1,6 @@
 # Hak5 Device Companion — Design Plan (VictorSuite)
 
-**Status:** planning only. This document does **not** implement features.  
+**Status:** planning only. This document does **not** implement features. Revised 2026-10-15 after Don's review (see Decisions).  
 **Owner:** Don Victor (GitHub [Victorious93](https://github.com/Victorious93)).  
 **Repo:** private `Victorious93/VictorSuite` (Termux / ZeroTermux fork, package `com.termux`, `targetSdk` **28**).  
 **Goal of this PR:** agree on scope, architecture, and safety before any feature code is written.
@@ -11,8 +11,8 @@
 
 A **companion** inside VictorSuite that helps Don work with two Hak5 devices he owns (or is authorized to test):
 
-1. **WiFi Pineapple Tetra** — a real network appliance with a web UI and a programmable JSON API. The companion can discover it on the LAN (or over USB tether), authenticate, show status, list and run modules/scripts, and keep a command log.
-2. **Plunder Bug** — a **passive** USB-C Ethernet tap with **no control API**. The companion role is **capture control** (start/stop `tcpdump` / pcap on the host that sees the tap interface) and **pcap viewing** — **not** remote command-and-control of the Bug itself.
+1. **WiFi Pineapple Tetra** — a real network appliance with a web UI and a programmable JSON API. **VictorSuite** discovers it over Wi-Fi/LAN, authenticates, shows status, lists and runs modules/scripts, and keeps a command log.
+2. **Plunder Bug** — a **passive** USB-C Ethernet tap with **no control API**. The companion role is **capture control** (start/stop `tcpdump` / pcap on the host that sees the tap interface) and **pcap viewing**, **not** remote command-and-control of the Bug itself. **This work lives in RootForge**, not VictorSuite (see Decisions).
 
 This is for **authorized testing only**. Nothing in this plan auto-attacks, auto-runs offensive modules, or pretends the Plunder Bug is controllable like the Pineapple.
 
@@ -25,9 +25,19 @@ Related existing pieces in this repo (reuse, do not reinvent):
 
 ---
 
+## Decisions (locked by Don 2026-10-15)
+
+| # | Decision | Effect on this plan |
+|---|---|---|
+| D1 | **Hardware is a WiFi Pineapple Tetra** (6th-gen NANO/TETRA `/api/`). | Target the 6th-gen POST `/api/` + `apiToken` model only. Mark 7 REST is dropped from scope. **Caveat stays:** the exact firmware version still has to be confirmed on the real device before any module/action names are written into code. |
+| D2 | **Phase 1 connectivity is Wi-Fi/LAN management only.** | Phase 1 talks to the Pineapple over its management AP or LAN (default `172.16.42.1:1471`). **USB tether to the Pineapple is moved to a later enhancement**, not Phase 1. |
+| D3 | **Ownership split: VictorSuite owns the Pineapple HTTP companion. RootForge owns USB and the Plunder Bug tap.** | VictorSuite (`com.termux`, `targetSdk` 28) builds the Pineapple screens, HTTP client, safety gate and audit log. RootForge (`ai.rootforge.os`, modern `targetSdk`, already owns USB/device control) builds Plunder Bug detection, capture and pcap viewing, plus any future USB tether. The two apps link to each other with a deep-link handoff. |
+
+---
+
 ## 1. Target devices — how they actually work
 
-### 1.1 WiFi Pineapple Tetra (6th gen NANO/TETRA family)
+### 1.1 WiFi Pineapple Tetra (confirmed target, 6th-gen API) — owned by VictorSuite
 
 **What it is.** A portable wireless auditing appliance. On a typical management network it exposes an access point / management IP commonly documented as **`172.16.42.1`**, with the web UI / API on **port `1471`**. SSH to the device is also commonly available (exact port/user defaults are **firmware-dependent** — confirm on Don’s unit).
 
@@ -76,11 +86,11 @@ Sources (public Hak5 docs; do not invent beyond these):
 
 **SSH (secondary path).** SSH is useful for status scripts, package ops, or when the web API is insufficient. Exact shell layout, host key, and default credentials are **not** assumed here — confirm on device. Prefer key-based auth stored in encrypted prefs; never hardcode passwords in the APK.
 
-**USB tether.** Some Pineapple workflows put the phone on the Pineapple’s management network via USB Ethernet / RNDIS-style tether. Whether Tetra does this the same way as Nano, and whether Android  (and `targetSdk` 28 VictorSuite) sees a usable interface, is an **open question** — see §5. Treat USB as optional Phase 1 stretch, not a hard dependency.
+**USB tether (deferred, per D2).** Putting the phone on the Pineapple's management network over USB is **not** part of Phase 1. If it is picked up later, it belongs to **RootForge** (per D3), because USB host work is easier on a modern `targetSdk`. How the Tetra presents itself over USB is unverified and would need testing on the real device first.
 
-**Mark VII / newer Pineapples — out of scope unless Don says otherwise.** Mark 7+ has a different REST style (`POST /api/login` → Bearer token, resource-oriented paths). This plan targets **Tetra / 6th-gen NANO-TETRA JSON `/api/`**. If Don’s unit is actually Mark 7+, the plan must be revised; do not mix the two APIs.
+**Firmware caveat (still open).** The hardware is confirmed as a Tetra (D1), but the exact firmware version is not. Module names, action names and response fields can differ between firmware releases, so they must be checked on Don's unit before implementation. Mark 7 and newer Pineapples use a different REST API (`POST /api/login` then Bearer token) and are **out of scope**.
 
-### 1.2 Plunder Bug
+### 1.2 Plunder Bug — owned by RootForge
 
 **What it is (verified).** A pocket-sized **LAN tap**: two RJ45 ports go inline on a link; a **USB-C** port connects to a capture host. The host sees a new USB Ethernet NIC (documented as **ASIX AX88772C**). Traffic between the two Ethernet ports is **mirrored** to the USB tap for tools like Wireshark / `tcpdump`.
 
@@ -99,7 +109,9 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 | Start/stop `tcpdump -i <iface> -w …` (or similar) on the **phone / Termux host** | Claiming PoE pass-through or gigabit (Bug is documented as 10/100-class tap; PoE behavior is environment-specific — confirm) |
 | Browse / summarize saved pcaps in-app or via Termux tools | Inventing a Plunder Bug HTTP API |
 
-**Android / Termux caveat.** USB host Ethernet + `tcpdump` on Android is **harder** than on a laptop. Capabilities depend on kernel support, USB host permissions, whether the ASIX driver is present, and whether VictorSuite (`targetSdk` 28) vs a higher-SDK companion (RootForge per `SUITE_PLAN.md`) is the right place to own USB. Phase 3 must validate on Don’s hardware; if the phone cannot claim the NIC, the companion falls back to “guide the user / drive capture on a linked Linux host” rather than pretending capture works.
+**Where it lives (D3).** Plunder Bug support is built in **RootForge**, not VictorSuite. RootForge already owns USB and device control and stays on a modern `targetSdk`, so it is the right home for USB permission prompts and USB Ethernet handling. VictorSuite only shows a "Plunder Bug capture → open in RootForge" entry that deep-links across (and offers the RootForge sideload if it is missing).
+
+**Android caveat (still applies inside RootForge).** USB host Ethernet plus `tcpdump` on Android is **harder** than on a laptop. It depends on kernel support, USB host permission, whether the ASIX driver is present, and whether capture needs root. Phase 3 must be validated on Don's phone. If the phone cannot claim the NIC, RootForge falls back to "guide the user / drive capture on a linked Linux host" instead of pretending capture works.
 
 ---
 
@@ -107,7 +119,7 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 
 ### Phase 1 — Discovery + connection / status screen
 
-**Goal.** Find the Pineapple (and later recognize a Plunder Bug NIC), show “reachable / not reachable,” and open a connection settings sheet. No offensive actions.
+**Goal.** In VictorSuite, find the Tetra over **Wi-Fi/LAN only** (D2), show "reachable / not reachable," and open a connection settings sheet. No offensive actions. No USB.
 
 **What gets built (plan-level):**
 
@@ -116,15 +128,15 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 - Optional mDNS / ARP / “scan known management subnets” — **nice-to-have**; default is manual IP + last-known-good. Do not scan arbitrary networks without the gate and a clear warning.
 - Status UI: online/offline, last checked time, firmware string **if** a confirmed read-only API action exists (otherwise “unknown — confirm on device”).
 - Token / SSH credential fields stored via encrypted prefs (reuse `PluginConfigStore` patterns or a sibling `Hak5ConfigStore`).
-- Plunder Bug: “USB Ethernet detected?” boolean if the OS exposes the iface; otherwise “not detected / unsupported on this device.”
+- A "Plunder Bug (RootForge)" tile that only deep-links to RootForge; no USB detection in VictorSuite.
 
 **How it’s tested:**
 
 - Unit-test URL builders and timeout handling with mocked OkHttp.
 - Manual: phone on Pineapple AP / LAN; wrong IP shows clear failure; correct IP shows online.
-- Manual: no Plunder Bug attached → honest empty state.
+- Manual: RootForge not installed → handoff tile offers sideload instead of crashing.
 
-**Rough dependencies:** OkHttp (already present); Android network permission already typical for Termux; optional USB host permission later.
+**Rough dependencies:** OkHttp (already present); Android network permission already typical for Termux. No USB permission in VictorSuite.
 
 ---
 
@@ -154,15 +166,15 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 
 ---
 
-### Phase 3 — Plunder Bug capture + pcap viewing
+### Phase 3 — Plunder Bug capture + pcap viewing (in RootForge)
 
-**Goal.** When a Plunder Bug USB NIC is present (or when user points at an iface name), start/stop capture and review pcaps. **No** Bug C2.
+**Goal.** In **RootForge** (D3): when a Plunder Bug USB NIC is present (or the user points at an interface name), start/stop capture and review pcaps. **No** Bug C2. VictorSuite's only part is the deep-link handoff.
 
 **What gets built (plan-level):**
 
-- Interface picker (from `/sys/class/net` / Termux `ip link` via `RUN_COMMAND` or a small helper script).
+- RootForge USB permission flow + interface picker (from `/sys/class/net` / `ip link`, or a Termux helper if RootForge shells out to Termux).
 - Mute/unmute helper: ship or document the Hak5 mute approach adapted for Android/Termux **if feasible**; otherwise instruct “prefer muted mode from a companion Linux host.”
-- Capture control UI: start → `tcpdump -i … -w $HOME/hak5-captures/….pcap` (exact flags TBD); stop; show file size / duration.
+- Capture control UI in RootForge: start → `tcpdump -i … -w <capture dir>/….pcap` (exact flags and storage location TBD); stop; show file size / duration.
 - Simple pcap list + open-with Termux packet tools or export via Storage Access Framework.
 - Big warning that unmuted mode can inject traffic onto the tapped LAN.
 
@@ -171,7 +183,11 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 - On a device with USB host + ASIX support: plug Bug, see iface, capture loopback-style test traffic, open pcap.
 - On unsupported phones: graceful “capture not available here; use linked host” messaging — no fake success.
 
-**Rough dependencies:** Termux `tcpdump` (user-installed via `pkg`); USB host permission; possibly RootForge for better USB (`SUITE_PLAN.md` two-APK story). Decide in open questions whether Phase 3 lives in VictorSuite, RootForge, or both with a handoff.
+**Rough dependencies:** RootForge app (`ai.rootforge.os`) and its USB stack; a `tcpdump` binary (user-installed, or via Termux); possibly root; the shared suite deep-link handoff from `SUITE_PLAN.md`. Work happens in the `rootforge-os` repo; this doc only records the plan.
+
+### Later enhancement — USB tether to the Pineapple (deferred, per D2)
+
+Not scheduled. If Don wants it later, it is built in **RootForge** (USB owner). It must first be checked on the real Tetra that USB tether gives a usable management interface on Android. VictorSuite would keep talking HTTP to whatever address the tether exposes.
 
 ---
 
@@ -201,10 +217,19 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 
 ### 3.1 Where the companion lives
 
-**Recommended (primary):** first-party **in-app screens** under something like `com.termux.zerocore.hak5` (or `…companion.hak5`), launched from the existing tools / drawer UX — same pattern as other VictorSuite suite features. Reasons:
+**Split per D3:**
+
+| App | Owns |
+|---|---|
+| **VictorSuite** (`com.termux`, `targetSdk` 28) | Pineapple Tetra companion over Wi-Fi/LAN HTTP: discovery, token auth, status, allowlisted modules/scripts, safety gate, audit log. |
+| **RootForge** (`ai.rootforge.os`, modern `targetSdk`) | Everything USB: Plunder Bug detection, capture, pcap viewing; any future Pineapple USB tether. |
+
+**Handoff / deep link.** VictorSuite shows a "Plunder Bug capture (RootForge)" entry that launches RootForge's capture screen through the suite deep-link / "Open in RootForge" mechanism already planned in `docs/SUITE_PLAN.md`. If RootForge is not installed, VictorSuite offers the sideload instead. RootForge can link back to VictorSuite's Pineapple screen the same way. No shared `sharedUserId`; each app keeps its own audit log, with the same JSONL format so both can be exported side by side.
+
+**VictorSuite side (recommended):** first-party **in-app screens** under something like `com.termux.zerocore.hak5` (or `…companion.hak5`), launched from the existing tools / drawer UX, the same pattern as other VictorSuite suite features. Reasons:
 
 - Needs Android UI, encrypted prefs, and OkHttp without fighting Termux `$PREFIX` packaging.
-- Can still shell out to Termux for `tcpdump` / SSH via existing process APIs or `RUN_COMMAND`.
+- Can still shell out to Termux for an optional SSH client via existing process APIs or `RUN_COMMAND`.
 - Keeps the authorized-use gate next to the plugin gate Don already has.
 
 **Secondary (optional later):** a Termux-side `hak5-companion` script package for power users who prefer CLI — driven by the app or standalone. Not required for Phase 1.
@@ -217,26 +242,35 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 |---|---|
 | **HTTP (OkHttp)** | Primary for Pineapple POST `/api/` + `apiToken`. Cleartext HTTP to a link-local management IP is expected on the Pineapple AP; document cleartext use and prefer staying on the management network only. |
 | **SSH** | Optional admin / script path; confirm before adding a crypto SSH dependency. |
-| **USB** | Plunder Bug NIC; optional Pineapple USB tether. USB host is a weak spot on `targetSdk` 28 Termux forks — may hand off to RootForge (`targetSdk` 35) per suite plan. |
-| **RUN_COMMAND / Termux process** | Start `tcpdump`, run mute scripts, list interfaces, optional `ssh` CLI if packages are installed. |
+| **USB** | **Not in VictorSuite.** Plunder Bug NIC and any future Pineapple USB tether live in RootForge (D3). |
+| **Deep link** | VictorSuite ↔ RootForge handoff for Plunder Bug capture. |
+| **RUN_COMMAND / Termux process** | Optional `ssh` CLI or helper scripts on the VictorSuite side, if packages are installed. |
 
 ### 3.3 Reuse of existing VictorSuite / Termux pieces
 
 - **OkHttp 4.9.3** — already in `app/build.gradle`.
 - **`androidx.security:security-crypto`** — already used by `PluginConfigStore`.
 - **`PluginLogger` / authorized-use gate** — pattern to copy or share for Hak5 acknowledgments and audit JSONL.
-- **`RunCommandService` / `RUN_COMMAND`** — for Termux-side capture helpers without reinventing process launching.
-- **Package `com.termux`, `targetSdk` 28, `minSdk` 23** (`gradle.properties`) — keep companion code compatible; avoid APIs that require higher target without a RootForge handoff. Do not raise `targetSdk` in this feature (see `SUITE_PLAN.md`: Termux exec / `$PREFIX` constraints).
+- **`RunCommandService` / `RUN_COMMAND`** — for optional Termux-side helpers (e.g. SSH) without reinventing process launching.
+- **Suite deep link / "Open in RootForge"** (`docs/SUITE_PLAN.md`) — for the Plunder Bug handoff.
+- **Package `com.termux`, `targetSdk` 28, `minSdk` 23** (`gradle.properties`) — keep companion code compatible. Do not raise `targetSdk` in this feature (see `SUITE_PLAN.md`: Termux exec / `$PREFIX` constraints). Anything needing a modern target (USB) goes to RootForge.
 
 ### 3.4 Suggested module sketch (documentation only — not code in this PR)
 
 ```
-UI (CompanionActivity / fragments)
-  → Hak5AuthGate (ack + confirm)
-  → PineappleClient (OkHttp /api/)
-  → PlunderCaptureController (Termux tcpdump via RUN_COMMAND / process)
-  → Hak5AuditLog (JSONL)
-  → Hak5ConfigStore (EncryptedSharedPreferences)
+VictorSuite
+  UI (CompanionActivity / fragments)
+    → Hak5AuthGate (ack + confirm)
+    → PineappleClient (OkHttp /api/, Wi-Fi/LAN)
+    → Hak5AuditLog (JSONL)
+    → Hak5ConfigStore (EncryptedSharedPreferences)
+    → "Open in RootForge" handoff tile
+
+RootForge (separate repo)
+  → USB permission + Plunder Bug NIC detection
+  → PlunderCaptureController (tcpdump)
+  → pcap list / viewer
+  → same-format JSONL audit log + safety gate
 ```
 
 No feature classes are added in this PR.
@@ -249,7 +283,7 @@ No feature classes are added in this PR.
 
 **Required product rules:**
 
-1. **One-time explicit gate** before the companion unlocks: wording along the lines of *“I own this network/device or have written permission to test it.”* Stored acknowledgment; companion features stay locked until set. Same spirit as `acknowledgeAuthorizedUse` in the plugin framework.
+1. **One-time explicit gate** before the companion unlocks (in **both** apps: VictorSuite for the Pineapple, RootForge for the Plunder Bug): wording along the lines of *“I own this network/device or have written permission to test it.”* Stored acknowledgment; companion features stay locked until set. Same spirit as `acknowledgeAuthorizedUse` in the plugin framework.
 2. **Big, clear warnings** before anything invasive (module start that affects clients, unmuted tap, SSH as root, etc.).
 3. **Never auto-attack.** No “run playbook,” no silent chaining of offensive Pineapple modules, no background recon. Every state-changing or potentially invasive action needs **explicit per-action confirmation**.
 4. **Persistent command / audit log** of API calls and capture start/stop (secrets redacted).
@@ -262,16 +296,19 @@ If a future PR tries to add auto-run offense, it should be rejected against this
 
 ## 5. Open questions for Don
 
-1. **Which exact Pineapple hardware + firmware** do you have (Tetra vs Nano vs Mark 7+, firmware / web UI version)? This decides 6th-gen `/api/` + `apiToken` vs Mark 7 Bearer REST.
-2. Does **USB tether** to the Pineapple matter for your workflow, or is Wi‑Fi management AP / LAN enough for Phase 1?
-3. How deep should **module automation** go in v1 — read-only status + a tiny allowlist of confirmed actions, or a generic “pick any module/action” console (still with per-action confirm)?
-4. Prefer **API token only**, or also first-class **SSH** in Phase 2?
-5. For Plunder Bug: is capture expected **on the Android phone itself**, or is a **linked Linux host / RootForge USB** path acceptable if the phone lacks ASIX/USB-host support?
-6. Should the companion be **VictorSuite-only**, or split (**VictorSuite** = Pineapple HTTP; **RootForge** = USB / Plunder Bug) per `SUITE_PLAN.md`?
-7. Any **must-have modules/scripts** on your Tetra we should prioritize probing first (names you use day-to-day)?
-8. Where should the **audit log** live long-term — app private storage only, or also export into Termux `$HOME` for CLI review?
-9. Branding / drawer placement: under existing **Tools**, a new **Hak5** section, or behind the plugin browser?
-10. Are you OK with **cleartext HTTP** to `172.16.42.1:1471` on the management network (as Hak5 documents), with a warning — or do you need TLS / SSH-only policy?
+Answered on 2026-10-15 and moved to **Decisions**: hardware (Tetra), Phase 1 connectivity (Wi-Fi/LAN only), app split (VictorSuite = Pineapple HTTP, RootForge = USB/Plunder Bug).
+
+Still open:
+
+1. What **exact firmware version** is on the Tetra? Needed before writing any module/action names into code.
+2. How deep should **module automation** go in v1: read-only status plus a small allowlist of confirmed actions, or a generic "pick any module/action" console (still with per-action confirm)?
+3. **API token only**, or also first-class **SSH** in Phase 2?
+4. Which **must-have modules/scripts** on your Tetra should we probe first (the ones you use day-to-day)?
+5. Where should the **audit log** live long-term: app-private storage only, or also exportable to Termux `$HOME` (and from RootForge) for review?
+6. **Drawer placement** in VictorSuite: under existing **Tools**, a new **Hak5** section, or behind the plugin browser?
+7. Are you OK with **cleartext HTTP** to `172.16.42.1:1471` on the management network (as Hak5 documents), with a warning, or do you want a TLS / SSH-only policy?
+8. For the RootForge side: is capture **on the phone itself** required, or is a **linked Linux host** fallback acceptable if the phone lacks ASIX/USB-host support or root?
+9. Do you want the **USB tether** enhancement scheduled at all, or parked indefinitely?
 
 ---
 
@@ -283,11 +320,14 @@ If a future PR tries to add auto-run offense, it should be rejected against this
 | POST `/api/` with `system`/`module` + `action` | Verified in Hak5 NANO/TETRA docs |
 | `apiToken` in JSON body | Verified; tokens created via API Tokens module; none shipped by default |
 | Specific module/action names for “list modules”, “run script X” | **Unconfirmed** — probe firmware; do not invent |
-| Mark 7 API | Different; **out of scope** unless hardware is Mark 7 |
+| Hardware is a Tetra | **Confirmed by Don** (D1) |
+| Exact Tetra firmware version | **Unconfirmed**, check on device |
+| Mark 7 API | Different; **out of scope** |
 | Plunder Bug has no control API | Verified by product behavior / docs — companion = capture host UX |
 | Plunder Bug USB NIC = ASIX AX88772C | Documented by Hak5; Android driver support varies |
 | Mute scripts work identically under Termux | **Uncertain** — validate Phase 3 |
-| Raising `targetSdk` for USB | **Out of scope** for VictorSuite; consider RootForge handoff |
+| Raising `targetSdk` for USB | **Not needed**: USB work lives in RootForge (D3) |
+| Pineapple USB tether works on Android | **Unverified**, deferred (D2) |
 
 ---
 
@@ -307,7 +347,8 @@ If a future PR tries to add auto-run offense, it should be rejected against this
 - [ ] Only allowlisted, confirmed API actions are exposed; unknowns labeled / hidden.
 - [ ] Every invasive action requires a separate confirm; none auto-fire.
 - [ ] Audit log records actions with redacted secrets.
-- [ ] Plunder Bug UI never claims C2; capture path degrades honestly on unsupported hardware.
+- [ ] VictorSuite has no USB code; Plunder Bug tile deep-links to RootForge (or offers sideload).
+- [ ] (RootForge PR) Plunder Bug UI never claims C2; capture path degrades honestly on unsupported hardware.
 - [ ] `targetSdk` remains 28; no Termux exec regressions.
 
 ---
