@@ -3,14 +3,17 @@
 # Install a minimal Fedora root filesystem under proot and generate a
 # "startfedora" launcher.
 #
-# Ported from an older ZeroTermux/UTermux reference build; translated to
-# English and left functionally unchanged. The image mirror below is a
+# Ported from an older ZeroTermux/UTermux reference build and translated to
+# English. It now stops at the first failed step instead of writing a launcher
+# for a rootfs that never downloaded or extracted. The image mirror below is a
 # third-party host, not a VictorSuite-controlled one — verify it still
 # resolves and that you trust its contents before running this.
 
 # Image mirror (GitLab). A GitHub mirror of the same image also exists
 # upstream but was not re-verified here; swap ADDRESS if you prefer it.
 export ADDRESS=https://gitlab.com/zhanghua000/fedora-termux-cn/raw/master/fedora.7z
+
+set -e
 
 echo "Installing required packages: proot tar wget git p7zip"
 pkg install proot tar wget git p7zip -y
@@ -21,7 +24,7 @@ cd ~/fedora || exit 1
 
 echo "Downloading and extracting the image..."
 wget "$ADDRESS" -O fedora.7z
-7z x fedora.7z
+7z x -y fedora.7z
 
 echo "Cleaning up temporary files..."
 rm -f fedora.7z

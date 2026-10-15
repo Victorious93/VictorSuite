@@ -71,7 +71,8 @@ case "$(uname -m)" in
     *)
         NODE_ARCH=""
         if wants copilot || wants codex || wants hf; then
-            warn "$(uname -m) has no Linux build of copilot/codex; only pi will be installed"
+            wants pi || die "$(uname -m) has no Linux build of copilot/codex/hf; only pi is supported here (--only pi)"
+            warn "$(uname -m) has no Linux build of copilot/codex/hf; only pi will be installed"
             ONLY="pi"
         fi
         ;;
@@ -218,13 +219,17 @@ for tool in ${ONLY//,/ }; do
     fi
 done
 
-cat <<'EOF'
-
-Sign in before first use:
-  copilot  run `copilot` and type /login, or export GH_TOKEN (fine-grained
-           token with the "Copilot Requests" permission)
-  codex    run `codex` and sign in with ChatGPT, or export OPENAI_API_KEY
-  hf       `hf auth login`, or export HF_TOKEN
-  pi       run `pi` and follow its model/provider setup
-EOF
+echo
+echo "Sign in before first use:"
+# shellcheck disable=SC2016 # backticks are literal text in these hints
+for tool in ${ONLY//,/ }; do
+    case "$tool" in
+        copilot)
+            echo '  copilot  run `copilot` and type /login, or export GH_TOKEN (fine-grained'
+            echo '           token with the "Copilot Requests" permission)' ;;
+        codex) echo '  codex    run `codex` and sign in with ChatGPT, or export OPENAI_API_KEY' ;;
+        hf) echo '  hf       `hf auth login`, or export HF_TOKEN' ;;
+        pi) echo '  pi       run `pi` and follow its model/provider setup' ;;
+    esac
+done
 exit "$status"
