@@ -29,7 +29,7 @@ Related existing pieces in this repo (reuse, do not reinvent):
 
 | # | Decision | Effect on this plan |
 |---|---|---|
-| D1 | **Hardware is a WiFi Pineapple Tetra** (6th-gen NANO/TETRA `/api/`). | Target the 6th-gen POST `/api/` + `apiToken` model only. Mark 7 REST is dropped from scope. **Caveat stays:** the exact firmware version still has to be confirmed on the real device before any module/action names are written into code. |
+| D1 | **Target is the WiFi Pineapple Tetra across all of its firmware versions** (6th-gen NANO/TETRA `/api/`). *(Updated 2026-10-15: support all firmware, not one named version.)* | One hardware model; firmware is what varies. Target the 6th-gen POST `/api/` + `apiToken` model. The companion **detects the firmware/API version at connect time and adapts**: probe capabilities, confirm module/action names against whatever firmware is actually running, and degrade gracefully on older or newer firmware (see §3.5). Module/action names are **validated at runtime against the connected device, never hardcoded blindly**. Mark 7 REST stays out of scope (Tetra only). |
 | D2 | **Phase 1 connectivity is Wi-Fi/LAN management only.** | Phase 1 talks to the Pineapple over its management AP or LAN (default `172.16.42.1:1471`). **USB tether to the Pineapple is moved to a later enhancement**, not Phase 1. |
 | D3 | **Ownership split: VictorSuite owns the Pineapple HTTP companion. RootForge owns USB and the Plunder Bug tap.** | VictorSuite (`com.termux`, `targetSdk` 28) builds the Pineapple screens, HTTP client, safety gate and audit log. RootForge (`ai.rootforge.os`, modern `targetSdk`, already owns USB/device control) builds Plunder Bug detection, capture and pcap viewing, plus any future USB tether. The two apps link to each other with a deep-link handoff. |
 
@@ -39,7 +39,7 @@ Related existing pieces in this repo (reuse, do not reinvent):
 
 ### 1.1 WiFi Pineapple Tetra (confirmed target, 6th-gen API) — owned by VictorSuite
 
-**What it is.** A portable wireless auditing appliance. On a typical management network it exposes an access point / management IP commonly documented as **`172.16.42.1`**, with the web UI / API on **port `1471`**. SSH to the device is also commonly available (exact port/user defaults are **firmware-dependent** — confirm on Don’s unit).
+**What it is.** A portable wireless auditing appliance. On a typical management network it exposes an access point / management IP commonly documented as **`172.16.42.1`**, with the web UI / API on **port `1471`**. SSH to the device is also commonly available (exact port/user defaults may vary by firmware; the companion must not assume them).
 
 **API shape (verified against Hak5 6th-gen NANO/TETRA docs).**  
 Unlike older monolithic UIs, the backend is decoupled. Client requests are **HTTP POSTs to `/api/`** with a JSON body.
@@ -82,13 +82,13 @@ Sources (public Hak5 docs; do not invent beyond these):
 1. Discover reachability of `http://172.16.42.1:1471/` (and allow manual IP override).
 2. Store an **API token** (and optionally SSH credentials) in encrypted prefs — same pattern as `PluginConfigStore` / `EncryptedSharedPreferences`.
 3. Speak the POST `/api/` JSON protocol via OkHttp.
-4. Treat **module names and action names for “status”, “list modules”, “run script” as firmware-specific.** Many useful actions are **not** listed in the short public intro pages. **Do not invent endpoint names.** Phase 2 must probe Don’s actual firmware (or scrape the on-device module `module.php` / UI) and document a small allowlist of confirmed `(module|system, action)` pairs. Until then, mark candidates as **“to be confirmed against a real device/firmware version.”**
+4. Treat **module names and action names for “status”, “list modules”, “run script” as firmware-specific.** Many useful actions are **not** listed in the short public intro pages. **Do not invent endpoint names.** Because the companion supports every Tetra firmware (D1), it ships a list of *candidate* `(module|system, action)` pairs and **confirms each one at runtime against the connected device** before showing it in the UI. During development, candidates are checked against real firmware builds (Don's unit first, then others) and stay marked **“to be confirmed against a real device/firmware version”** until they are.
 
 **SSH (secondary path).** SSH is useful for status scripts, package ops, or when the web API is insufficient. Exact shell layout, host key, and default credentials are **not** assumed here — confirm on device. Prefer key-based auth stored in encrypted prefs; never hardcode passwords in the APK.
 
 **USB tether (deferred, per D2).** Putting the phone on the Pineapple's management network over USB is **not** part of Phase 1. If it is picked up later, it belongs to **RootForge** (per D3), because USB host work is easier on a modern `targetSdk`. How the Tetra presents itself over USB is unverified and would need testing on the real device first.
 
-**Firmware caveat (still open).** The hardware is confirmed as a Tetra (D1), but the exact firmware version is not. Module names, action names and response fields can differ between firmware releases, so they must be checked on Don's unit before implementation. Mark 7 and newer Pineapples use a different REST API (`POST /api/login` then Bearer token) and are **out of scope**.
+**Firmware: support all versions, detect at runtime (D1).** The Tetra is one hardware model, but module names, action names and response fields can differ between firmware releases. Rather than pinning one version, the companion identifies what is running when it connects and only exposes actions it has confirmed on that device (§3.5). Unknown or very old/new firmware gets a reduced, read-only-first experience instead of errors. Mark 7 and newer Pineapples use a different REST API (`POST /api/login` then Bearer token) and are **out of scope**.
 
 ### 1.2 Plunder Bug — owned by RootForge
 
@@ -126,13 +126,15 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 - In-app **Hak5 Companion** entry (drawer / tools screen) behind the **authorized-use gate** (§4).
 - Reachability check: HTTP GET/HEAD or light POST to `http://<host>:1471/` (default `172.16.42.1`), with manual IP/hostname field and timeout.
 - Optional mDNS / ARP / “scan known management subnets” — **nice-to-have**; default is manual IP + last-known-good. Do not scan arbitrary networks without the gate and a clear warning.
-- Status UI: online/offline, last checked time, firmware string **if** a confirmed read-only API action exists (otherwise “unknown — confirm on device”).
+- Status UI: online/offline, last checked time, detected firmware/API version (or “unknown firmware — limited mode”).
+- **Firmware detection + capability probe on connect** (see §3.5): identify the firmware, build the per-device capability map, cache it, and show only confirmed actions.
 - Token / SSH credential fields stored via encrypted prefs (reuse `PluginConfigStore` patterns or a sibling `Hak5ConfigStore`).
 - A "Plunder Bug (RootForge)" tile that only deep-links to RootForge; no USB detection in VictorSuite.
 
 **How it’s tested:**
 
 - Unit-test URL builders and timeout handling with mocked OkHttp.
+- Capability-probe tests against recorded responses from more than one firmware build (plus a synthetic “unknown firmware” fixture) to prove graceful degradation.
 - Manual: phone on Pineapple AP / LAN; wrong IP shows clear failure; correct IP shows online.
 - Manual: RootForge not installed → handoff tile offers sideload instead of crashing.
 
@@ -148,7 +150,7 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 
 - `PineappleClient` (OkHttp): POST `/api/` JSON with `apiToken`; map errors to human messages.
 - Token setup UX: “paste token from API Tokens module” (and optional helper text that tokens are created **on the Pineapple**, not by inventing endpoints in-app).
-- **Confirmed allowlist** of `(system|module, action)` pairs — populated only after checking Don’s firmware. Candidates to **probe / confirm** (not asserted as real until verified):
+- **Candidate list + runtime confirmation** of `(system|module, action)` pairs: shipped as candidates, shown only after the capability probe confirms them on the connected firmware. Candidates to **probe / confirm** (not asserted as real until verified):
   - notifications list / add (documented examples exist)
   - listing installed modules — **to be confirmed against a real device/firmware version**
   - dashboard / system status fields — **to be confirmed…**
@@ -275,6 +277,24 @@ RootForge (separate repo)
 
 No feature classes are added in this PR.
 
+### 3.5 Firmware compatibility (all Tetra firmware, detected at runtime)
+
+Goal: one companion that works with whatever firmware the Tetra is running, without a hardcoded version.
+
+Approach on every connect (Phase 1, reused in Phase 2):
+
+1. **Confirm the API shape.** Send a documented, harmless 6th-gen call (e.g. `{"system":"notifications","action":"listNotifications"}` with `apiToken`). A JSON reply means the `/api/` + token model is present. No usable reply → show “not a supported Tetra API / check token” and stop.
+2. **Identify the firmware.** Read a firmware/version string from the device. *Which* API action or on-device file exposes it is **to be confirmed against real firmware builds**; candidates are tried in order (API first, read-only SSH second if SSH is enabled), and the first that works is recorded. If none works, the firmware is labelled “unknown”.
+3. **Probe capabilities.** For each candidate `(module|system, action)` the companion knows about, check it safely: read-only actions may be called; state-changing actions are **never** fired as a probe. Their presence is checked by non-invasive means only (for example, whether the module appears in a module listing, once that listing action is confirmed). The result is a per-device **capability map**.
+4. **Cache by device + firmware.** Store the map keyed by device id + firmware string; re-probe when the firmware string changes or on manual “re-check”.
+5. **Degrade gracefully.**
+   - Known firmware: full confirmed feature set.
+   - Unknown, older or newer firmware: read-only status plus only the actions confirmed in step 3; unconfirmed actions are hidden or greyed out with “not available on this firmware”.
+   - Unexpected response shapes are parsed leniently (ignore unknown fields, treat missing fields as “unknown”), never crash.
+6. **Log it.** The detected firmware string and capability map are written to the audit log at each connect, so behaviour differences between firmware versions can be traced.
+
+Implementation note: module/action names must be validated at runtime against the connected device. A shipped name that has not been confirmed on the running firmware is never presented as available and never sent as a state-changing request.
+
 ---
 
 ## 4. Safety and ethics (prominent)
@@ -296,19 +316,18 @@ If a future PR tries to add auto-run offense, it should be rejected against this
 
 ## 5. Open questions for Don
 
-Answered on 2026-10-15 and moved to **Decisions**: hardware (Tetra), Phase 1 connectivity (Wi-Fi/LAN only), app split (VictorSuite = Pineapple HTTP, RootForge = USB/Plunder Bug).
+Answered on 2026-10-15 and moved to **Decisions**: hardware (Tetra), firmware (support all Tetra firmware versions, detect at runtime), Phase 1 connectivity (Wi-Fi/LAN only), app split (VictorSuite = Pineapple HTTP, RootForge = USB/Plunder Bug).
 
 Still open:
 
-1. What **exact firmware version** is on the Tetra? Needed before writing any module/action names into code.
-2. How deep should **module automation** go in v1: read-only status plus a small allowlist of confirmed actions, or a generic "pick any module/action" console (still with per-action confirm)?
-3. **API token only**, or also first-class **SSH** in Phase 2?
-4. Which **must-have modules/scripts** on your Tetra should we probe first (the ones you use day-to-day)?
-5. Where should the **audit log** live long-term: app-private storage only, or also exportable to Termux `$HOME` (and from RootForge) for review?
-6. **Drawer placement** in VictorSuite: under existing **Tools**, a new **Hak5** section, or behind the plugin browser?
-7. Are you OK with **cleartext HTTP** to `172.16.42.1:1471` on the management network (as Hak5 documents), with a warning, or do you want a TLS / SSH-only policy?
-8. For the RootForge side: is capture **on the phone itself** required, or is a **linked Linux host** fallback acceptable if the phone lacks ASIX/USB-host support or root?
-9. Do you want the **USB tether** enhancement scheduled at all, or parked indefinitely?
+1. How deep should **module automation** go in v1: read-only status plus a small allowlist of confirmed actions, or a generic "pick any module/action" console (still with per-action confirm)?
+2. **API token only**, or also first-class **SSH** in Phase 2?
+3. Which **must-have modules/scripts** on your Tetra should we probe first (the ones you use day-to-day)?
+4. Where should the **audit log** live long-term: app-private storage only, or also exportable to Termux `$HOME` (and from RootForge) for review?
+5. **Drawer placement** in VictorSuite: under existing **Tools**, a new **Hak5** section, or behind the plugin browser?
+6. Are you OK with **cleartext HTTP** to `172.16.42.1:1471` on the management network (as Hak5 documents), with a warning, or do you want a TLS / SSH-only policy?
+7. For the RootForge side: is capture **on the phone itself** required, or is a **linked Linux host** fallback acceptable if the phone lacks ASIX/USB-host support or root?
+8. Do you want the **USB tether** enhancement scheduled at all, or parked indefinitely?
 
 ---
 
@@ -319,9 +338,10 @@ Still open:
 | Pineapple management IP often `172.16.42.1:1471` | Documented by Hak5 for 6th-gen; still confirm on your unit |
 | POST `/api/` with `system`/`module` + `action` | Verified in Hak5 NANO/TETRA docs |
 | `apiToken` in JSON body | Verified; tokens created via API Tokens module; none shipped by default |
-| Specific module/action names for “list modules”, “run script X” | **Unconfirmed** — probe firmware; do not invent |
+| Specific module/action names for “list modules”, “run script X” | **Unconfirmed**; confirmed per device at runtime, never invented or hardcoded blindly |
 | Hardware is a Tetra | **Confirmed by Don** (D1) |
-| Exact Tetra firmware version | **Unconfirmed**, check on device |
+| Firmware version | **Not pinned by design**: all Tetra firmware supported, detected at runtime (D1, §3.5) |
+| Which API action / file reports the firmware version | **To be confirmed against real firmware builds** |
 | Mark 7 API | Different; **out of scope** |
 | Plunder Bug has no control API | Verified by product behavior / docs — companion = capture host UX |
 | Plunder Bug USB NIC = ASIX AX88772C | Documented by Hak5; Android driver support varies |
@@ -344,7 +364,7 @@ Still open:
 
 - [ ] Authorized-use gate blocks all companion actions until acknowledged.
 - [ ] Pineapple reachability + token auth work against Don’s real Tetra (or documented mock).
-- [ ] Only allowlisted, confirmed API actions are exposed; unknowns labeled / hidden.
+- [ ] Firmware is detected on connect; only actions confirmed on the running firmware are exposed; unknown firmware degrades to limited mode without crashing.
 - [ ] Every invasive action requires a separate confirm; none auto-fire.
 - [ ] Audit log records actions with redacted secrets.
 - [ ] VictorSuite has no USB code; Plunder Bug tile deep-links to RootForge (or offers sideload).
