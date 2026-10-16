@@ -26,7 +26,7 @@ IMAGE=kalilinux/kali-rolling
 echo "Installing proot-distro..."
 pkg install proot-distro -y
 
-if proot-distro list 2>/dev/null | grep -qw "$NAME"; then
+if proot-distro list -q 2>/dev/null | grep -qx "$NAME"; then
   echo "A container named '$NAME' already exists; skipping install."
 else
   echo "Installing $IMAGE as '$NAME' (this downloads several hundred MB)..."
