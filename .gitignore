@@ -35,3 +35,10 @@ local.properties
 .swp
 ehthumbs.db
 Thumbs.db
+
+# Signing keys: never commit. Release signing comes from CI secrets.
+*.jks
+*.keystore
+*.p12
+*.pfx
+victorsuite-signing/
