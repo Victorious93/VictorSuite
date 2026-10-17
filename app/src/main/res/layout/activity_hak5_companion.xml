@@ -181,6 +181,68 @@
             android:layout_gravity="center_horizontal"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/hak5_status_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_cleartext_warning"
+            android:textSize="11sp"
+            android:textStyle="italic"
+            android:paddingBottom="8dp" />
+
+        <!-- Phase 2: authenticated session + runtime modules/actions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_phase2_section"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="6dp">
+
+            <Button
+                android:id="@+id/hak5_connect_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hak5_connect_button" />
+
+            <Button
+                android:id="@+id/hak5_command_log_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/hak5_command_log_button" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hak5_modules_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_modules_none"
+            android:textSize="12sp"
+            android:paddingBottom="6dp" />
+
+        <LinearLayout
+            android:id="@+id/hak5_modules_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp" />
+
         <!-- Plunder Bug tile -->
         <TextView
             android:layout_width="match_parent"

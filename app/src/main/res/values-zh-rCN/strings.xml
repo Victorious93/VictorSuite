@@ -1375,6 +1375,36 @@
     <string name="hak5_revoke_gate_message">将再次锁定配套功能并清除已存 API 令牌。继续？</string>
     <string name="hak5_revoke_done">已撤销授权；令牌已清除。</string>
 
+    <!-- Hak5 companion Phase 2: authenticated session, modules, actions, command log -->
+    <string name="hak5_phase2_section">模块与操作</string>
+    <string name="hak5_connect_button">连接并列出模块</string>
+    <string name="hak5_command_log_button">查看命令日志</string>
+    <string name="hak5_connecting">正在认证…</string>
+    <string name="hak5_login_need_token">请先输入并保存 API 令牌</string>
+    <string name="hak5_login_ok">已认证。固件：%1$s</string>
+    <string name="hak5_login_failed">认证失败：%1$s</string>
+    <string name="hak5_token_rejected">设备拒绝了 API 令牌</string>
+    <string name="hak5_status_device">型号：%1$s · 版本：%2$s</string>
+    <string name="hak5_modules_none">尚未发现模块。请使用有效的 API 令牌连接，以列出该固件提供的功能。</string>
+    <string name="hak5_modules_limited">未知/受限固件 — 无法列出模块。仅支持只读状态。</string>
+    <string name="hak5_module_no_actions">该模块未公布任何操作。</string>
+    <string name="hak5_running">正在执行操作…</string>
+    <string name="hak5_confirm_action_title">确认操作</string>
+    <string name="hak5_confirm_action_message">执行 \"%1$s\"？\n\n级别：%2$s</string>
+    <string name="hak5_confirm_invasive_warning">⚠ 此操作可能具有侵入性或会更改设备/网络状态。仅在你拥有或获授权测试的硬件上继续。不会自动执行其他任何操作。</string>
+    <string name="hak5_confirm_run">执行操作</string>
+    <string name="hak5_action_executed">已执行（HTTP %1$s）</string>
+    <string name="hak5_action_blocked">已阻止：%1$s</string>
+    <string name="hak5_action_failed">操作失败：%1$s</string>
+    <string name="hak5_cleartext_warning">默认情况下，与 Pineapple 管理 IP 的通信在本地链路上为明文 HTTP（设备在 :1471 提供）。请仅在你控制的受信任本地网络中使用。</string>
+    <string name="hak5_severity_read">只读</string>
+    <string name="hak5_severity_config">配置更改</string>
+    <string name="hak5_severity_invasive">可能具有侵入性</string>
+    <string name="hak5_command_log_title">命令日志</string>
+    <string name="hak5_command_log_subtitle">每个已执行或被阻止的操作（已屏蔽机密信息）。存储在设备本地。</string>
+    <string name="hak5_command_log_empty">尚未执行任何命令。</string>
+    <string name="hak5_command_log_clear">清除日志</string>
+    <string name="hak5_command_log_cleared">命令日志已清除</string>
 </resources>
 
 

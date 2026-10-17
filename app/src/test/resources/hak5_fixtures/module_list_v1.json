@@ -1,0 +1,11 @@
+{
+  "modules": [
+    { "name": "Dashboard", "title": "Dashboard", "actions": ["getOverview", "getStats"] },
+    { "name": "Recon", "title": "Recon", "actions": [
+        { "action": "getScanResults", "description": "Read last scan" },
+        { "action": "startScan", "description": "Begin a new scan" }
+      ] },
+    { "name": "PineAP", "title": "PineAP", "actions": ["getStatus", "enablePineAP", "runKarma"] },
+    { "name": "Logging", "actions": ["getLog", "clearLog"] }
+  ]
+}
