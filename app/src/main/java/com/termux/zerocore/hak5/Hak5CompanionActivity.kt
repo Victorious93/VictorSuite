@@ -1,6 +1,7 @@
 package com.termux.zerocore.hak5
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -42,6 +43,12 @@ class Hak5CompanionActivity : AppCompatActivity() {
 
     private var lastCapabilities: CapabilityMap? = null
 
+    private lateinit var statusDevice: TextView
+    private lateinit var connectButton: Button
+    private lateinit var commandLogButton: Button
+    private lateinit var modulesEmpty: TextView
+    private lateinit var modulesContainer: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hak5_companion)
@@ -72,6 +79,11 @@ class Hak5CompanionActivity : AppCompatActivity() {
         progress = findViewById(R.id.hak5_progress)
         plunderTile = findViewById(R.id.hak5_plunder_tile)
         revokeButton = findViewById(R.id.hak5_revoke_button)
+        statusDevice = findViewById(R.id.hak5_status_device)
+        connectButton = findViewById(R.id.hak5_connect_button)
+        commandLogButton = findViewById(R.id.hak5_command_log_button)
+        modulesEmpty = findViewById(R.id.hak5_modules_empty)
+        modulesContainer = findViewById(R.id.hak5_modules_container)
     }
 
     private fun loadSettingsIntoForm() {
@@ -92,6 +104,7 @@ class Hak5CompanionActivity : AppCompatActivity() {
         tokenInput.isEnabled = featuresEnabled
         saveButton.isEnabled = featuresEnabled
         checkButton.isEnabled = featuresEnabled
+        connectButton.isEnabled = featuresEnabled
         revokeButton.isEnabled = ack
         if (ack) {
             val at = Hak5AuthGate.acknowledgedAt(this) ?: 0L
@@ -130,6 +143,10 @@ class Hak5CompanionActivity : AppCompatActivity() {
         checkButton.setOnClickListener { runConnectionCheck() }
         plunderTile.setOnClickListener { openPlunderBugHandoff() }
         revokeButton.setOnClickListener { confirmRevoke() }
+        connectButton.setOnClickListener { runLogin() }
+        commandLogButton.setOnClickListener {
+            startActivity(Intent(this, Hak5CommandLogActivity::class.java))
+        }
     }
 
     private fun showAckDialog() {
@@ -289,6 +306,239 @@ class Hak5CompanionActivity : AppCompatActivity() {
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
+    }
+
+    // ---------------------------------------------------------------------------
+    // Phase 2: authenticated session, runtime module listing, gated action exec.
+    // ---------------------------------------------------------------------------
+
+    private fun runLogin() {
+        if (!Hak5AuthGate.isAcknowledged(this)) {
+            Toast.makeText(this, R.string.hak5_gate_status_locked, Toast.LENGTH_SHORT).show()
+            return
+        }
+        saveSettings()
+        val token = Hak5ConfigStore.getApiToken(this)
+        if (token.isNullOrBlank()) {
+            Toast.makeText(this, R.string.hak5_login_need_token, Toast.LENGTH_LONG).show()
+            return
+        }
+        val baseUrl = Hak5ConfigStore.baseUrl(this)
+        progress.visibility = View.VISIBLE
+        connectButton.isEnabled = false
+        statusDetail.text = getString(R.string.hak5_connecting)
+
+        executor.execute {
+            val result = try {
+                PineappleSession().login(baseUrl, token)
+            } catch (e: Exception) {
+                PineappleSession.LoginResult(
+                    authenticated = false,
+                    baseUrl = baseUrl,
+                    capabilities = CapabilityMap.unknown(false),
+                    status = PineappleSession.DeviceStatus(
+                        reachable = false, apiShapeConfirmed = false, limitedMode = true
+                    ),
+                    errorMessage = e.message
+                )
+            }
+            runOnUiThread { applyLoginResult(result) }
+        }
+    }
+
+    private fun applyLoginResult(result: PineappleSession.LoginResult) {
+        progress.visibility = View.GONE
+        connectButton.isEnabled = Hak5AuthGate.isAcknowledged(this)
+        lastCapabilities = result.capabilities
+        val now = System.currentTimeMillis()
+        Hak5ConfigStore.setLastCheckedAt(this, now)
+        Hak5ConfigStore.setLastReachable(this, result.status.reachable)
+        Hak5ConfigStore.setLastFirmware(this, result.capabilities.firmwareLabel)
+        Hak5ConfigStore.setLastCapabilitiesJson(this, result.capabilities.toSummaryJson())
+
+        Hak5AuditLog.log(
+            this,
+            event = "LOGIN",
+            detail = "authenticated=${result.authenticated} " +
+                "tokenRejected=${result.tokenRejected} " +
+                "status=${result.httpStatus} " +
+                "caps=${result.capabilities.confirmedActions.size} " +
+                "err=${result.errorMessage}",
+            deviceId = result.baseUrl,
+            firmware = result.capabilities.firmwareLabel,
+            success = result.authenticated
+        )
+
+        statusReachable.text = if (result.status.reachable) {
+            getString(R.string.hak5_status_online)
+        } else {
+            getString(R.string.hak5_status_offline)
+        }
+        statusFirmware.text = when {
+            !result.status.reachable -> getString(R.string.hak5_firmware_n_a)
+            result.capabilities.limitedMode -> getString(R.string.hak5_firmware_unknown_limited)
+            else -> getString(R.string.hak5_firmware_detected, result.capabilities.firmwareLabel)
+        }
+        statusDevice.text = getString(
+            R.string.hak5_status_device,
+            result.status.model ?: "—",
+            result.status.version ?: "—"
+        )
+
+        if (result.authenticated) {
+            PineappleSessionManager.start(result)
+            statusDetail.text = getString(R.string.hak5_login_ok, result.capabilities.firmwareLabel)
+            loadModules()
+        } else {
+            PineappleSessionManager.logout()
+            val msg = if (result.tokenRejected) {
+                getString(R.string.hak5_token_rejected)
+            } else {
+                getString(R.string.hak5_login_failed, result.errorMessage ?: "unknown")
+            }
+            statusDetail.text = msg
+            renderModules(ModuleCatalog.limited(result.capabilities.firmwareLabel))
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun loadModules() {
+        val caps = lastCapabilities ?: return
+        val baseUrl = Hak5ConfigStore.baseUrl(this)
+        val token = Hak5ConfigStore.getApiToken(this)
+        progress.visibility = View.VISIBLE
+        executor.execute {
+            val catalog = try {
+                PineappleModuleLister().list(baseUrl, token, caps)
+            } catch (e: Exception) {
+                ModuleCatalog.limited(caps.firmwareLabel)
+            }
+            runOnUiThread {
+                progress.visibility = View.GONE
+                PineappleSessionManager.updateCatalog(catalog)
+                renderModules(catalog)
+            }
+        }
+    }
+
+    private fun renderModules(catalog: ModuleCatalog) {
+        modulesContainer.removeAllViews()
+        if (catalog.isEmpty) {
+            modulesEmpty.visibility = View.VISIBLE
+            modulesEmpty.text = if (catalog.limited) {
+                getString(R.string.hak5_modules_limited)
+            } else {
+                getString(R.string.hak5_modules_none)
+            }
+            return
+        }
+        modulesEmpty.visibility = View.GONE
+        for (module in catalog.modules) {
+            val header = TextView(this).apply {
+                text = module.displayName
+                textSize = 15f
+                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                setPadding(0, 16, 0, 4)
+            }
+            modulesContainer.addView(header)
+            if (module.actions.isEmpty()) {
+                val none = TextView(this).apply {
+                    text = getString(R.string.hak5_module_no_actions)
+                    textSize = 12f
+                }
+                modulesContainer.addView(none)
+                continue
+            }
+            for (action in module.actions) {
+                val btn = Button(this).apply {
+                    text = "${action.action}  [${severityLabel(action.severity)}]"
+                    setOnClickListener { onActionTapped(module, action) }
+                }
+                modulesContainer.addView(btn)
+            }
+        }
+    }
+
+    private fun severityLabel(severity: Hak5ActionSeverity): String = when (severity) {
+        Hak5ActionSeverity.READ_ONLY -> getString(R.string.hak5_severity_read)
+        Hak5ActionSeverity.CONFIG -> getString(R.string.hak5_severity_config)
+        Hak5ActionSeverity.POTENTIALLY_INVASIVE -> getString(R.string.hak5_severity_invasive)
+    }
+
+    private fun onActionTapped(module: PineappleModule, action: ModuleActionInfo) {
+        val pending = action.toPendingAction(module.name)
+        if (action.severity == Hak5ActionSeverity.READ_ONLY) {
+            // Read-only still requires the authorized-use gate, but not an extra confirm.
+            executeAction(module, action, pending, userConfirmed = true)
+        } else {
+            showActionConfirm(module, action, pending)
+        }
+    }
+
+    private fun showActionConfirm(
+        module: PineappleModule,
+        action: ModuleActionInfo,
+        pending: Hak5PendingAction
+    ) {
+        val base = getString(
+            R.string.hak5_confirm_action_message,
+            pending.title,
+            severityLabel(action.severity)
+        )
+        val message = if (action.severity == Hak5ActionSeverity.POTENTIALLY_INVASIVE) {
+            base + System.lineSeparator() + System.lineSeparator() + getString(R.string.hak5_confirm_invasive_warning)
+        } else {
+            base
+        }
+        AlertDialog.Builder(this)
+            .setTitle(R.string.hak5_confirm_action_title)
+            .setMessage(message)
+            .setPositiveButton(R.string.hak5_confirm_run) { _, _ ->
+                executeAction(module, action, pending, userConfirmed = true)
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun executeAction(
+        module: PineappleModule,
+        action: ModuleActionInfo,
+        pending: Hak5PendingAction,
+        userConfirmed: Boolean
+    ) {
+        val caps = lastCapabilities
+        val baseUrl = Hak5ConfigStore.baseUrl(this)
+        val token = Hak5ConfigStore.getApiToken(this)
+        val authorized = Hak5AuthGate.isAcknowledged(this)
+        val request = PineappleApiRequest(
+            module = module.name,
+            action = action.action,
+            apiToken = token
+        )
+        progress.visibility = View.VISIBLE
+        statusDetail.text = getString(R.string.hak5_running)
+        executor.execute {
+            val runner = PineappleActionRunner(PineappleClient()) { entry ->
+                Hak5CommandLog.append(this, entry)
+            }
+            val outcome = try {
+                runner.run(baseUrl, token, pending, request, authorized, caps, userConfirmed)
+            } catch (e: Exception) {
+                PineappleActionRunner.ActionOutcome(
+                    executed = false, blocked = false, errorMessage = e.message
+                )
+            }
+            runOnUiThread {
+                progress.visibility = View.GONE
+                val msg = when {
+                    outcome.blocked -> getString(R.string.hak5_action_blocked, outcome.blockReason ?: "")
+                    outcome.executed -> getString(R.string.hak5_action_executed, outcome.httpStatus?.toString() ?: "?")
+                    else -> getString(R.string.hak5_action_failed, outcome.errorMessage ?: "unknown")
+                }
+                statusDetail.text = msg
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun formatTime(epochMs: Long): String {
