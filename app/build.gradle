@@ -216,6 +216,15 @@ android {
             System.getenv("KEY_ALIAS") && System.getenv("KEY_PASSWORD") && System.getenv("STORE_PASSWORD")
 
     signingConfigs {
+        debug {
+            // Dedicated, committed VictorSuite debug key (NOT a secret).
+            // Keeps the debug fingerprint stable across machines/CI so
+            // debug builds install over each other.
+            storeFile file('victorsuite-debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
         if (releaseSigningReady) {
             release {
                 storeFile releaseKeystore
@@ -244,7 +253,7 @@ android {
         }
 
         debug {
-            // Default Android debug keystore; no committed key.
+            signingConfig signingConfigs.debug
         }
     }
 

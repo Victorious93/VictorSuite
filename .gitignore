@@ -39,6 +39,8 @@ Thumbs.db
 # Signing keys: never commit. Release signing comes from CI secrets.
 *.jks
 *.keystore
+# Dedicated debug key (not a secret) is intentionally tracked.
+!app/victorsuite-debug.keystore
 *.p12
 *.pfx
 victorsuite-signing/
