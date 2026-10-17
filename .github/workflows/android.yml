@@ -113,6 +113,9 @@ jobs:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: |
           chmod +x gradlew
+          # Fetch bootstrap zips first: the release ndkBuild can run before javaCompile,
+          # which is what triggers downloadBootstraps.
+          ./gradlew :app:downloadBootstraps
           ./gradlew :app:assembleRelease --stacktrace
 
       - name: Remove decoded keystore
