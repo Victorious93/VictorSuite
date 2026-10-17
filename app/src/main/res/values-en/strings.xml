@@ -1373,4 +1373,34 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="hak5_revoke_gate_message">This locks the companion again and clears the stored API token. Continue?</string>
     <string name="hak5_revoke_done">Authorization revoked; token cleared.</string>
 
+    <!-- Hak5 companion Phase 2: authenticated session, modules, actions, command log -->
+    <string name="hak5_phase2_section">Modules &amp; actions</string>
+    <string name="hak5_connect_button">Connect &amp; list modules</string>
+    <string name="hak5_command_log_button">View command log</string>
+    <string name="hak5_connecting">Authenticating…</string>
+    <string name="hak5_login_need_token">Enter and save an API token first</string>
+    <string name="hak5_login_ok">Authenticated. Firmware: %1$s</string>
+    <string name="hak5_login_failed">Authentication failed: %1$s</string>
+    <string name="hak5_token_rejected">API token rejected by device</string>
+    <string name="hak5_status_device">Model: %1$s · Version: %2$s</string>
+    <string name="hak5_modules_none">No modules discovered yet. Connect with a valid API token to list what this firmware offers.</string>
+    <string name="hak5_modules_limited">Unknown / limited firmware — module listing unavailable. Only read-only status is supported.</string>
+    <string name="hak5_module_no_actions">No actions advertised by this module.</string>
+    <string name="hak5_running">Running action…</string>
+    <string name="hak5_confirm_action_title">Confirm action</string>
+    <string name="hak5_confirm_action_message">Run \"%1$s\"?\n\nSeverity: %2$s</string>
+    <string name="hak5_confirm_invasive_warning">⚠ This action may be invasive or change device/network state. Only proceed on hardware you own or are authorized to test. Nothing else will run automatically.</string>
+    <string name="hak5_confirm_run">Run action</string>
+    <string name="hak5_action_executed">Executed (HTTP %1$s)</string>
+    <string name="hak5_action_blocked">Blocked: %1$s</string>
+    <string name="hak5_action_failed">Action failed: %1$s</string>
+    <string name="hak5_cleartext_warning">Traffic to the Pineapple management IP is cleartext HTTP on the local link by default (what the device serves at :1471). Use only on a trusted local network you control.</string>
+    <string name="hak5_severity_read">Read-only</string>
+    <string name="hak5_severity_config">Config change</string>
+    <string name="hak5_severity_invasive">Potentially invasive</string>
+    <string name="hak5_command_log_title">Command log</string>
+    <string name="hak5_command_log_subtitle">Every executed or blocked action, with secrets redacted. Stored on-device.</string>
+    <string name="hak5_command_log_empty">No commands run yet.</string>
+    <string name="hak5_command_log_clear">Clear log</string>
+    <string name="hak5_command_log_cleared">Command log cleared</string>
 </resources>
