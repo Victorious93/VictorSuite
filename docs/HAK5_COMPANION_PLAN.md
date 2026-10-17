@@ -1,6 +1,6 @@
 # Hak5 Device Companion — Design Plan (VictorSuite)
 
-**Status:** planning only. This document does **not** implement features. Revised 2026-10-15 after Don's review (see Decisions).  
+**Status:** implementation underway. Phase 1 shipped (PR #22, branch `feature/hak5-companion-phase1`). Phase 2 shipped (branch `feature/hak5-companion-phase2`; see `docs/HAK5_COMPANION_PHASE2.md`). Originally revised 2026-10-15 after Don's review (see Decisions); phase-status updated 2026-10-17.  
 **Owner:** Don Victor (GitHub [Victorious93](https://github.com/Victorious93)).  
 **Repo:** private `Victorious93/VictorSuite` (Termux / ZeroTermux fork, package `com.termux`, `targetSdk` **28**).  
 **Goal of this PR:** agree on scope, architecture, and safety before any feature code is written.
@@ -117,7 +117,7 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 
 ## 2. Phased plan
 
-### Phase 1 — Discovery + connection / status screen
+### Phase 1 — Discovery + connection / status screen  ✅ SHIPPED (PR #22)
 
 **Goal.** In VictorSuite, find the Tetra over **Wi-Fi/LAN only** (D2), show "reachable / not reachable," and open a connection settings sheet. No offensive actions. No USB.
 
@@ -142,7 +142,10 @@ Source: [About Mode Switching](https://documentation.hak5.org/plunder-bug/active
 
 ---
 
-### Phase 2 — Pineapple authenticated session, status, modules/scripts, command log
+### Phase 2 — Pineapple authenticated session, status, modules/scripts, command log  ✅ SHIPPED (branch `feature/hak5-companion-phase2`)
+
+> **Delivered 2026-10-17.** Authenticated apiToken session (`PineappleSession`), live status view (`DeviceStatus`), runtime module/script discovery (`PineappleModuleLister`, no hardcoded list), per-action confirmation before any execution (`PineappleActionRunner` + `Hak5ActionConfirm`), and a persistent, redacted command log (`Hak5CommandLog` + `Hak5CommandLogActivity`). Decisions on the open questions: **(1)** module automation depth = runtime discovery + single manual action per tap, each gated (no chaining/auto-run); **(2)** **apiToken only** — SSH stays deferred (no JSch/sshj dependency added). Transport defaults to cleartext HTTP (what the device serves at `:1471`) with an in-UI warning. Details in `docs/HAK5_COMPANION_PHASE2.md`.
+
 
 **Goal.** Hold an authenticated API session (API token preferred), show read-only status, list modules, run **explicitly confirmed** common module actions / scripts, and append every call to a persistent command log.
 
