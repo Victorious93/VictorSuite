@@ -484,7 +484,7 @@
 
     <string name="本机IP">本机IP</string>
 
-    <string name="Zero功能">Zero功能</string>
+    <string name="Zero功能">VictorSuite功能</string>
     <string name="VictorSuite内置功能">VictorSuite 脚本区域(长按打开作者地址)</string>
     <string name="内置nginx">Nginx(内置)</string>
     <string name="Nginx开关">Nginx开关</string>
@@ -583,7 +583,7 @@
     <string name="获取镜像">提取码:6b7w</string>
     <string name="是否前往下载系统">是否前往下载系统</string>
     <string name="前往">前往</string>
-    <string name="Zero">Zero/UTermux模拟</string>
+    <string name="Zero">VictorSuite/UTermux模拟</string>
     <string name="一键启动">一键启动</string>
 
     <string name="确定重置所有任务">确定重置并删除所有任务?\n如果您的下载状态错乱/不正确请应用此设置\n注意:已下载完成的不会被删除\n正在下载的会被删除</string>
@@ -667,7 +667,7 @@
     <string name="此脚本数据错误">此脚本数据错误,请尝试联系管理员</string>
 
     <string name="VictorSuite论坛">VictorSuite论坛</string>
-    <string name="Zero论坛">Zero论坛</string>
+    <string name="Zero论坛">VictorSuite论坛</string>
 
     <string name="美化设置">美化设置</string>
     <string name="字体颜色">字体颜色</string>
