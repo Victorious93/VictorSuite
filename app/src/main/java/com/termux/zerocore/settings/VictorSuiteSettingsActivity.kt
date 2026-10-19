@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SwitchCompat
 import com.example.xh_lib.utils.UUtils
 import com.termux.api.TermuxApiEmbed
 import com.termux.R
+import com.termux.zerocore.victorfiles.VictorFilesPanel
 import com.termux.zerocore.ftp.utils.UserSetManage
 import com.termux.zerocore.url.FileUrl
 import com.termux.zerocore.utils.FileHttpUtils.Companion.get
@@ -50,6 +51,9 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
     private val termuxApiEmbedSwitch by lazy {findViewById<SwitchCompat>(R.id.termux_api_embed_switch)}
     private val termuxApiEmbedLl by lazy {findViewById<LinearLayout>(R.id.termux_api_embed_ll)}
 
+    private val victorFilesPanelSwitch by lazy {findViewById<SwitchCompat>(R.id.victorfiles_panel_switch)}
+    private val victorFilesPanelLl by lazy {findViewById<LinearLayout>(R.id.victorfiles_panel_ll)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_victor_suite_settings)
@@ -69,6 +73,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         setSwitchStatus(foldMenuCloseSwitch, foldMenuCloseLl)
         setSwitchStatus(mainMenuConfigCloseSwitch, mainMenuConfigCloseLl)
         setSwitchStatus(termuxApiEmbedSwitch, termuxApiEmbedLl)
+        setSwitchStatus(victorFilesPanelSwitch, victorFilesPanelLl)
     }
 
     private fun initStatus() {
@@ -84,6 +89,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         foldMenuCloseSwitch.isChecked = ztUserBean.isCloseFoldMenu
         mainMenuConfigCloseSwitch.isChecked = ztUserBean.isDisableMainConfigMenu
         termuxApiEmbedSwitch.isChecked = TermuxApiEmbed.isEnabled(this)
+        victorFilesPanelSwitch.isChecked = VictorFilesPanel.isEnabled(this)
     }
 
     private fun setSwitchStatus(switchCompat: SwitchCompat, linearLayout: LinearLayout) {
@@ -139,6 +145,9 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
                 mainMenuConfigCloseSwitch -> {
                     ztUserBean.isDisableMainConfigMenu = switchCompat.isChecked
                     //Toast.makeText(this, UUtils.getString(R.string.zt_command_path_ok), Toast.LENGTH_SHORT).show()
+                }
+                victorFilesPanelSwitch -> {
+                    VictorFilesPanel.setEnabled(this, isChecked)
                 }
                 termuxApiEmbedSwitch -> {
                     // Also fires while the screen sets its initial state; only act on a real change.

@@ -870,6 +870,16 @@ Reset successfully</string>
     <string name="file_manager">File Manager</string>
     <string name="victorious_file_manager_not_installed">Victorious File Manager is not installed — showing the built-in file browser instead.</string>
     <string name="select_session">Select Session</string>
+    <string name="victorfiles_open">Open VictorFiles</string>
+    <string name="droidcommand_ai_label">DroidCommand AI</string>
+    <string name="droidcommand_ai_title">DroidCommand AI</string>
+    <string name="droidcommand_ai_summary">Opens the separate DroidCommand AI app. VictorSuite no longer has a built-in AI chat.</string>
+    <string name="droidcommand_ai_missing_title">DroidCommand AI is not installed</string>
+    <string name="droidcommand_ai_missing_msg">The AI option now opens the separate DroidCommand AI app. Download it from its releases page.</string>
+    <string name="droidcommand_ai_open_releases">Open releases page</string>
+    <string name="droidcommand_ai_launch_failed">Could not open DroidCommand AI</string>
+    <string name="victorfiles_panel_title">VictorFiles file manager panel</string>
+    <string name="victorfiles_panel_summary">When VictorFiles is installed, swiping out the right drawer opens its file manager in place of the built-in file window. Turn off to use the built-in browser.</string>
     <string name="http_folder">folder</string>
     <string name="http_file">file</string>
     <string name="no_http_msg">It seems that there is no connection to the network? Please manually open the local IP: 19956 in the browser</string>
