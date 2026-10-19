@@ -47,6 +47,7 @@ import com.termux.zerocore.config.mainmenu.config.PhoneSmsClickConfig;
 import com.termux.zerocore.config.mainmenu.config.PublicWarehouseClickConfig;
 import com.termux.zerocore.config.mainmenu.config.QEMUClickConfig;
 import com.termux.zerocore.config.mainmenu.config.ReleaseLinuxVersionClickConfig;
+import com.termux.zerocore.config.mainmenu.config.RootForgeOpenClickConfig;
 import com.termux.zerocore.config.mainmenu.config.RemoteConnectionClickConfig;
 import com.termux.zerocore.config.mainmenu.config.ScheduledTaskClickConfig;
 import com.termux.zerocore.config.mainmenu.config.ShowCommandClickConfig;
@@ -77,6 +78,7 @@ public class MainMenuConfig implements BaseConfig {
     public static final int CODE_ZT_ROOT = 5;
     public static final int CODE_ZT_ENGINE = 6;
     public static final int CODE_ZT_CONFIG = 7;
+    public static final int CODE_SUITE = 8;
 
     // 主页分类
     private static ArrayList<MainMenuCategoryData> MAIN_MENU_CATEGORY_DATAS = new ArrayList<>();
@@ -172,6 +174,11 @@ public class MainMenuConfig implements BaseConfig {
         ztFeaturesClicks.add(new LanguageClickConfig());
         ztFeaturesClicks.add(new GitHubClickConfig());
         MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.zt_features), CODE_ZT_FEATURES, ztFeaturesClicks));
+
+        // RootForge (separate app, opened by intent)
+        ArrayList<MainMenuClickConfig> suiteClicks = new ArrayList<>();
+        suiteClicks.add(new RootForgeOpenClickConfig());
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.rootforge_category), CODE_SUITE, suiteClicks));
     }
 
     public static ArrayList<MainMenuCategoryData> getMainMenuCategoryDatas() {

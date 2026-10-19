@@ -243,4 +243,10 @@
             click="java:com.termux.zerocore.config.mainmenu.config.GitHubClickConfig" />
     </group>
 
+    <group name="RootForge">
+        <item tag="Open RootForge"
+            name="Open RootForge"
+            click="java:com.termux.zerocore.config.mainmenu.config.RootForgeOpenClickConfig" />
+    </group>
+
 </zt-menu>
