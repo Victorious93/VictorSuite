@@ -595,7 +595,7 @@ error</string>
     <string name="获取镜像">Extraction code: 6b7w</string>
     <string name="是否前往下载系统">Whether to go to the download system</string>
     <string name="前往">Go to</string>
-    <string name="Zero">VictorSuite/UTermux simulation</string>
+    <string name="Zero">Windows (QEMU) simulation</string>
     <string name="一键启动">one-button start</string>
 
     <string name="确定重置所有任务">
@@ -669,7 +669,7 @@ Reset successfully</string>
     <string name="线上脚本">Online script</string>
     <string name="本地脚本">Local script</string>
     <string name="请双击命令窗口试试">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
-    <string name="Zero论坛">VictorSuite BBS</string>
+    <string name="Zero论坛">Termux Wiki</string>
     <string name="VictorSuite论坛">VictorSuite bbs</string>
 
     <string name="在线脚本">Online script</string>
@@ -759,9 +759,9 @@ Reset successfully</string>
 
     <string name="ttyd_install_complete">IP:0.0.0.0\nport:7681</string>
 
-    <string name="qq_group">copy qq number</string>
+    <string name="qq_group">Report an issue</string>
 
-    <string name="telegram_group">Telegram</string>
+    <string name="telegram_group">GitHub</string>
 
     <string name="opne_in_victorsuite">Opne In Victorsuite</string>
 
@@ -937,9 +937,9 @@ Reset successfully</string>
     <string name="common_functions">Common Functions</string>
     <string name="beautification_function">Beautification/UI function</string>
     <string name="online_features">online features</string>
-    <string name="zt_features">ZT function</string>
+    <string name="zt_features">VictorSuite functions</string>
     <string name="zt_settings">VictorSuite settings</string>
-    <string name="zt_settings1">ZT settings</string>
+    <string name="zt_settings1">VictorSuite settings</string>
     <string name="zt_settings_note">VictorSuite Related settings options</string>
     <string name="container_settings">Container settings</string>
     <string name="container_settings_note">Applications within the application container are only set for the current container.</string>
@@ -948,8 +948,8 @@ Reset successfully</string>
     <string name="termux_settings">Termux native settings</string>
     <string name="termux_settings_note">Enter the Termux native settings content</string>
     <string name="install_termux_software">Install/restore Termux official software</string>
-    <string name="install_termux_software_note">Use native Termux, API, X11, etc. with the same signature as ZT installed</string>
-    <string name="zt_download_service">ZT download server</string>
+    <string name="install_termux_software_note">Use native Termux, API, X11, etc. with the same signature as VictorSuite installed</string>
+    <string name="zt_download_service">VictorSuite download server</string>
     <string name="zt_download_service_note">The default port is:19956</string>
     <string name="zt_download_service_note1">Please note! This function is not protected by account password and can be downloaded by default. Please be careful about personal privacy being leaked after opening it!</string>
     <string name="zt_sidebar_closes_automatically">Sidebar closes automatically</string>
@@ -959,7 +959,7 @@ Reset successfully</string>
     <string name="toolbox_display_settings">Disable toolbox display</string>
     <string name="toolbox_display_settings_note">Enlarging or reducing the font with two fingers causes gesture conflict, which can be temporarily closed here\n</string>
     <string name="user_bottom_keyboard_settings">Turn on keyboard rules mode</string>
-    <string name="user_bottom_keyboard_settings_note">Force the use of ZT to set keyboard rules, other keyboard settings\nrules will be invalid</string>
+    <string name="user_bottom_keyboard_settings_note">Force the use of VictorSuite to set keyboard rules, other keyboard settings\nrules will be invalid</string>
     <string name="bottom_keyboard_settings">Set keyboard rules</string>
     <string name="bottom_keyboard_settings_note">Enter personalized keyboard rules to improve input efficiency</string>
     <string name="log_output">Output LOG to memory card</string>
@@ -1036,7 +1036,7 @@ Reset successfully</string>
     <string name="zt_timer_environment_sum">The current operating environment is:</string>
     <string name="zt_timer_other_title_dialog">Custom time (seconds)</string>
     <string name="zt_timer_other_input_numer_dialog">Please enter a number or enter a number greater than the maximum value of long (unit is seconds)</string>
-    <string name="zt_timer_notification_timer_title">(ZT) The scheduled task is currently running</string>
+    <string name="zt_timer_notification_timer_title">(VictorSuite) The scheduled task is currently running</string>
     <string name="zt_timer_notification_timer_sum">Current scheduled interval:</string>
     <string name="zt_timer_notification_timer_cunt">Current execution count:</string>
     <string name="zt_timer_notification_timer_kill">Forcefully closing the current task！</string>
@@ -1140,7 +1140,7 @@ Known Issue: Rapid consecutive back operations may cause black screen in Interna
     <string name="content_ssh_add_new_ssh_device">+ Add new SSH device</string>
 
     <string name="zt_command_version">VictorSuite Command Version: 0.2 (2025 ~ 2026)</string>
-    <string name="zt_command_error">Unsupported or unrecognized due to low ZT version: \"</string>
+    <string name="zt_command_error">Unsupported or unrecognized due to low VictorSuite version: \"</string>
     <string name="zt_command_help" tools:ignore="TypographyDashes"> Available Commands:\n
         VictorSuite Terminal Command Explanation \n
         Version 0.1 \n
@@ -1261,7 +1261,7 @@ Enter code recognition parameters separated by commas. These will appear as blue
     <string name="deepseek_settings_ai_get_deepseek_key_2">After logging in, tap API Keys in the left sidebar.</string>
     <string name="deepseek_settings_ai_get_deepseek_key_3">Then tap "Create API keys".</string>
     <string name="deepseek_settings_ai_get_deepseek_key_4">Enter any name you like.</string>
-    <string name="deepseek_settings_ai_get_deepseek_key_5">Copy the key here and paste it into the DeepSeek settings input field in ZT.</string>
+    <string name="deepseek_settings_ai_get_deepseek_key_5">Copy the key here and paste it into the DeepSeek settings input field in VictorSuite.</string>
 
     <string name="zt_ssh_improt_fail">Import failed: alias missing</string>
     <string name="zt_ssh_improt_fail_error">Import failed</string>
@@ -1291,7 +1291,7 @@ Enter code recognition parameters separated by commas. These will appear as blue
     <string name="zt_adb_shell_run_debug">This feature is only available on debug builds. Would you like to download the debug APP to continue using this feature?</string>
     <string name="zt_fold_menu_close">Disable folding feature</string>
     <string name="zt_fold_menu_close_summary">(Requires restarting the APP) Enabling this option will keep the menu section on the left always expanded.</string>
-    <string name="zt_app_crash">An error occurred in the application. Please forward the following information to the developer [screenshot]\nDeveloper Group 1 (QQ):</string>
+    <string name="zt_app_crash">An error occurred in the application. Please forward the following information to the developer [screenshot]\nIssue tracker: </string>
 
     <string name="zt_menu_title_config">Configure Terminal</string>
     <string name="zt_adb_shell_run">SHELL Run</string>
@@ -1321,7 +1321,7 @@ cd ~ &amp;&amp; pkg update -y \n
         Please select a usage habit</string>
     <string name="zt_usage_habits_termux">Termux usage habit set successfully. Please go to settings to change the configuration.</string>
     <string name="zt_usage_habits_ztermux">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
-    <string name="zt_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the ZT usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
+    <string name="zt_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the VictorSuite usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
 
     <!-- Plugin manager (com.termux.zerocore.plugin) -->
     <string name="plugin_manager_title">Plugin Manager</string>

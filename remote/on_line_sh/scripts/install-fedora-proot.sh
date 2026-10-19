@@ -3,7 +3,7 @@
 # Install a minimal Fedora root filesystem under proot and generate a
 # "startfedora" launcher.
 #
-# Ported from an older ZeroTermux/UTermux reference build and translated to
+# Ported from an older reference build and translated to
 # English. It now stops at the first failed step instead of writing a launcher
 # for a rootfs that never downloaded or extracted. The image mirror below is a
 # third-party host, not a VictorSuite-controlled one — verify it still

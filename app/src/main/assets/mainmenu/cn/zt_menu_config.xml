@@ -3,7 +3,7 @@
     <!--####################### 说明 ########################
     文件路径:
     /data/data/com.termux/files/home/ZtInfo/main_menu_path.xml
-    此文件是ZT左侧菜单栏的配置文件，可随意修改（注意格式,错误左侧栏可能无法正常显示）
+    此文件是VictorSuite左侧菜单栏的配置文件，可随意修改（注意格式,错误左侧栏可能无法正常显示）
     如果需要恢复默认请使用：
     zt menu reset 命令来复原
     如果修改完成立即刷新请使用
@@ -18,7 +18,7 @@
         1.name: 点击事件的名称
         示例：name="切换源"
         ####################### click ########################
-        1.click: 调用ZT内部的 JAVA 类
+        1.click: 调用VictorSuite内部的 JAVA 类
         示例: click="java:com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig"
         2.或跳转到网址页
         click="jumpUrl:www.example.com"
@@ -28,7 +28,7 @@
         autoRunShell="true"
         ####################### icon ########################
         注意，此属性只有在 click 非java: 开头才有效果
-        1.icon: 图标 application 开头的是调用ZT内部的资源, 或者填写绝对路径
+        1.icon: 图标 application 开头的是调用VictorSuite内部的资源, 或者填写绝对路径
         示例:(
         绝对路径: icon="imgPath:/data/data/com.termux/files/home/ZTinfo/1.png")
         ####################### shell ########################
@@ -123,7 +123,7 @@
             click="java:com.termux.zerocore.config.mainmenu.config.ReleaseLinuxVersionClickConfig" />
         <item tag="QEMU"
             click="java:com.termux.zerocore.config.mainmenu.config.QEMUClickConfig" />
-        <item tag="ZT设置"
+        <item tag="VictorSuite设置"
             click="java:com.termux.zerocore.config.mainmenu.config.ZTSettingsClickConfig" />
         <item tag="插件管理"
             click="java:com.termux.zerocore.config.mainmenu.config.PluginManagerClickConfig" />
@@ -193,7 +193,7 @@
     <group name="线上功能">
         <item tag="在线脚本"
             click="java:com.termux.zerocore.config.mainmenu.config.OnLineCommandClickConfig" />
-        <item tag="Zero论坛"
+        <item tag="Termux Wiki"
             click="java:com.termux.zerocore.config.mainmenu.config.ZeroBBsClickConfig" />
         <item tag="下载站"
             click="java:com.termux.zerocore.config.mainmenu.config.DownLoadClickConfig" />
@@ -218,7 +218,7 @@
             click="java:com.termux.zerocore.config.mainmenu.config.BootCommandClickConfig" />
     </group>
 
-    <group name="ZT 功能">
+    <group name="VictorSuite功能">
         <item tag="安装模块"
             click="java:com.termux.zerocore.config.mainmenu.config.InstallModuleClickConfig" />
         <item tag="FTP 服务"
