@@ -4,7 +4,7 @@
 
 # VictorSuite
 
-**A Termux-based Android Linux environment with ZeroTermux-era management tools: containers, backup/restore, plugins, X11, and automation.**
+**A Termux-based Android Linux environment with built-in management tools: containers, backup/restore, plugins, X11, and automation.**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
@@ -23,7 +23,7 @@ It is intended for personal learning, experimentation, and technical collaborati
 
 ## Features
 
-ZeroTermux / VictorSuite additions live under `com.termux.zerocore`:
+VictorSuite additions live under `com.termux.zerocore`:
 
 - **Linux containers** — install and switch between proot-based distributions (catalogue includes Ubuntu, Kali, Fedora, BlackArch, Kali NetHunter Rootless, and others via online-script / repository JSON).
 - **Backup and restore** — archive Termux environments and user data (`.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z`).
@@ -82,7 +82,7 @@ Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.54** 
 
 1. Install the APK (see [Install](#install)).
 2. Open VictorSuite — first launch follows Termux-style bootstrap / setup.
-3. Use the drawer menu for ZeroTermux/VictorSuite features (containers, backup, FTP, X11 settings, online scripts, AI CLIs, etc.).
+3. Use the drawer menu for VictorSuite features (containers, backup, FTP, X11 settings, online scripts, AI CLIs, etc.).
 4. For plugins: register from the remote catalogue → acknowledge authorized use → enable → place the entry-point binary yourself. See [PLUGINS.md](PLUGINS.md).
 5. For AI CLIs from the terminal: menu **AI CLIs**, or `bash ~/ai-cli-setup.sh` after the asset is copied — details in [docs/AI_CLIS.md](docs/AI_CLIS.md).
 

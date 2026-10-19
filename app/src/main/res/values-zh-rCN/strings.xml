@@ -415,7 +415,7 @@
         在使用一定程度之后,极力建议你过渡到官方termux[入门之后开始使用](推荐),\n
         \n
 
-        毕竟ZT能帮你一时，却帮不了你一世!\n
+        毕竟VictorSuite能帮你一时，却帮不了你一世!\n
         \n
 
 
@@ -428,7 +428,7 @@
         照片\n
         视频\n
         音频\n
-        以及其它所有数据,由你(VictorSuite(简称ZT)的个人使用用户)自己承担\n
+        以及其它所有数据,由你(VictorSuite的个人使用用户)自己承担\n
         \n
 
 
@@ -484,7 +484,7 @@
 
     <string name="本机IP">本机IP</string>
 
-    <string name="Zero功能">Zero功能</string>
+    <string name="Zero功能">VictorSuite功能</string>
     <string name="VictorSuite内置功能">VictorSuite 脚本区域(长按打开作者地址)</string>
     <string name="内置nginx">Nginx(内置)</string>
     <string name="Nginx开关">Nginx开关</string>
@@ -583,7 +583,7 @@
     <string name="获取镜像">提取码:6b7w</string>
     <string name="是否前往下载系统">是否前往下载系统</string>
     <string name="前往">前往</string>
-    <string name="Zero">Zero/UTermux模拟</string>
+    <string name="Zero">VictorSuite/UTermux模拟</string>
     <string name="一键启动">一键启动</string>
 
     <string name="确定重置所有任务">确定重置并删除所有任务?\n如果您的下载状态错乱/不正确请应用此设置\n注意:已下载完成的不会被删除\n正在下载的会被删除</string>
@@ -667,7 +667,7 @@
     <string name="此脚本数据错误">此脚本数据错误,请尝试联系管理员</string>
 
     <string name="VictorSuite论坛">VictorSuite论坛</string>
-    <string name="Zero论坛">Zero论坛</string>
+    <string name="Zero论坛">VictorSuite论坛</string>
 
     <string name="美化设置">美化设置</string>
     <string name="字体颜色">字体颜色</string>
@@ -918,9 +918,9 @@
     <string name="common_functions">常用功能</string>
     <string name="beautification_function">美化/UI功能</string>
     <string name="online_features">线上功能</string>
-    <string name="zt_features">ZT功能</string>
+    <string name="zt_features">VictorSuite功能</string>
     <string name="zt_settings">VictorSuite设置</string>
-    <string name="zt_settings1">ZT设置</string>
+    <string name="zt_settings1">VictorSuite设置</string>
     <string name="zt_settings_note">VictorSuite 相关设置选项</string>
     <string name="container_settings">容器设置</string>
     <string name="container_settings_note">应用容器内应用程序，只针对当前容器设置</string>
@@ -929,8 +929,8 @@
     <string name="termux_settings">Termux原生设置</string>
     <string name="termux_settings_note">进入Termux原生设置内容</string>
     <string name="install_termux_software">安装/还原Termux官方软件</string>
-    <string name="install_termux_software_note">使用安装ZT相同签名的原生Termux、API、X11等</string>
-    <string name="zt_download_service">ZT下载服务器</string>
+    <string name="install_termux_software_note">使用安装VictorSuite相同签名的原生Termux、API、X11等</string>
+    <string name="zt_download_service">VictorSuite下载服务器</string>
     <string name="zt_download_service_note">默认端口为:19956</string>
     <string name="zt_download_service_note1">请注意！此功能没有账号密码保护，默认即可打开下载。打开后请注意个人隐私外泄！</string>
     <string name="zt_sidebar_closes_automatically">侧边栏自动关闭</string>
@@ -940,7 +940,7 @@
     <string name="toolbox_display_settings">禁止工具箱显示</string>
     <string name="toolbox_display_settings_note">双指放大或缩小字体造成手势冲突，可在此\n临时关闭</string>
     <string name="user_bottom_keyboard_settings">打开键盘规则模式</string>
-    <string name="user_bottom_keyboard_settings_note">强制使用ZT设置键盘规则,其它设置键盘\n规则一律无效</string>
+    <string name="user_bottom_keyboard_settings_note">强制使用VictorSuite设置键盘规则,其它设置键盘\n规则一律无效</string>
     <string name="bottom_keyboard_settings">设置键盘规则</string>
     <string name="bottom_keyboard_settings_note">输入个性化的键盘规则,提高输入效率</string>
     <string name="log_output">输出LOG到存储卡</string>
@@ -958,7 +958,7 @@
     <string name="zt_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn 等(排名不分先后)</string>
     <string name="zt_install">还原/扩展官方版本</string>
     <string name="zt_install_float">没有安装此插件！请到【设置 -> 安装/还原Termux官方软件 -> Termux Float】安装插件</string>
-    <string name="zt_install_file">没有安装此插件！请到【设置 -> 安装/还原Termux官方软件 -> (Zero)Utermux File Plug】安装插件</string>
+    <string name="zt_install_file">没有安装此插件！请到【设置 -> 安装/还原Termux官方软件 -> (VictorSuite)Utermux File Plug】安装插件</string>
     <string name="zt_volume_function_title">还原音量+-键</string>
     <string name="zt_volume_function_summary">禁用当前使用音量+-键进行弹出左/右面板</string>
     <string name="zt_moe_remove">MOE目前作者已经不在维护，可能会出现VictorSuite不可预知的错误结果。</string>
@@ -1016,7 +1016,7 @@
     <string name="zt_timer_environment_sum">当前运行环境为:</string>
     <string name="zt_timer_other_title_dialog">自定义时常(秒)</string>
     <string name="zt_timer_other_input_numer_dialog">请输入数字或者输入数字大于long最大值(单位为秒)</string>
-    <string name="zt_timer_notification_timer_title">(ZT)定时任务当前正在运行</string>
+    <string name="zt_timer_notification_timer_title">(VictorSuite)定时任务当前正在运行</string>
     <string name="zt_timer_notification_timer_sum">当前计划时间间隔:</string>
     <string name="zt_timer_notification_timer_cunt">当前执行次数:</string>
     <string name="zt_timer_notification_timer_kill">正在强制关闭当前任务！</string>
@@ -1120,7 +1120,7 @@
     <string name="content_ssh_add_new_ssh_device">+ 添加新SSH设备</string>
 
     <string name="zt_command_version">VictorSuite-命令版本：0.2 (2025 ~ 2026)</string>
-    <string name="zt_command_error">不支持或ZT版本低不识别: \"</string>
+    <string name="zt_command_error">不支持或VictorSuite版本低不识别: \"</string>
     <string name="zt_command_help" tools:ignore="TypographyDashes">
         可用命令:\n
         VictorSuite 终端命令解释 \n
@@ -1253,7 +1253,7 @@
     <string name="deepseek_settings_ai_get_deepseek_key_2">登录账号之后，点击左侧栏的 API Keys</string>
     <string name="deepseek_settings_ai_get_deepseek_key_3">然后点击 “创建 API keys”</string>
     <string name="deepseek_settings_ai_get_deepseek_key_4">随意输入一个名称就行</string>
-    <string name="deepseek_settings_ai_get_deepseek_key_5">复制此处的key到 ZT 里边的 DeepSeek 设置编辑框即可</string>
+    <string name="deepseek_settings_ai_get_deepseek_key_5">复制此处的key到 VictorSuite 里边的 DeepSeek 设置编辑框即可</string>
     <string name="zt_ssh_improt_fail">导入失败：别名丢失</string>
     <string name="zt_ssh_improt_fail_error">导入失败</string>
     <string name="zt_ssh_improt_success">"密钥导入成功\n已保存为:"</string>
@@ -1304,15 +1304,15 @@
     <string name="zt_xml_settings_summary">(需重启APP)打开此选项将不在载入xml配置文件作为左侧菜单数据源</string>
 
     <string name="zt_usage_habits_title">使用习惯</string>
-    <string name="zt_usage_habits_content">注意(使用习惯相关选项可以在ZT设置重新自定义)\n
+    <string name="zt_usage_habits_content">注意(使用习惯相关选项可以在VictorSuite设置重新自定义)\n
         选择一个使用习惯\n
         termux(按键完全使用原生)\n
-        VictorSuite(按键完全使用ZT布局)\n
+        VictorSuite(按键完全使用VictorSuite布局)\n
         请选择一个使用习惯</string>
     <string name="zt_usage_habits_termux">设置成功Termux使用习惯,更改配置请到设置</string>
     <string name="zt_usage_habits_ztermux">设置成功VictorSuite使用习惯,更改配置请到设置</string>
 
-    <string name="zt_guide">双击屏幕边缘弹出左/右菜单栏\n如果你设置了ZT使用习惯,则为音量+-键\n如果打开左/右侧栏无法关闭此窗口\n长按此处强制关闭</string>
+    <string name="zt_guide">双击屏幕边缘弹出左/右菜单栏\n如果你设置了VictorSuite使用习惯,则为音量+-键\n如果打开左/右侧栏无法关闭此窗口\n长按此处强制关闭</string>
 
     <!-- 插件管理器 (com.termux.zerocore.plugin) -->
     <string name="plugin_manager_title">插件管理</string>
