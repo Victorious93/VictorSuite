@@ -870,6 +870,9 @@ Reset successfully</string>
     <string name="file_manager">File Manager</string>
     <string name="victorious_file_manager_not_installed">Victorious File Manager is not installed — showing the built-in file browser instead.</string>
     <string name="select_session">Select Session</string>
+    <string name="victorfiles_open">Open VictorFiles</string>
+    <string name="victorfiles_panel_title">VictorFiles file manager panel</string>
+    <string name="victorfiles_panel_summary">When VictorFiles is installed, swiping out the right drawer opens its file manager in place of the built-in file window. Turn off to use the built-in browser.</string>
     <string name="http_folder">folder</string>
     <string name="http_file">file</string>
     <string name="no_http_msg">It seems that there is no connection to the network? Please manually open the local IP: 19956 in the browser</string>
