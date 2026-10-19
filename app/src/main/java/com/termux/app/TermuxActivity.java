@@ -2032,6 +2032,10 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 e.printStackTrace();
             }
         }
+        // VictorSuite add {@
+        // Offer default entries added in newer app versions (once each) to a menu file that already exists.
+        com.termux.zerocore.utils.MenuDefaultsMerger.apply(this, targetLang);
+        // @}
     }
 
     /**
