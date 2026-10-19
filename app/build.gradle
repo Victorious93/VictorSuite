@@ -39,7 +39,6 @@ android {
         implementation "androidx.preference:preference:1.2.1"
         implementation "androidx.viewpager:viewpager:1.0.0"
         implementation "com.google.android.material:material:1.12.0"
-        implementation "com.google.guava:guava:24.1-jre"
         implementation "io.noties.markwon:core:$markwonVersion"
         implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
         implementation "io.noties.markwon:linkify:$markwonVersion"
@@ -58,7 +57,6 @@ android {
         implementation('cn.hotapk:fastandrutils:0.8.0') {
             exclude group: 'com.android.support'
         }
-        implementation "com.google.android.material:material:1.12.0"
         implementation "com.google.guava:guava:31.0.1-jre"
         implementation 'com.google.code.gson:gson:2.8.6'
         //网络框架
@@ -333,8 +331,7 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
 //    implementation project(path: ':xh_lib')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation files('libs/commons-logging-1.2.jar')
     implementation files('libs/commons-net-3.8.0.jar')
