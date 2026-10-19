@@ -128,21 +128,20 @@ public final class TermuxApiEmbed {
 
     private static boolean sameContent(File a, File b) throws IOException {
         if (!a.isFile() || !b.isFile() || a.length() != b.length()) return false;
-        try (InputStream inA = new FileInputStream(a); InputStream inB = new FileInputStream(b)) {
-            byte[] bufA = new byte[8192];
-            byte[] bufB = new byte[8192];
-            int readA;
-            while ((readA = inA.read(bufA)) > 0) {
-                int total = 0;
-                while (total < readA) {
-                    int readB = inB.read(bufB, total, readA - total);
-                    if (readB < 0) return false;
-                    total += readB;
-                }
-                if (!Arrays.equals(bufA, 0, readA, bufB, 0, readA)) return false;
+        return Arrays.equals(readAll(a), readAll(b)); // files are a few KB
+    }
+
+    private static byte[] readAll(File file) throws IOException {
+        byte[] data = new byte[(int) file.length()];
+        try (InputStream in = new FileInputStream(file)) {
+            int total = 0;
+            while (total < data.length) {
+                int n = in.read(data, total, data.length - total);
+                if (n < 0) throw new IOException("Unexpected end of file: " + file);
+                total += n;
             }
-            return true;
         }
+        return data;
     }
 
     private static void copy(File from, File to) throws IOException {
