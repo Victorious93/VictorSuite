@@ -1403,4 +1403,8 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="hak5_command_log_empty">No commands run yet.</string>
     <string name="hak5_command_log_clear">Clear log</string>
     <string name="hak5_command_log_cleared">Command log cleared</string>
+    <string name="termux_api_embed_title">Termux:API (built in)</string>
+    <string name="termux_api_embed_summary">Lets termux-* commands (pkg install termux-api) talk to VictorSuite directly, so the separate Termux:API app is not needed. Off by default. Android asks for each permission the first time a command needs it. Works on Android 13 and lower; Android 14+ needs a helper update that is not included yet.</string>
+    <string name="termux_api_embed_on_toast">Termux:API turned on. In the terminal run: pkg install termux-api</string>
+    <string name="termux_api_embed_off_toast">Termux:API turned off</string>
 </resources>
