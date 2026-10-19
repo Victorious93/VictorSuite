@@ -495,7 +495,7 @@ error</string>
 
     <string name="本机IP">Local IP</string>
 
-    <string name="Zero功能">Zero function</string>
+    <string name="Zero功能">VictorSuite function</string>
     <string name="VictorSuite内置功能">VictorSuite command area (long press to open author address)</string>
     <string name="内置nginx">Nginx (built-in)</string>
     <string name="Nginx开关">Nginx switch</string>
@@ -595,7 +595,7 @@ error</string>
     <string name="获取镜像">Extraction code: 6b7w</string>
     <string name="是否前往下载系统">Whether to go to the download system</string>
     <string name="前往">Go to</string>
-    <string name="Zero">Zero/UTermux simulation</string>
+    <string name="Zero">VictorSuite/UTermux simulation</string>
     <string name="一键启动">one-button start</string>
 
     <string name="确定重置所有任务">
@@ -669,7 +669,7 @@ Reset successfully</string>
     <string name="线上脚本">Online script</string>
     <string name="本地脚本">Local script</string>
     <string name="请双击命令窗口试试">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
-    <string name="Zero论坛">Zero BBS</string>
+    <string name="Zero论坛">VictorSuite BBS</string>
     <string name="VictorSuite论坛">VictorSuite bbs</string>
 
     <string name="在线脚本">Online script</string>
