@@ -15,11 +15,55 @@ ext {
     packageVariant = System.getenv("TERMUX_PACKAGE_VARIANT") ?: "apt-android-7" // Default: "apt-android-7"
 }
 
+// VictorSuite add {@
+// Builds the termux-api helper (MIT, src/main/cpp/termux-api-helper) for every ABI with the NDK's clang
+// and packages it as libtermux-api-helper.so: a PIE executable named like a library, the same shape as
+// jniLibs/<abi>/libadb.so. TermuxApiEmbed copies it into $PREFIX/libexec. Uses ProcessBuilder because
+// Project.exec is gone in Gradle 9.
+def termuxApiHelperOutDir = layout.buildDirectory.dir("generated/termuxApiHelper/jniLibs")
+tasks.register("buildTermuxApiHelper") {
+    def helperSrcDir = file("src/main/cpp/termux-api-helper")
+    inputs.dir(helperSrcDir)
+    outputs.dir(termuxApiHelperOutDir)
+    doLast {
+        def ndk = android.ndkDirectory
+        def os = org.gradle.internal.os.OperatingSystem.current()
+        def host = os.isWindows() ? "windows-x86_64" : (os.isMacOsX() ? "darwin-x86_64" : "linux-x86_64")
+        def ext = os.isWindows() ? ".cmd" : ""
+        def api = project.properties.minSdkVersion
+        def targets = [
+            "arm64-v8a"  : "aarch64-linux-android",
+            "armeabi-v7a": "armv7a-linux-androideabi",
+            "x86"        : "i686-linux-android",
+            "x86_64"     : "x86_64-linux-android",
+        ]
+        targets.each { abi, triple ->
+            def outFile = new File(termuxApiHelperOutDir.get().asFile, "${abi}/libtermux-api-helper.so")
+            outFile.parentFile.mkdirs()
+            def clang = new File(ndk, "toolchains/llvm/prebuilt/${host}/bin/${triple}${api}-clang${ext}")
+            def cmd = [clang.absolutePath, "-std=c11", "-Wno-sign-compare", "-Os", "-fno-stack-protector",
+                       "-fPIE", "-pie", "-s", "-Wl,-z,max-page-size=16384",
+                       "-o", outFile.absolutePath,
+                       new File(helperSrcDir, "termux-api.c").absolutePath,
+                       new File(helperSrcDir, "termux-api-broadcast.c").absolutePath]
+            def proc = new ProcessBuilder(cmd).redirectErrorStream(true).start()
+            def output = proc.inputStream.text
+            if (proc.waitFor() != 0) {
+                throw new GradleException("Building termux-api helper for ${abi} failed:\n${output}")
+            }
+        }
+    }
+}
+// @}
+
 android {
     sourceSets {
         main {
             // Bundles scripts/ai-cli-setup.sh for the "AI CLIs" menu entry (AiCliSetupClickConfig).
             assets.srcDirs += ['../scripts']
+            // VictorSuite add {@
+            jniLibs.srcDir(files(termuxApiHelperOutDir) { builtBy("buildTermuxApiHelper") })
+            // @}
         }
     }
 

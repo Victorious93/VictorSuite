@@ -9,9 +9,19 @@ import android.content.SharedPreferences;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.system.ErrnoException;
+import android.system.Os;
 
 import com.termux.api.util.ResultReturner;
 import com.termux.shared.logger.Logger;
+import com.termux.shared.termux.TermuxConstants;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
 
 /**
  * On/off switch for the Termux:API code embedded in VictorSuite.
@@ -31,6 +41,9 @@ public final class TermuxApiEmbed {
     /** All embedded components live under this package, so they can be found without a list. */
     private static final String COMPONENT_PACKAGE_PREFIX = "com.termux.api.";
 
+    /** Name the bundled helper executable has in the app's native library directory. */
+    private static final String HELPER_LIB_NAME = "libtermux-api-helper.so";
+
     private TermuxApiEmbed() {}
 
     public static boolean isEnabled(Context context) {
@@ -45,6 +58,7 @@ public final class TermuxApiEmbed {
         }
         if (enabled) {
             start(app);
+            installHelperAsync(app);
         }
     }
 
@@ -54,8 +68,88 @@ public final class TermuxApiEmbed {
         applyComponentState(app, enabled);
         if (enabled) {
             start(app);
+            installHelperAsync(app);
         } else {
             app.stopService(new Intent(app, KeepAliveService.class));
+        }
+    }
+
+    private static void installHelperAsync(Context context) {
+        final Context appContext = context.getApplicationContext();
+        new Thread(() -> installHelper(appContext), "TermuxApiHelperInstall").start();
+    }
+
+    /**
+     * Replaces {@code $PREFIX/libexec/termux-api-broadcast} (and the {@code termux-api} link the termux-*
+     * scripts call) with the helper bundled in this APK. The bundled helper talks to the receiver embedded
+     * here instead of {@code com.termux.api}, which is what makes the commands work on Android 14+.
+     *
+     * Only acts when the {@code termux-api} package is already installed, so nothing is left behind that
+     * could clash with {@code pkg install termux-api}. Reinstalling or upgrading that package puts the
+     * stock helper back; this runs again at the next app start or when the setting is switched on.
+     */
+    private static synchronized void installHelper(Context context) {
+        File libexec = new File(TermuxConstants.TERMUX_PREFIX_DIR_PATH, "libexec");
+        File target = new File(libexec, "termux-api-broadcast");
+        File link = new File(libexec, "termux-api");
+        if (!target.exists() && !link.exists()) {
+            Logger.logInfo(LOG_TAG, "termux-api package not installed, not installing the helper");
+            return;
+        }
+        File source = new File(context.getApplicationInfo().nativeLibraryDir, HELPER_LIB_NAME);
+        if (!source.isFile()) {
+            Logger.logError(LOG_TAG, "Bundled helper missing: " + source.getAbsolutePath());
+            return;
+        }
+        try {
+            if (!sameContent(source, target)) {
+                File temp = new File(libexec, ".termux-api-broadcast.tmp");
+                copy(source, temp);
+                Os.chmod(temp.getAbsolutePath(), 0755);
+                Os.rename(temp.getAbsolutePath(), target.getAbsolutePath());
+                Logger.logInfo(LOG_TAG, "Installed termux-api helper to " + target.getAbsolutePath());
+            }
+            if (!"termux-api-broadcast".equals(readLink(link))) {
+                link.delete();
+                Os.symlink("termux-api-broadcast", link.getAbsolutePath());
+            }
+        } catch (IOException | ErrnoException e) {
+            Logger.logStackTraceWithMessage(LOG_TAG, "Failed to install termux-api helper", e);
+        }
+    }
+
+    private static String readLink(File link) {
+        try {
+            return Os.readlink(link.getAbsolutePath());
+        } catch (ErrnoException e) {
+            return null; // not a symlink, or missing
+        }
+    }
+
+    private static boolean sameContent(File a, File b) throws IOException {
+        if (!a.isFile() || !b.isFile() || a.length() != b.length()) return false;
+        return Arrays.equals(readAll(a), readAll(b)); // files are a few KB
+    }
+
+    private static byte[] readAll(File file) throws IOException {
+        byte[] data = new byte[(int) file.length()];
+        try (InputStream in = new FileInputStream(file)) {
+            int total = 0;
+            while (total < data.length) {
+                int n = in.read(data, total, data.length - total);
+                if (n < 0) throw new IOException("Unexpected end of file: " + file);
+                total += n;
+            }
+        }
+        return data;
+    }
+
+    private static void copy(File from, File to) throws IOException {
+        try (InputStream in = new FileInputStream(from); FileOutputStream out = new FileOutputStream(to)) {
+            byte[] buf = new byte[8192];
+            int n;
+            while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
+            out.getFD().sync();
         }
     }
 

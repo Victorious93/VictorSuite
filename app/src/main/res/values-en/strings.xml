@@ -1415,8 +1415,8 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="hak5_command_log_clear">Clear log</string>
     <string name="hak5_command_log_cleared">Command log cleared</string>
     <string name="termux_api_embed_title">Termux:API (built in)</string>
-    <string name="termux_api_embed_summary">Lets termux-* commands (pkg install termux-api) talk to VictorSuite directly, so the separate Termux:API app is not needed. Off by default. Android asks for each permission the first time a command needs it. Works on Android 13 and lower; Android 14+ needs a helper update that is not included yet.</string>
-    <string name="termux_api_embed_on_toast">Termux:API turned on. In the terminal run: pkg install termux-api</string>
+    <string name="termux_api_embed_summary">Lets termux-* commands (pkg install termux-api) talk to VictorSuite directly, so the separate Termux:API app is not needed. Off by default. Android asks for each permission the first time a command needs it. VictorSuite replaces the termux-api helper with its own copy each time it starts, so reopen VictorSuite after updating the termux-api package.</string>
+    <string name="termux_api_embed_on_toast">Termux:API turned on. If not installed yet, run in the terminal: pkg install termux-api, then reopen VictorSuite</string>
     <string name="termux_api_embed_off_toast">Termux:API turned off</string>
     <string name="rootforge_category">RootForge</string>
     <string name="rootforge_open_title">Open RootForge</string>

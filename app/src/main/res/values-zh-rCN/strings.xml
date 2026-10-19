@@ -1406,8 +1406,8 @@
     <string name="hak5_command_log_clear">清除日志</string>
     <string name="hak5_command_log_cleared">命令日志已清除</string>
     <string name="termux_api_embed_title">Termux:API(内置)</string>
-    <string name="termux_api_embed_summary">让 termux-* 命令(pkg install termux-api)直接与 VictorSuite 通信,无需另装 Termux:API 应用。默认关闭。命令首次需要某项权限时,Android 会逐项询问。适用于 Android 13 及以下;Android 14 及以上需要更新辅助程序,目前尚未包含。</string>
-    <string name="termux_api_embed_on_toast">已开启 Termux:API。请在终端运行:pkg install termux-api</string>
+    <string name="termux_api_embed_summary">让 termux-* 命令(pkg install termux-api)直接与 VictorSuite 通信,无需另装 Termux:API 应用。默认关闭。命令首次需要某项权限时,Android 会逐项询问。VictorSuite 每次启动时会用自带的副本替换 termux-api 辅助程序,更新 termux-api 软件包后请重新打开 VictorSuite。</string>
+    <string name="termux_api_embed_on_toast">已开启 Termux:API。如尚未安装,请在终端运行:pkg install termux-api,然后重新打开 VictorSuite</string>
     <string name="termux_api_embed_off_toast">已关闭 Termux:API</string>
     <string name="rootforge_category">RootForge</string>
     <string name="rootforge_open_title">打开 RootForge</string>
