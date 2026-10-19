@@ -1464,14 +1464,17 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.qq_group_tv) {
-            UUtils.copyToClip(ZTConstantConfig.ContactInformation.ZT_QQ_GROUP);
-        } else if (v.getId() == R.id.telegram_group_tv) {
+        // VictorSuite modify {@
+        // The two INFO-card links open the project's issue tracker and repository.
+        if (v.getId() == R.id.qq_group_tv || v.getId() == R.id.telegram_group_tv) {
             Intent intent1 = new Intent();
-            intent1.setData(Uri.parse(ZTConstantConfig.ContactInformation.ZT_TELEGRAM_GROUP));
+            intent1.setData(Uri.parse(v.getId() == R.id.qq_group_tv
+                ? ZTConstantConfig.URL.ZT_ISSUES_URL
+                : ZTConstantConfig.URL.ZT_REPO_URL));
             intent1.setAction(Intent.ACTION_VIEW);
             this.startActivity(intent1);
         }
+        // @}
     }
 
     private void setImageBackground(File file) {

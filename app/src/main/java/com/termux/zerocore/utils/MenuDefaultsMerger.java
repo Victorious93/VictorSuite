@@ -39,6 +39,15 @@ public class MenuDefaultsMerger {
     private static final String KEY_KNOWN = "known_default_clicks";
     private static final String JAVA_PREFIX = "java:";
 
+    /**
+     * Group names an older default menu used, mapped to the current ones. A group is renamed only while
+     * it still carries the old default name exactly, so a name the user chose themselves is never touched.
+     */
+    private static final String[][] RENAMED_GROUPS = {
+        {"ZT Functions", "VictorSuite Functions"},
+        {"ZT 功能", "VictorSuite功能"},
+    };
+
     public static final class Result {
         public final String xml;
         public final int added;
@@ -68,6 +77,17 @@ public class MenuDefaultsMerger {
         Element root = user.selectFirst("zt-menu");
         if (root == null) {
             return new Result(userXml, 0, collectClicks(defaults, defaultClicks));
+        }
+
+        int renamed = 0;
+        for (Element group : user.select("group")) {
+            String name = group.attr("name").trim();
+            for (String[] rename : RENAMED_GROUPS) {
+                if (name.equals(rename[0]) && findGroup(user, rename[1]) == null) {
+                    group.attr("name", rename[1]);
+                    renamed++;
+                }
+            }
         }
 
         Set<String> userClicks = new HashSet<>();
@@ -105,7 +125,7 @@ public class MenuDefaultsMerger {
             previousGroupName = groupName;
         }
 
-        if (added == 0) {
+        if (added == 0 && renamed == 0) {
             return new Result(userXml, 0, defaultClicks);
         }
         user.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
@@ -142,9 +162,9 @@ public class MenuDefaultsMerger {
             Set<String> known = new HashSet<>(prefs.getStringSet(KEY_KNOWN, new HashSet<>()));
 
             Result result = merge(userXml, defaultXml, known);
-            if (result.added > 0) {
+            if (!result.xml.equals(userXml)) {
                 UUtils.setFileString(userFile, result.xml);
-                Log.i(TAG, "Added " + result.added + " new default menu entries");
+                Log.i(TAG, "Updated the menu file: " + result.added + " new default entries added");
             }
             known.addAll(result.defaultClicks);
             prefs.edit().putStringSet(KEY_KNOWN, known).apply();

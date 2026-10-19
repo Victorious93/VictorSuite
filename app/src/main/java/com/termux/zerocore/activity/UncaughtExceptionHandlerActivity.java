@@ -19,7 +19,7 @@ public class UncaughtExceptionHandlerActivity extends AppCompatActivity {
         String error = getIntent().getStringExtra("error");
         TextView errorText = findViewById(R.id.error_text);
         errorText.setText(errorText.getText().toString()
-            + ZTConstantConfig.ContactInformation.ZT_QQ_GROUP
+            + ZTConstantConfig.URL.ZT_ISSUES_URL
             + "\nVersion:" + UUtils.getVersionName(UUtils.getContext())
             + "\n\n" + error);
     }

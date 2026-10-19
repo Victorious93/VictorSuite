@@ -119,6 +119,27 @@ public class MenuDefaultsMergerTest {
     }
 
     @Test
+    public void oldDefaultGroupNameIsRenamedButCustomNamesAreNot() {
+        String old = "<zt-menu><group name=\"ZT Functions\">"
+            + "<item tag=\"A\" name=\"A\" click=\"" + P + "AClickConfig\" /></group>"
+            + "<group name=\"ZT 功能\"><item tag=\"B\" name=\"B\" click=\"" + P + "BClickConfig\" /></group>"
+            + "<group name=\"My ZT Functions\"><item tag=\"C\" name=\"C\" click=\"" + P + "CClickConfig\" /></group>"
+            + "</zt-menu>";
+        MenuDefaultsMerger.Result r = MenuDefaultsMerger.merge(old, "<zt-menu/>", new HashSet<>());
+        assertTrue(has(r.xml, "name=\"VictorSuite Functions\""));
+        assertTrue(has(r.xml, "name=\"VictorSuite功能\""));
+        assertTrue(has(r.xml, "name=\"My ZT Functions\""));
+        assertFalse(has(r.xml, "name=\"ZT Functions\""));
+    }
+
+    @Test
+    public void renameIsSkippedWhenTheNewNameAlreadyExists() {
+        String both = "<zt-menu><group name=\"ZT Functions\"/><group name=\"VictorSuite Functions\"/></zt-menu>";
+        MenuDefaultsMerger.Result r = MenuDefaultsMerger.merge(both, "<zt-menu/>", new HashSet<>());
+        assertEquals(both, r.xml);
+    }
+
+    @Test
     public void garbageWithoutRootIsLeftAlone() {
         MenuDefaultsMerger.Result r = MenuDefaultsMerger.merge("<nope/>", DEFAULTS, new HashSet<>());
         assertEquals(0, r.added);

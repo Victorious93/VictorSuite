@@ -3,7 +3,7 @@
     <!--####################### Instructions ########################
     File Path:
     /data/data/com.termux/files/home/ZtInfo/main_menu_path.xml
-    This file is the configuration file for the ZT left-hand menu bar. It can be modified freely (pay attention to the format; errors may prevent the left bar from displaying correctly).
+    This file is the configuration file for the VictorSuite left-hand menu bar. It can be modified freely (pay attention to the format; errors may prevent the left bar from displaying correctly).
     To restore defaults, please use the command:
     zt menu reset
     To apply changes immediately after modification, use the command:
@@ -18,7 +18,7 @@
         1.name: The name of the click event.
         Example: name="Switch Source"
         ####################### click ########################
-        1.click: Calls a JAVA class internal to ZT.
+        1.click: Calls a JAVA class internal to VictorSuite.
         Example: click="java:com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig"
         2.Or jump to a web page:
         click="jumpUrl:www.example.com"
@@ -28,7 +28,7 @@
         autoRunShell="true"
         ####################### icon ########################
         Note: This attribute only takes effect if click does NOT start with 'java:'.
-        1.icon: The icon. 'application' prefix calls ZT's internal resources, or an absolute path can be provided.
+        1.icon: The icon. 'application' prefix calls VictorSuite's internal resources, or an absolute path can be provided.
         Example:(
         Absolute path: icon="imgPath:/data/data/com.termux/files/home/ZTinfo/1.png")
         ####################### shell ########################
@@ -119,7 +119,7 @@
             click="java:com.termux.zerocore.config.mainmenu.config.ReleaseLinuxVersionClickConfig" />
         <item tag="QEMU"
             click="java:com.termux.zerocore.config.mainmenu.config.QEMUClickConfig" />
-        <item tag="ZT Settings"
+        <item tag="VictorSuite Settings"
             click="java:com.termux.zerocore.config.mainmenu.config.ZTSettingsClickConfig" />
         <item tag="Plugin Manager"
             click="java:com.termux.zerocore.config.mainmenu.config.PluginManagerClickConfig" />
@@ -201,7 +201,7 @@
     <group name="Online Functions">
         <item tag="Online Scripts"
             click="java:com.termux.zerocore.config.mainmenu.config.OnLineCommandClickConfig" />
-        <item tag="Zero Forum"
+        <item tag="Termux Wiki"
             click="java:com.termux.zerocore.config.mainmenu.config.ZeroBBsClickConfig" />
         <item tag="Download Station"
             click="java:com.termux.zerocore.config.mainmenu.config.DownLoadClickConfig" />
@@ -226,7 +226,7 @@
             click="java:com.termux.zerocore.config.mainmenu.config.BootCommandClickConfig" />
     </group>
 
-    <group name="ZT Functions">
+    <group name="VictorSuite Functions">
         <item tag="Install Module"
             click="java:com.termux.zerocore.config.mainmenu.config.InstallModuleClickConfig" />
         <item tag="FTP Service"
