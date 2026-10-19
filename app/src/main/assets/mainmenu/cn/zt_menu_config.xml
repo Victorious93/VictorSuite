@@ -132,6 +132,18 @@
             click="java:com.termux.zerocore.config.mainmenu.config.Hak5CompanionClickConfig" />
     </group>
 
+    <group name="Linux 登录">
+        <item tag="Ubuntu Login"
+            name="Ubuntu"
+            click="java:com.termux.zerocore.config.mainmenu.config.UbuntuLoginClickConfig" />
+        <item tag="Kali Login"
+            name="Kali Linux"
+            click="java:com.termux.zerocore.config.mainmenu.config.KaliLoginClickConfig" />
+        <item tag="Parrot Login"
+            name="Parrot OS"
+            click="java:com.termux.zerocore.config.mainmenu.config.ParrotLoginClickConfig" />
+    </group>
+
     <group name="X11功能">
         <item tag="X11设置"
             click="java:com.termux.zerocore.config.mainmenu.config.X11SettingsClickConfig" />
