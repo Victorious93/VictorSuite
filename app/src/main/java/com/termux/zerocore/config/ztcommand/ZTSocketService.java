@@ -68,7 +68,11 @@ public class ZTSocketService extends Service {
     private void startSocketService() {
         new Thread(() -> {
             try {
-                serverSocket = new ServerSocket(JAVA_PORT);
+                // VictorSuite modify {@
+                // Unauthenticated command channel: accept loopback connections only,
+                // never other hosts on the LAN. (Was: new ServerSocket(JAVA_PORT).)
+                serverSocket = new ServerSocket(JAVA_PORT, 50, InetAddress.getLoopbackAddress());
+                // @}
                 executor = Executors.newFixedThreadPool(5);
                 LogUtils.d(TAG, "Java Socket服务已启动，端口: " + JAVA_PORT);
 
