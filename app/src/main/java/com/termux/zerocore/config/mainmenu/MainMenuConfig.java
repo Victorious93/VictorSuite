@@ -34,6 +34,7 @@ import com.termux.zerocore.config.mainmenu.config.HideCommandClickConfig;
 import com.termux.zerocore.config.mainmenu.config.HideX11KeyboardClickConfig;
 import com.termux.zerocore.config.mainmenu.config.InstallModuleClickConfig;
 import com.termux.zerocore.config.mainmenu.config.InstallX11ClickConfig;
+import com.termux.zerocore.config.mainmenu.config.KaliLoginClickConfig;
 import com.termux.zerocore.config.mainmenu.config.KeyDataClickConfig;
 import com.termux.zerocore.config.mainmenu.config.LanguageClickConfig;
 import com.termux.zerocore.config.mainmenu.config.MainMenuClickConfig;
@@ -42,6 +43,7 @@ import com.termux.zerocore.config.mainmenu.config.MyUsedSoftLinksDataClickConfig
 import com.termux.zerocore.config.mainmenu.config.OnLineCommandClickConfig;
 import com.termux.zerocore.config.mainmenu.config.OpenPathClickConfig;
 import com.termux.zerocore.config.mainmenu.config.OpenTurnNetworkAdbClickConfig;
+import com.termux.zerocore.config.mainmenu.config.ParrotLoginClickConfig;
 import com.termux.zerocore.config.mainmenu.config.ParticleClickConfig;
 import com.termux.zerocore.config.mainmenu.config.PhoneSmsClickConfig;
 import com.termux.zerocore.config.mainmenu.config.PublicWarehouseClickConfig;
@@ -54,6 +56,7 @@ import com.termux.zerocore.config.mainmenu.config.ShowCommandClickConfig;
 import com.termux.zerocore.config.mainmenu.config.ShowX11KeyboardClickConfig;
 import com.termux.zerocore.config.mainmenu.config.SnowflakeClickConfig;
 import com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig;
+import com.termux.zerocore.config.mainmenu.config.UbuntuLoginClickConfig;
 import com.termux.zerocore.config.mainmenu.config.UnInstallClickConfig;
 import com.termux.zerocore.config.mainmenu.config.VNCClickConfig;
 import com.termux.zerocore.config.mainmenu.config.WebDataClickConfig;
@@ -78,6 +81,7 @@ public class MainMenuConfig implements BaseConfig {
     public static final int CODE_ZT_ROOT = 5;
     public static final int CODE_ZT_ENGINE = 6;
     public static final int CODE_ZT_CONFIG = 7;
+    public static final int CODE_LINUX_LOGIN = 9;
     public static final int CODE_SUITE = 8;
 
     // 主页分类
@@ -132,6 +136,13 @@ public class MainMenuConfig implements BaseConfig {
         rootClicks.add(new CloseTurnNetworkAdbClickConfig());
         rootClicks.add(new DockerCheckClickConfig());
         MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.zt_root_fun), CODE_ZT_ROOT, rootClicks));
+
+        // Linux login (proot-distro containers)
+        ArrayList<MainMenuClickConfig> linuxLoginClicks = new ArrayList<>();
+        linuxLoginClicks.add(new UbuntuLoginClickConfig());
+        linuxLoginClicks.add(new KaliLoginClickConfig());
+        linuxLoginClicks.add(new ParrotLoginClickConfig());
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.linux_login_group), CODE_LINUX_LOGIN, linuxLoginClicks));
 
         // 线上功能
         ArrayList<MainMenuClickConfig> onlineClicks = new ArrayList<>();
