@@ -1407,4 +1407,10 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="termux_api_embed_summary">Lets termux-* commands (pkg install termux-api) talk to VictorSuite directly, so the separate Termux:API app is not needed. Off by default. Android asks for each permission the first time a command needs it. Works on Android 13 and lower; Android 14+ needs a helper update that is not included yet.</string>
     <string name="termux_api_embed_on_toast">Termux:API turned on. In the terminal run: pkg install termux-api</string>
     <string name="termux_api_embed_off_toast">Termux:API turned off</string>
+    <string name="rootforge_category">RootForge</string>
+    <string name="rootforge_open_title">Open RootForge</string>
+    <string name="rootforge_missing_title">RootForge is not installed</string>
+    <string name="rootforge_missing_msg">RootForge is a separate app (USB toolkit). Install it, then tap this entry again.</string>
+    <string name="rootforge_open_releases">Open download page</string>
+    <string name="rootforge_launch_failed">Could not open RootForge</string>
 </resources>
