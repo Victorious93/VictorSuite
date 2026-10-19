@@ -99,7 +99,7 @@ The codebase is mixed Java and Kotlin. New `zerocore` features should be written
 
 ## Gotchas
 - `applicationId` is `com.termux`: VictorSuite cannot be installed alongside upstream Termux.
-- Signing: `app/build.gradle` signs with the committed `phone.jks`, with `STORE_PASSWORD` from the environment and a fallback default password in the file. Treat this as a debug/dev key only; never add real release keys or passwords to the repo.
+- Signing: debug builds use the committed `app/victorsuite-debug.keystore` (public `android` passwords, deliberately not a secret, so debug fingerprints are stable across machines/CI). Release builds sign only when `SIGNING_KEYSTORE_FILE` or `SIGNING_KEYSTORE_BASE64` plus `KEY_ALIAS`, `KEY_PASSWORD`, `STORE_PASSWORD` are set in the environment; otherwise release APKs are unsigned. Never commit real release keys or passwords.
 
 ## Don's standing rules (apply to every change)
 - Work on a branch and open a PR. Never push to `main`.
