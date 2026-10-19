@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
@@ -786,8 +787,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 		  // VictorSuite add {@
           /*  mTermuxTerminalViewClient.onToggleSoftKeyboardRequest();
             getDrawer().closeDrawers();*/
-            indexSwitch(0);
-            fragmentManager(0);
+            openFileManager();
 			// @}
         });
 
@@ -2067,6 +2067,40 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 break;
         }
     }
+
+    // VictorSuite add {@
+    /**
+     * "File Manager" drawer button handler. Victorious File Manager
+     * (<a href="https://github.com/Victorious93/File-Manager">Victorious93/File-Manager</a>,
+     * {@code ai.victorious.filemanager}) is a standalone app — not a library — so it is launched,
+     * never embedded. If it is not installed, falls back to the existing in-app
+     * {@code ZFileListFragment} (the {@code z_file.aar} browser this button opened before) so the
+     * button still works for someone without it.
+     */
+    private void openFileManager() {
+        Intent launchIntent = resolveVictoriousFileManagerLaunchIntent();
+        if (launchIntent != null) {
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(launchIntent);
+            return;
+        }
+        Toast.makeText(this, R.string.victorious_file_manager_not_installed, Toast.LENGTH_SHORT).show();
+        indexSwitch(0);
+        fragmentManager(0);
+    }
+
+    /** Release package first, then the debug build's {@code .debug} suffix. Null if neither is installed. */
+    private Intent resolveVictoriousFileManagerLaunchIntent() {
+        PackageManager packageManager = getPackageManager();
+        for (String packageName : new String[]{"ai.victorious.filemanager", "ai.victorious.filemanager.debug"}) {
+            Intent launchIntent = packageManager.getLaunchIntentForPackage(packageName);
+            if (launchIntent != null) {
+                return launchIntent;
+            }
+        }
+        return null;
+    }
+    // @}
 
     private void fragmentManager(int index) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager()

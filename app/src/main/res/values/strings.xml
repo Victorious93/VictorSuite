@@ -868,6 +868,7 @@ Reset successfully</string>
     <string name="module_un7z_">Module Expanding...</string>
     <string name="module_install_pro">processing command:</string>
     <string name="file_manager">File Manager</string>
+    <string name="victorious_file_manager_not_installed">Victorious File Manager is not installed — showing the built-in file browser instead.</string>
     <string name="select_session">Select Session</string>
     <string name="http_folder">folder</string>
     <string name="http_file">file</string>
