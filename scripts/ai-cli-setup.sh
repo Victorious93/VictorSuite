@@ -4,18 +4,23 @@
 #   pi       - runs natively in Termux (npm, per pi's own Termux guide)
 #   copilot  - GitHub Copilot CLI; runs inside a proot-distro Ubuntu container
 #   codex    - OpenAI Codex CLI;   runs inside the same Ubuntu container
+#   claude   - Claude Code;        runs inside the same Ubuntu container
+#   ollama   - Ollama (local LLM server and CLI); native Termux package
 #   hf       - Hugging Face CLI;   runs inside the same Ubuntu container
 #
-# Copilot and Codex ship prebuilt Linux (glibc/musl) binaries only; neither
-# publishes an Android build, so they cannot run directly on Termux's bionic
-# libc. hf depends on hf-xet, which has no Android wheel either. Running them
-# in a glibc Ubuntu container avoids that. Thin wrappers are written to
-# $PREFIX/bin so `copilot`, `codex` and `hf` work from the normal Termux prompt.
+# Copilot, Codex and Claude Code ship prebuilt Linux (glibc/musl) binaries
+# only; none publishes an Android build, so they cannot run directly on
+# Termux's bionic libc. hf depends on hf-xet, which has no Android wheel
+# either. Running them in a glibc Ubuntu container avoids that. Thin wrappers
+# are written to $PREFIX/bin so `copilot`, `codex`, `claude` and `hf` work from
+# the normal Termux prompt. Ollama is a Termux package and needs no container.
+# It is built for 64-bit ARM and x86_64 only. Models are large: check free
+# storage and RAM before pulling one.
 #
 # Usage: ai-cli-setup.sh [--only LIST] [--container NAME] [--codex-from-tur]
 #                        [--skip-upgrade] [-h|--help]
-#   --only LIST        comma-separated subset of: pi,copilot,codex,hf
-#                      (default: all four)
+#   --only LIST        comma-separated subset of: pi,copilot,codex,claude,ollama,hf
+#                      (default: all six)
 #   --container NAME   proot-distro container name (default: ai-cli)
 #   --codex-from-tur   install Codex natively from the Termux User Repository
 #                      instead of the container (TUR's build can lag upstream)
@@ -28,7 +33,7 @@ UBUNTU_IMAGE="ubuntu:24.04"
 NODE_LINE="latest-v22.x"
 PI_MIN_NODE="22.19.0"
 WRAPPER_MARKER="# managed-by: victorsuite ai-cli-setup"
-ONLY="pi,copilot,codex,hf"
+ONLY="pi,copilot,codex,claude,ollama,hf"
 CODEX_FROM_TUR=0
 SKIP_UPGRADE=0
 
@@ -52,7 +57,7 @@ done
 wants() { case ",$ONLY," in *",$1,"*) return 0 ;; *) return 1 ;; esac; }
 
 for tool in ${ONLY//,/ }; do
-    case "$tool" in pi|copilot|codex|hf) ;; *) die "unknown tool in --only: $tool" ;; esac
+    case "$tool" in pi|copilot|codex|claude|ollama|hf) ;; *) die "unknown tool in --only: $tool" ;; esac
 done
 case "$CONTAINER" in
     ''|[!A-Za-z0-9]*|*[!A-Za-z0-9_.-]*) die "invalid container name: $CONTAINER" ;;
@@ -70,16 +75,16 @@ case "$(uname -m)" in
     x86_64) NODE_ARCH="x64" ;;
     *)
         NODE_ARCH=""
-        if wants copilot || wants codex || wants hf; then
-            wants pi || die "$(uname -m) has no Linux build of copilot/codex/hf; only pi is supported here (--only pi)"
-            warn "$(uname -m) has no Linux build of copilot/codex/hf; only pi will be installed"
+        if [ "$ONLY" != "pi" ]; then
+            wants pi || die "$(uname -m) has no build of copilot/codex/claude/ollama/hf; only pi is supported here (--only pi)"
+            warn "$(uname -m) has no build of copilot/codex/claude/ollama/hf; only pi will be installed"
             ONLY="pi"
         fi
         ;;
 esac
 
 NEED_CONTAINER=0
-if wants copilot || wants hf || { wants codex && [ "$CODEX_FROM_TUR" = 0 ]; }; then
+if wants copilot || wants claude || wants hf || { wants codex && [ "$CODEX_FROM_TUR" = 0 ]; }; then
     NEED_CONTAINER=1
 fi
 
@@ -94,6 +99,7 @@ fi
 
 TERMUX_PKGS=()
 wants pi && TERMUX_PKGS+=(nodejs git)
+wants ollama && TERMUX_PKGS+=(ollama)
 [ "$NEED_CONTAINER" = 1 ] && TERMUX_PKGS+=(proot-distro)
 if [ ${#TERMUX_PKGS[@]} -gt 0 ]; then
     log "Installing Termux packages: ${TERMUX_PKGS[*]}"
@@ -140,6 +146,7 @@ if [ "$NEED_CONTAINER" = 1 ]; then
     NPM_PKGS=""
     wants copilot && NPM_PKGS="$NPM_PKGS @github/copilot"
     wants codex && [ "$CODEX_FROM_TUR" = 0 ] && NPM_PKGS="$NPM_PKGS @openai/codex"
+    wants claude && NPM_PKGS="$NPM_PKGS @anthropic-ai/claude-code"
 
     if [ -n "$NPM_PKGS" ]; then
         # Ubuntu 24.04's apt Node is 18; Copilot's launcher needs newer, so use
@@ -204,6 +211,7 @@ EOF
 
 wants copilot && write_wrapper copilot "GH_TOKEN GITHUB_TOKEN"
 wants codex && [ "$CODEX_FROM_TUR" = 0 ] && write_wrapper codex "OPENAI_API_KEY"
+wants claude && write_wrapper claude "ANTHROPIC_API_KEY ANTHROPIC_BASE_URL"
 wants hf && write_wrapper hf "HF_TOKEN"
 
 # --- verify ---------------------------------------------------------------
@@ -228,6 +236,10 @@ for tool in ${ONLY//,/ }; do
             echo '  copilot  run `copilot` and type /login, or export GH_TOKEN (fine-grained'
             echo '           token with the "Copilot Requests" permission)' ;;
         codex) echo '  codex    run `codex` and sign in with ChatGPT, or export OPENAI_API_KEY' ;;
+        claude) echo '  claude   run `claude` and sign in, or export ANTHROPIC_API_KEY' ;;
+        ollama)
+            echo '  ollama   no sign-in: start the server with `ollama serve &`, then'
+            echo '           `ollama pull <model>` (models are large; check storage and RAM)' ;;
         hf) echo '  hf       `hf auth login`, or export HF_TOKEN' ;;
         pi) echo '  pi       run `pi` and follow its model/provider setup' ;;
     esac
