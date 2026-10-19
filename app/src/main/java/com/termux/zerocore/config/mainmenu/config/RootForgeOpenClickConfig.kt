@@ -55,9 +55,9 @@ class RootForgeOpenClickConfig : BaseMenuClickConfig() {
             context.getString(R.string.rootforge_missing_msg),
             context
         )
-        dialog.ok.text = UUtils.getString(R.string.rootforge_open_releases)
-        dialog.cancel.setOnClickListener { dialog.dismiss() }
-        dialog.ok.setOnClickListener {
+        dialog.ok?.text = UUtils.getString(R.string.rootforge_open_releases)
+        dialog.cancel?.setOnClickListener { dialog.dismiss() }
+        dialog.ok?.setOnClickListener {
             dialog.dismiss()
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(RELEASES_URL))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
