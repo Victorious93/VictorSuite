@@ -33,7 +33,7 @@ ZeroTermux / VictorSuite additions live under `com.termux.zerocore`:
 - **Embedded services** — FTP server, HTTP/ttyd-style service, file browser integrations.
 - **X11 support** — separately distributed internal-channel X11 AAR; Termux:X11–style desktop workflows.
 - **scrcpy / QEMU / wireless ADB / root shell** — integrations under `zerocore` (scrcpy, UTermux/QEMU windows, wireless ADB, libsu).
-- **In-app AI chat** — DeepSeek and Claude API clients with SQLite session storage (`zerocore/deepseek`).
+- **AI via DroidCommand AI** — the drawer's AI button and the Settings AI entry launch the separate [DroidCommand AI](https://github.com/Victorious93/droidcommand-ai) app (`ai.droidcommand.app`). The old in-app DeepSeek/Claude chat UI is no longer reachable; its code under `zerocore/deepseek` is unreferenced and still present (`MarkDownAPI` there is used by `TermuxActivity`).
 - **AI CLI setup script** — bundled `scripts/ai-cli-setup.sh` installs pi, Copilot CLI, Codex CLI, and Hugging Face CLI (some via an Ubuntu proot container). **Not yet run on a real device** — see [docs/AI_CLIS.md](docs/AI_CLIS.md).
 
 Upstream Termux capabilities (terminal emulator, packages via bootstrap, `RUN_COMMAND`) remain the foundation.

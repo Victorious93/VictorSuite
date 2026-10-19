@@ -124,7 +124,9 @@ import com.termux.zerocore.config.mainmenu.data.MainMenuCategoryData;
 import com.termux.zerocore.config.mainmenu.view.adapter.MainMenuAdapter;
 import com.termux.zerocore.config.other.ZTGitHubVersion;
 import com.termux.zerocore.config.ztcommand.config.XmlMenuConfig;
-import com.termux.zerocore.deepseek.DeepSeekTransitFragment;
+// VictorSuite modify {@ the in-app AI chat was replaced by the DroidCommand AI app
+import com.termux.zerocore.droidcommand.DroidCommandAi;
+// @}
 import com.termux.zerocore.deepseek.markdown.MarkDownAPI;
 import com.termux.zerocore.dialog.BeautifySettingDialog;
 import com.termux.zerocore.dialog.CommonCommandsDialog;
@@ -803,10 +805,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         findViewById(R.id.select_new_session_button).setOnClickListener(v -> {
             indexSwitch(1);
         });
-        findViewById(R.id.deepseek).setOnClickListener(view -> {
-            indexSwitch(0);
-            fragmentManager(1);
-        });
+        findViewById(R.id.droidcommand_ai).setOnClickListener(view -> DroidCommandAi.launch(this));
 		// @}
     }
 
@@ -2140,15 +2139,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         LogUtils.e(TAG, "fragmentManager fragmentTransaction is: " + fragmentTransaction);
 
         // 1. 先移除可能存在的所有 Fragment
-        Fragment deepSeekFragment = getSupportFragmentManager()
-            .findFragmentByTag("DeepSeekTransitFragment");
         Fragment fileListFragment = getSupportFragmentManager()
             .findFragmentByTag("ZFileListFragment");
-
-        if (deepSeekFragment != null) {
-            fragmentTransaction.remove(deepSeekFragment);
-            LogUtils.e(TAG, "Removed existing DeepSeekTransitFragment");
-        }
 
         if (fileListFragment != null) {
             fragmentTransaction.remove(fileListFragment);
@@ -2184,13 +2176,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 fragmentTransaction.replace(R.id.frame_file, ZFileListFragment.newInstance(), "ZFileListFragment")
                     .commitAllowingStateLoss();
                 LogUtils.e(TAG, "fragmentManager switch ZFileListFragment deno. ");
-                break;
-            case 1:
-                LogUtils.e(TAG, "fragmentManager switch DeepSeekTransitFragment. ");
-                DeepSeekTransitFragment deepSeekTransitFragment = DeepSeekTransitFragment.newInstance();
-                fragmentTransaction.replace(R.id.frame_file, deepSeekTransitFragment, "DeepSeekMainFragment")
-                    .commitAllowingStateLoss();
-                LogUtils.e(TAG, "fragmentManager switch DeepSeekTransitFragment deno. ");
                 break;
         }
         ZTConfig.INSTANCE.setCloseListener(() -> getDrawer().smoothClose());
