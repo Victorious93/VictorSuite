@@ -34,13 +34,14 @@ CI (`.github/workflows/android.yml`, "Build") runs only `:app:assembleDebug --st
 
 Product direction (`docs/SUITE_PLAN.md`, planning only): VictorSuite and RootForge OS (`Victorious93/rootforge-os`) stay **two separate APKs** in one suite (shared Kotlin library, shared JSON command schema, deep-link handoff). `docs/MERGE_PLAN.md` (one-APK plan) is superseded/stub. `docs/AI_CLIS.md` documents `scripts/ai-cli-setup.sh` (not yet run on a real device).
 
-VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of the ZeroTermux codebase. It is a four-module Android Gradle project:
+VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of the ZeroTermux codebase. It is a five-module Android Gradle project:
 
 | Module | Role |
 |---|---|
 | `terminal-emulator` | Pure-Java/JNI VT100/xterm terminal state machine; no Android UI dependencies. |
 | `terminal-view` | Android `View` that renders a `TerminalEmulator` and handles input. Depends on `:terminal-emulator`. |
 | `termux-shared` | Shared utilities used by both `:app` and companion Termux apps (file utils, logger, settings, crash handling, JNI helpers, local Unix socket). |
+| `termux-api-lib` | Vendored copy of the Termux:API app (`termux/termux-api` v0.53.0, GPLv3) built as a library so it runs inside the `com.termux` APK. See "Embedded Termux:API" below and `termux-api-lib/UPSTREAM.md`. |
 | `app` | The main application. Contains all VictorSuite/ZeroTermux additions under `com.termux.zerocore`. |
 
 ### `app` source layout
@@ -68,6 +69,18 @@ Under `app/src/main/java/com/termux/`:
 - **`settings/`** — VictorSuite-specific settings activities (X11, timers, online server, install/uninstall).
 - **`adb/`** — wireless ADB shell integration.
 - **`libsu/`** — root shell integration via `libsu` (topjohnwu).
+
+### Embedded Termux:API
+
+`:termux-api-lib` replaces the separate `com.termux.api` app. Facts that are easy to get wrong:
+
+- Off by default. Every component in its manifest is `android:enabled="false"`. `TermuxApiEmbed.setEnabled()` (`com.termux.api`) stores the setting, enables or disables all `com.termux.api.*` components through `PackageManager`, and starts `SocketListener`. `TermuxApplication.onCreate()` calls `TermuxApiEmbed.init()`.
+- The switch is in `VictorSuiteSettingsActivity` ("Termux:API (built in)"). The stock Settings "Termux:API" row still targets the companion app and stays hidden without it; `TermuxUtils.isTermuxAPIAppInstalled()` still means the companion app, not the embed.
+- `TermuxApiReceiver` and `SocketListener` refuse requests while the setting is off.
+- Upstream's launcher/main/settings activities and `TermuxAPIApplication` were removed. Local changes are marked `// VictorSuite add {@` / `modify {@`; to update from upstream, follow `termux-api-lib/UPSTREAM.md`.
+- The manifest merges Termux:API's 33 permissions (SMS send, call, camera, mic, location, all-files, ...) into the APK whether or not the switch is on. Not Play-compatible.
+- Helper: the `termux-api` shell helper (`pkg install termux-api`, MIT, separate repo) connects to the socket `com.termux.api://listen` first on Android below 14, and the embedded `SocketListener` binds that name, so it should work there unmodified. On Android 14+ (or when the app process is not running) it falls back to `am broadcast -n com.termux.api/.TermuxApiReceiver`, which does not exist here. That retarget is not done yet.
+- Untested on a device as of this writing: only the CI build has run.
 
 ### Remote JSON manifests
 
