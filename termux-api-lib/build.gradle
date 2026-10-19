@@ -1,0 +1,40 @@
+// Termux:API sources (GPLv3) vendored from termux/termux-api, see UPSTREAM.md.
+// Built as a library so the receiver lives inside the VictorSuite APK (applicationId com.termux).
+apply plugin: 'com.android.library'
+
+android {
+    namespace = "com.termux.api"
+
+    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+
+    defaultConfig {
+        minSdkVersion project.properties.minSdkVersion.toInteger()
+        targetSdkVersion project.properties.targetSdkVersion.toInteger()
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.0.4"
+
+    implementation "androidx.annotation:annotation:1.9.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.core:core:1.13.1"
+    implementation "androidx.documentfile:documentfile:1.0.1"
+    implementation "androidx.biometric:biometric:1.2.0-alpha05"
+    implementation "com.google.android.material:material:1.12.0"
+
+    implementation project(":termux-shared")
+}

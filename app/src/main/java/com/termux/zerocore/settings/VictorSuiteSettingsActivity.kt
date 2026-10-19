@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import com.example.xh_lib.utils.UUtils
+import com.termux.api.TermuxApiEmbed
 import com.termux.R
 import com.termux.zerocore.ftp.utils.UserSetManage
 import com.termux.zerocore.url.FileUrl
@@ -46,6 +47,9 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
     private val mainMenuConfigCloseSwitch by lazy {findViewById<SwitchCompat>(R.id.main_menu_config_close_switch)}
     private val mainMenuConfigCloseLl by lazy {findViewById<LinearLayout>(R.id.main_menu_config_close_ll)}
 
+    private val termuxApiEmbedSwitch by lazy {findViewById<SwitchCompat>(R.id.termux_api_embed_switch)}
+    private val termuxApiEmbedLl by lazy {findViewById<LinearLayout>(R.id.termux_api_embed_ll)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_victor_suite_settings)
@@ -64,6 +68,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         setSwitchStatus(volumeFunctionSwitch, volumeFunctionLl)
         setSwitchStatus(foldMenuCloseSwitch, foldMenuCloseLl)
         setSwitchStatus(mainMenuConfigCloseSwitch, mainMenuConfigCloseLl)
+        setSwitchStatus(termuxApiEmbedSwitch, termuxApiEmbedLl)
     }
 
     private fun initStatus() {
@@ -78,6 +83,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         volumeFunctionSwitch.isChecked = ztUserBean.isResetVolume
         foldMenuCloseSwitch.isChecked = ztUserBean.isCloseFoldMenu
         mainMenuConfigCloseSwitch.isChecked = ztUserBean.isDisableMainConfigMenu
+        termuxApiEmbedSwitch.isChecked = TermuxApiEmbed.isEnabled(this)
     }
 
     private fun setSwitchStatus(switchCompat: SwitchCompat, linearLayout: LinearLayout) {
@@ -133,6 +139,17 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
                 mainMenuConfigCloseSwitch -> {
                     ztUserBean.isDisableMainConfigMenu = switchCompat.isChecked
                     //Toast.makeText(this, UUtils.getString(R.string.zt_command_path_ok), Toast.LENGTH_SHORT).show()
+                }
+                termuxApiEmbedSwitch -> {
+                    // Also fires while the screen sets its initial state; only act on a real change.
+                    if (isChecked != TermuxApiEmbed.isEnabled(this)) {
+                        TermuxApiEmbed.setEnabled(this, isChecked)
+                        Toast.makeText(
+                            this,
+                            UUtils.getString(if (isChecked) R.string.termux_api_embed_on_toast else R.string.termux_api_embed_off_toast),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
             UserSetManage.get().setZTUserBean(ztUserBean)

@@ -50,6 +50,7 @@ android {
 
         implementation project(":terminal-view")
         implementation project(":termux-shared")
+        implementation project(":termux-api-lib") // VictorSuite add: embedded Termux:API (off by default)
         //VictorSuite {@
         def libsuVersion = '5.2.1'
         implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
