@@ -1,3 +1,31 @@
+<!-- victorious-fleet-readme-refresh:start -->
+<p align="center">
+  <img src="assets/logo.png" alt="VictorSuite logo" width="200">
+</p>
+
+# VictorSuite
+
+Android Linux environment suite for the Victorious fleet (host/shell tooling via TERMUX_IPC).
+
+**Package id:** `com.termux`
+
+> **Package note:** From `app/build.gradle` / manifest (`TERMUX_PACKAGE_NAME` / `namespace`). Display name is VictorSuite — do not refer to this app as Termux.
+
+**Status:** CI green / not device-tested *(from [fleet-manifest ROADMAP](https://github.com/Victorious93/fleet-manifest/blob/main/ROADMAP.md))*
+
+## Install / build
+
+Gradle Android app under `app/`. JDK 17; see `gradle.properties` for SDK/NDK. Typical: `./gradlew :app:assembleDebug`.
+
+_Steps above are taken from this repo’s build files / existing docs; anything not exercised in this refresh is unlabeled as verified on a device._
+
+## Victorious fleet
+
+- Monorepo: [https://github.com/Victorious93/victorious-fleet](https://github.com/Victorious93/victorious-fleet)
+- Fleet site: [https://victorious-framework.pages.dev](https://victorious-framework.pages.dev)
+
+<!-- victorious-fleet-readme-refresh:end -->
+
 <div align="center">
 
 # VictorSuite
