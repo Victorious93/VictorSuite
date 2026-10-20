@@ -1344,7 +1344,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             intent.setAction(Intent.ACTION_VIEW);
             startActivity(intent); //启动浏览器
         });
-        telegram_group_tv.setOnClickListener(this);
+        // Upstream Telegram group removed (not owner-controlled).
+        telegram_group_tv.setVisibility(View.GONE);
         ZTGitHubVersion.create().initZtVersionVisible(zt_new);
         try {
             double_tishi.setText(double_tishi.getText() + "\n" + TermuxInstaller.determineTermuxArchName().toUpperCase());
