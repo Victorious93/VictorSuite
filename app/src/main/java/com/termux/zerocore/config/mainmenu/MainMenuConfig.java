@@ -34,6 +34,7 @@ import com.termux.zerocore.config.mainmenu.config.HideCommandClickConfig;
 import com.termux.zerocore.config.mainmenu.config.HideX11KeyboardClickConfig;
 import com.termux.zerocore.config.mainmenu.config.InstallModuleClickConfig;
 import com.termux.zerocore.config.mainmenu.config.InstallX11ClickConfig;
+import com.termux.zerocore.config.mainmenu.config.BlackArchLoginClickConfig;
 import com.termux.zerocore.config.mainmenu.config.KaliLoginClickConfig;
 import com.termux.zerocore.config.mainmenu.config.KeyDataClickConfig;
 import com.termux.zerocore.config.mainmenu.config.LanguageClickConfig;
@@ -142,6 +143,7 @@ public class MainMenuConfig implements BaseConfig {
         linuxLoginClicks.add(new UbuntuLoginClickConfig());
         linuxLoginClicks.add(new KaliLoginClickConfig());
         linuxLoginClicks.add(new ParrotLoginClickConfig());
+        linuxLoginClicks.add(new BlackArchLoginClickConfig());
         MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.linux_login_group), CODE_LINUX_LOGIN, linuxLoginClicks));
 
         // 线上功能
