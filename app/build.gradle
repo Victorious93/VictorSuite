@@ -15,11 +15,55 @@ ext {
     packageVariant = System.getenv("TERMUX_PACKAGE_VARIANT") ?: "apt-android-7" // Default: "apt-android-7"
 }
 
+// VictorSuite add {@
+// Builds the termux-api helper (MIT, src/main/cpp/termux-api-helper) for every ABI with the NDK's clang
+// and packages it as libtermux-api-helper.so: a PIE executable named like a library, the same shape as
+// jniLibs/<abi>/libadb.so. TermuxApiEmbed copies it into $PREFIX/libexec. Uses ProcessBuilder because
+// Project.exec is gone in Gradle 9.
+def termuxApiHelperOutDir = layout.buildDirectory.dir("generated/termuxApiHelper/jniLibs")
+tasks.register("buildTermuxApiHelper") {
+    def helperSrcDir = file("src/main/cpp/termux-api-helper")
+    inputs.dir(helperSrcDir)
+    outputs.dir(termuxApiHelperOutDir)
+    doLast {
+        def ndk = android.ndkDirectory
+        def os = org.gradle.internal.os.OperatingSystem.current()
+        def host = os.isWindows() ? "windows-x86_64" : (os.isMacOsX() ? "darwin-x86_64" : "linux-x86_64")
+        def ext = os.isWindows() ? ".cmd" : ""
+        def api = project.properties.minSdkVersion
+        def targets = [
+            "arm64-v8a"  : "aarch64-linux-android",
+            "armeabi-v7a": "armv7a-linux-androideabi",
+            "x86"        : "i686-linux-android",
+            "x86_64"     : "x86_64-linux-android",
+        ]
+        targets.each { abi, triple ->
+            def outFile = new File(termuxApiHelperOutDir.get().asFile, "${abi}/libtermux-api-helper.so")
+            outFile.parentFile.mkdirs()
+            def clang = new File(ndk, "toolchains/llvm/prebuilt/${host}/bin/${triple}${api}-clang${ext}")
+            def cmd = [clang.absolutePath, "-std=c11", "-Wno-sign-compare", "-Os", "-fno-stack-protector",
+                       "-fPIE", "-pie", "-s", "-Wl,-z,max-page-size=16384",
+                       "-o", outFile.absolutePath,
+                       new File(helperSrcDir, "termux-api.c").absolutePath,
+                       new File(helperSrcDir, "termux-api-broadcast.c").absolutePath]
+            def proc = new ProcessBuilder(cmd).redirectErrorStream(true).start()
+            def output = proc.inputStream.text
+            if (proc.waitFor() != 0) {
+                throw new GradleException("Building termux-api helper for ${abi} failed:\n${output}")
+            }
+        }
+    }
+}
+// @}
+
 android {
     sourceSets {
         main {
             // Bundles scripts/ai-cli-setup.sh for the "AI CLIs" menu entry (AiCliSetupClickConfig).
             assets.srcDirs += ['../scripts']
+            // VictorSuite add {@
+            jniLibs.srcDir(files(termuxApiHelperOutDir) { builtBy("buildTermuxApiHelper") })
+            // @}
         }
     }
 
@@ -39,7 +83,6 @@ android {
         implementation "androidx.preference:preference:1.2.1"
         implementation "androidx.viewpager:viewpager:1.0.0"
         implementation "com.google.android.material:material:1.12.0"
-        implementation "com.google.guava:guava:24.1-jre"
         implementation "io.noties.markwon:core:$markwonVersion"
         implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
         implementation "io.noties.markwon:linkify:$markwonVersion"
@@ -50,6 +93,7 @@ android {
 
         implementation project(":terminal-view")
         implementation project(":termux-shared")
+        implementation project(":termux-api-lib") // VictorSuite add: embedded Termux:API (off by default)
         //VictorSuite {@
         def libsuVersion = '5.2.1'
         implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
@@ -58,7 +102,6 @@ android {
         implementation('cn.hotapk:fastandrutils:0.8.0') {
             exclude group: 'com.android.support'
         }
-        implementation "com.google.android.material:material:1.12.0"
         implementation "com.google.guava:guava:31.0.1-jre"
         implementation 'com.google.code.gson:gson:2.8.6'
         //网络框架
@@ -192,27 +235,52 @@ android {
 
 
     // VictorSuite modify {@
-    /*signingConfigs {
-        debug {
-            storeFile file('testkey_untrusted.jks')
-            keyAlias 'alias'
-            storePassword 'xrj45yWGLbsO7W0v'
-            keyPassword 'xrj45yWGLbsO7W0v'
+    // Release signing comes ONLY from the environment (CI secrets). Nothing secret is
+    // committed. Required env vars:
+    //   SIGNING_KEYSTORE_FILE   path to the release keystore, OR
+    //   SIGNING_KEYSTORE_BASE64 base64 of the keystore (decoded into app/build/)
+    //   KEY_ALIAS, KEY_PASSWORD, STORE_PASSWORD
+    // If any is missing, release builds are left UNSIGNED (a warning is printed).
+    // Debug builds use the standard Android debug keystore (~/.android/debug.keystore).
+    def releaseKeystore = null
+    def keystorePathEnv = System.getenv("SIGNING_KEYSTORE_FILE")
+    def keystoreB64Env = System.getenv("SIGNING_KEYSTORE_BASE64")
+    if (keystorePathEnv) {
+        releaseKeystore = file(keystorePathEnv)
+        if (!releaseKeystore.isFile()) {
+            throw new GradleException("SIGNING_KEYSTORE_FILE points to a missing file: " + keystorePathEnv)
         }
-    }*/
+    } else if (keystoreB64Env) {
+        releaseKeystore = new File(buildDir, "signing/release.jks")
+        releaseKeystore.parentFile.mkdirs()
+        releaseKeystore.bytes = Base64.mimeDecoder.decode(keystoreB64Env.trim())
+    }
+    def releaseSigningReady = releaseKeystore != null &&
+            System.getenv("KEY_ALIAS") && System.getenv("KEY_PASSWORD") && System.getenv("STORE_PASSWORD")
+
     signingConfigs {
-        release {
-            keyAlias System.getenv("KEY_ALIAS") ?: 'phone1'
-            keyPassword System.getenv("KEY_PASSWORD") ?: '654321'
-            storeFile rootProject.file("phone.jks")
-            storePassword System.getenv("STORE_PASSWORD") ?: '123456'
-        }
         debug {
-            keyAlias System.getenv("KEY_ALIAS") ?: 'phone1'
-            keyPassword System.getenv("KEY_PASSWORD") ?: '654321'
-            storeFile rootProject.file("phone.jks")
-            storePassword System.getenv("STORE_PASSWORD") ?: '123456'
+            // Dedicated, committed VictorSuite debug key (NOT a secret).
+            // Keeps the debug fingerprint stable across machines/CI so
+            // debug builds install over each other.
+            storeFile file('victorsuite-debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
         }
+        if (releaseSigningReady) {
+            release {
+                storeFile releaseKeystore
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+                storePassword System.getenv("STORE_PASSWORD")
+            }
+        }
+    }
+    if (!releaseSigningReady) {
+        logger.warn("VictorSuite: release signing env vars not set " +
+                "(SIGNING_KEYSTORE_FILE|SIGNING_KEYSTORE_BASE64, KEY_ALIAS, KEY_PASSWORD, STORE_PASSWORD); " +
+                "release APKs will be unsigned.")
     }
     // @}
 
@@ -222,6 +290,9 @@ android {
             minifyEnabled true
             shrinkResources false // Reproducible builds
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (releaseSigningReady) {
+                signingConfig signingConfigs.release
+            }
         }
 
         debug {
@@ -292,6 +363,7 @@ android {
 
 dependencies {
     testImplementation "junit:junit:4.13.2"
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
     testImplementation "org.robolectric:robolectric:4.10"
     // VictorSuite delete {@
     // coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
@@ -304,8 +376,7 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
 //    implementation project(path: ':xh_lib')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation files('libs/commons-logging-1.2.jar')
     implementation files('libs/commons-net-3.8.0.jar')

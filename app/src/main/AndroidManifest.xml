@@ -12,9 +12,11 @@
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
+    <!-- VictorSuite modify {@ -->
     <uses-feature
         android:name="android.hardware.usb.host"
-        android:required="true" />
+        android:required="false" />
+    <!-- @} -->
 
     <permission
         android:name="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND"
@@ -100,6 +102,18 @@
 
         <activity android:name=".zerocore.deepseek.activity.VictorSuiteDeepSeekKeyActivity"
             android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".zerocore.hak5.Hak5CompanionActivity"
+            android:exported="false"
+            android:label="@string/hak5_companion_title"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".zerocore.hak5.Hak5CommandLogActivity"
+            android:exported="false"
+            android:label="@string/hak5_command_log_title"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity

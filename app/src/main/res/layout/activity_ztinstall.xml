@@ -331,7 +331,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="(Zero)Utermux File Plug"
+                            android:text="(VictorSuite)Utermux File Plug"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -340,7 +340,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="(Zero)Utermux File Plug"
+                            android:text="(VictorSuite)Utermux File Plug"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/hak5_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_companion_title"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/hak5_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_companion_subtitle"
+            android:textSize="13sp"
+            android:paddingBottom="12dp" />
+
+        <!-- Authorized-use gate banner -->
+        <LinearLayout
+            android:id="@+id/hak5_gate_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#33FF9800"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hak5_gate_warning_title"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/hak5_gate_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hak5_gate_warning_message"
+                android:paddingTop="6dp"
+                android:paddingBottom="8dp" />
+
+            <Button
+                android:id="@+id/hak5_gate_ack_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hak5_gate_ack_button" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hak5_gate_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingBottom="8dp" />
+
+        <!-- Connection settings -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_connection_section"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_host_label"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/hak5_host_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:hint="172.16.42.1"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_port_label"
+            android:textSize="12sp"
+            android:paddingTop="4dp" />
+
+        <EditText
+            android:id="@+id/hak5_port_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="1471"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_token_label"
+            android:textSize="12sp"
+            android:paddingTop="4dp" />
+
+        <EditText
+            android:id="@+id/hak5_token_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/hak5_token_hint"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/hak5_save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hak5_save_settings" />
+
+            <Button
+                android:id="@+id/hak5_check_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/hak5_check_connection" />
+        </LinearLayout>
+
+        <!-- Status -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_status_section"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:id="@+id/hak5_status_reachable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_status_unknown"
+            android:textSize="15sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/hak5_status_firmware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/hak5_status_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingBottom="8dp" />
+
+        <ProgressBar
+            android:id="@+id/hak5_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/hak5_status_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_cleartext_warning"
+            android:textSize="11sp"
+            android:textStyle="italic"
+            android:paddingBottom="8dp" />
+
+        <!-- Phase 2: authenticated session + runtime modules/actions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_phase2_section"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="6dp">
+
+            <Button
+                android:id="@+id/hak5_connect_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hak5_connect_button" />
+
+            <Button
+                android:id="@+id/hak5_command_log_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/hak5_command_log_button" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hak5_modules_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_modules_none"
+            android:textSize="12sp"
+            android:paddingBottom="6dp" />
+
+        <LinearLayout
+            android:id="@+id/hak5_modules_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp" />
+
+        <!-- Plunder Bug tile -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_plunder_section"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="6dp" />
+
+        <LinearLayout
+            android:id="@+id/hak5_plunder_tile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#2200BCD4"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hak5_plunder_title"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hak5_plunder_message"
+                android:paddingTop="4dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_no_auto_attack"
+            android:textSize="11sp"
+            android:paddingTop="16dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/hak5_revoke_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hak5_revoke_gate"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</ScrollView>
