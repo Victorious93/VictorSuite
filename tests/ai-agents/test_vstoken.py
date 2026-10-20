@@ -1,5 +1,6 @@
 """Unit tests for scripts/vstoken (run: python3 -m unittest tests/ai-agents/test_vstoken.py)."""
 import importlib.machinery, importlib.util, json, os, subprocess, sys, tempfile, unittest
+sys.dont_write_bytecode = True  # keep scripts/ (packaged as APK assets) free of .pyc
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 loader = importlib.machinery.SourceFileLoader("vstoken", os.path.join(ROOT, "scripts", "vstoken"))
