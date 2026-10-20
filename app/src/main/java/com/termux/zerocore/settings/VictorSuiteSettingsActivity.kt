@@ -1,7 +1,9 @@
 package com.termux.zerocore.settings
 
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -9,6 +11,7 @@ import com.example.xh_lib.utils.UUtils
 import com.termux.api.TermuxApiEmbed
 import com.termux.R
 import com.termux.zerocore.victorfiles.VictorFilesPanel
+import com.termux.zerocore.remotecontrol.android.RemoteControlSettings // VictorSuite add
 import com.termux.zerocore.ftp.utils.UserSetManage
 import com.termux.zerocore.url.FileUrl
 import com.termux.zerocore.utils.FileHttpUtils.Companion.get
@@ -53,6 +56,11 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
 
     private val victorFilesPanelSwitch by lazy {findViewById<SwitchCompat>(R.id.victorfiles_panel_switch)}
     private val victorFilesPanelLl by lazy {findViewById<LinearLayout>(R.id.victorfiles_panel_ll)}
+    // VictorSuite add {@ fleet remote-control envelope v1
+    private val remoteControlSwitch by lazy {findViewById<SwitchCompat>(R.id.remote_control_switch)}
+    private val remoteControlLl by lazy {findViewById<LinearLayout>(R.id.remote_control_ll)}
+    private val remoteControlPairingsLl by lazy {findViewById<LinearLayout>(R.id.remote_control_pairings_ll)}
+    // @}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +82,8 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         setSwitchStatus(mainMenuConfigCloseSwitch, mainMenuConfigCloseLl)
         setSwitchStatus(termuxApiEmbedSwitch, termuxApiEmbedLl)
         setSwitchStatus(victorFilesPanelSwitch, victorFilesPanelLl)
+        setSwitchStatus(remoteControlSwitch, remoteControlLl) // VictorSuite add
+        remoteControlPairingsLl.setOnClickListener { showPairingsDialog() } // VictorSuite add
     }
 
     private fun initStatus() {
@@ -90,6 +100,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         mainMenuConfigCloseSwitch.isChecked = ztUserBean.isDisableMainConfigMenu
         termuxApiEmbedSwitch.isChecked = TermuxApiEmbed.isEnabled(this)
         victorFilesPanelSwitch.isChecked = VictorFilesPanel.isEnabled(this)
+        remoteControlSwitch.isChecked = RemoteControlSettings.isExternalControlEnabled(this) // VictorSuite add
     }
 
     private fun setSwitchStatus(switchCompat: SwitchCompat, linearLayout: LinearLayout) {
@@ -149,6 +160,17 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
                 victorFilesPanelSwitch -> {
                     VictorFilesPanel.setEnabled(this, isChecked)
                 }
+                remoteControlSwitch -> {
+                    // VictorSuite add: only act on a real change (also fires on initial state).
+                    if (isChecked != RemoteControlSettings.isExternalControlEnabled(this)) {
+                        RemoteControlSettings.setExternalControlEnabled(this, isChecked)
+                        Toast.makeText(
+                            this,
+                            UUtils.getString(if (isChecked) R.string.remote_control_on_toast else R.string.remote_control_off_toast),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
                 termuxApiEmbedSwitch -> {
                     // Also fires while the screen sets its initial state; only act on a real change.
                     if (isChecked != TermuxApiEmbed.isEnabled(this)) {
@@ -164,6 +186,24 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
             UserSetManage.get().setZTUserBean(ztUserBean)
         }
     }
+
+    // VictorSuite add {@
+    private fun showPairingsDialog() {
+        val input = EditText(this)
+        input.setText(RemoteControlSettings.formatPairingsText(RemoteControlSettings.pairings(this)))
+        input.hint = "ai.droidcommand.app=controller"
+        AlertDialog.Builder(this)
+            .setTitle(R.string.remote_control_pairings_title)
+            .setMessage(R.string.remote_control_pairings_summary)
+            .setView(input)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                RemoteControlSettings.setPairings(this, RemoteControlSettings.parsePairingsText(input.text.toString()))
+                Toast.makeText(this, R.string.remote_control_pairings_saved, Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+    // @}
 
     private fun writerShellTermux() {
         val file = File(FileUrl.timerShellExecFile)
