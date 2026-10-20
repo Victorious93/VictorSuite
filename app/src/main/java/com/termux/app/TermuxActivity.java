@@ -1341,7 +1341,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             intent.setAction(Intent.ACTION_VIEW);
             startActivity(intent); //启动浏览器
         });
-        telegram_group_tv.setOnClickListener(this);
+        // Upstream Telegram group removed (not owner-controlled).
+        telegram_group_tv.setVisibility(View.GONE);
         ZTGitHubVersion.create().initZtVersionVisible(zt_new);
         try {
             double_tishi.setText(double_tishi.getText() + "\n" + TermuxInstaller.determineTermuxArchName().toUpperCase());
@@ -1463,11 +1464,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     public void onClick(View v) {
         if (v.getId() == R.id.qq_group_tv) {
             UUtils.copyToClip(ZTConstantConfig.ContactInformation.ZT_QQ_GROUP);
-        } else if (v.getId() == R.id.telegram_group_tv) {
-            Intent intent1 = new Intent();
-            intent1.setData(Uri.parse(ZTConstantConfig.ContactInformation.ZT_TELEGRAM_GROUP));
-            intent1.setAction(Intent.ACTION_VIEW);
-            this.startActivity(intent1);
         }
     }
 

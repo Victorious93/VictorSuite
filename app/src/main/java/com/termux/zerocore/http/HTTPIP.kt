@@ -6,9 +6,11 @@ object HTTPIP {
     public const val IP = "https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote"
     //还得脚本位置
     public const val QEMU_HAI = "$IP/"
-    //论坛
-    public const val ZERO_BBS = "https://termbbs.ixcm.org/"
-    // GITHUB Version
+    // Community / support: the owner-controlled GitHub issue tracker.
+    public const val ZERO_BBS = "https://github.com/Victorious93/VictorSuite/issues"
+    // Update check: GitHub Releases "latest" on the owner repo. While the repo is
+    // private this returns 404 unauthenticated; ZTGitHubVersion treats any
+    // non-200/parse failure as "no update info" and keeps the badge hidden.
     public const val GITHUB_VERSION = "https://api.github.com/repos/Victorious93/VictorSuite/releases/latest"
 
 }
