@@ -12,9 +12,11 @@
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
+    <!-- VictorSuite modify {@ -->
     <uses-feature
         android:name="android.hardware.usb.host"
-        android:required="true" />
+        android:required="false" />
+    <!-- @} -->
 
     <permission
         android:name="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND"

@@ -17,6 +17,7 @@ import com.termux.shared.errors.Error;
 import com.termux.shared.logger.Logger;
 import com.termux.shared.termux.TermuxBootstrap;
 import com.termux.shared.termux.TermuxConstants;
+import com.termux.api.TermuxApiEmbed;
 import com.termux.shared.termux.crash.TermuxCrashUtils;
 import com.termux.shared.termux.file.TermuxFileUtils;
 import com.termux.shared.termux.settings.preferences.TermuxAppSharedPreferences;
@@ -106,6 +107,8 @@ public class TermuxApplication extends XHApplication {
 
         // VictorSuite add {@
         onCreateInit();
+        // Embedded Termux:API: syncs component state with the setting (off by default)
+        TermuxApiEmbed.init(this);
         // @}
     }
 

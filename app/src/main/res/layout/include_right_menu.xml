@@ -108,13 +108,13 @@
                    android:layout_weight="1"
                    android:text="@string/select_session" />
                <Button
-                   android:id="@+id/deepseek"
+                   android:id="@+id/droidcommand_ai"
                    style="?android:attr/buttonBarButtonStyle"
                    android:layout_width="match_parent"
                    android:textColor="@color/color_ffffff"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
-                   android:text="AI" />
+                   android:text="@string/droidcommand_ai_label" />
            </LinearLayout>
 
        </androidx.cardview.widget.CardView>

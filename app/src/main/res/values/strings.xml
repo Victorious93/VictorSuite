@@ -439,7 +439,7 @@ error</string>
         Photo\n
         Video\n
         Audio\n
-        As well as all other data, you (the personal user of VictorSuite (VictorSuite)) are responsible for yourself\n
+        As well as all other data, you (the personal user of VictorSuite) are responsible for yourself\n
         \n
 
 
@@ -595,7 +595,7 @@ error</string>
     <string name="获取镜像">Extraction code: 6b7w</string>
     <string name="是否前往下载系统">Whether to go to the download system</string>
     <string name="前往">Go to</string>
-    <string name="Zero">VictorSuite/UTermux simulation</string>
+    <string name="Zero">Windows (QEMU) simulation</string>
     <string name="一键启动">one-button start</string>
 
     <string name="确定重置所有任务">
@@ -669,7 +669,7 @@ Reset successfully</string>
     <string name="线上脚本">Online script</string>
     <string name="本地脚本">Local script</string>
     <string name="请双击命令窗口试试">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
-    <string name="Zero论坛">VictorSuite BBS</string>
+    <string name="Zero论坛">Termux Wiki</string>
     <string name="VictorSuite论坛">VictorSuite bbs</string>
 
     <string name="在线脚本">Online script</string>
@@ -759,9 +759,9 @@ Reset successfully</string>
 
     <string name="ttyd_install_complete">IP:0.0.0.0\nport:7681</string>
 
-    <string name="qq_group">copy qq number</string>
+    <string name="qq_group">Report an issue</string>
 
-    <string name="telegram_group">Telegram</string>
+    <string name="telegram_group">GitHub</string>
 
     <string name="opne_in_victorsuite">Opne In Victorsuite</string>
 
@@ -868,7 +868,18 @@ Reset successfully</string>
     <string name="module_un7z_">Module Expanding...</string>
     <string name="module_install_pro">processing command:</string>
     <string name="file_manager">File Manager</string>
+    <string name="victorious_file_manager_not_installed">Victorious File Manager is not installed — showing the built-in file browser instead.</string>
     <string name="select_session">Select Session</string>
+    <string name="victorfiles_open">Open VictorFiles</string>
+    <string name="droidcommand_ai_label">DroidCommand AI</string>
+    <string name="droidcommand_ai_title">DroidCommand AI</string>
+    <string name="droidcommand_ai_summary">Opens the separate DroidCommand AI app. VictorSuite no longer has a built-in AI chat.</string>
+    <string name="droidcommand_ai_missing_title">DroidCommand AI is not installed</string>
+    <string name="droidcommand_ai_missing_msg">The AI option now opens the separate DroidCommand AI app. Download it from its releases page.</string>
+    <string name="droidcommand_ai_open_releases">Open releases page</string>
+    <string name="droidcommand_ai_launch_failed">Could not open DroidCommand AI</string>
+    <string name="victorfiles_panel_title">VictorFiles file manager panel</string>
+    <string name="victorfiles_panel_summary">When VictorFiles is installed, swiping out the right drawer opens its file manager in place of the built-in file window. Turn off to use the built-in browser.</string>
     <string name="http_folder">folder</string>
     <string name="http_file">file</string>
     <string name="no_http_msg">It seems that there is no connection to the network? Please manually open the local IP: 19956 in the browser</string>
@@ -926,7 +937,7 @@ Reset successfully</string>
     <string name="common_functions">Common Functions</string>
     <string name="beautification_function">Beautification/UI function</string>
     <string name="online_features">online features</string>
-    <string name="zt_features">VictorSuite function</string>
+    <string name="zt_features">VictorSuite functions</string>
     <string name="zt_settings">VictorSuite settings</string>
     <string name="zt_settings1">VictorSuite settings</string>
     <string name="zt_settings_note">VictorSuite Related settings options</string>
@@ -1280,7 +1291,7 @@ Enter code recognition parameters separated by commas. These will appear as blue
     <string name="zt_adb_shell_run_debug">This feature is only available on debug builds. Would you like to download the debug APP to continue using this feature?</string>
     <string name="zt_fold_menu_close">Disable folding feature</string>
     <string name="zt_fold_menu_close_summary">(Requires restarting the APP) Enabling this option will keep the menu section on the left always expanded.</string>
-    <string name="zt_app_crash">An error occurred in the application. Please forward the following information to the developer [screenshot]\nDeveloper Group 1 (QQ):</string>
+    <string name="zt_app_crash">An error occurred in the application. Please forward the following information to the developer [screenshot]\nIssue tracker: </string>
 
     <string name="zt_menu_title_config">Configure Terminal</string>
     <string name="zt_adb_shell_run">SHELL Run</string>
@@ -1403,4 +1414,23 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="hak5_command_log_empty">No commands run yet.</string>
     <string name="hak5_command_log_clear">Clear log</string>
     <string name="hak5_command_log_cleared">Command log cleared</string>
+    <string name="termux_api_embed_title">Termux:API (built in)</string>
+    <string name="termux_api_embed_summary">Lets termux-* commands (pkg install termux-api) talk to VictorSuite directly, so the separate Termux:API app is not needed. Off by default. Android asks for each permission the first time a command needs it. VictorSuite replaces the termux-api helper with its own copy each time it starts, so reopen VictorSuite after updating the termux-api package.</string>
+    <string name="termux_api_embed_on_toast">Termux:API turned on. If not installed yet, run in the terminal: pkg install termux-api, then reopen VictorSuite</string>
+    <string name="termux_api_embed_off_toast">Termux:API turned off</string>
+    <string name="rootforge_category">RootForge</string>
+    <string name="rootforge_open_title">Open RootForge</string>
+    <string name="rootforge_missing_title">RootForge is not installed</string>
+    <string name="rootforge_missing_msg">RootForge is a separate app (USB toolkit). Install it, then tap this entry again.</string>
+    <string name="rootforge_open_releases">Open download page</string>
+    <string name="rootforge_launch_failed">Could not open RootForge</string>
+    <string name="linux_login_group">Linux Login</string>
+    <!-- VictorSuite add: fleet remote-control envelope v1 -->
+    <string name="remote_control_title">Fleet remote control</string>
+    <string name="remote_control_summary">Lets paired fleet apps (for example DroidCommand AI) send remote-control envelopes through RUN_COMMAND. Off by default. Also needs allow-external-apps=true and a pairing row. Destructive actions such as shell commands are never run from a remote request.</string>
+    <string name="remote_control_on_toast">Fleet remote control turned on. Only paired apps can use it.</string>
+    <string name="remote_control_off_toast">Fleet remote control turned off.</string>
+    <string name="remote_control_pairings_title">Paired fleet apps</string>
+    <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef[,certSha256]. Only these apps can send remote-control envelopes.</string>
+    <string name="remote_control_pairings_saved">Pairings saved</string>
 </resources>
