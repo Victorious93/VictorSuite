@@ -128,6 +128,21 @@
             click="java:com.termux.zerocore.config.mainmenu.config.Hak5CompanionClickConfig" />
     </group>
 
+    <group name="Linux Login">
+        <item tag="Ubuntu Login"
+            name="Ubuntu"
+            click="java:com.termux.zerocore.config.mainmenu.config.UbuntuLoginClickConfig" />
+        <item tag="Kali Login"
+            name="Kali Linux"
+            click="java:com.termux.zerocore.config.mainmenu.config.KaliLoginClickConfig" />
+        <item tag="Parrot Login"
+            name="Parrot OS"
+            click="java:com.termux.zerocore.config.mainmenu.config.ParrotLoginClickConfig" />
+        <item tag="BlackArch Login"
+            name="BlackArch"
+            click="java:com.termux.zerocore.config.mainmenu.config.BlackArchLoginClickConfig" />
+    </group>
+
     <group name="X11 Functions">
         <item tag="X11 Settings"
             click="java:com.termux.zerocore.config.mainmenu.config.X11SettingsClickConfig" />
@@ -189,7 +204,7 @@
     <group name="Online Functions">
         <item tag="Online Scripts"
             click="java:com.termux.zerocore.config.mainmenu.config.OnLineCommandClickConfig" />
-        <item tag="VictorSuite Forum"
+        <item tag="Termux Wiki"
             click="java:com.termux.zerocore.config.mainmenu.config.ZeroBBsClickConfig" />
         <item tag="Download Station"
             click="java:com.termux.zerocore.config.mainmenu.config.DownLoadClickConfig" />
@@ -241,6 +256,12 @@
             click="java:com.termux.zerocore.config.mainmenu.config.LanguageClickConfig" />
         <item tag="Open Source Address"
             click="java:com.termux.zerocore.config.mainmenu.config.GitHubClickConfig" />
+    </group>
+
+    <group name="RootForge">
+        <item tag="Open RootForge"
+            name="Open RootForge"
+            click="java:com.termux.zerocore.config.mainmenu.config.RootForgeOpenClickConfig" />
     </group>
 
 </zt-menu>

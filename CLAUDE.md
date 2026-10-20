@@ -34,13 +34,14 @@ CI (`.github/workflows/android.yml`, "Build") runs only `:app:assembleDebug --st
 
 Product direction (`docs/SUITE_PLAN.md`, planning only): VictorSuite and RootForge OS (`Victorious93/rootforge-os`) stay **two separate APKs** in one suite (shared Kotlin library, shared JSON command schema, deep-link handoff). `docs/MERGE_PLAN.md` (one-APK plan) is superseded/stub. `docs/AI_CLIS.md` documents `scripts/ai-cli-setup.sh` (not yet run on a real device).
 
-VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of the ZeroTermux codebase. It is a four-module Android Gradle project:
+VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of the ZeroTermux codebase. It is a five-module Android Gradle project:
 
 | Module | Role |
 |---|---|
 | `terminal-emulator` | Pure-Java/JNI VT100/xterm terminal state machine; no Android UI dependencies. |
 | `terminal-view` | Android `View` that renders a `TerminalEmulator` and handles input. Depends on `:terminal-emulator`. |
 | `termux-shared` | Shared utilities used by both `:app` and companion Termux apps (file utils, logger, settings, crash handling, JNI helpers, local Unix socket). |
+| `termux-api-lib` | Vendored copy of the Termux:API app (`termux/termux-api` v0.53.0, GPLv3) built as a library so it runs inside the `com.termux` APK. See "Embedded Termux:API" below and `termux-api-lib/UPSTREAM.md`. |
 | `app` | The main application. Contains all VictorSuite/ZeroTermux additions under `com.termux.zerocore`. |
 
 ### `app` source layout
@@ -58,7 +59,7 @@ Under `app/src/main/java/com/termux/`:
 - **`config/ztcommand/`** — `ZTSocketService` runs a TCP server on port 19951 that accepts JSON command packets. Commands are dispatched through `ZTConfig` impls (each has a numeric `getId()` and returns a shell command string). `ZTCommandConfigStore` persists command definitions.
 - **`zero/engine/`** — `ZeroCoreManage` bridges to an optional external APK (`com.xinhao.zerocoremanage`) via reflection/`createPackageContext`. If that APK is absent the engine calls fail silently; the rest of the app continues working.
 - **`plugin/`** — plugin framework (see `PLUGINS.md`). Key files: `PluginRegistry`, `PluginManifest`, `PluginConfigStore` (encrypted SharedPreferences), `PluginLogger` (JSONL audit log), `PluginProcessLauncher`. Enable path: `register → acknowledgeAuthorizedUse → enable`; both registry and launcher enforce the invariant independently.
-- **`deepseek/`** — in-app AI chat (DeepSeek and Claude API clients via `AiClient` interface). Sessions stored in SQLite via `ChatDatabaseHelper`.
+- **`deepseek/`** — former in-app AI chat (DeepSeek and Claude API clients, SQLite sessions). No longer reachable from the UI: the drawer AI button and Settings AI entry launch DroidCommand AI via `zerocore/droidcommand/DroidCommandAi`. The package is dead code except `markdown/MarkDownAPI`, which `TermuxActivity` still uses; delete the rest once a build can verify it.
 - **`back/`** — backup/restore UI (`BackViewModel`, `RestoreViewModel`). Supports `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z` archives.
 - **`http/`** — `NanoHttpdServer`. **`otg/`** — `OTGManager`. Other dirs not listed here exist too (`shell/`, `zip/`, `developer/`, `keybord/`, `bosybox/`, etc.); inspect before assuming.
 - **`ftp/`** — embedded FTP server (`FsService`/`SwiftFTP`) and a newer implementation under `new_ftp/`.
@@ -68,6 +69,18 @@ Under `app/src/main/java/com/termux/`:
 - **`settings/`** — VictorSuite-specific settings activities (X11, timers, online server, install/uninstall).
 - **`adb/`** — wireless ADB shell integration.
 - **`libsu/`** — root shell integration via `libsu` (topjohnwu).
+
+### Embedded Termux:API
+
+`:termux-api-lib` replaces the separate `com.termux.api` app. Facts that are easy to get wrong:
+
+- Off by default. Every component in its manifest is `android:enabled="false"`. `TermuxApiEmbed.setEnabled()` (`com.termux.api`) stores the setting, enables or disables all `com.termux.api.*` components through `PackageManager`, and starts `SocketListener`. `TermuxApplication.onCreate()` calls `TermuxApiEmbed.init()`.
+- The switch is in `VictorSuiteSettingsActivity` ("Termux:API (built in)"). The stock Settings "Termux:API" row still targets the companion app and stays hidden without it; `TermuxUtils.isTermuxAPIAppInstalled()` still means the companion app, not the embed.
+- `TermuxApiReceiver` and `SocketListener` refuse requests while the setting is off.
+- Upstream's launcher/main/settings activities and `TermuxAPIApplication` were removed. Local changes are marked `// VictorSuite add {@` / `modify {@`; to update from upstream, follow `termux-api-lib/UPSTREAM.md`.
+- The manifest merges Termux:API's 33 permissions (SMS send, call, camera, mic, location, all-files, ...) into the APK whether or not the switch is on. Not Play-compatible.
+- Helper: the `termux-api` shell helper (`pkg install termux-api`, MIT, separate repo) connects to the socket `com.termux.api://listen` first on Android below 14, and the embedded `SocketListener` binds that name, so it should work there unmodified. On Android 14+ (or when the app process is not running) it falls back to `am broadcast -n com.termux.api/.TermuxApiReceiver`, which does not exist here. That retarget is not done yet.
+- Untested on a device as of this writing: only the CI build has run.
 
 ### Remote JSON manifests
 
@@ -99,7 +112,7 @@ The codebase is mixed Java and Kotlin. New `zerocore` features should be written
 
 ## Gotchas
 - `applicationId` is `com.termux`: VictorSuite cannot be installed alongside upstream Termux.
-- Signing: `app/build.gradle` signs with the committed `phone.jks`, with `STORE_PASSWORD` from the environment and a fallback default password in the file. Treat this as a debug/dev key only; never add real release keys or passwords to the repo.
+- Signing: debug builds use the committed `app/victorsuite-debug.keystore` (public `android` passwords, deliberately not a secret, so debug fingerprints are stable across machines/CI). Release builds sign only when `SIGNING_KEYSTORE_FILE` or `SIGNING_KEYSTORE_BASE64` plus `KEY_ALIAS`, `KEY_PASSWORD`, `STORE_PASSWORD` are set in the environment; otherwise release APKs are unsigned. Never commit real release keys or passwords.
 
 ## Don's standing rules (apply to every change)
 - Work on a branch and open a PR. Never push to `main`.

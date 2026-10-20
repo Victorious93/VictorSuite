@@ -13,8 +13,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
 import android.os.Build;
@@ -53,6 +55,9 @@ import com.billy.android.swipe.SmartSwipeWrapper;
 import com.billy.android.swipe.SwipeConsumer;
 import com.billy.android.swipe.consumer.DrawerConsumer;
 import com.billy.android.swipe.consumer.SlidingConsumer;
+// VictorSuite add {@
+import com.termux.zerocore.victorfiles.VictorFilesPanel;
+// @}
 import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.blockchain.ub.utils.httputils.BaseHttpUtils;
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase;
@@ -119,7 +124,9 @@ import com.termux.zerocore.config.mainmenu.data.MainMenuCategoryData;
 import com.termux.zerocore.config.mainmenu.view.adapter.MainMenuAdapter;
 import com.termux.zerocore.config.other.ZTGitHubVersion;
 import com.termux.zerocore.config.ztcommand.config.XmlMenuConfig;
-import com.termux.zerocore.deepseek.DeepSeekTransitFragment;
+// VictorSuite modify {@ the in-app AI chat was replaced by the DroidCommand AI app
+import com.termux.zerocore.droidcommand.DroidCommandAi;
+// @}
 import com.termux.zerocore.deepseek.markdown.MarkDownAPI;
 import com.termux.zerocore.dialog.BeautifySettingDialog;
 import com.termux.zerocore.dialog.CommonCommandsDialog;
@@ -786,8 +793,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 		  // VictorSuite add {@
           /*  mTermuxTerminalViewClient.onToggleSoftKeyboardRequest();
             getDrawer().closeDrawers();*/
-            indexSwitch(0);
-            fragmentManager(0);
+            openFileManager();
 			// @}
         });
 
@@ -799,10 +805,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         findViewById(R.id.select_new_session_button).setOnClickListener(v -> {
             indexSwitch(1);
         });
-        findViewById(R.id.deepseek).setOnClickListener(view -> {
-            indexSwitch(0);
-            fragmentManager(1);
-        });
+        findViewById(R.id.droidcommand_ai).setOnClickListener(view -> DroidCommandAi.launch(this));
 		// @}
     }
 
@@ -1462,9 +1465,17 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.qq_group_tv) {
-            UUtils.copyToClip(ZTConstantConfig.ContactInformation.ZT_QQ_GROUP);
+        // VictorSuite modify {@
+        // The two INFO-card links open the project's issue tracker and repository.
+        if (v.getId() == R.id.qq_group_tv || v.getId() == R.id.telegram_group_tv) {
+            Intent intent1 = new Intent();
+            intent1.setData(Uri.parse(v.getId() == R.id.qq_group_tv
+                ? ZTConstantConfig.URL.ZT_ISSUES_URL
+                : ZTConstantConfig.URL.ZT_REPO_URL));
+            intent1.setAction(Intent.ACTION_VIEW);
+            this.startActivity(intent1);
         }
+        // @}
     }
 
     private void setImageBackground(File file) {
@@ -2022,6 +2033,10 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 e.printStackTrace();
             }
         }
+        // VictorSuite add {@
+        // Offer default entries added in newer app versions (once each) to a menu file that already exists.
+        com.termux.zerocore.utils.MenuDefaultsMerger.apply(this, targetLang);
+        // @}
     }
 
     /**
@@ -2064,6 +2079,67 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
     }
 
+    // VictorSuite add {@
+    /**
+     * "File Manager" drawer button handler. Victorious File Manager
+     * (<a href="https://github.com/Victorious93/File-Manager">Victorious93/File-Manager</a>,
+     * {@code ai.victorious.victorfiles}) is a standalone app — not a library — so it is launched,
+     * never embedded. If it is not installed, falls back to the existing in-app
+     * {@code ZFileListFragment} (the {@code z_file.aar} browser this button opened before) so the
+     * button still works for someone without it.
+     */
+    private void openFileManager() {
+        // VictorFiles' right-edge sheet replaces the built-in file window when it is installed.
+        if (VictorFilesPanel.isActive(this) && VictorFilesPanel.launch(this)) {
+            return;
+        }
+        Intent launchIntent = resolveVictoriousFileManagerLaunchIntent();
+        if (launchIntent != null) {
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(launchIntent);
+            return;
+        }
+        Toast.makeText(this, R.string.victorious_file_manager_not_installed, Toast.LENGTH_SHORT).show();
+        indexSwitch(0);
+        fragmentManager(0);
+    }
+
+    /** Release package first, then the debug build's {@code .debug} suffix. Null if neither is installed. */
+    private Intent resolveVictoriousFileManagerLaunchIntent() {
+        PackageManager packageManager = getPackageManager();
+        for (String packageName : new String[]{"ai.victorious.victorfiles", "ai.victorious.victorfiles.debug"}) {
+            Intent launchIntent = packageManager.getLaunchIntentForPackage(packageName);
+            if (launchIntent != null) {
+                return launchIntent;
+            }
+        }
+        return null;
+    }
+    // @}
+
+    // VictorSuite add {@
+    /**
+     * Swiping the right drawer open on its file tab pulls out VictorFiles' sheet in place of the
+     * built-in file window. The drawer stays open underneath, so dismissing the sheet reveals the
+     * tab buttons (sessions, AI) again. Detects the right drawer by what is on screen rather than
+     * by the swipe direction constant, so a left-menu swipe never triggers it.
+     */
+    private void openVictorFilesPanelIfRightDrawerShowsFiles() {
+        // frame_file is also visible on the AI tab; the placeholder is only there on the file tab.
+        if (frame_file.getVisibility() != View.VISIBLE
+            || frame_file.findViewWithTag(VictorFilesPanel.PLACEHOLDER_TAG) == null
+            || !VictorFilesPanel.isActive(this)) {
+            return;
+        }
+        Rect visible = new Rect();
+        boolean shown = mIncludeRightMenu.getGlobalVisibleRect(visible)
+            && visible.width() >= mIncludeRightMenu.getWidth() * 0.9f;
+        if (shown) {
+            VictorFilesPanel.launch(this);
+        }
+    }
+    // @}
+
     private void fragmentManager(int index) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager()
             .beginTransaction();
@@ -2071,15 +2147,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         LogUtils.e(TAG, "fragmentManager fragmentTransaction is: " + fragmentTransaction);
 
         // 1. 先移除可能存在的所有 Fragment
-        Fragment deepSeekFragment = getSupportFragmentManager()
-            .findFragmentByTag("DeepSeekTransitFragment");
         Fragment fileListFragment = getSupportFragmentManager()
             .findFragmentByTag("ZFileListFragment");
-
-        if (deepSeekFragment != null) {
-            fragmentTransaction.remove(deepSeekFragment);
-            LogUtils.e(TAG, "Removed existing DeepSeekTransitFragment");
-        }
 
         if (fileListFragment != null) {
             fragmentTransaction.remove(fileListFragment);
@@ -2096,19 +2165,25 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             getSupportFragmentManager().executePendingTransactions();
         }
 
+        // VictorSuite add {@
+        View victorFilesPlaceholder = frame_file.findViewWithTag(VictorFilesPanel.PLACEHOLDER_TAG);
+        if (victorFilesPlaceholder != null) {
+            frame_file.removeView(victorFilesPlaceholder);
+        }
+        // @}
+
         switch (index) {
             case 0:
+                // VictorSuite add {@
+                if (VictorFilesPanel.isActive(this)) {
+                    frame_file.addView(VictorFilesPanel.buildPlaceholder(this, v -> openFileManager()));
+                    break;
+                }
+                // @}
                 LogUtils.e(TAG, "fragmentManager switch ZFileListFragment. ");
                 fragmentTransaction.replace(R.id.frame_file, ZFileListFragment.newInstance(), "ZFileListFragment")
                     .commitAllowingStateLoss();
                 LogUtils.e(TAG, "fragmentManager switch ZFileListFragment deno. ");
-                break;
-            case 1:
-                LogUtils.e(TAG, "fragmentManager switch DeepSeekTransitFragment. ");
-                DeepSeekTransitFragment deepSeekTransitFragment = DeepSeekTransitFragment.newInstance();
-                fragmentTransaction.replace(R.id.frame_file, deepSeekTransitFragment, "DeepSeekMainFragment")
-                    .commitAllowingStateLoss();
-                LogUtils.e(TAG, "fragmentManager switch DeepSeekTransitFragment deno. ");
                 break;
         }
         ZTConfig.INSTANCE.setCloseListener(() -> getDrawer().smoothClose());
@@ -2363,6 +2438,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             public void onSwipeOpened(SmartSwipeWrapper wrapper, SwipeConsumer consumer, int direction) {
                 super.onSwipeOpened(wrapper, consumer, direction);
                 mTerminalView.clearFocus();
+                // VictorSuite add {@
+                mIncludeRightMenu.post(TermuxActivity.this::openVictorFilesPanelIfRightDrawerShowsFiles);
+                // @}
                 if (!UserSetManage.Companion.get().getZTUserBean().isHideGuideLayout()) {
                     mGuideLayout.setVisibility(View.GONE);
                     ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();

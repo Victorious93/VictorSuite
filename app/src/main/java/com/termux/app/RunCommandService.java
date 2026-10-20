@@ -25,6 +25,7 @@ import com.termux.shared.logger.Logger;
 import com.termux.shared.notification.NotificationUtils;
 import com.termux.shared.shell.command.ExecutionCommand;
 import com.termux.shared.shell.command.ExecutionCommand.Runner;
+import com.termux.zerocore.remotecontrol.android.TermuxRemoteEnvelopeBinding; // VictorSuite add
 
 /**
  * A service that receives {@link RUN_COMMAND_SERVICE#ACTION_RUN_COMMAND} intent from third party apps and
@@ -78,6 +79,16 @@ public class RunCommandService extends Service {
             TermuxPluginUtils.processPluginExecutionCommandError(this, LOG_TAG, executionCommand, false);
             return stopService();
         }
+
+        // VictorSuite add {@
+        // Fleet remote-control envelope v1 (BRIDGE_PROTOCOL 1.1): a single JSON-blob extra.
+        // Fully handled by the envelope binding (auth, external-control switch, replay, gating);
+        // it never falls through to command execution below. See docs/REMOTE_CONTROL_ENVELOPE.md.
+        if (TermuxRemoteEnvelopeBinding.INSTANCE.isEnvelopeIntent(intent)) {
+            TermuxRemoteEnvelopeBinding.INSTANCE.handle(this, intent);
+            return stopService();
+        }
+        // @}
 
         String executableExtra = executionCommand.executable = IntentUtils.getStringExtraIfSet(intent, RUN_COMMAND_SERVICE.EXTRA_COMMAND_PATH, null);
         executionCommand.arguments = IntentUtils.getStringArrayExtraIfSet(intent, RUN_COMMAND_SERVICE.EXTRA_ARGUMENTS, null);

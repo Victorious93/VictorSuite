@@ -583,7 +583,7 @@
     <string name="获取镜像">提取码:6b7w</string>
     <string name="是否前往下载系统">是否前往下载系统</string>
     <string name="前往">前往</string>
-    <string name="Zero">VictorSuite/UTermux模拟</string>
+    <string name="Zero">Windows(QEMU)模拟</string>
     <string name="一键启动">一键启动</string>
 
     <string name="确定重置所有任务">确定重置并删除所有任务?\n如果您的下载状态错乱/不正确请应用此设置\n注意:已下载完成的不会被删除\n正在下载的会被删除</string>
@@ -667,7 +667,7 @@
     <string name="此脚本数据错误">此脚本数据错误,请尝试联系管理员</string>
 
     <string name="VictorSuite论坛">VictorSuite论坛</string>
-    <string name="Zero论坛">VictorSuite论坛</string>
+    <string name="Zero论坛">Termux Wiki</string>
 
     <string name="美化设置">美化设置</string>
     <string name="字体颜色">字体颜色</string>
@@ -747,9 +747,9 @@
 
     <string name="ttyd_install_complete">IP:0.0.0.0\n端口:7681</string>
 
-    <string name="qq_group">复制群号</string>
+    <string name="qq_group">反馈问题</string>
 
-    <string name="telegram_group">Telegram</string>
+    <string name="telegram_group">GitHub</string>
 
     <string name="opne_in_victorsuite">使用VictorSuite打开</string>
 
@@ -1281,7 +1281,7 @@
     <string name="zt_adb_shell_run_debug">此功能只能在debug版本上使用,是否下载 debug APP 以继续使用此功能?</string>
     <string name="zt_fold_menu_close">关闭折叠功能</string>
     <string name="zt_fold_menu_close_summary">(需要重启APP)打开此选项左侧的菜单栏目会始终保持展开状态</string>
-    <string name="zt_app_crash">程序出错,请将以下信息传递给开发者[截图]\n开发者群一(QQ):</string>
+    <string name="zt_app_crash">程序出错,请将以下信息传递给开发者[截图]\n问题反馈: </string>
 
     <string name="zt_menu_title_config">配置终端</string>
     <string name="zt_adb_shell_run">SHELL 运行</string>
@@ -1405,6 +1405,25 @@
     <string name="hak5_command_log_empty">尚未执行任何命令。</string>
     <string name="hak5_command_log_clear">清除日志</string>
     <string name="hak5_command_log_cleared">命令日志已清除</string>
+    <string name="termux_api_embed_title">Termux:API(内置)</string>
+    <string name="termux_api_embed_summary">让 termux-* 命令(pkg install termux-api)直接与 VictorSuite 通信,无需另装 Termux:API 应用。默认关闭。命令首次需要某项权限时,Android 会逐项询问。VictorSuite 每次启动时会用自带的副本替换 termux-api 辅助程序,更新 termux-api 软件包后请重新打开 VictorSuite。</string>
+    <string name="termux_api_embed_on_toast">已开启 Termux:API。如尚未安装,请在终端运行:pkg install termux-api,然后重新打开 VictorSuite</string>
+    <string name="termux_api_embed_off_toast">已关闭 Termux:API</string>
+    <string name="rootforge_category">RootForge</string>
+    <string name="rootforge_open_title">打开 RootForge</string>
+    <string name="rootforge_missing_title">未安装 RootForge</string>
+    <string name="rootforge_missing_msg">RootForge 是独立的应用(USB 工具箱)。请先安装,然后再次点击此项。</string>
+    <string name="rootforge_open_releases">打开下载页面</string>
+    <string name="rootforge_launch_failed">无法打开 RootForge</string>
+    <string name="linux_login_group">Linux 登录</string>
+    <!-- VictorSuite add: fleet remote-control envelope v1 -->
+    <string name="remote_control_title">舰队远程控制</string>
+    <string name="remote_control_summary">允许已配对的舰队应用(如 DroidCommand AI)通过 RUN_COMMAND 发送远程控制信封。默认关闭。还需要 allow-external-apps=true 和配对条目。远程请求永远不会执行 shell 命令等破坏性操作。</string>
+    <string name="remote_control_on_toast">已开启舰队远程控制。仅已配对的应用可以使用。</string>
+    <string name="remote_control_off_toast">已关闭舰队远程控制。</string>
+    <string name="remote_control_pairings_title">已配对的舰队应用</string>
+    <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef[,certSha256]。只有这些应用可以发送远程控制信封。</string>
+    <string name="remote_control_pairings_saved">配对已保存</string>
 </resources>
 
 

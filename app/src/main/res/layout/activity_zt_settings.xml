@@ -203,7 +203,7 @@
             android:layout_marginTop="10dp"
             android:visibility="visible"
             app:cardBackgroundColor="@color/color_55000000"
-            android:id="@+id/deep_seek"
+            android:id="@+id/droidcommand_ai"
             app:cardCornerRadius="6dp"
             android:layout_height="wrap_content">
 
@@ -223,7 +223,7 @@
                         android:textColor="@color/color_ffffff"
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:text="@string/deepseek_settings_seepseek"
+                        android:text="@string/droidcommand_ai_title"
                         android:layout_height="wrap_content"/>
 
                     <TextView
@@ -232,7 +232,7 @@
                         android:textColor="@color/md_grey_500"
                         android:textStyle="bold"
                         android:textSize="13sp"
-                        android:text="@string/deepseek_settings_seepseek_summary"
+                        android:text="@string/droidcommand_ai_summary"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
