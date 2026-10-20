@@ -415,7 +415,7 @@
         在使用一定程度之后,极力建议你过渡到官方termux[入门之后开始使用](推荐),\n
         \n
 
-        毕竟ZT能帮你一时，却帮不了你一世!\n
+        毕竟VictorSuite能帮你一时，却帮不了你一世!\n
         \n
 
 
@@ -428,7 +428,7 @@
         照片\n
         视频\n
         音频\n
-        以及其它所有数据,由你(VictorSuite(简称ZT)的个人使用用户)自己承担\n
+        以及其它所有数据,由你(VictorSuite的个人使用用户)自己承担\n
         \n
 
 
@@ -958,7 +958,7 @@
     <string name="zt_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn 等(排名不分先后)</string>
     <string name="zt_install">还原/扩展官方版本</string>
     <string name="zt_install_float">没有安装此插件！请到【设置 -> 安装/还原Termux官方软件 -> Termux Float】安装插件</string>
-    <string name="zt_install_file">没有安装此插件！请到【设置 -> 安装/还原Termux官方软件 -> (Zero)Utermux File Plug】安装插件</string>
+    <string name="zt_install_file">没有安装此插件！请到【设置 -> 安装/还原Termux官方软件 -> (VictorSuite)Utermux File Plug】安装插件</string>
     <string name="zt_volume_function_title">还原音量+-键</string>
     <string name="zt_volume_function_summary">禁用当前使用音量+-键进行弹出左/右面板</string>
     <string name="zt_moe_remove">MOE目前作者已经不在维护，可能会出现VictorSuite不可预知的错误结果。</string>
@@ -1304,10 +1304,10 @@
     <string name="zt_xml_settings_summary">(需重启APP)打开此选项将不在载入xml配置文件作为左侧菜单数据源</string>
 
     <string name="zt_usage_habits_title">使用习惯</string>
-    <string name="zt_usage_habits_content">注意(使用习惯相关选项可以在ZT设置重新自定义)\n
+    <string name="zt_usage_habits_content">注意(使用习惯相关选项可以在VictorSuite设置重新自定义)\n
         选择一个使用习惯\n
         termux(按键完全使用原生)\n
-        VictorSuite(按键完全使用ZT布局)\n
+        VictorSuite(按键完全使用VictorSuite布局)\n
         请选择一个使用习惯</string>
     <string name="zt_usage_habits_termux">设置成功Termux使用习惯,更改配置请到设置</string>
     <string name="zt_usage_habits_ztermux">设置成功VictorSuite使用习惯,更改配置请到设置</string>

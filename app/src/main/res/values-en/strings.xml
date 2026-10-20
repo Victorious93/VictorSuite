@@ -426,7 +426,7 @@ error</string>
         After a certain level of use, it is strongly recommended that you transition to the official termux [start using after getting started] (recommended),\n
         \n
 
-        After all, ZT can help you for a while, but it can't help you for the rest of your life!\n
+        After all, VictorSuite can help you for a while, but it can't help you for the rest of your life!\n
         \n
 
 
@@ -977,7 +977,7 @@ Reset successfully</string>
     <string name="zt_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn etc (in no particular order)</string>
     <string name="zt_install">Restore/expand official version</string>
     <string name="zt_install_float">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> Termux Float] to install the plug-in</string>
-    <string name="zt_install_file">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> (Zero)Utermux File Plug] to install the plug-in</string>
+    <string name="zt_install_file">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> (VictorSuite)Utermux File Plug] to install the plug-in</string>
     <string name="zt_volume_function_title">Restore volume +- keys</string>
     <string name="zt_volume_function_summary">Disable the current use of volume +- keys to pop up the left/right panel</string>
     <string name="zt_moe_remove">MOE is no longer maintained by the author, and unpredictable errors may occur in VictorSuite.</string>
@@ -1030,7 +1030,7 @@ Reset successfully</string>
     <string name="zt_timer_log">Log directory</string>
     <string name="zt_timer_log_sum">The LOG directory is:\n~/.timerdir/log/, please check the LOG operation status here.</string>
     <string name="zt_timer_edit">script directory</string>
-    <string name="zt_timer_edit_sum">Please manually modify the Termux directory:\nZT environment: ~/.timerdir/termux_timer.sh\nSHELL environment: ~/.timerdir/shell_timer.sh\nAttention! Notice! Note\nPlease do not grant ROOT permission to APP in VictorSuite environment, otherwise it will not run!</string>
+    <string name="zt_timer_edit_sum">Please manually modify the Termux directory:\nVictorSuite environment: ~/.timerdir/termux_timer.sh\nSHELL environment: ~/.timerdir/shell_timer.sh\nAttention! Notice! Note\nPlease do not grant ROOT permission to APP in VictorSuite environment, otherwise it will not run!</string>
 
     <string name="zt_timer_environment">Current operating environment</string>
     <string name="zt_timer_environment_sum">The current operating environment is:</string>
@@ -1314,10 +1314,10 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="zt_xml_settings_summary">(Requires APP restart) Enabling this option will prevent loading the XML configuration file as the data source for the left menu.</string>
 
     <string name="zt_usage_habits_title">Usage Habits</string>
-    <string name="zt_usage_habits_content">Note (Usage habit related options can be re-customized in ZT settings)\n
+    <string name="zt_usage_habits_content">Note (Usage habit related options can be re-customized in VictorSuite settings)\n
         Choose a usage habit\n
         termux (Buttons follow the native layout completely)\n
-        VictorSuite (Buttons follow the ZT layout completely)\n
+        VictorSuite (Buttons follow the VictorSuite layout completely)\n
         Please select a usage habit</string>
     <string name="zt_usage_habits_termux">Termux usage habit set successfully. Please go to settings to change the configuration.</string>
     <string name="zt_usage_habits_ztermux">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
