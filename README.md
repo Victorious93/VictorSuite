@@ -19,9 +19,9 @@
 
 ## Overview
 
-VictorSuite is a community-driven enhancement of the Termux ecosystem, built on Termux's terminal stack (see Credits). It keeps Termux's `applicationId` (`com.termux`) and the public `RUN_COMMAND` contract, so existing Termux tooling and intents still work.
+VictorSuite is a community-driven enhancement of the Termux ecosystem, built on Termux's terminal stack (see Credits). It uses its own `applicationId` (`com.victorious.suite`), so it installs alongside the real Termux and Termux:API. The `RUN_COMMAND` intent is `com.victorious.suite.RUN_COMMAND`, guarded by `com.victorious.suite.permission.RUN_COMMAND`. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
 
-> **Note:** because the package id is `com.termux`, VictorSuite and upstream Termux cannot be installed on the same device. Uninstall one before installing the other.
+> **Note:** until bootstraps are rebuilt for the `/data/data/com.victorious.suite/files` prefix, the bundled shell will not run on a device. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
 
 It is intended for personal learning, experimentation, and technical collaboration, not as a commercial product.
 

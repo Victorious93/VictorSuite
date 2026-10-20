@@ -19,11 +19,11 @@ PROMPT_DIRTRIM=2
 # Handles nonexistent commands.
 # If user has entered command which invokes non-available
 # utility, command-not-found will give a package suggestions.
-if [ -x "/data/data/com.termux/files/usr/libexec/termux/command-not-found" ]; then
+if [ -x "/data/data/com.victorious.suite/files/usr/libexec/termux/command-not-found" ]; then
 	command_not_found_handle() {
-		"/data/data/com.termux/files/usr"/libexec/termux/command-not-found "$1"
+		"/data/data/com.victorious.suite/files/usr"/libexec/termux/command-not-found "$1"
 	}
 fi
 
-[ -r /data/data/com.termux/files/usr/share/bash-completion/bash_completion ] && . /data/data/com.termux/files/usr/share/bash-completion/bash_completion
+[ -r /data/data/com.victorious.suite/files/usr/share/bash-completion/bash_completion ] && . /data/data/com.victorious.suite/files/usr/share/bash-completion/bash_completion
 # vim: set noet ft=bash tw=4 sw=4 ff=unix

@@ -29,7 +29,7 @@
 #define TERMUX_API_PACKAGE_VERSION "0.60.0"
 
 #ifndef PREFIX
-# define PREFIX "/data/data/com.termux/files/usr"
+# define PREFIX "/data/data/com.victorious.suite/files/usr"
 #endif
 
 #define LISTEN_SOCKET_ADDRESS "com.termux.api://listen"
@@ -370,9 +370,9 @@ _Noreturn void exec_am_broadcast_v2(int argc, char** argv,
     child_argv[3] = "0";
     child_argv[4] = "-n";
     // VictorSuite modify {@
-    // Termux:API is embedded in the com.termux APK; the receiver class keeps its upstream name.
+    // Termux:API is embedded in the com.victorious.suite APK; the receiver class keeps its upstream name.
     // (Upstream: "com.termux.api/.TermuxApiReceiver")
-    child_argv[5] = "com.termux/com.termux.api.TermuxApiReceiver";
+    child_argv[5] = "com.victorious.suite/com.termux.api.TermuxApiReceiver";
     // @}
     child_argv[6] = "--es";
     // Input/output are reversed for the java process (our output is its input):

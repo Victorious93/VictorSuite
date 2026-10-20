@@ -2,7 +2,7 @@
 <zt-menu>
     <!--####################### 说明 ########################
     文件路径:
-    /data/data/com.termux/files/home/ZtInfo/main_menu_path.xml
+    /data/data/com.victorious.suite/files/home/ZtInfo/main_menu_path.xml
     此文件是VictorSuite左侧菜单栏的配置文件，可随意修改（注意格式,错误左侧栏可能无法正常显示）
     如果需要恢复默认请使用：
     zt menu reset 命令来复原
@@ -30,7 +30,7 @@
         注意，此属性只有在 click 非java: 开头才有效果
         1.icon: 图标 application 开头的是调用VictorSuite内部的资源, 或者填写绝对路径
         示例:(
-        绝对路径: icon="imgPath:/data/data/com.termux/files/home/ZTinfo/1.png")
+        绝对路径: icon="imgPath:/data/data/com.victorious.suite/files/home/ZTinfo/1.png")
         ####################### shell ########################
     </group>-->
 
@@ -41,8 +41,8 @@
     <group name="示例点击事件(可在配置文件删除此分组)">
         <item tag="自定义左侧栏"
             name="编辑菜单"
-            icon="imgPath:/data/data/com.termux/files/home/ZtInfo/edit_menu.png"
-            click="ztEditText:/data/data/com.termux/files/home/ZtInfo/main_menu_path.xml" />
+            icon="imgPath:/data/data/com.victorious.suite/files/home/ZtInfo/edit_menu.png"
+            click="ztEditText:/data/data/com.victorious.suite/files/home/ZtInfo/main_menu_path.xml" />
         <!--dialog 属性只能对于 click 为 ztShell 生效
         dialogConfirm 为 false 则不提示
         -->
@@ -65,7 +65,7 @@
         <item tag="跳转内部活动"
             name="跳转设置"
             icon=""
-            packageName="com.termux"
+            packageName="com.victorious.suite"
             intentData=""
             click="startActivity:com.termux.zerocore.settings.ZtSettingsActivity" />
         <!--intentData 属性值，目前只支持 String 字符串
@@ -73,7 +73,7 @@
         <item tag="跳转action"
             name="跳转Action"
             icon=""
-            intentData="data@@com.termux"
+            intentData="data@@com.victorious.suite"
             packageName="com.android.settings"
             click="actionActivity:android.settings.WIRELESS_SETTINGS" />
         <!--List列表

@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/sh
+#!/data/data/com.victorious.suite/files/usr/bin/sh
 #
 # Install BlackArch on top of a proot-hosted Arch Linux, using Termux's
 # official proot-distro tool plus BlackArch's own official strap.sh.

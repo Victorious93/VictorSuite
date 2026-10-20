@@ -28,11 +28,11 @@ import java.io.File
 
 /**
  * TERMUX_IPC binding: one JSON-blob extra ([FleetProtocol.TERMUX_ENVELOPE_EXTRA]) on
- * `com.termux.RUN_COMMAND`. Thin layer: authenticate the caller, hand the raw blob to
+ * `com.victorious.suite.RUN_COMMAND`. Thin layer: authenticate the caller, hand the raw blob to
  * [RemoteEnvelopeDispatcher], and send the response back. Never executes a shell command.
  *
  * Caller identity (never from the envelope):
- *  - the manifest already requires `com.termux.permission.RUN_COMMAND` to reach the service;
+ *  - the manifest already requires `com.victorious.suite.permission.RUN_COMMAND` to reach the service;
  *  - `allow-external-apps=true` in termux.properties (the existing Termux allow-list policy);
  *  - the calling package is the **creator of the result PendingIntent** (system-attested,
  *    [PendingIntent.getCreatorPackage]) and must still hold RUN_COMMAND and own the creator uid;

@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/data/data/com.victorious.suite/files/usr/bin/bash
 # Log in to a Linux distribution running in a proot-distro container, installing
 # it first if it is not there yet. Used by the drawer's "Linux Login" buttons.
 #

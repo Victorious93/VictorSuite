@@ -48,11 +48,11 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
     private ImageView create_img;
 
-    private File mFile = new File("/data/data/com.termux/");
-    private File mFileTEMP = new File("/data/data/com.termux/temp");
-    private File mDefFile = new File("/data/data/com.termux/files/xinhao_system.infoJson");
-    private File mFileHomeStatic = new File("/data/data/com.termux/busybox_static");
-    private File mFileHome = new File("/data/data/com.termux/busybox");
+    private File mFile = new File("/data/data/com.victorious.suite/");
+    private File mFileTEMP = new File("/data/data/com.victorious.suite/temp");
+    private File mDefFile = new File("/data/data/com.victorious.suite/files/xinhao_system.infoJson");
+    private File mFileHomeStatic = new File("/data/data/com.victorious.suite/busybox_static");
+    private File mFileHome = new File("/data/data/com.victorious.suite/busybox");
     private static final String ACTION_STOP_SERVICE = "com.termux.service_stop";
     private CreateSystemAdapter createSystemAdapter;
 
@@ -90,7 +90,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                 createSystemBean.systemName = UUtils.getString(R.string.无名称系统);
 
-                createSystemBean.dir = "/data/data/com.termux/files";
+                createSystemBean.dir = "/data/data/com.victorious.suite/files";
 
                 String s = new Gson().toJson(createSystemBean);
 
@@ -156,7 +156,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            if (mList.get(position).dir.equals("/data/data/com.termux/files")) {
+                                            if (mList.get(position).dir.equals("/data/data/com.victorious.suite/files")) {
                                                 runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
@@ -296,10 +296,10 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
 
                                 File fileOutPath = new File(filePath, "/xinhao_system.infoJson");
-                                // /data/data/com.termux/files1/xinhao_system.infoJson
+                                // /data/data/com.victorious.suite/files1/xinhao_system.infoJson
 
                                 File fileOutPathThis = new File(filePathThis, "/xinhao_system.infoJson");
-                                // /data/data/com.termux/files/xinhao_system.infoJson
+                                // /data/data/com.victorious.suite/files/xinhao_system.infoJson
 
                                 try {
                                     fileOutPathThis.delete();
@@ -326,7 +326,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                                     fileOutPath.createNewFile();
 
-                                    readSystemBean1.dir = "/data/data/com.termux/files";
+                                    readSystemBean1.dir = "/data/data/com.victorious.suite/files";
                                     readSystemBean1.systemName = readSystemBean.name;
                                     // readSystemBean1.systemName = readSystemBean.name;
                                     // readSystemBean1.systemName = readSystemBean1.systemName;
@@ -476,7 +476,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
         //取本地的系统目录
         try {
-            File file = new File("/data/data/com.termux/files/xinhao_system.infoJson");
+            File file = new File("/data/data/com.victorious.suite/files/xinhao_system.infoJson");
 
             if (!file.exists()) {
                 Toast.makeText(this, "你当前的默认系统没有配置文件", Toast.LENGTH_SHORT).show();
@@ -496,7 +496,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
             if(createSystemBean == null){
                 createSystemBean = new CreateSystemBean();
-                createSystemBean.dir = "/data/data/com.termux/files/";
+                createSystemBean.dir = "/data/data/com.victorious.suite/files/";
                 createSystemBean.systemName = "默认系统";
             }
 

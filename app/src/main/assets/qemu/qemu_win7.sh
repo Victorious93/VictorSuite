@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/sh
+#!/data/data/com.victorious.suite/files/usr/bin/sh
 echo ""
 echo "---------------------------------------------------------"
 echo ""

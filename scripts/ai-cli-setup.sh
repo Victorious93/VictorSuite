@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/data/data/com.victorious.suite/files/usr/bin/bash
 # Install AI coding/model CLIs inside VictorSuite (or any Termux-compatible app).
 #
 #   pi       - runs natively in Termux (npm, per pi's own Termux guide)
