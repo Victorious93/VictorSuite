@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="VictorSuite logo" width="200">
+</p>
+
 <div align="center">
 
 <img src="docs/logo-512.png" alt="VictorSuite logo" width="200">
