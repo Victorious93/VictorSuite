@@ -1,0 +1,51 @@
+# Manual-only workflow: builds Termux bootstrap archives for the
+# com.victorious.suite prefix. Intended to run in the fork
+# Victorious93/termux-packages (copy it there), NOT in VictorSuite.
+# It never publishes a release; it only uploads workflow artifacts.
+name: Build bootstraps (com.victorious.suite)
+on:
+  workflow_dispatch:
+    inputs:
+      architectures:
+        description: "Comma-separated: aarch64,arm,i686,x86_64"
+        default: "aarch64"
+        required: true
+      termux_packages_ref:
+        description: "termux-packages git ref to build"
+        default: "master"
+        required: true
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: Victorious93/termux-packages   # fork (Don must create)
+          ref: ${{ inputs.termux_packages_ref }}
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc && df -h /
+      - name: Set app package name
+        run: |
+          sed -i 's|^TERMUX_APP__PACKAGE_NAME="com.termux"|TERMUX_APP__PACKAGE_NAME="com.victorious.suite"|' scripts/properties.sh
+          grep -n '^TERMUX_APP__PACKAGE_NAME=' scripts/properties.sh
+      - name: Build bootstraps from source (docker termux/package-builder)
+        run: ./scripts/run-docker.sh ./scripts/build-bootstraps.sh --architectures "${{ inputs.architectures }}" 2>&1 | tee build.log
+      - name: Verify prefix in bash
+        run: |
+          for z in bootstrap-*.zip; do
+            d=$(mktemp -d); unzip -q "$z" -d "$d"
+            strings "$d/bin/bash" | grep -q /data/data/com.victorious.suite/files || { echo "BAD prefix in $z"; exit 1; }
+            ! strings "$d/bin/bash" | grep -q /data/data/com.termux/ || { echo "old prefix in $z"; exit 1; }
+          done
+          sha256sum bootstrap-*.zip | tee SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bootstraps-${{ github.run_id }}
+          path: |
+            bootstrap-*.zip
+            SHA256SUMS
+            build.log
+          retention-days: 7
