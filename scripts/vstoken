@@ -1,0 +1,347 @@
+#!/usr/bin/env python3
+"""vstoken - shared token minimizer for the VictorSuite AI Coding Agents pack.
+
+Subcommands:
+  context  TASK [--repo DIR] [--max-tokens N] [--roadmap PATH]   compact context for TASK
+  trunc    [--max-lines N] [--max-tokens N] < log                 truncate / summarize output
+  classify TASK                                                   print tier + reasons (no calls)
+  route    TASK [--tier T | --model M] [--check CMD] [--dry-run]  pick tier, run, escalate on failure
+  track    AGENT IN_TOKENS OUT_TOKENS [--model M]                 record usage, warn on budget
+  report   [--days N]                                             usage summary
+  count    [FILE]                                                 count tokens (tiktoken if present)
+
+Config: $VSTOKEN_CONFIG or ~/.config/victorsuite/ai-agents/vstoken.json (see vstoken.example.json).
+Logs (no secrets, no prompt text): ~/.local/state/victorsuite/vstoken-{routes,usage}.jsonl
+"""
+import argparse, datetime as dt, fnmatch, json, os, re, shlex, subprocess, sys, urllib.request
+
+HOME = os.path.expanduser("~")
+CFG_PATH = os.environ.get("VSTOKEN_CONFIG", os.path.join(HOME, ".config/victorsuite/ai-agents/vstoken.json"))
+STATE = os.path.join(os.environ.get("XDG_STATE_HOME", os.path.join(HOME, ".local/state")), "victorsuite")
+TIERS = ["trivial", "routine", "hard"]
+
+# ------------------------------------------------------------------ tokens
+_ENC = None
+def count_tokens(text):
+    """Real tokenizer (tiktoken o200k_base) when installed; else a labelled estimate."""
+    global _ENC
+    try:
+        import tiktoken  # noqa
+        if _ENC is None:
+            _ENC = tiktoken.get_encoding("o200k_base")
+        return len(_ENC.encode(text, disallowed_special=())), "tiktoken:o200k_base"
+    except Exception:
+        return (len(text) + 3) // 4, "estimate:chars/4"
+
+# ------------------------------------------------------------------ config
+def load_cfg():
+    try:
+        with open(CFG_PATH) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def _append(name, rec):
+    os.makedirs(STATE, mode=0o700, exist_ok=True)
+    p = os.path.join(STATE, name)
+    fd = os.open(p, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+    with os.fdopen(fd, "a") as f:
+        f.write(json.dumps(rec, sort_keys=True) + "\n")
+
+# ------------------------------------------------------------------ context
+DEFAULT_IGNORE = ["*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.apk", "*.jar", "*.so", "*.zip",
+                  "*.keystore", "*.jks", "*.pem", "*.key", ".env", "*.env", "*.bin", "*.ttf", "*.otf",
+                  "gradlew", "gradlew.bat", "*.lock"]
+STOP = set("the a an and or to of in on for with is it this that be as at by from add fix make use new".split())
+
+def repo_files(repo):
+    """git ls-files respects .gitignore; then .aiignore + defaults are applied."""
+    try:
+        out = subprocess.run(["git", "-C", repo, "ls-files", "-co", "--exclude-standard"],
+                             capture_output=True, text=True, check=True).stdout.split("\n")
+    except Exception:
+        out = [os.path.relpath(os.path.join(d, f), repo) for d, _, fs in os.walk(repo) for f in fs]
+    pats = list(DEFAULT_IGNORE)
+    ai = os.path.join(repo, ".aiignore")
+    if os.path.exists(ai):
+        pats += [l.strip() for l in open(ai) if l.strip() and not l.startswith("#")]
+    def ignored(p):
+        for pat in pats:
+            pp = pat.rstrip("/")
+            if fnmatch.fnmatch(p, pp) or fnmatch.fnmatch(os.path.basename(p), pp) or p.startswith(pp + "/"):
+                return True
+        return False
+    return [p for p in out if p and not ignored(p)]
+
+def keywords(task):
+    words = re.findall(r"[A-Za-z_][A-Za-z0-9_]{2,}", task)
+    out = set()
+    for w in words:
+        lw = w.lower()
+        if lw in STOP:
+            continue
+        out.add(lw)
+        for part in re.findall(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])", w):  # split CamelCase
+            if len(part) > 2 and part.lower() not in STOP:
+                out.add(part.lower())
+    return out
+
+def score(repo, path, kws):
+    s = sum(4 for k in kws if k in path.lower())
+    try:
+        if os.path.getsize(os.path.join(repo, path)) > 200_000:
+            return 0
+        body = open(os.path.join(repo, path), errors="ignore").read().lower()
+    except Exception:
+        return 0
+    return s + sum(min(body.count(k), 5) for k in kws)
+
+def summarize_roadmap(text, kws, limit_lines=25):
+    """Keep headings, global notes, and table rows that mention task keywords."""
+    keep = []
+    for line in text.splitlines():
+        l = line.lower()
+        if line.startswith("#") or ("|" in line and any(k in l for k in kws)) or l.startswith("| merge policy") or l.startswith("| secrets"):
+            keep.append(line if len(line) < 400 else line[:400] + "…")
+    return "\n".join(keep[:limit_lines])
+
+def build_context(task, repo, max_tokens, roadmap):
+    kws = keywords(task)
+    parts = [f"# Task\n{task}\n"]
+    if roadmap and os.path.exists(roadmap):
+        parts.append("# Fleet ROADMAP (filtered)\n" + summarize_roadmap(open(roadmap, errors="ignore").read(), kws) + "\n")
+    files = repo_files(repo)
+    ranked = sorted(((score(repo, p, kws), p) for p in files), reverse=True)
+    parts.append("# Repo map (top-level)\n" + " ".join(sorted({p.split('/')[0] for p in files})) + "\n")
+    used, _ = count_tokens("\n".join(parts))
+    included = []
+    for sc, p in ranked:
+        if sc <= 0:
+            break
+        body = open(os.path.join(repo, p), errors="ignore").read()
+        chunk = f"## {p}\n```\n{body}\n```\n"
+        n, _ = count_tokens(chunk)
+        if used + n > max_tokens:
+            # include only lines around keyword hits
+            lines = body.splitlines()
+            hits = [i for i, l in enumerate(lines) if any(k in l.lower() for k in kws)]
+            sel = sorted({j for i in hits for j in range(max(0, i - 3), min(len(lines), i + 4))})
+            snippet = "\n".join(f"{j+1}: {lines[j]}" for j in sel[:80])
+            chunk = f"## {p} (excerpt)\n```\n{snippet}\n```\n"
+            n, _ = count_tokens(chunk)
+            if used + n > max_tokens:
+                continue
+        parts.append(chunk); used += n; included.append(p)
+        if len(included) >= 12:
+            break
+    return "\n".join(parts), included
+
+# ------------------------------------------------------------------ truncation
+ERR_RE = re.compile(r"(error|fail|exception|warning: |FAILED|BUILD FAILED|What went wrong|Caused by|panic|Traceback)", re.I)
+def truncate(text, max_lines=120, max_tokens=None):
+    lines = text.splitlines()
+    # collapse exact repeats
+    out, prev, rep = [], None, 0
+    for l in lines:
+        if l == prev:
+            rep += 1; continue
+        if rep:
+            out.append(f"  … (previous line repeated {rep}x)"); rep = 0
+        out.append(l); prev = l
+    if rep:
+        out.append(f"  … (previous line repeated {rep}x)")
+    lines = out
+    if len(lines) > max_lines:
+        head, tail = lines[: max_lines // 4], lines[-max_lines // 2:]
+        mid = [l for l in lines[max_lines // 4: -max_lines // 2] if ERR_RE.search(l)][: max_lines // 4]
+        lines = head + [f"… [{len(out) - len(head) - len(tail)} lines omitted; {len(mid)} error/warning lines kept] …"] + mid + ["…"] + tail
+    res = "\n".join(lines)
+    if max_tokens:
+        while count_tokens(res)[0] > max_tokens and len(res) > 200:
+            res = res[: int(len(res) * 0.8)] + "\n… [truncated to token budget]"
+    return res
+
+# ------------------------------------------------------------------ classifier / router
+HARD = ["refactor", "architecture", "architect", "redesign", "debug", "race condition", "deadlock", "crash",
+        "multi-file", "across files", "migrate", "migration", "security", "performance", "memory leak",
+        "concurrency", "design", "why does", "root cause", "investigate", "protocol", "envelope",
+        "plugin", " + "]
+ROUTINE = ["test", "unit test", "implement", "add a", "add an", "edit", "update", "fix", "bug", "function",
+           "method", "class", "endpoint", "script", "docs", "document", "lint", "add ", "remove", "replace",
+           "point ", "use ", "installer", "wire", "support", "own "]
+TRIVIAL = ["rename", "format", "typo", "reformat", "spelling", "what is", "what does", "explain", "short",
+           "one-line", "oneliner", "translate", "list ", "summarize", "regex", "command for"]
+
+def classify(task):
+    t = task.lower()
+    reasons = []
+    hard = [k for k in HARD if k in t]
+    files = len(set(re.findall(r"[\w./-]+\.(?:java|kt|kts|py|sh|gradle|xml|md|json|ts|js|c|cpp|h|rs|go)\b", task)))
+    if files >= 3:
+        hard.append(f"{files} files named")
+    if hard:
+        return "hard", ["hard:" + h for h in hard]
+    routine = [k for k in ROUTINE if k in t]
+    trivial = [k for k in TRIVIAL if k in t]
+    if trivial and not routine:
+        return "trivial", ["trivial:" + k for k in trivial]
+    if len(task) < 60 and not routine:
+        return "trivial", ["short request (<60 chars)"]
+    if routine or files:
+        return "routine", ["routine:" + k for k in routine] + ([f"{files} file(s) named"] if files else [])
+    return "routine", ["default"]
+
+def next_tier(tier):
+    i = TIERS.index(tier)
+    return TIERS[i + 1] if i + 1 < len(TIERS) else None
+
+def run_tier(cfg, tier, prompt, model_override, dry):
+    entry = (cfg.get("tiers") or {}).get(tier)
+    if not entry:
+        raise SystemExit(f"vstoken: no tier '{tier}' in {CFG_PATH}; copy vstoken.example.json there and edit it")
+    model = model_override or entry.get("model")
+    if not model:
+        raise SystemExit(f"vstoken: tier '{tier}' has no model; set one in {CFG_PATH}")
+    prov = entry["provider"]
+    if dry:
+        return {"provider": prov, "model": model, "text": "", "in": count_tokens(prompt)[0], "out": 0, "dry": True}
+    if prov == "ollama":
+        host = os.environ.get("OLLAMA_HOST", entry.get("host", "http://127.0.0.1:11434"))
+        if not host.startswith("http"):
+            host = "http://" + host
+        req = urllib.request.Request(host.rstrip("/") + "/api/generate", method="POST",
+                                     data=json.dumps({"model": model, "prompt": prompt, "stream": False}).encode(),
+                                     headers={"content-type": "application/json"})
+        r = json.load(urllib.request.urlopen(req, timeout=600))
+        return {"provider": prov, "model": model, "text": r.get("response", ""),
+                "in": r.get("prompt_eval_count", 0), "out": r.get("eval_count", 0)}
+    # Hosted tiers go through the vendor's own CLI non-interactively; the CLI owns auth.
+    cli = {"claude": ["claude", "-p", "--model", model],
+           "codex": ["codex", "exec", "-m", model],
+           "copilot": ["copilot", "-p", "--model", model]}.get(prov)
+    if not cli:
+        raise SystemExit(f"vstoken: unknown provider '{prov}'")
+    p = subprocess.run(cli + [prompt] if prov != "claude" else cli, input=prompt if prov == "claude" else None,
+                       capture_output=True, text=True)
+    out = p.stdout + (p.stderr if p.returncode else "")
+    return {"provider": prov, "model": model, "text": out, "in": count_tokens(prompt)[0],
+            "out": count_tokens(out)[0], "rc": p.returncode, "counted": "local-tokenizer"}
+
+def route(args):
+    cfg = load_cfg()
+    if not cfg.get("router_enabled") and not (args.tier or args.model or args.dry_run):
+        raise SystemExit("vstoken: the router is opt-in. Set \"router_enabled\": true in "
+                         f"{CFG_PATH}, or pass --tier/--model, or use --dry-run.")
+    tier, reasons = (args.tier, ["manual --tier"]) if args.tier else classify(args.task)
+    if args.model:
+        reasons.append("manual --model")
+    prompt = truncate(args.task, max_lines=400, max_tokens=cfg.get("max_prompt_tokens", 8000))
+    attempt = 0
+    while tier:
+        attempt += 1
+        res = run_tier(cfg, tier, prompt, args.model, args.dry_run)
+        check_ok = None
+        if args.check and not args.dry_run:
+            print(res["text"])
+            # The check runs as the user, in this terminal. It is not an agent action and
+            # never bypasses vsphone's gate (vsphone refuses risky ops non-interactively).
+            check_ok = subprocess.run(args.check, shell=True).returncode == 0
+        rec = {"ts": dt.datetime.now().astimezone().isoformat(timespec="seconds"), "tier": tier,
+               "reasons": reasons, "provider": res["provider"], "model": res["model"], "attempt": attempt,
+               "in_tokens": res["in"], "out_tokens": res["out"], "dry_run": bool(args.dry_run),
+               "check": None if check_ok is None else ("pass" if check_ok else "fail")}
+        _append("vstoken-routes.jsonl", rec)
+        print(f"[vstoken] tier={tier} provider={res['provider']} model={res['model']} attempt={attempt} "
+              f"in={res['in']} out={res['out']} reasons={','.join(reasons)}" + (" (dry-run)" if args.dry_run else ""),
+              file=sys.stderr)
+        if not args.dry_run:
+            track_usage(res["provider"], res["model"], res["in"], res["out"], cfg)
+        if check_ok is False and not args.tier and not args.model and next_tier(tier):
+            reasons = [f"escalated: check failed on {tier}"]
+            tier = next_tier(tier)
+            continue
+        if not args.check and not args.dry_run:
+            print(res["text"])
+        return 0 if check_ok in (None, True) else 1
+
+# ------------------------------------------------------------------ tracking
+def price_for(cfg, model):
+    p = (cfg.get("prices_per_mtok") or {}).get(model)
+    return (p["input"], p["output"]) if p else (None, None)
+
+def track_usage(agent, model, tin, tout, cfg=None):
+    cfg = cfg if cfg is not None else load_cfg()
+    pin, pout = price_for(cfg, model)
+    cost = None if pin is None else round(tin / 1e6 * pin + tout / 1e6 * pout, 6)
+    rec = {"ts": dt.datetime.now().astimezone().isoformat(timespec="seconds"), "agent": agent,
+           "model": model, "in": int(tin), "out": int(tout), "cost_usd": cost}
+    _append("vstoken-usage.jsonl", rec)
+    budget = cfg.get("daily_budget_usd")
+    if budget:
+        spent = sum(r["cost_usd"] or 0 for r in read_usage(1))
+        if spent >= budget:
+            print(f"[vstoken] WARNING: today's tracked spend ${spent:.4f} >= daily budget ${budget}", file=sys.stderr)
+        elif spent >= 0.8 * budget:
+            print(f"[vstoken] note: ${spent:.4f} of ${budget} daily budget used", file=sys.stderr)
+    if cost is None:
+        print(f"[vstoken] no price configured for {model}; cost not tracked (add prices_per_mtok)", file=sys.stderr)
+
+def read_usage(days):
+    p = os.path.join(STATE, "vstoken-usage.jsonl")
+    if not os.path.exists(p):
+        return []
+    cutoff = dt.date.today() - dt.timedelta(days=days - 1)
+    out = []
+    for l in open(p):
+        try:
+            r = json.loads(l)
+            if dt.date.fromisoformat(r["ts"][:10]) >= cutoff:
+                out.append(r)
+        except Exception:
+            pass
+    return out
+
+# ------------------------------------------------------------------ main
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="vstoken", description=__doc__.split("\n")[0])
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    c = sub.add_parser("context"); c.add_argument("task"); c.add_argument("--repo", default=".")
+    c.add_argument("--max-tokens", type=int, default=6000)
+    c.add_argument("--roadmap", default=os.environ.get("VS_FLEET_ROADMAP",
+                   os.path.join(HOME, ".local/share/victorsuite/fleet-manifest/ROADMAP.md")))
+    c.add_argument("--stats", action="store_true")
+    t = sub.add_parser("trunc"); t.add_argument("--max-lines", type=int, default=120); t.add_argument("--max-tokens", type=int)
+    k = sub.add_parser("classify"); k.add_argument("task")
+    r = sub.add_parser("route"); r.add_argument("task"); r.add_argument("--tier", choices=TIERS)
+    r.add_argument("--model"); r.add_argument("--check"); r.add_argument("--dry-run", action="store_true")
+    tr = sub.add_parser("track"); tr.add_argument("agent"); tr.add_argument("tin", type=int); tr.add_argument("tout", type=int)
+    tr.add_argument("--model", default="unknown")
+    rp = sub.add_parser("report"); rp.add_argument("--days", type=int, default=1)
+    n = sub.add_parser("count"); n.add_argument("file", nargs="?")
+    a = ap.parse_args(argv)
+    if a.cmd == "context":
+        text, inc = build_context(a.task, a.repo, a.max_tokens, a.roadmap)
+        print(text)
+        if a.stats:
+            print(f"[vstoken] {count_tokens(text)} files={inc}", file=sys.stderr)
+    elif a.cmd == "trunc":
+        print(truncate(sys.stdin.read(), a.max_lines, a.max_tokens))
+    elif a.cmd == "classify":
+        tier, why = classify(a.task); print(tier, "; ".join(why))
+    elif a.cmd == "route":
+        return route(a)
+    elif a.cmd == "track":
+        track_usage(a.agent, a.model, a.tin, a.tout)
+    elif a.cmd == "report":
+        rows = read_usage(a.days); agg = {}
+        for r_ in rows:
+            g = agg.setdefault(r_["agent"], [0, 0, 0.0, 0])
+            g[0] += r_["in"]; g[1] += r_["out"]; g[2] += r_["cost_usd"] or 0; g[3] += r_["cost_usd"] is None
+        for ag, (i, o, cst, unp) in sorted(agg.items()):
+            print(f"{ag:10} in={i} out={o} cost=${cst:.4f}" + (f" ({unp} unpriced)" if unp else ""))
+    elif a.cmd == "count":
+        print(*count_tokens(open(a.file).read() if a.file else sys.stdin.read()))
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

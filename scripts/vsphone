@@ -1,0 +1,252 @@
+#!/usr/bin/env bash
+# vsphone - drive this phone from the VictorSuite terminal (for AI coding agents and humans).
+#
+# Usage: vsphone [--dry-run] <command> [args...]
+#   pm <args...>              package manager (list/path/install/uninstall/clear/...)
+#   am <args...>              activity manager (start/force-stop/broadcast/...)
+#   settings get|put|delete <namespace> <key> [value]
+#   input tap X Y | swipe X1 Y1 X2 Y2 [ms] | text STRING | keyevent CODE
+#   screencap [OUT.png]       default: $HOME/vsphone/screen-<time>.png
+#   uidump [OUT.xml]          uiautomator dump; default: $HOME/vsphone/ui-<time>.xml
+#   pull <device-path> [dest] copy a file the shell user can read into $HOME
+#   push <src> <device-path>  copy a file onto shared storage (RISKY outside /sdcard)
+#   ls <device-path>          list a directory as the privileged user
+#   shell <cmd...>            raw shell (ALWAYS RISKY: needs the approval gate)
+#   classify <command...>     print SAFE/RISKY + reason, run nothing
+#   backend                   print which backend would be used (root / shizuku / none)
+#   log [N]                   show the last N audit lines (default 20)
+#
+# Backend: root (su) if `su -c id` returns uid 0, else Shizuku's `rish`, else error.
+# Override with VSPHONE_BACKEND=root|shizuku.
+#
+# Approval gate: RISKY actions (wipe, flash, dd/partition writes, factory reset,
+# uninstalling/clearing/disabling packages, security-weakening settings, raw shell, ...)
+# need a typed confirmation from the controlling terminal. They are REFUSED when stdin
+# or stdout is not a terminal, when invoked over SSH, or when VS_REMOTE_TRIGGER /
+# VSPHONE_REMOTE is set. There is no flag or env var that auto-approves.
+#
+# Audit log: $HOME/.local/state/victorsuite/vsphone-audit.log (mode 600). Logs the command
+# name, verdict and outcome. `input text` payloads and `settings put` values are redacted.
+
+set -uo pipefail
+
+AUDIT_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/victorsuite"
+AUDIT_LOG="$AUDIT_DIR/vsphone-audit.log"
+OUT_DIR="$HOME/vsphone"
+DRY_RUN=0
+
+die() { printf 'vsphone: %s\n' "$*" >&2; exit 2; }
+
+# ---------------------------------------------------------------- classifier
+# classify ARGS... -> prints "SAFE <reason>" or "RISKY <reason>". Pure: no device access.
+SECURITY_KEYS_RE='^(adb_enabled|adb_wifi_enabled|development_settings_enabled|package_verifier_enable|verifier_verify_adb_installs|package_verifier_user_consent|install_non_market_apps|lock_screen_.*|lockscreen\..*|lock_pattern_.*|screen_lock.*|accessibility_enabled|enabled_accessibility_services|enabled_notification_listeners|default_input_method|enabled_input_methods|location_mode|location_providers_allowed|bluetooth_on|wifi_on|airplane_mode_on|stay_on_while_plugged_in|usb_mass_storage_enabled|require_password_to_decrypt|device_provisioned|user_setup_complete|policy_control|hidden_api_policy.*|private_dns_mode|private_dns_specifier|http_proxy|global_http_proxy_.*|secure_frp_mode|send_action_app_error|upload_apk_enable|verifier_.*)$'
+DANGER_WORDS_RE='(^|[^a-z_])(wipe|wipefs|flash|fastboot|dd|mkfs[.a-z0-9]*|mke2fs|fdisk|sgdisk|parted|blkdiscard|format|factory|master_clear|recovery|bootloader|edl|setenforce|magisk|ksud|avbctl|bootctl|update_engine|vdc|sm|reboot|shutdown|svc|chmod|chown|chcon|mount|umount|rm|mv|truncate|kill|killall|setprop|resetprop|iptables|ip6tables|ndc|cmd|dumpsys|monkey)([^a-z_]|$)'
+
+classify() {
+    [ $# -gt 0 ] || { echo "RISKY empty command"; return; }
+    local c="$1"; shift
+    local joined; joined="$(printf '%s ' "$@")"
+    case "$c" in
+        classify|backend|log|-h|--help|help) echo "SAFE meta"; return ;;
+        screencap|uidump) echo "SAFE read-only capture"; return ;;
+        ls|pull) echo "SAFE read"; return ;;
+        push)
+            local dst="${2:-}"
+            case "$dst" in
+                /sdcard/*|/storage/emulated/0/*)
+                    case "$dst" in *..*) echo "RISKY path traversal in push target"; return ;; esac
+                    echo "SAFE write to shared storage"; return ;;
+                *) echo "RISKY push outside /sdcard: $dst"; return ;;
+            esac ;;
+        input)
+            case "${1:-}" in
+                tap|swipe|text|keyevent|press|roll|draganddrop|motionevent) ;;
+                *) echo "RISKY unknown input subcommand"; return ;;
+            esac
+            if [ "${1:-}" = keyevent ]; then
+                # KEYCODE_POWER=26, SLEEP=223, SOFT_SLEEP=276 are fine; nothing here wipes
+                :
+            fi
+            echo "SAFE ui input"; return ;;
+        settings)
+            local verb="${1:-}" key="${3:-}"
+            case "$verb" in
+                get|list) echo "SAFE settings read"; return ;;
+                put|delete|reset)
+                    [ "$verb" = reset ] && { echo "RISKY settings reset"; return; }
+                    if printf '%s' "$key" | grep -Eqi "$SECURITY_KEYS_RE"; then
+                        echo "RISKY security-sensitive setting: $key"; return
+                    fi
+                    echo "SAFE settings write: $key"; return ;;
+                *) echo "RISKY unknown settings verb"; return ;;
+            esac ;;
+        pm)
+            case "${1:-}" in
+                list|path|dump|resolve-activity|query-activities|has-feature|get-install-location)
+                    echo "SAFE pm read"; return ;;
+                install|install-create|install-write|install-commit)
+                    case "$joined" in *" -d "*|*"--bypass-low-target-sdk-block"*|*" -r -d"*)
+                        echo "RISKY pm install with downgrade/bypass flags"; return ;; esac
+                    echo "SAFE pm install"; return ;;
+                grant) echo "SAFE pm grant"; return ;;
+                uninstall|clear|disable|disable-user|disable-until-used|hide|suspend|revoke|reset-permissions|set-installer|uninstall-system-updates|trim-caches|remove-user|create-user|set-home-activity)
+                    echo "RISKY pm ${1}"; return ;;
+                enable|unhide|unsuspend) echo "SAFE pm ${1}"; return ;;
+                *) echo "RISKY unrecognised pm subcommand: ${1:-}"; return ;;
+            esac ;;
+        am)
+            case "${1:-}" in
+                start|start-activity|startservice|start-service|start-foreground-service|force-stop|stack|get-current-user|kill-all)
+                    [ "${1:-}" = kill-all ] && { echo "RISKY am kill-all"; return; }
+                    echo "SAFE am ${1}"; return ;;
+                broadcast)
+                    if printf '%s' "$joined" | grep -Eqi 'MASTER_CLEAR|FACTORY_RESET|REBOOT|SHUTDOWN|ACTION_REQUEST_SHUTDOWN|WIPE'; then
+                        echo "RISKY dangerous broadcast"; return
+                    fi
+                    echo "SAFE am broadcast"; return ;;
+                *) echo "RISKY unrecognised am subcommand: ${1:-}"; return ;;
+            esac ;;
+        shell) echo "RISKY raw shell (shell/exec is destructive per REMOTE_CONTROL_ENVELOPE)"; return ;;
+        wipe|flash|dd|factory-reset|reboot|format) echo "RISKY $c"; return ;;
+    esac
+    # Defensive catch-all for anything else that slipped through.
+    if printf '%s %s' "$c" "$joined" | tr '[:upper:]' '[:lower:]' | grep -Eq "$DANGER_WORDS_RE|/dev/block"; then
+        echo "RISKY matches destructive pattern"; return
+    fi
+    echo "RISKY unknown command: $c"
+}
+
+# ---------------------------------------------------------------- audit
+audit() { # verdict outcome cmd args...
+    local verdict="$1" outcome="$2"; shift 2
+    local redacted=() prev2="" prev1="" a
+    for a in "$@"; do
+        if [ "$prev1" = text ] && [ "$prev2" = input ]; then a="<redacted:${#a}chars>"
+        elif [ "$prev2" = put ] || { [ "${#redacted[@]}" -ge 4 ] && [ "${redacted[1]:-}" = put ]; }; then a="<redacted>"
+        fi
+        # Never log anything that looks like a token.
+        case "$a" in *[Tt][Oo][Kk][Ee][Nn]*=*|*[Kk][Ee][Yy]=*|sk-*|ghp_*|github_pat_*) a="<redacted>" ;; esac
+        redacted+=("$a"); prev2="$prev1"; prev1="$a"
+    done
+    mkdir -p "$AUDIT_DIR" && chmod 700 "$AUDIT_DIR" 2>/dev/null
+    ( umask 077; printf '%s\t%s\t%s\t%s\t%s\n' "$(date -Iseconds)" "${BACKEND:-none}" "$verdict" "$outcome" "${redacted[*]}" >> "$AUDIT_LOG" )
+    chmod 600 "$AUDIT_LOG" 2>/dev/null || true
+}
+
+# ---------------------------------------------------------------- gate
+is_remote_or_noninteractive() {
+    [ -n "${VS_REMOTE_TRIGGER:-}" ] && { echo "VS_REMOTE_TRIGGER is set"; return 0; }
+    [ -n "${VSPHONE_REMOTE:-}" ] && { echo "VSPHONE_REMOTE is set"; return 0; }
+    [ -n "${SSH_CONNECTION:-}${SSH_CLIENT:-}${SSH_TTY:-}" ] && { echo "invoked over SSH"; return 0; }
+    [ -t 0 ] || { echo "stdin is not a terminal"; return 0; }
+    [ -t 1 ] || { echo "stdout is not a terminal"; return 0; }
+    [ -r /dev/tty ] || { echo "no controlling terminal"; return 0; }
+    return 1
+}
+
+approval_gate() { # reason cmd...
+    local reason="$1"; shift
+    local why
+    if why="$(is_remote_or_noninteractive)"; then
+        echo "vsphone: REFUSED risky action ($reason): $why. Run it yourself in an interactive VictorSuite terminal." >&2
+        audit RISKY "refused:$why" "$@"; exit 3
+    fi
+    local word; word="CONFIRM-$(od -An -N2 -tx1 /dev/urandom 2>/dev/null | tr -d ' \n' || echo "$$")"
+    {
+        echo "================ vsphone approval gate ================"
+        echo "Action : $*"
+        echo "Why    : $reason"
+        echo "Backend: $BACKEND"
+        echo "Type exactly '$word' to run it, anything else cancels."
+    } > /dev/tty
+    local answer=""
+    IFS= read -r answer < /dev/tty || answer=""
+    if [ "$answer" != "$word" ]; then
+        echo "vsphone: cancelled." >&2; audit RISKY "declined" "$@"; exit 4
+    fi
+    audit RISKY "approved" "$@"
+}
+
+# ---------------------------------------------------------------- backend
+pick_backend() {
+    case "${VSPHONE_BACKEND:-}" in
+        root) BACKEND=root; return ;; shizuku) BACKEND=shizuku; return ;;
+    esac
+    if command -v su >/dev/null 2>&1 && [ "$(su -c id -u 2>/dev/null)" = 0 ]; then BACKEND=root
+    elif command -v rish >/dev/null 2>&1; then BACKEND=shizuku
+    else BACKEND=none; fi
+}
+
+# run_priv CMD... : run one command line as root (su) or the shell user (rish).
+run_priv() {
+    local line; line="$(printf '%q ' "$@")"
+    if [ "$DRY_RUN" = 1 ]; then echo "[dry-run:$BACKEND] $line"; return 0; fi
+    case "$BACKEND" in
+        root) su -c "$line" ;;
+        shizuku) rish -c "$line" ;;
+        *) die "no backend: install root (su) or set up Shizuku and its 'rish' shell (see docs/AI_CODING_AGENTS.md)" ;;
+    esac
+}
+
+# ---------------------------------------------------------------- main
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --dry-run) DRY_RUN=1; shift ;;
+        --) shift; break ;;
+        *) break ;;
+    esac
+done
+[ $# -gt 0 ] || { sed -n '2,/^$/{s/^# \{0,1\}//;p}' "$0"; exit 0; }
+
+cmd="$1"
+case "$cmd" in
+    -h|--help|help) sed -n '2,/^$/{s/^# \{0,1\}//;p}' "$0"; exit 0 ;;
+    classify) shift; classify "$@"; exit 0 ;;
+    log) tail -n "${2:-20}" "$AUDIT_LOG" 2>/dev/null || echo "(no audit log yet)"; exit 0 ;;
+esac
+
+pick_backend
+[ "$cmd" = backend ] && { echo "$BACKEND"; exit 0; }
+
+verdict="$(classify "$@")"
+reason="${verdict#* }"
+if [ "${verdict%% *}" = RISKY ]; then
+    approval_gate "$reason" "$@"
+else
+    audit SAFE "run" "$@"
+fi
+
+shift
+ts="$(date +%Y%m%d-%H%M%S)"
+case "$cmd" in
+    pm|am) run_priv "$cmd" "$@" ;;
+    settings) run_priv settings "$@" ;;
+    input) run_priv input "$@" ;;
+    screencap)
+        out="${1:-$OUT_DIR/screen-$ts.png}"; mkdir -p "$(dirname "$out")"
+        tmp="/data/local/tmp/vsphone-$ts.png"
+        run_priv screencap -p "$tmp" && run_priv cat "$tmp" > "$out" && run_priv rm -f "$tmp" && echo "$out" ;;
+    uidump)
+        out="${1:-$OUT_DIR/ui-$ts.xml}"; mkdir -p "$(dirname "$out")"
+        tmp="/data/local/tmp/vsphone-$ts.xml"
+        run_priv uiautomator dump "$tmp" >/dev/null && run_priv cat "$tmp" > "$out" && run_priv rm -f "$tmp" && echo "$out" ;;
+    ls) run_priv ls -la "${1:?path}" ;;
+    pull)
+        src="${1:?device path}"; dest="${2:-$OUT_DIR/$(basename "$src")}"; mkdir -p "$(dirname "$dest")"
+        run_priv cat "$src" > "$dest" && echo "$dest" ;;
+    push)
+        src="${1:?source}"; dst="${2:?device path}"
+        [ -f "$src" ] || die "no such file: $src"
+        if [ "$DRY_RUN" = 1 ]; then echo "[dry-run:$BACKEND] cat > $dst"; else
+            case "$BACKEND" in
+                root) su -c "cat > $(printf '%q' "$dst")" < "$src" ;;
+                shizuku) rish -c "cat > $(printf '%q' "$dst")" < "$src" ;;
+                *) die "no backend" ;;
+            esac
+        fi ;;
+    shell) shift 0; run_priv sh -c "$*" ;;
+    *) die "unknown command: $cmd (see --help)" ;;
+esac
+rc=$?
+audit "${verdict%% *}" "exit:$rc" "$cmd" "$@"
+exit "$rc"
