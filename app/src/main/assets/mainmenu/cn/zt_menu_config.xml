@@ -142,6 +142,9 @@
         <item tag="Parrot Login"
             name="Parrot OS"
             click="java:com.termux.zerocore.config.mainmenu.config.ParrotLoginClickConfig" />
+        <item tag="BlackArch Login"
+            name="BlackArch"
+            click="java:com.termux.zerocore.config.mainmenu.config.BlackArchLoginClickConfig" />
     </group>
 
     <group name="X11功能">

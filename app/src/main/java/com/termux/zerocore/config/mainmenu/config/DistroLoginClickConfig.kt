@@ -70,3 +70,5 @@ class UbuntuLoginClickConfig : DistroLoginClickConfig("ubuntu", "Ubuntu")
 class KaliLoginClickConfig : DistroLoginClickConfig("kali", "Kali Linux")
 
 class ParrotLoginClickConfig : DistroLoginClickConfig("parrot", "Parrot OS")
+
+class BlackArchLoginClickConfig : DistroLoginClickConfig("blackarch", "BlackArch")
