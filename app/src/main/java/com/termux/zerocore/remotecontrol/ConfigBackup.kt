@@ -428,26 +428,49 @@ object NodeConfigBackup {
         val out = LinkedHashMap<String, String>()
         el.asJsonObject.entrySet().forEach { (k, v) ->
             if (!v.isJsonPrimitive) invalid("property '$k' must be a string")
-            out[k] = v.asString
+            if (!isSafePropertyKey(k)) invalid("property key '${k.take(40)}' has whitespace, separators or control characters")
+            val value = v.asString
+            if (value.any { it == '\n' || it == '\r' }) invalid("property '$k' value must be a single line")
+            out[k] = value
         }
         return out
     }
 
-    /** Minimal `key=value` / `key: value` parser (comments and blank lines skipped). */
+    /** A key that `java.util.Properties` reads back unchanged: no whitespace, separators, `\`, or control chars. */
+    fun isSafePropertyKey(key: String): Boolean =
+        key.isNotEmpty() && key.none { it.isWhitespace() || it.isISOControl() || it in "=:\\#!" }
+
+    /** Parses with `java.util.Properties` (what Termux uses): `\` continuations, escapes, `=`/`:`/space separators. */
     fun parseProperties(text: String): Map<String, String> {
         val out = LinkedHashMap<String, String>()
-        text.lineSequence().forEach { line ->
-            val t = line.trim()
-            if (t.isEmpty() || t.startsWith("#") || t.startsWith("!")) return@forEach
-            val idx = t.indexOfFirst { it == '=' || it == ':' }
-            if (idx <= 0) return@forEach
-            out[t.substring(0, idx).trim()] = t.substring(idx + 1).trim()
-        }
+        object : java.util.Properties() {
+            @Synchronized
+            override fun put(key: Any, value: Any): Any? {
+                out[key as String] = value as String
+                return super.put(key, value)
+            }
+        }.load(java.io.StringReader(text))
         return out
     }
 
+    /** Inverse of [parseProperties]: keys and values are escaped so `Properties.load` returns them exactly. */
     fun renderProperties(values: Map<String, String>, header: String): String = buildString {
-        append("# ").append(header).append('\n')
-        values.forEach { (k, v) -> append(k).append('=').append(v).append('\n') }
+        append("# ").append(header.replace('\n', ' ').replace('\r', ' ')).append('\n')
+        values.forEach { (k, v) -> append(escapeProp(k, true)).append('=').append(escapeProp(v, false)).append('\n') }
+    }
+
+    private fun escapeProp(s: String, isKey: Boolean): String = buildString {
+        s.forEachIndexed { i, c ->
+            when (c) {
+                '\\' -> append("\\\\")
+                '\n' -> append("\\n")
+                '\r' -> append("\\r")
+                '\t' -> append("\\t")
+                '\u000c' -> append("\\f")
+                ' ' -> if (isKey || i == 0) append("\\ ") else append(c)
+                '=', ':', '#', '!' -> if (isKey || (i == 0 && (c == '#' || c == '!'))) append('\\').append(c) else append(c)
+                else -> append(c)
+            }
+        }
     }
 }
