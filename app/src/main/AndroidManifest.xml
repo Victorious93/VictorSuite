@@ -57,6 +57,7 @@
     <application
         android:name=".app.TermuxApplication"
         android:allowBackup="false"
+        tools:replace="android:allowBackup"
         android:banner="@drawable/banner"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
