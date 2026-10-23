@@ -12,12 +12,10 @@ Inventories below are grounded in code as of:
 
 | Tree | Ref | Notes |
 |---|---|---|
-| This repo (VictorSuite, private) | `main` @ `ced930b` | Termux/ZeroTermux fork, `applicationId` effectively `com.termux`, `targetSdk` **28** |
+| This repo (VictorSuite, private) | `main` @ `ced930b` | Termux fork, `applicationId` effectively `com.termux`, `targetSdk` **28** |
 | [Victorious93/rootforge-os](https://github.com/Victorious93/rootforge-os) (public) | `main` @ `ae180a3` (includes merged [PR #49](https://github.com/Victorious93/rootforge-os/pull/49)) | Debian ISO + Termux rootfs + Kotlin `:core` + Android APK `ai.rootforge.os` `targetSdk` **35** + Compose desktop + Docker |
 | [termux/termux-api](https://github.com/termux/termux-api) | `master` @ current clone (`versionName` 0.53.0 / `versionCode` 1002) | Companion APK `com.termux.api`, GPLv3 |
 | [termux/termux-api-package](https://github.com/termux/termux-api-package) | README + `termux-api.c` (helper 0.60.0) | MIT `termux-*` scripts + C helper |
-
-ZeroTermux research: [hanxinhao000/ZeroTermux](https://github.com/hanxinhao000/ZeroTermux) and [zerotermux.dev](https://zerotermux.dev/).
 
 ---
 
@@ -49,7 +47,7 @@ A single process cannot honestly satisfy both SDK contracts:
 
 | Constraint | VictorSuite must | RootForge must |
 |---|---|---|
-| `targetSdk` | Stay **28**. Termux exec, `$PREFIX` under `/data/data/com.termux/files`, background `am broadcast` from the `termux-api` helper, and external-dir layout all assume the Termux/ZeroTermux 28 contract. Raising it to 33–35 breaks scoped storage, helper delivery, and bootstrap. | Stay **modern (35 today)**. USB host permission flow, scoped/storage access for images and dumps, foreground-service types, and notification rules for an always-on client agent are written against current `targetSdk`. Shipping the toolkit at 28 would fight Android 12+ USB and storage. |
+| `targetSdk` | Stay **28**. Termux exec, `$PREFIX` under `/data/data/com.termux/files`, background `am broadcast` from the `termux-api` helper, and external-dir layout all assume the Termux 28 contract. Raising it to 33–35 breaks scoped storage, helper delivery, and bootstrap. | Stay **modern (35 today)**. USB host permission flow, scoped/storage access for images and dumps, foreground-service types, and notification rules for an always-on client agent are written against current `targetSdk`. Shipping the toolkit at 28 would fight Android 12+ USB and storage. |
 | `applicationId` | `com.termux` is load-bearing (PREFIX, `RUN_COMMAND`, `core-termux`). | `ai.rootforge.os` is already the DCA Messenger package. |
 | Permissions story | SMS / contacts leftovers + a future Termux:API embed. Sideload. | USB host + (later) optional VPN. No need to inherit VictorSuite’s SMS/call-log surface. |
 
@@ -57,11 +55,11 @@ The previous one-APK plan treated “keep `targetSdk` 28 for everything” as ac
 
 ### Non-goals (this plan)
 
-- Merging the two APKs, rewriting ZeroTermux UI in Compose, or producing a Play Store listing for either full app.
+- Merging the two APKs, rewriting the inherited UI in Compose, or producing a Play Store listing for either full app.
 - Building the Debian live ISO inside VictorSuite CI.
 - Replacing Magisk/KernelSU/APatch with a custom patcher (RootForge already delegates patching to those apps on the **target** phone).
 - Changing droidcommand-ai in the same PR as this document (protocol stays; DCA needs a small follow-up to treat the suite as two packages, one schema).
-- Using ZeroTermux’s unauthenticated TCP **19951** (`ZTSocketService`) as the admin/client channel — cautionary existing control plane, not a base (see §12).
+- Using the inherited unauthenticated TCP **19951** (`ZTSocketService`) as the admin/client channel — cautionary existing control plane, not a base (see §12).
 - Letting an admin flash/unlock the client through admin/client mode (that remains the **USB toolkit host→target** path; the far phone need not run any suite app).
 - Putting Termux, zerocore, or Termux:API on RootForge’s `:core` / `:toolkit-ui` / `:desktop` classpath.
 
@@ -69,7 +67,7 @@ The previous one-APK plan treated “keep `targetSdk` 28 for everything” as ac
 
 ## 2. Inventory — VictorSuite (this repo)
 
-VictorSuite is a Termux fork on the ZeroTermux codebase. It keeps Termux’s `applicationId` / `sharedUserId` (`com.termux`) and the public `RUN_COMMAND` contract so existing Termux tooling and droidcommand-AI’s `core-termux` module still work. **VictorSuite and genuine Termux cannot be installed on the same device.** VictorSuite and RootForge **can** — different applicationIds.
+VictorSuite is a Termux fork on an inherited upstream codebase. It keeps Termux’s `applicationId` / `sharedUserId` (`com.termux`) and the public `RUN_COMMAND` contract so existing Termux tooling and droidcommand-AI’s `core-termux` module still work. **VictorSuite and genuine Termux cannot be installed on the same device.** VictorSuite and RootForge **can** — different applicationIds.
 
 ### Languages and size
 
@@ -103,9 +101,9 @@ No Compose. `:app` uses data binding, AppCompat, drawer + RecyclerView menus.
 - `versionName` **0.118.3.54**, `versionCode` **117**.
 - Display name placeholder `TERMUX_APP_NAME = "VictorSuite"`; package still `com.termux` via `manifestPlaceholders.TERMUX_PACKAGE_NAME` and `TermuxConstants.TERMUX_PACKAGE_NAME`. There is no explicit `applicationId` in `app/build.gradle`; AGP uses `namespace "com.termux"`.
 - CI: `.github/workflows/android.yml` → `:app:assembleDebug` on `main` (JDK 17, platform-36, NDK 29, `packages: platform-tools`).
-- Signing: committed `phone.jks` with env-overridable passwords in `app/build.gradle` (legacy ZeroTermux/UTermux key compatibility). **Owner-approval item** — see §2.1.
+- Signing: committed `phone.jks` with env-overridable passwords in `app/build.gradle` (legacy upstream/UTermux key compatibility). **Owner-approval item** — see §2.1.
 
-### What lives under `com.termux.zerocore` (ZeroTermux / VictorSuite)
+### What lives under `com.termux.zerocore` (inherited / VictorSuite)
 
 Drawer categories in `MainMenuConfig.init()`:
 
@@ -130,13 +128,13 @@ The **Headscale** drawer (`HeadscaleClickConfig`: userspace `tailscaled`, SOCKS 
 
 - Launcher: `TermuxActivity` (terminal).
 - Settings: upstream `SettingsActivity` (PreferenceFragment, Termux:API row **hides if `com.termux.api` is missing**) plus `VictorSuiteSettingsActivity` (SwitchCompat list — the place for the embedded Termux:API toggle).
-- Manifest declares `android.hardware.usb.host` **`required="true"`** (ZeroTermux OTG file access). That **blocks install on phones without USB host**. Flip to `required="false"` as a standalone VictorSuite bugfix (mass-storage degrades; terminal must install everywhere). RootForge keeps its own USB-host feature for ADB/fastboot/EDL.
+- Manifest declares `android.hardware.usb.host` **`required="true"`** (OTG file access). That **blocks install on phones without USB host**. Flip to `required="false"` as a standalone VictorSuite bugfix (mass-storage degrades; terminal must install everywhere). RootForge keeps its own USB-host feature for ADB/fastboot/EDL.
 - Permissions already include `INTERNET`, storage, `READ_SMS`, `READ_CONTACTS`, `SYSTEM_ALERT_WINDOW`, `REQUEST_INSTALL_PACKAGES`, `WRITE_SECURE_SETTINGS`, `DUMP`, `PACKAGE_USAGE_STATS`. Not the full Termux:API set.
 - `sharedUserId="${TERMUX_PACKAGE_NAME}"` (`com.termux`) — official Termux plugins share the prefix **when signed with the same key**. VictorSuite’s `phone.jks` is **not** the official Termux key, so official F-Droid Termux:API will **not** share UID. Embedding Termux:API is how `termux-*` works for VictorSuite users without a matching-signature companion.
 
 ### License
 
-`LICENSE.md`: **GPLv3 only**, following ZeroTermux / Termux. Exceptions: Apache-2.0 terminal-emulator/view and StreamGobbler; GPLv2+Classpath for `com.termux.shared.file` ojluni bits.
+`LICENSE.md`: **GPLv3 only**, following Termux and the inherited upstream. Exceptions: Apache-2.0 terminal-emulator/view and StreamGobbler; GPLv2+Classpath for `com.termux.shared.file` ojluni bits.
 
 ### 2.1 VictorSuite-side prerequisites (owner approval)
 
@@ -154,7 +152,7 @@ Resolution is currently “whatever Gradle picks,” which is a latent break for
 
 **2. Package name `com.termux` clash.** Keeping `com.termux` means VictorSuite **cannot coexist with official Termux**. That is load-bearing for PREFIX, `RUN_COMMAND`, and `core-termux`. Renaming would require rewriting bootstrap paths, helper retargets, and a DCA follow-up. **Owner approval:** keep `com.termux` (recommended) **or** plan a migration. RootForge’s `ai.rootforge.os` does **not** clash with either.
 
-**3. Committed signing key.** `phone.jks` is in the tree. `app/build.gradle` embeds fallback `storePassword` / `keyPassword` (`123456` / `654321`, alias `phone1`) when env vars are unset. This is a **secret in git** and a supply-chain issue. Official Termux plugins will never share UID with this key. Suite “matching signing” must not mean “keep publishing the leaked ZeroTermux key.” **Owner approval:** rotate to a new Victorious keystore (CI secrets only, remove `phone.jks` from git, accept that existing installs will not upgrade in place) **or** keep the committed key for UTermux-compat upgrades and accept the leak. Matching RootForge signing (same publisher, **different** keystore from DCA) is a separate decision once this is settled.
+**3. Committed signing key.** `phone.jks` is in the tree. `app/build.gradle` embeds fallback `storePassword` / `keyPassword` (`123456` / `654321`, alias `phone1`) when env vars are unset. This is a **secret in git** and a supply-chain issue. Official Termux plugins will never share UID with this key. Suite “matching signing” must not mean “keep publishing the leaked upstream key.” **Owner approval:** rotate to a new Victorious keystore (CI secrets only, remove `phone.jks` from git, accept that existing installs will not upgrade in place) **or** keep the committed key for UTermux-compat upgrades and accept the leak. Matching RootForge signing (same publisher, **different** keystore from DCA) is a separate decision once this is settled.
 
 ---
 
@@ -249,13 +247,13 @@ Dashboard, ADB, Fastboot, EDL, Root/Patching, Module Builder, Recovery, Logs/Ter
 
 ---
 
-## 4. ZeroTermux feature set (inspiration, not a third repo)
+## 4. Inherited feature set (inspiration, not a third repo)
 
-VictorSuite **already is** a ZeroTermux-lineage tree. Do not import another copy of ZeroTermux.
+VictorSuite **already contains** the inherited management layer. Do not import another copy of the upstream project.
 
-Upstream ZeroTermux ([hanxinhao000/ZeroTermux](https://github.com/hanxinhao000/ZeroTermux), GPLv3) adds on top of Termux: graphical panels, backup/restore packs, PRoot/chroot distros, X11/QEMU, download-site restore packs, and (recently) an in-app AI agent / LSP editor.
+The inherited upstream project (GPLv3) adds on top of Termux: graphical panels, backup/restore packs, PRoot/chroot distros, X11/QEMU, download-site restore packs, and (recently) an in-app AI agent / LSP editor.
 
-VictorSuite has the historical ZeroTermux management layer (`zerocore`) plus VictorSuite-specific plugins, AI CLI setup, and DeepSeek/Claude chat. It is **behind** current ZeroTermux on the AI-agent / LSP work (ZeroTermux 0.118.3.63+). This program should **not** fast-forward to that AI agent.
+VictorSuite has the historical inherited management layer (`zerocore`) plus VictorSuite-specific plugins, AI CLI setup, and DeepSeek/Claude chat. It is **behind** current upstream on the AI-agent / LSP work (upstream 0.118.3.63+). This program should **not** fast-forward to that AI agent.
 
 ---
 
@@ -408,7 +406,7 @@ F-Droid: possible in principle for Termux:API, but VictorSuite is private, uses 
 | USB host feature | `required=true` (mass storage) | `required=true` (ADB/fastboot/EDL) | VS → **`required=false`** (standalone bugfix). RF may keep required USB host or also flip to false so the admin/client-only phone still installs. |
 | USB use | libaums MSC (`OTGManager`) | Bulk USB ADB/fastboot/Sahara | **Different apps, different jobs.** A cable on a phone that has both: VS offers “Use as storage”; RF offers “Use as Android target.” Do not auto-claim every device in both. |
 | ADB | `libadb.so` + tananaev; wireless ADB to **this** phone | Pure-Kotlin USB ADB to a **second** phone | Keep both. Label VS “ADB this device / wireless”; RF “USB target phone.” |
-| Module “install” | ZeroTermux Termux-module zip | Magisk/KernelSU/APatch zip builder + flash on **target** | Different. No rename collision across apps. |
+| Module “install” | Termux-module zip | Magisk/KernelSU/APatch zip builder + flash on **target** | Different. No rename collision across apps. |
 | Terminal | Full VT100 `TermuxActivity` | Log panel + command box | Termux remains the Linux environment. RF Logs stay a toolkit console. Remote PTY in admin/client is RF-owned UI talking to a VS session service when VS is installed (§12.2). |
 | Compose vs Views | AppCompat / data binding | Compose Material 3 | **No hybrid APK.** Handoff is an Intent, not a `ComposeView` inside TermuxActivity. |
 | INTERNET | Yes | No today | VS keeps INTERNET. RF adds INTERNET when admin/client or Tailscale ships. Toolkit flash code still must not use the network. |
@@ -532,7 +530,7 @@ VictorSuite drawer entries that used to be “merge the toolkit into this APK”
 
 ```
 TermuxActivity (drawer — existing MainMenuConfig)
-├── (existing ZeroTermux categories — unchanged)
+├── (existing categories — unchanged)
 └── NEW category CODE_SUITE = "RootForge"
     ├── Open RootForge                 → MAIN on ai.rootforge.os
     ├── ADB (USB target)               → OPEN destination=adb
@@ -553,7 +551,7 @@ RootForge may offer the reverse for terminal work: “Open in VictorSuite” →
 
 | Component | License | Effect on the suite |
 |---|---|---|
-| Termux app + ZeroTermux + VictorSuite | **GPLv3 only** | The VictorSuite APK is a GPLv3 binary. Corresponding source for everything **linked into it**. |
+| Termux app + inherited upstream + VictorSuite | **GPLv3 only** | The VictorSuite APK is a GPLv3 binary. Corresponding source for everything **linked into it**. |
 | terminal-emulator / terminal-view | Apache-2.0 | Compatible. |
 | Termux:API app sources | GPLv3 | Compatible in VictorSuite; keep notices. |
 | termux-api-package helper | MIT | Compatible; patched overlay OK. |
@@ -580,7 +578,7 @@ RootForge may offer the reverse for terminal work: “Open in VictorSuite” →
 ```
 VictorSuite                              RootForge
 TermuxActivity                           RootForgeUi (Compose)
-├── existing ZeroTermux drawers          ├── Dashboard / ADB / Fastboot / EDL
+├── existing drawers          ├── Dashboard / ADB / Fastboot / EDL
 └── RootForge (handoff)                  ├── Root / Patching / Module builder
       └── Open in RootForge →            ├── Recovery / Logs (USB)
                                          ├── Admin / Client          (§12)

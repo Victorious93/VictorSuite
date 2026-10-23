@@ -116,6 +116,8 @@ class RemoteEnvelopeDispatcher(
         RemoteResponse(env.requestId, nodeId, ok = true, result = dispatch(env.operation, env, remote = false, confirmed = confirmed, aead = aead))
     } catch (e: RemoteControlException) {
         RemoteResponse(env.requestId, nodeId, ok = false, errorCategory = e.category, errorMessage = e.message)
+    } catch (e: Exception) {
+        RemoteResponse(env.requestId, nodeId, ok = false, errorCategory = RemoteErrorCategory.INTERNAL, errorMessage = "internal error")
     }
 
     private fun requireTarget(target: String) {
