@@ -2,7 +2,7 @@
 
 **Status:** implementation underway. Phase 1 shipped (PR #22, branch `feature/hak5-companion-phase1`). Phase 2 shipped (branch `feature/hak5-companion-phase2`; see `docs/HAK5_COMPANION_PHASE2.md`). Originally revised 2026-10-15 after Don's review (see Decisions); phase-status updated 2026-10-17.  
 **Owner:** Don Victor (GitHub [Victorious93](https://github.com/Victorious93)).  
-**Repo:** private `Victorious93/VictorSuite` (Termux / ZeroTermux fork, package `com.termux`, `targetSdk` **28**).  
+**Repo:** private `Victorious93/VictorSuite` (Termux fork, package `com.termux`, `targetSdk` **28**).  
 **Goal of this PR:** agree on scope, architecture, and safety before any feature code is written.
 
 ---

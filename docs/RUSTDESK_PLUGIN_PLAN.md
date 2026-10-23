@@ -2,7 +2,7 @@
 
 **Status:** design only. No implementation code is in this PR. Nothing here is built or tested yet.
 **Owner:** Don Victor (GitHub [Victorious93](https://github.com/Victorious93)).
-**Repo:** private `Victorious93/VictorSuite` (Termux / ZeroTermux fork, package `com.termux`, `targetSdk` **28**, GPLv3-only — see `LICENSE.md`).
+**Repo:** private `Victorious93/VictorSuite` (Termux fork, package `com.termux`, `targetSdk` **28**, GPLv3-only — see `LICENSE.md`).
 **Goal of this PR:** agree on scope, licensing, architecture, and build approach for a remote desktop tool based on RustDesk that can **only** talk to servers we host ourselves, before any code is written.
 
 All upstream facts below were read from the upstream repositories on 2026-10-20 and are pinned to these commits so the line references stay valid:

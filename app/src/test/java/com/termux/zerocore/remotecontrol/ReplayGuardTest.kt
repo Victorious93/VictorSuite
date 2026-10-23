@@ -92,4 +92,17 @@ class ReplayGuardTest {
         g.checkAndRecord("controller", env(Fx.nonce(), clock.now))
         Fx.expectCategory(RemoteErrorCategory.INTERNAL) { g.checkAndRecord("controller", env(Fx.nonce(), clock.now)) }
     }
+
+    @Test
+    fun oneSourceCannotExhaustTheSharedCache() {
+        val clock = MutableClock()
+        val g = ReplayGuard(clock, maxEntries = 4, maxEntriesPerSource = 2)
+        g.checkAndRecord("noisy", env(Fx.nonce(), clock.now))
+        g.checkAndRecord("noisy", env(Fx.nonce(), clock.now))
+        Fx.expectCategory(RemoteErrorCategory.INTERNAL) { g.checkAndRecord("noisy", env(Fx.nonce(), clock.now)) }
+        // Other sources are unaffected.
+        g.checkAndRecord("controller", env(Fx.nonce(), clock.now))
+        g.checkAndRecord("victorlaunch", env(Fx.nonce(), clock.now))
+        assertEquals(4, g.size())
+    }
 }

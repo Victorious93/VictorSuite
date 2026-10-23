@@ -2,7 +2,7 @@
 
 VictorSuite should only point users at sources the owner (Victorious93) controls,
 or at official upstream project infrastructure (Termux, proot-distro, distro mirrors).
-This file lists every external source the app touched from the inherited ZeroTermux code,
+This file lists every external source the app touched from the inherited upstream code,
 and what happened to it.
 
 ## Replacements

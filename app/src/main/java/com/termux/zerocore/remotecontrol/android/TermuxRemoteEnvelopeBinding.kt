@@ -185,8 +185,15 @@ object AndroidNodeConfig {
         private fun write(path: String, values: Map<String, String>) {
             val f = File(path)
             f.parentFile?.mkdirs()
-            if (f.exists()) f.copyTo(File("$path.bak-${System.currentTimeMillis()}"), overwrite = false)
-            f.writeText(NodeConfigBackup.renderProperties(values, "Imported by VictorSuite config.import"))
+            if (f.exists()) f.copyTo(File("$path.bak-${System.currentTimeMillis()}"), overwrite = true)
+            // Write a sibling temp file then rename, so a crash mid-write cannot leave a truncated config.
+            val text = NodeConfigBackup.renderProperties(values, "Imported by VictorSuite config.import")
+            val tmp = File("$path.tmp")
+            tmp.writeText(text)
+            if (!tmp.renameTo(f)) {
+                f.writeText(text)
+                tmp.delete()
+            }
         }
     }
 }

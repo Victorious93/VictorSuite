@@ -34,7 +34,7 @@ CI (`.github/workflows/android.yml`, "Build") runs only `:app:assembleDebug --st
 
 Product direction (`docs/SUITE_PLAN.md`, planning only): VictorSuite and RootForge OS (`Victorious93/rootforge-os`) stay **two separate APKs** in one suite (shared Kotlin library, shared JSON command schema, deep-link handoff). `docs/MERGE_PLAN.md` (one-APK plan) is superseded/stub. `docs/AI_CLIS.md` documents `scripts/ai-cli-setup.sh` (not yet run on a real device).
 
-VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of the ZeroTermux codebase. It is a five-module Android Gradle project:
+VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of an inherited Termux-derived codebase. It is a five-module Android Gradle project:
 
 | Module | Role |
 |---|---|
@@ -42,14 +42,14 @@ VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMM
 | `terminal-view` | Android `View` that renders a `TerminalEmulator` and handles input. Depends on `:terminal-emulator`. |
 | `termux-shared` | Shared utilities used by both `:app` and companion Termux apps (file utils, logger, settings, crash handling, JNI helpers, local Unix socket). |
 | `termux-api-lib` | Vendored copy of the Termux:API app (`termux/termux-api` v0.53.0, GPLv3) built as a library so it runs inside the `com.termux` APK. See "Embedded Termux:API" below and `termux-api-lib/UPSTREAM.md`. |
-| `app` | The main application. Contains all VictorSuite/ZeroTermux additions under `com.termux.zerocore`. |
+| `app` | The main application. Contains all VictorSuite additions under `com.termux.zerocore`. |
 
 ### `app` source layout
 
 Under `app/src/main/java/com/termux/`:
 
 - **`app/`** — upstream Termux entry points (`TermuxApplication`, `TermuxActivity`, settings fragments, terminal I/O, broadcast/event handling). Minimal VictorSuite changes here.
-- **`zerocore/`** — all ZeroTermux/VictorSuite additions. Organised by feature area (see below).
+- **`zerocore/`** — all inherited and VictorSuite additions. Organised by feature area (see below).
 - **`filepicker/`** — file-picker Activity.
 - **`test/`** — small utility class used from unit tests.
 
