@@ -112,6 +112,7 @@ The codebase is mixed Java and Kotlin. New `zerocore` features should be written
 `app/build.gradle` bundles `scripts/ai-cli-setup.sh` as an app asset (see `assets.srcDirs`). Changes to `scripts/` are picked up automatically at the next build.
 
 ## Gotchas
+- `allowBackup` is `false`: Android backup (Auto Backup / `adb backup`) would otherwise copy `$HOME` (SSH keys, `zt.token`). The in-app backup/restore under `zerocore/back/` is unaffected.
 - `applicationId` is `com.termux`: VictorSuite cannot be installed alongside upstream Termux.
 - Signing: debug builds use the committed `app/victorsuite-debug.keystore` (public `android` passwords, deliberately not a secret, so debug fingerprints are stable across machines/CI). Release builds sign only when `SIGNING_KEYSTORE_FILE` or `SIGNING_KEYSTORE_BASE64` plus `KEY_ALIAS`, `KEY_PASSWORD`, `STORE_PASSWORD` are set in the environment; otherwise release APKs are unsigned. Never commit real release keys or passwords.
 
