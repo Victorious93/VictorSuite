@@ -44,6 +44,18 @@ jobs:
       - name: Build debug APKs
         run: ./gradlew :app:assembleDebug --stacktrace
 
+      - name: Run unit tests
+        run: ./gradlew :app:testDebugUnitTest --stacktrace
+
+      - name: Upload unit test reports
+        if: failure()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: VictorSuite-unit-test-reports
+          path: app/build/reports/tests/testDebugUnitTest
+          retention-days: 7
+
       - name: Upload debug APKs
         # The APK build above is the check. A full Actions storage quota on the
         # account should not turn a successful build red.

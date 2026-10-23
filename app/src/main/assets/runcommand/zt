@@ -20,4 +20,8 @@ nc -z -w 1 "$JAVA_HOST" "$JAVA_PORT" 2>/dev/null || { echo "Java服务未运行"
 # 直接启动监听，收到连接后自动退出
 nc -l -p $SHELL_PORT -q 0 &
 sleep 1
-echo "$*" | nc -w 10 "$JAVA_HOST" "$JAVA_PORT"
+# 每次请求都要带上令牌(只有 Termux 用户能读取该文件)
+ZT_TOKEN_FILE="$HOME/.termux/zt.token"
+[ -r "$ZT_TOKEN_FILE" ] || { echo "zt: token file missing ($ZT_TOKEN_FILE). Open VictorSuite once to create it."; exit 1; }
+ZT_TOKEN=$(cat "$ZT_TOKEN_FILE")
+echo "$ZT_TOKEN $*" | nc -w 10 "$JAVA_HOST" "$JAVA_PORT"

@@ -34,6 +34,7 @@ import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.zerocore.ftp.new_ftp.Constants;
 import com.termux.zerocore.ftp.new_ftp.bean.AccountItem;
+import com.termux.zerocore.ftp.new_ftp.utils.FtpAuthorities;
 import com.termux.zerocore.ftp.new_ftp.config.FTP_CONFIG;
 import com.termux.zerocore.ftp.new_ftp.utils.CommonUtils;
 import com.termux.zerocore.ftp.new_ftp.utils.MySQLiteOpenHelper;
@@ -345,16 +346,15 @@ public class FtpService extends Service implements NetworkStatusMonitor.NetworkS
     private void startFTPService(boolean isAnonymousMode, List<AccountItem> list) throws Exception {
         FtpServerFactory factory = new FtpServerFactory();
         SharedPreferences settings = getSharedPreferences(Constants.PreferenceConsts.FILE_NAME, Context.MODE_PRIVATE);
-        List<Authority> authorities_writable = new ArrayList<>();
-        authorities_writable.add(new WritePermission());
+        // VictorSuite modify {@
+        // The writable flags used to be ignored (write permission was always granted).
         if (isAnonymousMode) {
             BaseUser baseUser = new BaseUser();
             baseUser.setName(Constants.FTPConsts.NAME_ANONYMOUS);
             baseUser.setPassword("");
             baseUser.setHomeDirectory(settings.getString(Constants.PreferenceConsts.ANONYMOUS_MODE_PATH, Constants.PreferenceConsts.ANONYMOUS_MODE_PATH_DEFAULT));
-          //  if (settings.getBoolean(Constants.PreferenceConsts.ANONYMOUS_MODE_WRITABLE, Constants.PreferenceConsts.ANONYMOUS_MODE_WRITABLE_DEFAULT)) {
-            baseUser.setAuthorities(authorities_writable);
-          //  }
+            baseUser.setAuthorities(FtpAuthorities.forUser(settings.getBoolean(
+                    Constants.PreferenceConsts.ANONYMOUS_MODE_WRITABLE, Constants.PreferenceConsts.ANONYMOUS_MODE_WRITABLE_DEFAULT)));
             factory.getUserManager().save(baseUser);
         } else {
             for (AccountItem item : list) {
@@ -362,11 +362,11 @@ public class FtpService extends Service implements NetworkStatusMonitor.NetworkS
                 baseUser.setName(item.account);
                 baseUser.setPassword(item.password);
                 baseUser.setHomeDirectory(item.path);
-                baseUser.setAuthorities(authorities_writable);
-                if (item.writable) baseUser.setAuthorities(authorities_writable);
+                baseUser.setAuthorities(FtpAuthorities.forUser(item.writable));
                 factory.getUserManager().save(baseUser);
             }
         }
+        // @}
 
         ListenerFactory lfactory = new ListenerFactory();
         lfactory.setPort(settings.getInt(Constants.PreferenceConsts.PORT_NUMBER, Constants.PreferenceConsts.PORT_NUMBER_DEFAULT)); //设置端口号 非ROOT不可使用1024以下的端口

@@ -70,11 +70,11 @@
         <service
             android:name=".zerocore.settings.services.TimerExeService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false"></service>
 
         <activity
             android:name=".zerocore.settings.TimerActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".zerocore.settings.ZTInstallActivity"
@@ -386,7 +386,7 @@
         <service android:name=".zerocore.ftp.FsService" />
         <service
             android:name=".zerocore.ftp.new_ftp.services.FtpService"
-            android:exported="true" />
+            android:exported="false" />
         <service
             android:name=".zerocore.ftp.new_ftp.services.MyTileService"
             android:icon="@drawable/ic_launcher" />
