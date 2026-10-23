@@ -1422,7 +1422,7 @@
     <string name="remote_control_on_toast">已开启舰队远程控制。仅已配对的应用可以使用。</string>
     <string name="remote_control_off_toast">已关闭舰队远程控制。</string>
     <string name="remote_control_pairings_title">已配对的舰队应用</string>
-    <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef[,certSha256]。只有这些应用可以发送远程控制信封。</string>
+    <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef,certSha256。必须提供签名证书 SHA-256:没有证书的行永远不会被接受。只有这些应用可以发送远程控制信封。</string>
     <string name="remote_control_pairings_saved">配对已保存</string>
 </resources>
 
