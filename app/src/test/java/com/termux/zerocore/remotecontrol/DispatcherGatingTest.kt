@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class DispatcherGatingTest {
-    private fun remote(d: RemoteEnvelopeDispatcher, blob: String, pkg: String? = Fx.DCA_PKG, cert: String? = null) =
+    private fun remote(d: RemoteEnvelopeDispatcher, blob: String, pkg: String? = Fx.DCA_PKG, cert: String? = Fx.DCA_CERT) =
         d.handleRemote(pkg, cert, blob)
 
     // --- trust pipeline order: caller-id -> external control -> envelope/replay -> policy ---
@@ -39,6 +39,15 @@ class DispatcherGatingTest {
     }
 
     @Test
+    fun unpinnedPairingNeverAuthenticates() {
+        for (rowCert in listOf(null, "", "  ")) {
+            val d = Fx.dispatcher(cfg = Fx.pairedConfig(cert = rowCert))
+            Fx.assertError(remote(d, Fx.blob()), RemoteErrorCategory.UNAUTHORIZED)
+            Fx.assertError(remote(d, Fx.blob(), cert = null), RemoteErrorCategory.UNAUTHORIZED)
+        }
+    }
+
+    @Test
     fun payloadSourceFieldsAreNotIdentity() {
         // An envelope claiming to be from a paired node does not help an unpaired caller.
         val blob = Fx.blob { it.addProperty("sourceNodeRef", Fx.DCA_REF); it.addProperty("packageName", Fx.DCA_PKG) }
@@ -47,7 +56,7 @@ class DispatcherGatingTest {
 
     @Test
     fun replayIsKeyedByAuthenticatedSource() {
-        val cfg = RemoteControlConfig(true, listOf(DevicePairing("controller", Fx.DCA_PKG), DevicePairing("victorlaunch", "com.victorious.launch")))
+        val cfg = RemoteControlConfig(true, listOf(DevicePairing("controller", Fx.DCA_PKG, Fx.DCA_CERT), DevicePairing("victorlaunch", "com.victorious.launch", Fx.DCA_CERT)))
         val d = Fx.dispatcher(cfg = cfg)
         val n = Fx.nonce()
         assertTrue(remote(d, Fx.blob(nonce = n)).ok)
@@ -142,7 +151,7 @@ class DispatcherGatingTest {
         // A registry that wrongly lists a shell action as READ is still raised to destructive.
         val d = RemoteEnvelopeDispatcher(Fx.NODE_ID, Fx.NODE_PKG, { Fx.pairedConfig() }, ReplayGuard(MutableClock()), MutableClock(),
             { Fx.snapshot(it) }, RemoteActionRegistry(listOf(RemoteAction(OpDescriptor("shell.exec", OpKind.READ, true, false)) { throw AssertionError("must not run") })))
-        Fx.assertError(d.handleRemote(Fx.DCA_PKG, null, Fx.blob(actionRef = "shell.exec")), RemoteErrorCategory.CONFIRMATION_REQUIRED)
+        Fx.assertError(d.handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(actionRef = "shell.exec")), RemoteErrorCategory.CONFIRMATION_REQUIRED)
     }
 
     @Test
@@ -169,7 +178,7 @@ class DispatcherGatingTest {
     fun remoteActionWithRemoteAllowedFalseIsCapabilityOff() {
         val d = RemoteEnvelopeDispatcher(Fx.NODE_ID, Fx.NODE_PKG, { Fx.pairedConfig() }, ReplayGuard(MutableClock()), MutableClock(),
             { Fx.snapshot(it) }, RemoteActionRegistry(listOf(RemoteAction(OpDescriptor("local.only", OpKind.READ, false, false)) { com.google.gson.JsonObject() })))
-        Fx.assertError(d.handleRemote(Fx.DCA_PKG, null, Fx.blob(actionRef = "local.only")), RemoteErrorCategory.CAPABILITY_OFF)
+        Fx.assertError(d.handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(actionRef = "local.only")), RemoteErrorCategory.CAPABILITY_OFF)
     }
 
     @Test
@@ -201,7 +210,7 @@ class DispatcherGatingTest {
         var ran = 0
         val reg = RemoteActionRegistry(RemoteActionRegistry.DEFAULT_ACTIONS + RemoteAction(OpDescriptor("count", OpKind.ACTION, true, false)) { ran++; com.google.gson.JsonObject() })
         val d = RemoteEnvelopeDispatcher(Fx.NODE_ID, Fx.NODE_PKG, { Fx.pairedConfig() }, ReplayGuard(MutableClock()), MutableClock(), { Fx.snapshot(it) }, reg)
-        Fx.assertError(d.handleRemote(Fx.DCA_PKG, null, Fx.blob(operation = FleetProtocol.OP_MACRO_RUN, actionRef = null) {
+        Fx.assertError(d.handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(operation = FleetProtocol.OP_MACRO_RUN, actionRef = null) {
             it.add("steps", JsonParser.parseString("""[{"op":"count"},{"op":"shell.exec"}]"""))
         }), RemoteErrorCategory.CONFIRMATION_REQUIRED)
         assertEquals(0, ran)
@@ -212,7 +221,7 @@ class DispatcherGatingTest {
         var ran = 0
         val reg = RemoteActionRegistry(RemoteActionRegistry.DEFAULT_ACTIONS + RemoteAction(OpDescriptor("count", OpKind.ACTION, true, false)) { ran++; com.google.gson.JsonObject() })
         val d = RemoteEnvelopeDispatcher(Fx.NODE_ID, Fx.NODE_PKG, { Fx.pairedConfig() }, ReplayGuard(MutableClock()), MutableClock(), { Fx.snapshot(it) }, reg)
-        val r = d.handleRemote(Fx.DCA_PKG, null, Fx.blob(operation = FleetProtocol.OP_MACRO_RUN, actionRef = null) {
+        val r = d.handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(operation = FleetProtocol.OP_MACRO_RUN, actionRef = null) {
             it.addProperty("dryRun", true)
             it.add("steps", JsonParser.parseString("""[{"op":"count"},{"op":"shell.exec"},{"op":"bogus"}]"""))
         })

@@ -1431,6 +1431,6 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="remote_control_on_toast">Fleet remote control turned on. Only paired apps can use it.</string>
     <string name="remote_control_off_toast">Fleet remote control turned off.</string>
     <string name="remote_control_pairings_title">Paired fleet apps</string>
-    <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef[,certSha256]. Only these apps can send remote-control envelopes.</string>
+    <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef,certSha256. The signing-cert SHA-256 is required: a line without it is never accepted. Only these apps can send remote-control envelopes.</string>
     <string name="remote_control_pairings_saved">Pairings saved</string>
 </resources>

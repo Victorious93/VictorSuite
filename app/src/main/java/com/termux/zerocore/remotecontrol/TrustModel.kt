@@ -16,7 +16,7 @@ data class SourceIdentity(
     }
 }
 
-/** A paired source node. Empty [certSha256] = fail-open / unpinned (cert TBD). */
+/** A paired source node. [certSha256] is required to authenticate: a row without one never matches (fail-closed). */
 data class DevicePairing(
     val sourceNodeRef: String,
     val packageName: String,
@@ -27,14 +27,15 @@ data class DevicePairing(
  * Pairing table / allow-list. Caller-id is checked here, before anything else
  * in the trust pipeline. Lookup is by the **authenticated** calling package;
  * the resulting [SourceIdentity.sourceNodeRef] comes from the pairing row,
- * never from the envelope.
+ * never from the envelope. A row must pin the caller's signing cert; unpinned
+ * rows are refused, because a package name alone can be claimed by any app.
  */
 class PairingTable(pairings: List<DevicePairing> = emptyList()) {
     private val byPackage: Map<String, List<DevicePairing>> = pairings.groupBy { it.packageName }
 
     /**
      * @throws RemoteControlException NOT_PAIRED when the calling package has no
-     *   pairing row, UNAUTHORIZED when the row is cert-pinned and the caller's
+     *   pairing row, UNAUTHORIZED when the row has no cert pin, the caller's
      *   cert is missing or different, or the package is ambiguous.
      */
     fun authenticate(callingPackage: String?, callerCertSha256: String?): SourceIdentity {
@@ -50,7 +51,8 @@ class PairingTable(pairings: List<DevicePairing> = emptyList()) {
         }
         val pairing = rows.single()
         val pinned = pairing.certSha256?.takeIf { it.isNotBlank() }
-        if (pinned != null && !normalizeCert(pinned).equals(normalizeCert(callerCertSha256), ignoreCase = true)) {
+            ?: throw RemoteControlException(RemoteErrorCategory.UNAUTHORIZED, "pairing for '$callingPackage' has no certSha256; pin the caller's signing cert")
+        if (!normalizeCert(pinned).equals(normalizeCert(callerCertSha256), ignoreCase = true)) {
             throw RemoteControlException(RemoteErrorCategory.UNAUTHORIZED, "signing cert does not match pairing")
         }
         return SourceIdentity(pairing.sourceNodeRef, callingPackage, callerCertSha256)
