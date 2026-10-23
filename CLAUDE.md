@@ -12,8 +12,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ./gradlew :termux-shared:assembleDebug
 
 # Unit tests (JVM only — no device required). Only :app has unit tests
-# (app/src/test: TermuxActivityTest, TermuxFileReceiverActivityTest). Not run in CI.
-./gradlew :app:test
+# (app/src/test: remote-control, hak5, ZT socket auth, FTP permissions, plus the two
+# upstream activity tests). Run in CI after the debug build.
+./gradlew :app:testDebugUnitTest
 
 # Instrumented tests (requires a connected device or emulator; termux-shared/src/androidTest)
 ./gradlew :termux-shared:connectedAndroidTest
@@ -28,7 +29,7 @@ Checkstyle: `config/android-checkstyle.gradle` defines a `checkstyle` task (`ign
 
 SDK levels (`gradle.properties`): minSdk 23, **targetSdk 28 (intentional: keeps Termux exec / `$PREFIX` working; do not raise it)**, compileSdk 36, NDK 29.0.14206865. App version `0.118.3.54` (versionCode 117) in `app/build.gradle`.
 
-CI (`.github/workflows/android.yml`, "Build") runs only `:app:assembleDebug --stacktrace` on push to `main`, PRs targeting `main`, and manual dispatch, using JDK 17, Android SDK platform-36 / build-tools-36.0.0, NDK 29.0.14206865. Unit tests and lint are not run in CI. APK upload is `continue-on-error` so artifact quota can't fail the job. Latest `main` runs passed (checked 2026-10-15).
+CI (`.github/workflows/android.yml`, "Build") runs `:app:assembleDebug --stacktrace` and then `:app:testDebugUnitTest --stacktrace` on push to `main`, PRs targeting `main`, and manual dispatch, using JDK 17, Android SDK platform-36 / build-tools-36.0.0, NDK 29.0.14206865. Lint and instrumented tests are not run in CI. APK upload is `continue-on-error` so artifact quota can't fail the job. Latest `main` runs passed (checked 2026-10-15).
 
 ## Architecture overview
 
