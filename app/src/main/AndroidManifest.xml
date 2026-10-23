@@ -384,7 +384,6 @@
         </receiver>
         <service android:name=".zerocore.config.ztcommand.ZTSocketService"/>
 
-        <service android:name=".zerocore.ftp.FsService" />
         <service
             android:name=".zerocore.ftp.new_ftp.services.FtpService"
             android:exported="false" />
