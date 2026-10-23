@@ -63,7 +63,7 @@ Under `app/src/main/java/com/termux/`:
 - **`deepseek/`** — former in-app AI chat (DeepSeek and Claude API clients, SQLite sessions). No longer reachable from the UI: the drawer AI button and Settings AI entry launch DroidCommand AI via `zerocore/droidcommand/DroidCommandAi`. The package is dead code except `markdown/MarkDownAPI`, which `TermuxActivity` still uses; delete the rest once a build can verify it.
 - **`back/`** — backup/restore UI (`BackViewModel`, `RestoreViewModel`). Supports `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z` archives.
 - **`http/`** — `NanoHttpdServer`. **`otg/`** — `OTGManager`. Other dirs not listed here exist too (`shell/`, `zip/`, `developer/`, `keybord/`, `bosybox/`, etc.); inspect before assuming.
-- **`ftp/`** — embedded FTP server (`FsService`/`SwiftFTP`) and a newer implementation under `new_ftp/`.
+- **`ftp/`** — embedded FTP server: `new_ftp/` (Apache FtpServer via `FtpService`). The old SwiFTP-based `FsService` was removed (it was never started and had an always-true guest-login check).
 - **`http_service/`** — embedded HTTP/ttyd service.
 - **`scrcpy/`** — scrcpy screen-mirroring integration.
 - **`utermux_windows/qemu/`** — QEMU/UTermux Windows (x86 VM) integration.

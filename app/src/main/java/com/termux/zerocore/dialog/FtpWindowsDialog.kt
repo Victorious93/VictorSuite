@@ -15,7 +15,6 @@ import com.github.iielse.switchbutton.SwitchView
 import com.github.iielse.switchbutton.SwitchView.OnStateChangedListener
 import com.termux.R
 import com.termux.zerocore.bean.SaveDataZeroEngine
-import com.termux.zerocore.ftp.FsService
 import com.termux.zerocore.ftp.new_ftp.Constants
 import com.termux.zerocore.ftp.new_ftp.config.FTP_CONFIG
 import com.termux.zerocore.ftp.new_ftp.services.FtpService
@@ -67,11 +66,6 @@ class FtpWindowsDialog : BaseDialogCentre {
         }
         mZeroRoot?.setOnClickListener {
             switchIndex(FtpWindowsDialogConstant.ROOT_PATH_ZERO_HOME, true)
-        }
-        mTitleFtp?.setOnClickListener {
-            if (FsService.isRunning()) {
-                UUtils.startUrl("ftp://127.0.0.1:" + SaveDataZeroEngine.getStringData(UUtils.getContext(), SaveDataZeroEngine.FTP_PORT))
-            }
         }
         mSwitchBtn?.let {
             it.isOpened = FtpService.isFTPServiceRunning()
