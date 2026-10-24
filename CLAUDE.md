@@ -35,14 +35,14 @@ CI (`.github/workflows/android.yml`, "Build") runs `:app:assembleDebug --stacktr
 
 Product direction (`docs/SUITE_PLAN.md`, planning only): VictorSuite and RootForge OS (`Victorious93/rootforge-os`) stay **two separate APKs** in one suite (shared Kotlin library, shared JSON command schema, deep-link handoff). `docs/MERGE_PLAN.md` (one-APK plan) is superseded/stub. `docs/AI_CLIS.md` documents `scripts/ai-cli-setup.sh` (not yet run on a real device).
 
-VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMMAND` contract) built on top of an inherited Termux-derived codebase. It is a five-module Android Gradle project:
+VictorSuite is a Termux fork (own `applicationId com.victorious.suite`, Java namespace still `com.termux`; the `RUN_COMMAND` action and permission use the new ID, see `docs/APPLICATION_ID.md`) built on top of an inherited Termux-derived codebase. It is a five-module Android Gradle project:
 
 | Module | Role |
 |---|---|
 | `terminal-emulator` | Pure-Java/JNI VT100/xterm terminal state machine; no Android UI dependencies. |
 | `terminal-view` | Android `View` that renders a `TerminalEmulator` and handles input. Depends on `:terminal-emulator`. |
 | `termux-shared` | Shared utilities used by both `:app` and companion Termux apps (file utils, logger, settings, crash handling, JNI helpers, local Unix socket). |
-| `termux-api-lib` | Vendored copy of the Termux:API app (`termux/termux-api` v0.53.0, GPLv3) built as a library so it runs inside the `com.termux` APK. See "Embedded Termux:API" below and `termux-api-lib/UPSTREAM.md`. |
+| `termux-api-lib` | Vendored copy of the Termux:API app (`termux/termux-api` v0.53.0, GPLv3) built as a library so it runs inside the VictorSuite APK. See "Embedded Termux:API" below and `termux-api-lib/UPSTREAM.md`. |
 | `app` | The main application. Contains all VictorSuite additions under `com.termux.zerocore`. |
 
 ### `app` source layout
@@ -113,7 +113,7 @@ The codebase is mixed Java and Kotlin. New `zerocore` features should be written
 
 ## Gotchas
 - `allowBackup` is `false`: Android backup (Auto Backup / `adb backup`) would otherwise copy `$HOME` (SSH keys, `zt.token`). The in-app backup/restore under `zerocore/back/` is unaffected.
-- `applicationId` is `com.termux`: VictorSuite cannot be installed alongside upstream Termux.
+- `applicationId` is `com.victorious.suite` (the Java namespace stays `com.termux`), so VictorSuite installs alongside upstream Termux. The bundled bootstraps are still built for `/data/data/com.termux/files`; until they are rebuilt for the new prefix the shell will not run on a device (`docs/APPLICATION_ID.md`).
 - Signing: debug builds use the committed `app/victorsuite-debug.keystore` (public `android` passwords, deliberately not a secret, so debug fingerprints are stable across machines/CI). Release builds sign only when `SIGNING_KEYSTORE_FILE` or `SIGNING_KEYSTORE_BASE64` plus `KEY_ALIAS`, `KEY_PASSWORD`, `STORE_PASSWORD` are set in the environment; otherwise release APKs are unsigned. Never commit real release keys or passwords.
 
 ## Don's standing rules (apply to every change)

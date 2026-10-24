@@ -99,7 +99,7 @@ No Compose. `:app` uses data binding, AppCompat, drawer + RecyclerView menus.
 - `minSdkVersion` **23**, `targetSdkVersion` **28**, `compileSdkVersion` **36**, NDK **29.0.14206865** (`gradle.properties`).
 - `TERMUX_PACKAGE_VARIANT` default `apt-android-7`.
 - `versionName` **0.118.3.55**, `versionCode` **118**.
-- Display name placeholder `TERMUX_APP_NAME = "VictorSuite"`; package still `com.termux` via `manifestPlaceholders.TERMUX_PACKAGE_NAME` and `TermuxConstants.TERMUX_PACKAGE_NAME`. There is no explicit `applicationId` in `app/build.gradle`; AGP uses `namespace "com.termux"`.
+- Display name placeholder `TERMUX_APP_NAME = "VictorSuite"`; package is `com.victorious.suite` via `manifestPlaceholders.TERMUX_PACKAGE_NAME` and `TermuxConstants.TERMUX_PACKAGE_NAME`. `app/build.gradle` sets `applicationId "com.victorious.suite"` explicitly; `namespace "com.termux"` is unchanged.
 - CI: `.github/workflows/android.yml` → `:app:assembleDebug` on `main` (JDK 17, platform-36, NDK 29, `packages: platform-tools`).
 - Signing: committed `phone.jks` with env-overridable passwords in `app/build.gradle` (legacy upstream/UTermux key compatibility). **Owner-approval item** — see §2.1.
 
@@ -474,7 +474,7 @@ VictorSuite `:app` depends on **`:core` only if needed** for shared schema const
 | Handoff | `ai.rootforge.os.action.OPEN` (or documented `https` / custom-scheme deep links) with `destination` extra (`adb`, `fastboot`, `edl`, `peer`, `remote`, …) |
 | Bridge service | Stays in **RootForge**: action **`ai.rootforge.os.action.BRIDGE`** |
 | Termux:API receiver | VictorSuite only, disabled by default |
-| `RUN_COMMAND` | Unchanged on VictorSuite (`com.termux.permission.RUN_COMMAND`) |
+| `RUN_COMMAND` | Now `com.victorious.suite.permission.RUN_COMMAND` on VictorSuite (was `com.termux.permission.RUN_COMMAND`) |
 
 ### 7.4 How shared Kotlin `:core` is consumed
 

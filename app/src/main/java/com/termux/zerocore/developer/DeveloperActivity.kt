@@ -33,8 +33,8 @@ class DeveloperActivity : AppCompatActivity() {
                 file1.mkdirs()
             }
             try {
-                FileUtils.createDirectoryFile("/data/data/com.termux/files1/")
-                val pair = Pair<String, String>("t.txt", "/data/data/com.termux/files/t.txt")
+                FileUtils.createDirectoryFile("/data/data/com.victorious.suite/files1/")
+                val pair = Pair<String, String>("t.txt", "/data/data/com.victorious.suite/files/t.txt")
                 Os.symlink(pair.first, pair.second)
             }catch (e: Exception) {
                 e.printStackTrace()
@@ -55,7 +55,7 @@ class DeveloperActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.test_zip).setOnClickListener {
-        ZipUtils.toZip("/data/data/com.termux/files/", "/data/data/com.termux/files.zip", object : ZipNameListener{
+        ZipUtils.toZip("/data/data/com.victorious.suite/files/", "/data/data/com.victorious.suite/files.zip", object : ZipNameListener{
             override fun zip(FileName: String?, size: Int, position: Int) {
                 Log.d("TAG", "zipxxxxxxxxxxxxxxx FileName: $FileName")
             }
@@ -73,7 +73,7 @@ class DeveloperActivity : AppCompatActivity() {
         findViewById<Button>(R.id.test_unzip).setOnClickListener {
             Log.d("TAG", "onCreate:  unzip")
             Toast.makeText(this,"....", Toast.LENGTH_LONG).show()
-           ZipUtils.unZip(File("/data/data/com.termux/files.zip"), "/data/data/com.termux/files1/", object : ZipNameListener{
+           ZipUtils.unZip(File("/data/data/com.victorious.suite/files.zip"), "/data/data/com.victorious.suite/files1/", object : ZipNameListener{
                override fun zip(FileName: String?, size: Int, position: Int) {
 
                }
@@ -91,7 +91,7 @@ class DeveloperActivity : AppCompatActivity() {
         findViewById<Button>(R.id.test1).setOnClickListener {
             try {
                 val file =
-                    File("/data/data/com.termux/files/home/ubuntu-in-termux/ubuntu-fs/etc/init.d/procps")
+                    File("/data/data/com.victorious.suite/files/home/ubuntu-in-termux/ubuntu-fs/etc/init.d/procps")
                 Toast.makeText(this, "${file.exists()}", Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
                 UUtils.showMsg(e.toString())
@@ -99,7 +99,7 @@ class DeveloperActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.test_rlj).setOnClickListener {
 
-            Os.symlink("/storage/emulated/0", "/data/data/com.termux/files1/files/sdcard")
+            Os.symlink("/storage/emulated/0", "/data/data/com.victorious.suite/files1/files/sdcard")
         }
 
         findViewById<Button>(R.id.adb_connect).setOnClickListener {

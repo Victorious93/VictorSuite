@@ -45,11 +45,11 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
     private TextView title;
     private TextView mStartBackup;
 
-    private File mFileHomeFiles = new File("/data/data/com.termux/files/");
-    private File mFileHome = new File("/data/data/com.termux/busybox");
-    private File mFileHomeStatic = new File("/data/data/com.termux/busybox_static");
-    private File mFileSupport = new File("/data/data/com.termux/files/support");
-    private File mFileSupportSh = new File("/data/data/com.termux/files/support/extractFilesystem.sh");
+    private File mFileHomeFiles = new File("/data/data/com.victorious.suite/files/");
+    private File mFileHome = new File("/data/data/com.victorious.suite/busybox");
+    private File mFileHomeStatic = new File("/data/data/com.victorious.suite/busybox_static");
+    private File mFileSupport = new File("/data/data/com.victorious.suite/files/support");
+    private File mFileSupportSh = new File("/data/data/com.victorious.suite/files/support/extractFilesystem.sh");
     private File mFileHomeFilesGz = new File(Environment.getExternalStorageDirectory() + "/xinhao/data/");
     private File mFileHomeFilesGzHome = new File(Environment.getExternalStorageDirectory() + "/xinhao/data/");
 
@@ -107,7 +107,7 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
             yesNoDialog.getNoTv().setText(UUtils.getString(R.string.开始备份));
             yesNoDialog.getNoTv().setOnClickListener(v2 -> {
                 yesNoDialog.dismiss();
-                if (!(new File("/data/data/com.termux/files/home/storage").exists())){
+                if (!(new File("/data/data/com.victorious.suite/files/home/storage").exists())){
                     Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到目录), Toast.LENGTH_SHORT).show();
                     UUtils.getHandler().post(() -> {
                         com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));

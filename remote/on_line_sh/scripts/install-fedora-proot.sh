@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/sh
+#!/data/data/com.victorious.suite/files/usr/bin/sh
 #
 # Install a minimal Fedora root filesystem under proot and generate a
 # "startfedora" launcher.
@@ -30,10 +30,10 @@ echo "Cleaning up temporary files..."
 rm -f fedora.7z
 
 echo "Generating launch script..."
-cat > /data/data/com.termux/files/usr/bin/startfedora <<- EOM
+cat > /data/data/com.victorious.suite/files/usr/bin/startfedora <<- EOM
 #!/bin/sh
 unset LD_PRELOAD && proot --link2symlink -0 -r ~/fedora -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b \$HOME -w \$HOME /bin/env -i HOME=/root TERM="\$TERM" PS1='[termux@fedora \W]\$ ' LANG=en_US.UTF8 PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/zsh -l
 EOM
-chmod +x /data/data/com.termux/files/usr/bin/startfedora
+chmod +x /data/data/com.victorious.suite/files/usr/bin/startfedora
 
 echo "Done! Run 'startfedora' to start Fedora. Inside the Fedora shell, run 'dnf update' to update it."
