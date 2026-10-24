@@ -73,6 +73,8 @@ jobs:
     # If the secrets are not configured the job skips the build instead of failing.
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # create the tag and GitHub Release below
     env:
       HAS_SIGNING_SECRETS: ${{ secrets.SIGNING_KEYSTORE_BASE64 != '' && secrets.KEY_ALIAS != '' && secrets.KEY_PASSWORD != '' && secrets.STORE_PASSWORD != '' }}
 
@@ -142,3 +144,42 @@ jobs:
           name: VictorSuite-release-apks
           path: app/build/outputs/apk/release/*.apk
           retention-days: 14
+
+      # Publishes a pre-release for the versionName in app/build.gradle. Pushes to main only,
+      # so manual runs and other branches never publish. Skips if the tag already exists, so
+      # re-running a build for the same version does not touch an existing release.
+      - name: Publish GitHub Release
+        if: env.HAS_SIGNING_SECRETS == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(grep -oP '^\s*versionName "\K[^"]+' app/build.gradle | head -1)
+          if [ -z "$VERSION" ]; then
+            echo "::error::Could not read versionName from app/build.gradle"
+            exit 1
+          fi
+          TAG="v$VERSION"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; nothing to publish."
+            exit 0
+          fi
+          shopt -s nullglob
+          APKS=(app/build/outputs/apk/release/*.apk)
+          if [ ${#APKS[@]} -eq 0 ]; then
+            echo "::error::No release APKs found to attach"
+            exit 1
+          fi
+          PREV=$(git describe --tags --abbrev=0 2>/dev/null || true)
+          {
+            echo "Built and signed by CI from commit $GITHUB_SHA. Not device-tested."
+            echo
+            echo "Prefer the ABI-specific APK for your device; use universal only if needed."
+            echo
+            echo "## Changes${PREV:+ since $PREV}"
+            git log --no-merges --max-count=50 --pretty='- %s' ${PREV:+"$PREV"..}HEAD
+          } > "$RUNNER_TEMP/release-notes.md"
+          gh release create "$TAG" "${APKS[@]}" \
+            --target "$GITHUB_SHA" \
+            --title "VictorSuite $TAG" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            --prerelease
