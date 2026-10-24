@@ -47,6 +47,26 @@ class HttpPathGuardTest {
     }
 
     @Test
+    fun encodedPathsRoundTripThroughUrlDecoding() {
+        val names = listOf(
+            "/data/data/com.termux/files/home/plain.txt",
+            "/files/100%.txt",
+            "/files/a#b?c.txt",
+            "/files/a+b.txt",
+            "/files/with space.txt",
+            "/files/é中.txt",
+        )
+        for (n in names) {
+            val encoded = HttpPathGuard.encodePath(n)
+            assertFalse(encoded, encoded.contains(" ") || encoded.contains("#") || encoded.contains("?"))
+            assertEquals(n, java.net.URLDecoder.decode(encoded, "UTF-8"))
+        }
+        assertEquals("/files/a%20b", HttpPathGuard.encodePath("/files/a b"))
+        assertEquals("/files/a%2Bb", HttpPathGuard.encodePath("/files/a+b"))
+        assertEquals("", HttpPathGuard.encodePath(null))
+    }
+
+    @Test
     fun htmlAndHeaderEscaping() {
         assertEquals("&lt;script&gt;&quot;x&quot;&amp;&#39;", HttpPathGuard.escapeHtml("<script>\"x\"&'"))
         val h = HttpPathGuard.headerSafeFileName("a\"b\r\nX-Evil: 1\\")

@@ -131,6 +131,10 @@ public class HttpServer extends NanoHTTPD {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                // VictorSuite modify {@
+                // Was: fell through to "Success!", so a failed upload looked like a good one.
+                return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, "text/plain", "Upload failed");
+                // @}
             }
         } else if (method.equals(Method.GET)) {
             // for file browse and download
@@ -138,6 +142,7 @@ public class HttpServer extends NanoHTTPD {
             uri = uri.replace(rootFile.getAbsolutePath(), "");
             // VictorSuite modify {@
             // Resolve inside the root only; "/../" must not reach files outside it.
+            File serveRoot = rootFile;
             File resolved = HttpPathGuard.resolveInside(rootFile, uri);
             if (resolved == null) {
                 return newFixedLengthResponse(Response.Status.FORBIDDEN, "text/plain", "Forbidden");
@@ -169,9 +174,13 @@ public class HttpServer extends NanoHTTPD {
                 answer += "<a id=\"btn2\" href=\"" + rootFile.getParentFile().getAbsolutePath()
                     + "\" alt = \"\">" + UUtils.getString(com.termux.R.string.open_file_http)
                     + "</a>";*/
-                answer += "<a id=\"btn2\" href=\"" + rootFile.getParentFile().getAbsolutePath()
+                // VictorSuite modify {@
+                // At the serve root, "..." stays put: the real parent is outside the root and 404s.
+                File parentDir = rootFile.equals(serveRoot) ? serveRoot : rootFile.getParentFile();
+                answer += "<a id=\"btn2\" href=\"" + HttpPathGuard.escapeHtml(HttpPathGuard.encodePath(parentDir.getAbsolutePath()))
                     + "\" alt = \"\">..."
                     + "</a>";
+                // @}
                 if (files == null) {
                     files = new File[0];
                 }
@@ -187,7 +196,7 @@ public class HttpServer extends NanoHTTPD {
                         isFileLink = file.getName();
                     }
                     // VictorSuite modify {@
-                    answer += "<a id=\"btn2\" href=\"" + HttpPathGuard.escapeHtml(file.getAbsolutePath())
+                    answer += "<a id=\"btn2\" href=\"" + HttpPathGuard.escapeHtml(HttpPathGuard.encodePath(file.getAbsolutePath()))
                         + "\" alt = \"\">" + HttpPathGuard.escapeHtml(isFileLink)
                         + "</a>";
                     // @}

@@ -1,6 +1,8 @@
 package com.termux.zerocore.http_service;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,26 @@ public final class HttpPathGuard {
         base = base.trim();
         if (base.isEmpty() || base.equals(".") || base.equals("..")) return null;
         return base;
+    }
+
+    /**
+     * Percent-encodes each segment of an absolute path so names containing spaces, '#', '?', '%'
+     * or '+' survive inside an href. The server decodes the request path with URLDecoder, which
+     * would otherwise turn a literal '+' into a space.
+     */
+    public static String encodePath(String path) {
+        if (path == null) return "";
+        String[] segments = path.split("/", -1);
+        StringBuilder sb = new StringBuilder(path.length() + 16);
+        for (int i = 0; i < segments.length; i++) {
+            if (i > 0) sb.append('/');
+            try {
+                sb.append(URLEncoder.encode(segments[i], "UTF-8").replace("+", "%20"));
+            } catch (UnsupportedEncodingException e) {
+                throw new IllegalStateException(e); // UTF-8 is always supported
+            }
+        }
+        return sb.toString();
     }
 
     public static String escapeHtml(String s) {
