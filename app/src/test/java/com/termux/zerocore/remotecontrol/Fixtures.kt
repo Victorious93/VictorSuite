@@ -32,6 +32,7 @@ object Fx {
     const val NODE_PKG = "com.victorious.suite"
     const val DCA_PKG = "ai.droidcommand.app"
     const val DCA_REF = "controller"
+    const val DCA_CERT = "AA:BB:CC:DD"
 
     private var counter = 0
 
@@ -61,7 +62,7 @@ object Fx {
         extra(this)
     }.toString()
 
-    fun pairedConfig(externalControl: Boolean = true, cert: String? = null) = RemoteControlConfig(
+    fun pairedConfig(externalControl: Boolean = true, cert: String? = DCA_CERT) = RemoteControlConfig(
         externalControlEnabled = externalControl,
         pairings = listOf(DevicePairing(DCA_REF, DCA_PKG, cert)),
     )

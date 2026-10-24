@@ -14,8 +14,8 @@ class ZTAboutActivity : AppCompatActivity() {
             UUtils.startUrl("https://github.com/Victorious93/VictorSuite")
         }
 
-        findViewById<CardView>(R.id.zt_core_manage_termux_github_card_view).setOnClickListener {
-            UUtils.startUrl("https://github.com/hanxinhao000/ZeroCoreManage")
-        }
+        // The ZeroCoreManage add-on is a third-party APK from an upstream personal
+        // repo; we no longer link users to download it. Hide its card.
+        findViewById<CardView>(R.id.zt_core_manage_termux_github_card_view).visibility = android.view.View.GONE
     }
 }

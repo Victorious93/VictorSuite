@@ -75,7 +75,7 @@ object RemoteControlSettings {
     }
 
     /**
-     * Pairings editor format: one `packageName=sourceNodeRef[,certSha256]` per line.
+     * Pairings editor format: one `packageName=sourceNodeRef,certSha256` per line (the cert is required; rows without it never authenticate).
      * Blank lines and `#` comments are ignored; malformed lines are skipped.
      */
     fun parsePairingsText(text: String): List<DevicePairing> = text.lineSequence().mapNotNull { line ->

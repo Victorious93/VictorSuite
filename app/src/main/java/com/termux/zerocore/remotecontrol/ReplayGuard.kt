@@ -10,16 +10,19 @@ package com.termux.zerocore.remotecontrol
  * Seen nonces are retained for at least [retentionMs] (>= 10 min) and at least
  * until the request itself could no longer be valid. In memory only (lost on
  * process death), same as the controller-side skeleton; not a MAC. The cache
- * fails closed (`internal`) instead of evicting live entries when full.
+ * fails closed (`internal`) instead of evicting live entries when full, and caps
+ * each source so one paired app cannot exhaust the shared cache.
  */
 class ReplayGuard(
     private val clock: RemoteClock = RemoteClock.SYSTEM,
     private val retentionMs: Long = FleetProtocol.REPLAY_RETENTION_MS,
     private val maxEntries: Int = 10_000,
+    private val maxEntriesPerSource: Int = 1_000,
 ) {
     init {
         require(retentionMs >= FleetProtocol.REPLAY_RETENTION_MS) { "retention must be >= 10 minutes" }
         require(maxEntries > 0)
+        require(maxEntriesPerSource > 0)
     }
 
     private data class Key(val sourceNodeRef: String, val nonce: String)
@@ -36,6 +39,10 @@ class ReplayGuard(
         val key = Key(sourceNodeRef, envelope.nonce.lowercase())
         if (seen.containsKey(key)) {
             throw RemoteControlException(RemoteErrorCategory.REPLAY_DETECTED, "nonce already seen for this source")
+        }
+        // A single paired source must not be able to fill the shared cache and lock out the others.
+        if (seen.keys.count { it.sourceNodeRef == sourceNodeRef } >= maxEntriesPerSource) {
+            throw RemoteControlException(RemoteErrorCategory.INTERNAL, "too many recent requests from this source; try again later")
         }
         if (seen.size >= maxEntries) {
             throw RemoteControlException(RemoteErrorCategory.INTERNAL, "replay cache full; try again later")

@@ -1,0 +1,22 @@
+{
+  "_comment": "Copy to ~/.config/victorsuite/ai-agents/vstoken.json and edit. Model ids were checked 2026-10-20 against the provider docs linked in docs/AI_CODING_AGENTS.md; they WILL go stale. Prices are copied from those pages and are only used for local cost estimates; update them yourself.",
+  "router_enabled": false,
+  "max_prompt_tokens": 8000,
+  "daily_budget_usd": 2.0,
+  "tiers": {
+    "trivial": {"provider": "ollama", "model": "qwen2.5-coder:1.5b", "host": "http://127.0.0.1:11434"},
+    "routine": {"provider": "claude", "model": "claude-sonnet-5-5"},
+    "hard":    {"provider": "claude", "model": "claude-opus-5-5"}
+  },
+  "_alt_tiers_openai": {
+    "routine": {"provider": "codex", "model": "gpt-6.1-sol"},
+    "hard":    {"provider": "codex", "model": "gpt-6-astra"}
+  },
+  "prices_per_mtok": {
+    "claude-sonnet-5-5": {"input": 2, "output": 10},
+    "claude-opus-5-5":   {"input": 4, "output": 20},
+    "gpt-6.1-sol":       {"input": 2, "output": 10},
+    "gpt-6-astra":       {"input": 10, "output": 50},
+    "qwen2.5-coder:1.5b": {"input": 0, "output": 0}
+  }
+}

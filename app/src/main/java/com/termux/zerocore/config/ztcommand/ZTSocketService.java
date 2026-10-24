@@ -13,6 +13,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
+import com.termux.shared.termux.TermuxConstants;
 import com.termux.zerocore.config.ztcommand.config.HelpConfig;
 import com.termux.zerocore.config.ztcommand.config.ZTConfig;
 import com.zp.z_file.util.LogUtils;
@@ -31,12 +32,25 @@ public class ZTSocketService extends Service {
     private ExecutorService executor;
     private boolean isRunning = true;
     private LocalBroadcastManager localBroadcastManager;
+    // VictorSuite add {@
+    private static final int READ_TIMEOUT_MS = 10_000;
+    private volatile String mToken;
+    // @}
 
     @Override
     public void onCreate() {
         super.onCreate();
         LogUtils.d(TAG, "ZT服务创建");
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        // VictorSuite add {@
+        try {
+            mToken = ZTCommandAuth.loadOrCreateToken(new File(TermuxConstants.TERMUX_HOME_DIR_PATH, ".termux/zt.token"));
+        } catch (IOException e) {
+            // Without a token every request would be refused; do not open the socket at all.
+            LogUtils.e(TAG, "ZT token unavailable, command socket disabled: " + e);
+            return;
+        }
+        // @}
         startSocketService();
     }
 
@@ -99,9 +113,20 @@ public class ZTSocketService extends Service {
         @Override
         public void run() {
             try {
+                // VictorSuite modify {@
+                // Bounded read with a timeout (an idle or oversized client must not pin a pool thread
+                // or exhaust memory), and the first word must be the per-install token.
+                mClientSocket.setSoTimeout(READ_TIMEOUT_MS);
                 mIn = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
                 mOut = new PrintWriter(mClientSocket.getOutputStream(), true);
-                String command = mIn.readLine();
+                String line = ZTCommandAuth.readBoundedLine(mIn, ZTCommandAuth.MAX_LINE_CHARS);
+                String command = ZTCommandAuth.authenticate(line, mToken);
+                if (command == null) {
+                    LogUtils.e(TAG, "拒绝未授权的命令请求");
+                    mOut.println(getJson(1, "unauthorized: missing or wrong token", ""));
+                    return;
+                }
+                // @}
                 LogUtils.d(TAG, "收到命令: " + command);
                 String result = processCommand(command);
                 if (TextUtils.isEmpty(result)) {
@@ -221,7 +246,7 @@ public class ZTSocketService extends Service {
     }
 
     private String getJson(int code, String message, String title) {
-        return "{\"message\": \"" + message + "\",\"code\": " + code + ",\"title\": \"" + title + "\"}";
+        return ZTCommandAuth.json(code, message, title);
     }
 
     private String getOkJson() {

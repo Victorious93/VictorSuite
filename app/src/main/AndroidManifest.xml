@@ -56,7 +56,8 @@
    <!-- android:debuggable="true"-->
     <application
         android:name=".app.TermuxApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        tools:replace="android:allowBackup"
         android:banner="@drawable/banner"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
@@ -70,11 +71,11 @@
         <service
             android:name=".zerocore.settings.services.TimerExeService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false"></service>
 
         <activity
             android:name=".zerocore.settings.TimerActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".zerocore.settings.ZTInstallActivity"
@@ -383,10 +384,9 @@
         </receiver>
         <service android:name=".zerocore.config.ztcommand.ZTSocketService"/>
 
-        <service android:name=".zerocore.ftp.FsService" />
         <service
             android:name=".zerocore.ftp.new_ftp.services.FtpService"
-            android:exported="true" />
+            android:exported="false" />
         <service
             android:name=".zerocore.ftp.new_ftp.services.MyTileService"
             android:icon="@drawable/ic_launcher" />

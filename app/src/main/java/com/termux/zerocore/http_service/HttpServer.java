@@ -106,8 +106,16 @@ public class HttpServer extends NanoHTTPD {
                         String fileName = item.getName();
                         Log.d(TAG, "Item is file field, name=" + name + ",fileName=" + fileName);
 
+                        // VictorSuite modify {@
+                        // The client controls this name; keep only the file name so "../" cannot
+                        // write outside the Downloads folder.
+                        String safeName = HttpPathGuard.safeUploadName(fileName);
+                        if (safeName == null) {
+                            return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", "Bad file name");
+                        }
                         File file = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_DOWNLOADS), fileName);
+                            Environment.DIRECTORY_DOWNLOADS), safeName);
+                        // @}
                         String path = file.getAbsolutePath();
                         Log.d(TAG, "Save file to " + path);
                         if (mStatusUpdateListener != null) {
@@ -123,12 +131,24 @@ public class HttpServer extends NanoHTTPD {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                // VictorSuite modify {@
+                // Was: fell through to "Success!", so a failed upload looked like a good one.
+                return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, "text/plain", "Upload failed");
+                // @}
             }
         } else if (method.equals(Method.GET)) {
             // for file browse and download
             File rootFile = new File(FileUrl.INSTANCE.getMainFilesUrl());
             uri = uri.replace(rootFile.getAbsolutePath(), "");
-            rootFile = new File(rootFile + uri);
+            // VictorSuite modify {@
+            // Resolve inside the root only; "/../" must not reach files outside it.
+            File serveRoot = rootFile;
+            File resolved = HttpPathGuard.resolveInside(rootFile, uri);
+            if (resolved == null) {
+                return newFixedLengthResponse(Response.Status.FORBIDDEN, "text/plain", "Forbidden");
+            }
+            rootFile = resolved;
+            // @}
             if (!rootFile.exists()) {
                 return newFixedLengthResponse("Error! No such file or dirctory");
             }
@@ -154,9 +174,16 @@ public class HttpServer extends NanoHTTPD {
                 answer += "<a id=\"btn2\" href=\"" + rootFile.getParentFile().getAbsolutePath()
                     + "\" alt = \"\">" + UUtils.getString(com.termux.R.string.open_file_http)
                     + "</a>";*/
-                answer += "<a id=\"btn2\" href=\"" + rootFile.getParentFile().getAbsolutePath()
+                // VictorSuite modify {@
+                // At the serve root, "..." stays put: the real parent is outside the root and 404s.
+                File parentDir = rootFile.equals(serveRoot) ? serveRoot : rootFile.getParentFile();
+                answer += "<a id=\"btn2\" href=\"" + HttpPathGuard.escapeHtml(HttpPathGuard.encodePath(parentDir.getAbsolutePath()))
                     + "\" alt = \"\">..."
                     + "</a>";
+                // @}
+                if (files == null) {
+                    files = new File[0];
+                }
                 for (File file : files) {
 
                     String isFile = UUtils.getString(com.termux.R.string.http_folder);
@@ -168,9 +195,11 @@ public class HttpServer extends NanoHTTPD {
                         isFile = UUtils.getString(com.termux.R.string.http_file);
                         isFileLink = file.getName();
                     }
-                    answer += "<a id=\"btn2\" href=\"" + file.getAbsolutePath()
-                        + "\" alt = \"\">" + isFileLink
+                    // VictorSuite modify {@
+                    answer += "<a id=\"btn2\" href=\"" + HttpPathGuard.escapeHtml(HttpPathGuard.encodePath(file.getAbsolutePath()))
+                        + "\" alt = \"\">" + HttpPathGuard.escapeHtml(isFileLink)
                         + "</a>";
+                    // @}
                     /**
                      *
                      * <br>[time: "
@@ -201,7 +230,7 @@ public class HttpServer extends NanoHTTPD {
 
                 if (response != null) {
                     response.addHeader(
-                        "Content-Disposition", "attachment; filename=" + rootFile.getName());
+                        "Content-Disposition", "attachment; filename=\"" + HttpPathGuard.headerSafeFileName(rootFile.getName()) + "\"");
                     return response;
                 } else {
                     return newFixedLengthResponse("Error downloading file!");

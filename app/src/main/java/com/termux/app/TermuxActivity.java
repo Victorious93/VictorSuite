@@ -1344,7 +1344,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             intent.setAction(Intent.ACTION_VIEW);
             startActivity(intent); //启动浏览器
         });
-        telegram_group_tv.setOnClickListener(this);
+        // Upstream Telegram group removed (not owner-controlled).
+        telegram_group_tv.setVisibility(View.GONE);
         ZTGitHubVersion.create().initZtVersionVisible(zt_new);
         try {
             double_tishi.setText(double_tishi.getText() + "\n" + TermuxInstaller.determineTermuxArchName().toUpperCase());
@@ -1974,10 +1975,11 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         File mainFile = new File(FileUrl.INSTANCE.getMainBinUrl());
         File zt = new File(FileUrl.INSTANCE.getZt());
         if (mainFile.exists()) {
-            if (!zt.exists()) {
-                UUtils.writerFile("runcommand/zt", zt);
-                UUtils.chmod(zt);
-            }
+            // VictorSuite modify {@
+            // Always refresh: older copies of the helper do not send the ZT socket token.
+            UUtils.writerFile("runcommand/zt", zt);
+            UUtils.chmod(zt);
+            // @}
         }
         //写入主菜单信息
         writerMainMenuConfig(false);

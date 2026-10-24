@@ -11,7 +11,7 @@ class NodeStatusTest {
     @Test
     fun nodeStatusGetReturnsFrozenSnapshotShape() {
         val clock = MutableClock()
-        val r = Fx.dispatcher(clock = clock).handleRemote(Fx.DCA_PKG, null, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null))
+        val r = Fx.dispatcher(clock = clock).handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null))
         assertTrue(r.toJson(), r.ok)
         val s = r.result!!
         assertEquals(setOf("nodeId", "packageName", "connectionClass", "updatedAtMs", "domains"), s.keySet())
@@ -34,17 +34,17 @@ class NodeStatusTest {
 
     @Test
     fun nodeStatusIsNeverConfirmationGatedEvenIfDestructiveFlagSet() {
-        val r = Fx.dispatcher().handleRemote(Fx.DCA_PKG, null, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null, destructive = true))
+        val r = Fx.dispatcher().handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null, destructive = true))
         assertTrue(r.toJson(), r.ok)
     }
 
     @Test
     fun nodeIdArgMustMatchAndUnknownArgsAreIgnored() {
         val d = Fx.dispatcher()
-        Fx.assertError(d.handleRemote(Fx.DCA_PKG, null, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null) {
+        Fx.assertError(d.handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null) {
             it.add("args", Fx.json("""{"nodeId":"mesh-${"a".repeat(32)}"}"""))
         }), RemoteErrorCategory.NOT_FOUND)
-        assertTrue(d.handleRemote(Fx.DCA_PKG, null, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null) {
+        assertTrue(d.handleRemote(Fx.DCA_PKG, Fx.DCA_CERT, Fx.blob(operation = FleetProtocol.OP_NODE_STATUS_GET, actionRef = null) {
             it.add("args", Fx.json("""{"nodeId":"${Fx.NODE_ID}","futureKey":"x"}"""))
         }).ok)
     }

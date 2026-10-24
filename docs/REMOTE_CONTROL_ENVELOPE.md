@@ -154,8 +154,8 @@ Caller identity comes only from the transport:
 3. The calling package is the system-reported **creator of the result PendingIntent**
    (`PendingIntent.getCreatorPackage()` / `getCreatorUid()`). It must own that uid and hold RUN_COMMAND.
 4. That package must have exactly one pairing row. `sourceNodeRef` is taken from the row.
-   If the row has a `certSha256`, the caller's signing cert SHA-256 must match (colons ignored).
-   An empty cert means unpinned (fail-open), matching the fleet's "certs TBD" rows.
+   The row must have a `certSha256` and the caller's signing cert SHA-256 must match it (colons ignored,
+   case-insensitive). A row without a cert never authenticates (fail-closed, `unauthorized`).
 
 A request without a result PendingIntent cannot be authenticated. It is logged and dropped.
 

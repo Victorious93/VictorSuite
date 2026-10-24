@@ -199,6 +199,11 @@ write_wrapper() {
 $WRAPPER_MARKER
 # Runs '$name' inside the proot-distro container '$CONTAINER'.
 set -e
+# Optional key file written by ai-agents-pack.sh (mode 600, never logged).
+keyfile="\$HOME/.config/victorsuite/ai-agents/keys/$name.env"
+if [ -f "\$keyfile" ] && [ "\$(stat -c %a "\$keyfile" 2>/dev/null)" = 600 ]; then
+    set -a; . "\$keyfile"; set +a
+fi
 args=(--work-dir "\$PWD")
 for v in TERM COLORTERM $envs; do
     [ -n "\${!v:-}" ] && args+=(--env "\$v=\${!v}")

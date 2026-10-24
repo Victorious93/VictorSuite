@@ -102,3 +102,20 @@ Not callable remotely. No Settings button yet.
 | `capability_off` | That op is not allowed remotely |
 | `confirmation_required` | Needs on-device confirmation; never granted remotely |
 | `internal` | Something else went wrong (also: backup could not be decrypted) |
+
+
+## AI Coding Agents pack
+
+Menu **ZT features → AI Coding Agents** installs Claude Code, OpenAI Codex CLI, GitHub Copilot CLI
+and Ollama (local, or a remote host via `OLLAMA_HOST`). It asks for each API key once and stores it in
+`~/.config/victorsuite/ai-agents/keys/` (mode 600), or you can use each tool's own login.
+It also installs two helpers:
+
+- `vsphone`: lets agents tap, swipe, type, take screenshots, dump the UI, and run `pm`/`am`/`settings`
+  through root or Shizuku. Risky actions (uninstall, clear, wipe, flash, security settings, raw shell)
+  stop for a typed confirmation and are refused when no person is at the terminal.
+  `vsphone log` shows the audit log.
+- `vstoken`: builds small, relevant context (`vstoken context "task"`), shortens logs
+  (`… | vstoken trunc`), tracks token spend (`vstoken report`) and has an opt-in model router.
+
+Details, licences and confidence labels: [AI_CODING_AGENTS.md](AI_CODING_AGENTS.md).

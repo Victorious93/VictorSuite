@@ -39,10 +39,8 @@ class X86AlpineDataClickConfig: BaseMenuClickConfig() {
         val versionName = ZeroCoreManage.getVersionName()
         if (TextUtils.isEmpty(versionName)) {
             UUtils.showMsg(UUtils.getString(R.string.zero_eg_not_install))
-            val intent = Intent()
-            intent.setData(Uri.parse("https://github.com/hanxinhao000/ZeroCoreManage/releases/tag/0.1.20221116")) //Url 就是你要打开的网址
-            intent.setAction(Intent.ACTION_VIEW)
-            context?.startActivity(intent) //启动浏览器
+            // Do not send users to download the third-party ZeroCoreManage APK from an
+            // upstream personal repo (untrusted binary). Feature stays unavailable.
             return
         }
         if (FileIOUtils.isProotQemu()) {

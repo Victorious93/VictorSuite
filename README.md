@@ -1,33 +1,55 @@
+<!-- victorious-fleet-readme-refresh:start -->
 <p align="center">
   <img src="assets/logo.png" alt="VictorSuite logo" width="200">
 </p>
 
-<div align="center">
+# VictorSuite
 
-<img src="docs/logo-512.png" alt="VictorSuite logo" width="200">
+Android Linux environment suite for the Victorious fleet (host/shell tooling via TERMUX_IPC).
+
+**Package id:** `com.victorious.suite`
+
+> **Package note:** From `app/build.gradle` / manifest (`TERMUX_PACKAGE_NAME` / `namespace`). Display name is VictorSuite — do not refer to this app as Termux.
+
+**Status:** CI green / not device-tested *(from [fleet-manifest ROADMAP](https://github.com/Victorious93/fleet-manifest/blob/main/ROADMAP.md))*
+
+## Install / build
+
+Gradle Android app under `app/`. JDK 17; see `gradle.properties` for SDK/NDK. Typical: `./gradlew :app:assembleDebug`.
+
+_Steps above are taken from this repo’s build files / existing docs; anything not exercised in this refresh is unlabeled as verified on a device._
+
+## Victorious fleet
+
+- Monorepo: [https://github.com/Victorious93/victorious-fleet](https://github.com/Victorious93/victorious-fleet)
+- Fleet site: [https://victorious-framework.pages.dev](https://victorious-framework.pages.dev)
+
+<!-- victorious-fleet-readme-refresh:end -->
+
+<div align="center">
 
 # VictorSuite
 
-**A Termux-based Android Linux environment with management tools: containers, backup/restore, plugins, X11, and automation.**
+**A Termux-based Android Linux environment with ZeroTermux-era management tools — containers, backup/restore, plugins, X11, and automation.**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
-![Min API](https://img.shields.io/badge/minSdk-23-brightgreen)
 ![Language](https://img.shields.io/badge/language-Java%20%2F%20Kotlin-orange)
+![Status](https://img.shields.io/badge/status-private%20fork-lightgrey)
 
 </div>
 
-## Overview
-
-VictorSuite is a community-driven enhancement of the Termux ecosystem, built on Termux's terminal stack (see Credits). It uses its own `applicationId` (`com.victorious.suite`), so it installs alongside the real Termux and Termux:API. The `RUN_COMMAND` intent is `com.victorious.suite.RUN_COMMAND`, guarded by `com.victorious.suite.permission.RUN_COMMAND`. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
+VictorSuite is a community-driven enhancement of the Termux ecosystem, built on the [ZeroTermux](https://github.com/hanxinhao000/ZeroTermux) codebase and Termux’s terminal stack. It uses its own `applicationId` (`com.victorious.suite`), so it installs alongside the real Termux and Termux:API. The `RUN_COMMAND` intent is `com.victorious.suite.RUN_COMMAND`, guarded by `com.victorious.suite.permission.RUN_COMMAND`. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
 
 > **Note:** until bootstraps are rebuilt for the `/data/data/com.victorious.suite/files` prefix, the bundled shell will not run on a device. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
 
-It is intended for personal learning, experimentation, and technical collaboration, not as a commercial product.
+It is intended for personal learning, experimentation, and technical collaboration — not as a commercial product.
+
+> **Fleet note:** VictorSuite is the third companion Android app in [Victorious93/droidcommand-AI](https://github.com/Victorious93/droidcommand-AI)’s app fleet (alongside hackeraiETC and Pentest-Swarm-AI). VictorSuite now uses its own package `com.victorious.suite` and its own `RUN_COMMAND` action and permission, so droidcommand-AI’s `core-termux` module, which targets `com.termux`, must be updated to reach it (see the fleet binding table in [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md)). VictorSuite can be installed alongside genuine Termux. See that repo’s `docs/ARCHITECTURE.md` and `docs/AUDIT_2026-09-05.md`.
 
 ## Features
 
-VictorSuite additions live under `com.termux.zerocore`:
+Documented and present in the codebase (ZeroTermux / VictorSuite additions under `com.termux.zerocore`):
 
 - **Linux containers** — install and switch between proot-based distributions (catalogue includes Ubuntu, Kali, Fedora, BlackArch, Kali NetHunter Rootless, and others via online-script / repository JSON).
 - **Backup and restore** — archive Termux environments and user data (`.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z`).
@@ -37,30 +59,28 @@ VictorSuite additions live under `com.termux.zerocore`:
 - **Embedded services** — FTP server, HTTP/ttyd-style service, file browser integrations.
 - **X11 support** — separately distributed internal-channel X11 AAR; Termux:X11–style desktop workflows.
 - **scrcpy / QEMU / wireless ADB / root shell** — integrations under `zerocore` (scrcpy, UTermux/QEMU windows, wireless ADB, libsu).
-- **AI via DroidCommand AI** — the drawer's AI button and the Settings AI entry launch the separate [DroidCommand AI](https://github.com/Victorious93/droidcommand-ai) app (`ai.droidcommand.app`). The old in-app DeepSeek/Claude chat UI is no longer reachable; its code under `zerocore/deepseek` is unreferenced and still present (`MarkDownAPI` there is used by `TermuxActivity`).
+- **In-app AI chat** — DeepSeek and Claude API clients with SQLite session storage (`zerocore/deepseek`).
 - **AI CLI setup script** — bundled `scripts/ai-cli-setup.sh` installs pi, Copilot CLI, Codex CLI, and Hugging Face CLI (some via an Ubuntu proot container). **Not yet run on a real device** — see [docs/AI_CLIS.md](docs/AI_CLIS.md).
+- **Prebuilt APK releases** and shared signing-key compatibility with UTermux (as noted historically in this project).
 
 Upstream Termux capabilities (terminal emulator, packages via bootstrap, `RUN_COMMAND`) remain the foundation.
 
 ## Screenshots
 
-Screenshots coming soon.
+> Placeholders — add device captures when you publish or document a release.
+
+| Terminal | Drawer / main menu | Container manager | Backup/restore | Plugin list | X11 session |
+|---|---|---|---|---|---|
+| *TODO* | *TODO* | *TODO* | *TODO* | *TODO* | *TODO* |
 
 ## Requirements
 
 - Android device with **API 23+** (`minSdkVersion` 23; `targetSdkVersion` 28; `compileSdkVersion` 36)
 - JDK **17** for building (CI uses Temurin 17)
 - Android SDK platform 36, build-tools 36, NDK **29.0.14206865** (see `gradle.properties`)
+- Note: package id is `com.victorious.suite`, so it installs alongside upstream Termux. The bundled shell needs bootstraps rebuilt for this prefix first (see [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md))
 
-## Install
-
-No tagged releases are published on GitHub yet. To install:
-
-1. Build a debug APK from source (see [Build from source](#build-from-source)); it is written under `app/build/outputs/apk/debug/`.
-2. Sideload it onto your device (for example `adb install <apk>`).
-3. Uninstall upstream Termux first if it is present (same package id).
-
-## Build from source
+## Build
 
 ```sh
 git clone https://github.com/Victorious93/VictorSuite.git
@@ -80,13 +100,13 @@ cd VictorSuite
 
 CI (`.github/workflows/android.yml`) runs `:app:assembleDebug` on pushes/PRs to `main`.
 
-Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.54** / **117**.
+Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.55** / **118**.
 
 ## Usage
 
-1. Install the APK (see [Install](#install)).
+1. Install a debug or release APK (sideload).
 2. Open VictorSuite — first launch follows Termux-style bootstrap / setup.
-3. Use the drawer menu for VictorSuite features (containers, backup, FTP, X11 settings, online scripts, AI CLIs, etc.).
+3. Use the drawer menu for ZeroTermux/VictorSuite features (containers, backup, FTP, X11 settings, online scripts, AI CLIs, etc.).
 4. For plugins: register from the remote catalogue → acknowledge authorized use → enable → place the entry-point binary yourself. See [PLUGINS.md](PLUGINS.md).
 5. For AI CLIs from the terminal: menu **AI CLIs**, or `bash ~/ai-cli-setup.sh` after the asset is copied — details in [docs/AI_CLIS.md](docs/AI_CLIS.md).
 
@@ -122,7 +142,7 @@ This repository is private. If you have access:
 
 ## Licence
 
-VictorSuite is released under the **GNU General Public License v3** (see [LICENSE.md](LICENSE.md)), following the licenses of the projects it builds on (see Credits).
+VictorSuite is released under the **GNU General Public License v3** (see [LICENSE.md](LICENSE.md)), following the ZeroTermux / Termux lineage.
 
 Exceptions called out in `LICENSE.md` include:
 
