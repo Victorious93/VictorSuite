@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!DOCTYPE resources [
-    <!ENTITY TERMUX_PACKAGE_NAME "com.victorious.suite">
+    <!ENTITY TERMUX_PACKAGE_NAME "com.termux">
     <!ENTITY TERMUX_APP_NAME "VictorSuite">
-    <!ENTITY TERMUX_API_APP_NAME "VictorSuite:API">
-    <!ENTITY TERMUX_BOOT_APP_NAME "VictorSuite:Boot">
-    <!ENTITY TERMUX_FLOAT_APP_NAME "VictorSuite:Float">
-    <!ENTITY TERMUX_STYLING_APP_NAME "VictorSuite:Styling">
-    <!ENTITY TERMUX_TASKER_APP_NAME "VictorSuite:Tasker">
-    <!ENTITY TERMUX_WIDGET_APP_NAME "VictorSuite:Widget">
+    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
+    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
+    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
+    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
+    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
     <!ENTITY TERMUX_PROPERTIES_PRIMARY_PATH_SHORT "~/.termux/termux.properties">
     ]>
 
@@ -1181,8 +1181,8 @@ Known Issue: Rapid consecutive back operations may cause black screen in Interna
         ln[ \n
         Description: current directory internal storage path \n
         Note: Both paths must be absolute paths \n
-        Example: ln /data/data/com.victorious.suite/files/home/custom_name /sdcard/ \n
-        Example (or specify a directory): ln /data/data/com.victorious.suite/files/home/custom_name /sdcard/custom_directory/ \n
+        Example: ln /data/data/com.termux/files/home/custom_name /sdcard/ \n
+        Example (or specify a directory): ln /data/data/com.termux/files/home/custom_name /sdcard/custom_directory/ \n
         ] \n
         --------Version 0.2 Update--------\n
         zt dialog \n
@@ -1198,8 +1198,8 @@ Known Issue: Rapid consecutive back operations may cause black screen in Interna
         zt backgroundimage(bgi) Image path (set as current terminal background)\n
         backgroundimage(bgi)[\n
         Usage Help (full path required):\n
-        zt backgroundimage /data/data/com.victorious.suite/files/home/.img/back.jpg \n
-        zt bgi /data/data/com.victorious.suite/files/home/.img/back.jpg \n
+        zt backgroundimage /data/data/com.termux/files/home/.img/back.jpg \n
+        zt bgi /data/data/com.termux/files/home/.img/back.jpg \n
         ]\n
         \n
         zt qr Open Scan (scan QR code or barcode)\n
@@ -1302,7 +1302,7 @@ home/termux-adb-shell.sh \n
 Please follow these steps:\n
 \n
 adb shell \n
-run-as com.victorious.suite \n
+run-as com.termux \n
 cd files/home/ \n
 sh termux-adb-shell.sh \n
 cd ~ &amp;&amp; pkg update -y \n

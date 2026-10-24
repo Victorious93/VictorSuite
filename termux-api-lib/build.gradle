@@ -1,5 +1,5 @@
 // Termux:API sources (GPLv3) vendored from termux/termux-api, see UPSTREAM.md.
-// Built as a library so the receiver lives inside the VictorSuite APK (applicationId com.victorious.suite).
+// Built as a library so the receiver lives inside the VictorSuite APK (applicationId com.termux).
 apply plugin: 'com.android.library'
 
 android {

@@ -52,26 +52,26 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
     private LinearLayout other;
 
 
-    private File mFile = new File("/data/data/com.victorious.suite/files/usr/bin/qemu-system-x86_64");
-    private File mFileQemuStart = new File("/data/data/com.victorious.suite/files/home/.qemustart/start.sh");
-    private File mFileQemuStart1 = new File("/data/data/com.victorious.suite/files/home/.qemustart");
-    private File mFile1 = new File("/data/data/com.victorious.suite/files/usr/bin/qemu-x86_64-static");
-    private File mFile2 = new File("/data/data/com.victorious.suite/files/usr/bin/qemu-system-i386");
+    private File mFile = new File("/data/data/com.termux/files/usr/bin/qemu-system-x86_64");
+    private File mFileQemuStart = new File("/data/data/com.termux/files/home/.qemustart/start.sh");
+    private File mFileQemuStart1 = new File("/data/data/com.termux/files/home/.qemustart");
+    private File mFile1 = new File("/data/data/com.termux/files/usr/bin/qemu-x86_64-static");
+    private File mFile2 = new File("/data/data/com.termux/files/usr/bin/qemu-system-i386");
     private File mWin10 = new File(Environment.getExternalStorageDirectory(), "/xinhao/windows/Utermux_win10.vhd");
-    private File mWin10RunPath = new File("/data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/Utermux_win10.vhd");
+    private File mWin10RunPath = new File("/data/data/com.termux/files/home/storage/shared/xinhao/windows/Utermux_win10.vhd");
 
 
     private File mWin7 = new File(Environment.getExternalStorageDirectory(), "/xinhao/windows/Utermux_win7.vhd");
-    private File mWin7RunPath = new File("/data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/Utermux_win7.vhd");
+    private File mWin7RunPath = new File("/data/data/com.termux/files/home/storage/shared/xinhao/windows/Utermux_win7.vhd");
 
     private File mWinConfig = new File(Environment.getExternalStorageDirectory(), "/xinhao/windows_config/");
     private File mWinWindows = new File(Environment.getExternalStorageDirectory(), "/xinhao/windows/");
 
     private File mWinxp = new File(Environment.getExternalStorageDirectory(), "/xinhao/windows/Utermux_xp.qcow2");
-    private File mWinxpRunPath = new File("/data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/Utermux_xp.qcow2");
+    private File mWinxpRunPath = new File("/data/data/com.termux/files/home/storage/shared/xinhao/windows/Utermux_xp.qcow2");
 
     private File mMac = new File(Environment.getExternalStorageDirectory(), "/xinhao/windows/Utermux-mac.qcow2");
-    private File mMacRunPath = new File("/data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/Utermux-mac.qcow2");
+    private File mMacRunPath = new File("/data/data/com.termux/files/home/storage/shared/xinhao/windows/Utermux-mac.qcow2");
 
     private boolean mkdirs = false;
 
@@ -192,8 +192,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         editTextDialog.setSystemSwitchListener(new EditTextDialog.SystemSwitchListener() {
                             @Override
                             public void switchEdit(EditText editText) {
-                                SaveData.saveData("mac_config", "cd ~ && qemu-system-ppc -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mMac.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33\n");
-                                editText.setText("cd ~ && qemu-system-ppc -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mMac.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33\n");
+                                SaveData.saveData("mac_config", "cd ~ && qemu-system-ppc -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mMac.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33\n");
+                                editText.setText("cd ~ && qemu-system-ppc -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mMac.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33\n");
                             }
                         });
 
@@ -229,13 +229,13 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                             fileListDialog.dismiss();
                             switch (string) {
                                 case "amd":
-                                    cmd[0] = "qemu-system-x86_64 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + file.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4";
+                                    cmd[0] = "qemu-system-x86_64 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + file.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4";
                                     break;
                                 case "i386":
-                                    cmd[0] = "qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + file.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4";
+                                    cmd[0] = "qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + file.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4";
                                     break;
                                 case "mac":
-                                    cmd[0] = "qemu-system-ppc -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + file.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33";
+                                    cmd[0] = "qemu-system-ppc -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + file.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33";
                                     break;
                             }
 
@@ -309,8 +309,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
         });
 
 
-        File fileProot = new File("/data/data/com.victorious.suite/files/usr/bin/termux-chroot");
-        File fileWget = new File("/data/data/com.victorious.suite/files/usr/bin/wget");
+        File fileProot = new File("/data/data/com.termux/files/usr/bin/termux-chroot");
+        File fileWget = new File("/data/data/com.termux/files/usr/bin/wget");
 
 
         if (!fileProot.exists() || !fileWget.exists()) {
@@ -368,7 +368,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            writerFile(new File(("/data/data/com.victorious.suite/files/usr/bin/qemu-system-ppc")));
+                            writerFile(new File(("/data/data/com.termux/files/usr/bin/qemu-system-ppc")));
 
                             try {
                                 Thread.sleep(2000);
@@ -511,8 +511,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                     editTextDialog.setSystemSwitchListener(new EditTextDialog.SystemSwitchListener() {
                         @Override
                         public void switchEdit(EditText editText) {
-                            SaveData.saveData("win7_config", "cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWin7RunPath.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
-                            editText.setText("cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWin7RunPath.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+                            SaveData.saveData("win7_config", "cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWin7RunPath.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+                            editText.setText("cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWin7RunPath.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
                         }
                     });
 
@@ -606,8 +606,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         editTextDialog.setSystemSwitchListener(new EditTextDialog.SystemSwitchListener() {
                             @Override
                             public void switchEdit(EditText editText) {
-                                SaveData.saveData("win10_config", "cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
-                                editText.setText("cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWin10RunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+                                SaveData.saveData("win10_config", "cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+                                editText.setText("cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWin10RunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
                             }
                         });
 
@@ -699,9 +699,9 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         editTextDialog.setSystemSwitchListener(new EditTextDialog.SystemSwitchListener() {
                             @Override
                             public void switchEdit(EditText editText) {
-                                SaveData.saveData("winxp_config", "cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+                                SaveData.saveData("winxp_config", "cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
 
-                                editText.setText("cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+                                editText.setText("cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
                             }
                         });
 
@@ -737,28 +737,28 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
         String win10_config = SaveData.getData("win10_config");
         if (win10_config == null || win10_config.isEmpty() || "def".equals(win10_config)) {
 
-            SaveData.saveData("win10_config", "cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWin10RunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+            SaveData.saveData("win10_config", "cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWin10RunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
 
         }
 
         String win7_config = SaveData.getData("win7_config");
         if (win7_config == null || win7_config.isEmpty() || "def".equals(win7_config)) {
 
-            SaveData.saveData("win7_config", "cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWin7RunPath.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+            SaveData.saveData("win7_config", "cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWin7RunPath.getName() + " -boot d -m 800  -device e1000,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
 
         }
 
         String winxp_config = SaveData.getData("winxp_config");
         if (winxp_config == null || winxp_config.isEmpty() || "def".equals(winxp_config)) {
 
-            SaveData.saveData("winxp_config", "cd ~ && qemu-system-i386 -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
+            SaveData.saveData("winxp_config", "cd ~ && qemu-system-i386 -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mWinxpRunPath.getName() + " -boot d -m 900  -device rtl8139,id=d-net1  -vnc :33 -cpu Skylake-Server-IBRS --accel tcg,thread=multi -smp 4\n");
 
         }
 
         String mac_config = SaveData.getData("mac_config");
         if (mac_config == null || mac_config.isEmpty() || "def".equals(mac_config)) {
 
-            SaveData.saveData("mac_config", "cd ~ && qemu-system-ppc -hda /data/data/com.victorious.suite/files/home/storage/shared/xinhao/windows/" + mMac.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33\n");
+            SaveData.saveData("mac_config", "cd ~ && qemu-system-ppc -hda /data/data/com.termux/files/home/storage/shared/xinhao/windows/" + mMac.getName() + " -M mac99 -m 512 -g 800x600x32 -machine usb=on -device  usb-tablet  -vnc :33\n");
 
         }
 
@@ -816,13 +816,13 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                     //mFileQemuStart
 
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("#!/data/data/com.victorious.suite/files/usr/bin/bash\n");
+                    stringBuilder.append("#!/data/data/com.termux/files/usr/bin/bash\n");
                     stringBuilder.append("\n");
                     stringBuilder.append(cmd).append("\n");
                     stringBuilder.append("\n");
                     stringBuilder.append("am broadcast --user 0 \\\n");
                     stringBuilder.append("  --es com.termux.app.reload_style qemu_run_error \\\n");
-                    stringBuilder.append("  -a com.victorious.suite.app.reload_style com.victorious.suite > /dev/null \\\n");
+                    stringBuilder.append("  -a com.termux.app.reload_style com.termux > /dev/null \\\n");
 
 
                     UUtils.setFileString(mFileQemuStart, stringBuilder.toString());

@@ -2,7 +2,7 @@ package com.termux.zerocore.remotecontrol
 
 /**
  * Transport-authenticated caller. On TERMUX_IPC this is derived from the
- * `com.victorious.suite.permission.RUN_COMMAND` permission + the VictorSuite
+ * `com.termux.permission.RUN_COMMAND` permission + the VictorSuite
  * allow-external-apps allow-list + the calling package. NEVER from a payload
  * field. [sourceNodeRef] is derived from the authenticated caller.
  */

@@ -29,7 +29,7 @@ class RecordingSink : NodeConfigSink {
 
 object Fx {
     const val NODE_ID = "victorsuite-0123456789abcdef0123456789abcdef"
-    const val NODE_PKG = "com.victorious.suite"
+    const val NODE_PKG = "com.termux"
     const val DCA_PKG = "ai.droidcommand.app"
     const val DCA_REF = "controller"
     const val DCA_CERT = "AA:BB:CC:DD"

@@ -11,7 +11,7 @@ import javax.crypto.spec.GCMParameterSpec
 
 /**
  * Frozen SETTINGS/BACKUP bundle (droidcommand-AI `docs/specs/UNIFIED_BACKUP.md`),
- * node side for VictorSuite (`com.victorious.suite`).
+ * node side for VictorSuite (`com.termux`).
  *
  * VictorSuite entry payload, `schemaVersion` 1:
  * ```
@@ -180,7 +180,7 @@ data class BackupImportReport(
 object NodeConfigBackup {
     const val BUNDLE_VERSION = 1
     const val SCHEMA_VERSION = 1
-    const val NODE_PACKAGE = "com.victorious.suite"
+    const val NODE_PACKAGE = "com.termux"
 
     const val TERMUX_PROPERTIES = ".termux/termux.properties"
     const val COLORS_PROPERTIES = ".termux/colors.properties"

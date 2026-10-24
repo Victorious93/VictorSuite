@@ -1,6 +1,6 @@
-#!/data/data/com.victorious.suite/files/usr/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 ### 这是在VictorSuite运行的脚本,默认pwd位置:
-### /data/data/com.victorious.suite/files/home
+### /data/data/com.termux/files/home
 ### 也就是Home位置
 ### 启用脚本请在 VictorSuite -> 定时任务 -> "定时任务设置"页面当中设置
 

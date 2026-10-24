@@ -30,9 +30,9 @@ object FileIOUtils {
     public const val TAG = "FileIOUtils"
 
     //环境
-    public const val TERMUX_CHROOT = "/data/data/com.victorious.suite/files/usr/bin/termux-chroot"
-    public const val TERMUX_WGET = "/data/data/com.victorious.suite/files/usr/bin/wget"
-    public const val TERMUX_QEMU = "/data/data/com.victorious.suite/files/usr/bin/qemu-system-x86_64"
+    public const val TERMUX_CHROOT = "/data/data/com.termux/files/usr/bin/termux-chroot"
+    public const val TERMUX_WGET = "/data/data/com.termux/files/usr/bin/wget"
+    public const val TERMUX_QEMU = "/data/data/com.termux/files/usr/bin/qemu-system-x86_64"
 
     public  val TERMUX_XINHAO_CONFIG = Environment.getExternalStorageDirectory().absolutePath + "/xinhao/config/"
     //ROM信息文件地址
@@ -258,7 +258,7 @@ object FileIOUtils {
         return mContext.filesDir.absolutePath + "/home/storage"
     }
     public fun getTermuxPathFile(mContext: Context): File {
-        return File("/data/data/com.victorious.suite/")
+        return File("/data/data/com.termux/")
     }
 
     public fun isStoragePath(mContext: Context): Boolean {

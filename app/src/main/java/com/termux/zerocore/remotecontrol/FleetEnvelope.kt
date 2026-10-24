@@ -45,7 +45,7 @@ object FleetProtocol {
     const val MAX_BLOB_CHARS = 256 * 1024
 
     /**
-     * TERMUX_IPC binding: the single JSON-blob extra on `com.victorious.suite.RUN_COMMAND`.
+     * TERMUX_IPC binding: the single JSON-blob extra on `com.termux.RUN_COMMAND`.
      * Key is the controller proposal from REMOTE_CONTROL.md Appendix C / §7 item 4.
      */
     const val TERMUX_ENVELOPE_EXTRA = "ai.droidcommand.REMOTE_ENVELOPE_JSON"

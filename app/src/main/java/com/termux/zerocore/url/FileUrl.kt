@@ -97,7 +97,7 @@ object FileUrl {
     public val smsUrlFile = "${TermuxConstants.TERMUX_FILES_DIR_PATH}/home/sms.txt"
     public val phoneUrlFile = "${TermuxConstants.TERMUX_FILES_DIR_PATH}/home/phone.txt"
     //系统启动脚本目录
-    ///data/data/com.victorious.suite/files/usr/etc/bash.bashrc  .xinhao_history
+    ///data/data/com.termux/files/usr/etc/bash.bashrc  .xinhao_history
     public val smsBashrcFile = "${TermuxConstants.TERMUX_FILES_DIR_PATH}/usr/etc/bash.bashrc"
     public val smsMotdFile = "${TermuxConstants.TERMUX_FILES_DIR_PATH}/usr/etc/motd"
     //Zero系统脚本目录

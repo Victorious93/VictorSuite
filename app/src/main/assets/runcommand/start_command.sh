@@ -1,4 +1,4 @@
-#!/data/data/com.victorious.suite/files/usr/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 #XINHAO_HAN
 #
 #

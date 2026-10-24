@@ -16,7 +16,7 @@ class NodeStatusTest {
         val s = r.result!!
         assertEquals(setOf("nodeId", "packageName", "connectionClass", "updatedAtMs", "domains"), s.keySet())
         assertEquals(Fx.NODE_ID, s.get("nodeId").asString)
-        assertEquals("com.victorious.suite", s.get("packageName").asString)
+        assertEquals("com.termux", s.get("packageName").asString)
         assertEquals("TERMUX_IPC", s.get("connectionClass").asString)
         assertEquals(clock.now, s.get("updatedAtMs").asLong)
         val domains = s.getAsJsonArray("domains").map { it.asJsonObject }

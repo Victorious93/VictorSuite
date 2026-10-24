@@ -91,7 +91,7 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
         val authKeyFlag = if (authKey.isEmpty()) "" else "--authkey=${shellQuote(authKey)}"
 
         val script = """
-            #!/data/data/com.victorious.suite/files/usr/bin/bash
+            #!/data/data/com.termux/files/usr/bin/bash
             set -e
 
             TS_DIR="${'$'}HOME/.headscale"
@@ -179,14 +179,14 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
         File(FileUrl.headscaleDir).mkdirs()
 
         val disconnectScript = """
-            #!/data/data/com.victorious.suite/files/usr/bin/bash
+            #!/data/data/com.termux/files/usr/bin/bash
             TS_DIR="${'$'}HOME/.headscale"
             "${'$'}TS_DIR/bin/tailscale" --socket="${'$'}TS_DIR/tailscaled.sock" down
         """.trimIndent() + "\n"
         UUtils.setFileString(File(FileUrl.headscaleDisconnectScript), disconnectScript)
 
         val statusScript = """
-            #!/data/data/com.victorious.suite/files/usr/bin/bash
+            #!/data/data/com.termux/files/usr/bin/bash
             TS_DIR="${'$'}HOME/.headscale"
             "${'$'}TS_DIR/bin/tailscale" --socket="${'$'}TS_DIR/tailscaled.sock" status
         """.trimIndent() + "\n"
