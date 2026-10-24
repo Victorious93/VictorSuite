@@ -44,3 +44,6 @@ Thumbs.db
 *.p12
 *.pfx
 victorsuite-signing/
+
+# Python bytecode (vstoken tests)
+__pycache__/
