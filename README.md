@@ -15,7 +15,9 @@ Android Linux environment suite for the Victorious fleet (host/shell tooling via
 
 ## Install / build
 
-Gradle Android app under `app/`. JDK 17; see `gradle.properties` for SDK/NDK. Typical: `./gradlew :app:assembleDebug`.
+Prebuilt, signed APKs are attached to [GitHub Releases](https://github.com/Victorious93/VictorSuite/releases). Pick the `arm64-v8a` APK for most phones (`universal` only if needed). Releases are built by CI and are marked pre-release because they have not been device-tested.
+
+To build from source: Gradle Android app under `app/`. JDK 17; see `gradle.properties` for SDK/NDK. Typical: `./gradlew :app:assembleDebug`.
 
 _Steps above are taken from this repo’s build files / existing docs; anything not exercised in this refresh is unlabeled as verified on a device._
 
