@@ -448,7 +448,7 @@ fi
 pkill -9 pulseaudio 2>/dev/null
 pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &
 unset LD_PRELOAD
-proot --kill-on-exit ${LDCONFIG} ${PLAT_PROPERTY_CONTEXT} ${PROPERTY_CONTEXT} ${APEX} ${SYSTEM_EXT} -b /vendor -b /system -b /sdcard -b /sdcard:/root/sdcard -b /data/data/com.termux/files -b /data/data/com.termux/cache -b /data/data/com.termux/files/usr/tmp:/tmp -b /dev/null:/proc/sys/kernel/cap_last_cap -b $DEBIAN-qemu/etc/proc/version:/proc/version -b $DEBIAN-qemu/etc/proc/misc:/proc/misc -b $DEBIAN-qemu/etc/proc/buddyinfo:/proc/buddyinfo -b $DEBIAN-qemu/etc/proc/kmsg:/proc/kmsg -b $DEBIAN-qemu/etc/proc/consoles:/proc/consoles -b $DEBIAN-qemu/etc/proc/execdomains:/proc/execdomains -b $DEBIAN-qemu/etc/proc/stat:/proc/stat -b $DEBIAN-qemu/etc/proc/fb:/proc/fb -b $DEBIAN-qemu/etc/proc/loadavg:/proc/loadavg -b $DEBIAN-qemu/etc/proc/key-users:/proc/key-users -b $DEBIAN-qemu/etc/proc/uptime:/proc/uptime -b $DEBIAN-qemu/etc/proc/devices:/proc/devices -b $DEBIAN-qemu/etc/proc/vmstat:/proc/vmstat -b /data/dalvik-cache -b $DEBIAN-qemu/tmp:/dev/shm -b /proc/self/fd/2:/dev/stderr -b /proc/self/fd/1:/dev/stdout -b /proc/self/fd/0:/dev/stdin -b /proc/self/fd:/dev/fd -b /dev/urandom:/dev/random --sysvipc --link2symlink -S $DEBIAN-qemu -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games LANG=zh_CN.UTF-8 TZ=Asia/Shanghai TERM=xterm-256color USER=root /bin/bash --login
+proot --kill-on-exit ${LDCONFIG} ${PLAT_PROPERTY_CONTEXT} ${PROPERTY_CONTEXT} ${APEX} ${SYSTEM_EXT} -b /vendor -b /system -b /sdcard -b /sdcard:/root/sdcard -b /data/data/com.victorious.suite/files -b /data/data/com.victorious.suite/cache -b /data/data/com.victorious.suite/files/usr/tmp:/tmp -b /dev/null:/proc/sys/kernel/cap_last_cap -b $DEBIAN-qemu/etc/proc/version:/proc/version -b $DEBIAN-qemu/etc/proc/misc:/proc/misc -b $DEBIAN-qemu/etc/proc/buddyinfo:/proc/buddyinfo -b $DEBIAN-qemu/etc/proc/kmsg:/proc/kmsg -b $DEBIAN-qemu/etc/proc/consoles:/proc/consoles -b $DEBIAN-qemu/etc/proc/execdomains:/proc/execdomains -b $DEBIAN-qemu/etc/proc/stat:/proc/stat -b $DEBIAN-qemu/etc/proc/fb:/proc/fb -b $DEBIAN-qemu/etc/proc/loadavg:/proc/loadavg -b $DEBIAN-qemu/etc/proc/key-users:/proc/key-users -b $DEBIAN-qemu/etc/proc/uptime:/proc/uptime -b $DEBIAN-qemu/etc/proc/devices:/proc/devices -b $DEBIAN-qemu/etc/proc/vmstat:/proc/vmstat -b /data/dalvik-cache -b $DEBIAN-qemu/tmp:/dev/shm -b /proc/self/fd/2:/dev/stderr -b /proc/self/fd/1:/dev/stdout -b /proc/self/fd/0:/dev/stdin -b /proc/self/fd:/dev/fd -b /dev/urandom:/dev/random --sysvipc --link2symlink -S $DEBIAN-qemu -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games LANG=zh_CN.UTF-8 TZ=Asia/Shanghai TERM=xterm-256color USER=root /bin/bash --login
 
 }
 ##################
@@ -546,8 +546,8 @@ export BOOTCLASSPATH=${BOOTCLASSPATH-}
 export COLORTERM=${COLORTERM-}
 export DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH-}
 export EXTERNAL_STORAGE=${EXTERNAL_STORAGE-}
-export PATH=\${PATH}:/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin
-export PREFIX=${PREFIX-/data/data/com.termux/files/usr}
+export PATH=\${PATH}:/data/data/com.victorious.suite/files/usr/bin:/system/bin:/system/xbin
+export PREFIX=${PREFIX-/data/data/com.victorious.suite/files/usr}
 export TERM=${TERM-xterm-256color}
 export TMPDIR=/tmp
 export PULSE_SERVER=tcp:127.0.0.1:4713
@@ -2873,15 +2873,15 @@ echo -e "1) 换源
 	case $input in
 		1) read -r -p "1)北外源 2)清华源 9)返回 " input
 	case $input in
-	1) if [ -d /data/data/com.termux/files/usr/etc/termux/mirrors/china ]; then
-		rm -rf /data/data/com.termux/files/usr/etc/termux/chosen_mirrors
-		mkdir /data/data/com.termux/files/usr/etc/termux/chosen_mirrors
-		ln -svf /data/data/com.termux/files/usr/etc/termux/mirrors/china/mirrors.bfsu.edu.cn /data/data/com.termux/files//usr/etc/termux/chosen_mirrors
+	1) if [ -d /data/data/com.victorious.suite/files/usr/etc/termux/mirrors/china ]; then
+		rm -rf /data/data/com.victorious.suite/files/usr/etc/termux/chosen_mirrors
+		mkdir /data/data/com.victorious.suite/files/usr/etc/termux/chosen_mirrors
+		ln -svf /data/data/com.victorious.suite/files/usr/etc/termux/mirrors/china/mirrors.bfsu.edu.cn /data/data/com.victorious.suite/files//usr/etc/termux/chosen_mirrors
 	fi
 		sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && pkg update ;;
-	2) if [ -d /data/data/com.termux/files/usr/etc/termux/mirrors/china ]; then
-		rm -rf /data/data/com.termux/files/usr/etc/termux/chosen_mirrors
-		ln -svf /data/data/com.termux/files/usr/etc/termux/mirrors/china /data/data/com.termux/files/usr/etc/termux/chosen_mirrors
+	2) if [ -d /data/data/com.victorious.suite/files/usr/etc/termux/mirrors/china ]; then
+		rm -rf /data/data/com.victorious.suite/files/usr/etc/termux/chosen_mirrors
+		ln -svf /data/data/com.victorious.suite/files/usr/etc/termux/mirrors/china /data/data/com.victorious.suite/files/usr/etc/termux/chosen_mirrors
 	fi
 		sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && pkg update ;;
 	*) MAIN ;;

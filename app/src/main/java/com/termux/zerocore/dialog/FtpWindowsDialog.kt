@@ -262,7 +262,7 @@ class FtpWindowsDialog : BaseDialogCentre {
         }
         val stringData =
             SaveDataZeroEngine.getStringData(UUtils.getContext(), SaveDataZeroEngine.FTP_CHROOT)
-        if (stringData.contains("com.termux")) {
+        if (stringData.contains("com.victorious.suite")) {
             switchIndex(FtpWindowsDialogConstant.ROOT_PATH_ZERO_HOME, false)
         } else {
             switchIndex(FtpWindowsDialogConstant.ROOT_PATH_SDCARD, false)

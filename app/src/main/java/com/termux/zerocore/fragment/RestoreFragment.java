@@ -41,15 +41,15 @@ import java.util.ArrayList;
 
 public class RestoreFragment extends BaseFragment {
 
-    private File mFile12 = new File("/data/data/com.termux/files/usr");
-    private File mFile13 = new File("/data/data/com.termux/files/home");
+    private File mFile12 = new File("/data/data/com.victorious.suite/files/usr");
+    private File mFile13 = new File("/data/data/com.victorious.suite/files/home");
     private File mSdFile = new File(Environment.getExternalStorageDirectory(), "/xinhao/data/");
-    private File mFileHomeFiles = new File("/data/data/com.termux/files/");
-    private File mFileHome = new File("/data/data/com.termux/busybox");
-    private File mFileHomeStatic = new File("/data/data/com.termux/busybox_static");
-    private File mFileHomeProot = new File("/data/data/com.termux/proot");
-    private File mFileHomeMain = new File("/data/data/com.termux/files/usr/bin/tar");
-    private File mFileHomeMainTar = new File("/data/data/com.termux/busybox_tar");
+    private File mFileHomeFiles = new File("/data/data/com.victorious.suite/files/");
+    private File mFileHome = new File("/data/data/com.victorious.suite/busybox");
+    private File mFileHomeStatic = new File("/data/data/com.victorious.suite/busybox_static");
+    private File mFileHomeProot = new File("/data/data/com.victorious.suite/proot");
+    private File mFileHomeMain = new File("/data/data/com.victorious.suite/files/usr/bin/tar");
+    private File mFileHomeMainTar = new File("/data/data/com.victorious.suite/busybox_tar");
     private ListView mListView;
     private TextView mTitle;
     private TextView mStartRe;
@@ -127,7 +127,7 @@ public class RestoreFragment extends BaseFragment {
 
 
 
-                        if (!(new File("/data/data/com.termux/files/home/storage").exists())){
+                        if (!(new File("/data/data/com.victorious.suite/files/home/storage").exists())){
 
                             Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到目录), Toast.LENGTH_SHORT).show();
 

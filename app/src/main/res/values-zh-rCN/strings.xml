@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!DOCTYPE resources [
-    <!ENTITY TERMUX_PACKAGE_NAME "com.termux">
+    <!ENTITY TERMUX_PACKAGE_NAME "com.victorious.suite">
     <!ENTITY TERMUX_APP_NAME "VictorSuite">
-    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
-    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
-    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
-    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
-    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
-    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+    <!ENTITY TERMUX_API_APP_NAME "VictorSuite:API">
+    <!ENTITY TERMUX_BOOT_APP_NAME "VictorSuite:Boot">
+    <!ENTITY TERMUX_FLOAT_APP_NAME "VictorSuite:Float">
+    <!ENTITY TERMUX_STYLING_APP_NAME "VictorSuite:Styling">
+    <!ENTITY TERMUX_TASKER_APP_NAME "VictorSuite:Tasker">
+    <!ENTITY TERMUX_WIDGET_APP_NAME "VictorSuite:Widget">
     <!ENTITY TERMUX_PROPERTIES_PRIMARY_PATH_SHORT "~/.termux/termux.properties">
     ]>
 
@@ -1164,8 +1164,8 @@
         ln[ \n
         说明：当前目录 内部存储路径 \n
         注意：两个路径都必须是全路径 \n
-        示例：ln /data/data/com.termux/files/home/自定义名称 /sdcard/ \n
-        示例(或指定一个目录)：ln /data/data/com.termux/files/home/自定义名称 /sdcard/自定义目录/ \n
+        示例：ln /data/data/com.victorious.suite/files/home/自定义名称 /sdcard/ \n
+        示例(或指定一个目录)：ln /data/data/com.victorious.suite/files/home/自定义名称 /sdcard/自定义目录/ \n
         ] \n
         \n
         \n
@@ -1183,8 +1183,8 @@
         zt backgroundimage(bgi) 图片路径(设置当前终端背景)\n
         backgroundimage(bgi)[\n
         使用帮助(必须全路径):\n
-        zt backgroundimage /data/data/com.termux/files/home/.img/back.jpg \n
-        zt bgi /data/data/com.termux/files/home/.img/back.jpg \n
+        zt backgroundimage /data/data/com.victorious.suite/files/home/.img/back.jpg \n
+        zt bgi /data/data/com.victorious.suite/files/home/.img/back.jpg \n
         ]\n
         \n
         zt qr 打开扫一扫 (扫描二维码或者条形码)\n
@@ -1292,7 +1292,7 @@
         请使用以下步骤 \n
         \n
         adb shell \n
-        run-as com.termux \n
+        run-as com.victorious.suite \n
         cd files/home/ \n
         sh termux-adb-shell.sh \n
         cd ~ &amp;&amp; pkg update -y \n

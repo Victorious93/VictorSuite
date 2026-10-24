@@ -24,7 +24,7 @@ object IsInstallCommand {
 
             val msg: SwitchDialog = switchDialogShow(activity,UUtils.getString(R.string.警告), temp)
 
-            ///data/data/com.termux/files/usr/bin/vim
+            ///data/data/com.victorious.suite/files/usr/bin/vim
             msg.cancel!!.setOnClickListener { msg.dismiss() }
             UUtils.showLog("vim的安装目录:${file.absoluteFile}")
             msg.ok!!.setOnClickListener {
