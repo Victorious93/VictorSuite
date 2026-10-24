@@ -27,7 +27,7 @@ The `TERMUX_PACKAGE_VARIANT` env var selects the bootstrap variant baked into th
 
 Checkstyle: `config/android-checkstyle.gradle` defines a `checkstyle` task (`ignoreFailures = true`), but as of 2026-10-15 no build file applies it, so `./gradlew checkstyle` is probably not available (not run to confirm).
 
-SDK levels (`gradle.properties`): minSdk 23, **targetSdk 28 (intentional: keeps Termux exec / `$PREFIX` working; do not raise it)**, compileSdk 36, NDK 29.0.14206865. App version `0.118.3.54` (versionCode 117) in `app/build.gradle`.
+SDK levels (`gradle.properties`): minSdk 23, **targetSdk 28 (intentional: keeps Termux exec / `$PREFIX` working; do not raise it)**, compileSdk 36, NDK 29.0.14206865. App version `0.118.3.55` (versionCode 118) in `app/build.gradle`.
 
 CI (`.github/workflows/android.yml`, "Build") runs `:app:assembleDebug --stacktrace` and then `:app:testDebugUnitTest --stacktrace` on push to `main`, PRs targeting `main`, and manual dispatch, using JDK 17, Android SDK platform-36 / build-tools-36.0.0, NDK 29.0.14206865. Lint and instrumented tests are not run in CI. APK upload is `continue-on-error` so artifact quota can't fail the job. Latest `main` runs passed (checked 2026-10-15).
 
