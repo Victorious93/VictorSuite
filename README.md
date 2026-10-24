@@ -7,7 +7,7 @@
 
 Android Linux environment suite for the Victorious fleet (host/shell tooling via TERMUX_IPC).
 
-**Package id:** `com.victorious.suite`
+**Package id:** `com.termux`
 
 > **Package note:** From `app/build.gradle` / manifest (`TERMUX_PACKAGE_NAME` / `namespace`). Display name is VictorSuite — do not refer to this app as Termux.
 
@@ -39,13 +39,11 @@ _Steps above are taken from this repo’s build files / existing docs; anything 
 
 </div>
 
-VictorSuite is a community-driven enhancement of the Termux ecosystem, built on the [ZeroTermux](https://github.com/hanxinhao000/ZeroTermux) codebase and Termux’s terminal stack. It uses its own `applicationId` (`com.victorious.suite`), so it installs alongside the real Termux and Termux:API. The `RUN_COMMAND` intent is `com.victorious.suite.RUN_COMMAND`, guarded by `com.victorious.suite.permission.RUN_COMMAND`. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
-
-> **Note:** until bootstraps are rebuilt for the `/data/data/com.victorious.suite/files` prefix, the bundled shell will not run on a device. See [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md).
+VictorSuite is a community-driven enhancement of the Termux ecosystem, built on the [ZeroTermux](https://github.com/hanxinhao000/ZeroTermux) codebase and Termux’s terminal stack. It keeps Termux’s `applicationId` (`com.termux`) and the public `RUN_COMMAND` contract so existing Termux tooling and intents still work.
 
 It is intended for personal learning, experimentation, and technical collaboration — not as a commercial product.
 
-> **Fleet note:** VictorSuite is the third companion Android app in [Victorious93/droidcommand-AI](https://github.com/Victorious93/droidcommand-AI)’s app fleet (alongside hackeraiETC and Pentest-Swarm-AI). VictorSuite now uses its own package `com.victorious.suite` and its own `RUN_COMMAND` action and permission, so droidcommand-AI’s `core-termux` module, which targets `com.termux`, must be updated to reach it (see the fleet binding table in [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md)). VictorSuite can be installed alongside genuine Termux. See that repo’s `docs/ARCHITECTURE.md` and `docs/AUDIT_2026-09-05.md`.
+> **Fleet note:** VictorSuite is the third companion Android app in [Victorious93/droidcommand-AI](https://github.com/Victorious93/droidcommand-AI)’s app fleet (alongside hackeraiETC and Pentest-Swarm-AI). Because VictorSuite keeps `com.termux` and `RUN_COMMAND` unchanged, droidcommand-AI’s `core-termux` module already reaches it — and cannot tell it apart from upstream Termux. **VictorSuite and genuine Termux cannot be installed on the same device.** See that repo’s `docs/ARCHITECTURE.md` and `docs/AUDIT_2026-09-05.md`.
 
 ## Features
 
@@ -78,7 +76,7 @@ Upstream Termux capabilities (terminal emulator, packages via bootstrap, `RUN_CO
 - Android device with **API 23+** (`minSdkVersion` 23; `targetSdkVersion` 28; `compileSdkVersion` 36)
 - JDK **17** for building (CI uses Temurin 17)
 - Android SDK platform 36, build-tools 36, NDK **29.0.14206865** (see `gradle.properties`)
-- Note: package id is `com.victorious.suite`, so it installs alongside upstream Termux. The bundled shell needs bootstraps rebuilt for this prefix first (see [docs/APPLICATION_ID.md](docs/APPLICATION_ID.md))
+- Note: package id is `com.termux` — uninstall upstream Termux first if both would conflict
 
 ## Build
 

@@ -2,7 +2,7 @@
 <zt-menu>
     <!--####################### Instructions ########################
     File Path:
-    /data/data/com.victorious.suite/files/home/ZtInfo/main_menu_path.xml
+    /data/data/com.termux/files/home/ZtInfo/main_menu_path.xml
     This file is the configuration file for the VictorSuite left-hand menu bar. It can be modified freely (pay attention to the format; errors may prevent the left bar from displaying correctly).
     To restore defaults, please use the command:
     zt menu reset
@@ -30,7 +30,7 @@
         Note: This attribute only takes effect if click does NOT start with 'java:'.
         1.icon: The icon. 'application' prefix calls VictorSuite's internal resources, or an absolute path can be provided.
         Example:(
-        Absolute path: icon="imgPath:/data/data/com.victorious.suite/files/home/ZTinfo/1.png")
+        Absolute path: icon="imgPath:/data/data/com.termux/files/home/ZTinfo/1.png")
         ####################### shell ########################
     </group>-->
 
@@ -39,8 +39,8 @@
     <group name="Example click event (this grouping can be deleted in the profile)">
         <item tag="customizeTheLeftSidebar"
             name="EditMenu"
-            icon="imgPath:/data/data/com.victorious.suite/files/home/ZtInfo/edit_menu.png"
-            click="ztEditText:/data/data/com.victorious.suite/files/home/ZtInfo/main_menu_path.xml" />
+            icon="imgPath:/data/data/com.termux/files/home/ZtInfo/edit_menu.png"
+            click="ztEditText:/data/data/com.termux/files/home/ZtInfo/main_menu_path.xml" />
         <!--dialog The property can only be effective for click for ztShell
        dialogConfirm for false It Is Not Prompted
         -->
@@ -63,7 +63,7 @@
         <item tag="JumpToInternalActivities"
             name="JumpSettings"
             icon=""
-            packageName="com.victorious.suite"
+            packageName="com.termux"
             intentData=""
             click="startActivity:com.termux.zerocore.settings.ZtSettingsActivity" />
         <!--intentData property values, currently only support String strings
@@ -71,7 +71,7 @@
         <item tag="JumpAction"
             name="JumpToAction"
             icon=""
-            intentData="data@@com.victorious.suite"
+            intentData="data@@com.termux"
             packageName="com.android.settings"
             click="actionActivity:android.settings.WIRELESS_SETTINGS" />
         <!--List

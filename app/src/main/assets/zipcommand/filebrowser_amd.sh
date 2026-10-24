@@ -1,4 +1,4 @@
-#!/data/data/com.victorious.suite/files/usr/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 echo "欢迎安装filebrowser(amd)"
 echo "作者地址:https://github.com/filebrowser/filebrowser"
 echo "安装成功后开机自启"

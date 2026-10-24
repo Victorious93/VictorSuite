@@ -66,7 +66,7 @@ class ConfigBackupTest {
         assertEquals("none", b.get("wrapping").asString)
         assertEquals(Fx.NODE_ID, b.get("sourceNodeRef").asString)
         val entry = b.getAsJsonArray("entries")[0].asJsonObject
-        assertEquals("com.victorious.suite", entry.get("packageName").asString)
+        assertEquals("com.termux", entry.get("packageName").asString)
         val p = Fx.json(entry.get("clearPayload").asString)
         assertEquals("vibrate", p.getAsJsonObject("termuxProperties").get("bell-character").asString)
         assertEquals("#000000", p.getAsJsonObject("colorsProperties").get("background").asString)

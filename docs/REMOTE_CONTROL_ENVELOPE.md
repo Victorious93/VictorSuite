@@ -2,25 +2,9 @@
 
 Status: **implemented on JVM, unit-tested; not yet tried on a device.**
 
-> **Binding change (application ID PR, feature/own-application-id):** VictorSuite now
-> uses its own application ID `com.victorious.suite` so it installs alongside real
-> Termux. Controllers (Fleet Orchestrator / DroidCommand AI `core-termux`) must update:
->
-> | | Before | Now |
-> |---|---|---|
-> | Package / `targetNodeRef` / backup `packageName` | `com.termux` | `com.victorious.suite` |
-> | Intent action | `com.termux.RUN_COMMAND` | `com.victorious.suite.RUN_COMMAND` |
-> | Component | `com.termux/.app.RunCommandService` | `com.victorious.suite/com.termux.app.RunCommandService` (Java class name unchanged) |
-> | Permission (caller `<uses-permission>`) | `com.termux.permission.RUN_COMMAND` | `com.victorious.suite.permission.RUN_COMMAND` |
-> | Result extra | `com.termux.RUN_COMMAND_PENDING_INTENT` | `com.victorious.suite.RUN_COMMAND_PENDING_INTENT` |
-> | Other RUN_COMMAND extras | `com.termux.RUN_COMMAND_*` | `com.victorious.suite.RUN_COMMAND_*` |
->
-> `ai.droidcommand.REMOTE_ENVELOPE_JSON` / `REMOTE_RESPONSE_JSON` are unchanged.
-> Calls to `com.termux` now reach real Termux (if installed), not VictorSuite.
-
-VictorSuite (`com.victorious.suite`) is a **node** in the Victorious fleet. It answers the
+VictorSuite (`com.termux`) is a **node** in the Victorious fleet. It answers the
 frozen fleet envelope over the **TERMUX_IPC** binding: one JSON blob on the
-existing `com.victorious.suite.RUN_COMMAND` intent. DroidCommand AI is the controller and
+existing `com.termux.RUN_COMMAND` intent. DroidCommand AI is the controller and
 sole authorizer. Every inbound envelope is an **untrusted request**.
 
 Frozen specs this follows (in `Victorious93/droidcommand-AI`):
@@ -66,7 +50,7 @@ The blob is one camelCase JSON object (no BridgeRequest wrapper, no nested `auth
 |---|---|---|---|
 | `operation` | string | recommended | One of the ops above. Unknown value -> `unsupported_op`. VictorSuite addition, see §8. |
 | `requestId` | string | yes | Echoed as `request_id` in the response. Max 128 chars. |
-| `targetNodeRef` | string | yes | This node's id (`victorsuite-<32 hex>`) or `com.victorious.suite`; anything else -> `not_found`. |
+| `targetNodeRef` | string | yes | This node's id (`victorsuite-<32 hex>`) or `com.termux`; anything else -> `not_found`. |
 | `actionRef` | string | for `remote.command` | The action to run. For other ops it defaults to the op name. |
 | `params` | object | no | Default `{}`. Values must be string / number / boolean (stored as strings). Max 16 entries. `args` (the DroidCommand AI wire name) is accepted as an alias; sending both with different contents is `invalid_parameters`. Unknown keys are ignored. |
 | `nonce` | string | yes | 128 bits: 32 hex chars, or base64/base64url that decodes to exactly 16 bytes. |
@@ -139,9 +123,9 @@ Both are stored in the private `victorsuite_remote_control` SharedPreferences.
 
 ## 5. Binding (TERMUX_IPC)
 
-- Intent: `com.victorious.suite.RUN_COMMAND` to `com.victorious.suite/com.termux.app.RunCommandService` (existing, exported, guarded by `com.victorious.suite.permission.RUN_COMMAND`).
+- Intent: `com.termux.RUN_COMMAND` to `com.termux/.app.RunCommandService` (existing, exported, guarded by `com.termux.permission.RUN_COMMAND`).
 - Request extra: `ai.droidcommand.REMOTE_ENVELOPE_JSON` (String, the blob above).
-- Result: the caller **must** attach `com.victorious.suite.RUN_COMMAND_PENDING_INTENT`
+- Result: the caller **must** attach `com.termux.RUN_COMMAND_PENDING_INTENT`
   (a PendingIntent it created). The response JSON goes back on it in the extra
   `ai.droidcommand.REMOTE_RESPONSE_JSON`.
 - When the envelope extra is present, `RunCommandService` hands the intent to
@@ -149,7 +133,7 @@ Both are stored in the private `victorsuite_remote_control` SharedPreferences.
 
 Caller identity comes only from the transport:
 
-1. The manifest already requires `com.victorious.suite.permission.RUN_COMMAND`.
+1. The manifest already requires `com.termux.permission.RUN_COMMAND`.
 2. `allow-external-apps=true` must be set in `~/.termux/termux.properties` (the existing Termux policy).
 3. The calling package is the system-reported **creator of the result PendingIntent**
    (`PendingIntent.getCreatorPackage()` / `getCreatorUid()`). It must own that uid and hold RUN_COMMAND.
@@ -177,7 +161,7 @@ Response (frozen BridgeResponse shape):
 | `external_control_disabled` | Switch is OFF (default) |
 | `expired` | TTL passed, or timestamp more than 120 s in the future |
 | `replay_detected` | `(sourceNodeRef, nonce)` seen before |
-| `not_found` | `targetNodeRef` is not this node, unknown `actionRef`, `args.nodeId` mismatch, no backup entry for `com.victorious.suite` |
+| `not_found` | `targetNodeRef` is not this node, unknown `actionRef`, `args.nodeId` mismatch, no backup entry for `com.termux` |
 | `unsupported_op` | Unknown op, or a macro step op this node does not advertise |
 | `capability_off` | Op/action is `remoteAllowed:false` for a remote caller |
 | `confirmation_required` | Destructive or confirm-gated op without on-device confirmation |
@@ -192,7 +176,7 @@ Result is one snapshot:
 ```json
 {
   "nodeId": "victorsuite-0123456789abcdef0123456789abcdef",
-  "packageName": "com.victorious.suite",
+  "packageName": "com.termux",
   "connectionClass": "TERMUX_IPC",
   "updatedAtMs": 1760920000000,
   "domains": [
@@ -220,7 +204,7 @@ Both are `remoteAllowed:false`. A remote caller always gets `capability_off`,
 also through a macro. They run only through the local dispatcher entry point
 (`RemoteEnvelopeDispatcher.handleLocal`). This PR adds no Settings button for them yet.
 
-Bundle: `{ version: 1, createdAtMs, sourceNodeRef, wrapping, entries: [ { packageName: "com.victorious.suite", schemaVersion: 1, ciphertext | clearPayload } ] }`.
+Bundle: `{ version: 1, createdAtMs, sourceNodeRef, wrapping, entries: [ { packageName: "com.termux", schemaVersion: 1, ciphertext | clearPayload } ] }`.
 
 VictorSuite entry payload (`schemaVersion` 1):
 
@@ -245,12 +229,12 @@ Export:
   AES-256-GCM, 12-byte IV, 128-bit tag, record `v1.<b64url iv>.<b64url ct>`, AAD
   `packageName|schemaVersion|sourceNodeRef`. The key is supplied by the local caller
   and never written to the bundle. Android Keystore wrapping is **not implemented** yet.
-- `params.packageName` other than `com.victorious.suite` -> `not_found`.
+- `params.packageName` other than `com.termux` -> `not_found`.
 
 Import, in order:
 
 1. Parse; `version` must be 1; `wrapping` must be known; duplicate `packageName` fails; exactly one of `ciphertext` / `clearPayload` per entry and it must match `wrapping`.
-2. Find the `com.victorious.suite` entry (`not_found` if missing).
+2. Find the `com.termux` entry (`not_found` if missing).
 3. Decrypt (failure -> `internal`, treated as tampering).
 4. Secret / history / SSH scan -> `invalid_parameters`.
 5. `dryRun` (`params.dryRun = "true"` or top-level `dryRun: true`): report only, write nothing.
@@ -296,14 +280,14 @@ Import, in order:
 `node.status.get`:
 
 ```json
-{ "operation": "node.status.get", "requestId": "r-2", "targetNodeRef": "com.victorious.suite",
+{ "operation": "node.status.get", "requestId": "r-2", "targetNodeRef": "com.termux",
   "params": {}, "nonce": "0f9e8d7c6b5a49382716150413121110", "timestampMs": 1760920000000, "ttlMs": 60000 }
 ```
 
 `remote.command` that is refused (destructive, whatever the flag says):
 
 ```json
-{ "operation": "remote.command", "requestId": "r-3", "targetNodeRef": "com.victorious.suite",
+{ "operation": "remote.command", "requestId": "r-3", "targetNodeRef": "com.termux",
   "actionRef": "shell.exec", "params": { "cmd": "id" }, "destructive": false,
   "nonce": "11112222333344445555666677778888", "timestampMs": 1760920000000,
   "trigger": { "sourceNumber": "+15555550100", "matchedKeyword": true, "rawExtras": {} } }
@@ -313,7 +297,7 @@ Import, in order:
 `macro.run` dry run:
 
 ```json
-{ "operation": "macro.run", "requestId": "r-4", "targetNodeRef": "com.victorious.suite",
+{ "operation": "macro.run", "requestId": "r-4", "targetNodeRef": "com.termux",
   "macroId": "morning", "dryRun": true,
   "steps": [ { "op": "node.ping" }, { "op": "node.status.get", "onError": "continue" } ],
   "nonce": "aaaabbbbccccddddeeeeffff00001111", "timestampMs": 1760920000000 }
@@ -323,9 +307,9 @@ Sending from a controller app (Kotlin sketch):
 
 ```kotlin
 val reply = PendingIntent.getBroadcast(ctx, 0, Intent(ctx, ReplyReceiver::class.java), PendingIntent.FLAG_MUTABLE)
-ctx.startForegroundService(Intent("com.victorious.suite.RUN_COMMAND").setClassName("com.victorious.suite", "com.termux.app.RunCommandService")
+ctx.startForegroundService(Intent("com.termux.RUN_COMMAND").setClassName("com.termux", "com.termux.app.RunCommandService")
     .putExtra("ai.droidcommand.REMOTE_ENVELOPE_JSON", blobJson)
-    .putExtra("com.victorious.suite.RUN_COMMAND_PENDING_INTENT", reply))
+    .putExtra("com.termux.RUN_COMMAND_PENDING_INTENT", reply))
 // ReplyReceiver reads intent.getStringExtra("ai.droidcommand.REMOTE_RESPONSE_JSON")
 ```
 

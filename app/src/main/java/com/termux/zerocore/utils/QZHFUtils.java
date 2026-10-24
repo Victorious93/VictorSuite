@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class QZHFUtils {
 
-    private File mFile = new File("/data/data/com.victorious.suite/");
+    private File mFile = new File("/data/data/com.termux/");
     private File createFile;
 
     public void main(MyDialog myDialog, String systemName, BackupFragment restoreFragment) {
@@ -88,7 +88,7 @@ public class QZHFUtils {
                     e.printStackTrace();
                 }
 
-                if (!(new File("/data/data/com.victorious.suite/files/home/storage").exists())) {
+                if (!(new File("/data/data/com.termux/files/home/storage").exists())) {
 
 
                     UUtils.getHandler().post(new Runnable() {
@@ -144,7 +144,7 @@ public class QZHFUtils {
                     public void run() {
                         myDialog.dismiss();
 
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -zcvf ./storage/shared/xinhao/data/" + systemName + " /data/data/com.victorious.suite/files && echo \"备份完成，备份文件在->内部存储/xinhao/data/|目录下\" \n");
+                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -zcvf ./storage/shared/xinhao/data/" + systemName + " /data/data/com.termux/files && echo \"备份完成，备份文件在->内部存储/xinhao/data/|目录下\" \n");
 
 
                         restoreFragment.getActivity().finish();

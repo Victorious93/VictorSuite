@@ -1,4 +1,4 @@
-#!/data/data/com.victorious.suite/files/usr/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 #
 # Install Kali NetHunter Rootless using Kali's own official installer.
 # No root or custom recovery is required.

@@ -47,7 +47,7 @@ public class FontActivity extends BaseThemeActivity {
 
     private ArrayList<FondDatdBean> arrayList;
 
-    private File termuxFontFile = new File("/data/data/com.victorious.suite/files/home/.termux/font.ttf");
+    private File termuxFontFile = new File("/data/data/com.termux/files/home/.termux/font.ttf");
     private FontAdapter fontAdapter;
 
     @Override
@@ -58,7 +58,7 @@ public class FontActivity extends BaseThemeActivity {
         list_view = findViewById(R.id.list_view);
 
         getBaseTitle().setVisibility(View.GONE);
-        File file1 = new File("/data/data/com.victorious.suite/files/home/.termux/");
+        File file1 = new File("/data/data/com.termux/files/home/.termux/");
 
         if(!file1.exists()){
             file1.mkdirs();

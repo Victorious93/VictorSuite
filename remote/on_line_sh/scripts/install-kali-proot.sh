@@ -1,4 +1,4 @@
-#!/data/data/com.victorious.suite/files/usr/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 #
 # Install Kali Linux (rolling) rootless under Termux's official proot-distro.
 #

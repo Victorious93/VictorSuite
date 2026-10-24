@@ -7,7 +7,7 @@ fleet remote-control envelope. Protocol details live in
 ## Fleet remote control
 
 VictorSuite can take requests from paired fleet apps (for example DroidCommand AI)
-through the existing `com.victorious.suite.RUN_COMMAND` intent. It is **off by default**.
+through the existing `com.termux.RUN_COMMAND` intent. It is **off by default**.
 
 ### Turning it on
 
@@ -19,7 +19,7 @@ You need all of these:
    Example: `ai.droidcommand.app=controller`. With a cert, only an app signed with
    that cert is accepted.
 3. `allow-external-apps=true` in `~/.termux/termux.properties` (standard Termux setting).
-4. The calling app holds the `com.victorious.suite.permission.RUN_COMMAND` permission
+4. The calling app holds the `com.termux.permission.RUN_COMMAND` permission
    (Android settings -> Apps -> the app -> Permissions -> "Run commands in Termux environment").
 
 Turning the switch off blocks every remote request at once, including status reads.

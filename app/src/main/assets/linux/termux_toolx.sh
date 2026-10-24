@@ -291,7 +291,7 @@ command+=" -S $sys_name"
 command+=""
 command+=" -b $sys_name/root:/dev/shm"
 ## uncomment the following line to have access to the home directory of termux
-#command+=" -b /data/data/com.victorious.suite/files/home:/root"
+#command+=" -b /data/data/com.termux/files/home:/root"
 ## uncomment the following line to mount /sdcard directly to /
 command+=" -b /sdcard"
 command+=" -w /root"
