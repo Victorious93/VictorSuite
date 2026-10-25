@@ -2084,7 +2084,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     /**
      * "File Manager" drawer button handler. Victorious File Manager
      * (<a href="https://github.com/Victorious93/File-Manager">Victorious93/File-Manager</a>,
-     * {@code ai.victorious.victorfiles}) is a standalone app — not a library — so it is launched,
+     * {@code ai.victorious.filemanager}) is a standalone app — not a library — so it is launched,
      * never embedded. If it is not installed, falls back to the existing in-app
      * {@code ZFileListFragment} (the {@code z_file.aar} browser this button opened before) so the
      * button still works for someone without it.
@@ -2108,7 +2108,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     /** Release package first, then the debug build's {@code .debug} suffix. Null if neither is installed. */
     private Intent resolveVictoriousFileManagerLaunchIntent() {
         PackageManager packageManager = getPackageManager();
-        for (String packageName : new String[]{"ai.victorious.victorfiles", "ai.victorious.victorfiles.debug"}) {
+        for (String packageName : new String[]{"ai.victorious.filemanager", "ai.victorious.filemanager.debug"}) {
             Intent launchIntent = packageManager.getLaunchIntentForPackage(packageName);
             if (launchIntent != null) {
                 return launchIntent;

@@ -20,12 +20,12 @@ import com.termux.R
  * callers fall back to the built-in browser.
  */
 object VictorFilesPanel {
-    const val ACTION_PANEL = "ai.victorious.victorfiles.action.PANEL"
-    const val EXTRA_OPEN_PATH = "ai.victorious.victorfiles.extra.OPEN_PATH"
+    const val ACTION_PANEL = "ai.victorious.filemanager.action.PANEL"
+    const val EXTRA_OPEN_PATH = "ai.victorious.filemanager.extra.OPEN_PATH"
     const val PLACEHOLDER_TAG = "victorfiles_placeholder"
 
     /** Release package first, then the debug build's ".debug" suffix. */
-    private val PACKAGES = arrayOf("ai.victorious.victorfiles", "ai.victorious.victorfiles.debug")
+    private val PACKAGES = arrayOf("ai.victorious.filemanager", "ai.victorious.filemanager.debug")
     private const val PREFS = "victorfiles_panel"
     private const val KEY_ENABLED = "use_panel"
 
