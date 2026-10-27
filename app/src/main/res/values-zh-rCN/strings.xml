@@ -668,6 +668,7 @@
 
     <string name="VictorSuite论坛">VictorSuite论坛</string>
     <string name="Zero论坛">帮助与手册</string>
+    <string name="vs_help_title">VictorSuite 帮助</string>
 
     <string name="美化设置">美化设置</string>
     <string name="字体颜色">字体颜色</string>
@@ -1424,7 +1425,6 @@
     <string name="remote_control_pairings_title">已配对的舰队应用</string>
     <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef,certSha256。必须提供签名证书 SHA-256:没有证书的行永远不会被接受。只有这些应用可以发送远程控制信封。</string>
     <string name="remote_control_pairings_saved">配对已保存</string>
-    <string name="vs_help_title">VictorSuite 帮助</string>
 </resources>
 
 
