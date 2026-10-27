@@ -42,7 +42,6 @@ import com.termux.victor.config.mainmenu.config.KaliLoginClickConfig;
 import com.termux.victor.config.mainmenu.config.KeyDataClickConfig;
 import com.termux.victor.config.mainmenu.config.LanguageClickConfig;
 import com.termux.victor.config.mainmenu.config.MainMenuClickConfig;
-import com.termux.victor.config.mainmenu.config.MoeClickConfig;
 import com.termux.victor.config.mainmenu.config.MyUsedSoftLinksDataClickConfig;
 import com.termux.victor.config.mainmenu.config.OnLineCommandClickConfig;
 import com.termux.victor.config.mainmenu.config.OpenPathClickConfig;
@@ -97,7 +96,6 @@ public class MainMenuConfig implements BaseConfig {
         commonClicks.add(new SwitchSourceClickConfig());
         commonClicks.add(new ContainerSwitchClickConfig());
         commonClicks.add(new BackupRestoreClickConfig());
-        commonClicks.add(new MoeClickConfig());
         commonClicks.add(new ReleaseLinuxVersionClickConfig());
         commonClicks.add(new QEMUClickConfig());
         commonClicks.add(new PluginManagerClickConfig());

@@ -80,6 +80,7 @@ Declared in `app/build.gradle`; licences as published by each project.
 | jCIFS | LGPL-2.1 |
 | un7zip (hzy) | Apache-2.0 / LGPL (wraps p7zip) – verify |
 | fastandrutils (hotapk), switchbutton, numberprogressbar, colorseekbar, imagepicker, plugin-locale, RealtimeBlurView_v2 | Apache-2.0 (as published) – verify per release |
+| Material Symbols (Google, `ic_ms_*.xml` vector drawables) | Apache-2.0 – https://github.com/google/material-design-icons |
 
 If you are a copyright holder and something here is wrong or missing, please open an issue at
 https://github.com/Victorious93/VictorSuite/issues.

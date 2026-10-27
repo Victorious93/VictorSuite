@@ -117,8 +117,6 @@
             click="java:com.termux.victor.config.mainmenu.config.ContainerSwitchClickConfig" />
         <item tag="备份/恢复"
             click="java:com.termux.victor.config.mainmenu.config.BackupRestoreClickConfig" />
-        <item tag="MOE全能"
-            click="java:com.termux.victor.config.mainmenu.config.MoeClickConfig" />
         <item tag="发型版本"
             click="java:com.termux.victor.config.mainmenu.config.ReleaseLinuxVersionClickConfig" />
         <item tag="QEMU"
