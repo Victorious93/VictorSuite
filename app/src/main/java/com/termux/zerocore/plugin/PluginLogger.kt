@@ -4,9 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import java.io.File
 import java.io.FileWriter
-import java.text.SimpleDateFormat
+import com.termux.zerocore.utils.IsoTimestamp
 import java.util.Date
-import java.util.Locale
 
 /**
  * Append-only, newline-delimited-JSON audit log for the plugin framework: registration,
@@ -18,7 +17,6 @@ object PluginLogger {
     private const val LOG_FILE = "plugin_audit.jsonl"
     private const val MAX_LOG_BYTES = 2L * 1024 * 1024
     private val gson = Gson()
-    private val dateFormat get() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US)
 
     data class AuditEvent(
         val timestamp: String,
@@ -34,7 +32,7 @@ object PluginLogger {
             if (!dir.exists()) dir.mkdirs()
             val file = File(dir, LOG_FILE)
             rotateIfNeeded(file)
-            val entry = AuditEvent(dateFormat.format(Date()), pluginId, event, detail)
+            val entry = AuditEvent(IsoTimestamp.format(Date()), pluginId, event, detail)
             FileWriter(file, true).use { it.appendLine(gson.toJson(entry)) }
         } catch (e: Exception) {
             e.printStackTrace()

@@ -131,7 +131,7 @@ class ADB(private val context: Context) {
             adb(false, listOf("start-server")).waitFor()
             debug("Waiting for device to connect...")
             debug("This may take a minute")
-            val waitProcess = adb(false, listOf("wait-for-device")).waitFor(1, TimeUnit.MINUTES)
+            val waitProcess = waitForCompat(adb(false, listOf("wait-for-device")), 1, TimeUnit.MINUTES)
             if (!waitProcess) {
                 debug("Your device didn't connect to LADB")
                 debug("If a reboot doesn't work, please contact support")
@@ -210,12 +210,12 @@ class ADB(private val context: Context) {
         }
 
         /* Continue once finished pairing (or 10s elapses) */
-        pairShell.waitFor(10, TimeUnit.SECONDS)
-        pairShell.destroyForcibly().waitFor()
+        waitForCompat(pairShell, 10, TimeUnit.SECONDS)
+        destroyForciblyCompat(pairShell).waitFor()
 
         val killShell = adb(false, listOf("kill-server"))
-        killShell.waitFor(3, TimeUnit.SECONDS)
-        killShell.destroyForcibly()
+        waitForCompat(killShell, 3, TimeUnit.SECONDS)
+        destroyForciblyCompat(killShell)
 
         return pairShell.exitValue() == 0
     }
@@ -239,7 +239,9 @@ class ADB(private val context: Context) {
             .apply {
                 if (redirect) {
                     redirectErrorStream(true)
-                    redirectOutput(outputBufferFile)
+                    // ProcessBuilder.redirectOutput(File) is API 26+; below that we pump stdout ourselves.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                        redirectOutput(outputBufferFile)
                 }
 
                 environment().apply {
@@ -248,7 +250,47 @@ class ADB(private val context: Context) {
                 }
             }
 
-        return processBuilder.start()!!
+        val process = processBuilder.start()!!
+        if (redirect && Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+            pumpToFile(process, outputBufferFile)
+        return process
+    }
+
+    /** Pre-API-26 stand-in for redirectOutput(File): copy the merged stdout/stderr into the file. */
+    private fun pumpToFile(process: Process, file: File) {
+        Thread {
+            try {
+                process.inputStream.use { input ->
+                    java.io.FileOutputStream(file, false).use { out -> input.copyTo(out, 1024).also { out.flush() } }
+                }
+            } catch (e: Exception) {
+                Log.w("ADB", "output pump stopped: ${e.message}")
+            }
+        }.apply { isDaemon = true; start() }
+    }
+
+    /** Process.waitFor(timeout, unit) is API 26+; poll exitValue() below that. */
+    private fun waitForCompat(process: Process, timeout: Long, unit: TimeUnit): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            return process.waitFor(timeout, unit)
+        val deadline = System.nanoTime() + unit.toNanos(timeout)
+        while (true) {
+            try {
+                process.exitValue()
+                return true
+            } catch (e: IllegalThreadStateException) {
+                if (System.nanoTime() >= deadline) return false
+                Thread.sleep(100)
+            }
+        }
+    }
+
+    /** Process.destroyForcibly() is API 26+; destroy() (SIGKILL on Android) below that. */
+    private fun destroyForciblyCompat(process: Process): Process {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            return process.destroyForcibly()
+        process.destroy()
+        return process
     }
 
     /**
