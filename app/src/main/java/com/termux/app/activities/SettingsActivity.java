@@ -25,8 +25,27 @@ import com.termux.shared.termux.TermuxConstants;
 import com.termux.shared.termux.TermuxUtils;
 import com.termux.shared.activity.media.AppCompatActivityUtils;
 import com.termux.shared.theme.NightMode;
+import com.termux.victor.theme.FleetThemeBinding; // VictorSuite add: fleet theme
 
 public class SettingsActivity extends AppCompatActivity {
+
+    // VictorSuite add {@ fleet theme: action bar chrome only (preference rows follow the app theme)
+    private FleetThemeBinding mFleetThemeBinding;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mFleetThemeBinding == null)
+            mFleetThemeBinding = new FleetThemeBinding(this, true, java.util.Collections::emptyList);
+        mFleetThemeBinding.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        if (mFleetThemeBinding != null) mFleetThemeBinding.onStop();
+        super.onStop();
+    }
+    // @}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -22,6 +22,14 @@
         android:required="false" />
     <!-- @} -->
 
+    <!-- VictorSuite add {@ fleet theme client (read-only). Package visibility for the VictorLaunch
+         theme provider; inert at targetSdk 28, kept so a later targetSdk bump does not hide it.
+         The FLEET_THEME_CHANGED receiver is registered at runtime (exported) by FleetThemeClient. -->
+    <queries>
+        <package android:name="com.victorious.launch" />
+    </queries>
+    <!-- @} -->
+
     <permission
         android:name="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND"
         android:description="@string/permission_run_command_description"

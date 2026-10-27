@@ -7,8 +7,22 @@ import androidx.cardview.widget.CardView
 import com.termux.R
 import com.termux.app.activities.SettingsActivity
 import com.termux.victor.droidcommand.DroidCommandAi
+import com.termux.victor.theme.FleetThemeBinding // VictorSuite add: fleet theme
 
 class ZtSettingsActivity : AppCompatActivity() {
+    // VictorSuite add: fleet theme for the settings hub chrome (View/XML only)
+    private val fleetTheme by lazy { FleetThemeBinding(this) }
+
+    override fun onStart() {
+        super.onStart()
+        fleetTheme.onStart()
+    }
+
+    override fun onStop() {
+        fleetTheme.onStop()
+        super.onStop()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zt_settings)

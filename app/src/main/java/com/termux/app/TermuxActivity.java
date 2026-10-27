@@ -58,6 +58,7 @@ import com.billy.android.swipe.consumer.DrawerConsumer;
 import com.billy.android.swipe.consumer.SlidingConsumer;
 // VictorSuite add {@
 import com.termux.victor.victorfiles.VictorFilesPanel;
+import com.termux.victor.theme.FleetThemeBinding; // VictorSuite add: fleet theme
 // @}
 import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.blockchain.ub.utils.httputils.BaseHttpUtils;
@@ -422,6 +423,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             addTermuxActivityRootViewGlobalLayoutListener();
 
         registerTermuxActivityBroadcastReceiver();
+        // VictorSuite add {@ fleet theme (drawers only, never terminal colours)
+        if (mFleetThemeBinding != null) mFleetThemeBinding.onStart();
+        // @}
     }
 
     @Override
@@ -478,6 +482,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         removeTermuxActivityRootViewGlobalLayoutListener();
 
         unregisterTermuxActivityBroadcastReceiver();
+        // VictorSuite add {@ fleet theme
+        if (mFleetThemeBinding != null) mFleetThemeBinding.onStop();
+        // @}
         // VictorSuite add {@
         //getDrawer().closeDrawers();
         getDrawer().smoothClose();
@@ -1299,6 +1306,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private RecyclerView mMainMenuList;
     private Button mKeyBordButton;
 	private SlidingConsumer mSlidingConsumer;
+    // VictorSuite add: fleet theme (View/XML drawers only)
+    private FleetThemeBinding mFleetThemeBinding;
     private View mLayoutMenuAll;
     private View mIncludeRightMenu;
     private TextView mGuideContent;
@@ -2436,6 +2445,10 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mLayoutMenuAll = UUtils.getViewLay(R.layout.layout_menu_all);
         mIncludeRightMenu = UUtils.getViewLay(R.layout.include_right_menu);
         int size = SmartSwipe.dp2px(300, this);
+        // VictorSuite add {@ fleet theme for the left and right drawers
+        mFleetThemeBinding = new FleetThemeBinding(this, false,
+            () -> java.util.Arrays.asList(mLayoutMenuAll, mIncludeRightMenu));
+        // @}
         mLayoutMenuAll.setLayoutParams(new ViewGroup.LayoutParams(size, ViewGroup.LayoutParams.MATCH_PARENT));
         mIncludeRightMenu.setLayoutParams(new ViewGroup.LayoutParams(size, ViewGroup.LayoutParams.MATCH_PARENT));
         SmartSwipeWrapper leftHorizontalMenuWrapper = SmartSwipe.wrap(mLayoutMenuAll).addConsumer(new DrawerConsumer()).enableVertical().getWrapper();
@@ -2445,6 +2458,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             public void onSwipeOpened(SmartSwipeWrapper wrapper, SwipeConsumer consumer, int direction) {
                 super.onSwipeOpened(wrapper, consumer, direction);
                 mTerminalView.clearFocus();
+                // VictorSuite add {@ fleet theme: cover rows bound since the last theme change
+                if (mFleetThemeBinding != null) mFleetThemeBinding.reapply();
+                // @}
                 // VictorSuite add {@
                 mIncludeRightMenu.post(TermuxActivity.this::openVictorFilesPanelIfRightDrawerShowsFiles);
                 // @}
