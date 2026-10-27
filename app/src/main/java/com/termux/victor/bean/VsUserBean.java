@@ -2,7 +2,7 @@ package com.termux.victor.bean;
 
 import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
 
-public class ZTUserBean {
+public class VsUserBean {
     // 是否打开ZT下载服务器
     private boolean isOpenDownloadFileServices = false;
     // 输入法调起侧边栏是否关闭

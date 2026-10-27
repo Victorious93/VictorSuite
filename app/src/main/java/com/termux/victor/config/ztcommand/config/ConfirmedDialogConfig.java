@@ -6,7 +6,7 @@ import static com.termux.victor.dialog.ShowDialogActivity.DIALOG_TYPE_EDIT_TEXT;
 import static com.termux.victor.dialog.ShowDialogActivity.EXTRA_MESSAGE;
 import static com.termux.victor.dialog.ShowDialogActivity.EXTRA_TITLE;
 import static com.termux.victor.dialog.ShowDialogActivity.EXTRA_TYPE;
-import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_CONFIRMED_DIALOG;
+import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_CONFIRMED_DIALOG;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import com.example.xh_lib.utils.LogUtils;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.victor.dialog.ShowDialogActivity;
-import com.termux.victor.config.ztcommand.ZTSocketService;
+import com.termux.victor.config.ztcommand.VsSocketService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.Map;
 public class ConfirmedDialogConfig extends BaseOkJsonConfig {
     private static final String TAG = ConfirmedDialogConfig.class.getSimpleName();
     private String mCommand;
-    private static ZTSocketService.ClientHandler mClientHandler;
+    private static VsSocketService.ClientHandler mClientHandler;
     @Override
     public String getCommand(Context context, String command) {
         this.mCommand = command;
@@ -36,7 +36,7 @@ public class ConfirmedDialogConfig extends BaseOkJsonConfig {
     }
 
     @Override
-    public void sendSocketMessage(ZTSocketService.ClientHandler clientHandler, Context context) {
+    public void sendSocketMessage(VsSocketService.ClientHandler clientHandler, Context context) {
         mClientHandler = clientHandler;
         try {
             String[] commands = mCommand.split(" ");

@@ -2,9 +2,9 @@ package com.termux.victor.config.ztcommand.config;
 
 import android.content.Context;
 
-import com.termux.victor.config.ztcommand.ZTSocketService;
+import com.termux.victor.config.ztcommand.VsSocketService;
 
-public abstract class SimpleConfig implements ZTConfig {
+public abstract class SimpleConfig implements VsConfig {
     @Override
     public boolean isForWard() {
         return false;
@@ -16,7 +16,7 @@ public abstract class SimpleConfig implements ZTConfig {
     }
 
     @Override
-    public void sendSocketMessage(ZTSocketService.ClientHandler clientHandler, Context context) {
+    public void sendSocketMessage(VsSocketService.ClientHandler clientHandler, Context context) {
 
     }
 }

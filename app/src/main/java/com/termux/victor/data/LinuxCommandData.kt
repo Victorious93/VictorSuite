@@ -5,18 +5,18 @@ import com.termux.victor.config.VsLinks
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxInstaller
-import com.termux.victor.bean.ZeroRunCommandBean
+import com.termux.victor.bean.VsRunCommandBean
 import com.termux.victor.url.FileUrl
 import java.io.File
 
 object LinuxCommandData {
 
 
-    public fun getZeroRunCommandBeanData():ArrayList<ZeroRunCommandBean>{
+    public fun getZeroRunCommandBeanData():ArrayList<VsRunCommandBean>{
 
 
 
-        var mArrayList:ArrayList<ZeroRunCommandBean> = ArrayList()
+        var mArrayList:ArrayList<VsRunCommandBean> = ArrayList()
 
 
         /**
@@ -29,7 +29,7 @@ object LinuxCommandData {
          *
          */
 
-        val rjTitle = ZeroRunCommandBean()
+        val rjTitle = VsRunCommandBean()
 
         rjTitle.type = 0
 
@@ -57,7 +57,7 @@ object LinuxCommandData {
          */
 
 
-        val myServerBean = ZeroRunCommandBean()
+        val myServerBean = VsRunCommandBean()
 
         myServerBean.type = 1
 
@@ -87,7 +87,7 @@ object LinuxCommandData {
          */
 
 
-        val aDBBean = ZeroRunCommandBean()
+        val aDBBean = VsRunCommandBean()
 
         aDBBean.type = 1
 
@@ -120,7 +120,7 @@ object LinuxCommandData {
 
 
 
-        val vScodeBean = ZeroRunCommandBean()
+        val vScodeBean = VsRunCommandBean()
 
         vScodeBean.type = 1
 
@@ -191,9 +191,9 @@ object LinuxCommandData {
      *
      */
 
-    private fun getEmpty():ZeroRunCommandBean{
+    private fun getEmpty():VsRunCommandBean{
 
-        val empty1 = ZeroRunCommandBean()
+        val empty1 = VsRunCommandBean()
 
         empty1.type = 0
 

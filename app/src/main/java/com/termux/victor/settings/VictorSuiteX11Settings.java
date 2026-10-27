@@ -18,7 +18,7 @@ import com.termux.R;
 import com.termux.app.TermuxService;
 import com.termux.x11.LoriePreferences;
 import com.termux.victor.activity.SwitchActivity;
-import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.bean.VsUserBean;
 import com.termux.victor.dialog.LoadingDialog;
 import com.termux.victor.dialog.SwitchDialog;
 import com.termux.victor.ftp.utils.UserSetManage;
@@ -68,7 +68,7 @@ public class VictorSuiteX11Settings extends AppCompatActivity {
                 return;
             }
             switchAisle(true);
-            ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+            VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
             ztUserBean.setInternalPassage(true);
             setX11SettingsEnable(true);
             UserSetManage.Companion.get().setZTUserBean(ztUserBean);
@@ -86,7 +86,7 @@ public class VictorSuiteX11Settings extends AppCompatActivity {
             }
             switchAisle(false);
             setX11SettingsEnable(false);
-            ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+            VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
             ztUserBean.setInternalPassage(false);
             UserSetManage.Companion.get().setZTUserBean(ztUserBean);
         });

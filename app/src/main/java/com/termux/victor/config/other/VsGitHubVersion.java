@@ -32,11 +32,11 @@ import com.termux.victor.config.other.data.VersionBean;
 
 import java.util.HashMap;
 
-public class ZTGitHubVersion {
-    private static final String TAG = ZTGitHubVersion.class.getSimpleName();
+public class VsGitHubVersion {
+    private static final String TAG = VsGitHubVersion.class.getSimpleName();
 
-    public static ZTGitHubVersion create() {
-        return new ZTGitHubVersion();
+    public static VsGitHubVersion create() {
+        return new VsGitHubVersion();
     }
 
     public void initZtVersionVisible(TextView textView) {

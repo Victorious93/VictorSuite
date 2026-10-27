@@ -1,6 +1,6 @@
 package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_RIGHT;
+import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_RIGHT;
 
 import android.content.Context;
 

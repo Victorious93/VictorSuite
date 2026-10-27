@@ -19,7 +19,7 @@ import com.termux.victor.bosybox.BusyBoxManager;
 import com.termux.victor.developer.DeveloperActivity;
 import com.termux.victor.utils.FileHttpUtils;
 import com.termux.victor.utils.Z7ExtracatUtils;
-import com.zp.z_file.zerotermux.ZTConfig;
+import com.zp.z_file.zerotermux.VsConfig;
 
 import java.io.File;
 
@@ -35,8 +35,8 @@ public class LocalReceiver extends BroadcastReceiver {
         String broadcastString = intent.getStringExtra("broadcastString");
         if (broadcastString != null && !(broadcastString.isEmpty())) {
             com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(broadcastString + "\n");
-            if (ZTConfig.INSTANCE.getCloseListener() != null) {
-                ZTConfig.INSTANCE.getCloseListener().close();
+            if (VsConfig.INSTANCE.getCloseListener() != null) {
+                VsConfig.INSTANCE.getCloseListener().close();
             }
             return;
         }
@@ -61,8 +61,8 @@ public class LocalReceiver extends BroadcastReceiver {
                     command = "echo \"不能识别的格式(unrecognized format)\"";
                 }
 
-                if (ZTConfig.INSTANCE.getCloseListener() != null) {
-                    ZTConfig.INSTANCE.getCloseListener().close();
+                if (VsConfig.INSTANCE.getCloseListener() != null) {
+                    VsConfig.INSTANCE.getCloseListener().close();
                 }
                 com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal( command + "\n");
             } catch (Exception e) {
@@ -88,11 +88,11 @@ public class LocalReceiver extends BroadcastReceiver {
 
                 @Override
                 public void onProgress(@Nullable String name, long size) {
-                    if (ZTConfig.INSTANCE.getZ7Listener() != null) {
+                    if (VsConfig.INSTANCE.getZ7Listener() != null) {
                         UUtils.runOnUIThread(new Runnable() {
                             @Override
                             public void run() {
-                                ZTConfig.INSTANCE.getZ7Listener().decompress(name, false, false);
+                                VsConfig.INSTANCE.getZ7Listener().decompress(name, false, false);
                             }
                         });
                     }
@@ -100,11 +100,11 @@ public class LocalReceiver extends BroadcastReceiver {
 
                 @Override
                 public void onError(int errorCode, @Nullable String message) {
-                    if (ZTConfig.INSTANCE.getZ7Listener() != null) {
+                    if (VsConfig.INSTANCE.getZ7Listener() != null) {
                        UUtils.runOnUIThread(new Runnable() {
                            @Override
                            public void run() {
-                               ZTConfig.INSTANCE.getZ7Listener().decompress("error:" + message, true, true);
+                               VsConfig.INSTANCE.getZ7Listener().decompress("error:" + message, true, true);
                            }
                        });
                     }
@@ -112,11 +112,11 @@ public class LocalReceiver extends BroadcastReceiver {
 
                 @Override
                 public void onSucceed() {
-                    if (ZTConfig.INSTANCE.getZ7Listener() != null) {
+                    if (VsConfig.INSTANCE.getZ7Listener() != null) {
                        UUtils.runOnUIThread(new Runnable() {
                            @Override
                            public void run() {
-                               ZTConfig.INSTANCE.getZ7Listener().decompress("", true, false);
+                               VsConfig.INSTANCE.getZ7Listener().decompress("", true, false);
                            }
                        });
                     }

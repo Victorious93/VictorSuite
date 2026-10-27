@@ -16,7 +16,7 @@ public class ToastConfig extends BaseOkJsonConfig {
 
     @Override
     public int getId() {
-        return ZTKeyConstants.ZT_ID_TOAST;
+        return VsKeyConstants.ZT_ID_TOAST;
     }
 
 }

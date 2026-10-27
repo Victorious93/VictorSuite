@@ -1,6 +1,6 @@
 package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_X11_KEYBOARD_SHOW;
+import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_X11_KEYBOARD_SHOW;
 
 import android.content.Context;
 

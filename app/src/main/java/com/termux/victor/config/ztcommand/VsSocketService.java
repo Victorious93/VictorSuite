@@ -15,14 +15,14 @@ import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.shared.termux.TermuxConstants;
 import com.termux.victor.config.ztcommand.config.HelpConfig;
-import com.termux.victor.config.ztcommand.config.ZTConfig;
+import com.termux.victor.config.ztcommand.config.VsConfig;
 import com.zp.z_file.util.LogUtils;
 
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 
-public class ZTSocketService extends Service {
+public class VsSocketService extends Service {
     private static final String TAG = "AndroidSocketService";
     public static final String ZT_COMMAND_ACTIVITY_ACTION = "zt_command_activity";
     public static final String ZT_COMMAND_SERVICES_ACTION = "zt_command_services";
@@ -44,7 +44,7 @@ public class ZTSocketService extends Service {
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         // VictorSuite add {@
         try {
-            mToken = ZTCommandAuth.loadOrCreateToken(new File(TermuxConstants.TERMUX_HOME_DIR_PATH, ".termux/zt.token"));
+            mToken = VsCommandAuth.loadOrCreateToken(new File(TermuxConstants.TERMUX_HOME_DIR_PATH, ".termux/zt.token"));
         } catch (Exception e) {
             // Any failure (I/O, SecurityException, unexpected runtime error): without a token
             // every request would be refused, so do not open the socket at all, and never crash.
@@ -120,8 +120,8 @@ public class ZTSocketService extends Service {
                 mClientSocket.setSoTimeout(READ_TIMEOUT_MS);
                 mIn = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
                 mOut = new PrintWriter(mClientSocket.getOutputStream(), true);
-                String line = ZTCommandAuth.readBoundedLine(mIn, ZTCommandAuth.MAX_LINE_CHARS);
-                String command = ZTCommandAuth.authenticate(line, mToken);
+                String line = VsCommandAuth.readBoundedLine(mIn, VsCommandAuth.MAX_LINE_CHARS);
+                String command = VsCommandAuth.authenticate(line, mToken);
                 if (command == null) {
                     LogUtils.e(TAG, "拒绝未授权的命令请求");
                     mOut.println(getJson(1, "unauthorized: missing or wrong token", ""));
@@ -225,8 +225,8 @@ public class ZTSocketService extends Service {
 
     /**
      *  请求对应的config ID
-     *  注意：需要在 ZTKeyConstants 定义 ID
-     *  需要在此处链接你的config: ZTCommandConfigStore
+     *  注意：需要在 VsKeyConstants 定义 ID
+     *  需要在此处链接你的config: VsCommandConfigStore
      * @param command 用户直接输入的命令行
      * @param commandID 有些命令行是 xx yy，示例：toast hello 这种格式的，传入的时候只需要传入 xx即可,
      *                  如果是单一的命令，看个人情况是否传递，此参数会传递到
@@ -237,17 +237,17 @@ public class ZTSocketService extends Service {
         return getZTConfig(command, commandID).getCommand(getApplicationContext(), command);
     }
 
-    private ZTConfig getZTConfig(String command, String commandID) {
-        return ZTCommandConfigStore.getConfig(TextUtils.isEmpty(commandID) ? command : commandID);
+    private VsConfig getZTConfig(String command, String commandID) {
+        return VsCommandConfigStore.getConfig(TextUtils.isEmpty(commandID) ? command : commandID);
     }
 
     // 是否需要转发到 TermuxActivity 页面
     private boolean isForWard(String command, String commandID) {
-        return ZTCommandConfigStore.getConfig(TextUtils.isEmpty(commandID) ? command : commandID).isForWard();
+        return VsCommandConfigStore.getConfig(TextUtils.isEmpty(commandID) ? command : commandID).isForWard();
     }
 
     private String getJson(int code, String message, String title) {
-        return ZTCommandAuth.json(code, message, title);
+        return VsCommandAuth.json(code, message, title);
     }
 
     private String getOkJson() {

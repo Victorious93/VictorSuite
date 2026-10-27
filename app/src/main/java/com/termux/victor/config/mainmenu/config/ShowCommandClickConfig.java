@@ -10,7 +10,7 @@ import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.x11.MainActivity;
-import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.bean.VsUserBean;
 import com.termux.victor.ftp.utils.UserSetManage;
 
 public class ShowCommandClickConfig extends BaseMenuClickConfig {

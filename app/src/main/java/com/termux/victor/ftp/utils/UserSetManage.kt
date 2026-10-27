@@ -4,7 +4,7 @@ import android.text.TextUtils
 import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.SaveData
 import com.google.gson.Gson
-import com.termux.victor.bean.ZTUserBean
+import com.termux.victor.bean.VsUserBean
 import com.termux.victor.config.VsLinks
 import com.zp.z_file.content.TAG
 
@@ -24,22 +24,22 @@ class UserSetManage private constructor() {
         public val ITEM_GEON = "0"
     }
 
-    public fun getZTUserBean(): ZTUserBean {
-        val zTUserBeanJson = SaveData.getStringOther(ZTConstant.ZT_USER_BEAN_KEY)
+    public fun getZTUserBean(): VsUserBean {
+        val zTUserBeanJson = SaveData.getStringOther(VsConstant.ZT_USER_BEAN_KEY)
         if (zTUserBeanJson.isNullOrEmpty() || zTUserBeanJson == "def") {
-            return ZTUserBean()
+            return VsUserBean()
         }
         return try {
-            Gson().fromJson(zTUserBeanJson, ZTUserBean::class.java)
+            Gson().fromJson(zTUserBeanJson, VsUserBean::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
-            ZTUserBean()
+            VsUserBean()
         }
     }
 
-    public fun setZTUserBean(mZTUserBean: ZTUserBean) {
+    public fun setZTUserBean(mZTUserBean: VsUserBean) {
         val toJson = Gson().toJson(mZTUserBean)
-        SaveData.saveStringOther(ZTConstant.ZT_USER_BEAN_KEY, toJson)
+        SaveData.saveStringOther(VsConstant.ZT_USER_BEAN_KEY, toJson)
     }
 
     public fun defServerIPName(): DataServers {

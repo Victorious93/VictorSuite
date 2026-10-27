@@ -1,16 +1,16 @@
 package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_QR_CODE_ENCODER_CONFIG;
+import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_QR_CODE_ENCODER_CONFIG;
 
 import android.content.Context;
 import android.content.Intent;
 
 import com.example.xh_lib.utils.UUtils;
-import com.termux.victor.config.ztcommand.ZTSocketService;
+import com.termux.victor.config.ztcommand.VsSocketService;
 import com.termux.victor.config.ztcommand.activity.SocketBaseActivity;
 
 public class QRCodeEncoderConfig extends BaseOkJsonConfig {
-    private static ZTSocketService.ClientHandler mClientHandler;
+    private static VsSocketService.ClientHandler mClientHandler;
     @Override
     public String getCommand(Context context, String command) {
         return null;
@@ -22,7 +22,7 @@ public class QRCodeEncoderConfig extends BaseOkJsonConfig {
     }
 
     @Override
-    public void sendSocketMessage(ZTSocketService.ClientHandler clientHandler, Context context) {
+    public void sendSocketMessage(VsSocketService.ClientHandler clientHandler, Context context) {
         mClientHandler = clientHandler;
         UUtils.runOnUIThread(() -> {
             Intent intent = new Intent(context, SocketBaseActivity.class);

@@ -1,6 +1,6 @@
 package com.termux.victor.bean;
 
-public class ZeroRunCommandBean {
+public class VsRunCommandBean {
 
 
     //0标题 1内容
