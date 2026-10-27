@@ -72,11 +72,11 @@ public class ResizeTest extends TerminalTestCase {
 			enterString("\r\n");
 		}
 		assertLinesAre("998       ", "999       ", "          ");
-		mTerminal.resize(cols, 2);
+		mTerminal.resize(cols, 2, CELL_WIDTH, CELL_HEIGHT);
 		assertLinesAre("999       ", "          ");
-		mTerminal.resize(cols, 5);
+		mTerminal.resize(cols, 5, CELL_WIDTH, CELL_HEIGHT);
 		assertLinesAre("996       ", "997       ", "998       ", "999       ", "          ");
-		mTerminal.resize(cols, rows);
+		mTerminal.resize(cols, rows, CELL_WIDTH, CELL_HEIGHT);
 		assertLinesAre("998       ", "999       ", "          ");
 	}
 
