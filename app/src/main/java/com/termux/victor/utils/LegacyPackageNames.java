@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * fully-qualified class names in {@code java:} / {@code startActivity:} click values. Those were
  * written under the old package and must keep resolving after an in-place update.
  *
- * It also maps classes renamed by the ZT*/Zero* -> Vs* debrand (plan batch 5). Old simple names
+ * It also maps classes renamed by the ZT- and Zero-prefixed to Vs-prefixed debrand (plan batch 5). Old simple names
  * are built by concatenation so later mechanical renames do not rewrite them.
  */
 public final class LegacyPackageNames {
