@@ -303,7 +303,11 @@ object FileIOUtils {
     public fun createSystem(mContext: Context, name: String): File? {
         val mFile = getTermuxPathFile(mContext)
         var createFile: File? = null
-        val files: Array<File> = mFile.listFiles()
+        // VictorSuite: listFiles() returns null if the dir is unreadable or missing.
+        val files: Array<File> = mFile.listFiles() ?: run {
+            LogUtils.e(TAG, "createSystem: cannot list ${mFile.absolutePath}")
+            return null
+        }
         if (files.size == 1) {
             createFile = File(mFile, "files1")
             createFile.mkdirs()
@@ -377,7 +381,7 @@ object FileIOUtils {
     }
 
     public fun isPacketFormat(name: String): Boolean {
-        return name.endsWith("tar.gz") || name.endsWith("tar.bz2") || name.endsWith("tar.xz")
+        return com.termux.zerocore.data.RestoreShell.restoreFlagFor(name) != null
     }
 
     public fun isModuleFormat(name: String): Boolean {

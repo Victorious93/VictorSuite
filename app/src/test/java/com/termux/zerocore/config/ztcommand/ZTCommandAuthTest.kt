@@ -79,4 +79,28 @@ class ZTCommandAuthTest {
         assertEquals("{\"message\": \"bad \\\"quote\\\" \\\\ \\n end\",\"code\": 1,\"title\": \"t\"}", j)
         assertFalse(j.contains("\n"))
     }
+
+    @Test
+    fun tokenFileIsReadWithoutNioAndTrimmed() {
+        val f = File.createTempFile("zttoken", ".token")
+        f.writeText("  abc123\n\n")
+        assertEquals("abc123", ZTCommandAuth.readTokenFile(f))
+        assertEquals("abc123", ZTCommandAuth.loadOrCreateToken(f))
+        f.writeText("")
+        assertEquals("", ZTCommandAuth.readTokenFile(f))
+        f.delete()
+    }
+
+    @Test
+    fun oversizedTokenFileIsRejected() {
+        val f = File.createTempFile("zttoken", ".token")
+        f.writeText("a".repeat(ZTCommandAuth.MAX_LINE_CHARS + 10))
+        try {
+            ZTCommandAuth.readTokenFile(f)
+            fail("expected IOException")
+        } catch (expected: IOException) {
+        } finally {
+            f.delete()
+        }
+    }
 }

@@ -25,6 +25,8 @@ import com.termux.zerocore.remotecontrol.RemoteResponse
 import com.termux.zerocore.remotecontrol.ReplayGuard
 import com.termux.zerocore.remotecontrol.StatusTrayState
 import java.io.File
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 /**
  * TERMUX_IPC binding: one JSON-blob extra ([FleetProtocol.TERMUX_ENVELOPE_EXTRA]) on
@@ -50,7 +52,19 @@ object TermuxRemoteEnvelopeBinding {
 
     fun isEnvelopeIntent(intent: Intent?): Boolean = intent?.hasExtra(FleetProtocol.TERMUX_ENVELOPE_EXTRA) == true
 
-    /** Handles the envelope intent. Always consumes it (never falls through to command execution). */
+    /**
+     * Single background thread for envelope work: auth + dispatch (the status op scans /proc)
+     * must not run on the main thread from onStartCommand. One thread keeps requests ordered,
+     * so replay-guard and config import/export behave exactly as when they ran inline.
+     */
+    private val worker: ExecutorService = Executors.newSingleThreadExecutor { r ->
+        Thread(r, "RemoteEnvelope").apply { isDaemon = true }
+    }
+
+    /**
+     * Handles the envelope intent. Always consumes it (never falls through to command execution).
+     * Extras are read here; authentication, dispatch and the PendingIntent reply run on [worker].
+     */
     fun handle(context: Context, intent: Intent) {
         val app = context.applicationContext
         val raw = try { intent.getStringExtra(FleetProtocol.TERMUX_ENVELOPE_EXTRA) } catch (e: Exception) { null }
@@ -61,6 +75,20 @@ object TermuxRemoteEnvelopeBinding {
             Logger.logError(LOG_TAG, "Dropped remote envelope: no result PendingIntent, caller cannot be authenticated")
             return
         }
+        try {
+            worker.execute {
+                // An escaping exception would kill the worker thread and crash the app process.
+                try { process(app, pending, raw) } catch (t: Throwable) {
+                    Logger.logStackTraceWithMessage(LOG_TAG, "Remote envelope worker error", t)
+                }
+            }
+        } catch (e: Exception) {
+            Logger.logError(LOG_TAG, "Could not queue remote envelope: ${e.message}")
+        }
+    }
+
+    /** Runs on [worker]. Same logic as before, just off the main thread. */
+    internal fun process(app: Context, pending: PendingIntent, raw: String?) {
         val response = try {
             authenticateAndDispatch(app, pending, raw)
         } catch (e: Exception) {

@@ -819,7 +819,7 @@ Reset successfully</string>
 
     <string name="backup_success">The backup is complete, and the backup file is in ->internal storage/xinhao/data/|directory</string>
 
-    <string name="backup_msg_dialog">To start backing up the current container, the system needs to create a new session to perform the backup operation, click OK to continue</string>
+    <string name="backup_msg_dialog">To start backing up the current container, the system needs to create a new session to perform the backup operation, click OK to continue Warning: the backup is an UNENCRYPTED tar archive saved to shared storage (internal storage/xinhao/data). It includes everything in your home directory, such as SSH private keys, API tokens and shell history. Any app with storage access can read it; keep it private and delete it when no longer needed.</string>
     <string name="delete_restore_data">delete</string>
 
     <string name="ftp_port_msg">port out of range!</string>
@@ -1455,4 +1455,5 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="remote_control_pairings_title">Paired fleet apps</string>
     <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef,certSha256. The signing-cert SHA-256 is required: a line without it is never accepted. Only these apps can send remote-control envelopes.</string>
     <string name="remote_control_pairings_saved">Pairings saved</string>
+    <string name="backup_file_name_unsafe">This backup file name contains control characters or a path separator and cannot be restored safely. Rename the file and try again.</string>
 </resources>

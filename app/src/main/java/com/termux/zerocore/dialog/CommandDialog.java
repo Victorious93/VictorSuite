@@ -210,10 +210,10 @@ public class CommandDialog extends BaseDialogCentre {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull CommandViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull CommandViewHolder holder, int bindPosition) {
 
-            if(position != 0) {
-                if (position % 2 == 0) {
+            if(bindPosition != 0) {
+                if (bindPosition % 2 == 0) {
                     holder.item_text.setBackgroundResource(R.drawable.shape_line_2e84e6);
 
                 } else {
@@ -226,11 +226,13 @@ public class CommandDialog extends BaseDialogCentre {
 
             }
 
-            holder.item_text.setText(commAndList.get(position));
+            holder.item_text.setText(commAndList.get(bindPosition));
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    final int position = holder.getAdapterPosition(); // VictorSuite: not the stale bind-time position
+                    if (position == RecyclerView.NO_POSITION) return;
                     search.setVisibility(View.GONE);
                     web_show.setVisibility(View.VISIBLE);
                     fanhui.setVisibility(View.VISIBLE);

@@ -18,6 +18,7 @@ import com.termux.zerocore.back.listener.CreateConversationListener
 import com.termux.zerocore.back.listener.RestoreFileDataListener
 import com.termux.zerocore.back.listener.RestoreRefreshFileListener
 import com.termux.zerocore.data.CommendShellData
+import com.termux.zerocore.data.RestoreShell
 import com.termux.zerocore.dialog.LoadingDialog
 import com.termux.zerocore.dialog.YesNoDialog
 import com.termux.zerocore.utils.FileIOUtils
@@ -88,8 +89,14 @@ class RestoreViewModel {
                         UUtils.showMsg(UUtils.getString(R.string.storage_error))
                         return
                     }
-                    if (!FileIOUtils.isPacketFormat(mDataBean.mFile!!.name)) {
+                    // VictorSuite: validate format and name BEFORE any container dir is created.
+                    val restoreFlag = RestoreShell.restoreFlagFor(mDataBean.mFile!!.name)
+                    if (restoreFlag == null) {
                         UUtils.showMsg(UUtils.getString(R.string.unrecognized_compression_format))
+                        return
+                    }
+                    if (!RestoreShell.isSafeFileName(mDataBean.mFile!!.name)) {
+                        UUtils.showMsg(UUtils.getString(R.string.backup_file_name_unsafe))
                         return
                     }
                     val mSwitchDialog = YesNoDialog(mContext!!)
@@ -131,15 +138,18 @@ class RestoreViewModel {
                                 mLoadingDialog?.dismiss()
                                 mDataBean.mFile?.let {
                                     LogUtils.d(TAG, "setRestoreFileDataListener -> file file name is: ${it.name}")
-                                    if (it.name.endsWith("tar.gz")) {
-                                        sendTextToTerminal(CommendShellData.getShellRestore(CommendShellData.SHELL_TAR_RESTORE_GZ, it, createSystem))
-                                    } else if (it.name.endsWith("tar.bz2")) {
-                                        sendTextToTerminal(CommendShellData.getShellRestore(CommendShellData.SHELL_TAR_RESTORE_BZ2, it, createSystem))
-                                    } else if (it.name.endsWith("tar.xz")) {
-                                        sendTextToTerminal(CommendShellData.getShellRestore(CommendShellData.SHELL_TAR_RESTORE_XZ, it, createSystem))
+                                    val command = try {
+                                        CommendShellData.getShellRestore(restoreFlag, it, createSystem)
+                                    } catch (e: IllegalArgumentException) {
+                                        null
+                                    }
+                                    if (command != null) {
+                                        sendTextToTerminal(command)
                                     } else {
-                                        UUtils.showMsg(UUtils.getString(R.string.unrecognized_compression_format))
-                                        LogUtils.d(TAG, "setRestoreFileDataListener -> file unrecognized compression format: ${it.name}")
+                                        // Do not leave an empty filesN container behind.
+                                        createSystem.deleteRecursively()
+                                        UUtils.showMsg(UUtils.getString(R.string.backup_file_name_unsafe))
+                                        LogUtils.d(TAG, "setRestoreFileDataListener -> refused unsafe restore for: ${it.name}")
                                     }
                                 }
                             }

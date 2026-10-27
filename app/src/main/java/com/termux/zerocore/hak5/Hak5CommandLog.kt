@@ -6,9 +6,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import java.io.File
 import java.io.FileWriter
-import java.text.SimpleDateFormat
+import com.termux.zerocore.utils.IsoTimestamp
 import java.util.Date
-import java.util.Locale
 
 /**
  * Persistent, append-only command log for Hak5 companion actions (plan §5).
@@ -29,7 +28,6 @@ object Hak5CommandLog {
     const val LOG_FILE = "hak5_commands.jsonl"
     private const val MAX_LOG_BYTES = 2L * 1024 * 1024
     private val gson = GsonBuilder().disableHtmlEscaping().create()
-    private fun dateFormat() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US)
 
     /** One executed (or blocked) action and its result. */
     data class CommandLogEntry(
@@ -92,7 +90,7 @@ object Hak5CommandLog {
         responseSnippet: String? = null
     ): CommandLogEntry {
         return CommandLogEntry(
-            timestamp = dateFormat().format(Date()),
+            timestamp = IsoTimestamp.format(Date()),
             kind = kind,
             target = target,
             action = action,

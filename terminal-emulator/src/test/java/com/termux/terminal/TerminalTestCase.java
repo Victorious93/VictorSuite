@@ -13,6 +13,9 @@ import java.util.Set;
 
 public abstract class TerminalTestCase extends TestCase {
 
+	/** Arbitrary cell size in pixels; only used for pixel-size reports. */
+	public static final int CELL_WIDTH = 10, CELL_HEIGHT = 20;
+
 	public static class MockTerminalOutput extends TerminalOutput {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		public final List<ChangedTitle> titleChanges = new ArrayList<>();
@@ -35,11 +38,6 @@ public abstract class TerminalTestCase extends TestCase {
 		public void titleChanged(String oldTitle, String newTitle) {
 			titleChanges.add(new ChangedTitle(oldTitle, newTitle));
 		}
-
-        @Override
-        public void clipboardText(String text) {
-
-        }
 
         @Override
 		public void onCopyTextToClipboard(String text) {
@@ -113,7 +111,7 @@ public abstract class TerminalTestCase extends TestCase {
 
 	protected TerminalTestCase withTerminalSized(int columns, int rows) {
 	    // The tests aren't currently using the client, so a null client will suffice, a dummy client should be implemented if needed
-		mTerminal = new TerminalEmulator(mOutput, columns, rows, rows * 2, null);
+		mTerminal = new TerminalEmulator(mOutput, columns, rows, CELL_WIDTH, CELL_HEIGHT, rows * 2, null);
 		return this;
 	}
 
@@ -206,7 +204,7 @@ public abstract class TerminalTestCase extends TestCase {
 	}
 
 	public TerminalTestCase resize(int cols, int rows) {
-		mTerminal.resize(cols, rows);
+		mTerminal.resize(cols, rows, CELL_WIDTH, CELL_HEIGHT);
 		assertInvariants();
 		return this;
 	}

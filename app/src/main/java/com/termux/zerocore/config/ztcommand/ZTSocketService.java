@@ -45,8 +45,9 @@ public class ZTSocketService extends Service {
         // VictorSuite add {@
         try {
             mToken = ZTCommandAuth.loadOrCreateToken(new File(TermuxConstants.TERMUX_HOME_DIR_PATH, ".termux/zt.token"));
-        } catch (IOException e) {
-            // Without a token every request would be refused; do not open the socket at all.
+        } catch (Exception e) {
+            // Any failure (I/O, SecurityException, unexpected runtime error): without a token
+            // every request would be refused, so do not open the socket at all, and never crash.
             LogUtils.e(TAG, "ZT token unavailable, command socket disabled: " + e);
             return;
         }
@@ -94,7 +95,7 @@ public class ZTSocketService extends Service {
                     Socket clientSocket = serverSocket.accept();
                     executor.execute(new ClientHandler(clientSocket));
                 }
-            } catch (IOException e) {
+            } catch (Exception e) { // VictorSuite: was IOException only; a runtime error here must not kill the app
                 e.printStackTrace();
                 LogUtils.e(TAG, "服务启动失败 " + e);
             }

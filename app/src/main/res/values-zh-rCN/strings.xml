@@ -807,7 +807,7 @@
 
     <string name="backup_success">备份完成，备份文件在->内部存储/xinhao/data/|目录下</string>
 
-    <string name="backup_msg_dialog">开始备份当前容器,系统需要新建一个会话来进行备份操作,点击确定继续</string>
+    <string name="backup_msg_dialog">开始备份当前容器,系统需要新建一个会话来进行备份操作,点击确定继续 警告：备份是未加密的 tar 压缩包，保存在共享存储（内部存储/xinhao/data）中。它包含主目录中的所有内容，例如 SSH 私钥、API 令牌和命令历史。任何拥有存储权限的应用都可以读取它；请妥善保管，不再需要时请删除。</string>
 
     <string name="delete_restore_data">删除此数据包</string>
 
@@ -1446,6 +1446,22 @@
     <string name="remote_control_pairings_title">已配对的舰队应用</string>
     <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef,certSha256。必须提供签名证书 SHA-256:没有证书的行永远不会被接受。只有这些应用可以发送远程控制信封。</string>
     <string name="remote_control_pairings_saved">配对已保存</string>
+    <string name="backup_file_name_unsafe">该备份文件名包含控制字符或路径分隔符，无法安全恢复。请重命名文件后重试。</string>
+    <string name="victorious_file_manager_not_installed">未安装 Victorious 文件管理器 — 将显示内置文件浏览器。</string>
+    <string name="victorfiles_open">打开 VictorFiles</string>
+    <string name="droidcommand_ai_label">DroidCommand AI</string>
+    <string name="droidcommand_ai_title">DroidCommand AI</string>
+    <string name="droidcommand_ai_summary">打开独立的 DroidCommand AI 应用。VictorSuite 已不再内置 AI 聊天。</string>
+    <string name="droidcommand_ai_missing_title">未安装 DroidCommand AI</string>
+    <string name="droidcommand_ai_missing_msg">AI 选项现在会打开独立的 DroidCommand AI 应用。请从其发布页面下载。</string>
+    <string name="droidcommand_ai_open_releases">打开发布页面</string>
+    <string name="droidcommand_ai_launch_failed">无法打开 DroidCommand AI</string>
+    <string name="victorfiles_panel_title">VictorFiles 文件管理器面板</string>
+    <string name="victorfiles_panel_summary">安装 VictorFiles 后，从右侧滑出抽屉将打开其文件管理器，替代内置文件窗口。关闭此项则使用内置浏览器。</string>
+    <string name="ai_provider_title">AI 提供方</string>
+    <string name="ai_provider_summary">关 = DeepSeek，开 = Claude (Anthropic)。选择由哪个 AI 回答您的聊天问题。</string>
+    <string name="claude_settings_key_edit">在此输入您的 Claude (Anthropic) API 密钥，将自动保存。</string>
+    <string name="claude_settings_key_edit_info">请在 console.anthropic.com 获取 API 密钥。仅在上方 AI 提供方开关设为 Claude 时使用。</string>
 </resources>
 
 

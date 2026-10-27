@@ -4,9 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import java.io.File
 import java.io.FileWriter
-import java.text.SimpleDateFormat
+import com.termux.zerocore.utils.IsoTimestamp
 import java.util.Date
-import java.util.Locale
 import java.util.regex.Pattern
 
 /**
@@ -18,7 +17,6 @@ object Hak5AuditLog {
     private const val LOG_FILE = "hak5_audit.jsonl"
     private const val MAX_LOG_BYTES = 2L * 1024 * 1024
     private val gson = Gson()
-    private val dateFormat get() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US)
 
     /** Matches common secret-bearing JSON fields / query params for redaction. */
     private val SECRET_PATTERNS = listOf(
@@ -81,7 +79,7 @@ object Hak5AuditLog {
             val file = File(dir, LOG_FILE)
             rotateIfNeeded(file)
             val entry = AuditEvent(
-                timestamp = dateFormat.format(Date()),
+                timestamp = IsoTimestamp.format(Date()),
                 event = event,
                 deviceId = deviceId,
                 firmware = firmware,

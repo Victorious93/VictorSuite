@@ -198,9 +198,9 @@ WHITE="\e[37m"
 RES="\e[0m"
 ####################
 #IP=`ip -4 -br a | awk '{print $3}' | cut -d '/' -f 1 | sed -n 2p`
-	if [ $(ip -4 -br a | awk '{print $3}' | cut -d '/' -f 1 | grep ^192 | cut -d '.' -f 1) 2>/dev/null == 192 ]; then
+	if [ "$(ip -4 -br a 2>/dev/null | awk '{print $3}' | cut -d '/' -f 1 | grep ^192 | cut -d '.' -f 1)" = 192 ]; then
 	IP=`ip -4 -br a | awk '{print $3}' | cut -d '/' -f 1 | grep ^192`
-	elif [ $(ip -4 -br a | awk '{print $3}' | cut -d '/' -f 1 | grep ^172 | cut -d '.' -f 1) 2>/dev/null == 172 ]; then
+	elif [ "$(ip -4 -br a 2>/dev/null | awk '{print $3}' | cut -d '/' -f 1 | grep ^172 | cut -d '.' -f 1)" = 172 ]; then
 	IP=`ip -4 -br a | awk '{print $3}' | cut -d '/' -f 1 | grep ^172`
 	else
 	IP=`ip -4 -br a | awk '{print $3}' | cut -d '/' -f 1 | grep ^10`
@@ -523,7 +523,7 @@ procs_running 1
 procs_blocked 0
 softirq 0 0 0 0 0 0 0 0 0 0 0" >$sys_name/etc/proc/stat
 cpus=`cat -n /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq | tail -n 1 | awk '{print $1}'`
-if [ -n $cpus ]; then
+if [ -n "$cpus" ]; then
 	while [[ $cpus -ne 1 ]]
 	do
 		cpus=$(( $cpus-1 ))
@@ -2125,7 +2125,7 @@ eof
 	read -r -p "输入usb名称对应的bus序号(如001，请输1或者011，请输11) " HOSTBUS
 	lsusb -t
 	read -r -p "输入Port序号(如001，请输1或者011，请输11) " HOSTPORT
-	if echo ${@} | grep -q ehci; then
+	if echo "$*" | grep -q ehci; then
 		printf ""
 	else
         set -- "${@}" "-device" "usb-ehci,id=ehci"
@@ -2139,7 +2139,7 @@ eof
 	fi
 		echo -e "\n${YELLOW}请插入usb${RES}"
 	CONFIRM
-	if echo ${@} | grep -q ehci; then
+	if echo "$*" | grep -q ehci; then
 		printf ""
 	else
 	set -- "${@}" "-device" "usb-ehci,id=ehci"
