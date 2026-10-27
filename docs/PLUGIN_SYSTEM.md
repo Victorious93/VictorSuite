@@ -21,7 +21,7 @@ Related: `PLUGINS.md` (the current framework), `docs/HAK5_COMPANION_PLAN.md` (th
 | Launch | `plugin/PluginProcessLauncher.kt` | Builds the shell command only. Refuses if not ENABLED or if the entry point is missing. |
 | Feed | `remote/plugins/main.json` | Empty `data: []`. |
 | Hak5 | `hak5/*` | `Hak5ActionClassifier` + `Hak5ActionConfirm` + `Hak5AuditLog` form the confirm-before-destructive pattern. We reuse it. |
-| Legacy intents | `utermux_windows/qemu/RunWindowActivity.java` | Sends `com.utermux.action.vnc` with extra `utermux_as`. `ZTInstallActivity` installs the bundled asset `apk/utermux_file_plug.ip` (to be removed; VictorFiles replaces it, §13). |
+| Legacy intents | `utermux_windows/qemu/RunWindowActivity.java` | Sends `com.utermux.action.vnc` with extra `utermux_as`. `VsInstallActivity` installs the bundled asset `apk/utermux_file_plug.ip` (to be removed; VictorFiles replaces it, §13). |
 
 There is **no** code loader (no `DexClassLoader`), and that stays true: plugins never load code into the VictorSuite process.
 
@@ -140,7 +140,7 @@ Aliases: for **two releases** (or until Phase 4), VictorSuite sends both the new
 | 1 | `feat/plugin-catalog-model` | Catalog/manifest data classes, `schemaVersion` handling, sha256 verification, JVM unit tests, `VsLinks.PLUGIN_CATALOG`. No UI changes. |
 | 2 | `feat/plugin-install-flow` | Download, staging, install, update, uninstall, unsigned warning UI, generalised `ActionConfirm`, permission review screen. |
 | 3 | `feat/plugin-signatures` | Ed25519 verification, pinned public key, `docs/plugins/keys/`, `scripts/sign-plugin` for Don to run locally (it reads the key from his machine and never from the repo). |
-| 4 | `feat/plugin-intents` | `com.termux.victor.action.*`, permission, legacy aliases, migrate RunWindowActivity, **remove `apk/utermux_file_plug.ip` and all references** (`ZTInstallActivity`, docs), pointing users to VictorFiles. |
+| 4 | `feat/plugin-intents` | `com.termux.victor.action.*`, permission, legacy aliases, migrate RunWindowActivity, **remove `apk/utermux_file_plug.ip` and all references** (`VsInstallActivity`, docs), pointing users to VictorFiles. |
 | 5 | `feat/companion-apk` | APK type, signing-cert pinning, first companion. |
 | 6 | cleanup | Remove the legacy feed and the aliases after two releases. Update PLUGINS.md and CLAUDE.md. |
 

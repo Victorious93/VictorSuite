@@ -67,9 +67,9 @@ import com.termux.victor.config.mainmenu.config.WebDataClickConfigImp;
 import com.termux.victor.config.mainmenu.config.X11EnvironmentClickConfig;
 import com.termux.victor.config.mainmenu.config.X11SettingsClickConfig;
 import com.termux.victor.config.mainmenu.config.X86AlpineDataClickConfig;
-import com.termux.victor.config.mainmenu.config.ZTCommandKeyClickConfig;
-import com.termux.victor.config.mainmenu.config.ZTSettingsClickConfig;
-import com.termux.victor.config.mainmenu.config.ZeroBBsClickConfig;
+import com.termux.victor.config.mainmenu.config.VsCommandKeyClickConfig;
+import com.termux.victor.config.mainmenu.config.VsSettingsClickConfig;
+import com.termux.victor.config.mainmenu.config.VsBBsClickConfig;
 import com.termux.victor.config.mainmenu.data.MainMenuCategoryData;
 
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class MainMenuConfig implements BaseConfig {
         commonClicks.add(new QEMUClickConfig());
         commonClicks.add(new PluginManagerClickConfig());
         commonClicks.add(new Hak5CompanionClickConfig());
-        commonClicks.add(new ZTSettingsClickConfig());
+        commonClicks.add(new VsSettingsClickConfig());
         MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.common_functions), CODE_COMMON_FUNCTIONS, commonClicks));
 
         // x11功能
@@ -151,7 +151,7 @@ public class MainMenuConfig implements BaseConfig {
         // 线上功能
         ArrayList<MainMenuClickConfig> onlineClicks = new ArrayList<>();
         onlineClicks.add(new OnLineCommandClickConfig());
-        onlineClicks.add(new ZeroBBsClickConfig());
+        onlineClicks.add(new VsBBsClickConfig());
         onlineClicks.add(new DownLoadClickConfig());
         onlineClicks.add(new PublicWarehouseClickConfig());
         MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.online_features), CODE_ONLINE_FEATURES, onlineClicks));
@@ -159,7 +159,7 @@ public class MainMenuConfig implements BaseConfig {
         // 配置文件
         ArrayList<MainMenuClickConfig> configClicks = new ArrayList<>();
         configClicks.add(new AdbShellRunClickConfig());
-        configClicks.add(new ZTCommandKeyClickConfig());
+        configClicks.add(new VsCommandKeyClickConfig());
         configClicks.add(new DefBashClickConfig());
         configClicks.add(new ChangBashClickConfig());
         configClicks.add(new ChangStartMsgClickConfig());

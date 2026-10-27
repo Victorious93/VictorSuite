@@ -11,8 +11,8 @@ import com.termux.victor.ftp.utils.UserSetManage
  *  此类未完成，后期需要重新继续此需求
  *  需求：更新在线脚本url，可随意变更数据源
  */
-class ZTOnlineServerActivity : AppCompatActivity() {
-    private val TAG = "ZTInstallActivity"
+class VsOnlineServerActivity : AppCompatActivity() {
+    private val TAG = "VsInstallActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ztonline)

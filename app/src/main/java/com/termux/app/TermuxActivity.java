@@ -138,7 +138,7 @@ import com.termux.victor.dialog.ProtocolDialog;
 import com.termux.victor.dialog.SwitchDialog;
 import com.termux.victor.ftp.utils.UserSetManage;
 import com.termux.victor.otg.OTGManager;
-import com.termux.victor.settings.ZtSettingsActivity;
+import com.termux.victor.settings.VsSettingsActivity;
 import com.termux.victor.config.ztcommand.ZTSocketService;
 import com.termux.victor.config.ztcommand.config.ZTKeyConstants;
 import com.termux.victor.url.FileUrl;
@@ -1378,9 +1378,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
         getServiceVs();
         main_card.setOnClickListener(
-            v -> startActivity(new Intent(TermuxActivity.this, ZtSettingsActivity.class)));
+            v -> startActivity(new Intent(TermuxActivity.this, VsSettingsActivity.class)));
         /*findViewById(R.id.settings).setOnClickListener(
-            v -> startActivity(new Intent(TermuxActivity.this, ZtSettingsActivity.class)));*/
+            v -> startActivity(new Intent(TermuxActivity.this, VsSettingsActivity.class)));*/
 
         ip_card.setOnClickListener(v -> {
             if (info_card.getVisibility() == View.GONE) {
@@ -2553,7 +2553,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 return true;
             });
             if (mInternalPassage) {
-                mMainActivity.setSettingsClick(() -> startActivity(new Intent(TermuxActivity.this, ZtSettingsActivity.class)));
+                mMainActivity.setSettingsClick(() -> startActivity(new Intent(TermuxActivity.this, VsSettingsActivity.class)));
             }
         }
     }
