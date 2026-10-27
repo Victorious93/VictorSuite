@@ -66,9 +66,6 @@ public class ZTGitHubVersion {
                                 UUtils.runOnUIThread(() -> textView.setVisibility(View.GONE));
                             }
                         } else {
-                                UUtils.runOnUIThread(() -> textView.setVisibility(View.GONE));
-                            }
-                        } else {
                             UUtils.runOnUIThread(() -> textView.setVisibility(View.GONE));
                         }
                     } catch (Exception e) {
