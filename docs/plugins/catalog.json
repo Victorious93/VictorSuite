@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "catalogId": "victorsuite-official",
+  "generatedAt": "2026-10-27T00:00:00Z",
+  "homepage": "https://victorious93.github.io/VictorSuite/",
+  "signingKeys": [
+    {
+      "keyId": "EXAMPLE-NOT-A-REAL-KEY",
+      "algorithm": "ed25519",
+      "publicKey": "RWQ_PLACEHOLDER_PUBLIC_KEY_ONLY",
+      "owner": "Don Victor (private key held offline by Don, never committed)"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "io.github.victorious93.example-hello",
+      "name": "Example Hello",
+      "type": "package",
+      "category": "utility",
+      "description": "Sample entry: prints a greeting. For schema illustration only.",
+      "license": "GPL-3.0-or-later",
+      "sourceUrl": "https://github.com/Victorious93/VictorSuite/tree/main/docs/plugins",
+      "authors": ["Don Victor"],
+      "permissions": ["exec"],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "minAppVersionCode": 118,
+          "changelog": "Initial example.",
+          "artifacts": [
+            {
+              "abi": "all",
+              "url": "https://github.com/Victorious93/VictorSuite/releases/download/plugins-example-hello-0.1.0/example-hello-0.1.0.tar.gz",
+              "size": 0,
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "signature": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
