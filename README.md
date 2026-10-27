@@ -61,6 +61,9 @@ Documented and present in the codebase (ZeroTermux / VictorSuite additions under
 - **scrcpy / QEMU / wireless ADB / root shell** — integrations under `zerocore` (scrcpy, UTermux/QEMU windows, wireless ADB, libsu).
 - **In-app AI chat** — DeepSeek and Claude API clients with SQLite session storage (`zerocore/deepseek`).
 - **AI CLI setup script** — bundled `scripts/ai-cli-setup.sh` installs pi, Copilot CLI, Codex CLI, and Hugging Face CLI (some via an Ubuntu proot container). **Not yet run on a real device** — see [docs/AI_CLIS.md](docs/AI_CLIS.md).
+- **AI Coding Agents pack** — menu **ZT features → AI Coding Agents** installs Claude Code, Codex CLI, Copilot CLI, and Ollama (local or remote) via `ai-agents-pack.sh`, with `vsphone` (root/Shizuku phone-control bridge + approval gates) and `vstoken` (token minimizer / model routing). See [docs/AI_CODING_AGENTS.md](docs/AI_CODING_AGENTS.md). **Shellchecked + unit-tested locally; not device-tested.**
+- **GitHub Releases** — CI publishes a signed pre-release APK after a successful signed build on `main` (pre-release because not device-tested).
+- **Package id remains `com.termux`** — a brief attempt to move to `com.victorious.suite` was reverted (#62) so Termux IPC / `RUN_COMMAND` stay compatible. VictorSuite and upstream Termux still cannot share a device.
 - **Prebuilt APK releases** and shared signing-key compatibility with UTermux (as noted historically in this project).
 
 Upstream Termux capabilities (terminal emulator, packages via bootstrap, `RUN_COMMAND`) remain the foundation.
