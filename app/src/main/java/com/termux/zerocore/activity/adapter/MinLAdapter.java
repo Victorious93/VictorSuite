@@ -44,15 +44,15 @@ public class MinLAdapter extends RecyclerView.Adapter<MinLViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MinLViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MinLViewHolder holder, int bindPosition) {
 
         MinLViewHolder minLViewHolder = holder;
 
-        minLViewHolder.name.setText(dataNum.get(position).name);
-        minLViewHolder.value.setText(dataNum.get(position).value);
+        minLViewHolder.name.setText(dataNum.get(bindPosition).name);
+        minLViewHolder.value.setText(dataNum.get(bindPosition).value);
 
 
-        if(dataNum.get(position).isChecked){
+        if(dataNum.get(bindPosition).isChecked){
             minLViewHolder.enter.setVisibility(View.VISIBLE);
         }else{
             minLViewHolder.enter.setVisibility(View.GONE);
@@ -62,6 +62,8 @@ public class MinLAdapter extends RecyclerView.Adapter<MinLViewHolder> {
         minLViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final int position = holder.getAdapterPosition(); // VictorSuite: not the stale bind-time position
+                if (position == RecyclerView.NO_POSITION) return;
                 if(mCloseLiftListener!= null){
                     mCloseLiftListener.close();
                 }
@@ -78,6 +80,8 @@ public class MinLAdapter extends RecyclerView.Adapter<MinLViewHolder> {
             minLViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    final int position = holder.getAdapterPosition(); // VictorSuite: not the stale bind-time position
+                    if (position == RecyclerView.NO_POSITION) return false;
 
 
                     MinglingDialog minglingDialog = new MinglingDialog(activity);
