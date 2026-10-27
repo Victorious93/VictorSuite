@@ -11,7 +11,7 @@ View/XML chrome only:
 | Surface | How |
 |---|---|
 | Left drawer (`layout_menu_all.xml`) and right drawer (`include_right_menu.xml`) | `TermuxActivity` → `FleetThemeBinding`, re-applied whenever a drawer opens |
-| `ZtSettingsActivity`, `VictorSuiteSettingsActivity` | whole content view |
+| `VsSettingsActivity`, `VictorSuiteSettingsActivity` | whole content view |
 | Stock `SettingsActivity` | action bar only (background `surface`, title `onBackground`); preference rows keep the app theme |
 
 Terminal colours (`colors.properties`, Monet background, extra keys) are **not** touched.

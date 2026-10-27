@@ -18,8 +18,8 @@ import java.io.File
 import java.io.IOException
 import java.io.InputStream
 
-class ZTInstallActivity : AppCompatActivity(), View.OnClickListener {
-    private val TAG = "ZTInstallActivity"
+class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
+    private val TAG = "VsInstallActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ztinstall)
@@ -120,7 +120,7 @@ class ZTInstallActivity : AppCompatActivity(), View.OnClickListener {
         switchDialog1.cancel!!.setOnClickListener { switchDialog1.dismiss() }
         switchDialog1.ok!!.setOnClickListener {
             switchDialog1.dismiss()
-            XXPermissions.with(this@ZTInstallActivity)
+            XXPermissions.with(this@VsInstallActivity)
                 .permission(Permission.WRITE_EXTERNAL_STORAGE)
                 .permission(Permission.READ_EXTERNAL_STORAGE)
                 .permission(Permission.REQUEST_INSTALL_PACKAGES)
@@ -138,7 +138,7 @@ class ZTInstallActivity : AppCompatActivity(), View.OnClickListener {
                                 "/xinhao/apk/$fileName.apk"
                             )
                             val loadingDialog =
-                                LoadingDialog(this@ZTInstallActivity)
+                                LoadingDialog(this@VsInstallActivity)
                             loadingDialog.show()
                             UUtils.writerFileRawInput(file1, inputStream)
                             Thread {
@@ -164,7 +164,7 @@ class ZTInstallActivity : AppCompatActivity(), View.OnClickListener {
                         if (never) {
                             UUtils.showMsg("无权限")
                             // 如果是被永久拒绝就跳转到应用权限系统设置页面
-                            XXPermissions.startPermissionActivity(this@ZTInstallActivity, permissions)
+                            XXPermissions.startPermissionActivity(this@VsInstallActivity, permissions)
                         } else {
                             UUtils.showMsg("无权限")
                         }

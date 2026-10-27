@@ -67,7 +67,7 @@
             icon=""
             packageName="com.termux"
             intentData=""
-            click="startActivity:com.termux.victor.settings.ZtSettingsActivity" />
+            click="startActivity:com.termux.victor.settings.VsSettingsActivity" />
         <!--intentData 属性值，目前只支持 String 字符串
             key@@value-->
         <item tag="跳转action"
@@ -122,7 +122,7 @@
         <item tag="QEMU"
             click="java:com.termux.victor.config.mainmenu.config.QEMUClickConfig" />
         <item tag="VictorSuite设置"
-            click="java:com.termux.victor.config.mainmenu.config.ZTSettingsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VsSettingsClickConfig" />
         <item tag="插件管理"
             click="java:com.termux.victor.config.mainmenu.config.PluginManagerClickConfig" />
         <item tag="Hak5 Companion"
@@ -207,7 +207,7 @@
         <item tag="在线脚本"
             click="java:com.termux.victor.config.mainmenu.config.OnLineCommandClickConfig" />
         <item tag="Termux Wiki"
-            click="java:com.termux.victor.config.mainmenu.config.ZeroBBsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VsBBsClickConfig" />
         <item tag="下载站"
             click="java:com.termux.victor.config.mainmenu.config.DownLoadClickConfig" />
         <item tag="公共仓库"
@@ -218,7 +218,7 @@
         <item tag="SHELL 运行"
             click="java:com.termux.victor.config.mainmenu.config.AdbShellRunClickConfig" />
         <item tag="底部键盘"
-            click="java:com.termux.victor.config.mainmenu.config.ZTCommandKeyClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VsCommandKeyClickConfig" />
         <item tag="默认启动文件"
             click="java:com.termux.victor.config.mainmenu.config.DefBashClickConfig" />
         <item tag="编辑启动文件"

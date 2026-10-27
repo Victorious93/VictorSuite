@@ -8,9 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.termux.R;
-import com.termux.victor.settings.ZtSettingsActivity;
+import com.termux.victor.settings.VsSettingsActivity;
 
-public class ZTSettingsClickConfig extends BaseMenuClickConfig {
+public class VsSettingsClickConfig extends BaseMenuClickConfig {
     @Override
     public int getType() {
         return CODE_COMMON_FUNCTIONS;
@@ -28,6 +28,6 @@ public class ZTSettingsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public void onClick(View view, Context context) {
-        context.startActivity(new Intent(context, ZtSettingsActivity.class));
+        context.startActivity(new Intent(context, VsSettingsActivity.class));
     }
 }

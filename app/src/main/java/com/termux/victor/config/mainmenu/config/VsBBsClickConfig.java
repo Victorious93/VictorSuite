@@ -11,7 +11,7 @@ import android.view.View;
 import com.termux.R;
 import com.termux.victor.activity.WebViewActivity;
 
-public class ZeroBBsClickConfig extends BaseMenuClickConfig {
+public class VsBBsClickConfig extends BaseMenuClickConfig {
     @Override
     public int getType() {
         return CODE_ONLINE_FEATURES;

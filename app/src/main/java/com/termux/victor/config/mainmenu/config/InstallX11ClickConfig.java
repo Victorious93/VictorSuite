@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.termux.R;
-import com.termux.victor.settings.ZTInstallActivity;
+import com.termux.victor.settings.VsInstallActivity;
 
 public class InstallX11ClickConfig extends BaseMenuClickConfig {
     @Override
@@ -28,6 +28,6 @@ public class InstallX11ClickConfig extends BaseMenuClickConfig {
 
     @Override
     public void onClick(View view, Context context) {
-        context.startActivity(new Intent(context, ZTInstallActivity.class));
+        context.startActivity(new Intent(context, VsInstallActivity.class));
     }
 }

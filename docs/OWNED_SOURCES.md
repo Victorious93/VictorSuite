@@ -10,7 +10,7 @@ and what happened to it.
 | Where | Old | New | Why |
 |---|---|---|---|
 | `ZTConstantConfig.URL.ZT_GITHUB_URL` | `https://github.com/hanxinhao000/VictorSuite/releases` | `https://github.com/Victorious93/VictorSuite/releases` | Owner repo |
-| `GitHubClickConfig`, `ZTAboutActivity` (GitHub card) | `https://github.com/hanxinhao000/VictorSuite` | `https://github.com/Victorious93/VictorSuite` | Owner repo |
+| `GitHubClickConfig`, `VsAboutActivity` (GitHub card) | `https://github.com/hanxinhao000/VictorSuite` | `https://github.com/Victorious93/VictorSuite` | Owner repo |
 | `HTTPIP.GITHUB_VERSION` (update check) | upstream repo | `https://api.github.com/repos/Victorious93/VictorSuite/releases/latest` | Owner release channel |
 | `HTTPIP.ZERO_BBS` (forum) | `https://termbbs.ixcm.org/` | `https://github.com/Victorious93/VictorSuite/issues` | Third-party forum, not owner-controlled |
 | `HTTPIP.IP` (remote scripts) | — | `https://raw.githubusercontent.com/Victorious93/VictorSuite/main/remote` (unchanged, already owned) | Owner repo |

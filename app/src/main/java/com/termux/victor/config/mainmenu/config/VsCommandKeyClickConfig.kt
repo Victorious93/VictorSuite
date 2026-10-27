@@ -20,9 +20,9 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.Properties
 
-class ZTCommandKeyClickConfig : BaseMenuClickConfig() {
+class VsCommandKeyClickConfig : BaseMenuClickConfig() {
     companion object {
-        val TAG = ZTCommandKeyClickConfig::class.simpleName
+        val TAG = VsCommandKeyClickConfig::class.simpleName
     }
 
     override fun getIcon(context: Context?): Drawable? {

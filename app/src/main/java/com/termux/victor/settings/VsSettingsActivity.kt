@@ -9,7 +9,7 @@ import com.termux.app.activities.SettingsActivity
 import com.termux.victor.droidcommand.DroidCommandAi
 import com.termux.victor.theme.FleetThemeBinding // VictorSuite add: fleet theme
 
-class ZtSettingsActivity : AppCompatActivity() {
+class VsSettingsActivity : AppCompatActivity() {
     // VictorSuite add: fleet theme for the settings hub chrome (View/XML only)
     private val fleetTheme by lazy { FleetThemeBinding(this) }
 
@@ -36,13 +36,13 @@ class ZtSettingsActivity : AppCompatActivity() {
             DroidCommandAi.launch(this)
         }
         findViewById<CardView>(R.id.online_sh_server).setOnClickListener {
-            startActivity(Intent(this, ZTOnlineServerActivity::class.java))
+            startActivity(Intent(this, VsOnlineServerActivity::class.java))
         }
         findViewById<CardView>(R.id.zt_about_card_view).setOnClickListener {
-            startActivity(Intent(this, ZTAboutActivity::class.java))
+            startActivity(Intent(this, VsAboutActivity::class.java))
         }
         findViewById<CardView>(R.id.install_card_view).setOnClickListener {
-            startActivity(Intent(this, ZTInstallActivity::class.java))
+            startActivity(Intent(this, VsInstallActivity::class.java))
         }
 
     }

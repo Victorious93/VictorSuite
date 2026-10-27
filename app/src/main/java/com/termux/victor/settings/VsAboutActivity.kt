@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 
-class ZTAboutActivity : AppCompatActivity() {
+class VsAboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ztabout)

@@ -87,15 +87,15 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".victor.settings.ZTInstallActivity"
+            android:name=".victor.settings.VsInstallActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".victor.settings.ZTOnlineServerActivity"
+            android:name=".victor.settings.VsOnlineServerActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".victor.settings.ZTAboutActivity"
+            android:name=".victor.settings.VsAboutActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
@@ -132,7 +132,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".victor.settings.ZtSettingsActivity"
+            android:name=".victor.settings.VsSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 

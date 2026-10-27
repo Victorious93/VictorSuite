@@ -65,7 +65,7 @@
             icon=""
             packageName="com.termux"
             intentData=""
-            click="startActivity:com.termux.victor.settings.ZtSettingsActivity" />
+            click="startActivity:com.termux.victor.settings.VsSettingsActivity" />
         <!--intentData property values, currently only support String strings
             key@@value-->
         <item tag="JumpAction"
@@ -118,7 +118,7 @@
         <item tag="QEMU"
             click="java:com.termux.victor.config.mainmenu.config.QEMUClickConfig" />
         <item tag="VictorSuite Settings"
-            click="java:com.termux.victor.config.mainmenu.config.ZTSettingsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VsSettingsClickConfig" />
         <item tag="Plugin Manager"
             click="java:com.termux.victor.config.mainmenu.config.PluginManagerClickConfig" />
         <item tag="Hak5 Companion"
@@ -203,7 +203,7 @@
         <item tag="Online Scripts"
             click="java:com.termux.victor.config.mainmenu.config.OnLineCommandClickConfig" />
         <item tag="Termux Wiki"
-            click="java:com.termux.victor.config.mainmenu.config.ZeroBBsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VsBBsClickConfig" />
         <item tag="Download Station"
             click="java:com.termux.victor.config.mainmenu.config.DownLoadClickConfig" />
         <item tag="Public Repository"
@@ -214,7 +214,7 @@
         <item tag="SHELL Run"
             click="java:com.termux.victor.config.mainmenu.config.AdbShellRunClickConfig" />
         <item tag="Bottom Keyboard"
-            click="java:com.termux.victor.config.mainmenu.config.ZTCommandKeyClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VsCommandKeyClickConfig" />
         <item tag="Default Startup File"
             click="java:com.termux.victor.config.mainmenu.config.DefBashClickConfig" />
         <item tag="Edit Startup File"
