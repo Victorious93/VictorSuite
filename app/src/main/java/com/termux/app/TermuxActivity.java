@@ -154,7 +154,7 @@ import com.termux.victor.utils.WindowUtils;
 import com.termux.victor.view.BoomWindow;
 import com.termux.victor.zero.engine.ZeroCoreManage;
 import com.zp.z_file.ui.ZFileListFragment;
-import com.zp.z_file.zerotermux.VsConfig;
+import com.zp.z_file.zerotermux.ZTConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -2202,7 +2202,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 LogUtils.e(TAG, "fragmentManager switch ZFileListFragment deno. ");
                 break;
         }
-        VsConfig.INSTANCE.setCloseListener(() -> getDrawer().smoothClose());
+        ZTConfig.INSTANCE.setCloseListener(() -> getDrawer().smoothClose());
     }
 
     private void locaBroadcast() {
