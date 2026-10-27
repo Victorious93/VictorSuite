@@ -21,6 +21,6 @@ public class KnowConfig extends SimpleConfig {
 
     @Override
     public int getId() {
-        return ZTKeyConstants.ZT_ID_KNOW;
+        return VsKeyConstants.ZT_ID_KNOW;
     }
 }

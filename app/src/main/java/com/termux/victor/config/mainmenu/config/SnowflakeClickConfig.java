@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.bean.VsUserBean;
 import com.termux.victor.ftp.utils.UserSetManage;
 import com.termux.victor.view.xuehua.SnowView;
 
@@ -38,7 +38,7 @@ public class SnowflakeClickConfig extends BaseMenuClickConfig {
     @Override
     public void onClick(View view, Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
         ztUserBean.setRainShow(false);
         termuxActivity.firework_view.setVisibility(View.GONE);
         if (!ztUserBean.isSnowflakeShow()) {

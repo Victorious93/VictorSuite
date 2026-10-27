@@ -16,11 +16,11 @@ import java.security.SecureRandom;
  * app on the device, so each request must start with the token stored in a file under
  * Termux's private home (readable only by the Termux user).
  */
-public final class ZTCommandAuth {
+public final class VsCommandAuth {
     public static final int MAX_LINE_CHARS = 4096;
     private static final int TOKEN_BYTES = 32;
 
-    private ZTCommandAuth() {
+    private VsCommandAuth() {
     }
 
     /** Reads the token file, creating it (owner-only) with a fresh random token if missing or empty. */

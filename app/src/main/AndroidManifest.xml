@@ -385,7 +385,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:name=".victor.config.ztcommand.ZTSocketService"/>
+        <service android:name=".victor.config.ztcommand.VsSocketService"/>
 
         <service
             android:name=".victor.ftp.new_ftp.services.FtpService"

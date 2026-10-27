@@ -1,8 +1,8 @@
 package com.termux.app;
 
 import androidx.activity.OnBackPressedCallback;
-import static com.termux.victor.config.ztcommand.ZTSocketService.ZT_COMMAND_ACTIVITY_ACTION;
-import static com.termux.victor.config.ztcommand.ZTSocketService.ZT_COMMAND_SERVICES_ACTION;
+import static com.termux.victor.config.ztcommand.VsSocketService.ZT_COMMAND_ACTIVITY_ACTION;
+import static com.termux.victor.config.ztcommand.VsSocketService.ZT_COMMAND_SERVICES_ACTION;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -116,7 +116,7 @@ import com.termux.victor.activity.EditTextActivity;
 import com.termux.victor.background.FireworkView;
 import com.termux.victor.bean.EditPromptBean;
 import com.termux.victor.bean.ZDYDataBean;
-import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.bean.VsUserBean;
 import com.termux.victor.broadcast.LocalReceiver;
 import com.termux.victor.code.CodeString;
 import com.termux.victor.config.VsLinks;
@@ -124,7 +124,7 @@ import com.termux.victor.config.mainmenu.MainMenuConfig;
 import com.termux.victor.config.mainmenu.XMLMainMenuConfig;
 import com.termux.victor.config.mainmenu.data.MainMenuCategoryData;
 import com.termux.victor.config.mainmenu.view.adapter.MainMenuAdapter;
-import com.termux.victor.config.other.ZTGitHubVersion;
+import com.termux.victor.config.other.VsGitHubVersion;
 import com.termux.victor.config.ztcommand.config.XmlMenuConfig;
 // VictorSuite modify {@ the in-app AI chat was replaced by the DroidCommand AI app
 import com.termux.victor.droidcommand.DroidCommandAi;
@@ -139,8 +139,8 @@ import com.termux.victor.dialog.SwitchDialog;
 import com.termux.victor.ftp.utils.UserSetManage;
 import com.termux.victor.otg.OTGManager;
 import com.termux.victor.settings.VsSettingsActivity;
-import com.termux.victor.config.ztcommand.ZTSocketService;
-import com.termux.victor.config.ztcommand.config.ZTKeyConstants;
+import com.termux.victor.config.ztcommand.VsSocketService;
+import com.termux.victor.config.ztcommand.config.VsKeyConstants;
 import com.termux.victor.url.FileUrl;
 import com.termux.victor.utils.FileHttpUtils;
 import com.termux.victor.utils.FileIOUtils;
@@ -1361,7 +1361,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         });
         // INFO card: "Issues" (qq_group_tv) and "Source" (telegram_group_tv) links, both from VsLinks.
         telegram_group_tv.setOnClickListener(this);
-        ZTGitHubVersion.create().initZtVersionVisible(zt_new);
+        VsGitHubVersion.create().initZtVersionVisible(zt_new);
         try {
             double_tishi.setText(double_tishi.getText() + "\n" + TermuxInstaller.determineTermuxArchName().toUpperCase());
 
@@ -1397,7 +1397,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
         mGuideContent.setOnLongClickListener(v -> {
             mGuideLayout.setVisibility(View.GONE);
-            ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+            VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
             ztUserBean.setHideGuideLayout(true);
             UserSetManage.Companion.get().setZTUserBean(ztUserBean);
             return true;
@@ -1456,7 +1456,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             }
         });
         if (mInternalPassage) {
-            ZTUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
+            VsUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
             Log.i(TAG, "initStatuexxxxxxxx ztUserBeanShow.isShowCommand(): " + ztUserBeanShow.isShowCommand());
             mTerminalView.setVisibility(ztUserBeanShow.isShowCommand() ? View.VISIBLE : View.INVISIBLE);
             back_color.setVisibility(ztUserBeanShow.isShowCommand() ? View.VISIBLE : View.INVISIBLE);
@@ -1515,7 +1515,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
     }
     public void showTermuxView() {
-        ZTUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
         ztUserBeanShow.setShowCommand(true);
         if (MainActivity.isConnected()) {
             mTerminalView.setVisibility(View.VISIBLE);
@@ -1538,7 +1538,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         UserSetManage.Companion.get().setZTUserBean(ztUserBeanShow);
     }
     public void hideTermuxView() {
-        ZTUserBean ztUserBeanHide = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztUserBeanHide = UserSetManage.Companion.get().getZTUserBean();
         ztUserBeanHide.setShowCommand(false);
         if (MainActivity.isConnected()) {
             mTerminalView.setVisibility(View.INVISIBLE);
@@ -2019,7 +2019,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     private void initMenu() {
         writerMainMenuConfig(false);
-        ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
         if (ztUserBean.isDisableMainConfigMenu()) {
             initListMenu(MainMenuConfig.getMainMenuCategoryDatas());
         } else {
@@ -2298,11 +2298,11 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             super.handleMessage(msg);
             if (!MainActivity.isConnected()) {
                 mTerminalView.setVisibility(View.VISIBLE);
-                ZTUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
+                VsUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
                 ztUserBeanShow.setShowCommand(true);
                 UserSetManage.Companion.get().setZTUserBean(ztUserBeanShow);
             } else {
-                ZTUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
+                VsUserBean ztUserBeanShow = UserSetManage.Companion.get().getZTUserBean();
                 if (!ztUserBeanShow.isShowCommand()) {
                     back_img.setVisibility(View.GONE);
                     back_video.setVisibility(View.GONE);
@@ -2325,34 +2325,34 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             }
             switch (message) {
                 // 调用本页面 VIEW 不可写到 Config 当中，否则可能造成内存泄漏
-                case ZTKeyConstants.ZT_COMMAND_LEFT:
-                case ZTKeyConstants.ZT_COMMAND_LEFT_1:
+                case VsKeyConstants.ZT_COMMAND_LEFT:
+                case VsKeyConstants.ZT_COMMAND_LEFT_1:
                     getDrawer().close();
                     getDrawer().smoothLeftOpen();
                     break;
-                case ZTKeyConstants.ZT_COMMAND_RIGHT:
-                case ZTKeyConstants.ZT_COMMAND_RIGHT_1:
+                case VsKeyConstants.ZT_COMMAND_RIGHT:
+                case VsKeyConstants.ZT_COMMAND_RIGHT_1:
                     getDrawer().close();
                     getDrawer().smoothRightOpen();
                     break;
-                case ZTKeyConstants.ZT_COMMAND_X11_COMMAND_SHOW:
-                case ZTKeyConstants.ZT_COMMAND_X11_COMMAND_SHOW_1:
+                case VsKeyConstants.ZT_COMMAND_X11_COMMAND_SHOW:
+                case VsKeyConstants.ZT_COMMAND_X11_COMMAND_SHOW_1:
                     showTermuxView();
                     break;
-                case ZTKeyConstants.ZT_COMMAND_X11_COMMAND_HIDE:
-                case ZTKeyConstants.ZT_COMMAND_X11_COMMAND_HIDE_1:
+                case VsKeyConstants.ZT_COMMAND_X11_COMMAND_HIDE:
+                case VsKeyConstants.ZT_COMMAND_X11_COMMAND_HIDE_1:
                     hideTermuxView();
                     break;
-                case ZTKeyConstants.ZT_COMMAND_X11_KEYBOARD_SHOW:
-                case ZTKeyConstants.ZT_COMMAND_X11_KEYBOARD_SHOW_1:
+                case VsKeyConstants.ZT_COMMAND_X11_KEYBOARD_SHOW:
+                case VsKeyConstants.ZT_COMMAND_X11_KEYBOARD_SHOW_1:
                     x11KeyboardVisible();
                     break;
-                case ZTKeyConstants.ZT_COMMAND_X11_KEYBOARD_HIDE:
-                case ZTKeyConstants.ZT_COMMAND_X11_KEYBOARD_HIDE_1:
+                case VsKeyConstants.ZT_COMMAND_X11_KEYBOARD_HIDE:
+                case VsKeyConstants.ZT_COMMAND_X11_KEYBOARD_HIDE_1:
                     x11KeyboardGone();
                     break;
-                case ZTKeyConstants.ZT_COMMAND_BACKGROUND_IMAGE:
-                case ZTKeyConstants.ZT_COMMAND_BACKGROUND_IMAGE_1:
+                case VsKeyConstants.ZT_COMMAND_BACKGROUND_IMAGE:
+                case VsKeyConstants.ZT_COMMAND_BACKGROUND_IMAGE_1:
                     setImageBackground(new File(FileUrl.INSTANCE.getMainConfigImg() + "/back.jpg"));
                     break;
                 case XmlMenuConfig.MENU_UPDATE:
@@ -2398,7 +2398,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             regMainViewKeyDown();
         }
         try {
-            startService(new Intent(this, ZTSocketService.class));
+            startService(new Intent(this, VsSocketService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2466,7 +2466,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 // @}
                 if (!UserSetManage.Companion.get().getZTUserBean().isHideGuideLayout()) {
                     mGuideLayout.setVisibility(View.GONE);
-                    ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+                    VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
                     ztUserBean.setHideGuideLayout(true);
                     UserSetManage.Companion.get().setZTUserBean(ztUserBean);
                 }
@@ -2712,7 +2712,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
 	 // VictorSuite add {@
     private void initUserData() {
-        ZTUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
         if (ztUserBean.isOpenDownloadFileServices()) {
             new Thread(() -> {
                if (!FileHttpUtils.Companion.get().isServicesRun()) {

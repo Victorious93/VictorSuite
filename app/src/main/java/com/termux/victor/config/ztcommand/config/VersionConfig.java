@@ -13,6 +13,6 @@ public class VersionConfig extends SimpleConfig {
 
     @Override
     public int getId() {
-        return ZTKeyConstants.ZT_ID_VERSION;
+        return VsKeyConstants.ZT_ID_VERSION;
     }
 }

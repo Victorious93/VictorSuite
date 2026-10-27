@@ -1,6 +1,6 @@
 package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_X11_COMMAND_HIDE;
+import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_X11_COMMAND_HIDE;
 
 import android.content.Context;
 

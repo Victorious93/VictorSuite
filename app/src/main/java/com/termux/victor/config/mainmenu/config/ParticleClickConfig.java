@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.bean.VsUserBean;
 import com.termux.victor.ftp.utils.UserSetManage;
 
 public class ParticleClickConfig extends BaseMenuClickConfig {
@@ -30,7 +30,7 @@ public class ParticleClickConfig extends BaseMenuClickConfig {
     @Override
     public void onClick(View view, Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        ZTUserBean ztRainUserBean = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztRainUserBean = UserSetManage.Companion.get().getZTUserBean();
         ztRainUserBean.setSnowflakeShow(false);
         termuxActivity.xue_fragment.removeAllViews();
         if (!ztRainUserBean.isRainShow()) {
@@ -47,7 +47,7 @@ public class ParticleClickConfig extends BaseMenuClickConfig {
     @Override
     public void initViewStatus(Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        ZTUserBean ztRainUserBean = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean ztRainUserBean = UserSetManage.Companion.get().getZTUserBean();
         termuxActivity.xue_fragment.removeAllViews();
         if (ztRainUserBean.isRainShow()) {
             termuxActivity.firework_view.setVisibility(View.VISIBLE);

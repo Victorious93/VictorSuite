@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.victor.bean.ZeroRunCommandBean
+import com.termux.victor.bean.VsRunCommandBean
 import com.termux.victor.dialog.LoadingDialog
 import com.termux.victor.dialog.view_holder.BoomVictorSuiteViewHolder
 import com.termux.victor.url.FileUrl.mainHomeUrl
@@ -17,12 +17,12 @@ import java.io.File
 
 class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
-    private var mList:ArrayList<ZeroRunCommandBean>? = null
+    private var mList:ArrayList<VsRunCommandBean>? = null
 
     private var mActivity:Activity? = null
 
 
-    constructor(mList:ArrayList<ZeroRunCommandBean>?,mActivity:Activity) : super(){
+    constructor(mList:ArrayList<VsRunCommandBean>?,mActivity:Activity) : super(){
 
         this.mList = mList
         this.mActivity = mActivity

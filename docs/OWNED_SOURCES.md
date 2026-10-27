@@ -38,7 +38,7 @@ and what happened to it.
 
 ## Update check behaviour
 
-`ZTGitHubVersion` calls `releases/latest` without authentication. While
+`VsGitHubVersion` calls `releases/latest` without authentication. While
 `Victorious93/VictorSuite` is **private**, GitHub returns 404. Any non-200 response,
 network error or JSON parse failure keeps the "new version" badge hidden — no crash,
 just "no update info". The badge shows only when the latest release `name` starts with

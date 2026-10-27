@@ -1,11 +1,11 @@
 package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_MENU;
+import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_MENU;
 
 import android.content.Context;
 
 import com.example.xh_lib.utils.LogUtils;
-import com.termux.victor.config.ztcommand.ZTSocketService;
+import com.termux.victor.config.ztcommand.VsSocketService;
 
 // zt menu update 更新左菜单
 // zt menu reset 恢复默认菜单
@@ -22,7 +22,7 @@ public class XmlMenuConfig extends BaseOkJsonConfig {
     }
 
     @Override
-    public void sendSocketMessage(ZTSocketService.ClientHandler clientHandler, Context context) {
+    public void sendSocketMessage(VsSocketService.ClientHandler clientHandler, Context context) {
         try {
             String command = mCommand.split(" ")[1];
             clientHandler.sendMessageToActivity("menu_" + command);

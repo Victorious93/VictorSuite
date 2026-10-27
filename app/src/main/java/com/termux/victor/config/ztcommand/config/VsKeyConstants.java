@@ -1,6 +1,6 @@
 package com.termux.victor.config.ztcommand.config;
 
-public class ZTKeyConstants {
+public class VsKeyConstants {
     //未知命令
     public static final int ZT_ID_KNOW = -1;
     public static final String ZT_COMMAND_KNOW = "know";

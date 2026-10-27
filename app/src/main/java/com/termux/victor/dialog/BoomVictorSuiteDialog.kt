@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.termux.R
-import com.termux.victor.bean.ZeroRunCommandBean
+import com.termux.victor.bean.VsRunCommandBean
 import com.termux.victor.data.LinuxCommandData
 import com.termux.victor.dialog.adapter.BoomVictorSuiteAdapter
 import com.termux.victor.popuwindow.NginxPopuWindow
@@ -30,7 +30,7 @@ class BoomVictorSuiteDialog : BaseDialogDown {
 
         recycler_view!!.layoutManager = GridLayoutManager(mContext,4)
 
-        var mList:ArrayList<ZeroRunCommandBean> = LinuxCommandData.getZeroRunCommandBeanData()
+        var mList:ArrayList<VsRunCommandBean> = LinuxCommandData.getZeroRunCommandBeanData()
 
 
         val boomVictorSuiteAdapter = BoomVictorSuiteAdapter(mList, mContext as Activity)

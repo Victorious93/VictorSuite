@@ -59,7 +59,7 @@ The previous one-APK plan treated “keep `targetSdk` 28 for everything” as ac
 - Building the Debian live ISO inside VictorSuite CI.
 - Replacing Magisk/KernelSU/APatch with a custom patcher (RootForge already delegates patching to those apps on the **target** phone).
 - Changing droidcommand-ai in the same PR as this document (protocol stays; DCA needs a small follow-up to treat the suite as two packages, one schema).
-- Using the inherited unauthenticated TCP **19951** (`ZTSocketService`) as the admin/client channel — cautionary existing control plane, not a base (see §12).
+- Using the inherited unauthenticated TCP **19951** (`VsSocketService`) as the admin/client channel — cautionary existing control plane, not a base (see §12).
 - Letting an admin flash/unlock the client through admin/client mode (that remains the **USB toolkit host→target** path; the far phone need not run any suite app).
 - Putting Termux, zerocore, or Termux:API on RootForge’s `:core` / `:toolkit-ui` / `:desktop` classpath.
 
@@ -118,7 +118,7 @@ Drawer categories in `MainMenuConfig.init()`:
 | Config | ADB shell, ZT command keys, bash/start-message, boot command |
 | ZT features | install module, FTP, soft links, uninstall, remote, Headscale, APK analysis, AndroidIDE, AI CLIs, SMS, timers, language, GitHub |
 
-Other notable packages: `plugin/` (authorized-use gate, encrypted prefs, JSONL audit), `deepseek/` (DeepSeek/Claude chat + SQLite), `back/` (`.tar.gz`/`.bz2`/`.xz`/`.Z`), `ftp/` + `ftp/new_ftp/`, `http_core`/`http_service`, `scrcpy/`, `utermux_windows/qemu/`, `adb/` (`libadb.so` + `com.tananaev:adblib:1.3`), `otg/` (**USB mass-storage** via libaums, not ADB), `bosybox/`, `config/ztcommand/` (`ZTSocketService` TCP **19951** JSON commands), `libsu` (topjohnwu 5.2.1).
+Other notable packages: `plugin/` (authorized-use gate, encrypted prefs, JSONL audit), `deepseek/` (DeepSeek/Claude chat + SQLite), `back/` (`.tar.gz`/`.bz2`/`.xz`/`.Z`), `ftp/` + `ftp/new_ftp/`, `http_core`/`http_service`, `scrcpy/`, `utermux_windows/qemu/`, `adb/` (`libadb.so` + `com.tananaev:adblib:1.3`), `otg/` (**USB mass-storage** via libaums, not ADB), `bosybox/`, `config/ztcommand/` (`VsSocketService` TCP **19951** JSON commands), `libsu` (topjohnwu 5.2.1).
 
 Remote JSON catalogues in `remote/{plugins,repository,on_line_sh}/main.json`.
 
@@ -729,7 +729,7 @@ One protocol, two pipes. The client is always the TLS **server**. The admin is t
 - Client binds `127.0.0.1` plus, only if “Allow LAN” is on, the LAN address (not `0.0.0.0` on cellular by default).
 - TLS 1.3, per-install keypair (AndroidKeyStore).
 - Discovery: optional mDNS (`_rootforge-peer._tcp` recommended — the listen app is RootForge; open decision vs `_victorsuite-peer._tcp`) advertising `node_id` + pairing-token **hash**. Manual `IP:port` always works.
-- **Do not** extend VictorSuite `ZTSocketService` (port **19951**, cleartext, no auth). Leave it as a legacy VS feature or ask VS to disable it while Peer is on (handoff extra). Open decision whether to deprecate 19951.
+- **Do not** extend VictorSuite `VsSocketService` (port **19951**, cleartext, no auth). Leave it as a legacy VS feature or ask VS to disable it while Peer is on (handoff extra). Open decision whether to deprecate 19951.
 
 **USB-C (ADB as a tunnel only)**
 
@@ -779,7 +779,7 @@ Highest-risk feature in the suite: remote shell + optional `su` + optional SMS/c
 
 | Risk | Why it is real | Mitigation |
 |---|---|---|
-| Cleartext LAN shell | VS `ZTSocketService` :19951, no TLS/auth | Do not reuse it. Peer listen default **off**. |
+| Cleartext LAN shell | VS `VsSocketService` :19951, no TLS/auth | Do not reuse it. Peer listen default **off**. |
 | Raw `adb shell` as the remote terminal | RF USB ADB is built to run shell on a target | USB is tunnel-only. |
 | Reverse control | Symmetric protocol | Admin does not bind the peer server. Client rejects `peer.*` unless `role==client`. |
 | Cross-app confuse | VS and RF both on the client | Signature-checked IPC; VS refuses session binds from non-suite signers. |
@@ -807,7 +807,7 @@ Neither repo implements a relay today. What *does* exist:
 | Existing | Use for internet remote? |
 |---|---|
 | RootForge USB ADB / `AdbConnection` | No. Local USB only. |
-| VS `ZTSocketService` :19951 | **No.** Cleartext, no auth. |
+| VS `VsSocketService` :19951 | **No.** Cleartext, no auth. |
 | Docker `HeadlessApi` / `ROOTFORGE_API_TOKEN` on `127.0.0.1:8787` | Pattern only. Not a phone-to-phone relay. |
 | VictorSuite **Headscale / Tailnet** drawer | Implementation **reference** (userspace, SOCKS 1055). Product surface moves to **RootForge Settings → Remote**. |
 | RootForge `join_headscale.sh` | Same idea on Debian ISO / chroot; `curl\|sh` is a known smell. Pin before reuse. Not in the PRoot flavour. |
