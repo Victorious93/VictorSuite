@@ -32,7 +32,7 @@ _Steps above are taken from this repo’s build files / existing docs; anything 
 
 # VictorSuite
 
-**A Termux-based Android Linux environment with ZeroTermux-era management tools — containers, backup/restore, plugins, X11, and automation.**
+**An Android Linux environment and toolkit — containers, backup/restore, plugins, X11, AI coding agents and automation.**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
@@ -41,7 +41,9 @@ _Steps above are taken from this repo’s build files / existing docs; anything 
 
 </div>
 
-VictorSuite is a community-driven enhancement of the Termux ecosystem, built on the [ZeroTermux](https://github.com/hanxinhao000/ZeroTermux) codebase and Termux’s terminal stack. It keeps Termux’s `applicationId` (`com.termux`) and the public `RUN_COMMAND` contract so existing Termux tooling and intents still work.
+VictorSuite is an Android Linux environment maintained by Victorious93. It keeps Termux’s `applicationId` (`com.termux`) and the public `RUN_COMMAND` contract so existing Termux tooling and intents still work.
+
+> **Credits:** VictorSuite is a modified version of [Termux](https://github.com/termux/termux-app) and [ZeroTermux](https://github.com/hanxinhao000/ZeroTermux) by hanxinhao000 (both GPLv3). Full credits and bundled-library licences: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 It is intended for personal learning, experimentation, and technical collaboration — not as a commercial product.
 
@@ -49,7 +51,7 @@ It is intended for personal learning, experimentation, and technical collaborati
 
 ## Features
 
-Documented and present in the codebase (ZeroTermux / VictorSuite additions under `com.termux.zerocore`):
+Documented and present in the codebase (VictorSuite features, currently under the inherited `com.termux.zerocore` package):
 
 - **Linux containers** — install and switch between proot-based distributions (catalogue includes Ubuntu, Kali, Fedora, BlackArch, Kali NetHunter Rootless, and others via online-script / repository JSON).
 - **Backup and restore** — archive Termux environments and user data (`.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z`).
@@ -109,7 +111,7 @@ Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.55** 
 
 1. Install a debug or release APK (sideload).
 2. Open VictorSuite — first launch follows Termux-style bootstrap / setup.
-3. Use the drawer menu for ZeroTermux/VictorSuite features (containers, backup, FTP, X11 settings, online scripts, AI CLIs, etc.).
+3. Use the drawer menu for VictorSuite features (containers, backup, FTP, X11 settings, online scripts, AI CLIs, etc.).
 4. For plugins: register from the remote catalogue → acknowledge authorized use → enable → place the entry-point binary yourself. See [PLUGINS.md](PLUGINS.md).
 5. For AI CLIs from the terminal: menu **AI CLIs**, or `bash ~/ai-cli-setup.sh` after the asset is copied — details in [docs/AI_CLIS.md](docs/AI_CLIS.md).
 
@@ -145,7 +147,7 @@ This repository is private. If you have access:
 
 ## Licence
 
-VictorSuite is released under the **GNU General Public License v3** (see [LICENSE.md](LICENSE.md)), following the ZeroTermux / Termux lineage.
+VictorSuite is released under the **GNU General Public License v3** (see [LICENSE.md](LICENSE.md)), following the Termux / ZeroTermux lineage. Credits and bundled-library licences, including open compliance items, are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Exceptions called out in `LICENSE.md` include:
 
