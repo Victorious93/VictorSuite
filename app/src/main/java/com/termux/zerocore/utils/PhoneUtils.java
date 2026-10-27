@@ -22,17 +22,17 @@ public class PhoneUtils {
                 //新建一个联系人实例
                 MyContacts temp = new MyContacts();
                 String contactId = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Contacts._ID));
+                    .getColumnIndexOrThrow(ContactsContract.Contacts._ID));
                 //获取联系人姓名
                 String name = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    .getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
                 temp.name = name;
 
                 //获取联系人电话号码
                 Cursor phoneCursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                     null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
                 while (phoneCursor.moveToNext()) {
-                    String phone = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    String phone = phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     phone = phone.replace("-", "");
                     phone = phone.replace(" ", "");
                     temp.phone = phone;
@@ -48,7 +48,7 @@ public class PhoneUtils {
                 if (noteCursor.moveToFirst()) {
                     do {
                         String note = noteCursor.getString(noteCursor
-                            .getColumnIndex(ContactsContract.CommonDataKinds.Nickname.NAME));
+                            .getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Nickname.NAME));
                         temp.note = note;
                         Log.i("note:", note);
                     } while (noteCursor.moveToNext());
