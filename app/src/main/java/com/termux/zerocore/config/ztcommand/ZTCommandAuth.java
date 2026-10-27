@@ -1,11 +1,12 @@
 package com.termux.zerocore.config.ztcommand;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 
@@ -25,7 +26,7 @@ public final class ZTCommandAuth {
     /** Reads the token file, creating it (owner-only) with a fresh random token if missing or empty. */
     public static synchronized String loadOrCreateToken(File file) throws IOException {
         if (file.isFile()) {
-            String existing = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8).trim();
+            String existing = readTokenFile(file);
             if (!existing.isEmpty()) {
                 restrict(file);
                 return existing;
@@ -43,6 +44,24 @@ public final class ZTCommandAuth {
         }
         restrict(file);
         return token;
+    }
+
+    /**
+     * Reads the (small) token file without java.nio.file, which is API 26+ and is not
+     * covered by core-library desugaring on our minSdk 23. Bounded so a corrupted or
+     * hostile file cannot make us buffer unbounded data.
+     */
+    static String readTokenFile(File file) throws IOException {
+        try (Reader in = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)) {
+            StringBuilder sb = new StringBuilder();
+            char[] buf = new char[256];
+            int n;
+            while ((n = in.read(buf)) != -1) {
+                sb.append(buf, 0, n);
+                if (sb.length() > MAX_LINE_CHARS) throw new IOException("token file too large");
+            }
+            return sb.toString().trim();
+        }
     }
 
     private static void restrict(File file) {
