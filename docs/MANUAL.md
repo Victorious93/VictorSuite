@@ -104,6 +104,23 @@ Not callable remotely. No Settings button yet.
 | `internal` | Something else went wrong (also: backup could not be decrypted) |
 
 
+## Container backup and restore
+
+The backup panel (Backup / Restore in the side menu) writes the whole Termux
+`files` directory (`home` and `usr`) to `internal storage/xinhao/data/` as a
+`.tar.gz`, `.tar.bz2`, `.tar.xz` or `.tar.Z` archive. Restore accepts the same
+four formats and unpacks the archive into a new container (`filesN`).
+
+> **Warning: backups are not encrypted.** The archive is a plain tar file on
+> shared storage. It contains everything in your home directory, including SSH
+> private keys (`~/.ssh`), API keys and tokens, `termux.properties` and shell
+> history. Any app with storage access can read it. Keep backups private, do not
+> share them, and delete them when you no longer need them.
+
+Restore only accepts archive names without control characters (for example a
+newline) or `/`. The name is quoted when it is passed to `tar`, so spaces and
+characters such as `;`, `$`, `` ` `` and `'` are restored as-is.
+
 ## AI Coding Agents pack
 
 Menu **ZT features → AI Coding Agents** installs Claude Code, OpenAI Codex CLI, GitHub Copilot CLI

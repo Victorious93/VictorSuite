@@ -144,10 +144,7 @@ class BackViewModel : BackupClickListener {
                 }
                 withContext(Dispatchers.Main) {
                     mLoadingDialog?.dismiss()
-                    val replace = CommendShellData.SHELL_BACKUP.replace(
-                        "systemName",
-                        FileIOUtils.getTimeFileName(name)
-                    ).replace("TemporaryMark", command)
+                    val replace = CommendShellData.getShellBackup(command, FileIOUtils.getTimeFileName(name))
                     sendTextToTerminal(replace)
                     UUtils.showMsg(UUtils.getString(R.string.开始备份))
                    // mBackupStoreDialogCloseListener?.backupStoreDismiss()

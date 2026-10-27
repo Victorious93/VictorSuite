@@ -785,7 +785,7 @@
 
     <string name="backup_success">备份完成，备份文件在->内部存储/xinhao/data/|目录下</string>
 
-    <string name="backup_msg_dialog">开始备份当前容器,系统需要新建一个会话来进行备份操作,点击确定继续</string>
+    <string name="backup_msg_dialog">开始备份当前容器,系统需要新建一个会话来进行备份操作,点击确定继续 警告：备份是未加密的 tar 压缩包，保存在共享存储（内部存储/xinhao/data）中。它包含主目录中的所有内容，例如 SSH 私钥、API 令牌和命令历史。任何拥有存储权限的应用都可以读取它；请妥善保管，不再需要时请删除。</string>
 
     <string name="delete_restore_data">删除此数据包</string>
 
@@ -1424,6 +1424,7 @@
     <string name="remote_control_pairings_title">已配对的舰队应用</string>
     <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef,certSha256。必须提供签名证书 SHA-256:没有证书的行永远不会被接受。只有这些应用可以发送远程控制信封。</string>
     <string name="remote_control_pairings_saved">配对已保存</string>
+    <string name="backup_file_name_unsafe">该备份文件名包含控制字符或路径分隔符，无法安全恢复。请重命名文件后重试。</string>
 </resources>
 
 
