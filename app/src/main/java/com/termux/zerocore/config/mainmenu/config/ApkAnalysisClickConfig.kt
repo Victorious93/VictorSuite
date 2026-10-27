@@ -25,7 +25,7 @@ class ApkAnalysisClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getString(context: Context?): String? {
-        return "APK Analysis Tools"
+        return context?.getString(R.string.vs_menu_apk_analysis)
     }
 
     override fun onClick(view: View?, context: Context?) {
@@ -33,11 +33,11 @@ class ApkAnalysisClickConfig : BaseMenuClickConfig() {
         val labels = tools.map { "${it.first} — ${it.second}" }.toTypedArray()
 
         AlertDialog.Builder(ctx)
-            .setTitle("Install analysis tools")
+            .setTitle(R.string.vs_apk_install_title)
             .setMultiChoiceItems(labels, checked) { _, which, isChecked ->
                 checked[which] = isChecked
             }
-            .setPositiveButton("Install selected") { _, _ ->
+            .setPositiveButton(R.string.vs_apk_install_selected) { _, _ ->
                 val selected = tools.indices.filter { checked[it] }.map { tools[it].first }
                 if (selected.isNotEmpty()) {
                     val command = "pkg install -y ${selected.joinToString(" ")}\n"
@@ -45,7 +45,7 @@ class ApkAnalysisClickConfig : BaseMenuClickConfig() {
                         .sendTextToTerminal(command)
                 }
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
 }

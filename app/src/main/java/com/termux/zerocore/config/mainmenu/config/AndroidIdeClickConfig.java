@@ -36,7 +36,7 @@ public class AndroidIdeClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return "Android IDE";
+        return context.getString(R.string.vs_menu_android_ide);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class AndroidIdeClickConfig extends BaseMenuClickConfig {
             return;
         }
 
-        Toast.makeText(context, "Android IDE is not installed - opening its GitHub page", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.vs_android_ide_not_installed, Toast.LENGTH_LONG).show();
         Intent viewIntent = new Intent(Intent.ACTION_VIEW);
         viewIntent.setData(Uri.parse(ANDROID_IDE_GITHUB_URL));
         viewIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

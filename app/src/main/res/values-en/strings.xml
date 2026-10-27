@@ -201,7 +201,7 @@
     <string name="切换源">Source</string>
     <string name="容器切换">ContainerSwitching</string>
     <string name="备份恢复">Backup/restore</string>
-    <string name="发行版本">linux</string>
+    <string name="发行版本">Release Version</string>
     <string name="QEMU">QEMU</string>
     <string name="命令定义">CommandEditing</string>
     <string name="短信通话">SMS/Call</string>
@@ -358,7 +358,7 @@ error</string>
     </string>
     <string name="版本">version</string>
     <string name="会话窗口在右侧">Tip: The session window is on the right side\nDouble-click the command window to open the shortcut command\nLicense: Learn to communicate</string>
-    <string name="开源地址">Open source address \n thank</string>
+    <string name="开源地址">Source code &amp; credits</string>
     <string name="已打开开机启动命令">The boot command has been opened, restart the APP to take effect</string>
     <string name="已关闭开机启动命令">The boot command has been turned off and will take effect after restart</string>
     <string name="悬浮窗口">Floating window</string>
@@ -1433,4 +1433,25 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="remote_control_pairings_title">Paired fleet apps</string>
     <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef,certSha256. The signing-cert SHA-256 is required: a line without it is never accepted. Only these apps can send remote-control envelopes.</string>
     <string name="remote_control_pairings_saved">Pairings saved</string>
+    <string name="vs_menu_ai_agents">AI Coding Agents</string>
+    <string name="vs_menu_ai_clis">AI CLIs</string>
+    <string name="vs_menu_android_ide">Android IDE</string>
+    <string name="vs_menu_headscale">Headscale / Tailnet</string>
+    <string name="vs_menu_apk_analysis">APK Analysis Tools</string>
+    <string name="vs_android_ide_not_installed">Android IDE is not installed - opening its GitHub page</string>
+    <string name="vs_ai_agents_prepare_failed">Could not prepare the AI agents pack: %1$s</string>
+    <string name="vs_ai_cli_prepare_failed">Could not prepare the AI CLI setup script: %1$s</string>
+    <string name="vs_distro_prepare_failed">Could not prepare the %1$s login script: %2$s</string>
+    <string name="vs_apk_install_title">Install analysis tools</string>
+    <string name="vs_apk_install_selected">Install selected</string>
+    <string name="vs_headscale_title">Headscale / WireGuard Tailnet</string>
+    <string name="vs_headscale_message">Connects this device to your own headscale server over a WireGuard-based tailnet (no root required). If you leave the pre-auth key blank, the terminal will print a login URL to open in a browser instead.</string>
+    <string name="vs_headscale_server_hint">Login server URL, e.g. https://headscale.example.com</string>
+    <string name="vs_headscale_authkey_hint">Pre-auth key (leave blank to log in interactively)</string>
+    <string name="vs_headscale_server_required">Login server URL is required</string>
+    <string name="vs_headscale_connect">Connect</string>
+    <string name="vs_headscale_status">Status</string>
+    <string name="vs_headscale_disconnect">Disconnect</string>
+    <string name="vs_catalog_empty">Nothing here yet: this catalog is empty.</string>
+    <string name="vs_file_manager_not_installed">VictorFiles is not installed. Install it from the Releases page.</string>
 </resources>

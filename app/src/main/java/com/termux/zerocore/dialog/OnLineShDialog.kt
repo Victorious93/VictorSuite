@@ -66,6 +66,13 @@ class OnLineShDialog : BaseDialogDown {
                     recycler_view?.layoutManager = LinearLayoutManager(this@OnLineShDialog.mContext)
                     service_name?.text = fromJson.serviceName
                     val data = fromJson.data
+                    if (data.isNullOrEmpty()) {
+                        UUtils.runOnUIThread {
+                            UUtils.showMsg(UUtils.getString(R.string.vs_catalog_empty))
+                            dismiss()
+                        }
+                        return
+                    }
                     val onLineShDialogAdapter = OnLineShDialogAdapter(data,fromJson.ip)
                     recycler_view?.adapter = onLineShDialogAdapter
 

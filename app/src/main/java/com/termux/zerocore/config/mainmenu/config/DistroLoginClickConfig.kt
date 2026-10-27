@@ -54,7 +54,7 @@ open class DistroLoginClickConfig(private val key: String, private val label: St
                 }
             } catch (e: IOException) {
                 mainHandler.post {
-                    Toast.makeText(appContext, "Could not prepare the $label login script: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(appContext, appContext.getString(R.string.vs_distro_prepare_failed, label, e.message ?: ""), Toast.LENGTH_LONG).show()
                 }
             }
         }.start()

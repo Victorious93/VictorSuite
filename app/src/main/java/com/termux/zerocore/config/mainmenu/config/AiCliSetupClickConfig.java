@@ -42,7 +42,7 @@ public class AiCliSetupClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return "AI CLIs";
+        return context.getString(R.string.vs_menu_ai_clis);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class AiCliSetupClickConfig extends BaseMenuClickConfig {
                     .sendTextToTerminal("bash ~/" + SCRIPT_ASSET + "\n"));
             } catch (IOException e) {
                 mainHandler.post(() -> Toast.makeText(appContext,
-                    "Could not prepare the AI CLI setup script: " + e.getMessage(),
+                    appContext.getString(R.string.vs_ai_cli_prepare_failed, e.getMessage()),
                     Toast.LENGTH_LONG).show());
             }
         }).start();

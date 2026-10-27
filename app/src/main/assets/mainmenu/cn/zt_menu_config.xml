@@ -38,7 +38,7 @@
     然后使用
     zt menu update 立即刷新-->
     <!--#######################可删除#########################-->
-    <group name="示例点击事件(可在配置文件删除此分组)">
+    <group enabled="false" name="示例点击事件(可在配置文件删除此分组)">
         <item tag="自定义左侧栏"
             name="编辑菜单"
             icon="imgPath:/data/data/com.termux/files/home/ZtInfo/edit_menu.png"
@@ -246,6 +246,16 @@
             click="java:com.termux.zerocore.config.mainmenu.config.UnInstallClickConfig" />
         <item tag="ADB 远程链接"
             click="java:com.termux.zerocore.config.mainmenu.config.RemoteConnectionClickConfig" />
+        <item tag="Headscale"
+            click="java:com.termux.zerocore.config.mainmenu.config.HeadscaleClickConfig" />
+        <item tag="APK Analysis"
+            click="java:com.termux.zerocore.config.mainmenu.config.ApkAnalysisClickConfig" />
+        <item tag="Android IDE"
+            click="java:com.termux.zerocore.config.mainmenu.config.AndroidIdeClickConfig" />
+        <item tag="AI CLIs"
+            click="java:com.termux.zerocore.config.mainmenu.config.AiCliSetupClickConfig" />
+        <item tag="AI Coding Agents"
+            click="java:com.termux.zerocore.config.mainmenu.config.AiAgentsPackClickConfig" />
         <item tag="浏览器终端"
             click="java:com.termux.zerocore.config.mainmenu.config.WebDataClickConfig" />
         <item tag="短信/通话"

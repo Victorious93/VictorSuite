@@ -704,7 +704,10 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                     service_name?.text = serviceName.serviceName
                     mArray?.clear()
-                    mArray?.addAll(serviceName.data)
+                    serviceName.data?.let { mArray?.addAll(it) }
+                    if (mArray.isNullOrEmpty()) {
+                        UUtils.showMsg(UUtils.getString(R.string.vs_catalog_empty))
+                    }
                     this@DownLoadDialogBoom.ip = serviceName.ip
                     taskSynchronization()
                     mDownLoadAdapter?.setIp(serviceName.ip)

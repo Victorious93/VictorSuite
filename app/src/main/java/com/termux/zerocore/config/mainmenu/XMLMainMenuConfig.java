@@ -451,6 +451,10 @@ public class XMLMainMenuConfig {
 
             for (int i = 0; i < groupList.getLength(); i++) {
                 Element groupElement = (Element) groupList.item(i);
+                // enabled="false" hides a group (used for the shipped example group).
+                if ("false".equalsIgnoreCase(groupElement.getAttribute("enabled").trim())) {
+                    continue;
+                }
 
                 // 获取group名称
                 String groupName = groupElement.getAttribute("name");

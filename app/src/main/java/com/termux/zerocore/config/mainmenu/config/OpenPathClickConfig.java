@@ -4,6 +4,7 @@ import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURE
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -11,6 +12,11 @@ import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 
 public class OpenPathClickConfig extends BaseMenuClickConfig {
+    private static final String[] FILE_MANAGER_PACKAGES = {
+        "ai.victorious.filemanager",
+        "ai.victorious.filemanager.debug"
+    };
+
     @Override
     public int getType() {
         return CODE_ZT_FEATURES;
@@ -28,13 +34,20 @@ public class OpenPathClickConfig extends BaseMenuClickConfig {
 
     @Override
     public void onClick(View view, Context context) {
-        try {
-            Intent intent = new Intent();
-            intent.setAction("com.utermux.files.action");
-            context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-            UUtils.showMsg(UUtils.getString(R.string.zt_install_file));
+        // Same target as the toolbar File Manager button: VictorFiles.
+        PackageManager pm = context.getPackageManager();
+        for (String pkg : FILE_MANAGER_PACKAGES) {
+            Intent launch = pm.getLaunchIntentForPackage(pkg);
+            if (launch != null) {
+                launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    context.startActivity(launch);
+                    return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        UUtils.showMsg(context.getString(R.string.vs_file_manager_not_installed));
     }
 }
