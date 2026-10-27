@@ -229,8 +229,6 @@
     <string name="打开目录">OpenDirectory</string>
     <string name="开机启动">Startup(off)</string>
     <string name="开机启动开">Startup(on)</string>
-    <string name="MOE">MOE</string>
-    <string name="MOE全能">MOE ALL</string>
     <string name="清华源">QingHuaSource</string>
     <string name="北京源">BeiJinSource</string>
     <string name="官方源">OfficialSource</string>
@@ -1002,7 +1000,6 @@ Reset successfully</string>
     <string name="zt_install_file">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> (VictorSuite)Utermux File Plug] to install the plug-in</string>
     <string name="zt_volume_function_title">Restore volume +- keys</string>
     <string name="zt_volume_function_summary">Disable the current use of volume +- keys to pop up the left/right panel</string>
-    <string name="zt_moe_remove">MOE is no longer maintained by the author, and unpredictable errors may occur in VictorSuite.</string>
 
     <string-array name="options_resolution_keys">
         <item>1920x1080</item>

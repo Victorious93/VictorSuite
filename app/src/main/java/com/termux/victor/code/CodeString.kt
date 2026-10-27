@@ -25,7 +25,6 @@ public object CodeString {
     public val runQemuSh: String = "cd ~ && cd ~ && chmod 777 utqemu.sh && ./utqemu.sh \n"
     public val runWin7Sh: String = "cd ~ && cd ~ && chmod 777 qemu_win7.sh && ./qemu_win7.sh \n"
     public val runWinXPSh: String = "cd ~ && cd ~ && chmod 777 qemu_winxp.sh && ./qemu_winxp.sh \n"
-    public val runMoeSh: String = "echo 'Disabled: this installer was fetched from an upstream personal gitee mirror. Use proot-distro instead.'\n"
     public val runsmsChomdSh: String = "cd .. && cd usr && cd bin && chmod 777 smsread && cd ~ \n"
     public val runPhoneChomdSh: String = "cd .. && cd usr && cd bin && chmod 777 readcontacts && cd ~ \n"
     public val runsmsInstallSh: String = "cd ~ && pkg update -y && pkg install vim -y \n"
