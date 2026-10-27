@@ -1,6 +1,6 @@
 package com.termux.app.activities;
 
-import com.termux.zerocore.config.VsLinks;
+import com.termux.victor.config.VsLinks;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;

@@ -17,7 +17,7 @@
 
 
 
-    <com.termux.zerocore.view.CustomScrollView
+    <com.termux.victor.view.CustomScrollView
         android:layout_width="match_parent"
         android:background="@drawable/shape_r_3dp_161823_2e"
         android:layout_marginTop="10dp"
@@ -38,7 +38,7 @@
             android:textColor="@color/color_ffffff"
             android:layout_height="match_parent"/>
 
-    </com.termux.zerocore.view.CustomScrollView>
+    </com.termux.victor.view.CustomScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

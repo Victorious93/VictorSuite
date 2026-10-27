@@ -1,6 +1,6 @@
 # Plugin framework
 
-`com.termux.zerocore.plugin` is a small, tool-agnostic framework for registering,
+`com.termux.victor.plugin` is a small, tool-agnostic framework for registering,
 gating, and launching external command-line/GUI tools that the user installs and
 authorizes themselves. It is infrastructure only: this codebase does not implement,
 bundle, download, or automate any specific tool through it, security-related or

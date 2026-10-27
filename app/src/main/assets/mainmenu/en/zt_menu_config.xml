@@ -19,7 +19,7 @@
         Example: name="Switch Source"
         ####################### click ########################
         1.click: Calls a JAVA class internal to VictorSuite.
-        Example: click="java:com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig"
+        Example: click="java:com.termux.victor.config.mainmenu.config.SwitchSourceClickConfig"
         2.Or jump to a web page:
         click="jumpUrl:www.example.com"
         3.Or execute a shell command:
@@ -65,7 +65,7 @@
             icon=""
             packageName="com.termux"
             intentData=""
-            click="startActivity:com.termux.zerocore.settings.ZtSettingsActivity" />
+            click="startActivity:com.termux.victor.settings.ZtSettingsActivity" />
         <!--intentData property values, currently only support String strings
             key@@value-->
         <item tag="JumpAction"
@@ -108,170 +108,170 @@
         <!--Modify your new name in the name tag-->
         <item tag="Switch Source"
             name="Switch Source"
-            click="java:com.termux.zerocore.config.mainmenu.config.SwitchSourceClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.SwitchSourceClickConfig" />
         <item tag="Container Switch"
-            click="java:com.termux.zerocore.config.mainmenu.config.ContainerSwitchClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ContainerSwitchClickConfig" />
         <item tag="Backup/Restore"
-            click="java:com.termux.zerocore.config.mainmenu.config.BackupRestoreClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.BackupRestoreClickConfig" />
         <item tag="MOE All-in-One"
-            click="java:com.termux.zerocore.config.mainmenu.config.MoeClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.MoeClickConfig" />
         <item tag="Release Version"
-            click="java:com.termux.zerocore.config.mainmenu.config.ReleaseLinuxVersionClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ReleaseLinuxVersionClickConfig" />
         <item tag="QEMU"
-            click="java:com.termux.zerocore.config.mainmenu.config.QEMUClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.QEMUClickConfig" />
         <item tag="VictorSuite Settings"
-            click="java:com.termux.zerocore.config.mainmenu.config.ZTSettingsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ZTSettingsClickConfig" />
         <item tag="Plugin Manager"
-            click="java:com.termux.zerocore.config.mainmenu.config.PluginManagerClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.PluginManagerClickConfig" />
         <item tag="Hak5 Companion"
             name="Hak5 Companion"
-            click="java:com.termux.zerocore.config.mainmenu.config.Hak5CompanionClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.Hak5CompanionClickConfig" />
     </group>
 
     <group name="Linux Login">
         <item tag="Ubuntu Login"
             name="Ubuntu"
-            click="java:com.termux.zerocore.config.mainmenu.config.UbuntuLoginClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.UbuntuLoginClickConfig" />
         <item tag="Kali Login"
             name="Kali Linux"
-            click="java:com.termux.zerocore.config.mainmenu.config.KaliLoginClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.KaliLoginClickConfig" />
         <item tag="Parrot Login"
             name="Parrot OS"
-            click="java:com.termux.zerocore.config.mainmenu.config.ParrotLoginClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ParrotLoginClickConfig" />
         <item tag="BlackArch Login"
             name="BlackArch"
-            click="java:com.termux.zerocore.config.mainmenu.config.BlackArchLoginClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.BlackArchLoginClickConfig" />
     </group>
 
     <group name="X11 Functions">
         <item tag="X11 Settings"
-            click="java:com.termux.zerocore.config.mainmenu.config.X11SettingsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.X11SettingsClickConfig" />
         <item tag="Show Terminal"
-            click="java:com.termux.zerocore.config.mainmenu.config.ShowCommandClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ShowCommandClickConfig" />
         <item tag="Hide Terminal"
-            click="java:com.termux.zerocore.config.mainmenu.config.HideCommandClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.HideCommandClickConfig" />
         <item tag="X11 Environment"
-            click="java:com.termux.zerocore.config.mainmenu.config.X11EnvironmentClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.X11EnvironmentClickConfig" />
         <item tag="Fix Environment Error"
-            click="java:com.termux.zerocore.config.mainmenu.config.FixEnvironmentalErrorClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.FixEnvironmentalErrorClickConfig" />
         <item tag="Install X11"
-            click="java:com.termux.zerocore.config.mainmenu.config.InstallX11ClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.InstallX11ClickConfig" />
         <item tag="Show Keyboard"
-            click="java:com.termux.zerocore.config.mainmenu.config.ShowX11KeyboardClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ShowX11KeyboardClickConfig" />
         <item tag="Hide Keyboard"
-            click="java:com.termux.zerocore.config.mainmenu.config.HideX11KeyboardClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.HideX11KeyboardClickConfig" />
         <item tag="VNC"
-            click="java:com.termux.zerocore.config.mainmenu.config.VNCClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.VNCClickConfig" />
     </group>
 
     <group name="Beautification/UI Functions">
         <item tag="Floating Window"
-            click="java:com.termux.zerocore.config.mainmenu.config.FloatWindowsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.FloatWindowsClickConfig" />
         <item tag="Beautification Settings"
-            click="java:com.termux.zerocore.config.mainmenu.config.BeautificationSettingsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.BeautificationSettingsClickConfig" />
         <item tag="Font Settings"
-            click="java:com.termux.zerocore.config.mainmenu.config.FontSettingsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.FontSettingsClickConfig" />
         <item tag="Full Screen Mode"
-            click="java:com.termux.zerocore.config.mainmenu.config.FullScreenClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.FullScreenClickConfig" />
         <item tag="Snowflake (Modifying this name will disable display status)"
-            click="java:com.termux.zerocore.config.mainmenu.config.SnowflakeClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.SnowflakeClickConfig" />
         <item tag="Video Background"
-            click="java:com.termux.zerocore.config.mainmenu.config.WebDataClickConfigImp" />
+            click="java:com.termux.victor.config.mainmenu.config.WebDataClickConfigImp" />
         <item tag="Particle Animation"
-            click="java:com.termux.zerocore.config.mainmenu.config.ParticleClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ParticleClickConfig" />
         <item tag="Clear Beautification"
-            click="java:com.termux.zerocore.config.mainmenu.config.ClearStyleClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ClearStyleClickConfig" />
     </group>
 
     <group name="Requires Plugin/Engine (Restart APP after installation)">
         <item tag="Built-in Keyboard"
-            click="java:com.termux.zerocore.config.mainmenu.config.KeyDataClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.KeyDataClickConfig" />
         <item tag="Network Linux Directory"
-            click="java:com.termux.zerocore.config.mainmenu.config.FileBrowserClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.FileBrowserClickConfig" />
         <item tag="x86 Alpine"
-            click="java:com.termux.zerocore.config.mainmenu.config.X86AlpineDataClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.X86AlpineDataClickConfig" />
     </group>
 
     <group name="ROOT Functions">
         <item tag="Network ADB"
-            click="java:com.termux.zerocore.config.mainmenu.config.OpenTurnNetworkAdbClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.OpenTurnNetworkAdbClickConfig" />
         <item tag="Close ADB"
-            click="java:com.termux.zerocore.config.mainmenu.config.CloseTurnNetworkAdbClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.CloseTurnNetworkAdbClickConfig" />
         <item tag="Docker Check"
-            click="java:com.termux.zerocore.config.mainmenu.config.DockerCheckClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.DockerCheckClickConfig" />
     </group>
 
     <group name="Online Functions">
         <item tag="Online Scripts"
-            click="java:com.termux.zerocore.config.mainmenu.config.OnLineCommandClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.OnLineCommandClickConfig" />
         <item tag="Termux Wiki"
-            click="java:com.termux.zerocore.config.mainmenu.config.ZeroBBsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ZeroBBsClickConfig" />
         <item tag="Download Station"
-            click="java:com.termux.zerocore.config.mainmenu.config.DownLoadClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.DownLoadClickConfig" />
         <item tag="Public Repository"
-            click="java:com.termux.zerocore.config.mainmenu.config.PublicWarehouseClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.PublicWarehouseClickConfig" />
     </group>
 
     <group name="Configure Terminal">
         <item tag="SHELL Run"
-            click="java:com.termux.zerocore.config.mainmenu.config.AdbShellRunClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.AdbShellRunClickConfig" />
         <item tag="Bottom Keyboard"
-            click="java:com.termux.zerocore.config.mainmenu.config.ZTCommandKeyClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ZTCommandKeyClickConfig" />
         <item tag="Default Startup File"
-            click="java:com.termux.zerocore.config.mainmenu.config.DefBashClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.DefBashClickConfig" />
         <item tag="Edit Startup File"
-            click="java:com.termux.zerocore.config.mainmenu.config.ChangBashClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ChangBashClickConfig" />
         <item tag="Modify Welcome Message"
-            click="java:com.termux.zerocore.config.mainmenu.config.ChangStartMsgClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ChangStartMsgClickConfig" />
         <item tag="Command Definition"
-            click="java:com.termux.zerocore.config.mainmenu.config.CommandDefinitionCLickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.CommandDefinitionCLickConfig" />
         <item tag="Boot Startup (Modifying this name will disable display status)"
-            click="java:com.termux.zerocore.config.mainmenu.config.BootCommandClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.BootCommandClickConfig" />
     </group>
 
     <group name="VictorSuite Functions">
         <item tag="Install Module"
-            click="java:com.termux.zerocore.config.mainmenu.config.InstallModuleClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.InstallModuleClickConfig" />
         <item tag="FTP Service"
-            click="java:com.termux.zerocore.config.mainmenu.config.FtpDataClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.FtpDataClickConfig" />
         <item tag="Common Shortcuts"
-            click="java:com.termux.zerocore.config.mainmenu.config.CommonlyUsedSoftLinksDataClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.CommonlyUsedSoftLinksDataClickConfig" />
         <item tag="Custom Shortcuts"
-            click="java:com.termux.zerocore.config.mainmenu.config.MyUsedSoftLinksDataClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.MyUsedSoftLinksDataClickConfig" />
         <item tag="Uninstall"
-            click="java:com.termux.zerocore.config.mainmenu.config.UnInstallClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.UnInstallClickConfig" />
         <item tag="ADB Remote Connection"
-            click="java:com.termux.zerocore.config.mainmenu.config.RemoteConnectionClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.RemoteConnectionClickConfig" />
         <item tag="Headscale"
-            click="java:com.termux.zerocore.config.mainmenu.config.HeadscaleClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.HeadscaleClickConfig" />
         <item tag="APK Analysis"
-            click="java:com.termux.zerocore.config.mainmenu.config.ApkAnalysisClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ApkAnalysisClickConfig" />
         <item tag="Android IDE"
-            click="java:com.termux.zerocore.config.mainmenu.config.AndroidIdeClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.AndroidIdeClickConfig" />
         <item tag="AI CLIs"
-            click="java:com.termux.zerocore.config.mainmenu.config.AiCliSetupClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.AiCliSetupClickConfig" />
         <item tag="AI Coding Agents"
-            click="java:com.termux.zerocore.config.mainmenu.config.AiAgentsPackClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.AiAgentsPackClickConfig" />
         <item tag="Browser Terminal"
-            click="java:com.termux.zerocore.config.mainmenu.config.WebDataClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.WebDataClickConfig" />
         <item tag="SMS/Call"
-            click="java:com.termux.zerocore.config.mainmenu.config.PhoneSmsClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.PhoneSmsClickConfig" />
         <item tag="Scheduled Tasks"
-            click="java:com.termux.zerocore.config.mainmenu.config.ScheduledTaskClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.ScheduledTaskClickConfig" />
         <item tag="Open Directory"
-            click="java:com.termux.zerocore.config.mainmenu.config.OpenPathClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.OpenPathClickConfig" />
         <item tag="Create Data Package Info"
-            click="java:com.termux.zerocore.config.mainmenu.config.DataMessageClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.DataMessageClickConfig" />
         <item tag="Language Switch"
-            click="java:com.termux.zerocore.config.mainmenu.config.LanguageClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.LanguageClickConfig" />
         <item tag="Open Source Address"
-            click="java:com.termux.zerocore.config.mainmenu.config.GitHubClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.GitHubClickConfig" />
     </group>
 
     <group name="RootForge">
         <item tag="Open RootForge"
             name="Open RootForge"
-            click="java:com.termux.zerocore.config.mainmenu.config.RootForgeOpenClickConfig" />
+            click="java:com.termux.victor.config.mainmenu.config.RootForgeOpenClickConfig" />
     </group>
 
 </zt-menu>

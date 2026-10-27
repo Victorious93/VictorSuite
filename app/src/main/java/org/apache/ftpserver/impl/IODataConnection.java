@@ -2,7 +2,7 @@ package org.apache.ftpserver.impl;
 
 
 
-import com.termux.zerocore.ftp.new_ftp.services.FtpService;
+import com.termux.victor.ftp.new_ftp.services.FtpService;
 
 import org.apache.ftpserver.ftplet.DataConnection;
 import org.apache.ftpserver.ftplet.DataType;

@@ -12,7 +12,7 @@
             android:id="@+id/back_img"
             android:scaleType="centerCrop"
             android:layout_height="match_parent"/>
-        <com.termux.zerocore.view.CustomerVideoView
+        <com.termux.victor.view.CustomerVideoView
             android:layout_width="match_parent"
             android:id="@+id/back_video"
             android:visibility="invisible"

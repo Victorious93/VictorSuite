@@ -10,7 +10,7 @@ unchanged; this file adds credits, it does not replace any of them.
 |---|---|---|---|
 | Termux app (terminal, bootstrap, `RUN_COMMAND`) | Fredrik Fornwall and the Termux developers | GPLv3 (some parts Apache-2.0, see below) | https://github.com/termux/termux-app |
 | Termux:API (`termux-api-lib`) | Termux developers | GPLv3 | https://github.com/termux/termux-api |
-| ZeroTermux (`com.termux.zerocore` code, drawer tools, management features) | hanxinhao000 | GPLv3 only | https://github.com/hanxinhao000/ZeroTermux |
+| ZeroTermux (`com.termux.zerocore` code, now `com.termux.victor`; drawer tools, management features) | hanxinhao000 | GPLv3 only | https://github.com/hanxinhao000/ZeroTermux |
 | Terminal Emulator for Android (`terminal-view`, `terminal-emulator`) | Jack Palevich | Apache-2.0 | https://github.com/jackpal/Android-Terminal-Emulator |
 | libcore/ojluni (`com.termux.shared.file`) | The Android Open Source Project / Oracle | GPLv2 with Classpath exception | https://cs.android.com/android/platform/superproject/+/android-11.0.0_r3:libcore/ojluni/ |
 | libsuperuser (`StreamGobbler`) | Chainfire | Apache-2.0 | https://github.com/Chainfire/libsuperuser |

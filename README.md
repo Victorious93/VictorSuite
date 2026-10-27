@@ -51,7 +51,7 @@ It is intended for personal learning, experimentation, and technical collaborati
 
 ## Features
 
-Documented and present in the codebase (VictorSuite features, currently under the inherited `com.termux.zerocore` package):
+Documented and present in the codebase (VictorSuite features, under the `com.termux.victor` package):
 
 - **Linux containers** — install and switch between proot-based distributions (catalogue includes Ubuntu, Kali, Fedora, BlackArch, Kali NetHunter Rootless, and others via online-script / repository JSON).
 - **Backup and restore** — archive Termux environments and user data (`.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z`).
@@ -60,8 +60,8 @@ Documented and present in the codebase (VictorSuite features, currently under th
 - **Plugin framework** — register, authorize, enable, and launch user-installed tools with an audit log and encrypted settings store (see [PLUGINS.md](PLUGINS.md)). The framework does **not** download or implement specific tools.
 - **Embedded services** — FTP server, HTTP/ttyd-style service, file browser integrations.
 - **X11 support** — separately distributed internal-channel X11 AAR; Termux:X11–style desktop workflows.
-- **scrcpy / QEMU / wireless ADB / root shell** — integrations under `zerocore` (scrcpy, UTermux/QEMU windows, wireless ADB, libsu).
-- **In-app AI chat** — DeepSeek and Claude API clients with SQLite session storage (`zerocore/deepseek`).
+- **scrcpy / QEMU / wireless ADB / root shell** — integrations under `victor` (scrcpy, UTermux/QEMU windows, wireless ADB, libsu).
+- **In-app AI chat** — DeepSeek and Claude API clients with SQLite session storage (`victor/deepseek`).
 - **AI CLI setup script** — bundled `scripts/ai-cli-setup.sh` installs pi, Copilot CLI, Codex CLI, and Hugging Face CLI (some via an Ubuntu proot container). **Not yet run on a real device** — see [docs/AI_CLIS.md](docs/AI_CLIS.md).
 - **AI Coding Agents pack** — menu **ZT features → AI Coding Agents** installs Claude Code, Codex CLI, Copilot CLI, and Ollama (local or remote) via `ai-agents-pack.sh`, with `vsphone` (root/Shizuku phone-control bridge + approval gates) and `vstoken` (token minimizer / model routing). See [docs/AI_CODING_AGENTS.md](docs/AI_CODING_AGENTS.md). **Shellchecked + unit-tested locally; not device-tested.**
 - **GitHub Releases** — CI publishes a signed pre-release APK after a successful signed build on `main` (pre-release because not device-tested).
@@ -124,7 +124,7 @@ Remote JSON catalogues (served via `raw.githubusercontent.com` from this repo):
 ## Project structure
 
 ```text
-app/                    Main application (Termux entry points + com.termux.zerocore.*)
+app/                    Main application (Termux entry points + com.termux.victor.*)
 terminal-emulator/      VT100/xterm state machine (Java/JNI)
 terminal-view/          Android View rendering the emulator
 termux-shared/          Shared Termux utilities
@@ -134,7 +134,7 @@ docs/                   AI_CLIS.md and related notes
 art/                    Icon / banner generation helpers
 ```
 
-VictorSuite changes in upstream Termux files are wrapped in `// VictorSuite add {@` / `// VictorSuite modify {@` markers. Prefer **Kotlin** for new `zerocore` code.
+VictorSuite changes in upstream Termux files are wrapped in `// VictorSuite add {@` / `// VictorSuite modify {@` markers. Prefer **Kotlin** for new `victor` code.
 
 ## Contributing
 
