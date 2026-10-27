@@ -46,7 +46,7 @@ public class AiAgentsPackClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return "AI Coding Agents";
+        return context.getString(R.string.vs_menu_ai_agents);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class AiAgentsPackClickConfig extends BaseMenuClickConfig {
                     .sendTextToTerminal("bash ~/" + DIR + "/" + SCRIPT_ASSET + "\n"));
             } catch (IOException e) {
                 mainHandler.post(() -> Toast.makeText(appContext,
-                    "Could not prepare the AI agents pack: " + e.getMessage(),
+                    appContext.getString(R.string.vs_ai_agents_prepare_failed, e.getMessage()),
                     Toast.LENGTH_LONG).show());
             }
         }).start();

@@ -36,7 +36,7 @@
 
     <!--This is just an example. Edit according to your needs. For normal use, you can comment out this menu and then use 'zt menu update' to refresh immediately.-->
     <!--####################### Can be deleted #########################-->
-    <group name="Example click event (this grouping can be deleted in the profile)">
+    <group enabled="false" name="Example click event (this grouping can be deleted in the profile)">
         <item tag="customizeTheLeftSidebar"
             name="EditMenu"
             icon="imgPath:/data/data/com.termux/files/home/ZtInfo/edit_menu.png"
@@ -115,7 +115,7 @@
             click="java:com.termux.zerocore.config.mainmenu.config.BackupRestoreClickConfig" />
         <item tag="MOE All-in-One"
             click="java:com.termux.zerocore.config.mainmenu.config.MoeClickConfig" />
-        <item tag="Haircut Version"
+        <item tag="Release Version"
             click="java:com.termux.zerocore.config.mainmenu.config.ReleaseLinuxVersionClickConfig" />
         <item tag="QEMU"
             click="java:com.termux.zerocore.config.mainmenu.config.QEMUClickConfig" />
@@ -242,6 +242,16 @@
             click="java:com.termux.zerocore.config.mainmenu.config.UnInstallClickConfig" />
         <item tag="ADB Remote Connection"
             click="java:com.termux.zerocore.config.mainmenu.config.RemoteConnectionClickConfig" />
+        <item tag="Headscale"
+            click="java:com.termux.zerocore.config.mainmenu.config.HeadscaleClickConfig" />
+        <item tag="APK Analysis"
+            click="java:com.termux.zerocore.config.mainmenu.config.ApkAnalysisClickConfig" />
+        <item tag="Android IDE"
+            click="java:com.termux.zerocore.config.mainmenu.config.AndroidIdeClickConfig" />
+        <item tag="AI CLIs"
+            click="java:com.termux.zerocore.config.mainmenu.config.AiCliSetupClickConfig" />
+        <item tag="AI Coding Agents"
+            click="java:com.termux.zerocore.config.mainmenu.config.AiAgentsPackClickConfig" />
         <item tag="Browser Terminal"
             click="java:com.termux.zerocore.config.mainmenu.config.WebDataClickConfig" />
         <item tag="SMS/Call"

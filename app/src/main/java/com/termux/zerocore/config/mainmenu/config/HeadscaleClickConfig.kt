@@ -38,7 +38,7 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getString(context: Context?): String? {
-        return "Headscale / Tailnet"
+        return context?.getString(R.string.vs_menu_headscale)
     }
 
     override fun onClick(view: View?, context: Context?) {
@@ -55,35 +55,31 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
         layout.setPadding(padding, padding / 2, padding, padding / 2)
 
         val serverInput = EditText(context)
-        serverInput.hint = "Login server URL, e.g. https://headscale.example.com"
+        serverInput.hint = context.getString(R.string.vs_headscale_server_hint)
         serverInput.setText(SaveData.getStringOther(KEY_LOGIN_SERVER) ?: "")
         layout.addView(serverInput)
 
         val authKeyInput = EditText(context)
-        authKeyInput.hint = "Pre-auth key (leave blank to log in interactively)"
+        authKeyInput.hint = context.getString(R.string.vs_headscale_authkey_hint)
         authKeyInput.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         layout.addView(authKeyInput)
 
         AlertDialog.Builder(context)
-            .setTitle("Headscale / WireGuard Tailnet")
-            .setMessage(
-                "Connects this device to your own headscale server over a WireGuard-based " +
-                    "tailnet (no root required). If you leave the pre-auth key blank, the " +
-                    "terminal will print a login URL to open in a browser instead."
-            )
+            .setTitle(R.string.vs_headscale_title)
+            .setMessage(R.string.vs_headscale_message)
             .setView(layout)
-            .setPositiveButton("Connect") { _, _ ->
+            .setPositiveButton(R.string.vs_headscale_connect) { _, _ ->
                 val server = serverInput.text?.toString()?.trim().orEmpty()
                 val authKey = authKeyInput.text?.toString()?.trim().orEmpty()
                 if (server.isEmpty()) {
-                    Toast.makeText(context, "Login server URL is required", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.vs_headscale_server_required, Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
                 SaveData.saveStringOther(KEY_LOGIN_SERVER, server)
                 connect(server, authKey)
             }
-            .setNeutralButton("Status") { _, _ -> status() }
-            .setNegativeButton("Disconnect") { _, _ -> disconnect() }
+            .setNeutralButton(R.string.vs_headscale_status) { _, _ -> status() }
+            .setNegativeButton(R.string.vs_headscale_disconnect) { _, _ -> disconnect() }
             .show()
     }
 
