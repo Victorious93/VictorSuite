@@ -1,6 +1,6 @@
 # VictorSuite Plugin System — Design (no code yet)
 
-**Status:** DESIGN ONLY. Needs Don's review. No code changes in this PR.
+**Status:** DESIGN ONLY. Decisions recorded Oct 27, 2026 (§13). No code changes in this PR.
 **Owner:** Don Victor ([Victorious93](https://github.com/Victorious93)).
 **Context:** VictorSuite is a GPLv3 Termux fork. `applicationId` stays `com.termux`. Kotlin/Java code moves from `com.termux.zerocore` to `com.termux.victor` in PR #71. This design uses the new package names and assumes #71 lands first.
 
@@ -21,7 +21,7 @@ Related: `PLUGINS.md` (the current framework), `docs/HAK5_COMPANION_PLAN.md` (th
 | Launch | `plugin/PluginProcessLauncher.kt` | Builds the shell command only. Refuses if not ENABLED or if the entry point is missing. |
 | Feed | `remote/plugins/main.json` | Empty `data: []`. |
 | Hak5 | `hak5/*` | `Hak5ActionClassifier` + `Hak5ActionConfirm` + `Hak5AuditLog` form the confirm-before-destructive pattern. We reuse it. |
-| Legacy intents | `utermux_windows/qemu/RunWindowActivity.java` | Sends `com.utermux.action.vnc` with extra `utermux_as`. `ZTInstallActivity` installs the bundled asset `apk/utermux_file_plug.ip`. |
+| Legacy intents | `utermux_windows/qemu/RunWindowActivity.java` | Sends `com.utermux.action.vnc` with extra `utermux_as`. `ZTInstallActivity` installs the bundled asset `apk/utermux_file_plug.ip` (to be removed; VictorFiles replaces it, §13). |
 
 There is **no** code loader (no `DexClassLoader`), and that stays true: plugins never load code into the VictorSuite process.
 
@@ -31,7 +31,7 @@ Recent history to respect: #62 reverted the application ID change (stay `com.ter
 
 Goals:
 - A small, reviewable way to publish and install add-ons from a catalog Don controls.
-- Integrity from a sha256 for every artifact. Authenticity from an optional signature by Don's key.
+- Integrity from a sha256 for every artifact. Authenticity from a signature by Don's offline key. Only signed plugins appear in the official catalog.
 - Keep the existing gates (authorized use, the enable step, the audit log) and add a confirmation for destructive actions.
 
 Non-goals:
@@ -57,10 +57,12 @@ During install, the catalog entry and the embedded `plugin.json` must agree on `
 - **Hosting:** GitHub Pages from this repo's `docs/`, at `https://victorious93.github.io/VictorSuite/plugins/catalog.json` (Pages is live). Artifacts are GitHub Release assets or files under `docs/plugins/artifacts/`. `remote/plugins/main.json` stays as a legacy feed until Phase 4.
 - **Format:** see `docs/plugins/catalog.json`. Top level: `schemaVersion` (an integer, currently 1), `generatedAt`, `catalogId`, `signingKeys[]` (public keys only), and `plugins[]`. Each plugin has a `versions[]` list. Each version has `artifacts[]`, and each artifact has `url`, `sha256` (**required**), `size`, `abi`, and optionally `signature`.
 - **schemaVersion rules:** the app refuses any catalog with a `schemaVersion` higher than it supports and shows "Update VictorSuite to read this catalog." Unknown fields are ignored. A breaking change bumps the major integer.
-- **Signatures (optional):** Ed25519 (minisign-compatible) over the raw artifact bytes, plus an optional detached signature over `catalog.json` itself (`catalog.json.minisig`).
-  - **Don holds the private key** offline, on his own machine or in a password manager. It is **never committed**, never stored in CI secrets for now (see open questions), and never placed on the box.
+- **Signatures (required for the official catalog):** Ed25519 (minisign-compatible) over the raw artifact bytes, plus an optional detached signature over `catalog.json` itself (`catalog.json.minisig`).
+  - **Don holds the private key** offline, on his own machine or in a password manager. Don signs by hand. It is **never committed**, **never stored in CI** (no CI secret, no auto-signing), and never placed on the box.
+  - **Backup and rotation:** Don keeps an encrypted offline backup of the private key (e.g. password manager plus an offline copy). If the key is lost or compromised, Don generates a new keypair, commits the new public key to `docs/plugins/keys/`, pins it in the next app release (old key kept pinned for one release during rotation only if not compromised; a compromised key is unpinned immediately), and re-signs the current catalog artifacts.
   - Only the **public** key is committed, in `docs/plugins/keys/` and also pinned in the app at build time. A catalog cannot add a trusted key by itself: a key listed in `signingKeys` is trusted only if it matches a pinned key.
-- **Verification order:** download → check size → **sha256 must match, or abort** → if a signature is present, verify it against the pinned keys, and a bad signature means abort (a bad signature is worse than none) → if there is no signature, mark the plugin **unsigned**.
+- **Verification order:** download → check size → **sha256 must match, or abort** → if a signature is present, verify it against the pinned keys, and a bad signature means abort (a bad signature is worse than none) → if there is no signature, mark the plugin **unsigned**. Unsigned artifacts are rejected from the official catalog; they can only be sideloaded or come from a third-party catalog.
+- **Third-party catalogs:** users may add other catalog URLs after a warning dialog. Keys listed by a third-party catalog are **never** trusted as official; its plugins are always treated as unsigned/third-party and get the full unsigned warning and badge.
 - HTTPS only. No redirects to a different host unless the host is on an allowlist (`github.com`, `objects.githubusercontent.com`, `victorious93.github.io`).
 
 ## 6. Permissions and approval gates
@@ -74,7 +76,7 @@ Declared permissions, each shown to the user before install:
 | `storage.shared` | Reads or writes `~/storage` (shared storage). |
 | `apt` | Installs the listed packages. |
 | `run_command` | Sends `RUN_COMMAND` to VictorSuite (companion APKs). |
-| `root` | Wants `su`. Shows a red banner and needs a separate confirmation. |
+| `root` | Wants `su`. Allowed. Shows a red banner and needs a confirmation on **every** root use; no "don't ask again". |
 | `device.<x>` | Hardware companions such as Hak5. These follow the Hak5 gate. |
 
 Gates, all enforced in code:
@@ -93,13 +95,13 @@ Gates, all enforced in code:
 | `com.termux.victor.action.PLUGIN_RESULT` | — | Result callback. |
 | `com.termux.RUN_COMMAND` | unchanged | Upstream contract, kept as is. |
 
-Aliases: for **two releases** (or until Phase 4), VictorSuite sends both the new and the old action and reads both extras, preferring the new one. Each use of a legacy alias is logged once per session. The new permission is `signature|` with a user-approved fallback (see open questions). Using `com.termux.victor.*` keeps the names tied to the package.
+Aliases: for **two releases** (or until Phase 4), VictorSuite sends both the new and the old action and reads both extras, preferring the new one. Each use of a legacy alias is logged once per session. The new permission is `signature|` with a user-approved fallback (decided default, §13). Using `com.termux.victor.*` keeps the names tied to the package.
 
 ## 8. Install, update, uninstall
 
 **Install:** Catalog list → details screen (name, version, licence, source link, size, permissions, signed/unsigned badge) → user taps Install → download and verify (§5) → **unsigned warning** if needed → permission review → unpack to a staging directory → validate `plugin.json` → atomically move it into place → register as DISABLED → authorized-use acknowledgement → enable. For an APK, the system installer runs after verification. Afterwards, VictorSuite checks that the installed package's signing certificate matches `apkSigningCertSha256`. If it doesn't, the plugin stays disabled and the app warns the user.
 
-**Unsigned warning UI:** a full-screen dialog with an amber or red header that says "Unsigned plugin." The body says: "This plugin's file matches the catalog checksum, but nobody has signed it. VictorSuite can't confirm who made it. Only install it if you trust the source: <sourceUrl>." The default button is **Cancel**. Install needs a checkbox ("I understand the risk") before the button becomes active. The plugin gets a permanent "Unsigned" badge in the list. A sideloaded file with no catalog entry gets the same warning plus "checksum not verified."
+**Unsigned warning UI:** a full-screen dialog with an amber or red header that says "Unsigned plugin." The body says: "This plugin's file matches the catalog checksum, but nobody has signed it. VictorSuite can't confirm who made it. Only install it if you trust the source: <sourceUrl>." The default button is **Cancel**. Install needs a checkbox ("I understand the risk") before the button becomes active. The plugin gets a permanent "Unsigned" badge in the list. Sideloading is the only way to install an unsigned plugin outside third-party catalogs; a sideloaded file always gets this full-screen warning, plus "checksum not verified" if it has no catalog entry.
 
 **Update:** On catalog refresh, or manually (no automatic background installs in v1), the app compares SemVer. The update screen shows the changelog and any permission changes. The update goes through the same verification. The previous version is kept for one rollback. The plugin stays enabled unless its permissions widened.
 
@@ -117,9 +119,9 @@ Aliases: for **two releases** (or until Phase 4), VictorSuite sends both the new
 
 - `license` (SPDX) is required. Without it, the plugin isn't listed.
 - **Bundled** into the VictorSuite APK or its assets: must be GPL-3.0-compatible (for example GPL-3.0-or-later, GPL-2.0-or-later, LGPL, Apache-2.0, MIT, BSD, MPL-2.0). GPL-2.0-only is not allowed. It needs an entry in THIRD_PARTY_NOTICES.md and source available.
-- **Catalog-distributed** package plugins: any OSI or FSF free licence. Anything under the GPL family needs `sourceUrl` that points to the exact source for that version. Proprietary or unknown licences are not listed in the official catalog (see open questions).
+- **Catalog-distributed** package plugins: any OSI or FSF free licence. Anything under the GPL family needs `sourceUrl` that points to the exact source for that version. Proprietary or unknown licences are not listed in the official catalog (decided default, §13).
 - **Companion APKs** are separate programs that talk over intents, so they can use other licences. If one includes VictorSuite code, it must be GPL-3.0.
-- `utermux_file_plug.ip`: its licence and source are unknown. Phase 4 audits it and replaces or removes it.
+- `utermux_file_plug.ip`: dropped. VictorFiles replaces it; Phase 4 removes the asset and all references.
 
 ## 11. Migration of existing entries
 
@@ -138,21 +140,21 @@ Aliases: for **two releases** (or until Phase 4), VictorSuite sends both the new
 | 1 | `feat/plugin-catalog-model` | Catalog/manifest data classes, `schemaVersion` handling, sha256 verification, JVM unit tests, `VsLinks.PLUGIN_CATALOG`. No UI changes. |
 | 2 | `feat/plugin-install-flow` | Download, staging, install, update, uninstall, unsigned warning UI, generalised `ActionConfirm`, permission review screen. |
 | 3 | `feat/plugin-signatures` | Ed25519 verification, pinned public key, `docs/plugins/keys/`, `scripts/sign-plugin` for Don to run locally (it reads the key from his machine and never from the repo). |
-| 4 | `feat/plugin-intents` | `com.termux.victor.action.*`, permission, legacy aliases, migrate RunWindowActivity, audit `utermux_file_plug.ip`. |
+| 4 | `feat/plugin-intents` | `com.termux.victor.action.*`, permission, legacy aliases, migrate RunWindowActivity, **remove `apk/utermux_file_plug.ip` and all references** (`ZTInstallActivity`, docs), pointing users to VictorFiles. |
 | 5 | `feat/companion-apk` | APK type, signing-cert pinning, first companion. |
 | 6 | cleanup | Remove the legacy feed and the aliases after two releases. Update PLUGINS.md and CLAUDE.md. |
 
 Every PR: CI build plus unit tests, a draft until Don reviews it, no secrets.
 
-## 13. Open questions (Don decides)
+## 13. Decisions (Oct 27, 2026)
 
-1. **Signing key custody:** do you keep the Ed25519 private key only on your laptop or password manager (the default here), or also as a CI secret so releases can auto-sign? And what's the backup or rotation plan if it's lost?
-2. **Unsigned policy scope:** can unsigned plugins appear in the **official** catalog, or only through sideload or third-party catalogs?
-3. **Third-party catalogs:** can users add other catalog URLs? If they can, are those catalogs' keys trusted per catalog, or never?
-4. **Licence policy for the official catalog:** free licences only, or are proprietary plugins allowed with a label?
-5. **Companion permission level:** `signature` only (companions signed with your release key), or should third-party companions get a user-approved runtime grant?
-6. **Alias lifetime:** keep `com.utermux.*` for two releases, or remove it immediately since there are no external users?
-7. **`utermux_file_plug.ip`:** keep it, rebuild it from source, or drop it?
-8. **Auto-update:** manual only (proposed), or a background check with a notification?
-9. **Root plugins:** allow the `root` permission at all in the official catalog?
-10. **Artifact hosting:** GitHub Release assets (proposed) or files committed under `docs/plugins/artifacts/`, which increases repo size?
+1. **Signing key custody:** offline only. Don signs by hand; the private key is never in CI or the repo. Backup and rotation as in §5.
+2. **Unsigned plugins:** sideload only (or third-party catalogs, see 3). Never in the official catalog. Sideloads always show the full-screen unsigned warning.
+3. **Third-party catalogs:** allowed, with a warning when added. Their keys are never trusted as official; their plugins are treated as unsigned/third-party.
+4. **Licence policy (decided default):** free (OSI/FSF) licences only in the official catalog; GPL-family needs `sourceUrl`.
+5. **Companion permission level (decided default):** `signature|` with a user-approved runtime grant for third-party companions.
+6. **Alias lifetime (decided default):** keep `com.utermux.*` aliases for two releases, removed in Phase 6.
+7. **`utermux_file_plug.ip`:** dropped; VictorFiles replaces it. Removal is in Phase 4.
+8. **Updates (decided default):** manual only in v1; no background installs.
+9. **Root plugins:** allowed, with a confirmation on every root use. No "don't ask again".
+10. **Artifact hosting (decided default):** GitHub Release assets.
