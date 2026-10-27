@@ -22,7 +22,7 @@ import com.termux.shared.logger.Logger
 import com.termux.zerocore.bean.online_sh.Data
 import com.termux.zerocore.bean.online_sh.OnLineShBean
 import com.termux.zerocore.data.DownLoadShEntey
-import com.termux.zerocore.http.HTTPIP
+import com.termux.zerocore.config.VsLinks
 import com.termux.zerocore.url.FileUrl
 
 class OnLineShDialog : BaseDialogDown {
@@ -31,7 +31,7 @@ class OnLineShDialog : BaseDialogDown {
     private var show_data: RelativeLayout? = null
     private var service_name: TextView? = null
     private var mOnItemClickListener:OnItemClickListener? = null
-    private var mUrl: String = "${HTTPIP.IP}/on_line_sh/main.json"
+    private var mUrl: String = VsLinks.FEED_ONLINE_SCRIPTS
     private val LOG_TAG = "Termux--Apk:OnLineShDialog"
     constructor(context: Context) : super(context)
     constructor(context: Context, themeResId: Int) : super(context, themeResId)
@@ -54,7 +54,7 @@ class OnLineShDialog : BaseDialogDown {
 
     //下载数据
     private fun downloadHttpData(){
-        Logger.logDebug(LOG_TAG, "downloadHttpData start on url: ${HTTPIP.IP}/on_line_sh/main.json")
+        Logger.logDebug(LOG_TAG, "downloadHttpData start on url: ${VsLinks.FEED_ONLINE_SCRIPTS}")
         BaseHttpUtils().getUrl(mUrl,object :HttpResponseListenerBase{
             override fun onSuccessful(msg: Message, mWhat: Int) {
 

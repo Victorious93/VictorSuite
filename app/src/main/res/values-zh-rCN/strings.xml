@@ -372,7 +372,7 @@
     <string name="公共仓库">公共仓库</string>
     <string name="正在连接到自定义服务器">正在连接到自定义服务器</string>
     <string name="请输入自定义服务器IP">请输入自定义服务器IP</string>
-    <string name="默认地址">http://10.242.164.19</string>
+    <string name="默认地址">服务器地址</string>
     <string name="无法连接到自定义服务器">无法连接到自定义服务器!</string>
     <string name="连接">连接</string>
     <string name="如何创建服务器">如何创建服务器</string>
@@ -667,7 +667,8 @@
     <string name="此脚本数据错误">此脚本数据错误,请尝试联系管理员</string>
 
     <string name="VictorSuite论坛">VictorSuite论坛</string>
-    <string name="Zero论坛">Termux Wiki</string>
+    <string name="Zero论坛">帮助与手册</string>
+    <string name="vs_help_title">VictorSuite 帮助</string>
 
     <string name="美化设置">美化设置</string>
     <string name="字体颜色">字体颜色</string>
@@ -747,9 +748,9 @@
 
     <string name="ttyd_install_complete">IP:0.0.0.0\n端口:7681</string>
 
-    <string name="qq_group">反馈问题</string>
+    <string name="qq_group">问题反馈</string>
 
-    <string name="telegram_group">GitHub</string>
+    <string name="telegram_group">源代码</string>
 
     <string name="opne_in_victorsuite">使用VictorSuite打开</string>
 

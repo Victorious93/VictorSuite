@@ -1,5 +1,7 @@
 package com.termux.zerocore.deepseek.activity
 
+import com.termux.zerocore.config.VsLinks
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -24,7 +26,7 @@ class VictorSuiteDeepSeekKeyActivity : AppCompatActivity() {
             UUtils.getString(R.string.deepseek_settings_ai_get_deepseek_key_1), object : ClickableSpan() {
                 override fun onClick(p0: View) {
                     val intent = Intent()
-                    intent.data = Uri.parse("https://platform.deepseek.com/") //Url 就是你要打开的网址
+                    intent.data = Uri.parse(VsLinks.DEEPSEEK_PLATFORM) //Url 就是你要打开的网址
                     intent.action = Intent.ACTION_VIEW
                     startActivity(intent) //启动浏览器
                 }

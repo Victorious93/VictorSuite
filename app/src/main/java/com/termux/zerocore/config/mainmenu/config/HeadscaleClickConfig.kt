@@ -1,5 +1,7 @@
 package com.termux.zerocore.config.mainmenu.config
 
+import com.termux.zerocore.config.VsLinks
+
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -110,12 +112,12 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
             if [ ! -x "${'$'}TS_BIN/tailscale" ] || [ ! -x "${'$'}TS_BIN/tailscaled" ]; then
                 echo "Fetching latest Tailscale static build for ${'$'}TS_ARCH ..."
                 pkg install -y curl >/dev/null 2>&1 || true
-                LATEST_FILE="${'$'}(curl -fsSL https://pkgs.tailscale.com/stable/ | grep -oE "tailscale_[0-9.]+_${'$'}{TS_ARCH}\.tgz" | sort -V | tail -n1)"
+                LATEST_FILE="${'$'}(curl -fsSL ${VsLinks.TAILSCALE_STABLE} | grep -oE "tailscale_[0-9.]+_${'$'}{TS_ARCH}\.tgz" | sort -V | tail -n1)"
                 if [ -z "${'$'}LATEST_FILE" ]; then
                     echo "Could not determine latest Tailscale release for ${'$'}TS_ARCH; aborting."
                     exit 1
                 fi
-                curl -fsSL "https://pkgs.tailscale.com/stable/${'$'}LATEST_FILE" -o "${'$'}TS_DIR/tailscale.tgz"
+                curl -fsSL "${VsLinks.TAILSCALE_STABLE}${'$'}LATEST_FILE" -o "${'$'}TS_DIR/tailscale.tgz"
                 tar -xzf "${'$'}TS_DIR/tailscale.tgz" -C "${'$'}TS_DIR"
                 EXTRACTED_DIR="${'$'}(find "${'$'}TS_DIR" -maxdepth 1 -type d -name 'tailscale_*' | head -n1)"
                 cp "${'$'}EXTRACTED_DIR/tailscale" "${'$'}TS_BIN/tailscale"

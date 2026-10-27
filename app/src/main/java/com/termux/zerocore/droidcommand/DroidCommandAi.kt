@@ -1,5 +1,7 @@
 package com.termux.zerocore.droidcommand
 
+import com.termux.zerocore.config.VsLinks
+
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -16,7 +18,7 @@ import com.termux.R
 object DroidCommandAi {
     /** Release package first, then the `.debug` build used during development. */
     private val PACKAGES = listOf("ai.droidcommand.app", "ai.droidcommand.app.debug")
-    private const val RELEASES_URL = "https://github.com/Victorious93/droidcommand-ai/releases"
+    private const val RELEASES_URL = VsLinks.DROIDCOMMAND_RELEASES
 
     @JvmStatic
     fun launch(context: Context) {

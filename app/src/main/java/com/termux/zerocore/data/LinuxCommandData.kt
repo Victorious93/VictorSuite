@@ -1,5 +1,7 @@
 package com.termux.zerocore.data
 
+import com.termux.zerocore.config.VsLinks
+
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxInstaller
@@ -126,7 +128,7 @@ object LinuxCommandData {
 
         vScodeBean.fileName = "filebrowser.zip"
 
-        vScodeBean.address = "https://github.com/filebrowser/filebrowser"
+        vScodeBean.address = VsLinks.FILEBROWSER
 
         var determineTermuxArchName = TermuxInstaller.determineTermuxArchName()
 

@@ -383,7 +383,7 @@ error</string>
     <string name="公共仓库">Public warehouse</string>
     <string name="正在连接到自定义服务器">Connecting to custom server</string>
     <string name="请输入自定义服务器IP">Please enter the custom server IP</string>
-    <string name="默认地址">http://10.242.164.19</string>
+    <string name="默认地址">Server URL</string>
     <string name="无法连接到自定义服务器">Unable to connect to custom server!</string>
     <string name="连接">connection</string>
     <string name="如何创建服务器">How to create a server</string>
@@ -669,7 +669,8 @@ Reset successfully</string>
     <string name="线上脚本">Online script</string>
     <string name="本地脚本">Local script</string>
     <string name="请双击命令窗口试试">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
-    <string name="Zero论坛">Termux Wiki</string>
+    <string name="Zero论坛">Help &amp; Manual</string>
+    <string name="vs_help_title">VictorSuite Help</string>
     <string name="VictorSuite论坛">VictorSuite bbs</string>
 
     <string name="在线脚本">Online script</string>
@@ -759,9 +760,9 @@ Reset successfully</string>
 
     <string name="ttyd_install_complete">IP:0.0.0.0\nport:7681</string>
 
-    <string name="qq_group">Report an issue</string>
+    <string name="qq_group">Issues</string>
 
-    <string name="telegram_group">GitHub</string>
+    <string name="telegram_group">Source</string>
 
     <string name="opne_in_victorsuite">Opne In Victorsuite</string>
 

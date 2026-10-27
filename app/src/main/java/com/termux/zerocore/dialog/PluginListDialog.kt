@@ -17,7 +17,7 @@ import com.github.iielse.switchbutton.SwitchView
 import com.google.gson.Gson
 import com.lzy.okgo.model.Response
 import com.termux.R
-import com.termux.zerocore.http.HTTPIP
+import com.termux.zerocore.config.VsLinks
 import com.termux.zerocore.plugin.PluginManifest
 import com.termux.zerocore.plugin.PluginProcessLauncher
 import com.termux.zerocore.plugin.PluginRecord
@@ -38,7 +38,7 @@ class PluginListDialog : BaseDialogDown {
     private var show_data: RelativeLayout? = null
     private var service_name: TextView? = null
     private var plugin_empty: TextView? = null
-    private var mUrl: String = "${HTTPIP.IP}/plugins/main.json"
+    private var mUrl: String = VsLinks.FEED_PLUGINS
     private val LOG_TAG = "Termux--Apk:PluginListDialog"
 
     constructor(context: Context) : super(context)

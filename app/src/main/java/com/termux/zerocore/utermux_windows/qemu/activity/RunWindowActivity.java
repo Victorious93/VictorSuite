@@ -1,5 +1,7 @@
 package com.termux.zerocore.utermux_windows.qemu.activity;
 
+import com.termux.zerocore.config.VsLinks;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -959,7 +961,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 // Official Microsoft download page instead of an unverifiable
                 // personal Baidu Netdisk mirror of unknown provenance.
                 Intent intent = new Intent();
-                intent.setData(Uri.parse("https://www.microsoft.com/software-download/windows11"));
+                intent.setData(Uri.parse(VsLinks.WINDOWS11_DOWNLOAD));
                 intent.setAction(Intent.ACTION_VIEW);
                 startActivity(intent); //启动浏览器
 

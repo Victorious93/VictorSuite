@@ -27,7 +27,6 @@ import com.termux.zerocore.config.mainmenu.config.OnLineCommandClickConfig;
 import com.termux.zerocore.config.mainmenu.config.XMLClickConfig;
 import com.termux.zerocore.config.mainmenu.data.MainMenuCategoryData;
 import com.termux.zerocore.dialog.SwitchDialog;
-import com.termux.zerocore.http.HTTPIP;
 import com.termux.zerocore.utils.FileIOUtils;
 
 import java.util.ArrayList;

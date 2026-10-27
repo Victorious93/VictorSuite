@@ -1,5 +1,7 @@
 package com.termux.zerocore.settings
 
+import com.termux.zerocore.config.VsLinks
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.cardview.widget.CardView
@@ -11,7 +13,7 @@ class ZTAboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ztabout)
         findViewById<CardView>(R.id.zt_termux_github_card_view).setOnClickListener {
-            UUtils.startUrl("https://github.com/Victorious93/VictorSuite")
+            UUtils.startUrl(VsLinks.REPO)
         }
 
         // The ZeroCoreManage add-on is a third-party APK from an upstream personal

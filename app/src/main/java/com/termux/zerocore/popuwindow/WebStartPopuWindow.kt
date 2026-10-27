@@ -1,5 +1,7 @@
 package com.termux.zerocore.popuwindow
 
+import com.termux.zerocore.config.VsLinks
+
 
 import android.app.Activity
 import android.content.Context
@@ -75,7 +77,7 @@ class WebStartPopuWindow : BasePuPuWindow {
 
             // SendJoinUtils.INSTANCE.sendJoin(this);
             val intent = Intent()
-            intent.data = Uri.parse("https://github.com/joinAero/AndroidWebServ") //Url 就是你要打开的网址
+            intent.data = Uri.parse(VsLinks.ANDROID_WEB_SERV) //Url 就是你要打开的网址
             intent.action = Intent.ACTION_VIEW
             val activity = mContext as Activity
             activity.startActivity(intent) //启动浏览器

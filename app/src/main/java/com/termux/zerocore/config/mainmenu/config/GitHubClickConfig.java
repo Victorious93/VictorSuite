@@ -1,5 +1,7 @@
 package com.termux.zerocore.config.mainmenu.config;
 
+import com.termux.zerocore.config.VsLinks;
+
 import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
 
 import android.content.Context;
@@ -31,7 +33,7 @@ public class GitHubClickConfig extends BaseMenuClickConfig {
     @Override
     public void onClick(View view, Context context) {
         Intent intent = new Intent();
-        intent.setData(Uri.parse("https://github.com/Victorious93/VictorSuite"));//Url 就是你要打开的网址
+        intent.setData(Uri.parse(VsLinks.REPO));//Url 就是你要打开的网址
         intent.setAction(Intent.ACTION_VIEW);
         context.startActivity(intent); //启动浏览器
     }
