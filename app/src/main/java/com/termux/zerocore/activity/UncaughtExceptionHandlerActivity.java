@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.config.ZTConstantConfig;
+import com.termux.zerocore.config.VsLinks;
 
 public class UncaughtExceptionHandlerActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class UncaughtExceptionHandlerActivity extends AppCompatActivity {
         String error = getIntent().getStringExtra("error");
         TextView errorText = findViewById(R.id.error_text);
         errorText.setText(errorText.getText().toString()
-            + ZTConstantConfig.URL.ZT_ISSUES_URL
+            + VsLinks.ISSUES
             + "\nVersion:" + UUtils.getVersionName(UUtils.getContext())
             + "\n\n" + error);
     }

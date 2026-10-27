@@ -1,5 +1,6 @@
 package com.termux.zerocore.config.mainmenu.config;
 
+import com.termux.zerocore.config.VsLinks;
 import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
 
 import android.content.Context;
@@ -45,7 +46,7 @@ public class PublicWarehouseClickConfig extends BaseMenuClickConfig {
             public void onClick(View v) {
                 String s = edit_text.getText().toString();
                 if (s == null || s.isEmpty()) {
-                    s = "http://10.242.164.19";
+                    s = VsLinks.FEED_BASE;
                 }
                 editDialog.dismiss();
                 termuxActivity.startHttp(s);

@@ -1,5 +1,7 @@
 package com.termux.zerocore.hak5
 
+import com.termux.zerocore.config.VsLinks
+
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,7 +20,7 @@ object RootForgeHandoff {
     const val ACTION_OPEN = "ai.rootforge.os.action.OPEN"
     const val EXTRA_DESTINATION = "destination"
     const val DESTINATION_PLUNDER_BUG = "plunder_bug"
-    const val SIDELOAD_URL = "https://github.com/Victorious93/rootforge-os/releases"
+    const val SIDELOAD_URL = VsLinks.ROOTFORGE_RELEASES
 
     data class ResolveResult(
         val installed: Boolean,

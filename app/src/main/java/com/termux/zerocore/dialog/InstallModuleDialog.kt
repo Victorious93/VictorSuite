@@ -1,5 +1,7 @@
 package com.termux.zerocore.dialog
 
+import com.termux.zerocore.config.VsLinks
+
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
@@ -56,7 +58,7 @@ class InstallModuleDialog: BaseDialogCentre {
                 dismiss()
             }
             download_module?.setOnClickListener {
-                UUtils.startUrl("https://github.com/Victorious93/VictorSuite/tree/main/remote/repository")
+                UUtils.startUrl(VsLinks.FEED_REPOSITORY_BROWSE)
             }
 
             mClose?.setOnClickListener {

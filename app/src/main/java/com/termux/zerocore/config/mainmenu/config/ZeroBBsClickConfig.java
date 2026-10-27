@@ -1,5 +1,6 @@
 package com.termux.zerocore.config.mainmenu.config;
 
+import com.termux.zerocore.config.VsLinks;
 import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
 
 import android.content.Context;
@@ -9,7 +10,6 @@ import android.view.View;
 
 import com.termux.R;
 import com.termux.zerocore.activity.WebViewActivity;
-import com.termux.zerocore.http.HTTPIP;
 
 public class ZeroBBsClickConfig extends BaseMenuClickConfig {
     @Override
@@ -30,8 +30,8 @@ public class ZeroBBsClickConfig extends BaseMenuClickConfig {
     @Override
     public void onClick(View view, Context context) {
         Intent intent2 = new Intent(context, WebViewActivity.class);
-        intent2.putExtra("title", "VictorSuite 论坛");
-        intent2.putExtra("content", HTTPIP.ZERO_BBS);
+        intent2.putExtra("title", context.getString(R.string.vs_help_title));
+        intent2.putExtra("content", VsLinks.HELP);
         context.startActivity(intent2);
     }
 }

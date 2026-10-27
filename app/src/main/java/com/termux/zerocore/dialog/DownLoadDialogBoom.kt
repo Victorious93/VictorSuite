@@ -1,5 +1,7 @@
 package com.termux.zerocore.dialog
 
+import com.termux.zerocore.config.VsLinks
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -31,7 +33,6 @@ import com.termux.R
 import com.termux.zerocore.activity.BackNewActivity
 import com.termux.zerocore.bean.Data
 import com.termux.zerocore.bean.ZDYDataBean
-import com.termux.zerocore.http.HTTPIP
 import com.termux.zerocore.url.FileUrl
 import com.termux.zerocore.url.FileUrl.victorSuiteApk
 import com.termux.zerocore.url.FileUrl.victorSuiteData
@@ -65,7 +66,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
         service_name?.let {
             it.paint!!.flags = Paint.UNDERLINE_TEXT_FLAG
             it.setOnClickListener {
-                UUtils.startUrl("https://github.com/Victorious93/VictorSuite/tree/main/remote/repository")
+                UUtils.startUrl(VsLinks.FEED_REPOSITORY_BROWSE)
             }
         }
         mDownLoadMuTILS = DownLoadMuTILS()

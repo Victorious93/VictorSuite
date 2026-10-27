@@ -1,5 +1,6 @@
 package com.termux.zerocore.config.mainmenu.config;
 
+import com.termux.zerocore.config.VsLinks;
 import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
 
 import android.content.Context;
@@ -8,7 +9,6 @@ import android.view.View;
 
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.http.HTTPIP;
 
 public class DownLoadClickConfig extends BaseMenuClickConfig {
     @Override
@@ -29,6 +29,6 @@ public class DownLoadClickConfig extends BaseMenuClickConfig {
     @Override
     public void onClick(View view, Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        termuxActivity.startHttp1(HTTPIP.IP + "/repository/main.json");
+        termuxActivity.startHttp1(VsLinks.FEED_REPOSITORY);
     }
 }

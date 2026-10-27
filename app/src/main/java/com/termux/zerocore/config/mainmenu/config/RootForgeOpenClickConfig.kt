@@ -1,5 +1,7 @@
 package com.termux.zerocore.config.mainmenu.config
 
+import com.termux.zerocore.config.VsLinks
+
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -72,6 +74,6 @@ class RootForgeOpenClickConfig : BaseMenuClickConfig() {
     companion object {
         /** Release package first, then the `.debug` build used during development. */
         private val PACKAGES = listOf("ai.rootforge.os", "ai.rootforge.os.debug")
-        private const val RELEASES_URL = "https://github.com/Victorious93/rootforge-os/releases"
+        private const val RELEASES_URL = VsLinks.ROOTFORGE_RELEASES
     }
 }

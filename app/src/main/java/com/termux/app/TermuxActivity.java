@@ -117,7 +117,7 @@ import com.termux.zerocore.bean.ZDYDataBean;
 import com.termux.zerocore.bean.ZTUserBean;
 import com.termux.zerocore.broadcast.LocalReceiver;
 import com.termux.zerocore.code.CodeString;
-import com.termux.zerocore.config.ZTConstantConfig;
+import com.termux.zerocore.config.VsLinks;
 import com.termux.zerocore.config.mainmenu.MainMenuConfig;
 import com.termux.zerocore.config.mainmenu.XMLMainMenuConfig;
 import com.termux.zerocore.config.mainmenu.data.MainMenuCategoryData;
@@ -135,7 +135,6 @@ import com.termux.zerocore.dialog.LoadingDialog;
 import com.termux.zerocore.dialog.ProtocolDialog;
 import com.termux.zerocore.dialog.SwitchDialog;
 import com.termux.zerocore.ftp.utils.UserSetManage;
-import com.termux.zerocore.http.HTTPIP;
 import com.termux.zerocore.otg.OTGManager;
 import com.termux.zerocore.settings.ZtSettingsActivity;
 import com.termux.zerocore.config.ztcommand.ZTSocketService;
@@ -1340,12 +1339,12 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         });
         zt_new.setOnClickListener(v -> {
             Intent intent = new Intent();
-            intent.setData(Uri.parse(ZTConstantConfig.URL.ZT_GITHUB_URL));//Url 就是你要打开的网址
+            intent.setData(Uri.parse(VsLinks.RELEASES));//Url 就是你要打开的网址
             intent.setAction(Intent.ACTION_VIEW);
             startActivity(intent); //启动浏览器
         });
-        // Upstream Telegram group removed (not owner-controlled).
-        telegram_group_tv.setVisibility(View.GONE);
+        // INFO card: "Issues" (qq_group_tv) and "Source" (telegram_group_tv) links, both from VsLinks.
+        telegram_group_tv.setOnClickListener(this);
         ZTGitHubVersion.create().initZtVersionVisible(zt_new);
         try {
             double_tishi.setText(double_tishi.getText() + "\n" + TermuxInstaller.determineTermuxArchName().toUpperCase());
@@ -1470,8 +1469,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (v.getId() == R.id.qq_group_tv || v.getId() == R.id.telegram_group_tv) {
             Intent intent1 = new Intent();
             intent1.setData(Uri.parse(v.getId() == R.id.qq_group_tv
-                ? ZTConstantConfig.URL.ZT_ISSUES_URL
-                : ZTConstantConfig.URL.ZT_REPO_URL));
+                ? VsLinks.ISSUES
+                : VsLinks.REPO));
             intent1.setAction(Intent.ACTION_VIEW);
             this.startActivity(intent1);
         }
@@ -1943,7 +1942,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     private void getServiceVs() {
         ip_status.setText(UUtils.getHostIP());
-        new BaseHttpUtils().getUrl(HTTPIP.IP + "/repository/main.json", new HttpResponseListenerBase() {
+        new BaseHttpUtils().getUrl(VsLinks.FEED_REPOSITORY, new HttpResponseListenerBase() {
             @Override
             public void onSuccessful(@NotNull Message msg, int mWhat) {
                 LogUtils.d(TAG, "getServiceVs onSuccessful connection succeeded");

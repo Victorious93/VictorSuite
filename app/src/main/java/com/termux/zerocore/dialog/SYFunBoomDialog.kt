@@ -12,7 +12,7 @@ import com.example.xh_lib.utils.UUtils
 import com.scottyab.rootbeer.RootBeer
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.http.HTTPIP
+import com.termux.zerocore.config.VsLinks
 import com.termux.zerocore.shell.ExeCommand
 
 
@@ -66,7 +66,7 @@ class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {
                     UUtils.showMsg(UUtils.getString(R.string.请在下载站下载Alpine插件))
                     dismiss()
                     val activity = mContext as TermuxActivity
-                    activity.startHttp1(HTTPIP.IP + "/repository/main.json")
+                    activity.startHttp1(VsLinks.FEED_REPOSITORY)
                 }
 
             }

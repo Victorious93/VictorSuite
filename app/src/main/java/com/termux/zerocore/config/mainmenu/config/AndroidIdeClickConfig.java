@@ -1,5 +1,7 @@
 package com.termux.zerocore.config.mainmenu.config;
 
+import com.termux.zerocore.config.VsLinks;
+
 import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
 
 import android.content.Context;
@@ -22,7 +24,7 @@ import com.termux.R;
 public class AndroidIdeClickConfig extends BaseMenuClickConfig {
 
     private static final String ANDROID_IDE_PACKAGE_NAME = "com.tom.rv2ide";
-    private static final String ANDROID_IDE_GITHUB_URL = "https://github.com/Victorious93/android-code-studio";
+    private static final String ANDROID_IDE_GITHUB_URL = VsLinks.ANDROID_CODE_STUDIO_REPO;
 
     @Override
     public int getType() {

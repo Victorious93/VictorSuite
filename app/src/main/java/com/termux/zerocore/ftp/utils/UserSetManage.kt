@@ -5,7 +5,7 @@ import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.SaveData
 import com.google.gson.Gson
 import com.termux.zerocore.bean.ZTUserBean
-import com.termux.zerocore.http.HTTPIP
+import com.termux.zerocore.config.VsLinks
 import com.zp.z_file.content.TAG
 
 class UserSetManage private constructor() {
@@ -44,7 +44,7 @@ class UserSetManage private constructor() {
 
     public fun defServerIPName(): DataServers {
         val arrayList = ArrayList<DataServer>()
-        val dataServer = DataServer("def", HTTPIP.IP)
+        val dataServer = DataServer("def", VsLinks.FEED_BASE)
         arrayList.add(dataServer)
         val dataServers = DataServers(arrayList)
         val ztUserBean = getZTUserBean()
