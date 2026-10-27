@@ -82,7 +82,7 @@ class ZTCommandAuthTest {
 
     @Test
     fun tokenFileIsReadWithoutNioAndTrimmed() {
-        val f = File.createTempFile("zt", ".token")
+        val f = File.createTempFile("zttoken", ".token")
         f.writeText("  abc123\n\n")
         assertEquals("abc123", ZTCommandAuth.readTokenFile(f))
         assertEquals("abc123", ZTCommandAuth.loadOrCreateToken(f))
@@ -93,7 +93,7 @@ class ZTCommandAuthTest {
 
     @Test
     fun oversizedTokenFileIsRejected() {
-        val f = File.createTempFile("zt", ".token")
+        val f = File.createTempFile("zttoken", ".token")
         f.writeText("a".repeat(ZTCommandAuth.MAX_LINE_CHARS + 10))
         try {
             ZTCommandAuth.readTokenFile(f)
