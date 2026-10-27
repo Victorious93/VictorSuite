@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- VictorSuite add: view tags used by com.termux.victor.theme.FleetThemeApplier to remember a
+     view's built-in colour so the fleet theme can be removed again. -->
+<resources>
+    <item name="fleet_theme_tag_background" type="id" />
+    <item name="fleet_theme_tag_text" type="id" />
+</resources>

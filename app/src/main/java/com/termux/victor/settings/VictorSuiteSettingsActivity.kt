@@ -11,6 +11,7 @@ import com.example.xh_lib.utils.UUtils
 import com.termux.api.TermuxApiEmbed
 import com.termux.R
 import com.termux.victor.victorfiles.VictorFilesPanel
+import com.termux.victor.theme.FleetThemeBinding // VictorSuite add: fleet theme
 import com.termux.victor.remotecontrol.android.RemoteControlSettings // VictorSuite add
 import com.termux.victor.ftp.utils.UserSetManage
 import com.termux.victor.url.FileUrl
@@ -62,11 +63,24 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
     private val remoteControlPairingsLl by lazy {findViewById<LinearLayout>(R.id.remote_control_pairings_ll)}
     // @}
 
+    // VictorSuite add: fleet theme for this settings screen's chrome (View/XML only)
+    private val fleetTheme by lazy { FleetThemeBinding(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_victor_suite_settings)
         initView()
         initStatus()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fleetTheme.onStart()
+    }
+
+    override fun onStop() {
+        fleetTheme.onStop()
+        super.onStop()
     }
 
     private fun initView() {
