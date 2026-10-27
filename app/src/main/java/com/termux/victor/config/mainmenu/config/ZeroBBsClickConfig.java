@@ -19,7 +19,7 @@ public class ZeroBBsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public Drawable getIcon(Context context) {
-        return context.getDrawable(R.mipmap.bbs_zero);
+        return context.getDrawable(R.drawable.ic_ms_forum);
     }
 
     @Override

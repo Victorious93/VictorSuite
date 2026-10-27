@@ -26,7 +26,7 @@ class ZTCommandKeyClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getIcon(context: Context?): Drawable? {
-        return context?.getDrawable(R.mipmap.zt_command_key)
+        return context?.getDrawable(R.drawable.ic_ms_keyboard)
     }
 
     override fun getString(context: Context?): String? {
