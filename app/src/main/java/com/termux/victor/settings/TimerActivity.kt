@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
 import android.content.Context
 import android.content.Intent
@@ -11,14 +11,14 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.dialog.YesNoDialog
-import com.termux.zerocore.ftp.utils.TimerSetManage
-import com.termux.zerocore.ftp.utils.UserSetManage
-import com.termux.zerocore.libsu.LibSuManage
-import com.termux.zerocore.settings.services.TimerExeService
-import com.termux.zerocore.settings.timer.TimerBean
-import com.termux.zerocore.utils.FileHttpUtils
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.dialog.YesNoDialog
+import com.termux.victor.ftp.utils.TimerSetManage
+import com.termux.victor.ftp.utils.UserSetManage
+import com.termux.victor.libsu.LibSuManage
+import com.termux.victor.settings.services.TimerExeService
+import com.termux.victor.settings.timer.TimerBean
+import com.termux.victor.utils.FileHttpUtils
 import com.zp.z_file.util.LogUtils
 
 class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnClickListener {

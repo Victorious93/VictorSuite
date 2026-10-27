@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -6,9 +6,9 @@ import android.view.View;
 
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.back.BackRestoreDialog;
-import com.termux.zerocore.back.listener.CreateConversationListener;
-import com.termux.zerocore.config.mainmenu.MainMenuConfig;
+import com.termux.victor.back.BackRestoreDialog;
+import com.termux.victor.back.listener.CreateConversationListener;
+import com.termux.victor.config.mainmenu.MainMenuConfig;
 
 // 备份/ 恢复
 public class BackupRestoreClickConfig extends BaseMenuClickConfig {

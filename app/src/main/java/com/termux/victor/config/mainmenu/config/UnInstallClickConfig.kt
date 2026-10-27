@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.app.Activity
 import android.content.Context
@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.utils.PackageMsg
+import com.termux.victor.utils.PackageMsg
 
 class UnInstallClickConfig: BaseMenuClickConfig() {
     override fun getIcon(context: Context?): Drawable? {

@@ -1,4 +1,4 @@
-package com.termux.zerocore.remotecontrol
+package com.termux.victor.remotecontrol
 
 /**
  * Wire error categories for the fleet remote-control envelope v1

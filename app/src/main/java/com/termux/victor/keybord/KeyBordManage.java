@@ -1,10 +1,10 @@
-package com.termux.zerocore.keybord;
+package com.termux.victor.keybord;
 
 import android.os.Handler;
 import android.view.View;
 
 import com.example.xh_lib.utils.UUtils;
-import com.termux.zerocore.zero.engine.ZeroCoreManage;
+import com.termux.victor.zero.engine.ZeroCoreManage;
 
 public class KeyBordManage {
 

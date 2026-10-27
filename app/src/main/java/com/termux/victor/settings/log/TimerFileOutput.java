@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings.log;
+package com.termux.victor.settings.log;
 
 public class TimerFileOutput {
 

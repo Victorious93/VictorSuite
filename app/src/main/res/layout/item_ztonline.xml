@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_2b2b2b"
     android:padding="10dp"
-    tools:context=".zerocore.settings.ZtSettingsActivity">
+    tools:context=".victor.settings.ZtSettingsActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

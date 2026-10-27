@@ -1,4 +1,4 @@
-package com.termux.zerocore.fragment;
+package com.termux.victor.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,11 +19,11 @@ import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.app.TermuxApplication;
 import com.termux.app.TermuxInstaller;
-import com.termux.zerocore.activity.BackNewActivity;
-import com.termux.zerocore.dialog.MyDialog;
-import com.termux.zerocore.dialog.YesNoDialog;
-import com.termux.zerocore.shell.ExeCommand;
-import com.termux.zerocore.utils.QZHFUtils;
+import com.termux.victor.activity.BackNewActivity;
+import com.termux.victor.dialog.MyDialog;
+import com.termux.victor.dialog.YesNoDialog;
+import com.termux.victor.shell.ExeCommand;
+import com.termux.victor.utils.QZHFUtils;
 
 
 import java.io.BufferedInputStream;
@@ -110,8 +110,8 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
                 if (!(new File("/data/data/com.termux/files/home/storage").exists())){
                     Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到目录), Toast.LENGTH_SHORT).show();
                     UUtils.getHandler().post(() -> {
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage ");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage ");
                         getActivity().finish();
                     });
                     return;

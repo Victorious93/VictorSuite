@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.app.Activity
 import android.content.Context

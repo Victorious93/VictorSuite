@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.config.mainmenu.MainMenuConfig
+import com.termux.victor.config.mainmenu.MainMenuConfig
 
 /**
  * Drawer entry that hands off to the separate RootForge OS app (docs/SUITE_PLAN.md section 7.6).

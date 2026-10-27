@@ -1,4 +1,4 @@
-package com.termux.zerocore.remotecontrol
+package com.termux.victor.remotecontrol
 
 import com.google.gson.JsonParser
 import org.junit.Assert.assertEquals

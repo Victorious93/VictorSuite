@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils;
+package com.termux.victor.utils;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -6,9 +6,9 @@ import android.widget.Toast;
 import com.example.xh_lib.utils.UUtils;
 import com.google.gson.Gson;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.bean.CreateSystemBean;
-import com.termux.zerocore.dialog.MyDialog;
-import com.termux.zerocore.fragment.RestoreFragment;
+import com.termux.victor.bean.CreateSystemBean;
+import com.termux.victor.dialog.MyDialog;
+import com.termux.victor.fragment.RestoreFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,7 +68,7 @@ public class QZUtils {
              /*   UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage \n");
                     }
                 });*/
 
@@ -81,7 +81,7 @@ public class QZUtils {
                             Toast.makeText(UUtils.getContext(), "没有找到storage目录,请手动创建", Toast.LENGTH_SHORT).show();
 
                             myDialog.dismiss();
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                             restoreFragment.getActivity().finish();
                         }
                     });
@@ -158,10 +158,10 @@ public class QZUtils {
                         myDialog.dismiss();
                         Toast.makeText(UUtils.getContext(), "开始恢复..", Toast.LENGTH_SHORT).show();
 
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo \"----手动恢复开始----\" \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo \"----手动恢复开始----\" \n");
 
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -xzvf ./storage/shared/xinhao/data/" + tarFle.getName().replace(" ","") + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"系统恢复完成,请在切换系统，切换您的系统\" \n");
-                        //com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("tar -xzvf./storage/shared/xinhao/data/" + tarFle.getName() + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"系统恢复完成,请在切换系统，切换您的系统\" \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -xzvf ./storage/shared/xinhao/data/" + tarFle.getName().replace(" ","") + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"系统恢复完成,请在切换系统，切换您的系统\" \n");
+                        //com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("tar -xzvf./storage/shared/xinhao/data/" + tarFle.getName() + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"系统恢复完成,请在切换系统，切换您的系统\" \n");
 
                         try {
                             restoreFragment.getActivity().finish();

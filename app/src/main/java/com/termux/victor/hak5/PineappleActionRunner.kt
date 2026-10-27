@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 /**
  * Executes a selected module/action ONLY after it passes the per-action confirmation

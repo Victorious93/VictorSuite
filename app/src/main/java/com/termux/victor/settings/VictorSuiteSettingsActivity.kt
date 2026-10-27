@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
 import android.os.Bundle
 import android.widget.EditText
@@ -10,11 +10,11 @@ import androidx.appcompat.widget.SwitchCompat
 import com.example.xh_lib.utils.UUtils
 import com.termux.api.TermuxApiEmbed
 import com.termux.R
-import com.termux.zerocore.victorfiles.VictorFilesPanel
-import com.termux.zerocore.remotecontrol.android.RemoteControlSettings // VictorSuite add
-import com.termux.zerocore.ftp.utils.UserSetManage
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.utils.FileHttpUtils.Companion.get
+import com.termux.victor.victorfiles.VictorFilesPanel
+import com.termux.victor.remotecontrol.android.RemoteControlSettings // VictorSuite add
+import com.termux.victor.ftp.utils.UserSetManage
+import com.termux.victor.url.FileUrl
+import com.termux.victor.utils.FileHttpUtils.Companion.get
 import com.topjohnwu.superuser.Shell
 import com.zp.z_file.util.LogUtils
 import java.io.File

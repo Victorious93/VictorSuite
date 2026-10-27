@@ -1,4 +1,4 @@
-package com.termux.zerocore.remotecontrol
+package com.termux.victor.remotecontrol
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

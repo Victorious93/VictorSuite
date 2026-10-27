@@ -1345,7 +1345,7 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="zt_usage_habits_ztermux">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
     <string name="zt_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the VictorSuite usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
 
-    <!-- Plugin manager (com.termux.zerocore.plugin) -->
+    <!-- Plugin manager (com.termux.victor.plugin) -->
     <string name="plugin_manager_title">Plugin Manager</string>
     <string name="plugin_none_registered">No plugins registered yet. Add an entry to remote/plugins/main.json, or register one locally — see PLUGINS.md.</string>
     <string name="plugin_configure">Configure</string>

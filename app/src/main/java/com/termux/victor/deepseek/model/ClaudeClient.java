@@ -1,11 +1,11 @@
-package com.termux.zerocore.deepseek.model;
+package com.termux.victor.deepseek.model;
 
 import android.text.TextUtils;
 
 import com.example.xh_lib.utils.LogUtils;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.ftp.utils.UserSetManage;
+import com.termux.victor.ftp.utils.UserSetManage;
 
 import okhttp3.Call;
 import okhttp3.Callback;

@@ -1,4 +1,4 @@
-package com.termux.zerocore.victorfiles
+package com.termux.victor.victorfiles
 
 import android.app.Activity
 import android.content.ActivityNotFoundException

@@ -1,12 +1,12 @@
-package com.termux.zerocore.data
+package com.termux.victor.data
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxInstaller
-import com.termux.zerocore.bean.ZeroRunCommandBean
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.bean.ZeroRunCommandBean
+import com.termux.victor.url.FileUrl
 import java.io.File
 
 object LinuxCommandData {

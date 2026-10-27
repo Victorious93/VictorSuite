@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.ztcommand;
+package com.termux.victor.config.ztcommand;
 
 import java.io.File;
 import java.io.FileInputStream;

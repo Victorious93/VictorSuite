@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek;
+package com.termux.victor.deepseek;
 
 
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.termux.R;
-import com.termux.zerocore.deepseek.data.ChatDatabaseHelper;
-import com.termux.zerocore.deepseek.model.AiClient;
-import com.termux.zerocore.deepseek.model.Config;
-import com.termux.zerocore.deepseek.model.DeepSeekClient;
-import com.termux.zerocore.deepseek.model.RequestMessageItem;
+import com.termux.victor.deepseek.data.ChatDatabaseHelper;
+import com.termux.victor.deepseek.model.AiClient;
+import com.termux.victor.deepseek.model.Config;
+import com.termux.victor.deepseek.model.DeepSeekClient;
+import com.termux.victor.deepseek.model.RequestMessageItem;
 
 import java.util.ArrayList;
 import java.util.List;

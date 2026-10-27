@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.app.Activity
 import android.content.Context
@@ -12,8 +12,8 @@ import com.example.xh_lib.utils.UUtils
 import com.scottyab.rootbeer.RootBeer
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.config.VsLinks
-import com.termux.zerocore.shell.ExeCommand
+import com.termux.victor.config.VsLinks
+import com.termux.victor.shell.ExeCommand
 
 
 class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {

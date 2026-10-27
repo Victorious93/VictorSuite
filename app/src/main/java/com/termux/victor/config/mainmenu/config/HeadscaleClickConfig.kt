@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.app.AlertDialog
 import android.content.Context
@@ -13,9 +13,9 @@ import android.widget.Toast
 import com.example.xh_lib.utils.SaveData
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.code.CodeString
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.utils.SingletonCommunicationUtils
+import com.termux.victor.code.CodeString
+import com.termux.victor.url.FileUrl
+import com.termux.victor.utils.SingletonCommunicationUtils
 import java.io.File
 
 /**

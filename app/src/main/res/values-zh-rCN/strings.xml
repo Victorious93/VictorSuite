@@ -1336,7 +1336,7 @@
 
     <string name="zt_guide">双击屏幕边缘弹出左/右菜单栏\n如果你设置了VictorSuite使用习惯,则为音量+-键\n如果打开左/右侧栏无法关闭此窗口\n长按此处强制关闭</string>
 
-    <!-- 插件管理器 (com.termux.zerocore.plugin) -->
+    <!-- 插件管理器 (com.termux.victor.plugin) -->
     <string name="plugin_manager_title">插件管理</string>
     <string name="plugin_none_registered">暂无已注册的插件。请在 remote/plugins/main.json 中添加条目，或本地注册一个——详见 PLUGINS.md。</string>
     <string name="plugin_configure">配置</string>

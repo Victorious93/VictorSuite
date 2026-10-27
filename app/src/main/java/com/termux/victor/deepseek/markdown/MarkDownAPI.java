@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek.markdown;
+package com.termux.victor.deepseek.markdown;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils;
+package com.termux.victor.utils;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.utermux_windows.qemu.data.MyContacts;
+import com.termux.victor.utermux_windows.qemu.data.MyContacts;
 
 import java.util.ArrayList;
 

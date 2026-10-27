@@ -1,7 +1,7 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import com.termux.zerocore.config.VsLinks;
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
+import com.termux.victor.config.VsLinks;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.termux.R;
-import com.termux.zerocore.activity.WebViewActivity;
+import com.termux.victor.activity.WebViewActivity;
 
 public class ZeroBBsClickConfig extends BaseMenuClickConfig {
     @Override

@@ -1,9 +1,9 @@
-package com.termux.zerocore.utils;
+package com.termux.victor.utils;
 
 import android.app.DownloadManager;
 
 
-import com.termux.zerocore.bean.EditPromptBean;
+import com.termux.victor.bean.EditPromptBean;
 
 import java.io.BufferedReader;
 import java.io.File;

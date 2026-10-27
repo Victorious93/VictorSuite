@@ -1,9 +1,9 @@
-package com.termux.zerocore.ftp.utils
+package com.termux.victor.ftp.utils
 
 import com.example.xh_lib.utils.SaveData
 import com.google.gson.Gson
-import com.termux.zerocore.bean.ZTUserBean
-import com.termux.zerocore.settings.timer.TimerBean
+import com.termux.victor.bean.ZTUserBean
+import com.termux.victor.settings.timer.TimerBean
 
 class TimerSetManage private constructor() {
     companion object {

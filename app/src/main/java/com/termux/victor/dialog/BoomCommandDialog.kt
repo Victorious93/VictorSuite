@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.app.Activity
 import android.content.Context
@@ -11,9 +11,9 @@ import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.example.xh_lib.utils.UUtils
 import com.google.gson.Gson
 import com.termux.R
-import com.termux.zerocore.activity.adapter.MinLAdapter
-import com.termux.zerocore.bean.MinLBean
-import com.termux.zerocore.utils.SaveData
+import com.termux.victor.activity.adapter.MinLAdapter
+import com.termux.victor.bean.MinLBean
+import com.termux.victor.utils.SaveData
 
 class BoomCommandDialog : BaseDialogDown {
 

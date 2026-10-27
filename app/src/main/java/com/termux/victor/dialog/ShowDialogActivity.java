@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog;
+package com.termux.victor.dialog;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.config.ztcommand.config.ConfirmedDialogConfig;
+import com.termux.victor.config.ztcommand.config.ConfirmedDialogConfig;
 
 public class ShowDialogActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "dialog_title";

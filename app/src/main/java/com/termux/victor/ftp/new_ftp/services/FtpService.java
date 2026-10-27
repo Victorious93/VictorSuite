@@ -1,4 +1,4 @@
-package com.termux.zerocore.ftp.new_ftp.services;
+package com.termux.victor.ftp.new_ftp.services;
 
 import android.Manifest;
 import android.app.Activity;
@@ -32,14 +32,14 @@ import com.example.xh_lib.utils.UUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.ftp.new_ftp.Constants;
-import com.termux.zerocore.ftp.new_ftp.bean.AccountItem;
-import com.termux.zerocore.ftp.new_ftp.utils.FtpAuthorities;
-import com.termux.zerocore.ftp.new_ftp.config.FTP_CONFIG;
-import com.termux.zerocore.ftp.new_ftp.utils.CommonUtils;
-import com.termux.zerocore.ftp.new_ftp.utils.MySQLiteOpenHelper;
-import com.termux.zerocore.ftp.new_ftp.utils.NetworkStatusMonitor;
-import com.termux.zerocore.url.FileUrl;
+import com.termux.victor.ftp.new_ftp.Constants;
+import com.termux.victor.ftp.new_ftp.bean.AccountItem;
+import com.termux.victor.ftp.new_ftp.utils.FtpAuthorities;
+import com.termux.victor.ftp.new_ftp.config.FTP_CONFIG;
+import com.termux.victor.ftp.new_ftp.utils.CommonUtils;
+import com.termux.victor.ftp.new_ftp.utils.MySQLiteOpenHelper;
+import com.termux.victor.ftp.new_ftp.utils.NetworkStatusMonitor;
+import com.termux.victor.url.FileUrl;
 
 import org.apache.ftpserver.ConnectionConfig;
 import org.apache.ftpserver.FtpServer;

@@ -1,11 +1,11 @@
-package com.termux.zerocore.activity.adapter;
+package com.termux.victor.activity.adapter;
 
 import android.view.View;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.activity.view_holder.RestoreViewHolder;
-import com.termux.zerocore.activity.view_holder.ViewHolder;
+import com.termux.victor.activity.view_holder.RestoreViewHolder;
+import com.termux.victor.activity.view_holder.ViewHolder;
 
 import java.io.File;
 import java.util.List;

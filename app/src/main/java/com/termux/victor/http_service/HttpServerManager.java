@@ -1,4 +1,4 @@
-package com.termux.zerocore.http_service;
+package com.termux.victor.http_service;
 
 import com.example.xh_lib.utils.LogUtils;
 import com.example.xh_lib.utils.UUtils;

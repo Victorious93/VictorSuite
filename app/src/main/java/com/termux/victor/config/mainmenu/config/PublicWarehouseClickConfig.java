@@ -1,7 +1,7 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import com.termux.zerocore.config.VsLinks;
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
+import com.termux.victor.config.VsLinks;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ONLINE_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.dialog.EditDialog;
+import com.termux.victor.dialog.EditDialog;
 
 public class PublicWarehouseClickConfig extends BaseMenuClickConfig {
     @Override

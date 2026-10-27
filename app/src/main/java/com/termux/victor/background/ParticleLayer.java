@@ -1,4 +1,4 @@
-package com.termux.zerocore.background;
+package com.termux.victor.background;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,9 +6,9 @@ import android.opengl.GLES20;
 
 
 import com.termux.R;
-import com.termux.zerocore.background.utils.ESShader;
-import com.termux.zerocore.background.utils.RawResourceReader;
-import com.termux.zerocore.background.utils.TextureHelper;
+import com.termux.victor.background.utils.ESShader;
+import com.termux.victor.background.utils.RawResourceReader;
+import com.termux.victor.background.utils.TextureHelper;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

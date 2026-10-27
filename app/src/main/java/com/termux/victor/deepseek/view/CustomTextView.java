@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek.view;
+package com.termux.victor.deepseek.view;
 
 // CustomTextView.java
 import android.content.Context;
@@ -73,7 +73,7 @@ public class CustomTextView extends AppCompatTextView {
 
                     case 2: // Test选项
                         // 自定义操作
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(selectedText);
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(selectedText);
                         Context context = getContext();
                         if (context instanceof TermuxActivity) {
                             ((TermuxActivity) context).getDrawer().smoothClose();

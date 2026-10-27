@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 /**
  * Severity tags and per-action confirmation scaffolding (Phase 1 ships the types +

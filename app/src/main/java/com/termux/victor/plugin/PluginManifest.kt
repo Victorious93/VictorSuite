@@ -1,9 +1,9 @@
-package com.termux.zerocore.plugin
+package com.termux.victor.plugin
 
 /**
  * Top-level manifest schema fetched from `remote/plugins/main.json` (or a user-configured
  * alternate source). Mirrors the shape of the existing module-manifest system
- * (see [com.termux.zerocore.bean.ZDYDataBean]) so it fits the same fetch/parse code path.
+ * (see [com.termux.victor.bean.ZDYDataBean]) so it fits the same fetch/parse code path.
  */
 data class PluginManifest(
     val code: Int,

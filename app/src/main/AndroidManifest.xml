@@ -70,61 +70,61 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <service
-            android:name=".zerocore.settings.services.TimerExeService"
+            android:name=".victor.settings.services.TimerExeService"
             android:enabled="true"
             android:exported="false"></service>
 
         <activity
-            android:name=".zerocore.settings.TimerActivity"
+            android:name=".victor.settings.TimerActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.settings.ZTInstallActivity"
+            android:name=".victor.settings.ZTInstallActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.settings.ZTOnlineServerActivity"
+            android:name=".victor.settings.ZTOnlineServerActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.settings.ZTAboutActivity"
+            android:name=".victor.settings.ZTAboutActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.settings.ContainerSettingsMainActivity"
+            android:name=".victor.settings.ContainerSettingsMainActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.settings.VictorSuiteSettingsActivity"
+            android:name=".victor.settings.VictorSuiteSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".zerocore.deepseek.activity.VictorSuiteDeepSeekSettingsActivity"
+        <activity android:name=".victor.deepseek.activity.VictorSuiteDeepSeekSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <activity android:name=".zerocore.deepseek.activity.VictorSuiteDeepSeekKeyActivity"
+        <activity android:name=".victor.deepseek.activity.VictorSuiteDeepSeekKeyActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".zerocore.hak5.Hak5CompanionActivity"
+            android:name=".victor.hak5.Hak5CompanionActivity"
             android:exported="false"
             android:label="@string/hak5_companion_title"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".zerocore.hak5.Hak5CommandLogActivity"
+            android:name=".victor.hak5.Hak5CommandLogActivity"
             android:exported="false"
             android:label="@string/hak5_command_log_title"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".zerocore.settings.VictorSuiteX11Settings"
+            android:name=".victor.settings.VictorSuiteX11Settings"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".zerocore.settings.ZtSettingsActivity"
+            android:name=".victor.settings.ZtSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
@@ -133,7 +133,7 @@
             android:required="false" />
 
         <activity
-            android:name=".zerocore.developer.DeveloperActivity"
+            android:name=".victor.developer.DeveloperActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
@@ -141,11 +141,11 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".zerocore.activity.EditTextActivity"
+            android:name=".victor.activity.EditTextActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
-                <action android:name="com.termux.zerocore.activity.edittextactivity" />
+                <action android:name="com.termux.victor.activity.edittextactivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -155,7 +155,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".zerocore.activity.ImageActivity"
+            android:name=".victor.activity.ImageActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <!--
          This (or rather, value 2.1 or higher) is needed to make the Samsung Galaxy S8
@@ -219,25 +219,25 @@
             android:resizeableActivity="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.activity.UncaughtExceptionHandlerActivity"
+            android:name=".victor.activity.UncaughtExceptionHandlerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.activity.SwitchActivity"
+            android:name=".victor.activity.SwitchActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.activity.BackNewActivity"
+            android:name=".victor.activity.BackNewActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.activity.FontActivity"
+            android:name=".victor.activity.FontActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.utermux_windows.qemu.activity.RunWindowActivity"
+            android:name=".victor.utermux_windows.qemu.activity.RunWindowActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.activity.WebViewActivity"
+            android:name=".victor.activity.WebViewActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.scrcpy.MainActivity"
+            android:name=".victor.scrcpy.MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".app.activities.SettingsActivity"
@@ -273,11 +273,11 @@
             android:name="com.lcw.library.imagepicker.activity.ImagePreActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".zerocore.dialog.ShowDialogActivity"
+            android:name=".victor.dialog.ShowDialogActivity"
             android:theme="@style/ThemeBaseDialog" />
 
         <activity
-            android:name=".zerocore.config.ztcommand.activity.SocketBaseActivity"
+            android:name=".victor.config.ztcommand.activity.SocketBaseActivity"
             android:theme="@style/ThemeBaseDialog" />
         <activity
             android:name="com.lcw.library.imagepicker.activity.BaseActivity"
@@ -357,7 +357,7 @@
         <service
             android:name=".app.TermuxService"
             android:exported="false" />
-        <service android:name=".zerocore.scrcpy.Scrcpy" />
+        <service android:name=".victor.scrcpy.Scrcpy" />
         <service
             android:name=".app.RunCommandService"
             android:exported="true"
@@ -377,13 +377,13 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:name=".zerocore.config.ztcommand.ZTSocketService"/>
+        <service android:name=".victor.config.ztcommand.ZTSocketService"/>
 
         <service
-            android:name=".zerocore.ftp.new_ftp.services.FtpService"
+            android:name=".victor.ftp.new_ftp.services.FtpService"
             android:exported="false" />
         <service
-            android:name=".zerocore.ftp.new_ftp.services.MyTileService"
+            android:name=".victor.ftp.new_ftp.services.MyTileService"
             android:icon="@drawable/ic_launcher" />
 
         <receiver

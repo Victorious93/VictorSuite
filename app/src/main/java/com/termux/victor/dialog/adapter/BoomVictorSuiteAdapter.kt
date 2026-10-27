@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog.adapter
+package com.termux.victor.dialog.adapter
 
 import android.app.Activity
 import android.content.Intent
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.bean.ZeroRunCommandBean
-import com.termux.zerocore.dialog.LoadingDialog
-import com.termux.zerocore.dialog.view_holder.BoomVictorSuiteViewHolder
-import com.termux.zerocore.url.FileUrl.mainHomeUrl
+import com.termux.victor.bean.ZeroRunCommandBean
+import com.termux.victor.dialog.LoadingDialog
+import com.termux.victor.dialog.view_holder.BoomVictorSuiteViewHolder
+import com.termux.victor.url.FileUrl.mainHomeUrl
 import java.io.File
 
 class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
@@ -64,7 +64,7 @@ class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
                 if(zeroRunCommandBean.isHttpCommand){
 
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(zeroRunCommandBean.runCommand)
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(zeroRunCommandBean.runCommand)
 
                 }else{
 
@@ -80,7 +80,7 @@ class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
                             loadingDialog.dismiss()
 
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(zeroRunCommandBean.runCommand)
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(zeroRunCommandBean.runCommand)
 
                             if(zeroRunCommandBean.runCommit != null){
                                 zeroRunCommandBean.runCommit.run()

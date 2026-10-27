@@ -1,11 +1,11 @@
-package com.termux.zerocore.ftp.utils
+package com.termux.victor.ftp.utils
 
 import android.text.TextUtils
 import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.SaveData
 import com.google.gson.Gson
-import com.termux.zerocore.bean.ZTUserBean
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.bean.ZTUserBean
+import com.termux.victor.config.VsLinks
 import com.zp.z_file.content.TAG
 
 class UserSetManage private constructor() {

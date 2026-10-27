@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.content.Context
 import android.content.Intent
@@ -10,9 +10,9 @@ import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxService
 import com.termux.shared.termux.TermuxConstants
-import com.termux.zerocore.ftp.utils.UserSetManage
-import com.termux.zerocore.utils.ViewBackUtils
-import com.termux.zerocore.view.CustomScrollView
+import com.termux.victor.ftp.utils.UserSetManage
+import com.termux.victor.utils.ViewBackUtils
+import com.termux.victor.view.CustomScrollView
 import kotlinx.coroutines.Runnable
 import java.lang.RuntimeException
 

@@ -1,4 +1,4 @@
-package com.termux.zerocore.zip;
+package com.termux.victor.zip;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

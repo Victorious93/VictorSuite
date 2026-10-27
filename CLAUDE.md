@@ -43,24 +43,24 @@ VictorSuite is a Termux fork (keeps `applicationId com.termux` and the `RUN_COMM
 | `terminal-view` | Android `View` that renders a `TerminalEmulator` and handles input. Depends on `:terminal-emulator`. |
 | `termux-shared` | Shared utilities used by both `:app` and companion Termux apps (file utils, logger, settings, crash handling, JNI helpers, local Unix socket). |
 | `termux-api-lib` | Vendored copy of the Termux:API app (`termux/termux-api` v0.53.0, GPLv3) built as a library so it runs inside the `com.termux` APK. See "Embedded Termux:API" below and `termux-api-lib/UPSTREAM.md`. |
-| `app` | The main application. Contains all VictorSuite additions under `com.termux.zerocore`. |
+| `app` | The main application. Contains all VictorSuite additions under `com.termux.victor`. |
 
 ### `app` source layout
 
 Under `app/src/main/java/com/termux/`:
 
 - **`app/`** — upstream Termux entry points (`TermuxApplication`, `TermuxActivity`, settings fragments, terminal I/O, broadcast/event handling). Minimal VictorSuite changes here.
-- **`zerocore/`** — all inherited and VictorSuite additions. Organised by feature area (see below).
+- **`victor/`** — all inherited and VictorSuite additions. Organised by feature area (see below).
 - **`filepicker/`** — file-picker Activity.
 - **`test/`** — small utility class used from unit tests.
 
-### `zerocore` feature areas
+### `victor` feature areas
 
 - **`config/mainmenu/`** — drawer menu registration. `MainMenuConfig.init()` builds `MainMenuCategoryData` lists from individual `*ClickConfig` objects. To add a menu item, create a `MainMenuClickConfig` impl and register it here.
 - **`config/ztcommand/`** — `ZTSocketService` runs a loopback-only TCP server on port 19951 that accepts JSON command packets. Every request must start with the per-install token in `~/.termux/zt.token` (`ZTCommandAuth`); the bundled `zt` helper sends it, and older clients that omit it are refused. Commands are dispatched through `ZTConfig` impls (each has a numeric `getId()` and returns a shell command string). `ZTCommandConfigStore` persists command definitions.
 - **`zero/engine/`** — `ZeroCoreManage` bridges to an optional external APK (`com.xinhao.zerocoremanage`) via reflection/`createPackageContext`. If that APK is absent the engine calls fail silently; the rest of the app continues working.
 - **`plugin/`** — plugin framework (see `PLUGINS.md`). Key files: `PluginRegistry`, `PluginManifest`, `PluginConfigStore` (encrypted SharedPreferences), `PluginLogger` (JSONL audit log), `PluginProcessLauncher`. Enable path: `register → acknowledgeAuthorizedUse → enable`; both registry and launcher enforce the invariant independently.
-- **`deepseek/`** — former in-app AI chat (DeepSeek and Claude API clients, SQLite sessions). No longer reachable from the UI: the drawer AI button and Settings AI entry launch DroidCommand AI via `zerocore/droidcommand/DroidCommandAi`. The package is dead code except `markdown/MarkDownAPI`, which `TermuxActivity` still uses; delete the rest once a build can verify it.
+- **`deepseek/`** — former in-app AI chat (DeepSeek and Claude API clients, SQLite sessions). No longer reachable from the UI: the drawer AI button and Settings AI entry launch DroidCommand AI via `victor/droidcommand/DroidCommandAi`. The package is dead code except `markdown/MarkDownAPI`, which `TermuxActivity` still uses; delete the rest once a build can verify it.
 - **`back/`** — backup/restore UI (`BackViewModel`, `RestoreViewModel`). Supports `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z` archives.
 - **`http/`** — `NanoHttpdServer`. **`otg/`** — `OTGManager`. Other dirs not listed here exist too (`shell/`, `zip/`, `developer/`, `keybord/`, `bosybox/`, etc.); inspect before assuming.
 - **`ftp/`** — embedded FTP server: `new_ftp/` (Apache FtpServer via `FtpService`). The old SwiFTP-based `FsService` was removed (it was never started and had an always-true guest-login check).
@@ -107,12 +107,12 @@ VictorSuite changes to upstream Termux files are wrapped in comment markers so t
 // @}
 ```
 
-The codebase is mixed Java and Kotlin. New `zerocore` features should be written in Kotlin; existing Java files can stay Java unless there is a reason to convert.
+The codebase is mixed Java and Kotlin. New `victor` features should be written in Kotlin; existing Java files can stay Java unless there is a reason to convert.
 
 `app/build.gradle` bundles `scripts/ai-cli-setup.sh` as an app asset (see `assets.srcDirs`). Changes to `scripts/` are picked up automatically at the next build.
 
 ## Gotchas
-- `allowBackup` is `false`: Android backup (Auto Backup / `adb backup`) would otherwise copy `$HOME` (SSH keys, `zt.token`). The in-app backup/restore under `zerocore/back/` is unaffected.
+- `allowBackup` is `false`: Android backup (Auto Backup / `adb backup`) would otherwise copy `$HOME` (SSH keys, `zt.token`). The in-app backup/restore under `victor/back/` is unaffected.
 - `applicationId` is `com.termux`: VictorSuite cannot be installed alongside upstream Termux.
 - Signing: debug builds use the committed `app/victorsuite-debug.keystore` (public `android` passwords, deliberately not a secret, so debug fingerprints are stable across machines/CI). Release builds sign only when `SIGNING_KEYSTORE_FILE` or `SIGNING_KEYSTORE_BASE64` plus `KEY_ALIAS`, `KEY_PASSWORD`, `STORE_PASSWORD` are set in the environment; otherwise release APKs are unsigned. Never commit real release keys or passwords.
 

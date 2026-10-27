@@ -1,4 +1,4 @@
-package com.termux.zerocore.code
+package com.termux.victor.code
 
 
 /**

@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity.adapter;
+package com.termux.victor.activity.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.termux.R;
-import com.termux.zerocore.bean.SSHDeviceBean;
+import com.termux.victor.bean.SSHDeviceBean;
 import com.zp.z_file.util.LogUtils;
 
 import java.util.List;

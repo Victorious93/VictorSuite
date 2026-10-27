@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,11 +8,11 @@ import android.widget.Toast;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.code.CodeString;
-import com.termux.zerocore.config.mainmenu.MainMenuConfig;
-import com.termux.zerocore.dialog.SwitchDialog;
-import com.termux.zerocore.popuwindow.MenuLeftPopuListWindow;
-import com.termux.zerocore.url.FileUrl;
+import com.termux.victor.code.CodeString;
+import com.termux.victor.config.mainmenu.MainMenuConfig;
+import com.termux.victor.dialog.SwitchDialog;
+import com.termux.victor.popuwindow.MenuLeftPopuListWindow;
+import com.termux.victor.url.FileUrl;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -88,7 +88,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 switchDialog.getCancel().setOnClickListener(v -> switchDialog.dismiss());
                 switchDialog.getOk().setOnClickListener(v -> {
                     switchDialog.dismiss();
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getQH());
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getQH());
                 });
                 break;
             //北京
@@ -97,7 +97,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 switchDialog1.getCancel().setOnClickListener(v -> switchDialog1.dismiss());
                 switchDialog1.getOk().setOnClickListener(v -> {
                     switchDialog1.dismiss();
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getBJ());
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getBJ());
                 });
                 break;
             //官方
@@ -109,7 +109,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                     UUtils.writerFile("code/sources.list", new File(FileUrl.INSTANCE.getSourcesUrl()));
                     UUtils.writerFile("code/science.list", new File(FileUrl.INSTANCE.getScienceUrl()));
                     UUtils.writerFile("code/game.list", new File(FileUrl.INSTANCE.getGameUrl()));
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getUpDate());
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getUpDate());
                 });
                 break;
             //NJU
@@ -118,7 +118,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 switchDialog15.getCancel().setOnClickListener(v -> switchDialog15.dismiss());
                 switchDialog15.getOk().setOnClickListener(v -> {
                     switchDialog15.dismiss();
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getNJU());
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getNJU());
                 });
                 break;
 
@@ -128,7 +128,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 ustc.getCancel().setOnClickListener(v -> ustc.dismiss());
                 ustc.getOk().setOnClickListener(v -> {
                     ustc.dismiss();
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getUSTC());
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getUSTC());
                 });
                 break;
             //heb
@@ -137,7 +137,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 heb.getCancel().setOnClickListener(v -> heb.dismiss());
                 heb.getOk().setOnClickListener(v -> {
                     heb.dismiss();
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getHEB());
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getHEB());
                 });
                 break;
         }

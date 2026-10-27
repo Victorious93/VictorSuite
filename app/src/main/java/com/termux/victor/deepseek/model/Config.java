@@ -1,6 +1,6 @@
-package com.termux.zerocore.deepseek.model;
+package com.termux.victor.deepseek.model;
 
-import com.termux.zerocore.config.VsLinks;
+import com.termux.victor.config.VsLinks;
 
 public class Config {
     // 默认命令行

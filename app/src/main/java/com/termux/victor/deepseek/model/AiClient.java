@@ -1,6 +1,6 @@
-package com.termux.zerocore.deepseek.model;
+package com.termux.victor.deepseek.model;
 
-import com.termux.zerocore.ftp.utils.UserSetManage;
+import com.termux.victor.ftp.utils.UserSetManage;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.termux.zerocore.remotecontrol
+package com.termux.victor.remotecontrol
 
 /**
  * Transport-authenticated caller. On TERMUX_IPC this is derived from the

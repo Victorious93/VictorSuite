@@ -1,14 +1,14 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.dialog.PluginListDialog
+import com.termux.victor.dialog.PluginListDialog
 
 /**
- * Opens the plugin manager (com.termux.zerocore.plugin) - registering, enabling, and
+ * Opens the plugin manager (com.termux.victor.plugin) - registering, enabling, and
  * launching external tools the user has installed and authorized themselves. See
  * PLUGINS.md for the framework's scope and non-goals.
  */
@@ -18,7 +18,7 @@ class PluginManagerClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getType(): Int {
-        return com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_COMMON_FUNCTIONS
+        return com.termux.victor.config.mainmenu.MainMenuConfig.CODE_COMMON_FUNCTIONS
     }
 
     override fun getIcon(context: Context?): Drawable? {

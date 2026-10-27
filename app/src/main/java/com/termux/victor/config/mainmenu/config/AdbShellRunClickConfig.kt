@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
@@ -10,10 +10,10 @@ import com.example.xh_lib.utils.UUtils
 import com.termux.BuildConfig
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.config.VsLinks
-import com.termux.zerocore.dialog.MingLShowDialog
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.config.VsLinks
+import com.termux.victor.dialog.MingLShowDialog
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 
 class AdbShellRunClickConfig: BaseMenuClickConfig() {

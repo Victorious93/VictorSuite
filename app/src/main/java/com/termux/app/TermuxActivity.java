@@ -1,8 +1,8 @@
 package com.termux.app;
 
 import androidx.activity.OnBackPressedCallback;
-import static com.termux.zerocore.config.ztcommand.ZTSocketService.ZT_COMMAND_ACTIVITY_ACTION;
-import static com.termux.zerocore.config.ztcommand.ZTSocketService.ZT_COMMAND_SERVICES_ACTION;
+import static com.termux.victor.config.ztcommand.ZTSocketService.ZT_COMMAND_ACTIVITY_ACTION;
+import static com.termux.victor.config.ztcommand.ZTSocketService.ZT_COMMAND_SERVICES_ACTION;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -57,7 +57,7 @@ import com.billy.android.swipe.SwipeConsumer;
 import com.billy.android.swipe.consumer.DrawerConsumer;
 import com.billy.android.swipe.consumer.SlidingConsumer;
 // VictorSuite add {@
-import com.termux.zerocore.victorfiles.VictorFilesPanel;
+import com.termux.victor.victorfiles.VictorFilesPanel;
 // @}
 import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.blockchain.ub.utils.httputils.BaseHttpUtils;
@@ -111,47 +111,47 @@ import com.termux.view.TerminalRenderer;
 import com.termux.view.TerminalView;
 import com.termux.view.TerminalViewClient;
 import com.termux.x11.MainActivity;
-import com.termux.zerocore.activity.EditTextActivity;
-import com.termux.zerocore.background.FireworkView;
-import com.termux.zerocore.bean.EditPromptBean;
-import com.termux.zerocore.bean.ZDYDataBean;
-import com.termux.zerocore.bean.ZTUserBean;
-import com.termux.zerocore.broadcast.LocalReceiver;
-import com.termux.zerocore.code.CodeString;
-import com.termux.zerocore.config.VsLinks;
-import com.termux.zerocore.config.mainmenu.MainMenuConfig;
-import com.termux.zerocore.config.mainmenu.XMLMainMenuConfig;
-import com.termux.zerocore.config.mainmenu.data.MainMenuCategoryData;
-import com.termux.zerocore.config.mainmenu.view.adapter.MainMenuAdapter;
-import com.termux.zerocore.config.other.ZTGitHubVersion;
-import com.termux.zerocore.config.ztcommand.config.XmlMenuConfig;
+import com.termux.victor.activity.EditTextActivity;
+import com.termux.victor.background.FireworkView;
+import com.termux.victor.bean.EditPromptBean;
+import com.termux.victor.bean.ZDYDataBean;
+import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.broadcast.LocalReceiver;
+import com.termux.victor.code.CodeString;
+import com.termux.victor.config.VsLinks;
+import com.termux.victor.config.mainmenu.MainMenuConfig;
+import com.termux.victor.config.mainmenu.XMLMainMenuConfig;
+import com.termux.victor.config.mainmenu.data.MainMenuCategoryData;
+import com.termux.victor.config.mainmenu.view.adapter.MainMenuAdapter;
+import com.termux.victor.config.other.ZTGitHubVersion;
+import com.termux.victor.config.ztcommand.config.XmlMenuConfig;
 // VictorSuite modify {@ the in-app AI chat was replaced by the DroidCommand AI app
-import com.termux.zerocore.droidcommand.DroidCommandAi;
+import com.termux.victor.droidcommand.DroidCommandAi;
 // @}
-import com.termux.zerocore.deepseek.markdown.MarkDownAPI;
-import com.termux.zerocore.dialog.BeautifySettingDialog;
-import com.termux.zerocore.dialog.CommonCommandsDialog;
-import com.termux.zerocore.dialog.DownLoadDialogBoom;
-import com.termux.zerocore.dialog.LoadingDialog;
-import com.termux.zerocore.dialog.ProtocolDialog;
-import com.termux.zerocore.dialog.SwitchDialog;
-import com.termux.zerocore.ftp.utils.UserSetManage;
-import com.termux.zerocore.otg.OTGManager;
-import com.termux.zerocore.settings.ZtSettingsActivity;
-import com.termux.zerocore.config.ztcommand.ZTSocketService;
-import com.termux.zerocore.config.ztcommand.config.ZTKeyConstants;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utils.FileHttpUtils;
-import com.termux.zerocore.utils.FileIOUtils;
-import com.termux.zerocore.utils.IsInstallCommand;
-import com.termux.zerocore.utils.PhoneUtils;
-import com.termux.zerocore.utils.SingletonCommunicationUtils;
-import com.termux.zerocore.utils.SmsUtils;
-import com.termux.zerocore.utils.UUUtils;
-import com.termux.zerocore.utils.VideoUtils;
-import com.termux.zerocore.utils.WindowUtils;
-import com.termux.zerocore.view.BoomWindow;
-import com.termux.zerocore.zero.engine.ZeroCoreManage;
+import com.termux.victor.deepseek.markdown.MarkDownAPI;
+import com.termux.victor.dialog.BeautifySettingDialog;
+import com.termux.victor.dialog.CommonCommandsDialog;
+import com.termux.victor.dialog.DownLoadDialogBoom;
+import com.termux.victor.dialog.LoadingDialog;
+import com.termux.victor.dialog.ProtocolDialog;
+import com.termux.victor.dialog.SwitchDialog;
+import com.termux.victor.ftp.utils.UserSetManage;
+import com.termux.victor.otg.OTGManager;
+import com.termux.victor.settings.ZtSettingsActivity;
+import com.termux.victor.config.ztcommand.ZTSocketService;
+import com.termux.victor.config.ztcommand.config.ZTKeyConstants;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utils.FileHttpUtils;
+import com.termux.victor.utils.FileIOUtils;
+import com.termux.victor.utils.IsInstallCommand;
+import com.termux.victor.utils.PhoneUtils;
+import com.termux.victor.utils.SingletonCommunicationUtils;
+import com.termux.victor.utils.SmsUtils;
+import com.termux.victor.utils.UUUtils;
+import com.termux.victor.utils.VideoUtils;
+import com.termux.victor.utils.WindowUtils;
+import com.termux.victor.view.BoomWindow;
+import com.termux.victor.zero.engine.ZeroCoreManage;
 import com.zp.z_file.ui.ZFileListFragment;
 import com.zp.z_file.zerotermux.ZTConfig;
 
@@ -1649,18 +1649,18 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
                             } else {
                                 // UUtils.showMsg(("获取部分权限成功，但部分权限未正常授予"));
-                                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
+                                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
                             }
                         }
 
                         @Override
                         public void onDenied(List<String> permissions, boolean never) {
                             if (never) {
-                                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
+                                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
                                 // 如果是被永久拒绝就跳转到应用权限系统设置页面
                                 XXPermissions.startPermissionActivity(TermuxActivity.this, permissions);
                             } else {
-                                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
+                                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
                             }
                         }
                     });
@@ -1690,7 +1690,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                                                 public void run() {
                                                     isPhoneRun = false;
                                                     loadingDialog.dismiss();
-                                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && vim phone.txt \n");
+                                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && vim phone.txt \n");
                                                 }
                                             }), 100);
                                         }).start();
@@ -1698,7 +1698,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                                     } else {
                                         isPhoneRun = false;
                                         // UUtils.showMsg(("获取部分权限成功，但部分权限未正常授予"));
-                                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
+                                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
                                     }
                                 }
 
@@ -1706,11 +1706,11 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                                 public void onDenied(List<String> permissions, boolean never) {
                                     isPhoneRun = false;
                                     if (never) {
-                                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
+                                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
                                         // 如果是被永久拒绝就跳转到应用权限系统设置页面
                                         XXPermissions.startPermissionActivity(TermuxActivity.this, permissions);
                                     } else {
-                                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
+                                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.无权限读取) + "! \n");
                                     }
                                 }
                             });
@@ -1719,7 +1719,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                     }
                 }
             } else {
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请等待) + "! \n");
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请等待) + "! \n");
             }
         }
         if (msg.equals("left")) {
@@ -2034,7 +2034,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         } else {
             Log.i(TAG, "writerMainMenuConfig smart update for language: " + targetLang);
             try {
-                com.termux.zerocore.utils.XMLMergeUtils.smartUpdateMenuLanguage(this, targetLang);
+                com.termux.victor.utils.XMLMergeUtils.smartUpdateMenuLanguage(this, targetLang);
             } catch (Throwable e) {
                 Log.e(TAG, "Critical Error: XMLMergeUtils failed!", e);
                 e.printStackTrace();
@@ -2042,7 +2042,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
         // VictorSuite add {@
         // Offer default entries added in newer app versions (once each) to a menu file that already exists.
-        com.termux.zerocore.utils.MenuDefaultsMerger.apply(this, targetLang);
+        com.termux.victor.utils.MenuDefaultsMerger.apply(this, targetLang);
         // @}
     }
 
@@ -2755,16 +2755,16 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     private void onActivityResultZtInit(int requestCode, int resultCode, @Nullable Intent data) {
         //导入SSH密钥
-        if (requestCode == com.termux.zerocore.view.BoomWindow.REQUEST_CODE_IMPORT_KEY && resultCode == RESULT_OK && data != null) {
+        if (requestCode == com.termux.victor.view.BoomWindow.REQUEST_CODE_IMPORT_KEY && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             if (uri != null) {
-                String alias = com.termux.zerocore.view.BoomWindow.PENDING_IMPORT_ALIAS;
+                String alias = com.termux.victor.view.BoomWindow.PENDING_IMPORT_ALIAS;
                 if (TextUtils.isEmpty(alias)) {
                     UUtils.showMsg(UUtils.getString(R.string.zt_ssh_improt_fail));
                     return;
                 }
                 try {
-                    File targetKeyFile = com.termux.zerocore.utils.SSHKeyUtils.getKeyFile(alias);
+                    File targetKeyFile = com.termux.victor.utils.SSHKeyUtils.getKeyFile(alias);
                     File sshDir = targetKeyFile.getParentFile();
                     if (!sshDir.exists()) sshDir.mkdirs();
 

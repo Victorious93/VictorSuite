@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.xh_lib.utils.LogUtils;
 import com.termux.R;
-import com.termux.zerocore.utils.StartRunCommandUtils;
+import com.termux.victor.utils.StartRunCommandUtils;
 
 public class BootCommandClickConfig extends BaseMenuClickConfig {
     private static final String TAG = BootCommandClickConfig.class.getSimpleName();

@@ -1,4 +1,4 @@
-package com.termux.zerocore.back.bean
+package com.termux.victor.back.bean
 
 import java.io.File
 

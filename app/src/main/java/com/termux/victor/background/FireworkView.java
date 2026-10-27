@@ -1,4 +1,4 @@
-package com.termux.zerocore.background;
+package com.termux.victor.background;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.app.AlertDialog
 import android.content.Context
@@ -17,13 +17,13 @@ import com.github.iielse.switchbutton.SwitchView
 import com.google.gson.Gson
 import com.lzy.okgo.model.Response
 import com.termux.R
-import com.termux.zerocore.config.VsLinks
-import com.termux.zerocore.plugin.PluginManifest
-import com.termux.zerocore.plugin.PluginProcessLauncher
-import com.termux.zerocore.plugin.PluginRecord
-import com.termux.zerocore.plugin.PluginRegistry
-import com.termux.zerocore.plugin.PluginState
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.config.VsLinks
+import com.termux.victor.plugin.PluginManifest
+import com.termux.victor.plugin.PluginProcessLauncher
+import com.termux.victor.plugin.PluginRecord
+import com.termux.victor.plugin.PluginRegistry
+import com.termux.victor.plugin.PluginState
+import com.termux.victor.url.FileUrl
 import java.io.File
 
 /**
@@ -167,7 +167,7 @@ class PluginListDialog : BaseDialogDown {
             val installDir = File(FileUrl.victorSuitePlugins, record.id)
             try {
                 val command = PluginProcessLauncher.resolveCommand(mContext, installDir, record.id)
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance()
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance()
                     .getmSingletonCommunicationListener().sendTextToTerminal("$command\n")
                 UUtils.showMsg(UUtils.getString(R.string.plugin_launch_sent_msg))
                 dismiss()

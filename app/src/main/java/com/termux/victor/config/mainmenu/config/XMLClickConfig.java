@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

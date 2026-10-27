@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.other;
+package com.termux.victor.config.other;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -1,6 +1,6 @@
-package com.termux.zerocore.ftp
+package com.termux.victor.ftp
 
-import com.termux.zerocore.ftp.new_ftp.utils.FtpAuthorities
+import com.termux.victor.ftp.new_ftp.utils.FtpAuthorities
 import org.apache.ftpserver.usermanager.impl.WritePermission
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

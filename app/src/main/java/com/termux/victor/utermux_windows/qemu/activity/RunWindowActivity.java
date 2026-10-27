@@ -1,6 +1,6 @@
-package com.termux.zerocore.utermux_windows.qemu.activity;
+package com.termux.victor.utermux_windows.qemu.activity;
 
-import com.termux.zerocore.config.VsLinks;
+import com.termux.victor.config.VsLinks;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -23,15 +23,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.dialog.LoadingDialog;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utermux_windows.qemu.data.TermuxData;
-import com.termux.zerocore.utermux_windows.qemu.dialog.EditTextDialog;
-import com.termux.zerocore.utermux_windows.qemu.dialog.EndDialog;
-import com.termux.zerocore.utermux_windows.qemu.dialog.FileListDialog;
-import com.termux.zerocore.utermux_windows.qemu.dialog.FileNameDialog;
-import com.termux.zerocore.utermux_windows.qemu.dialog.SwitchQemuDialog;
-import com.termux.zerocore.utils.SaveData;
+import com.termux.victor.dialog.LoadingDialog;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utermux_windows.qemu.data.TermuxData;
+import com.termux.victor.utermux_windows.qemu.dialog.EditTextDialog;
+import com.termux.victor.utermux_windows.qemu.dialog.EndDialog;
+import com.termux.victor.utermux_windows.qemu.dialog.FileListDialog;
+import com.termux.victor.utermux_windows.qemu.dialog.FileNameDialog;
+import com.termux.victor.utermux_windows.qemu.dialog.SwitchQemuDialog;
+import com.termux.victor.utils.SaveData;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -137,8 +137,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 if (!mMacRunPath.exists()) {
 
                     UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续) + "\n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续) + "\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                     finish();
                     return;
                 }
@@ -327,7 +327,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
             ab.setNegativeButton(UUtils.getString(R.string.给我安装), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg in wget proot -y" + "\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg in wget proot -y" + "\n");
                     ab.create().dismiss();
                     finish();
                 }
@@ -383,14 +383,14 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                                 @Override
                                 public void run() {
                                     loadingDialog.dismiss();
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd .. && cd usr && cd bin && chmod 777 qemu-system-ppc && cd ~\n");
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg update -y && pkg install x11-repo unstable-repo -y && pkg install qemu-utils qemu-system-x86_64-headless  qemu-system-i386-headless -y &&  termux-setup-storage\n");
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd .. && cd usr && cd bin && chmod 777 qemu-system-ppc && cd ~\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg update -y && pkg install x11-repo unstable-repo -y && pkg install qemu-utils qemu-system-x86_64-headless  qemu-system-i386-headless -y &&  termux-setup-storage\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
 
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
                                     RunWindowActivity.this.finish();
                                     alertDialog.create().dismiss();
                                     Toast.makeText(RunWindowActivity.this, UUtils.getString(R.string.请等待安装完成在进入), Toast.LENGTH_SHORT).show();
@@ -427,13 +427,13 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
         }
 
         qemu_install.setOnClickListener(v -> {
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg update -y && pkg install x11-repo unstable-repo -y && pkg install qemu-utils qemu-system-x86_64-headless  qemu-system-i386-headless -y &&  termux-setup-storage\n");
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg update -y && pkg install x11-repo unstable-repo -y && pkg install qemu-utils qemu-system-x86_64-headless  qemu-system-i386-headless -y &&  termux-setup-storage\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
 
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
 
         });
 
@@ -447,8 +447,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
             if (!mWin7RunPath.exists()) {
 
                 UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                 finish();
                 return;
             }
@@ -542,8 +542,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 if (!mWin10RunPath.exists()) {
 
                     UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                     finish();
                     return;
                 }
@@ -637,8 +637,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 if (!mWinxpRunPath.exists()) {
 
                     UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                     finish();
                     return;
                 }
@@ -792,7 +792,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                     e.printStackTrace();
                 }
 
-                runOnUiThread(() -> com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminalCtrl("c", true));
+                runOnUiThread(() -> com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminalCtrl("c", true));
 
                 try {
                     Thread.sleep(1000);
@@ -803,17 +803,17 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
                 runOnUiThread(() -> {
 
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage\n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~  \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y \n");
 
                     //mFileQemuStart
 
@@ -828,9 +828,9 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
 
                     UUtils.setFileString(mFileQemuStart, stringBuilder.toString());
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~\n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd .qemustart\n");
-                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("chmod 777 start.sh\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd .qemustart\n");
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("chmod 777 start.sh\n");
 
 
                     try {
@@ -844,10 +844,10 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         @Override
                         public void run() {
 
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("./start.sh\n");
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~\n");
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("./start.sh\n");
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~\n");
 
-                            // com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(cmd);
+                            // com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(cmd);
                         }
                     });
 

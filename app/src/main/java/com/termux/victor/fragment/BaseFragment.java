@@ -1,4 +1,4 @@
-package com.termux.zerocore.fragment;
+package com.termux.victor.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

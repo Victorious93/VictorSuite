@@ -1,6 +1,6 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.content.Context
 import android.content.Intent

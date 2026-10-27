@@ -1,4 +1,4 @@
-package com.termux.zerocore.view
+package com.termux.victor.view
 
 import android.content.Context
 import android.util.AttributeSet

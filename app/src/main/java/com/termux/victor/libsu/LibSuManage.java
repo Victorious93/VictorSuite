@@ -1,4 +1,4 @@
-package com.termux.zerocore.libsu;
+package com.termux.victor.libsu;
 
 import android.content.Context;
 import android.os.Handler;
@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.BuildConfig;
 import com.termux.R;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utils.FileIOUtils;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utils.FileIOUtils;
 import com.topjohnwu.superuser.CallbackList;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.internal.MainShell;

@@ -1,4 +1,4 @@
-package com.termux.zerocore.adb.dialog
+package com.termux.victor.adb.dialog
 
 import android.app.Activity
 import android.content.Context
@@ -22,7 +22,7 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.termux.R
-import com.termux.zerocore.adb.ADB
+import com.termux.victor.adb.ADB
 import kotlinx.coroutines.*
 
 

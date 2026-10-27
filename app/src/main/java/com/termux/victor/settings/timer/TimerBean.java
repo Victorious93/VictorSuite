@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings.timer;
+package com.termux.victor.settings.timer;
 
 public class TimerBean {
     public static final int TIMER_30_SECOND = 30 * 1000;

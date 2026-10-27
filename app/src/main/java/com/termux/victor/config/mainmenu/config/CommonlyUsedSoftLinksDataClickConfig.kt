@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -9,8 +9,8 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.termux.R
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 
 class CommonlyUsedSoftLinksDataClickConfig: BaseMenuClickConfig() {

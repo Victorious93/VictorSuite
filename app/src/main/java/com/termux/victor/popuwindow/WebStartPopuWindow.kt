@@ -1,6 +1,6 @@
-package com.termux.zerocore.popuwindow
+package com.termux.victor.popuwindow
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 
 import android.app.Activity
@@ -18,9 +18,9 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.termux.R
-import com.termux.zerocore.dialog.LoadingDialog
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.url.FileUrl.victorSuiteApk
+import com.termux.victor.dialog.LoadingDialog
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.url.FileUrl.victorSuiteApk
 import java.io.File
 import java.io.InputStream
 

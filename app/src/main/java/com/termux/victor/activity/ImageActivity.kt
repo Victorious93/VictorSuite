@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity
+package com.termux.victor.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,9 @@ import com.example.xh_lib.utils.UUtils
 import com.lcw.library.imagepicker.ImagePicker
 import com.termux.R
 import com.termux.shared.logger.Logger
-import com.termux.zerocore.data.UsbFileData
-import com.termux.zerocore.loader.VictorSuiteImageLoader
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.data.UsbFileData
+import com.termux.victor.loader.VictorSuiteImageLoader
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 
 

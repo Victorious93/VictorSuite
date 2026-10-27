@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.other;
+package com.termux.victor.config.other;
 
-import com.termux.zerocore.config.VsLinks;
+import com.termux.victor.config.VsLinks;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,7 +28,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.lzy.okgo.utils.HttpUtils;
 import com.termux.BuildConfig;
-import com.termux.zerocore.config.other.data.VersionBean;
+import com.termux.victor.config.other.data.VersionBean;
 
 import java.util.HashMap;
 

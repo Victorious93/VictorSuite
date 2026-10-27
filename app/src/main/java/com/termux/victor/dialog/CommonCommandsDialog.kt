@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.content.Context
 import android.content.Intent
@@ -14,11 +14,11 @@ import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.bean.ClipboardBean
-import com.termux.zerocore.bean.ItemMenuBean
-import com.termux.zerocore.dialog.adapter.CommonCommandsAdapter
-import com.termux.zerocore.settings.VictorSuiteSettingsActivity
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.bean.ClipboardBean
+import com.termux.victor.bean.ItemMenuBean
+import com.termux.victor.dialog.adapter.CommonCommandsAdapter
+import com.termux.victor.settings.VictorSuiteSettingsActivity
+import com.termux.victor.utils.FileIOUtils
 
 class CommonCommandsDialog : BaseDialogDown {
 
@@ -85,7 +85,7 @@ class CommonCommandsDialog : BaseDialogDown {
                 mCommonCommandsAdapter.setClickDataListener(object :
                     CommonCommandsAdapter.ClickDataListener {
                     override fun data(data: String) {
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(data)
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(data)
                         dismiss()
                     }
                 })

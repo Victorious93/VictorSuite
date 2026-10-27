@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.ztcommand
+package com.termux.victor.config.ztcommand
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

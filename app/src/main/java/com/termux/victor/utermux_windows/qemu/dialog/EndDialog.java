@@ -1,4 +1,4 @@
-package com.termux.zerocore.utermux_windows.qemu.dialog;
+package com.termux.victor.utermux_windows.qemu.dialog;
 
 import android.content.Context;
 import android.view.View;
@@ -31,7 +31,7 @@ public class EndDialog extends BaseDialogCentre {
         start = mView.findViewById(R.id.start);
         edit_text = mView.findViewById(R.id.edit_text);
 
-        CharSequence text1 = com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().getTextToTerminal();
+        CharSequence text1 = com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().getTextToTerminal();
 
         String s = text1.toString();
         String[] split = s.split("\n");

@@ -1,4 +1,4 @@
-package com.termux.zerocore.remotecontrol
+package com.termux.victor.remotecontrol
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

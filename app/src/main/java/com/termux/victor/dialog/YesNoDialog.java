@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog;
+package com.termux.victor.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

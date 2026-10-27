@@ -1,6 +1,6 @@
-package com.termux.zerocore.droidcommand
+package com.termux.victor.droidcommand
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.content.ActivityNotFoundException
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.termux.zerocore.bean;
+package com.termux.victor.bean;
 
 import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
 

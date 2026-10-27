@@ -1,14 +1,14 @@
-package com.termux.zerocore.config.ztcommand.config;
+package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.zerocore.config.ztcommand.config.ZTKeyConstants.ZT_ID_BACKGROUND_IMAGE;
+import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_BACKGROUND_IMAGE;
 
 import android.content.Context;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.config.ztcommand.ZTSocketService;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utils.FileIOUtils;
+import com.termux.victor.config.ztcommand.ZTSocketService;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utils.FileIOUtils;
 
 import java.io.File;
 import java.io.FileInputStream;

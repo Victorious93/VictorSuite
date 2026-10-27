@@ -1,4 +1,4 @@
-package com.termux.zerocore.ftp.new_ftp.services;
+package com.termux.victor.ftp.new_ftp.services;
 
 import android.annotation.TargetApi;
 import android.app.Notification;

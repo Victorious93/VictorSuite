@@ -24,7 +24,7 @@ import com.termux.shared.logger.Logger;
 import com.termux.shared.view.ViewUtils;
 import com.termux.R;
 import com.termux.x11.MainActivity;
-import com.termux.zerocore.view.VictorSuiteBackLayout;
+import com.termux.victor.view.VictorSuiteBackLayout;
 
 /**
  * The {@link TermuxActivity} relies on {@link android.view.WindowManager.LayoutParams#SOFT_INPUT_ADJUST_RESIZE)}

@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.scrcpy.MainActivity
+import com.termux.victor.scrcpy.MainActivity
 
 class RemoteConnectionClickConfig: BaseMenuClickConfig() {
     override fun getIcon(context: Context?): Drawable? {

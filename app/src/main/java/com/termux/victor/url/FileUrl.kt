@@ -1,4 +1,4 @@
-package com.termux.zerocore.url
+package com.termux.victor.url
 
 import android.os.Environment
 import com.termux.shared.termux.TermuxConstants
@@ -42,7 +42,7 @@ object FileUrl {
     public val victorSuiteOnlineSystem = File(Environment.getExternalStorageDirectory(), "/xinhao/online_system")
    //qemu目录
     public val victorSuiteQemu = File(Environment.getExternalStorageDirectory(), "/xinhao/qemu")
-   //插件安装目录 (see com.termux.zerocore.plugin) - each plugin gets a subdirectory named by its id
+   //插件安装目录 (see com.termux.victor.plugin) - each plugin gets a subdirectory named by its id
     public val victorSuitePlugins = File(Environment.getExternalStorageDirectory(), "/xinhao/plugins")
    //server目录
     public val victorSuiteServer = File(Environment.getExternalStorageDirectory(), "/xinhao/server")

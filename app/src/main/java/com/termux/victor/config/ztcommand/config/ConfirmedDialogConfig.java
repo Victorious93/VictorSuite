@@ -1,12 +1,12 @@
-package com.termux.zerocore.config.ztcommand.config;
+package com.termux.victor.config.ztcommand.config;
 
-import static com.termux.zerocore.dialog.ShowDialogActivity.DIALOG_TYPE_CONFIRMED;
-import static com.termux.zerocore.dialog.ShowDialogActivity.DIALOG_TYPE_CONFIRMED_CANCEL;
-import static com.termux.zerocore.dialog.ShowDialogActivity.DIALOG_TYPE_EDIT_TEXT;
-import static com.termux.zerocore.dialog.ShowDialogActivity.EXTRA_MESSAGE;
-import static com.termux.zerocore.dialog.ShowDialogActivity.EXTRA_TITLE;
-import static com.termux.zerocore.dialog.ShowDialogActivity.EXTRA_TYPE;
-import static com.termux.zerocore.config.ztcommand.config.ZTKeyConstants.ZT_ID_CONFIRMED_DIALOG;
+import static com.termux.victor.dialog.ShowDialogActivity.DIALOG_TYPE_CONFIRMED;
+import static com.termux.victor.dialog.ShowDialogActivity.DIALOG_TYPE_CONFIRMED_CANCEL;
+import static com.termux.victor.dialog.ShowDialogActivity.DIALOG_TYPE_EDIT_TEXT;
+import static com.termux.victor.dialog.ShowDialogActivity.EXTRA_MESSAGE;
+import static com.termux.victor.dialog.ShowDialogActivity.EXTRA_TITLE;
+import static com.termux.victor.dialog.ShowDialogActivity.EXTRA_TYPE;
+import static com.termux.victor.config.ztcommand.config.ZTKeyConstants.ZT_ID_CONFIRMED_DIALOG;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.content.Intent;
 import com.example.xh_lib.utils.LogUtils;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.dialog.ShowDialogActivity;
-import com.termux.zerocore.config.ztcommand.ZTSocketService;
+import com.termux.victor.dialog.ShowDialogActivity;
+import com.termux.victor.config.ztcommand.ZTSocketService;
 
 import java.util.HashMap;
 import java.util.Map;

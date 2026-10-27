@@ -1,4 +1,4 @@
-package com.termux.zerocore.back.viewholder
+package com.termux.victor.back.viewholder
 
 import android.view.View
 import android.widget.TextView

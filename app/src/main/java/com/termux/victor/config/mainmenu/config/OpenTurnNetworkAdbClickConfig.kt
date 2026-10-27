@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -6,8 +6,8 @@ import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.scottyab.rootbeer.RootBeer
 import com.termux.R
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.shell.ExeCommand
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.shell.ExeCommand
 
 class OpenTurnNetworkAdbClickConfig : BaseMenuClickConfig() {
     override fun getIcon(context: Context?): Drawable? {

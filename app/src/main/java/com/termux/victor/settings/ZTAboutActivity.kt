@@ -1,6 +1,6 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

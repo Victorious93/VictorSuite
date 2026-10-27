@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_BEAUTIFICATION_FUNCTION;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_BEAUTIFICATION_FUNCTION;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,8 +8,8 @@ import android.view.View;
 
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.bean.ZTUserBean;
-import com.termux.zerocore.ftp.utils.UserSetManage;
+import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.ftp.utils.UserSetManage;
 
 public class ParticleClickConfig extends BaseMenuClickConfig {
     @Override

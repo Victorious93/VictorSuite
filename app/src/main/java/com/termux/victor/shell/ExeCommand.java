@@ -1,4 +1,4 @@
-package com.termux.zerocore.shell;
+package com.termux.victor.shell;
 
 import android.util.Log;
 

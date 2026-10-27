@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.content.Context
 import android.text.Editable
@@ -10,8 +10,8 @@ import com.example.xh_lib.utils.SaveData.getStringOther
 import com.example.xh_lib.utils.UUtils
 import com.google.gson.Gson
 import com.termux.R
-import com.termux.zerocore.bean.EditPromptBean
-import com.termux.zerocore.popuwindow.EditPromptWindow
+import com.termux.victor.bean.EditPromptBean
+import com.termux.victor.popuwindow.EditPromptWindow
 import java.util.ArrayList
 
 class EditDialog : BaseDialogCentre {

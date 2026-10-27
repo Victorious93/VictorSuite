@@ -1,4 +1,4 @@
-package com.termux.zerocore.view;
+package com.termux.victor.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -30,16 +30,16 @@ import com.google.gson.reflect.TypeToken;
 import com.google.common.net.InetAddresses;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.activity.adapter.BoomMinLAdapter;
-import com.termux.zerocore.activity.adapter.SSHAdapter;
-import com.termux.zerocore.bean.MinLBean;
-import com.termux.zerocore.bean.SSHDeviceBean;
-import com.termux.zerocore.code.CodeString;
-import com.termux.zerocore.dialog.CommandDialog;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utils.SaveData;
-import com.termux.zerocore.utils.WindowsUtils;
-import com.termux.zerocore.utils.SSHKeyUtils;
+import com.termux.victor.activity.adapter.BoomMinLAdapter;
+import com.termux.victor.activity.adapter.SSHAdapter;
+import com.termux.victor.bean.MinLBean;
+import com.termux.victor.bean.SSHDeviceBean;
+import com.termux.victor.code.CodeString;
+import com.termux.victor.dialog.CommandDialog;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utils.SaveData;
+import com.termux.victor.utils.WindowsUtils;
+import com.termux.victor.utils.SSHKeyUtils;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -154,7 +154,7 @@ public class BoomWindow {
                     UUtils.showMsg(UUtils.getString(R.string.文件名不能为空));
                     return;
                 }
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("find / -name " + string);
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("find / -name " + string);
                 popupWindow.dismiss();
 
             }
@@ -211,7 +211,7 @@ public class BoomWindow {
             } else {
                 isInstallingEnv = true;
                 UUtils.showMsg(UUtils.getString(R.string.content_ssh_list_toast_ssh_hint));
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getContentSSH());
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getContentSSH());
             }
         }
         showSSHList(closeLiftListener);
@@ -385,7 +385,7 @@ public class BoomWindow {
                 com.zp.z_file.util.LogUtils.d(TAG, "content click ssh:" + runCmd);
                 //屏蔽Connection refused用String runCmd = " clear && " + finalCmd + " 2>/dev/null || echo 'err'";
 
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(runCmd + "\n");
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(runCmd + "\n");
 
                 if (mPopupWindow != null) {
                     mPopupWindow.dismiss();
@@ -586,7 +586,7 @@ public class BoomWindow {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String cmd = SSHKeyUtils.getGenerateKeyCommand(currentAlias);
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(cmd + "\n");
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(cmd + "\n");
                             UUtils.showMsg(UUtils.getString(R.string.content_ssh_generate_keying));
                         }
                     })

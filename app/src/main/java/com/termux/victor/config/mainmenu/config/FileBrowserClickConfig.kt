@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
@@ -12,8 +12,8 @@ import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.zero.engine.ZeroCoreManage
+import com.termux.victor.url.FileUrl
+import com.termux.victor.zero.engine.ZeroCoreManage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -54,7 +54,7 @@ class FileBrowserClickConfig : BaseMenuClickConfig(){
                         UUtils.setFileString(smsBashrcFile,fileString)
                     }
                     if (msg?.obj != null) {
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(msg!!.obj as String?)
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(msg!!.obj as String?)
                     }
                 }
             }

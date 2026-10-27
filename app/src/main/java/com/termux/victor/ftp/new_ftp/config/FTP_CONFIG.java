@@ -1,7 +1,7 @@
-package com.termux.zerocore.ftp.new_ftp.config;
+package com.termux.victor.ftp.new_ftp.config;
 
-import com.termux.zerocore.bean.SaveDataZeroEngine;
-import com.termux.zerocore.url.FileUrl;
+import com.termux.victor.bean.SaveDataZeroEngine;
+import com.termux.victor.url.FileUrl;
 
 public class FTP_CONFIG {
     public static String USERNAME = "ftp";

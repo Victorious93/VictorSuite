@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.Dispatcher

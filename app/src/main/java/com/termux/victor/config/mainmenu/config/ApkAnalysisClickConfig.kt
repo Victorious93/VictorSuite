@@ -1,11 +1,11 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import com.termux.R
-import com.termux.zerocore.utils.SingletonCommunicationUtils
+import com.termux.victor.utils.SingletonCommunicationUtils
 
 /**
  * Shortcuts for standard, publicly available APK-analysis / network-diagnostic

@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,10 +12,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.plugin.PluginConfigFieldType
-import com.termux.zerocore.plugin.PluginConfigStore
-import com.termux.zerocore.plugin.PluginLogger
-import com.termux.zerocore.plugin.PluginRecord
+import com.termux.victor.plugin.PluginConfigFieldType
+import com.termux.victor.plugin.PluginConfigStore
+import com.termux.victor.plugin.PluginLogger
+import com.termux.victor.plugin.PluginRecord
 
 /**
  * Settings form for a plugin's configSchema, backed by the encrypted

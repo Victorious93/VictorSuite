@@ -1,4 +1,4 @@
-package com.termux.zerocore.plugin
+package com.termux.victor.plugin
 
 import android.content.Context
 import java.io.File

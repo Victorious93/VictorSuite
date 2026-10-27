@@ -1,11 +1,11 @@
-package com.termux.zerocore.remotecontrol.android
+package com.termux.victor.remotecontrol.android
 
 import android.content.Context
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.termux.zerocore.remotecontrol.DevicePairing
-import com.termux.zerocore.remotecontrol.RemoteControlConfig
+import com.termux.victor.remotecontrol.DevicePairing
+import com.termux.victor.remotecontrol.RemoteControlConfig
 import java.security.SecureRandom
 
 /**

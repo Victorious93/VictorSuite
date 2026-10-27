@@ -1,4 +1,4 @@
-package com.termux.zerocore.data
+package com.termux.victor.data
 
 import com.example.xh_lib.utils.UUtils
 import com.termux.R

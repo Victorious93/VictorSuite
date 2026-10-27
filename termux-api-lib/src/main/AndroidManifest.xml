@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- VictorSuite: Termux:API embedded as a library (upstream termux/termux-api v0.53.0, see ../../../UPSTREAM.md).
      Every component below is declared android:enabled="false"; the Termux:API setting in VictorSuite enables
-     them at runtime (com.termux.zerocore.termuxapi.TermuxApiEmbed). The upstream launcher / settings
+     them at runtime (com.termux.victor.termuxapi.TermuxApiEmbed). The upstream launcher / settings
      activities are intentionally not included. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">

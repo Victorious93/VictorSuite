@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 /**
  * Runtime firmware / capability detection for Tetra 6th-gen API (plan §3.5).

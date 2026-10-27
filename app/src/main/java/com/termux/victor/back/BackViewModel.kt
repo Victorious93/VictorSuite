@@ -1,4 +1,4 @@
-package com.termux.zerocore.back
+package com.termux.victor.back
 
 import android.content.Context
 import android.view.View
@@ -13,17 +13,17 @@ import com.hjq.permissions.XXPermissions
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.app.TermuxInstaller
-import com.termux.zerocore.back.adapter.BackupAdapter
-import com.termux.zerocore.back.constant.BackRestoreConstant
-import com.termux.zerocore.back.listener.BackupClickListener
-import com.termux.zerocore.back.listener.BackupStoreDialogCloseListener
-import com.termux.zerocore.back.listener.CreateConversationListener
-import com.termux.zerocore.bean.ItemMenuBean
-import com.termux.zerocore.data.CommendShellData
-import com.termux.zerocore.dialog.LoadingDialog
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.utils.FileIOUtils
-import com.termux.zerocore.utils.WindowsUtils
+import com.termux.victor.back.adapter.BackupAdapter
+import com.termux.victor.back.constant.BackRestoreConstant
+import com.termux.victor.back.listener.BackupClickListener
+import com.termux.victor.back.listener.BackupStoreDialogCloseListener
+import com.termux.victor.back.listener.CreateConversationListener
+import com.termux.victor.bean.ItemMenuBean
+import com.termux.victor.data.CommendShellData
+import com.termux.victor.dialog.LoadingDialog
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.utils.FileIOUtils
+import com.termux.victor.utils.WindowsUtils
 import kotlinx.coroutines.*
 
 class BackViewModel : BackupClickListener {
@@ -157,7 +157,7 @@ class BackViewModel : BackupClickListener {
 
     private fun sendTextToTerminal(text: String) {
         LogUtils.d(TAG, "sendTextToTerminal text to:$text")
-        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(text)
+        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(text)
 
     }
 

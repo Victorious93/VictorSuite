@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient

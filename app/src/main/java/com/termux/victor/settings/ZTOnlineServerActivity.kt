@@ -1,11 +1,11 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.termux.R
-import com.termux.zerocore.ftp.utils.UserSetManage
+import com.termux.victor.ftp.utils.UserSetManage
 
 /**
  *  此类未完成，后期需要重新继续此需求

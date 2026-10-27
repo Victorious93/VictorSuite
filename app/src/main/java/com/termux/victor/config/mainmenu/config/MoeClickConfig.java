@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,10 +7,10 @@ import android.view.View;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.code.CodeString;
-import com.termux.zerocore.config.mainmenu.MainMenuConfig;
-import com.termux.zerocore.dialog.SwitchDialog;
-import com.termux.zerocore.utermux_windows.qemu.dialog.EndDialog;
+import com.termux.victor.code.CodeString;
+import com.termux.victor.config.mainmenu.MainMenuConfig;
+import com.termux.victor.dialog.SwitchDialog;
+import com.termux.victor.utermux_windows.qemu.dialog.EndDialog;
 
 // MOE全能
 public class MoeClickConfig extends BaseMenuClickConfig {
@@ -35,7 +35,7 @@ public class MoeClickConfig extends BaseMenuClickConfig {
         switchDialog.getCancel().setOnClickListener(v1 -> switchDialog.dismiss());
         switchDialog.getOk().setOnClickListener(v12 -> {
             switchDialog.dismiss();
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunMoeSh());
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunMoeSh());
         });
     }
 }

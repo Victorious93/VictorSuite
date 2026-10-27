@@ -1,8 +1,8 @@
-package com.termux.zerocore.ftp.new_ftp;
+package com.termux.victor.ftp.new_ftp;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.termux.zerocore.ftp.new_ftp.utils.StorageUtil;
+import com.termux.victor.ftp.new_ftp.utils.StorageUtil;
 
 
 public class Constants {

@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog;
+package com.termux.victor.dialog;
 
 import android.content.Context;
 import android.os.Environment;
@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.activity.adapter.ListBaseAdapter;
-import com.termux.zerocore.activity.view_holder.ViewHolder;
+import com.termux.victor.activity.adapter.ListBaseAdapter;
+import com.termux.victor.activity.view_holder.ViewHolder;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package com.termux.zerocore.plugin
+package com.termux.victor.plugin
 
 import android.content.Context
 import com.google.gson.Gson
 import java.io.File
 import java.io.FileWriter
-import com.termux.zerocore.utils.IsoTimestamp
+import com.termux.victor.utils.IsoTimestamp
 import java.util.Date
 
 /**

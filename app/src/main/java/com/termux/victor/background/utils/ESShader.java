@@ -35,7 +35,7 @@
 //    Utility functions for loading GLSL ES 3.0 shaders and creating program objects.
 //
 
-package com.termux.zerocore.background.utils;
+package com.termux.victor.background.utils;
 
 import android.content.Context;
 import android.opengl.GLES20;

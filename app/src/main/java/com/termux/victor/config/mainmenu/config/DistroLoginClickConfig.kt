@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -7,9 +7,9 @@ import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import com.termux.R
-import com.termux.zerocore.config.mainmenu.MainMenuConfig
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.utils.SingletonCommunicationUtils
+import com.termux.victor.config.mainmenu.MainMenuConfig
+import com.termux.victor.url.FileUrl
+import com.termux.victor.utils.SingletonCommunicationUtils
 import java.io.File
 import java.io.IOException
 

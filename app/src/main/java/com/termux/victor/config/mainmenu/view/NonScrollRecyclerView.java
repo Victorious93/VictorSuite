@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.view;
+package com.termux.victor.config.mainmenu.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

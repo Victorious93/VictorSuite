@@ -1,4 +1,4 @@
-package com.termux.zerocore.fragment
+package com.termux.victor.fragment
 
 import android.view.View
 import com.example.xh_lib.utils.UUtils

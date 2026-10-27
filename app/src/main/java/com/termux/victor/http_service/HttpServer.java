@@ -1,4 +1,4 @@
-package com.termux.zerocore.http_service;
+package com.termux.victor.http_service;
 
 import static android.os.Build.VERSION_CODES.R;
 
@@ -8,8 +8,8 @@ import android.util.Log;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.shared.termux.TermuxConstants;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utils.FileIOUtils;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utils.FileIOUtils;
 
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;

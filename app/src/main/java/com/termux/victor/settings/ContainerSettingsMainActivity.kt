@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.termux.zerocore.background.utils;
+package com.termux.victor.background.utils;
 
 import android.content.Context;
 

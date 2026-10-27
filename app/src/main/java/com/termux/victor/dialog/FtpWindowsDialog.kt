@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.content.Context
 import android.os.Environment
@@ -14,11 +14,11 @@ import com.example.xh_lib.utils.UUtils
 import com.github.iielse.switchbutton.SwitchView
 import com.github.iielse.switchbutton.SwitchView.OnStateChangedListener
 import com.termux.R
-import com.termux.zerocore.bean.SaveDataZeroEngine
-import com.termux.zerocore.ftp.new_ftp.Constants
-import com.termux.zerocore.ftp.new_ftp.config.FTP_CONFIG
-import com.termux.zerocore.ftp.new_ftp.services.FtpService
-import com.termux.zerocore.url.FileUrl.mainFilesUrl
+import com.termux.victor.bean.SaveDataZeroEngine
+import com.termux.victor.ftp.new_ftp.Constants
+import com.termux.victor.ftp.new_ftp.config.FTP_CONFIG
+import com.termux.victor.ftp.new_ftp.services.FtpService
+import com.termux.victor.url.FileUrl.mainFilesUrl
 import kotlinx.coroutines.*
 
 class FtpWindowsDialog : BaseDialogCentre {

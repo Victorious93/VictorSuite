@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.app.Activity
 import android.content.Context
@@ -6,10 +6,10 @@ import android.content.Intent
 import android.view.View
 import com.example.xh_lib.utils.LogUtils
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.activity.ImageActivity
-import com.termux.zerocore.data.UsbFileData
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.activity.ImageActivity
+import com.termux.victor.data.UsbFileData
+import com.termux.victor.url.FileUrl
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 
 class WebDataClickConfigImp: VideoBackClickConfig() {

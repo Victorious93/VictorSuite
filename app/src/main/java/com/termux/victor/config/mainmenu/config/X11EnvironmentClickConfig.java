@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_X11_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_X11_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -30,7 +30,7 @@ public class X11EnvironmentClickConfig extends BaseMenuClickConfig {
         TermuxActivity termuxActivity = (TermuxActivity) context;
         // 复制环境
         // am start -a android.intent.action.zt.termux.x11
-        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg install x11-repo " +
+        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg install x11-repo " +
             "&& pkg install termux-x11-nightly " +
             "&& termux-x11 \n");
         termuxActivity.getDrawer().smoothClose();

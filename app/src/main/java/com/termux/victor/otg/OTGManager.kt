@@ -1,4 +1,4 @@
-package com.termux.zerocore.otg
+package com.termux.victor.otg
 
 import android.app.PendingIntent
 import android.content.Context
@@ -9,10 +9,10 @@ import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
 import com.github.mjdev.libaums.UsbMassStorageDevice
 import com.termux.R
-import com.termux.zerocore.data.UsbFileData.Companion.get
-import com.termux.zerocore.dialog.LoadingDialog
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.data.UsbFileData.Companion.get
+import com.termux.victor.dialog.LoadingDialog
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 import java.util.Arrays
 

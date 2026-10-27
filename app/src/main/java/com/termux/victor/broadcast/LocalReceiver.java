@@ -1,4 +1,4 @@
-package com.termux.zerocore.broadcast;
+package com.termux.victor.broadcast;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,10 +15,10 @@ import com.termux.BuildConfig;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.terminal.Logger;
-import com.termux.zerocore.bosybox.BusyBoxManager;
-import com.termux.zerocore.developer.DeveloperActivity;
-import com.termux.zerocore.utils.FileHttpUtils;
-import com.termux.zerocore.utils.Z7ExtracatUtils;
+import com.termux.victor.bosybox.BusyBoxManager;
+import com.termux.victor.developer.DeveloperActivity;
+import com.termux.victor.utils.FileHttpUtils;
+import com.termux.victor.utils.Z7ExtracatUtils;
 import com.zp.z_file.zerotermux.ZTConfig;
 
 import java.io.File;
@@ -34,7 +34,7 @@ public class LocalReceiver extends BroadcastReceiver {
         }
         String broadcastString = intent.getStringExtra("broadcastString");
         if (broadcastString != null && !(broadcastString.isEmpty())) {
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(broadcastString + "\n");
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(broadcastString + "\n");
             if (ZTConfig.INSTANCE.getCloseListener() != null) {
                 ZTConfig.INSTANCE.getCloseListener().close();
             }
@@ -64,7 +64,7 @@ public class LocalReceiver extends BroadcastReceiver {
                 if (ZTConfig.INSTANCE.getCloseListener() != null) {
                     ZTConfig.INSTANCE.getCloseListener().close();
                 }
-                com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal( command + "\n");
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal( command + "\n");
             } catch (Exception e) {
                 e.printStackTrace();
             }

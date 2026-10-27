@@ -1,4 +1,4 @@
-package com.termux.zerocore.data
+package com.termux.victor.data
 
 /**
  * Pure (no Android) helpers that build the backup/restore commands typed into the terminal.

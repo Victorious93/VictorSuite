@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings;
+package com.termux.victor.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +17,13 @@ import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxService;
 import com.termux.x11.LoriePreferences;
-import com.termux.zerocore.activity.SwitchActivity;
-import com.termux.zerocore.bean.ZTUserBean;
-import com.termux.zerocore.dialog.LoadingDialog;
-import com.termux.zerocore.dialog.SwitchDialog;
-import com.termux.zerocore.ftp.utils.UserSetManage;
-import com.termux.zerocore.url.FileUrl;
-import com.termux.zerocore.utils.UUUtils;
+import com.termux.victor.activity.SwitchActivity;
+import com.termux.victor.bean.ZTUserBean;
+import com.termux.victor.dialog.LoadingDialog;
+import com.termux.victor.dialog.SwitchDialog;
+import com.termux.victor.ftp.utils.UserSetManage;
+import com.termux.victor.url.FileUrl;
+import com.termux.victor.utils.UUUtils;
 import com.zp.z_file.util.ZFileUUtils;
 
 import java.io.File;

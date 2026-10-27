@@ -1,13 +1,13 @@
-package com.termux.zerocore.dialog.adapter
+package com.termux.victor.dialog.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.bean.ClipboardBean
-import com.termux.zerocore.dialog.view_holder.CommonCommandsHolder
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.bean.ClipboardBean
+import com.termux.victor.dialog.view_holder.CommonCommandsHolder
+import com.termux.victor.utils.FileIOUtils
 
 class CommonCommandsAdapter : RecyclerView.Adapter<CommonCommandsHolder> {
     private var mNoDataListener:NoDataListener? = null

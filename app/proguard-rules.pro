@@ -28,8 +28,8 @@
 -keep class com.mallotec.reb.localeplugin.** { *; }
 -dontwarn com.mallotec.reb.localeplugin.**
 
--keep class com.termux.zerocore.ftp.new_ftp.** { *; }
--dontwarn com.termux.zerocore.ftp.new_ftp.**
+-keep class com.termux.victor.ftp.new_ftp.** { *; }
+-dontwarn com.termux.victor.ftp.new_ftp.**
 
 -keep class org.apache.mina.** { *; }
 -dontwarn org.apache.mina.**
@@ -70,7 +70,7 @@
 -keepattributes *Annotation*
 
 # 保护数据模型
--keep class com.termux.zerocore.bean.** { *; }
+-keep class com.termux.victor.bean.** { *; }
 
 # 保护 TypeToken 的匿名子类，防止 R8 移除泛型信息导致运行时崩溃
 -keep class com.google.gson.reflect.TypeToken { *; }

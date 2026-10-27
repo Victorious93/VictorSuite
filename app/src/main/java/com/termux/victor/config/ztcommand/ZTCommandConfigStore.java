@@ -1,28 +1,28 @@
-package com.termux.zerocore.config.ztcommand;
+package com.termux.victor.config.ztcommand;
 
 
 import android.util.SparseArray;
 
-import com.termux.zerocore.config.ztcommand.config.AVncConfig;
-import com.termux.zerocore.config.ztcommand.config.ConfirmedDialogConfig;
-import com.termux.zerocore.config.ztcommand.config.ForWardOpenLeftConfig;
-import com.termux.zerocore.config.ztcommand.config.ForWardOpenRightConfig;
-import com.termux.zerocore.config.ztcommand.config.HelpConfig;
-import com.termux.zerocore.config.ztcommand.config.KnowConfig;
-import com.termux.zerocore.config.ztcommand.config.LnConfig;
-import com.termux.zerocore.config.ztcommand.config.QRCodeEncoderConfig;
-import com.termux.zerocore.config.ztcommand.config.RebootConfig;
-import com.termux.zerocore.config.ztcommand.config.ToastConfig;
-import com.termux.zerocore.config.ztcommand.config.VersionConfig;
-import com.termux.zerocore.config.ztcommand.config.X11CommandHideConfig;
-import com.termux.zerocore.config.ztcommand.config.X11CommandShowConfig;
-import com.termux.zerocore.config.ztcommand.config.X11KeyBoardHideConfig;
-import com.termux.zerocore.config.ztcommand.config.X11KeyBoardShowConfig;
-import com.termux.zerocore.config.ztcommand.config.X11StatusConfig;
-import com.termux.zerocore.config.ztcommand.config.XmlMenuConfig;
-import com.termux.zerocore.config.ztcommand.config.ZTBackgroundImageConfig;
-import com.termux.zerocore.config.ztcommand.config.ZTConfig;
-import com.termux.zerocore.config.ztcommand.config.ZTKeyConstants;
+import com.termux.victor.config.ztcommand.config.AVncConfig;
+import com.termux.victor.config.ztcommand.config.ConfirmedDialogConfig;
+import com.termux.victor.config.ztcommand.config.ForWardOpenLeftConfig;
+import com.termux.victor.config.ztcommand.config.ForWardOpenRightConfig;
+import com.termux.victor.config.ztcommand.config.HelpConfig;
+import com.termux.victor.config.ztcommand.config.KnowConfig;
+import com.termux.victor.config.ztcommand.config.LnConfig;
+import com.termux.victor.config.ztcommand.config.QRCodeEncoderConfig;
+import com.termux.victor.config.ztcommand.config.RebootConfig;
+import com.termux.victor.config.ztcommand.config.ToastConfig;
+import com.termux.victor.config.ztcommand.config.VersionConfig;
+import com.termux.victor.config.ztcommand.config.X11CommandHideConfig;
+import com.termux.victor.config.ztcommand.config.X11CommandShowConfig;
+import com.termux.victor.config.ztcommand.config.X11KeyBoardHideConfig;
+import com.termux.victor.config.ztcommand.config.X11KeyBoardShowConfig;
+import com.termux.victor.config.ztcommand.config.X11StatusConfig;
+import com.termux.victor.config.ztcommand.config.XmlMenuConfig;
+import com.termux.victor.config.ztcommand.config.ZTBackgroundImageConfig;
+import com.termux.victor.config.ztcommand.config.ZTConfig;
+import com.termux.victor.config.ztcommand.config.ZTKeyConstants;
 
 import java.util.HashMap;
 import java.util.Map;

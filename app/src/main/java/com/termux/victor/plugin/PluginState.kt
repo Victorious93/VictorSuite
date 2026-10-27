@@ -1,4 +1,4 @@
-package com.termux.zerocore.plugin
+package com.termux.victor.plugin
 
 /**
  * A registered plugin is always [DISABLED] until the user both acknowledges authorized

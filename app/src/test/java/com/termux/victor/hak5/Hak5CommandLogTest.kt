@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

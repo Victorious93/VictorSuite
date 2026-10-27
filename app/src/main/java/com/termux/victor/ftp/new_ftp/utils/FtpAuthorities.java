@@ -1,4 +1,4 @@
-package com.termux.zerocore.ftp.new_ftp.utils;
+package com.termux.victor.ftp.new_ftp.utils;
 
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.ftpserver.ftplet.Authority;

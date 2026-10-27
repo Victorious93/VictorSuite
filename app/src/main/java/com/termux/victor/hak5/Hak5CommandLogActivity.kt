@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 import android.app.AlertDialog
 import android.os.Bundle

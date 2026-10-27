@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
@@ -7,9 +7,9 @@ import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.activity.EditTextActivity
-import com.termux.zerocore.code.CodeString
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.activity.EditTextActivity
+import com.termux.victor.code.CodeString
+import com.termux.victor.url.FileUrl
 import java.io.File
 
 class ChangStartMsgClickConfig: BaseMenuClickConfig() {

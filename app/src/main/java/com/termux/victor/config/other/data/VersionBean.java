@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.other.data;
+package com.termux.victor.config.other.data;
 
 import java.util.List;
 

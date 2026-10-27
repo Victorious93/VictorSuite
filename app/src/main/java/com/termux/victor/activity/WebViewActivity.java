@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity;
+package com.termux.victor.activity;
 
 
 import android.annotation.TargetApi;

@@ -1,4 +1,4 @@
-package com.termux.zerocore.view.xuehua;
+package com.termux.victor.view.xuehua;
 
 class Random {
     private static final java.util.Random RANDOM = new java.util.Random();

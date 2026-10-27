@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.app.Activity
 import android.content.Context
@@ -19,10 +19,10 @@ import com.rtugeek.android.colorseekbar.AlphaSeekBar
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 import com.termux.R
 import com.termux.shared.logger.Logger
-import com.termux.zerocore.activity.ImageActivity
-import com.termux.zerocore.data.UsbFileData
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.activity.ImageActivity
+import com.termux.victor.data.UsbFileData
+import com.termux.victor.url.FileUrl
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 import java.io.FileInputStream
 

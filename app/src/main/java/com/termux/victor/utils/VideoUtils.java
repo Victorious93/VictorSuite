@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils;
+package com.termux.victor.utils;
 
 import android.media.MediaPlayer;
 import android.widget.MediaController;

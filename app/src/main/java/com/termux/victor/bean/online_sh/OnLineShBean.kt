@@ -1,4 +1,4 @@
-package com.termux.zerocore.bean.online_sh
+package com.termux.victor.bean.online_sh
 
 data class OnLineShBean(
     val code: Int,

@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek;
+package com.termux.victor.deepseek;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,15 +25,15 @@ import com.example.xh_lib.utils.LogUtils;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.deepseek.data.ChatDatabaseHelper;
-import com.termux.zerocore.deepseek.data.ChatMessage;
-import com.termux.zerocore.deepseek.data.ChatMessageAdapter;
-import com.termux.zerocore.deepseek.data.ChatSession;
-import com.termux.zerocore.deepseek.model.AiClient;
-import com.termux.zerocore.deepseek.model.Config;
-import com.termux.zerocore.deepseek.model.DeepSeekClient;
-import com.termux.zerocore.deepseek.model.RequestMessageItem;
-import com.termux.zerocore.ftp.utils.UserSetManage;
+import com.termux.victor.deepseek.data.ChatDatabaseHelper;
+import com.termux.victor.deepseek.data.ChatMessage;
+import com.termux.victor.deepseek.data.ChatMessageAdapter;
+import com.termux.victor.deepseek.data.ChatSession;
+import com.termux.victor.deepseek.model.AiClient;
+import com.termux.victor.deepseek.model.Config;
+import com.termux.victor.deepseek.model.DeepSeekClient;
+import com.termux.victor.deepseek.model.RequestMessageItem;
+import com.termux.victor.ftp.utils.UserSetManage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -268,7 +268,7 @@ public class ChatFragment extends Fragment {
     // 获取终端助手提示语
     private String getPrompt() {
         boolean isDeepSeekVisibleTerminal = UserSetManage.Companion.get().getZTUserBean().isIsDeepSeekVisibleTerminal();
-        String terminalCommands = com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().getTextToTerminal()
+        String terminalCommands = com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().getTextToTerminal()
             .replace("$", "")
             .replace("~", "")
             .replace("\n", "")

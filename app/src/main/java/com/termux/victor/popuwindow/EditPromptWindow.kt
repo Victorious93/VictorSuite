@@ -1,4 +1,4 @@
-package com.termux.zerocore.popuwindow
+package com.termux.victor.popuwindow
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -19,9 +19,9 @@ import com.example.xh_lib.utils.UUtils
 import com.google.gson.Gson
 import com.lzy.okgo.model.Response
 import com.termux.R
-import com.termux.zerocore.bean.EditPromptBean
-import com.termux.zerocore.bean.ZDYDataBean
-import com.termux.zerocore.dialog.DownLoadDialogBoom
+import com.termux.victor.bean.EditPromptBean
+import com.termux.victor.bean.ZDYDataBean
+import com.termux.victor.dialog.DownLoadDialogBoom
 import java.util.*
 import kotlin.collections.HashMap
 

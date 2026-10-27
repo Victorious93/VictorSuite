@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
 import android.os.Bundle
 import android.os.Environment
@@ -11,9 +11,9 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.termux.R
-import com.termux.zerocore.dialog.LoadingDialog
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.url.FileUrl.victorSuiteApk
+import com.termux.victor.dialog.LoadingDialog
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.url.FileUrl.victorSuiteApk
 import java.io.File
 import java.io.IOException
 import java.io.InputStream

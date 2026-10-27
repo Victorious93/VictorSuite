@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek;
+package com.termux.victor.deepseek;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.termux.R;
-import com.termux.zerocore.deepseek.activity.VictorSuiteDeepSeekSettingsActivity;
-import com.termux.zerocore.deepseek.data.ChatDatabaseHelper;
-import com.termux.zerocore.deepseek.data.ChatSession;
-import com.termux.zerocore.deepseek.data.ChatSessionAdapter;
+import com.termux.victor.deepseek.activity.VictorSuiteDeepSeekSettingsActivity;
+import com.termux.victor.deepseek.data.ChatDatabaseHelper;
+import com.termux.victor.deepseek.data.ChatSession;
+import com.termux.victor.deepseek.data.ChatSessionAdapter;
 
 import java.util.Collections;
 import java.util.List;

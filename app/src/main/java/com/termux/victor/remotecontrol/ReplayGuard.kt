@@ -1,4 +1,4 @@
-package com.termux.zerocore.remotecontrol
+package com.termux.victor.remotecontrol
 
 /**
  * Anti-replay / freshness check (REMOTE_CONTROL.md §2).

@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,7 @@ import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_ACTIVITY.ACTIO
 import com.termux.shared.termux.settings.properties.TermuxPropertyConstants
 import com.termux.shared.termux.settings.properties.TermuxPropertyConstants.DEFAULT_IVALUE_EXTRA_KEYS
 import com.termux.shared.termux.settings.properties.TermuxPropertyConstants.KEY_EXTRA_KEYS
-import com.termux.zerocore.dialog.MingLShowDialog
+import com.termux.victor.dialog.MingLShowDialog
 import org.json.JSONArray
 import java.io.FileInputStream
 import java.io.FileOutputStream

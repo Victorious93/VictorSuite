@@ -2,8 +2,8 @@ package org.apache.ftpserver.command.impl;
 
 
 
-import com.termux.zerocore.ftp.new_ftp.Constants;
-import com.termux.zerocore.ftp.new_ftp.services.FtpService;
+import com.termux.victor.ftp.new_ftp.Constants;
+import com.termux.victor.ftp.new_ftp.services.FtpService;
 
 import org.apache.ftpserver.command.AbstractCommand;
 import org.apache.ftpserver.ftplet.FtpException;

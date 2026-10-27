@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 /**
  * Authenticated Pineapple API session (plan Phase 2 §1 and §2).

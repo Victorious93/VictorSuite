@@ -25,7 +25,7 @@ import com.termux.shared.logger.Logger;
 import com.termux.shared.notification.NotificationUtils;
 import com.termux.shared.shell.command.ExecutionCommand;
 import com.termux.shared.shell.command.ExecutionCommand.Runner;
-import com.termux.zerocore.remotecontrol.android.TermuxRemoteEnvelopeBinding; // VictorSuite add
+import com.termux.victor.remotecontrol.android.TermuxRemoteEnvelopeBinding; // VictorSuite add
 
 /**
  * A service that receives {@link RUN_COMMAND_SERVICE#ACTION_RUN_COMMAND} intent from third party apps and

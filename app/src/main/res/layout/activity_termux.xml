@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/xue_fragment"
                     android:layout_height="match_parent"/>
-                <com.termux.zerocore.background.FireworkView
+                <com.termux.victor.background.FireworkView
                     android:layout_width="match_parent"
                     android:id="@+id/firework_view"
                     android:visibility="gone"

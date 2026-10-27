@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings
+package com.termux.victor.settings
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.cardview.widget.CardView
 import com.termux.R
 import com.termux.app.activities.SettingsActivity
-import com.termux.zerocore.droidcommand.DroidCommandAi
+import com.termux.victor.droidcommand.DroidCommandAi
 
 class ZtSettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

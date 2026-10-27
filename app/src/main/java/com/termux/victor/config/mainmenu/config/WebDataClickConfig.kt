@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.app.Activity
 import android.content.Context
@@ -7,9 +7,9 @@ import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.data.CommendShellData
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.data.CommendShellData
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.utils.FileIOUtils
 
 class WebDataClickConfig: BaseMenuClickConfig() {
     override fun getIcon(context: Context?): Drawable? {
@@ -25,10 +25,10 @@ class WebDataClickConfig: BaseMenuClickConfig() {
         if (FileIOUtils.isBinFileExists("ttyd")) {
             replace = UUtils.getString(R.string.ttyd_install_complete)
                 .replace("0.0.0.0", UUtils.getHostIP())
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CommendShellData.SHELL_DATA_RUN_WEB)
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CommendShellData.SHELL_DATA_RUN_WEB)
         } else {
             replace = UUtils.getString(R.string.ttyd_install_msg)
-            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CommendShellData.SHELL_DATA_WEB_LINUX)
+            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CommendShellData.SHELL_DATA_WEB_LINUX)
         }
         val switchDialog = SwitchDialog(mContext as Activity)
         switchDialog.createSwitchDialog(replace)

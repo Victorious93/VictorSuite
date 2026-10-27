@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog.view_holder
+package com.termux.victor.dialog.view_holder
 
 import android.view.View
 import android.widget.TextView

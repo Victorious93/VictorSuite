@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -7,8 +7,8 @@ import android.view.View
 import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.dialog.YesNoDialog
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.dialog.YesNoDialog
+import com.termux.victor.utils.FileIOUtils
 import java.io.File
 
 class MyUsedSoftLinksDataClickConfig: BaseMenuClickConfig() {

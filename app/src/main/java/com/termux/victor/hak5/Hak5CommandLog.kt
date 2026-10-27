@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 import android.content.Context
 import com.google.gson.Gson
@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import java.io.File
 import java.io.FileWriter
-import com.termux.zerocore.utils.IsoTimestamp
+import com.termux.victor.utils.IsoTimestamp
 import java.util.Date
 
 /**

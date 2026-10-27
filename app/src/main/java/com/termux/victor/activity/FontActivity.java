@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity;
+package com.termux.victor.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -23,10 +23,10 @@ import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxService;
 import com.termux.shared.termux.TermuxConstants;
-import com.termux.zerocore.activity.adapter.ListBaseAdapter;
-import com.termux.zerocore.activity.view_holder.ViewHolder;
-import com.termux.zerocore.code.CodeString;
-import com.termux.zerocore.dialog.SwitchDialog;
+import com.termux.victor.activity.adapter.ListBaseAdapter;
+import com.termux.victor.activity.view_holder.ViewHolder;
+import com.termux.victor.code.CodeString;
+import com.termux.victor.dialog.SwitchDialog;
 
 import org.jetbrains.annotations.NotNull;
 

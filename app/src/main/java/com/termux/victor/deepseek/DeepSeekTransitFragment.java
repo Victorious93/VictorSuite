@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek;
+package com.termux.victor.deepseek;
 
 import android.content.Context;
 import android.content.Intent;

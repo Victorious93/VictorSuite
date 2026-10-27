@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import com.gaurav.avnc.ui.home.HomeActivity;
 import com.gaurav.avnc.ui.vnc.VncActivity;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.dialog.VNCConnectionDialog;
-import com.termux.zerocore.popuwindow.MenuLeftPopuListWindow;
+import com.termux.victor.dialog.VNCConnectionDialog;
+import com.termux.victor.popuwindow.MenuLeftPopuListWindow;
 
 import org.jetbrains.annotations.Nullable;
 

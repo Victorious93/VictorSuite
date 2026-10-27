@@ -1,4 +1,4 @@
-package com.termux.zerocore.data
+package com.termux.victor.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

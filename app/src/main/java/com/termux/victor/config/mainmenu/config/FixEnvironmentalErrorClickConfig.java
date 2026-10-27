@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_X11_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_X11_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -12,7 +12,7 @@ import android.view.View;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.url.FileUrl;
+import com.termux.victor.url.FileUrl;
 import com.zp.z_file.util.ZFileUUtils;
 
 import java.io.File;

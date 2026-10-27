@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils
+package com.termux.victor.utils
 
 import android.app.Activity
 import android.content.Intent
@@ -9,9 +9,9 @@ import android.view.View
 import android.view.View.OnClickListener
 import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
-import com.termux.zerocore.bean.MessageBean
-import com.termux.zerocore.bean.PackageBean
-import com.termux.zerocore.dialog.SwitchDialog
+import com.termux.victor.bean.MessageBean
+import com.termux.victor.bean.PackageBean
+import com.termux.victor.dialog.SwitchDialog
 
 object PackageMsg {
     final val TAG = "PackageMsg"

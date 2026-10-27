@@ -1,6 +1,6 @@
-package com.termux.zerocore.deepseek.activity
+package com.termux.victor.deepseek.activity
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.content.Intent
 import android.net.Uri

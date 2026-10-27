@@ -2,7 +2,7 @@ package org.apache.ftpserver.listener.nio;
 
 
 
-import com.termux.zerocore.ftp.new_ftp.services.FtpService;
+import com.termux.victor.ftp.new_ftp.services.FtpService;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;

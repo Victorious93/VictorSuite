@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity;
+package com.termux.victor.activity;
 
 import android.os.Bundle;
 import android.widget.EditText;
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.config.VsLinks;
+import com.termux.victor.config.VsLinks;
 
 public class UncaughtExceptionHandlerActivity extends AppCompatActivity {
 

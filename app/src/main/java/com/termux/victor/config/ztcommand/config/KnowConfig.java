@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.ztcommand.config;
+package com.termux.victor.config.ztcommand.config;
 
 import android.content.Context;
 

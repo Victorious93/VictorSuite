@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject

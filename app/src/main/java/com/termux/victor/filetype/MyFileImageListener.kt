@@ -1,4 +1,4 @@
-package com.termux.zerocore.filetype
+package com.termux.victor.filetype
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

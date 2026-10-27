@@ -1,6 +1,6 @@
-package com.termux.zerocore.config.mainmenu.config;
+package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_BEAUTIFICATION_FUNCTION;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_BEAUTIFICATION_FUNCTION;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.utils.WindowUtils;
+import com.termux.victor.utils.WindowUtils;
 
 public class FullScreenClickConfig extends BaseMenuClickConfig {
     @Override

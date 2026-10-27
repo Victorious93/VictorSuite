@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_10202f"
-    tools:context=".zerocore.activity.ImageActivity">
+    tools:context=".victor.activity.ImageActivity">
 
 
     <TextView

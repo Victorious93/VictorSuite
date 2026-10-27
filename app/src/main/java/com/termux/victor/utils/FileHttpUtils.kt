@@ -1,8 +1,8 @@
-package com.termux.zerocore.utils
+package com.termux.victor.utils
 
 import com.example.xh_lib.utils.UUtils
-import com.termux.zerocore.http_service.HttpServer
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.http_service.HttpServer
+import com.termux.victor.url.FileUrl
 import com.zp.z_file.util.LogUtils
 import java.io.File
 import java.io.IOException

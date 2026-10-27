@@ -1,4 +1,4 @@
-package com.termux.zerocore.bean
+package com.termux.victor.bean
 
 import com.arialyy.aria.core.common.AbsEntity
 import com.arialyy.aria.core.download.DownloadEntity

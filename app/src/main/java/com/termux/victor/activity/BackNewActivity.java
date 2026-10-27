@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity;
+package com.termux.victor.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
-import com.termux.zerocore.fragment.BackupFragment;
-import com.termux.zerocore.fragment.RestoreFragment;
-import com.termux.zerocore.fragment.SettingFragment;
+import com.termux.victor.fragment.BackupFragment;
+import com.termux.victor.fragment.RestoreFragment;
+import com.termux.victor.fragment.SettingFragment;
 
 
 public class BackNewActivity extends AppCompatActivity implements View.OnClickListener {

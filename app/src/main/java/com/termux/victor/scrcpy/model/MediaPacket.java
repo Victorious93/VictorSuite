@@ -1,4 +1,4 @@
-package com.termux.zerocore.scrcpy.model;
+package com.termux.victor.scrcpy.model;
 
 /**
  * Created by Alexandr Golovach on 27.06.16.

@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity
+package com.termux.victor.activity
 
 import android.os.Bundle
 import android.util.Log

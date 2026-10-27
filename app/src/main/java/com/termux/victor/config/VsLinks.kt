@@ -1,4 +1,4 @@
-package com.termux.zerocore.config
+package com.termux.victor.config
 
 /**
  * Every external URL the app opens or fetches lives here, so links can be changed in one place.

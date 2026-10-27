@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
@@ -12,8 +12,8 @@ import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
-import com.termux.zerocore.keybord.KeyBordManage
-import com.termux.zerocore.zero.engine.ZeroCoreManage
+import com.termux.victor.keybord.KeyBordManage
+import com.termux.victor.zero.engine.ZeroCoreManage
 
 class KeyDataClickConfig: BaseMenuClickConfig() {
     companion object {
@@ -43,25 +43,25 @@ class KeyDataClickConfig: BaseMenuClickConfig() {
                     KeyBordManage.KEY_DEF -> {
                         LogUtils.d(TAG, "handleMessage DEF:${msg.obj}")
                         if (msg.obj != null) {
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(msg.obj as String?)
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(msg.obj as String?)
                         }
                     }
                     KeyBordManage.KEY_ALT -> {
                         LogUtils.d(TAG, "handleMessage ALT:${msg.obj}")
                         if (msg.obj != null) {
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminalAlt(msg.obj as String?, true)
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminalAlt(msg.obj as String?, true)
                         }
                     }
                     KeyBordManage.KEY_CTRL -> {
                         LogUtils.d(TAG, "handleMessage CTRL:${msg.obj}")
                         if (msg.obj != null) {
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminalCtrl(msg.obj as String?, true)
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminalCtrl(msg.obj as String?, true)
                         }
                     }
                     KeyBordManage.KEY_OTHER -> {
                         LogUtils.d(TAG, "handleMessage OTHER:${msg.obj}")
                         if (msg.obj != null) {
-                            com.termux.zerocore.utils.SingletonCommunicationUtils
+                            com.termux.victor.utils.SingletonCommunicationUtils
                                 .getInstance().getmSingletonCommunicationListener().onTerminalExtraKeyButtonClick(msg.obj as String?)
                         }
                     }

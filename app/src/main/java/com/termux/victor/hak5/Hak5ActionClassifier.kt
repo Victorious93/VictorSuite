@@ -1,4 +1,4 @@
-package com.termux.zerocore.hak5
+package com.termux.victor.hak5
 
 /**
  * Heuristic severity classifier for runtime-discovered Pineapple actions (plan §4).

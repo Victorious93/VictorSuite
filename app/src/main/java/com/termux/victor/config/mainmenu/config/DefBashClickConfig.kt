@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.app.Activity
 import android.content.Context
@@ -7,8 +7,8 @@ import android.view.View
 import com.example.xh_lib.utils.UUtils
 import com.example.xh_lib.utils.UUtils.FileCallback
 import com.termux.R
-import com.termux.zerocore.dialog.SwitchDialog
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.dialog.SwitchDialog
+import com.termux.victor.url.FileUrl
 import java.io.File
 
 class DefBashClickConfig: BaseMenuClickConfig() {

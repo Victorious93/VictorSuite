@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils;
+package com.termux.victor.utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class MenuDefaultsMergerTest {
 
-    private static final String P = "java:com.termux.zerocore.config.mainmenu.config.";
+    private static final String P = "java:com.termux.victor.config.mainmenu.config.";
 
     private static final String DEFAULTS = "<zt-menu>"
         + "<group name=\"Common\">"

@@ -1,4 +1,4 @@
-package com.termux.zerocore.developer
+package com.termux.victor.developer
 
 import android.os.Bundle
 import android.system.Os
@@ -13,10 +13,10 @@ import com.billy.android.swipe.consumer.SlidingConsumer
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
 import com.termux.shared.file.FileUtils
-import com.termux.zerocore.adb.dialog.AdbWindowsDialog
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.zip.ZipUtils
-import com.termux.zerocore.zip.ZipUtils.ZipNameListener
+import com.termux.victor.adb.dialog.AdbWindowsDialog
+import com.termux.victor.url.FileUrl
+import com.termux.victor.zip.ZipUtils
+import com.termux.victor.zip.ZipUtils.ZipNameListener
 import org.alfresco.jlan.server.config.ServerConfiguration
 import org.alfresco.jlan.smb.server.SMBServer
 import java.io.File

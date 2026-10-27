@@ -1,11 +1,11 @@
-package com.termux.zerocore.config.mainmenu.config
+package com.termux.victor.config.mainmenu.config
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.View
 import com.termux.R
-import com.termux.zerocore.hak5.Hak5CompanionActivity
+import com.termux.victor.hak5.Hak5CompanionActivity
 
 /**
  * Drawer entry for the Hak5 companion (WiFi Pineapple Tetra over Wi-Fi/LAN).
@@ -13,7 +13,7 @@ import com.termux.zerocore.hak5.Hak5CompanionActivity
  */
 class Hak5CompanionClickConfig : BaseMenuClickConfig() {
     override fun getType(): Int {
-        return com.termux.zerocore.config.mainmenu.MainMenuConfig.CODE_COMMON_FUNCTIONS
+        return com.termux.victor.config.mainmenu.MainMenuConfig.CODE_COMMON_FUNCTIONS
     }
 
     override fun getIcon(context: Context?): Drawable? {

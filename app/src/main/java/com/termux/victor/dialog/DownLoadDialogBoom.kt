@@ -1,6 +1,6 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.app.Activity
 import android.content.Context
@@ -30,13 +30,13 @@ import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.lzy.okgo.model.Response
 import com.termux.R
-import com.termux.zerocore.activity.BackNewActivity
-import com.termux.zerocore.bean.Data
-import com.termux.zerocore.bean.ZDYDataBean
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.url.FileUrl.victorSuiteApk
-import com.termux.zerocore.url.FileUrl.victorSuiteData
-import com.termux.zerocore.utils.DownLoadMuTILS
+import com.termux.victor.activity.BackNewActivity
+import com.termux.victor.bean.Data
+import com.termux.victor.bean.ZDYDataBean
+import com.termux.victor.url.FileUrl
+import com.termux.victor.url.FileUrl.victorSuiteApk
+import com.termux.victor.url.FileUrl.victorSuiteData
+import com.termux.victor.utils.DownLoadMuTILS
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -130,11 +130,11 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
     class DownLoadAdapter : RecyclerView.Adapter<DownLoadViewHolder>{
 
-        private var mList:ArrayList<com.termux.zerocore.bean.Data>? = null
+        private var mList:ArrayList<com.termux.victor.bean.Data>? = null
         private var ip:String? = null
         private var mDownLoadDialogBoom:DownLoadDialogBoom? = null
 
-        constructor(mList:ArrayList<com.termux.zerocore.bean.Data>?,mDownLoadDialogBoom:DownLoadDialogBoom) : super(){
+        constructor(mList:ArrayList<com.termux.victor.bean.Data>?,mDownLoadDialogBoom:DownLoadDialogBoom) : super(){
 
             this.mList = mList
             this.mDownLoadDialogBoom = mDownLoadDialogBoom

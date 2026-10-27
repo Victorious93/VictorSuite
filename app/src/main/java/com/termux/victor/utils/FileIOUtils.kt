@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils
+package com.termux.victor.utils
 
 import android.content.Context
 import android.os.Environment
@@ -8,11 +8,11 @@ import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
 import com.google.gson.Gson
 import com.termux.R
-import com.termux.zerocore.bean.ClipboardBean
-import com.termux.zerocore.bean.CreateSystemBean
-import com.termux.zerocore.bean.MinLBean
-import com.termux.zerocore.bean.MinLBean.DataNum
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.bean.ClipboardBean
+import com.termux.victor.bean.CreateSystemBean
+import com.termux.victor.bean.MinLBean
+import com.termux.victor.bean.MinLBean.DataNum
+import com.termux.victor.url.FileUrl
 import java.io.*
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
@@ -381,7 +381,7 @@ object FileIOUtils {
     }
 
     public fun isPacketFormat(name: String): Boolean {
-        return com.termux.zerocore.data.RestoreShell.restoreFlagFor(name) != null
+        return com.termux.victor.data.RestoreShell.restoreFlagFor(name) != null
     }
 
     public fun isModuleFormat(name: String): Boolean {

@@ -1,4 +1,4 @@
-package com.termux.zerocore.ftp.utils
+package com.termux.victor.ftp.utils
 
 object ZTConstant {
     public const val ZT_USER_BEAN_KEY = "victor_suite_user_bean"

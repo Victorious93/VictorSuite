@@ -1,11 +1,11 @@
-package com.termux.zerocore.utils
+package com.termux.victor.utils
 
 
 import android.content.Context
 import android.util.TypedValue
 import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
-import com.termux.zerocore.view.DiaLogData
+import com.termux.victor.view.DiaLogData
 
 object WindowsUtils {
 

@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity;
+package com.termux.victor.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -21,11 +21,11 @@ import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.app.TermuxInstaller;
 import com.termux.app.TermuxService;
-import com.termux.zerocore.activity.adapter.CreateSystemAdapter;
-import com.termux.zerocore.bean.CreateSystemBean;
-import com.termux.zerocore.bean.ReadSystemBean;
-import com.termux.zerocore.dialog.MyDialog;
-import com.termux.zerocore.shell.ExeCommand;
+import com.termux.victor.activity.adapter.CreateSystemAdapter;
+import com.termux.victor.bean.CreateSystemBean;
+import com.termux.victor.bean.ReadSystemBean;
+import com.termux.victor.dialog.MyDialog;
+import com.termux.victor.shell.ExeCommand;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -228,7 +228,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                                                     if(new File(mList.get(position).dir).exists()){
                                                         Toast.makeText(SwitchActivity.this, "正在清除系统残留文件", Toast.LENGTH_SHORT).show();
-                                                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("chmod 777 -R "+mList.get(position).dir+"&& rm -rf " + mList.get(position).dir + " \n");
+                                                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("chmod 777 -R "+mList.get(position).dir+"&& rm -rf " + mList.get(position).dir + " \n");
                                                         finish();
                                                     }else{
                                                         Toast.makeText(SwitchActivity.this, "删除成功!", Toast.LENGTH_SHORT).show();

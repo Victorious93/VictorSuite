@@ -1,7 +1,7 @@
-package com.termux.zerocore.utils
+package com.termux.victor.utils
 
 import com.example.xh_lib.utils.LogUtils
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.url.FileUrl
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList

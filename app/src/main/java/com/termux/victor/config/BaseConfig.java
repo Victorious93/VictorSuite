@@ -1,4 +1,4 @@
-package com.termux.zerocore.config;
+package com.termux.victor.config;
 
 public interface BaseConfig {
 }

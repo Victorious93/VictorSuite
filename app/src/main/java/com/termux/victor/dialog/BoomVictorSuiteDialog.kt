@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.app.Activity
 import android.content.Context
@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.termux.R
-import com.termux.zerocore.bean.ZeroRunCommandBean
-import com.termux.zerocore.data.LinuxCommandData
-import com.termux.zerocore.dialog.adapter.BoomVictorSuiteAdapter
-import com.termux.zerocore.popuwindow.NginxPopuWindow
-import com.termux.zerocore.popuwindow.WebStartPopuWindow
+import com.termux.victor.bean.ZeroRunCommandBean
+import com.termux.victor.data.LinuxCommandData
+import com.termux.victor.dialog.adapter.BoomVictorSuiteAdapter
+import com.termux.victor.popuwindow.NginxPopuWindow
+import com.termux.victor.popuwindow.WebStartPopuWindow
 
 class BoomVictorSuiteDialog : BaseDialogDown {
 

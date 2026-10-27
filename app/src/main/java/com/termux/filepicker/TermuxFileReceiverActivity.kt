@@ -26,7 +26,7 @@ import com.termux.shared.logger.Logger
 import com.termux.shared.termux.TermuxConstants
 import com.termux.shared.termux.TermuxConstants.TERMUX_APP
 import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties
-import com.termux.zerocore.utils.FileIOUtils
+import com.termux.victor.utils.FileIOUtils
 import com.zp.z_file.bean.DataBean
 import com.zp.z_file.ui.dialog.InstallModuleDialog
 import com.zp.z_file.ui.dialog.LoadingDialog

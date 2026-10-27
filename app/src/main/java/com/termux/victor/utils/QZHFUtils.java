@@ -1,4 +1,4 @@
-package com.termux.zerocore.utils;
+package com.termux.victor.utils;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -7,9 +7,9 @@ import com.example.xh_lib.utils.UUtils;
 import com.google.gson.Gson;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
-import com.termux.zerocore.activity.BackNewActivity;
-import com.termux.zerocore.dialog.MyDialog;
-import com.termux.zerocore.fragment.BackupFragment;
+import com.termux.victor.activity.BackNewActivity;
+import com.termux.victor.dialog.MyDialog;
+import com.termux.victor.fragment.BackupFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -78,7 +78,7 @@ public class QZHFUtils {
             /* TermuxApplication.mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage \n");
                     }
                 });*/
 
@@ -97,7 +97,7 @@ public class QZHFUtils {
                             Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到storage目录), Toast.LENGTH_SHORT).show();
 
                             myDialog.dismiss();
-                            com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                             restoreFragment.getActivity().finish();
                         }
                     });
@@ -144,7 +144,7 @@ public class QZHFUtils {
                     public void run() {
                         myDialog.dismiss();
 
-                        com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -zcvf ./storage/shared/xinhao/data/" + systemName + " /data/data/com.termux/files && echo \"备份完成，备份文件在->内部存储/xinhao/data/|目录下\" \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -zcvf ./storage/shared/xinhao/data/" + systemName + " /data/data/com.termux/files && echo \"备份完成，备份文件在->内部存储/xinhao/data/|目录下\" \n");
 
 
                         restoreFragment.getActivity().finish();

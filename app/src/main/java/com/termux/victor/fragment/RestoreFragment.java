@@ -1,4 +1,4 @@
-package com.termux.zerocore.fragment;
+package com.termux.victor.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,14 +22,14 @@ import com.termux.app.TermuxActivity;
 import com.termux.app.TermuxInstaller;
 import com.termux.app.TermuxService;
 import com.termux.shared.termux.TermuxConstants;
-import com.termux.zerocore.activity.BackNewActivity;
-import com.termux.zerocore.activity.adapter.RestoreAdapter;
-import com.termux.zerocore.data.UsbFileData;
-import com.termux.zerocore.dialog.MyDialog;
-import com.termux.zerocore.dialog.YesNoDialog;
-import com.termux.zerocore.shell.ExeCommand;
-import com.termux.zerocore.utils.QZUtils;
-import com.termux.zerocore.utils.SaveData;
+import com.termux.victor.activity.BackNewActivity;
+import com.termux.victor.activity.adapter.RestoreAdapter;
+import com.termux.victor.data.UsbFileData;
+import com.termux.victor.dialog.MyDialog;
+import com.termux.victor.dialog.YesNoDialog;
+import com.termux.victor.shell.ExeCommand;
+import com.termux.victor.utils.QZUtils;
+import com.termux.victor.utils.SaveData;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -136,9 +136,9 @@ public class RestoreFragment extends BaseFragment {
                                 public void run() {
 
 
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));
 
-                                    com.termux.zerocore.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage ");
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage ");
                                     getActivity().finish();
                                 }
                             });

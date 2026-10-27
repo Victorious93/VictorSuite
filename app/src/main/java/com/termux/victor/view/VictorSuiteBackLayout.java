@@ -1,4 +1,4 @@
-package com.termux.zerocore.view;
+package com.termux.victor.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import androidx.annotation.RequiresApi;
 import com.example.xh_lib.utils.UUtils;
 import com.termux.R;
 import com.termux.x11.MainActivity;
-import com.termux.zerocore.ftp.utils.UserSetManage;
+import com.termux.victor.ftp.utils.UserSetManage;
 
 public class VictorSuiteBackLayout extends RelativeLayout {
     private View back_color;

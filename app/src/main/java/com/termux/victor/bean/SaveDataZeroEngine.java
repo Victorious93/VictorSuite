@@ -1,4 +1,4 @@
-package com.termux.zerocore.bean;
+package com.termux.victor.bean;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import com.example.xh_lib.utils.LogUtils;
 import com.example.xh_lib.utils.UUtils;
-import com.termux.zerocore.utils.FileIOUtils;
+import com.termux.victor.utils.FileIOUtils;
 
 import java.security.SecureRandom;
 

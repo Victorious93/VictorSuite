@@ -1,4 +1,4 @@
-package com.termux.zerocore.utermux_windows.qemu.dialog;
+package com.termux.victor.utermux_windows.qemu.dialog;
 
 import android.content.Context;
 import android.view.View;

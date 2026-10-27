@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.mainmenu.view.viewholder;
+package com.termux.victor.config.mainmenu.view.viewholder;
 
 import android.view.View;
 import android.widget.ImageView;

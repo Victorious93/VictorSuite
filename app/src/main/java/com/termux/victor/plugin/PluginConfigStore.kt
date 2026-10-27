@@ -1,4 +1,4 @@
-package com.termux.zerocore.plugin
+package com.termux.victor.plugin
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,7 +9,7 @@ import androidx.security.crypto.MasterKey
  * Encrypted-at-rest storage for per-plugin settings (API keys, tokens, endpoints, etc.).
  * Backed by AndroidX Security's EncryptedSharedPreferences (AES256-GCM values, AES256-SIV
  * keys) instead of the plain SharedPreferences the rest of the app uses for non-sensitive
- * settings (see [com.termux.zerocore.utils.SaveData]).
+ * settings (see [com.termux.victor.utils.SaveData]).
  */
 object PluginConfigStore {
     private const val PREFS_NAME = "victorsuite_plugin_config"

@@ -1,4 +1,4 @@
-package com.termux.zerocore.plugin
+package com.termux.victor.plugin
 
 /**
  * Persisted bookkeeping for a registered plugin: which manifest it was registered from,

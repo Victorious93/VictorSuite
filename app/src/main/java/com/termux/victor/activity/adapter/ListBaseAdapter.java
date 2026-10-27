@@ -1,10 +1,10 @@
-package com.termux.zerocore.activity.adapter;
+package com.termux.victor.activity.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.termux.zerocore.activity.view_holder.ViewHolder;
+import com.termux.victor.activity.view_holder.ViewHolder;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.termux.zerocore.ftp.new_ftp.utils;
+package com.termux.victor.ftp.new_ftp.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.termux.zerocore.deepseek.activity
+package com.termux.victor.deepseek.activity
 
 import android.content.Intent
 import android.graphics.Color
@@ -22,10 +22,10 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.deepseek.model.Config
-import com.termux.zerocore.ftp.utils.UserSetManage
-import com.termux.zerocore.url.FileUrl
-import com.termux.zerocore.utils.FileHttpUtils.Companion.get
+import com.termux.victor.deepseek.model.Config
+import com.termux.victor.ftp.utils.UserSetManage
+import com.termux.victor.url.FileUrl
+import com.termux.victor.utils.FileHttpUtils.Companion.get
 import com.topjohnwu.superuser.Shell
 import com.zp.z_file.util.LogUtils
 import java.io.File

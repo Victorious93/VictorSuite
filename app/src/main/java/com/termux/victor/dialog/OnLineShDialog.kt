@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.content.Context
 import android.os.Message
@@ -19,11 +19,11 @@ import com.lzy.okgo.model.Response
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.shared.logger.Logger
-import com.termux.zerocore.bean.online_sh.Data
-import com.termux.zerocore.bean.online_sh.OnLineShBean
-import com.termux.zerocore.data.DownLoadShEntey
-import com.termux.zerocore.config.VsLinks
-import com.termux.zerocore.url.FileUrl
+import com.termux.victor.bean.online_sh.Data
+import com.termux.victor.bean.online_sh.OnLineShBean
+import com.termux.victor.data.DownLoadShEntey
+import com.termux.victor.config.VsLinks
+import com.termux.victor.url.FileUrl
 
 class OnLineShDialog : BaseDialogDown {
     private var recycler_view:RecyclerView? = null

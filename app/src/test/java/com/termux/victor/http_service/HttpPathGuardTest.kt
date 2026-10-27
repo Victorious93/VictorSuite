@@ -1,4 +1,4 @@
-package com.termux.zerocore.http_service
+package com.termux.victor.http_service
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

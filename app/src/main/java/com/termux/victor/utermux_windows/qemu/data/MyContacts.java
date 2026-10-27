@@ -1,4 +1,4 @@
-package com.termux.zerocore.utermux_windows.qemu.data;
+package com.termux.victor.utermux_windows.qemu.data;
 
 public class MyContacts {
 

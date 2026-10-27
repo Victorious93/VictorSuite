@@ -1,4 +1,4 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
 import android.content.Context
 import android.view.View
@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.utils.UUUtils
+import com.termux.victor.utils.UUUtils
 
 class VNCConnectionDialog : BaseDialogCentre {
 

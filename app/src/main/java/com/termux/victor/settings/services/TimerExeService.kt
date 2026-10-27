@@ -1,4 +1,4 @@
-package com.termux.zerocore.settings.services
+package com.termux.victor.settings.services
 
 
 import android.annotation.SuppressLint
@@ -11,10 +11,10 @@ import android.os.IBinder
 import android.os.Message
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.ftp.utils.TimerSetManage
-import com.termux.zerocore.libsu.LibSuManage
-import com.termux.zerocore.settings.timer.TimerBean
-import com.termux.zerocore.utils.NotificationUtils
+import com.termux.victor.ftp.utils.TimerSetManage
+import com.termux.victor.libsu.LibSuManage
+import com.termux.victor.settings.timer.TimerBean
+import com.termux.victor.utils.NotificationUtils
 import com.topjohnwu.superuser.Shell
 import com.zp.z_file.util.LogUtils
 import java.util.Locale

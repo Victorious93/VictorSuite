@@ -1,6 +1,6 @@
-package com.termux.zerocore.dialog
+package com.termux.victor.dialog
 
-import com.termux.zerocore.config.VsLinks
+import com.termux.victor.config.VsLinks
 
 import android.content.Context
 import android.view.View
@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.xh_lib.utils.LogUtils
 import com.example.xh_lib.utils.UUtils
 import com.termux.R
-import com.termux.zerocore.back.bean.DataBean
-import com.termux.zerocore.back.listener.RestoreFileDataListener
-import com.termux.zerocore.back.listener.RestoreRefreshFileListener
-import com.termux.zerocore.dialog.adapter.ModuleAdapter
-import com.termux.zerocore.utils.FileIOUtils
-import com.termux.zerocore.utils.ModuleInstallUtils
-import com.termux.zerocore.utils.Z7ExtracatUtils
+import com.termux.victor.back.bean.DataBean
+import com.termux.victor.back.listener.RestoreFileDataListener
+import com.termux.victor.back.listener.RestoreRefreshFileListener
+import com.termux.victor.dialog.adapter.ModuleAdapter
+import com.termux.victor.utils.FileIOUtils
+import com.termux.victor.utils.ModuleInstallUtils
+import com.termux.victor.utils.Z7ExtracatUtils
 import kotlinx.coroutines.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException

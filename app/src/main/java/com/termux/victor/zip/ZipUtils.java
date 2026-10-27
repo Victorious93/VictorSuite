@@ -1,4 +1,4 @@
-package com.termux.zerocore.zip;
+package com.termux.victor.zip;
 
 import android.app.Activity;
 import android.app.AlertDialog;

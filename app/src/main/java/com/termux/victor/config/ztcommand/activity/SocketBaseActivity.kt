@@ -1,4 +1,4 @@
-package com.termux.zerocore.config.ztcommand.activity
+package com.termux.victor.config.ztcommand.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.example.xh_lib.activity.ScanActivity.ScanActivityResultListener
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
-import com.termux.zerocore.config.ztcommand.config.QRCodeEncoderConfig
+import com.termux.victor.config.ztcommand.config.QRCodeEncoderConfig
 
 class SocketBaseActivity : AppCompatActivity(), ScanActivityResultListener {
     companion object {

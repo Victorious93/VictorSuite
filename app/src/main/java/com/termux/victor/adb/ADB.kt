@@ -1,4 +1,4 @@
-package com.termux.zerocore.adb
+package com.termux.victor.adb
 
 import android.Manifest
 import android.annotation.SuppressLint

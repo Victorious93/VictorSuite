@@ -1,4 +1,4 @@
-package com.termux.zerocore.activity.view_holder;
+package com.termux.victor.activity.view_holder;
 
 import android.view.View;
 import android.widget.TextView;

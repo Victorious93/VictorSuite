@@ -1,4 +1,4 @@
-package com.termux.zerocore.http_service;
+package com.termux.victor.http_service;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
