@@ -23,7 +23,7 @@ and what happened to it.
 | ZeroCoreManage add-on prompts (File browser, Key data, x86 Alpine menu items) | `https://github.com/hanxinhao000/ZeroCoreManage/releases/tag/0.1.20221116` | No longer opens the download page; shows the existing "not installed" message only | Third-party APK from a personal repo; no trusted replacement |
 | ZeroCoreManage card in About | `https://github.com/hanxinhao000/ZeroCoreManage` | Card hidden | Same as above |
 | `assets/linux/termux_toolx_2.sh` | `curl gitee.com/yudezeng/yutools/... \| bash` | Script prints "disabled" and exits 1 | Pipes a script from a personal gitee repo into bash |
-| `CodeString.runMoeSh` ("Moe" Linux installer) | `curl -L gitee.com/mo2/linux/raw/2/2 \| bash` | Replaced with an echo pointing to proot-distro | Personal gitee mirror |
+| `CodeString.runMoeSh` ("Moe" Linux installer) | `curl -L gitee.com/mo2/linux/raw/2/2 \| bash` | Removed entirely (dead code) | Personal gitee mirror |
 
 ## Kept (trusted)
 
