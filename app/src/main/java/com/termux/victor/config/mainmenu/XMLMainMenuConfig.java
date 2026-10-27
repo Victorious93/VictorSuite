@@ -1,5 +1,6 @@
 package com.termux.victor.config.mainmenu;
 
+import com.termux.victor.utils.LegacyPackageNames;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -142,7 +143,7 @@ public class XMLMainMenuConfig {
                     String className = menuItem.clickAction.replace(START_WITH_START_ACTIVITY, "").trim();
                     configs.add(getXmlClickConfig(context, name, icon, (view, context1) -> {
                         try {
-                            Class<?> clazz = Class.forName(className);
+                            Class<?> clazz = Class.forName(LegacyPackageNames.migrate(className));
                             Intent intent = new Intent(context, clazz);
                             if (!TextUtils.isEmpty(intentData)) {
                                 intent.putExtra(intentData.split("@@")[0], intentData.split("@@")[1]);
@@ -300,7 +301,7 @@ public class XMLMainMenuConfig {
         return null;
     }
     private static Object createObject(String className) throws Exception {
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = Class.forName(LegacyPackageNames.migrate(className));
         return clazz.getDeclaredConstructor().newInstance();
     }
 

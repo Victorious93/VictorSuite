@@ -145,4 +145,21 @@ public class MenuDefaultsMergerTest {
         assertEquals(0, r.added);
         assertEquals("<nope/>", r.xml);
     }
+
+    @Test
+    public void migratesLegacyPackageNamesWithoutDuplicatingEntries() {
+        String legacyP = P.replace(LegacyPackageNames.CURRENT_PACKAGE, LegacyPackageNames.LEGACY_PACKAGE);
+        String legacyUser = OLD_USER.replace(P, legacyP);
+        Set<String> legacyKnown = new HashSet<>();
+        legacyKnown.add(legacyP + "PluginClickConfig");
+        legacyKnown.add(legacyP + "UbuntuLoginClickConfig");
+        legacyKnown.add(legacyP + "KaliLoginClickConfig");
+
+        MenuDefaultsMerger.Result r = MenuDefaultsMerger.merge(legacyUser, DEFAULTS, legacyKnown);
+
+        assertFalse(r.xml.contains(LegacyPackageNames.LEGACY_PACKAGE));
+        assertEquals(0, r.added);
+        assertTrue(r.xml.contains(P + "AClickConfig"));
+        assertEquals(1, r.xml.split(java.util.regex.Pattern.quote(P + "AClickConfig"), -1).length - 1);
+    }
 }

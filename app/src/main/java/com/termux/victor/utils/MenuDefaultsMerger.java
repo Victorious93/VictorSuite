@@ -70,6 +70,10 @@ public class MenuDefaultsMerger {
      *         entries were added, and every {@code java:} click in the default menu
      */
     public static Result merge(String userXml, String defaultXml, Set<String> known) {
+        // Menu files written before the package move still name com.termux.zerocore classes.
+        // The migrated text is returned even when nothing else changes, so apply() rewrites the file.
+        userXml = LegacyPackageNames.migrate(userXml);
+        known = LegacyPackageNames.migrate(known);
         Document user = Jsoup.parse(userXml, "", Parser.xmlParser());
         Document defaults = Jsoup.parse(defaultXml, "", Parser.xmlParser());
         Set<String> defaultClicks = new LinkedHashSet<>();
@@ -159,7 +163,7 @@ public class MenuDefaultsMerger {
             String defaultXml = readStream(context.getAssets().open(assetPath));
             String userXml = readStream(new FileInputStream(userFile));
             SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            Set<String> known = new HashSet<>(prefs.getStringSet(KEY_KNOWN, new HashSet<>()));
+            Set<String> known = new HashSet<>(LegacyPackageNames.migrate(prefs.getStringSet(KEY_KNOWN, new HashSet<>())));
 
             Result result = merge(userXml, defaultXml, known);
             if (!result.xml.equals(userXml)) {
