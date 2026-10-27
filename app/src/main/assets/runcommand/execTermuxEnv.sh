@@ -8,6 +8,6 @@ export LD_LIBRARY_PATH='/data/data/com.termux/files/usr/lib'
 export PATH="/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:$PATH"
 export LANG='en_US.UTF-8'
 export SHELL='/data/data/com.termux/files/usr/bin/bash'
-cd "$HOME"
+cd "$HOME" || exit 1
 exec "$SHELL" -l
 

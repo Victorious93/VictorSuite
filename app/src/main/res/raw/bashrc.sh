@@ -11,7 +11,7 @@ export LD_LIBRARY_PATH='/data/data/com.termux/files/usr/lib'
 export PATH="/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:$PATH"
 export LANG='en_US.UTF-8'
 export SHELL='/data/data/com.termux/files/usr/bin/bash'
-cd "$HOME"
+cd "$HOME" || return 1
 exec "$SHELL" -l "./.timerdir/termux_timer.sh"
 }
 shell_Android() {

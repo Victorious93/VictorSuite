@@ -7,9 +7,9 @@ echo "十秒钟后开始安装，请阅读"
 sleep 10
 echo "[*]开始安装"
 
-cd ~
+cd ~ || exit 1
 
-cd .filebrowser
+cd .filebrowser || exit 1
 
 tar zxvf linux-amd64.tar.gz
 

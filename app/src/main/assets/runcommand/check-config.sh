@@ -231,11 +231,11 @@ if [ "$kernelMajor" -lt 4 ] || ([ "$kernelMajor" -eq 4 ] && [ "$kernelMinor" -lt
 	check_flags DEVPTS_MULTIPLE_INSTANCES
 fi
 
-if [ "$kernelMajor" -lt 5 ] || [ "$kernelMajor" -eq 5 -a "$kernelMinor" -le 1 ]; then
+if [ "$kernelMajor" -lt 5 ] || { [ "$kernelMajor" -eq 5 ] && [ "$kernelMinor" -le 1 ]; }; then
 	check_flags NF_NAT_IPV4
 fi
 
-if [ "$kernelMajor" -lt 5 ] || [ "$kernelMajor" -eq 5 -a "$kernelMinor" -le 2 ]; then
+if [ "$kernelMajor" -lt 5 ] || { [ "$kernelMajor" -eq 5 ] && [ "$kernelMinor" -le 2 ]; }; then
 	check_flags NF_NAT_NEEDED
 fi
 # check availability of BPF_CGROUP_DEVICE support
@@ -260,7 +260,7 @@ echo 'Optional Features:'
 {
 	check_flags MEMCG_SWAP
 	# Kernel v5.8+ removes MEMCG_SWAP_ENABLED.
-	if [ "$kernelMajor" -lt 5 ] || [ "$kernelMajor" -eq 5 -a "$kernelMinor" -le 8 ]; then
+	if [ "$kernelMajor" -lt 5 ] || { [ "$kernelMajor" -eq 5 ] && [ "$kernelMinor" -le 8 ]; }; then
 		CODE=${EXITCODE}
 		check_flags MEMCG_SWAP_ENABLED
 		# FIXME this check is cgroupv1-specific
@@ -352,7 +352,7 @@ check_flags VXLAN BRIDGE_VLAN_FILTERING | sed 's/^/    /'
 echo '      Optional (for encrypted networks):'
 check_flags CRYPTO CRYPTO_AEAD CRYPTO_GCM CRYPTO_SEQIV CRYPTO_GHASH \
 	XFRM XFRM_USER XFRM_ALGO INET_ESP | sed 's/^/      /'
-if [ "$kernelMajor" -lt 5 ] || [ "$kernelMajor" -eq 5 -a "$kernelMinor" -le 3 ]; then
+if [ "$kernelMajor" -lt 5 ] || { [ "$kernelMajor" -eq 5 ] && [ "$kernelMinor" -le 3 ]; }; then
 	check_flags INET_XFRM_MODE_TRANSPORT | sed 's/^/      /'
 fi
 echo "  - \"$(wrap_color 'ipvlan' blue)\":"

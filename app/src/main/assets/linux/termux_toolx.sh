@@ -367,7 +367,7 @@ echo -e "\n你选择的是x86架构rootfs,将会通过qemu的模拟方式运行;
 FIN_(){
 echo "配置qemu"
 sleep 2
-mkdir termux_tmp && cd termux_tmp
+mkdir termux_tmp && cd termux_tmp || return 1
 CURL_T=`curl https://mirrors.bfsu.edu.cn/debian/pool/main/q/qemu/ | grep '\.deb' | grep 'qemu-user-static' | grep arm64 | tail -n 1 | cut -d '=' -f 3 | cut -d '"' -f 2`
 curl -o qemu.deb https://mirrors.bfsu.edu.cn/debian/pool/main/q/qemu/$CURL_T
 apt install binutils
