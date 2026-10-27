@@ -13,6 +13,27 @@
     ]>
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="vs_menu_ai_agents">AI 编程助手</string>
+    <string name="vs_menu_ai_clis">AI 命令行工具</string>
+    <string name="vs_menu_android_ide">Android IDE</string>
+    <string name="vs_menu_headscale">Headscale / Tailnet</string>
+    <string name="vs_menu_apk_analysis">APK 分析工具</string>
+    <string name="vs_android_ide_not_installed">未安装 Android IDE，正在打开其 GitHub 页面</string>
+    <string name="vs_ai_agents_prepare_failed">无法准备 AI 编程助手包：%1$s</string>
+    <string name="vs_ai_cli_prepare_failed">无法准备 AI 命令行安装脚本：%1$s</string>
+    <string name="vs_distro_prepare_failed">无法准备 %1$s 登录脚本：%2$s</string>
+    <string name="vs_apk_install_title">安装分析工具</string>
+    <string name="vs_apk_install_selected">安装所选</string>
+    <string name="vs_headscale_title">Headscale / WireGuard Tailnet</string>
+    <string name="vs_headscale_message">通过基于 WireGuard 的 tailnet 将本设备连接到你自己的 headscale 服务器（无需 root）。如果预授权密钥留空，终端会打印一个登录链接，请在浏览器中打开。</string>
+    <string name="vs_headscale_server_hint">登录服务器地址，例如 https://headscale.example.com</string>
+    <string name="vs_headscale_authkey_hint">预授权密钥（留空则交互式登录）</string>
+    <string name="vs_headscale_server_required">必须填写登录服务器地址</string>
+    <string name="vs_headscale_connect">连接</string>
+    <string name="vs_headscale_status">状态</string>
+    <string name="vs_headscale_disconnect">断开</string>
+    <string name="vs_catalog_empty">这里还没有内容：目录为空。</string>
+    <string name="vs_file_manager_not_installed">未安装 VictorFiles，请从 Releases 页面安装。</string>
     <string name="application_name">&TERMUX_APP_NAME;</string>
     <string name="shared_user_label">VictorSuite 用户</string>
 
@@ -1424,27 +1445,6 @@
     <string name="remote_control_pairings_title">已配对的舰队应用</string>
     <string name="remote_control_pairings_summary">每行一个:packageName=sourceNodeRef,certSha256。必须提供签名证书 SHA-256:没有证书的行永远不会被接受。只有这些应用可以发送远程控制信封。</string>
     <string name="remote_control_pairings_saved">配对已保存</string>
-    <string name="vs_menu_ai_agents">AI 编程助手</string>
-    <string name="vs_menu_ai_clis">AI 命令行工具</string>
-    <string name="vs_menu_android_ide">Android IDE</string>
-    <string name="vs_menu_headscale">Headscale / Tailnet</string>
-    <string name="vs_menu_apk_analysis">APK 分析工具</string>
-    <string name="vs_android_ide_not_installed">未安装 Android IDE，正在打开其 GitHub 页面</string>
-    <string name="vs_ai_agents_prepare_failed">无法准备 AI 编程助手包：%1$s</string>
-    <string name="vs_ai_cli_prepare_failed">无法准备 AI 命令行安装脚本：%1$s</string>
-    <string name="vs_distro_prepare_failed">无法准备 %1$s 登录脚本：%2$s</string>
-    <string name="vs_apk_install_title">安装分析工具</string>
-    <string name="vs_apk_install_selected">安装所选</string>
-    <string name="vs_headscale_title">Headscale / WireGuard Tailnet</string>
-    <string name="vs_headscale_message">通过基于 WireGuard 的 tailnet 将本设备连接到你自己的 headscale 服务器（无需 root）。如果预授权密钥留空，终端会打印一个登录链接，请在浏览器中打开。</string>
-    <string name="vs_headscale_server_hint">登录服务器地址，例如 https://headscale.example.com</string>
-    <string name="vs_headscale_authkey_hint">预授权密钥（留空则交互式登录）</string>
-    <string name="vs_headscale_server_required">必须填写登录服务器地址</string>
-    <string name="vs_headscale_connect">连接</string>
-    <string name="vs_headscale_status">状态</string>
-    <string name="vs_headscale_disconnect">断开</string>
-    <string name="vs_catalog_empty">这里还没有内容：目录为空。</string>
-    <string name="vs_file_manager_not_installed">未安装 VictorFiles，请从 Releases 页面安装。</string>
 </resources>
 
 

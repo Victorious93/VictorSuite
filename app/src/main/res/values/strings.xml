@@ -13,6 +13,27 @@
     ]>
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="vs_menu_ai_agents">AI Coding Agents</string>
+    <string name="vs_menu_ai_clis">AI CLIs</string>
+    <string name="vs_menu_android_ide">Android IDE</string>
+    <string name="vs_menu_headscale">Headscale / Tailnet</string>
+    <string name="vs_menu_apk_analysis">APK Analysis Tools</string>
+    <string name="vs_android_ide_not_installed">Android IDE is not installed - opening its GitHub page</string>
+    <string name="vs_ai_agents_prepare_failed">Could not prepare the AI agents pack: %1$s</string>
+    <string name="vs_ai_cli_prepare_failed">Could not prepare the AI CLI setup script: %1$s</string>
+    <string name="vs_distro_prepare_failed">Could not prepare the %1$s login script: %2$s</string>
+    <string name="vs_apk_install_title">Install analysis tools</string>
+    <string name="vs_apk_install_selected">Install selected</string>
+    <string name="vs_headscale_title">Headscale / WireGuard Tailnet</string>
+    <string name="vs_headscale_message">Connects this device to your own headscale server over a WireGuard-based tailnet (no root required). If you leave the pre-auth key blank, the terminal will print a login URL to open in a browser instead.</string>
+    <string name="vs_headscale_server_hint">Login server URL, e.g. https://headscale.example.com</string>
+    <string name="vs_headscale_authkey_hint">Pre-auth key (leave blank to log in interactively)</string>
+    <string name="vs_headscale_server_required">Login server URL is required</string>
+    <string name="vs_headscale_connect">Connect</string>
+    <string name="vs_headscale_status">Status</string>
+    <string name="vs_headscale_disconnect">Disconnect</string>
+    <string name="vs_catalog_empty">Nothing here yet: this catalog is empty.</string>
+    <string name="vs_file_manager_not_installed">VictorFiles is not installed. Install it from the Releases page.</string>
     <string name="application_name">&TERMUX_APP_NAME;</string>
     <string name="shared_user_label">VictorSuite user</string>
 
@@ -1433,25 +1454,4 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="remote_control_pairings_title">Paired fleet apps</string>
     <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef,certSha256. The signing-cert SHA-256 is required: a line without it is never accepted. Only these apps can send remote-control envelopes.</string>
     <string name="remote_control_pairings_saved">Pairings saved</string>
-    <string name="vs_menu_ai_agents">AI Coding Agents</string>
-    <string name="vs_menu_ai_clis">AI CLIs</string>
-    <string name="vs_menu_android_ide">Android IDE</string>
-    <string name="vs_menu_headscale">Headscale / Tailnet</string>
-    <string name="vs_menu_apk_analysis">APK Analysis Tools</string>
-    <string name="vs_android_ide_not_installed">Android IDE is not installed - opening its GitHub page</string>
-    <string name="vs_ai_agents_prepare_failed">Could not prepare the AI agents pack: %1$s</string>
-    <string name="vs_ai_cli_prepare_failed">Could not prepare the AI CLI setup script: %1$s</string>
-    <string name="vs_distro_prepare_failed">Could not prepare the %1$s login script: %2$s</string>
-    <string name="vs_apk_install_title">Install analysis tools</string>
-    <string name="vs_apk_install_selected">Install selected</string>
-    <string name="vs_headscale_title">Headscale / WireGuard Tailnet</string>
-    <string name="vs_headscale_message">Connects this device to your own headscale server over a WireGuard-based tailnet (no root required). If you leave the pre-auth key blank, the terminal will print a login URL to open in a browser instead.</string>
-    <string name="vs_headscale_server_hint">Login server URL, e.g. https://headscale.example.com</string>
-    <string name="vs_headscale_authkey_hint">Pre-auth key (leave blank to log in interactively)</string>
-    <string name="vs_headscale_server_required">Login server URL is required</string>
-    <string name="vs_headscale_connect">Connect</string>
-    <string name="vs_headscale_status">Status</string>
-    <string name="vs_headscale_disconnect">Disconnect</string>
-    <string name="vs_catalog_empty">Nothing here yet: this catalog is empty.</string>
-    <string name="vs_file_manager_not_installed">VictorFiles is not installed. Install it from the Releases page.</string>
 </resources>
