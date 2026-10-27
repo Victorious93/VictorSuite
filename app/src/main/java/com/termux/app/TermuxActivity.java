@@ -1,5 +1,6 @@
 package com.termux.app;
 
+import androidx.activity.OnBackPressedCallback;
 import static com.termux.zerocore.config.ztcommand.ZTSocketService.ZT_COMMAND_ACTIVITY_ACTION;
 import static com.termux.zerocore.config.ztcommand.ZTSocketService.ZT_COMMAND_SERVICES_ACTION;
 
@@ -331,6 +332,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         setActivityTheme();
 
         super.onCreate(savedInstanceState);
+        getOnBackPressedDispatcher().addCallback(this, mBackCallback); // VictorSuite add
 
         setContentView(R.layout.activity_termux);
 
@@ -810,19 +812,24 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
 
 
-    @SuppressLint("RtlHardcoded")
-    @Override
-    public void onBackPressed() {
-        // VictorSuite add {@
-       // if (getDrawer().isDrawerOpen(Gravity.LEFT)) {
-       //     getDrawer().closeDrawers();
-        if (getDrawer().isOpened()) {
-            getDrawer().smoothClose();
-        } else {
-            finishActivityIfNotFinishing();
+    // VictorSuite modify {@
+    // Was an onBackPressed() override without the super call (lint MissingSuperCall). Same
+    // behavior via the dispatcher: close the drawer if open, otherwise finish the activity.
+    // (Calling super.onBackPressed() instead would change behavior: on Android 12+ the system
+    // moves a root activity to the back rather than finishing it.)
+    private final OnBackPressedCallback mBackCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+           // if (getDrawer().isDrawerOpen(Gravity.LEFT)) {
+           //     getDrawer().closeDrawers();
+            if (getDrawer().isOpened()) {
+                getDrawer().smoothClose();
+            } else {
+                finishActivityIfNotFinishing();
+            }
         }
-        // @}
-    }
+    };
+    // @}
 
     public void finishActivityIfNotFinishing() {
         // prevent duplicate calls to finish() if called from multiple places
