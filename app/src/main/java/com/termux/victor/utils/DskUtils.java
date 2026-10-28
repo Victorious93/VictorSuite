@@ -5,7 +5,7 @@ import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.util.Log;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

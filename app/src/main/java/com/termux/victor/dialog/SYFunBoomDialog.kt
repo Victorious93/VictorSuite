@@ -1,5 +1,6 @@
 package com.termux.victor.dialog
 
+import com.termux.victor.util.OtherPrefs
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -7,8 +8,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.blockchain.ub.util.custom.dialog.BaseDialogDown
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.scottyab.rootbeer.RootBeer
 import com.termux.R
 import com.termux.app.TermuxActivity
@@ -40,7 +40,7 @@ class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {
         alpine!!.setOnClickListener(this)
         start_new_old!!.setOnClickListener(this)
 
-        val stringOther = SaveData.getStringOther("new_old")
+        val stringOther = OtherPrefs.getStringOther("new_old")
         if (stringOther == null || stringOther.isEmpty() || stringOther == "def") {
             text_new_old?.text = UUtils.getString(R.string.启动器新)
         } else {
@@ -72,14 +72,14 @@ class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {
             }
 
             R.id.start_new_old->{
-                val stringOther = SaveData.getStringOther("new_old")
+                val stringOther = OtherPrefs.getStringOther("new_old")
                 if (stringOther == null || stringOther.isEmpty() || stringOther == "def") {
                     //旧启动器
-                    SaveData.saveStringOther("new_old","true")
+                    OtherPrefs.saveStringOther("new_old","true")
                     text_new_old?.text = UUtils.getString(R.string.启动器旧)
                 } else {
                     //新启动器
-                    SaveData.saveStringOther("new_old","def")
+                    OtherPrefs.saveStringOther("new_old","def")
                     text_new_old?.text = UUtils.getString(R.string.启动器新)
                 }
                 UUtils.showMsg(UUtils.getString(R.string.系统切换成功))

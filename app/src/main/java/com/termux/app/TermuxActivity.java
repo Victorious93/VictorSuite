@@ -1,5 +1,6 @@
 package com.termux.app;
 
+import com.termux.victor.util.OtherPrefs;
 import androidx.activity.OnBackPressedCallback;
 import static com.termux.victor.config.ztcommand.VsSocketService.ZT_COMMAND_ACTIVITY_ACTION;
 import static com.termux.victor.config.ztcommand.VsSocketService.ZT_COMMAND_SERVICES_ACTION;
@@ -65,10 +66,8 @@ import com.blockchain.ub.utils.httputils.BaseHttpUtils;
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.SaveData;
-import com.example.xh_lib.utils.UUtils;
-import com.example.xh_lib.utils.UUtils2;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
@@ -1370,7 +1369,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
 
         mTerminalView.setDoubleClickListener(this);
-        String xieyi = SaveData.INSTANCE.getStringOther("xieyi");
+        String xieyi = OtherPrefs.getStringOther("xieyi");
         if (xieyi == null || xieyi.isEmpty() || xieyi.equals("def")) {
             ProtocolDialog protocolDialog = new ProtocolDialog(this);
             protocolDialog.show();
@@ -1435,7 +1434,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void setEgInstallStatus() {
-        version.setText(UUtils.getString(R.string.版本) + " : " + UUtils2.INSTANCE.getVersionName(UUtils.getContext()));
+        version.setText(UUtils.getString(R.string.版本) + " : " + UUtils.getVersionName(UUtils.getContext()));
         String versionName = ZeroCoreManage.getVersionName();
         if (!TextUtils.isEmpty(versionName)) {
             eg_tv.setText(UUtils.getString(R.string.engine_vision) + " : " + versionName);
@@ -1749,9 +1748,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
              *
              *
              */
-            String sdcard_xinhao = SaveData.INSTANCE.getStringOther("sdcard_xinhao");
+            String sdcard_xinhao = OtherPrefs.getStringOther("sdcard_xinhao");
             if (sdcard_xinhao == null || sdcard_xinhao.isEmpty() || sdcard_xinhao.equals("def")) {
-                SaveData.INSTANCE.saveStringOther("sdcard_xinhao", "true");
+                OtherPrefs.saveStringOther("sdcard_xinhao", "true");
                 SwitchDialog switchDialog2 = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.需要在您的手机));
                 switchDialog2.getCancel().setOnClickListener(v -> {
                     switchDialog2.dismiss();
@@ -1841,7 +1840,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
      */
 
     public void startHttp(String ip) {
-        String ip_save = SaveData.INSTANCE.getStringOther("ip_save");
+        String ip_save = OtherPrefs.getStringOther("ip_save");
         if (ip_save == null || ip_save.isEmpty() || ip_save.equals("def")) {
             ArrayList<EditPromptBean.EditPromptData> arrayList = new ArrayList<>();
             EditPromptBean.EditPromptData editPromptData = new EditPromptBean.EditPromptData();
@@ -1852,7 +1851,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             editPromptBean.setArrayList(arrayList);
             String s = new Gson().toJson(editPromptBean);
             UUtils.showLog("编辑框存入[第一次]:" + s);
-            SaveData.INSTANCE.saveStringOther("ip_save", s);
+            OtherPrefs.saveStringOther("ip_save", s);
         } else {
             try {
                 EditPromptBean editPromptBean = new Gson().fromJson(ip_save, EditPromptBean.class);
@@ -1865,10 +1864,10 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 editPromptBean.setArrayList(arrayList1);
                 String s = new Gson().toJson(editPromptBean);
                 UUtils.showLog("编辑框存入[多次]:" + s);
-                SaveData.INSTANCE.saveStringOther("ip_save", s);
+                OtherPrefs.saveStringOther("ip_save", s);
             } catch (Exception e) {
                 e.printStackTrace();
-                SaveData.INSTANCE.saveStringOther("ip_save", "def");
+                OtherPrefs.saveStringOther("ip_save", "def");
             }
         }
         LoadingDialog loadingDialog = new LoadingDialog(TermuxActivity.this);
@@ -2625,9 +2624,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     public void initColorConfig() {
         Log.i(TAG, "initStatuexxxxxxxx initColorConfig....: ");
-        String font_color = SaveData.INSTANCE.getStringOther("font_color");
-        String back_color = SaveData.INSTANCE.getStringOther("back_color");
-        String change_text = SaveData.INSTANCE.getStringOther("change_text");
+        String font_color = OtherPrefs.getStringOther("font_color");
+        String back_color = OtherPrefs.getStringOther("back_color");
+        String change_text = OtherPrefs.getStringOther("change_text");
 
         if (!(font_color == null || font_color.isEmpty() || font_color.equals("def"))) {
             try {
@@ -2684,7 +2683,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void setSummaryVisible() {
-        String change_text_show = SaveData.INSTANCE.getStringOther("change_text_show");
+        String change_text_show = OtherPrefs.getStringOther("change_text_show");
         if ((change_text_show == null || change_text_show.isEmpty() || change_text_show.equals("def"))) {
             double_tishi.setVisibility(View.VISIBLE);
         } else {

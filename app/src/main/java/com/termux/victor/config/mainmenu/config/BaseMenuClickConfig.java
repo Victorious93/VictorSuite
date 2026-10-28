@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.victor.dialog.SwitchDialog;
 import com.termux.victor.popuwindow.MenuLeftPopuListWindow;

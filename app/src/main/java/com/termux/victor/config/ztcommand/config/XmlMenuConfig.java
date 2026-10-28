@@ -4,7 +4,7 @@ import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_MEN
 
 import android.content.Context;
 
-import com.example.xh_lib.utils.LogUtils;
+import com.termux.victor.util.LogUtils;
 import com.termux.victor.config.ztcommand.VsSocketService;
 
 // zt menu update 更新左菜单

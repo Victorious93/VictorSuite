@@ -1,12 +1,12 @@
 package com.termux.victor.dialog
 
+import com.termux.victor.util.OtherPrefs
 import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.TextView
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxService
 import com.termux.shared.termux.TermuxConstants
@@ -43,7 +43,7 @@ class ProtocolDialog : BaseDialogCentre, View.OnFocusChangeListener {
         ok?.setOnClickListener {
             if (isYD){
                 usageHabits()
-                SaveData.saveStringOther("xieyi","true")
+                OtherPrefs.saveStringOther("xieyi","true")
                 dismiss()
             }else{
                 UUtils.showMsg(UUtils.getString(R.string.请认真阅读许可协议))
@@ -108,10 +108,10 @@ class ProtocolDialog : BaseDialogCentre, View.OnFocusChangeListener {
                 ViewBackUtils.setBackLine161823_fd(custom_scroll!!)
             }
             R.id.ok -> {
-                ok?.setTextColor(UUtils.getColor(com.example.xh_lib.R.color.color_FD9F3E))
+                ok?.setTextColor(UUtils.getColor(com.termux.R.color.color_FD9F3E))
             }
             R.id.cancel -> {
-                cancel?.setTextColor(UUtils.getColor(com.example.xh_lib.R.color.color_FD9F3E))
+                cancel?.setTextColor(UUtils.getColor(com.termux.R.color.color_FD9F3E))
             }
         }
     }

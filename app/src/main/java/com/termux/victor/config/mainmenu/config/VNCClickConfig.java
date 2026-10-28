@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.gaurav.avnc.model.ServerProfile;
 import com.gaurav.avnc.ui.home.HomeActivity;
 import com.gaurav.avnc.ui.vnc.VncActivity;

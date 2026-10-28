@@ -8,9 +8,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.SaveData;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.BuildConfig;
 import com.termux.R;
 import com.termux.app.TermuxActivity;

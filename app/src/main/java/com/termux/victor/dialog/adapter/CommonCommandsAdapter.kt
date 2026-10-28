@@ -3,7 +3,7 @@ package com.termux.victor.dialog.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.bean.ClipboardBean
 import com.termux.victor.dialog.view_holder.CommonCommandsHolder

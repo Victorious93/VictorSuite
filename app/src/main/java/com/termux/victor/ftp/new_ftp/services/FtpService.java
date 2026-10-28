@@ -27,7 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.PermissionChecker;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.termux.R;

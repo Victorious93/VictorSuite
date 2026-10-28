@@ -3,8 +3,8 @@ package com.termux.victor.deepseek.model;
 
 import android.util.Log;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.victor.ftp.utils.UserSetManage;
 

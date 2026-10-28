@@ -1,6 +1,6 @@
 package com.termux.victor.utils;
 
-import com.example.xh_lib.utils.LogUtils;
+import com.termux.victor.util.LogUtils;
 
 public class SingletonCommunicationUtils {
     private static final String TAG = SingletonCommunicationUtils.class.getSimpleName();

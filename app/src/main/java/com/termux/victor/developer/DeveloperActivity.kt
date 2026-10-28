@@ -10,7 +10,7 @@ import com.billy.android.swipe.SmartSwipe
 import com.billy.android.swipe.SmartSwipeWrapper
 import com.billy.android.swipe.consumer.DrawerConsumer
 import com.billy.android.swipe.consumer.SlidingConsumer
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.shared.file.FileUtils
 import com.termux.victor.adb.dialog.AdbWindowsDialog

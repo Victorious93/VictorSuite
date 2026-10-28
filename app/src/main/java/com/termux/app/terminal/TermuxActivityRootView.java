@@ -18,7 +18,7 @@ import android.widget.VideoView;
 import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.app.TermuxActivity;
 import com.termux.shared.logger.Logger;
 import com.termux.shared.view.ViewUtils;

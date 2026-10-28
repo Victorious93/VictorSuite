@@ -1,7 +1,7 @@
 package com.termux.victor.fragment
 
 import android.view.View
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 
 class SettingFragment : BaseFragment {

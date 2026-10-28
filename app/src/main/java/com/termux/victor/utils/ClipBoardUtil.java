@@ -8,8 +8,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 public class ClipBoardUtil {

@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 

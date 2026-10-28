@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.victor.dialog.EditDialog;

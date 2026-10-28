@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.xh_lib.utils.LogUtils;
+import com.termux.victor.util.LogUtils;
 import com.termux.R;
 import com.termux.victor.config.mainmenu.config.MainMenuClickConfig;
 import com.termux.victor.config.mainmenu.view.viewholder.MainMenuItemViewHolder;

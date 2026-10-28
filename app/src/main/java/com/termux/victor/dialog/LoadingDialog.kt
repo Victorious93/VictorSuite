@@ -3,7 +3,7 @@ package com.termux.victor.dialog
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 
 class LoadingDialog : BaseDialogCentre {

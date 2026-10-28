@@ -1,5 +1,6 @@
 package com.termux.victor.dialog
 
+import com.termux.victor.util.OtherPrefs
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -13,8 +14,7 @@ import android.widget.TextView
 import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.rtugeek.android.colorseekbar.AlphaSeekBar
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 import com.termux.R
@@ -71,10 +71,10 @@ class BeautifySettingDialog : BaseDialogDown {
     }
 
     private fun initProgress(){
-        val stringOther = SaveData.getStringOther("font_color_progress")
-        val back_color_progress = SaveData.getStringOther("back_color_progress")
-        val change_text = SaveData.getStringOther("change_text")
-        val change_text_show = SaveData.getStringOther("change_text_show")
+        val stringOther = OtherPrefs.getStringOther("font_color_progress")
+        val back_color_progress = OtherPrefs.getStringOther("back_color_progress")
+        val change_text = OtherPrefs.getStringOther("change_text")
+        val change_text_show = OtherPrefs.getStringOther("change_text_show")
         if(!(stringOther == null || stringOther.isEmpty() || stringOther == "def")){
             try {
                 val toInt = stringOther.toInt()
@@ -117,8 +117,8 @@ class BeautifySettingDialog : BaseDialogDown {
             fontColorProgress = progress
             mFontColorChange?.onColorChange(color)
 
-            SaveData.saveStringOther("font_color","$color")
-            SaveData.saveStringOther("font_color_progress","$progress")
+            OtherPrefs.saveStringOther("font_color","$color")
+            OtherPrefs.saveStringOther("font_color_progress","$progress")
 
         }
 
@@ -134,8 +134,8 @@ class BeautifySettingDialog : BaseDialogDown {
 
             mBackColorChange?.onColorChange(color)
 
-            SaveData.saveStringOther("back_color","$color")
-            SaveData.saveStringOther("back_color_progress","$progress")
+            OtherPrefs.saveStringOther("back_color","$color")
+            OtherPrefs.saveStringOther("back_color_progress","$progress")
 
         }
         back_color_ap?.setOnAlphaChangeListener { progress, alpha ->
@@ -145,18 +145,18 @@ class BeautifySettingDialog : BaseDialogDown {
             Logger.logDebug(LOG_TAG, "change:$b")
             mOnChangeTextView?.onChange(b)
             if(b){
-                SaveData.saveStringOther("change_text","$b")
+                OtherPrefs.saveStringOther("change_text","$b")
             }else{
-                SaveData.saveStringOther("change_text","def")
+                OtherPrefs.saveStringOther("change_text","def")
             }
         }
 
         back_text_show_switch?.setOnCheckedChangeListener { compoundButton, b ->
             mOnTextCheckedChangeListener?.onChange(b)
             if(b){
-                SaveData.saveStringOther("change_text_show","def")
+                OtherPrefs.saveStringOther("change_text_show","def")
             }else{
-                SaveData.saveStringOther("change_text_show","$b")
+                OtherPrefs.saveStringOther("change_text_show","$b")
             }
 
         }

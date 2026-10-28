@@ -1,6 +1,6 @@
 package com.termux.victor.utils
 
-import com.example.xh_lib.utils.LogUtils
+import com.termux.victor.util.LogUtils
 import com.termux.victor.url.FileUrl
 import java.io.File
 import java.util.*

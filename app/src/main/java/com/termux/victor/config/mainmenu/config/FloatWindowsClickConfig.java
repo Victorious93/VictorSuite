@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 public class FloatWindowsClickConfig extends BaseMenuClickConfig {

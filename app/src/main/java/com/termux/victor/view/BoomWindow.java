@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
 import java.util.Collections;
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.common.net.InetAddresses;

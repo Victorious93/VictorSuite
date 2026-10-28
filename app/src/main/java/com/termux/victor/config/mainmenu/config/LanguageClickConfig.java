@@ -7,8 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.mallotec.reb.localeplugin.utils.LocaleHelper;
 import com.termux.R;
 import com.termux.app.TermuxActivity;

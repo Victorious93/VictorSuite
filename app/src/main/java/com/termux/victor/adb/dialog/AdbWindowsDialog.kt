@@ -17,7 +17,7 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions

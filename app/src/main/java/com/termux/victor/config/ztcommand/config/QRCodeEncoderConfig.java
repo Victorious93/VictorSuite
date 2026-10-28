@@ -5,7 +5,7 @@ import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_QR_
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.victor.config.ztcommand.VsSocketService;
 import com.termux.victor.config.ztcommand.activity.SocketBaseActivity;
 

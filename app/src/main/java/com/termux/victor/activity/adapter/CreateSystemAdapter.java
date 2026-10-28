@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.victor.activity.view_holder.CreateSystemVieHolder;
 import com.termux.victor.activity.view_holder.ViewHolder;

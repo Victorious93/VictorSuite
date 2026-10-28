@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.xh_lib.utils.LogUtils;
+import com.termux.victor.util.LogUtils;
 import com.termux.R;
 
 public class DeepSeekTransitFragment extends Fragment {

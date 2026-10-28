@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import com.example.xh_lib.activity.BaseActivity;
 import com.example.xh_lib.activity.BaseThemeActivity;
 import com.example.xh_lib.statusBar.StatusBarCompat;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.just.agentweb.AgentWeb;
 import com.termux.R;
 

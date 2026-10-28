@@ -1,7 +1,7 @@
 package com.termux.victor.http_service;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import cn.hotapk.fhttpserver.FHttpManager;
 
 public class HttpServerManager {

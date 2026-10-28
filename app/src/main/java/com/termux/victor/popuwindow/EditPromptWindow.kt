@@ -1,5 +1,6 @@
 package com.termux.victor.popuwindow
 
+import com.termux.victor.util.OtherPrefs
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
@@ -14,8 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blockchain.ub.utils.httputils.BaseHttpUtils
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.google.gson.Gson
 import com.lzy.okgo.model.Response
 import com.termux.R
@@ -305,7 +305,7 @@ class EditPromptWindow :BasePuPuWindow {
         private fun del(ip:String){
 
 
-            val ip_save = SaveData.getStringOther("ip_save")
+            val ip_save = OtherPrefs.getStringOther("ip_save")
 
             if(ip_save == null || ip_save.isEmpty() || ip_save == "def"){
 
@@ -345,7 +345,7 @@ class EditPromptWindow :BasePuPuWindow {
                             val toJson = Gson().toJson(fromJson)
 
                             UUtils.showLog("删除存入:${toJson}")
-                            SaveData.saveStringOther("ip_save",toJson)
+                            OtherPrefs.saveStringOther("ip_save",toJson)
 
                             return
                         }

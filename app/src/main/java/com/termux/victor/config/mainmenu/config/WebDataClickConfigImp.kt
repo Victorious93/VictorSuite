@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
-import com.example.xh_lib.utils.LogUtils
+import com.termux.victor.util.LogUtils
 import com.termux.app.TermuxActivity
 import com.termux.victor.activity.ImageActivity
 import com.termux.victor.data.UsbFileData

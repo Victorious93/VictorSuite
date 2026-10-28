@@ -3,8 +3,8 @@ package com.termux.victor.bosybox
 import android.content.Context
 import android.system.Os
 import android.util.Log
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.app.TermuxInstaller
 import com.termux.victor.shell.ExeCommand
 import com.termux.victor.url.FileUrl

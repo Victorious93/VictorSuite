@@ -4,7 +4,7 @@ import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_X11
 
 import android.content.Context;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.x11.MainActivity;
 import com.termux.victor.config.ztcommand.VsSocketService;

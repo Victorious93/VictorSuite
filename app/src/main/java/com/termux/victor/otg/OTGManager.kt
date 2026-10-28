@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.hardware.usb.UsbManager
 import android.view.View
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.github.mjdev.libaums.UsbMassStorageDevice
 import com.termux.R
 import com.termux.victor.data.UsbFileData.Companion.get

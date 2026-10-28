@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.github.iielse.switchbutton.SwitchView
 import com.github.iielse.switchbutton.SwitchView.OnStateChangedListener
 import com.termux.R

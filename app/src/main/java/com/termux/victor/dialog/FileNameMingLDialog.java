@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 import java.io.File;

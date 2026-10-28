@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import com.blockchain.ub.util.custom.dialog.BaseDialogDown
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions

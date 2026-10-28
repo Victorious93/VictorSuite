@@ -6,8 +6,8 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import com.example.xh_lib.utils.SaveData.getStringOther
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.OtherPrefs.getStringOther
+import com.termux.victor.util.UUtils
 import com.google.gson.Gson
 import com.termux.R
 import com.termux.victor.bean.EditPromptBean
