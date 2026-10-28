@@ -28,7 +28,6 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 | `avnc.aar` | `com.gaurav.avnc` | GPL-3.0 (bundles Apache-2.0, BSD libjpeg-turbo, X11, sshlib licence texts in `assets/license/`) | https://github.com/gujjwal00/avnc | OK – licence texts inside the aar |
 | `termux-x11.aar` | `com.termux.x11` | GPL-3.0 | https://github.com/termux/termux-x11 | No licence text inside the aar; source public |
 | `stub/` module (was `stub.aar`) | `com.termux.x11.stub` | GPL-3.0 | Vendored source from https://github.com/termux/termux-x11 `shell-loader/stub` @ `6dfb8b4` | OK – source in repo (`stub/`) |
-| `xh_lib.aar` | `com.example.xh_lib` | Unknown (ZeroTermux author's helper library, assumed GPLv3 with ZeroTermux) | Not published as far as we know | ⚠️ **No source and no licence text** |
 | `z_file/` module (was `z_file.aar`) | `com.zp.z_file` (contains `com.zp.z_file.zerotermux.*`) | Apache-2.0 base (ZFileManager, zippo88888888) + GPL-3.0 ZeroTermux changes (hanxinhao000), GPL-3.0 as a whole | Vendored source from the `z_file/` module of https://github.com/msmt2017/new_ZeroTermux @ `f68fd87`; upstream base https://github.com/zippo88888888/ZFileManager. See `z_file/NOTICE.md` | OK – source in repo (`z_file/`) |
 | `FHttpServer.aar` | `cn.hotapk.fhttpserver` | Unknown (hotapk FHttpServer) | https://github.com/hotapk/FHttpServer | ⚠️ **No licence text inside the aar – verify** |
 | `qrcodecore.aar` | `cn.bingoogolapple.qrcode.core` | Apache-2.0 | https://github.com/bingoogolapple/BGAQRCode-Android | No licence text inside the aar |
@@ -43,8 +42,7 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 
 ### Open compliance items
 
-1. `xh_lib.aar` ships without source or licence text (`stub.aar` and `z_file.aar` are now built from source). Audit and options: [docs/LICENSE_AUDIT.md](docs/LICENSE_AUDIT.md). Either locate the exact source
-   (hanxinhao000 repositories / Termux:X11) and link it here, or replace these libraries.
+1. `xh_lib.aar` has been removed: the helpers VictorSuite used are rewritten as VictorSuite-owned GPLv3 code in `com.termux.victor.util` (see [docs/LICENSE_AUDIT.md](docs/LICENSE_AUDIT.md)).
 2. `FHttpServer.aar` and `jlan-5.jar` licences must be confirmed against upstream.
 3. ~~`log4j-1.2.17.jar` is end-of-life with published CVEs.~~ Done: log4j 1.2.17 and `slf4j-log4j12` were removed; the only
    user was the slf4j binding for Apache FtpServer/MINA. slf4j now binds to `org.slf4j:slf4j-android` (MIT, logs to logcat).

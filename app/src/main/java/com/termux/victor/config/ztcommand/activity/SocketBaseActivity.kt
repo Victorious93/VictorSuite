@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.xh_lib.activity.ScanActivity
-import com.example.xh_lib.activity.ScanActivity.ScanActivityResultListener
+import com.termux.victor.util.ScanActivity
+import com.termux.victor.util.ScanActivity.ScanActivityResultListener
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions

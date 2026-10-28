@@ -291,7 +291,7 @@
             android:name="com.lcw.library.imagepicker.activity.BaseActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.xh_lib.activity.ScanActivity"
+            android:name=".victor.util.ScanActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".shared.activities.ReportActivity"
