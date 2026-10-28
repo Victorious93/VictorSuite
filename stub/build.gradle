@@ -1,0 +1,18 @@
+// Compile-time stubs for hidden Android framework APIs used by termux-x11.aar
+// (CmdEntryPoint). Vendored from termux/termux-x11 shell-loader/stub, GPL-3.0,
+// commit 6dfb8b4a4cc887bc329284d31eb049d596bd1208. Replaces the source-less app/libs/stub.aar
+// (same seven classes, same signatures). At runtime the real framework classes win.
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'com.termux.x11.stub'
+    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+    defaultConfig {
+        minSdkVersion project.properties.minSdkVersion.toInteger()
+    }
+    buildFeatures { buildConfig false }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
