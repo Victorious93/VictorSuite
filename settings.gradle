@@ -1,1 +1,1 @@
-include ':app', ':termux-shared', ':terminal-emulator', ':terminal-view', ':termux-api-lib'
+include ':app', ':stub', ':termux-shared', ':terminal-emulator', ':terminal-view', ':termux-api-lib'

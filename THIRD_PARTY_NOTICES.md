@@ -26,7 +26,7 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 |---|---|---|---|---|
 | `avnc.aar` | `com.gaurav.avnc` | GPL-3.0 (bundles Apache-2.0, BSD libjpeg-turbo, X11, sshlib licence texts in `assets/license/`) | https://github.com/gujjwal00/avnc | OK – licence texts inside the aar |
 | `termux-x11.aar` | `com.termux.x11` | GPL-3.0 | https://github.com/termux/termux-x11 | No licence text inside the aar; source public |
-| `stub.aar` | `com.termux.x11.stub` | GPL-3.0 (assumed, part of Termux:X11 build) | https://github.com/termux/termux-x11 | ⚠️ **No licence text, exact source revision unknown** |
+| `stub/` module (was `stub.aar`) | `com.termux.x11.stub` | GPL-3.0 | Vendored source from https://github.com/termux/termux-x11 `shell-loader/stub` @ `6dfb8b4` | OK – source in repo (`stub/`) |
 | `xh_lib.aar` | `com.example.xh_lib` | Unknown (ZeroTermux author's helper library, assumed GPLv3 with ZeroTermux) | Not published as far as we know | ⚠️ **No source and no licence text** |
 | `z_file.aar` | `com.zp.z_file` (contains `com.zp.z_file.zerotermux.*`) | Unknown. Appears to be a modified ZFileManager; the modifications are ZeroTermux-specific | Upstream ZFileManager source; modified source not in this repo | ⚠️ **No source for the modified build and no licence text** |
 | `FHttpServer.aar` | `cn.hotapk.fhttpserver` | Unknown (hotapk FHttpServer) | https://github.com/hotapk/FHttpServer | ⚠️ **No licence text inside the aar – verify** |

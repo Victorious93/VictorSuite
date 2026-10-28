@@ -97,6 +97,7 @@ android {
         //VictorSuite {@
         def libsuVersion = '5.2.1'
         implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+        implementation project(':stub') // termux-x11 hidden-API stubs, built from source (was libs/stub.aar)
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
         implementation('cn.hotapk:fastandrutils:0.8.0') {
