@@ -1,5 +1,6 @@
 package com.termux.victor.popuwindow
 
+import com.termux.victor.util.OtherPrefs
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler

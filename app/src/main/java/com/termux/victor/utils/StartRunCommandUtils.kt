@@ -1,5 +1,6 @@
 package com.termux.victor.utils
 
+import com.termux.victor.util.OtherPrefs
 import android.system.Os
 import com.termux.victor.util.UUtils
 import com.termux.victor.util.UUtils.FileCallback

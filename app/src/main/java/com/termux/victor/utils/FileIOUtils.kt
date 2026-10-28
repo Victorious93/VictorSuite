@@ -1,5 +1,6 @@
 package com.termux.victor.utils
 
+import com.termux.victor.util.OtherPrefs
 import android.content.Context
 import android.os.Environment
 import android.system.Os

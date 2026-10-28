@@ -1,5 +1,6 @@
 package com.termux.victor.ftp.utils
 
+import com.termux.victor.util.OtherPrefs
 import com.google.gson.Gson
 import com.termux.victor.bean.VsUserBean
 import com.termux.victor.settings.timer.TimerBean

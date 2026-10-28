@@ -1,5 +1,6 @@
 package com.termux.victor.dialog
 
+import com.termux.victor.util.OtherPrefs
 import com.termux.victor.config.VsLinks
 
 import android.app.Activity

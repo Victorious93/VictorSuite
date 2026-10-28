@@ -1,5 +1,6 @@
 package com.termux.victor.ftp.utils
 
+import com.termux.victor.util.OtherPrefs
 import android.text.TextUtils
 import com.termux.victor.util.LogUtils
 import com.google.gson.Gson

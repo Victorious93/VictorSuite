@@ -1,5 +1,6 @@
 package com.termux.app;
 
+import com.termux.victor.util.OtherPrefs;
 import androidx.activity.OnBackPressedCallback;
 import static com.termux.victor.config.ztcommand.VsSocketService.ZT_COMMAND_ACTIVITY_ACTION;
 import static com.termux.victor.config.ztcommand.VsSocketService.ZT_COMMAND_SERVICES_ACTION;
