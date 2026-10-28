@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
+import com.termux.victor.util.BaseDialogDown
 import com.termux.R
 import com.termux.victor.bean.VsRunCommandBean
 import com.termux.victor.data.LinuxCommandData

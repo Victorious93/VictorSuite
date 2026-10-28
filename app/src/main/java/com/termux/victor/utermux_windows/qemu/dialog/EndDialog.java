@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.blockchain.ub.util.custom.dialog.BaseDialogCentre;
+import com.termux.victor.util.BaseDialogCentre;
 import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;

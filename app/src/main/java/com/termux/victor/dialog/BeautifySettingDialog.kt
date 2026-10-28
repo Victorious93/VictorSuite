@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Switch
 import android.widget.TextView
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
+import com.termux.victor.util.BaseDialogDown
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.termux.victor.util.UUtils

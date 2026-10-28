@@ -9,9 +9,9 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
-import com.blockchain.ub.utils.httputils.BaseHttpUtils
-import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
+import com.termux.victor.util.BaseDialogDown
+import com.termux.victor.util.BaseHttpUtils
+import com.termux.victor.util.HttpResponseListenerBase
 import com.termux.victor.util.UUtils
 import com.github.iielse.switchbutton.SwitchView
 import com.google.gson.Gson

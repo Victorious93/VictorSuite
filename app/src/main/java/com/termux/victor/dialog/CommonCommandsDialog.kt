@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
+import com.termux.victor.util.BaseDialogDown
 import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity

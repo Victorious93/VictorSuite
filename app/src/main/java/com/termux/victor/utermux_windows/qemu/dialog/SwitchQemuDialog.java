@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
-import com.blockchain.ub.util.custom.dialog.BaseDialogCentre;
+import com.termux.victor.util.BaseDialogCentre;
 import com.termux.R;
 
 /**

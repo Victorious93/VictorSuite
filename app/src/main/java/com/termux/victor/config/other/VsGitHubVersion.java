@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.blockchain.ub.utils.httputils.BaseHttpUtils;
-import com.blockchain.ub.utils.httputils.HttpResponseListenerBase;
+import com.termux.victor.util.BaseHttpUtils;
+import com.termux.victor.util.HttpResponseListenerBase;
 import com.termux.victor.util.LogUtils;
 import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;

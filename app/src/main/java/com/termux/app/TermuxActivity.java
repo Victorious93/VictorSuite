@@ -62,8 +62,8 @@ import com.termux.victor.victorfiles.VictorFilesPanel;
 import com.termux.victor.theme.FleetThemeBinding; // VictorSuite add: fleet theme
 // @}
 import com.billy.android.swipe.listener.SimpleSwipeListener;
-import com.blockchain.ub.utils.httputils.BaseHttpUtils;
-import com.blockchain.ub.utils.httputils.HttpResponseListenerBase;
+import com.termux.victor.util.BaseHttpUtils;
+import com.termux.victor.util.HttpResponseListenerBase;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.termux.victor.util.LogUtils;

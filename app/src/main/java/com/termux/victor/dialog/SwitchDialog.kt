@@ -3,7 +3,7 @@ package com.termux.victor.dialog
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import com.blockchain.ub.util.custom.dialog.BaseDialogCentre
+import com.termux.victor.util.BaseDialogCentre
 import com.termux.victor.util.UUtils
 import com.termux.R
 

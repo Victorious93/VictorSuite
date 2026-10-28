@@ -7,7 +7,7 @@ import android.widget.RelativeLayout
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
+import com.termux.victor.util.BaseDialogDown
 import com.termux.victor.util.UUtils
 import com.google.gson.Gson
 import com.termux.R
