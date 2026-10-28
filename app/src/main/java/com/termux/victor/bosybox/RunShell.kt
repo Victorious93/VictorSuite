@@ -1,7 +1,7 @@
 package com.termux.victor.bosybox
 
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import java.io.File
 import java.nio.charset.Charset
 

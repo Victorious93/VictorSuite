@@ -3,8 +3,8 @@ package com.termux.victor.utils
 
 import android.content.Context
 import android.util.TypedValue
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.victor.view.DiaLogData
 
 object WindowsUtils {

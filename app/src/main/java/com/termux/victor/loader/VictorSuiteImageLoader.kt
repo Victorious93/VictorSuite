@@ -4,7 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.RequestOptions
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.lcw.library.imagepicker.utils.ImageLoader
 import com.termux.R
 

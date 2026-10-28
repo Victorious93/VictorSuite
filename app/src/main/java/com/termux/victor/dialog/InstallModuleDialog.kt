@@ -11,8 +11,8 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.back.bean.DataBean
 import com.termux.victor.back.listener.RestoreFileDataListener

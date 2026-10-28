@@ -1,9 +1,8 @@
 package com.termux.victor.utils
 
 import android.system.Os
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
-import com.example.xh_lib.utils.UUtils.FileCallback
+import com.termux.victor.util.UUtils
+import com.termux.victor.util.UUtils.FileCallback
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.code.CodeString
@@ -26,7 +25,7 @@ object StartRunCommandUtils {
         var fileString = UUtils.getFileString(smsBashrcFile)
         fileString += "\n cd ~ > /dev/null && ./.xinhao_history/start_command.sh"
         UUtils.setFileString(smsBashrcFile,fileString)
-        SaveData.saveStringOther("start_command","true")
+        OtherPrefs.saveStringOther("start_command","true")
         UUtils.writerFile("runcommand/start_command.sh",smsZeroBashrcFile)
         com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.runstartSh)
         try {
@@ -40,7 +39,7 @@ object StartRunCommandUtils {
     }
 
     public fun isRun():Boolean{
-        val stringOther = SaveData.getStringOther("start_command")
+        val stringOther = OtherPrefs.getStringOther("start_command")
         if(stringOther == null || stringOther.isEmpty() || stringOther == "def"){
             isRun = false
         }else{
@@ -56,7 +55,7 @@ object StartRunCommandUtils {
             override fun callBack(msg: String?, state: Boolean) {
                 if (state) {
                     UUtils.showMsg(UUtils.getString(R.string.install_def_bash_msg_ok))
-                    SaveData.saveStringOther("start_command","def")
+                    OtherPrefs.saveStringOther("start_command","def")
                     isRun = false
                 } else {
                     UUtils.showMsg(UUtils.getString(R.string.install_def_bash_msg_error))

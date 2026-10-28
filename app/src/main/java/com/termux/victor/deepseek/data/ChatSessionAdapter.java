@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.victor.deepseek.DeepSeekTransitFragment;
 

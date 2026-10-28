@@ -11,8 +11,8 @@ import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_CON
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.victor.dialog.ShowDialogActivity;
 import com.termux.victor.config.ztcommand.VsSocketService;

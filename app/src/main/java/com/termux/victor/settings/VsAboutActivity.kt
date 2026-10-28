@@ -5,7 +5,7 @@ import com.termux.victor.config.VsLinks
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.cardview.widget.CardView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 
 class VsAboutActivity : AppCompatActivity() {

@@ -3,7 +3,7 @@ package com.termux.victor.utils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.termux.app.TermuxActivity;
 import com.termux.victor.bean.CreateSystemBean;

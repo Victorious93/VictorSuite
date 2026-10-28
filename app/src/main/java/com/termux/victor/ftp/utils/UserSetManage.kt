@@ -1,8 +1,7 @@
 package com.termux.victor.ftp.utils
 
 import android.text.TextUtils
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.SaveData
+import com.termux.victor.util.LogUtils
 import com.google.gson.Gson
 import com.termux.victor.bean.VsUserBean
 import com.termux.victor.config.VsLinks
@@ -25,7 +24,7 @@ class UserSetManage private constructor() {
     }
 
     public fun getZTUserBean(): VsUserBean {
-        val zTUserBeanJson = SaveData.getStringOther(VsConstant.ZT_USER_BEAN_KEY)
+        val zTUserBeanJson = OtherPrefs.getStringOther(VsConstant.ZT_USER_BEAN_KEY)
         if (zTUserBeanJson.isNullOrEmpty() || zTUserBeanJson == "def") {
             return VsUserBean()
         }
@@ -39,7 +38,7 @@ class UserSetManage private constructor() {
 
     public fun setZTUserBean(mZTUserBean: VsUserBean) {
         val toJson = Gson().toJson(mZTUserBean)
-        SaveData.saveStringOther(VsConstant.ZT_USER_BEAN_KEY, toJson)
+        OtherPrefs.saveStringOther(VsConstant.ZT_USER_BEAN_KEY, toJson)
     }
 
     public fun defServerIPName(): DataServers {
@@ -55,11 +54,11 @@ class UserSetManage private constructor() {
 
     public fun setMainMenuItemShow(id: String, isShow: String) {
         LogUtils.i(TAG, "setMainMenuItemShow id：$id, isShow: $isShow")
-        SaveData.saveStringOther(id, isShow)
+        OtherPrefs.saveStringOther(id, isShow)
     }
 
     public fun getMainMenuItemShow(id: String): Boolean {
-        val stringOther = SaveData.getStringOther(id)
+        val stringOther = OtherPrefs.getStringOther(id)
         LogUtils.i(TAG, "getMainMenuItemShow id：$id, stringOther: $stringOther")
         if (TextUtils.isEmpty(stringOther) || TextUtils.equals(stringOther, "def")) {
             LogUtils.i(TAG, "getMainMenuItemShow return false(isEmpty|def).")

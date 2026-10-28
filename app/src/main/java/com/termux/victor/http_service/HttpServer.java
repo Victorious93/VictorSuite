@@ -5,7 +5,7 @@ import static android.os.Build.VERSION_CODES.R;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.shared.termux.TermuxConstants;
 import com.termux.victor.url.FileUrl;

@@ -20,8 +20,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.PluralsRes;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.victor.bean.VsUserBean;

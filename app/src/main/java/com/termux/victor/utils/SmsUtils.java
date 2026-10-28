@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.util.Log;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

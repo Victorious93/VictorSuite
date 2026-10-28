@@ -7,8 +7,8 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.view.View.OnClickListener
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.victor.bean.MessageBean
 import com.termux.victor.bean.PackageBean
 import com.termux.victor.dialog.SwitchDialog

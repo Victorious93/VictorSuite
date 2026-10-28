@@ -3,8 +3,8 @@ package com.termux.victor.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.lcw.library.imagepicker.ImagePicker
 import com.termux.R
 import com.termux.shared.logger.Logger

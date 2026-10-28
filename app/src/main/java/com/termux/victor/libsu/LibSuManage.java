@@ -9,7 +9,7 @@ import android.widget.ScrollView;
 import androidx.annotation.NonNull;
 
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.BuildConfig;
 import com.termux.R;
 import com.termux.victor.url.FileUrl;

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.termux.R;
 import com.termux.app.TermuxActivity;

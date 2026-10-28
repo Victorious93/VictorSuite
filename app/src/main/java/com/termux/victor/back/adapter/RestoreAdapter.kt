@@ -3,7 +3,7 @@ package com.termux.victor.back.adapter
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.back.bean.DataBean
 import com.termux.victor.back.listener.RestoreFileDataListener

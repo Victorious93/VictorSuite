@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.termux.R;
 import com.termux.app.TermuxActivity;

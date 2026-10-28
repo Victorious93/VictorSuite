@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.victor.dialog.LoadingDialog;

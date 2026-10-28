@@ -1,12 +1,13 @@
 package com.termux.app;
 
+import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.Toast;
 
 import com.arialyy.aria.core.Aria;
-import com.example.xh_lib.application.XHApplication;
 import com.hjq.permissions.XXPermissions;
 import com.hzy.lib7z.Z7Extractor;
 import com.lzy.okgo.OkGo;
@@ -35,6 +36,7 @@ import com.termux.victor.utils.ClipBoardUtil;
 import com.zp.z_file.common.ZFileManageHelp;
 import com.zp.z_file.content.ZFileConfiguration;
 import com.zp.z_file.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.zp.z_file.util.ZFileUUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -47,12 +49,20 @@ import okhttp3.OkHttpClient;
 
 // VictorSuite add {@
 //public class TermuxApplication extends Application {
-public class TermuxApplication extends XHApplication {
+public class TermuxApplication extends Application {
+
+    /** Application context and main-thread handler, also handed to {@link UUtils}. */
+    public Context mContext;
+    public Handler mHandler;
+
 // @}
     private static final String LOG_TAG = "TermuxApplication";
 
     public void onCreate() {
         super.onCreate();
+        mContext = this;
+        mHandler = new Handler();
+        UUtils.initUUtils(mContext, mHandler);
 
         Context context = getApplicationContext();
 

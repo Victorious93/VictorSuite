@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 

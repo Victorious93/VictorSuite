@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.termux.R;
 import com.termux.victor.bean.MinLBean;

@@ -13,7 +13,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 
 class VictorSuiteDeepSeekKeyActivity : AppCompatActivity() {

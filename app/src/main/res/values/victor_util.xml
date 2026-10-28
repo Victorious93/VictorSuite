@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resources the app used to get from xh_lib.aar. Values unchanged. -->
+<resources>
+    <color name="color0A868686">#0A868686</color>
+    <color name="color_232635">#232635</color>
+    <color name="color_2e84e6">#2e84e6</color>
+    <color name="color_6d87a8">#6d87a8</color>
+    <color name="color_FD9F3E">#FD9F3E</color>
+    <string name="cancel">取消</string>
+    <string name="复制失败">复制失败</string>
+    <string name="复制成功">复制成功</string>
+    <string name="标题">标题</string>
+</resources>

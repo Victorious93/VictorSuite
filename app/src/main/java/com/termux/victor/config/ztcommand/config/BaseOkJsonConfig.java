@@ -1,6 +1,6 @@
 package com.termux.victor.config.ztcommand.config;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 public abstract class BaseOkJsonConfig extends SimpleConfig {

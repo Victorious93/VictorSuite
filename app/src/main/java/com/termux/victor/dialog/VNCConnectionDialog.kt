@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.utils.UUUtils
 

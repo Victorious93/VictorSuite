@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.blockchain.ub.util.custom.dialog.BaseDialogCentre;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 import java.io.File;

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.hzy.lib7z.IExtractCallback;
 import com.hzy.lib7z.Z7Extractor;
 import com.termux.app.TermuxApplication;

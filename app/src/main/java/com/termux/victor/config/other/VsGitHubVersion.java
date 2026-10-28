@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.blockchain.ub.utils.httputils.BaseHttpUtils;
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase;
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

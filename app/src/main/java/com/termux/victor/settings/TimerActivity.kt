@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.dialog.SwitchDialog
 import com.termux.victor.dialog.YesNoDialog

@@ -10,8 +10,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.code.CodeString
 import com.termux.victor.url.FileUrl
@@ -56,7 +55,7 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
 
         val serverInput = EditText(context)
         serverInput.hint = context.getString(R.string.vs_headscale_server_hint)
-        serverInput.setText(SaveData.getStringOther(KEY_LOGIN_SERVER) ?: "")
+        serverInput.setText(OtherPrefs.getStringOther(KEY_LOGIN_SERVER) ?: "")
         layout.addView(serverInput)
 
         val authKeyInput = EditText(context)
@@ -75,7 +74,7 @@ class HeadscaleClickConfig : BaseMenuClickConfig() {
                     Toast.makeText(context, R.string.vs_headscale_server_required, Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
-                SaveData.saveStringOther(KEY_LOGIN_SERVER, server)
+                OtherPrefs.saveStringOther(KEY_LOGIN_SERVER, server)
                 connect(server, authKey)
             }
             .setNeutralButton(R.string.vs_headscale_status) { _, _ -> status() }

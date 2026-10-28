@@ -5,7 +5,7 @@ import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_VNC
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.gaurav.avnc.model.ServerProfile;
 import com.gaurav.avnc.ui.vnc.VncActivity;
 import com.zp.z_file.util.LogUtils;

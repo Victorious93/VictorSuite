@@ -3,7 +3,7 @@ package com.termux.victor.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 
 
 public class SaveData {

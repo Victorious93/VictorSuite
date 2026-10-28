@@ -4,7 +4,7 @@ import static com.termux.victor.config.ztcommand.config.VsKeyConstants.ZT_ID_HEL
 
 import android.content.Context;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 
 public class HelpConfig extends SimpleConfig {

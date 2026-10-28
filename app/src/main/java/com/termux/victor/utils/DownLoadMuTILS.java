@@ -5,7 +5,7 @@ import android.content.Context;
 import com.arialyy.annotations.Download;
 import com.arialyy.aria.core.Aria;
 import com.arialyy.aria.core.task.DownloadTask;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 
 public class DownLoadMuTILS {
 

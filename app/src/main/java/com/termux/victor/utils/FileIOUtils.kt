@@ -4,8 +4,8 @@ import android.content.Context
 import android.os.Environment
 import android.system.Os
 import android.widget.Toast
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.google.gson.Gson
 import com.termux.R
 import com.termux.victor.bean.ClipboardBean
@@ -233,14 +233,14 @@ object FileIOUtils {
     }
 
     public fun clearStyle() {
-        com.example.xh_lib.utils.SaveData.saveStringOther("font_color_progress", "def")
-        com.example.xh_lib.utils.SaveData.saveStringOther("font_color", "def")
+        com.termux.victor.util.OtherPrefs.saveStringOther("font_color_progress", "def")
+        com.termux.victor.util.OtherPrefs.saveStringOther("font_color", "def")
 
-        com.example.xh_lib.utils.SaveData.saveStringOther("back_color", "def")
-        com.example.xh_lib.utils.SaveData.saveStringOther("back_color_progress", "def")
+        com.termux.victor.util.OtherPrefs.saveStringOther("back_color", "def")
+        com.termux.victor.util.OtherPrefs.saveStringOther("back_color_progress", "def")
 
-        com.example.xh_lib.utils.SaveData.saveStringOther("change_text_show", "def")
-        com.example.xh_lib.utils.SaveData.saveStringOther("change_text", "def")
+        com.termux.victor.util.OtherPrefs.saveStringOther("change_text_show", "def")
+        com.termux.victor.util.OtherPrefs.saveStringOther("change_text", "def")
 
 
         val fileImg = File("${FileUrl.mainConfigImg}/back.jpg")

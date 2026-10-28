@@ -6,7 +6,7 @@ import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.bean.VsRunCommandBean

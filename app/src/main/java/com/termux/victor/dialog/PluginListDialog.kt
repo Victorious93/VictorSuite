@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.blockchain.ub.utils.httputils.BaseHttpUtils
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.github.iielse.switchbutton.SwitchView
 import com.google.gson.Gson
 import com.lzy.okgo.model.Response

@@ -10,8 +10,8 @@ import android.os.Message
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.dialog.SwitchDialog

@@ -1,6 +1,6 @@
 package com.termux.victor.data
 
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import java.io.File
 

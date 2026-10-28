@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.View;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

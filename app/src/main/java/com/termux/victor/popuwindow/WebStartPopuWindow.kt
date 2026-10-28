@@ -12,7 +12,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.github.iielse.switchbutton.SwitchView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission

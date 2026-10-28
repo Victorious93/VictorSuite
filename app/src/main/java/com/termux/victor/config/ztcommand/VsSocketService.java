@@ -11,7 +11,7 @@ import android.util.Log;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.shared.termux.TermuxConstants;
 import com.termux.victor.config.ztcommand.config.HelpConfig;

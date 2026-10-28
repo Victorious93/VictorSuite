@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
-import com.example.xh_lib.utils.UUtils
-import com.example.xh_lib.utils.UUtils.FileCallback
+import com.termux.victor.util.UUtils
+import com.termux.victor.util.UUtils.FileCallback
 import com.termux.R
 import com.termux.victor.dialog.SwitchDialog
 import com.termux.victor.url.FileUrl

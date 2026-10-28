@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;

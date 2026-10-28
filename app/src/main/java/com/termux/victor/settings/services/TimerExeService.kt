@@ -9,7 +9,7 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.os.IBinder
 import android.os.Message
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.ftp.utils.TimerSetManage
 import com.termux.victor.libsu.LibSuManage

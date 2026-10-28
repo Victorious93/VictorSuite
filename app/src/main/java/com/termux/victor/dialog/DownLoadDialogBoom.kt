@@ -22,8 +22,7 @@ import com.blockchain.ub.util.custom.dialog.BaseDialogDown
 import com.blockchain.ub.utils.httputils.BaseHttpUtils
 import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
 import com.daimajia.numberprogressbar.NumberProgressBar
-import com.example.xh_lib.utils.SaveData
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.google.gson.Gson
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
@@ -260,7 +259,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                         data.isFail = false
 
 
-                        val stringOther = SaveData.getStringOther("$ip${data.download}")
+                        val stringOther = OtherPrefs.getStringOther("$ip${data.download}")
 
 
 
@@ -297,9 +296,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                     holder.download?.setImageResource(R.mipmap.jiazai)
 
                                     if(data.id == -1L){
-                                        SaveData.saveStringOther("$ip${data.download}","def")
+                                        OtherPrefs.saveStringOther("$ip${data.download}","def")
                                     }else{
-                                        SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                        OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                                     }
 
                                 }else{
@@ -328,9 +327,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                         holder.download?.setImageResource(R.mipmap.jiazai)
 
                                         if(data.id == -1L){
-                                            SaveData.saveStringOther("$ip${data.download}","def")
+                                            OtherPrefs.saveStringOther("$ip${data.download}","def")
                                         }else{
-                                            SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                            OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                                         }
 
 
@@ -360,9 +359,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                 holder.download?.setImageResource(R.mipmap.jiazai)
 
                                 if(data.id == -1L){
-                                    SaveData.saveStringOther("$ip${data.download}","def")
+                                    OtherPrefs.saveStringOther("$ip${data.download}","def")
                                 }else{
-                                    SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                    OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                                 }
                             }
                         }else{
@@ -383,9 +382,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                             holder.download?.setImageResource(R.mipmap.jiazai)
                             if(data.id == -1L){
-                                SaveData.saveStringOther("$ip${data.download}","def")
+                                OtherPrefs.saveStringOther("$ip${data.download}","def")
                             }else{
-                                SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                             }
 
 
@@ -408,7 +407,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                         data.isRun = true
 
 
-                        val stringOther = SaveData.getStringOther("$ip${data.download}")
+                        val stringOther = OtherPrefs.getStringOther("$ip${data.download}")
 
 
 
@@ -446,9 +445,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                     holder.download?.setImageResource(R.mipmap.jiazai)
 
                                     if(data.id == -1L){
-                                        SaveData.saveStringOther("$ip${data.download}","def")
+                                        OtherPrefs.saveStringOther("$ip${data.download}","def")
                                     }else{
-                                        SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                        OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                                     }
 
                                 }else{
@@ -477,9 +476,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                         holder.download?.setImageResource(R.mipmap.jiazai)
 
                                         if(data.id == -1L){
-                                            SaveData.saveStringOther("$ip${data.download}","def")
+                                            OtherPrefs.saveStringOther("$ip${data.download}","def")
                                         }else{
-                                            SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                            OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                                         }
 
 
@@ -502,9 +501,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                                 holder.download?.setImageResource(R.mipmap.jiazai)
 
                                 if(data.id == -1L){
-                                    SaveData.saveStringOther("$ip${data.download}","def")
+                                    OtherPrefs.saveStringOther("$ip${data.download}","def")
                                 }else{
-                                    SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                    OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                                 }
 
                             }
@@ -526,9 +525,9 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                             }
                             holder.download?.setImageResource(R.mipmap.jiazai)
                             if(data.id == -1L){
-                                SaveData.saveStringOther("$ip${data.download}","def")
+                                OtherPrefs.saveStringOther("$ip${data.download}","def")
                             }else{
-                                SaveData.saveStringOther("$ip${data.download}","${data.id}")
+                                OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                             }
                             UUtils.showLog("任务状态------------创建的ID:${data.id}")
                         }
@@ -558,7 +557,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
 
 
-            val stringOther = SaveData.getStringOther("$ip${data.download}")
+            val stringOther = OtherPrefs.getStringOther("$ip${data.download}")
 
             if(stringOther != null && stringOther.isNotEmpty() && stringOther != "def") {
 
@@ -574,7 +573,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                         data.isFail = true
 
-                        SaveData.saveStringOther("$ip${data.download}", "def")
+                        OtherPrefs.saveStringOther("$ip${data.download}", "def")
                     }
 
 
@@ -853,7 +852,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
         if(task == null){
             return
         }
-        SaveData.saveStringOther(task.key,"def")
+        OtherPrefs.saveStringOther(task.key,"def")
         mDownLoadAdapter!!.notifyDataSetChanged()
 
     }

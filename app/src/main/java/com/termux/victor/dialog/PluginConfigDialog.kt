@@ -10,7 +10,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.victor.plugin.PluginConfigFieldType
 import com.termux.victor.plugin.PluginConfigStore

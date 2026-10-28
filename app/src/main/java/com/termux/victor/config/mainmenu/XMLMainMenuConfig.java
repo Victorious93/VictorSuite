@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.xh_lib.utils.LogUtils;
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.LogUtils;
+import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxActivity;
 import com.termux.victor.activity.EditTextActivity;
@@ -254,7 +254,7 @@ public class XMLMainMenuConfig {
                    termuxActivity.getTerminalView().sendTextToTerminal(commandContent[which]);
                }
             })
-            .setNegativeButton(UUtils.getString(com.example.xh_lib.R.string.cancel),
+            .setNegativeButton(UUtils.getString(com.termux.R.string.cancel),
                 (dialog, which) -> dialog.dismiss())
             .setCancelable(true); // 点击外部可取消
         AlertDialog dialog = builder.create();

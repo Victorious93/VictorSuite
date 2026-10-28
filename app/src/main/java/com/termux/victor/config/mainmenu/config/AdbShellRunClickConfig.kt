@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.system.Os
 import android.view.View
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.BuildConfig
 import com.termux.R
 import com.termux.app.TermuxActivity

@@ -1,6 +1,6 @@
 package com.termux.victor.utils
 
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.victor.http_service.HttpServer
 import com.termux.victor.url.FileUrl
 import com.zp.z_file.util.LogUtils

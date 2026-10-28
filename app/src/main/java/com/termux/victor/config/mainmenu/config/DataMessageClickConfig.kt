@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.view.View
-import com.example.xh_lib.utils.LogUtils
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.LogUtils
+import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.dialog.MingLShowDialog

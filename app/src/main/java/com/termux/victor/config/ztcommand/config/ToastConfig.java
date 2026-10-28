@@ -3,7 +3,7 @@ package com.termux.victor.config.ztcommand.config;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.xh_lib.utils.UUtils;
+import com.termux.victor.util.UUtils;
 
 public class ToastConfig extends BaseOkJsonConfig {
     @Override

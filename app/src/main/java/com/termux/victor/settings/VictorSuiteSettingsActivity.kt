@@ -7,7 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import com.example.xh_lib.utils.UUtils
+import com.termux.victor.util.UUtils
 import com.termux.api.TermuxApiEmbed
 import com.termux.R
 import com.termux.victor.victorfiles.VictorFilesPanel
