@@ -47,3 +47,4 @@ victorsuite-signing/
 
 # Python bytecode (vstoken tests)
 __pycache__/
+.kotlin/
