@@ -384,8 +384,8 @@ dependencies {
     implementation files('libs/ftpserver-core-1.1.1-edited.jar')
     implementation files('libs/jlan-5.jar')
     implementation files('libs/mina-core-2.0.16.jar')
-    implementation files('libs/slf4j-api-1.7.21.jar')
     // slf4j binding: Android logcat (MIT). Replaces EOL log4j 1.2.17 + slf4j-log4j12.
+    implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'org.slf4j:slf4j-android:1.7.36'
     implementation files('libs/commons-codec-1.10-rep.jar')
     def room_version = "2.6.1"  // 使用稳定的版本

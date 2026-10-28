@@ -33,7 +33,6 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 | `qrcodecore.aar` | `cn.bingoogolapple.qrcode.core` | Apache-2.0 | https://github.com/bingoogolapple/BGAQRCode-Android | No licence text inside the aar |
 | `zxing.aar` | `cn.bingoogolapple.qrcode.zxing` | Apache-2.0 (wraps ZXing, Apache-2.0) | https://github.com/bingoogolapple/BGAQRCode-Android | No licence text inside the aar |
 | `jlan-5.jar` | `org.alfresco.jlan` | GPL (Alfresco JLAN; exact version – GPLv2/GPLv3/LGPL – **verify**) | Alfresco JLAN 5 source | ⚠️ **No licence text inside the jar** |
-| `slf4j-api-1.7.21.jar` | `org.slf4j` | MIT | https://www.slf4j.org/ | No licence text inside the jar |
 | `ftpserver-core-1.1.1-edited.jar` | `org.apache.ftpserver` | Apache-2.0 (locally edited build) | https://mina.apache.org/ftpserver-project/ | Licence + NOTICE in jar; edits not documented |
 | `ftplet-api-1.1.1.jar` | `org.apache.ftpserver.ftplet` | Apache-2.0 | https://mina.apache.org/ftpserver-project/ | Licence + NOTICE in jar |
 | `mina-core-2.0.16.jar` | `org.apache.mina` | Apache-2.0 | https://mina.apache.org/ | Licence + NOTICE in jar |
@@ -53,6 +52,7 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 
 Declared in `app/build.gradle`; licences as published by each project.
 
+- `org.slf4j:slf4j-api:1.7.36` – MIT – https://www.slf4j.org/ – replaces bundled `slf4j-api-1.7.21.jar`.
 - `org.slf4j:slf4j-android:1.7.36` – MIT (GPLv3-compatible) – https://www.slf4j.org/ – slf4j → Android `Log` binding, replaces log4j 1.2.17.
 
 | Library | Licence |
