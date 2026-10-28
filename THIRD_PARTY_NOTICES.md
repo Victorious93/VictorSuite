@@ -10,6 +10,7 @@ unchanged; this file adds credits, it does not replace any of them.
 |---|---|---|---|
 | Termux app (terminal, bootstrap, `RUN_COMMAND`) | Fredrik Fornwall and the Termux developers | GPLv3 (some parts Apache-2.0, see below) | https://github.com/termux/termux-app |
 | Termux:API (`termux-api-lib`) | Termux developers | GPLv3 | https://github.com/termux/termux-api |
+| ZFileManager (base of the `z_file/` module) | zippo88888888 | Apache-2.0 | https://github.com/zippo88888888/ZFileManager |
 | ZeroTermux (`com.termux.zerocore` code, now `com.termux.victor`; drawer tools, management features) | hanxinhao000 | GPLv3 only | https://github.com/hanxinhao000/ZeroTermux |
 | Terminal Emulator for Android (`terminal-view`, `terminal-emulator`) | Jack Palevich | Apache-2.0 | https://github.com/jackpal/Android-Terminal-Emulator |
 | libcore/ojluni (`com.termux.shared.file`) | The Android Open Source Project / Oracle | GPLv2 with Classpath exception | https://cs.android.com/android/platform/superproject/+/android-11.0.0_r3:libcore/ojluni/ |
@@ -28,7 +29,7 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 | `termux-x11.aar` | `com.termux.x11` | GPL-3.0 | https://github.com/termux/termux-x11 | No licence text inside the aar; source public |
 | `stub/` module (was `stub.aar`) | `com.termux.x11.stub` | GPL-3.0 | Vendored source from https://github.com/termux/termux-x11 `shell-loader/stub` @ `6dfb8b4` | OK – source in repo (`stub/`) |
 | `xh_lib.aar` | `com.example.xh_lib` | Unknown (ZeroTermux author's helper library, assumed GPLv3 with ZeroTermux) | Not published as far as we know | ⚠️ **No source and no licence text** |
-| `z_file.aar` | `com.zp.z_file` (contains `com.zp.z_file.zerotermux.*`) | Unknown. Appears to be a modified ZFileManager; the modifications are ZeroTermux-specific | Upstream ZFileManager source; modified source not in this repo | ⚠️ **No source for the modified build and no licence text** |
+| `z_file/` module (was `z_file.aar`) | `com.zp.z_file` (contains `com.zp.z_file.zerotermux.*`) | Apache-2.0 base (ZFileManager, zippo88888888) + GPL-3.0 ZeroTermux changes (hanxinhao000), GPL-3.0 as a whole | Vendored source from the `z_file/` module of https://github.com/msmt2017/new_ZeroTermux @ `f68fd87`; upstream base https://github.com/zippo88888888/ZFileManager. See `z_file/NOTICE.md` | OK – source in repo (`z_file/`) |
 | `FHttpServer.aar` | `cn.hotapk.fhttpserver` | Unknown (hotapk FHttpServer) | https://github.com/hotapk/FHttpServer | ⚠️ **No licence text inside the aar – verify** |
 | `qrcodecore.aar` | `cn.bingoogolapple.qrcode.core` | Apache-2.0 | https://github.com/bingoogolapple/BGAQRCode-Android | No licence text inside the aar |
 | `zxing.aar` | `cn.bingoogolapple.qrcode.zxing` | Apache-2.0 (wraps ZXing, Apache-2.0) | https://github.com/bingoogolapple/BGAQRCode-Android | No licence text inside the aar |
@@ -42,7 +43,7 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 
 ### Open compliance items
 
-1. `xh_lib.aar` and `z_file.aar` ship without source or licence text (`stub.aar` is now built from source). Audit and options: [docs/LICENSE_AUDIT.md](docs/LICENSE_AUDIT.md). Either locate the exact source
+1. `xh_lib.aar` ships without source or licence text (`stub.aar` and `z_file.aar` are now built from source). Audit and options: [docs/LICENSE_AUDIT.md](docs/LICENSE_AUDIT.md). Either locate the exact source
    (hanxinhao000 repositories / Termux:X11) and link it here, or replace these libraries.
 2. `FHttpServer.aar` and `jlan-5.jar` licences must be confirmed against upstream.
 3. ~~`log4j-1.2.17.jar` is end-of-life with published CVEs.~~ Done: log4j 1.2.17 and `slf4j-log4j12` were removed; the only
@@ -79,7 +80,7 @@ Declared in `app/build.gradle`; licences as published by each project.
 | dd-plist | MIT |
 | adblib (tananaev) | BSD-3-Clause |
 | jCIFS | LGPL-2.1 |
-| un7zip (hzy) | Apache-2.0 / LGPL (wraps p7zip) – verify |
+| `com.hzy:un7zip:1.7.1` (pinned; used by `z_file/` and the app for 7z restore) | Apache-2.0 wrapper (https://github.com/hzy3774/AndroidUn7zip); bundles native p7zip (LGPL-2.1+ with the unRAR restriction) – https://p7zip.sourceforge.net/ |
 | fastandrutils (hotapk), switchbutton, numberprogressbar, colorseekbar, imagepicker, plugin-locale, RealtimeBlurView_v2 | Apache-2.0 (as published) – verify per release |
 | Material Symbols (Google, `ic_ms_*.xml` vector drawables) | Apache-2.0 – https://github.com/google/material-design-icons |
 
