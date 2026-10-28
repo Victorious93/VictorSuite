@@ -162,3 +162,7 @@ Users are responsible for any recovery packages, modules, or third-party softwar
 ## Acknowledgements
 
 Built on the work of Termux, Termux:Tasker, Termux:API, Termux:Styling, Termux Packages, ZeroTermux, and many libraries listed in prior project acknowledgements (ImagePicker, VShell, AgentWeb, XXPermissions, libaums, Glide, ttyd, File Browser, Swiftp, ImmersionBar, CodeEditor, and others). Please support upstream maintainers directly when you can.
+
+## Release retention
+
+Each push to `main` that bumps `versionName` auto-publishes a signed pre-release. After it publishes, CI deletes all older GitHub releases (including stale drafts) so only the latest remains. Git tags are never deleted, so every past build stays traceable to its exact source (GPL).

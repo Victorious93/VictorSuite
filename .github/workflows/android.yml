@@ -149,6 +149,7 @@ jobs:
       # so manual runs and other branches never publish. Skips if the tag already exists, so
       # re-running a build for the same version does not touch an existing release.
       - name: Publish GitHub Release
+        id: publish
         if: env.HAS_SIGNING_SECRETS == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -161,6 +162,7 @@ jobs:
           TAG="v$VERSION"
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists; nothing to publish."
+            echo "published=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           shopt -s nullglob
@@ -183,3 +185,32 @@ jobs:
             --title "VictorSuite $TAG" \
             --notes-file "$RUNNER_TEMP/release-notes.md" \
             --prerelease
+          echo "published=true" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      # Release retention policy: keep only the release just published. Every other
+      # release (and any older draft) is deleted. Git tags are KEPT (no --cleanup-tag)
+      # so every published build stays traceable to its source for GPL compliance.
+      # Runs only when the step above actually created a release.
+      - name: Prune outdated GitHub Releases
+        if: steps.publish.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEEP_TAG: ${{ steps.publish.outputs.tag }}
+        run: |
+          set -euo pipefail
+          # Confirm the new release exists before deleting anything.
+          gh release view "$KEEP_TAG" >/dev/null
+          # All releases incl. drafts, newest first by created date.
+          mapfile -t TAGS < <(gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            --jq '.[] | [.created_at, .tag_name] | @tsv' | sort -r | cut -f2)
+          NEWEST="${TAGS[0]:-}"
+          if [ "$NEWEST" != "$KEEP_TAG" ]; then
+            echo "::warning::Newest release ($NEWEST) is not the one just published ($KEEP_TAG); skipping prune."
+            exit 0
+          fi
+          for t in "${TAGS[@]:1}"; do
+            [ -z "$t" ] || [ "$t" = "$KEEP_TAG" ] && continue
+            echo "Deleting outdated release $t (tag kept)"
+            gh release delete "$t" --yes
+          done
