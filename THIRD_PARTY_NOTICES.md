@@ -42,7 +42,7 @@ source code are known. GPLv3 §6 requires that we can offer the corresponding so
 
 ### Open compliance items
 
-1. `xh_lib.aar`, `z_file.aar` and `stub.aar` ship without source or licence text. Either locate the exact source
+1. `xh_lib.aar` and `z_file.aar` ship without source or licence text (`stub.aar` is now built from source). Audit and options: [docs/LICENSE_AUDIT.md](docs/LICENSE_AUDIT.md). Either locate the exact source
    (hanxinhao000 repositories / Termux:X11) and link it here, or replace these libraries.
 2. `FHttpServer.aar` and `jlan-5.jar` licences must be confirmed against upstream.
 3. ~~`log4j-1.2.17.jar` is end-of-life with published CVEs.~~ Done: log4j 1.2.17 and `slf4j-log4j12` were removed; the only
