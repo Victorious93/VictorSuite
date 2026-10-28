@@ -1,8 +1,8 @@
 package com.termux.victor.data
 
 import android.os.Message
-import com.blockchain.ub.utils.httputils.BaseHttpUtils
-import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
+import com.termux.victor.util.BaseHttpUtils
+import com.termux.victor.util.HttpResponseListenerBase
 import com.lzy.okgo.model.Response
 import java.io.File
 import java.io.PrintWriter

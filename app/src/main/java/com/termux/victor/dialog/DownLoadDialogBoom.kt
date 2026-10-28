@@ -19,9 +19,9 @@ import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.common.AbsEntity
 import com.arialyy.aria.core.task.DownloadTask
 import com.arialyy.aria.util.CommonUtil
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
-import com.blockchain.ub.utils.httputils.BaseHttpUtils
-import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
+import com.termux.victor.util.BaseDialogDown
+import com.termux.victor.util.BaseHttpUtils
+import com.termux.victor.util.HttpResponseListenerBase
 import com.daimajia.numberprogressbar.NumberProgressBar
 import com.termux.victor.util.UUtils
 import com.google.gson.Gson

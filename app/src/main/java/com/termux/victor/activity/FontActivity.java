@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.xh_lib.activity.BaseThemeActivity;
-import com.example.xh_lib.statusBar.StatusBarCompat;
+import com.termux.victor.util.StatusBarCompat;
 import com.termux.victor.util.UUtils;
 import com.termux.R;
 import com.termux.app.TermuxService;

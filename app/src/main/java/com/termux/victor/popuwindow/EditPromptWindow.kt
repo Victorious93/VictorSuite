@@ -13,8 +13,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blockchain.ub.utils.httputils.BaseHttpUtils
-import com.blockchain.ub.utils.httputils.HttpResponseListenerBase
+import com.termux.victor.util.BaseHttpUtils
+import com.termux.victor.util.HttpResponseListenerBase
 import com.termux.victor.util.UUtils
 import com.google.gson.Gson
 import com.lzy.okgo.model.Response

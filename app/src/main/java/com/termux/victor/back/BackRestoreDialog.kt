@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
+import com.termux.victor.util.BaseDialogDown
 import com.termux.victor.util.LogUtils
 import com.termux.victor.util.UUtils
 import com.hjq.permissions.OnPermissionCallback

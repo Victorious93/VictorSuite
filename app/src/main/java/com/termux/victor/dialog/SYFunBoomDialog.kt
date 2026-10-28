@@ -7,7 +7,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.blockchain.ub.util.custom.dialog.BaseDialogDown
+import com.termux.victor.util.BaseDialogDown
 import com.termux.victor.util.UUtils
 import com.scottyab.rootbeer.RootBeer
 import com.termux.R

@@ -12,9 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 
-import com.blockchain.ub.util.custom.dialog.BaseDialogCentre;
-import com.example.xh_lib.base.ListBaseAdapter;
-import com.example.xh_lib.base.ViewHolder;
+import com.termux.victor.util.BaseDialogCentre;
+import com.termux.victor.activity.adapter.ListBaseAdapter;
+import com.termux.victor.activity.view_holder.ViewHolder;
 import com.termux.victor.util.UUtils;
 import com.termux.R;
 
