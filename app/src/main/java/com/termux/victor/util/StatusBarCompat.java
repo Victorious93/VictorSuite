@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import androidx.core.view.ViewCompat;
 
-/** The two status-bar helpers the app uses. */
+/** The status-bar helpers the app uses. */
 public final class StatusBarCompat {
 
     private StatusBarCompat() {}
@@ -27,6 +27,17 @@ public final class StatusBarCompat {
             ViewCompat.setFitsSystemWindows(child, false);
             ViewCompat.requestApplyInsets(child);
         }
+    }
+
+    /** Sets SYSTEM_UI_FLAG_LIGHT_STATUS_BAR (dark icons on a light bar). */
+    @SuppressWarnings("deprecation")
+    public static void changeToLightStatusBar(Activity activity) {
+        if (activity == null) return;
+        Window window = activity.getWindow();
+        if (window == null) return;
+        View decor = window.getDecorView();
+        if (decor == null) return;
+        decor.setSystemUiVisibility(decor.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     /** Clears SYSTEM_UI_FLAG_LIGHT_STATUS_BAR (light icons on a dark bar). */

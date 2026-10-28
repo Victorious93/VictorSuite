@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="victor_back">返回</string>
+    <string name="victor_close">关闭</string>
+    <string name="victor_scan_title">扫一扫</string>
+    <string name="victor_scan_album">相册</string>
+    <string name="victor_scan_tip">将二维码/条码放入框内，即可自动扫描</string>
+    <string name="victor_scan_too_dark">环境过暗，请打开闪光灯</string>
+
+    <style name="VictorDayTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#fafafa</item>
+        <item name="colorPrimaryDark">#fafafa</item>
+        <item name="colorAccent">#03DAC5</item>
+    </style>
+    <style name="VictorNightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#3F3F3F</item>
+        <item name="colorPrimaryDark">#3A3A3A</item>
+        <item name="colorAccent">#868686</item>
+    </style>
+</resources>

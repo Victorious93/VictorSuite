@@ -10,7 +10,7 @@ we have to be able to give out the corresponding source for every GPL object cod
 |---|---|---|---|---|
 | `stub.aar` | Termux:X11 `shell-loader/stub` | GPL-3.0 | Yes, indirectly. `termux-x11.aar` `CmdEntryPoint` needs these hidden-API stubs to compile and link | **Done:** replaced with vendored source module `stub/` (PR #79) |
 | `z_file.aar` | ZFileManager (zippo88888888, Apache-2.0), modified by the ZeroTermux author (hanxinhao000), with a `com.zp.z_file.zerotermux` package added | Apache-2.0 base + GPL-3.0 ZeroTermux changes, so GPL-3.0 as a whole | Yes, in 21 files | **Done:** replaced with vendored source module `z_file/` (see below) |
-| `xh_lib.aar` | ZeroTermux author's private helper library (`com.example.xh_lib` + `com.blockchain.ub`) | No licence stated; the only published source is inside a GPL-3.0 ZeroTermux copy | Heavily, in about 170 files (`UUtils`, `LogUtils`, `SaveData`, dialogs, `BaseHttpUtils`) | **Don decides:** vendor the close-match source, or rewrite it as VictorSuite-owned code |
+| `xh_lib.aar` | ZeroTermux author's private helper library (`com.example.xh_lib` + `com.blockchain.ub`) | No licence stated; the only published source is inside a GPL-3.0 ZeroTermux copy | Heavily, in about 170 files (`UUtils`, `LogUtils`, `SaveData`, dialogs, `BaseHttpUtils`) | **Resolved:** rewritten as VictorSuite-owned code in `com.termux.victor.util`; aar removed |
 | `log4j-1.2.17.jar` | Apache log4j 1.x | Apache-2.0 | Only as the backend of `slf4j-log4j12`, the slf4j binding that Apache FtpServer/MINA log through. No direct imports | **Done:** removed, with slf4j bound to `org.slf4j:slf4j-android` (MIT) (PR #78) |
 
 ## stub.aar
@@ -54,6 +54,8 @@ we have to be able to give out the corresponding source for every GPL object cod
     behavioural differences beyond the ones above. On-device check: backup/restore picker, tar/7z restore, `.sh` files.
 
 ## xh_lib.aar
+
+**Status: resolved (2026-10).** Rewritten from scratch as VictorSuite-owned GPLv3 code in `com.termux.victor.util` (only the methods the app used); `app/libs/xh_lib.aar` deleted. Notes below are historical.
 
 - The manifest package is `com.example.xh_lib` (Android Studio's default library name). It also contains `com.blockchain.ub.*`
   classes (city picker, `BaseDialogCentre/Down/Left`, `BaseHttpUtils`, `SaveData`), which look like code copied from the author's other projects.

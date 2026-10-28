@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.xh_lib.activity.BaseThemeActivity;
+import com.termux.victor.util.BaseThemeActivity;
 import com.termux.victor.util.StatusBarCompat;
 import com.termux.victor.util.UUtils;
 import com.termux.R;

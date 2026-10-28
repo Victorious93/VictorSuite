@@ -17,8 +17,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
-import com.example.xh_lib.activity.BaseActivity;
-import com.example.xh_lib.activity.BaseThemeActivity;
+import com.termux.victor.util.BaseThemeActivity;
 import com.termux.victor.util.StatusBarCompat;
 import com.termux.victor.util.UUtils;
 import com.just.agentweb.AgentWeb;
