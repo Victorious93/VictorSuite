@@ -18,6 +18,12 @@ object VsLinks {
     /** In-app help / manual. Points at docs/MANUAL.md until the Pages site is live, then switch to DOCS_SITE. */
     const val HELP = "$REPO/blob/main/docs/MANUAL.md"
 
+    /**
+     * Plugin / module catalog, served by GitHub Pages from docs/plugins/catalog.json.
+     * Replaces the upstream ZeroTermux module download server.
+     */
+    const val PLUGIN_CATALOG = "${DOCS_SITE}plugins/catalog.json"
+
     /** Release check: newest release including pre-releases (/releases/latest skips pre-releases and 404s). */
     const val RELEASES_API = "https://api.github.com/repos/Victorious93/VictorSuite/releases?per_page=1"
 

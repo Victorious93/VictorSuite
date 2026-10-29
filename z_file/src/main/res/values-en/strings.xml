@@ -72,6 +72,7 @@
     <string name="install_module_download">Install Modules (Download Modules)</string>
     <string name="install_module_message">Note: It cannot be uninstalled after installation, and it only takes effect for the current container (if the path has been put into the module package but it is not displayed, please check the SD card permission)</string>
     <string name="install_empty">Internal storage /xinhao/module, no module package</string>
+    <string name="install_module_download_unavailable">Module downloads are not available yet. Copy a module package into the module folder to install it.</string>
     <string name="install_module">install module</string>
     <string name="install_message">Console:\nStart installing modules</string>
     <string name="确定">Sure</string>
