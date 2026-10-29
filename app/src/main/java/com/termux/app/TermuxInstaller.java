@@ -114,6 +114,8 @@ public final class TermuxInstaller {
             if (TermuxFileUtils.isTermuxPrefixDirectoryEmpty()) {
                 Logger.logInfo(LOG_TAG, "The termux prefix directory \"" + TERMUX_PREFIX_DIR_PATH + "\" exists but is empty or only contains specific unimportant files.");
             } else {
+                // VictorSuite: give existing installs our motd if theirs is still stock.
+                com.termux.victor.motd.VsMotd.installIfStock(TERMUX_PREFIX_DIR);
                 whenDone.run();
                 return;
             }
@@ -227,6 +229,9 @@ public final class TermuxInstaller {
 
                     // Recreate env file since termux prefix was wiped earlier
                     TermuxShellEnvironment.writeEnvironmentToFile(activity);
+
+                    // VictorSuite: replace the bootstrap's stock etc/motd (zip itself untouched).
+                    com.termux.victor.motd.VsMotd.installIfStock(TERMUX_PREFIX_DIR);
 
                     activity.runOnUiThread(whenDone);
 

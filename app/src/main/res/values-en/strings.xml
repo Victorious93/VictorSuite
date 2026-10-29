@@ -1453,4 +1453,8 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="remote_control_pairings_summary">One per line: packageName=sourceNodeRef,certSha256. The signing-cert SHA-256 is required: a line without it is never accepted. Only these apps can send remote-control envelopes.</string>
     <string name="remote_control_pairings_saved">Pairings saved</string>
     <string name="backup_file_name_unsafe">This backup file name contains control characters or a path separator and cannot be restored safely. Rename the file and try again.</string>
+    <string name="vs_tips_title">Tips / Gestures</string>
+    <string name="vs_tips_body">• Double-tap the terminal to open the shortcut bar.\n• Double-tap the far-left edge (or press Volume +) / far-right edge (or press Volume −) to open the menu / session bar.\n• Two-finger tap to open the toolbox.\n• The right-side drawer is the built-in file browser (VictorSuite Files).\n• You can reopen these tips any time from the side menu → Tips / Gestures.</string>
+    <string name="vs_tips_device">Device: %1$s %2$s\nAndroid %3$s · arch %4$s</string>
+    <string name="vs_tips_ok">Got it</string>
 </resources>

@@ -1459,6 +1459,10 @@
     <string name="ai_provider_summary">关 = DeepSeek，开 = Claude (Anthropic)。选择由哪个 AI 回答您的聊天问题。</string>
     <string name="claude_settings_key_edit">在此输入您的 Claude (Anthropic) API 密钥，将自动保存。</string>
     <string name="claude_settings_key_edit_info">请在 console.anthropic.com 获取 API 密钥。仅在上方 AI 提供方开关设为 Claude 时使用。</string>
+    <string name="vs_tips_title">使用技巧 / 手势</string>
+    <string name="vs_tips_body">• 双击终端窗口打开快捷栏。\n• 双击最左侧(或按音量+) / 最右侧(或按音量−)打开菜单 / 会话栏。\n• 双指单击打开工具箱。\n• 右侧抽屉是内置文件浏览器(VictorSuite 文件)。\n• 随时可在侧边菜单 → 使用技巧 / 手势 再次查看。</string>
+    <string name="vs_tips_device">设备: %1$s %2$s\nAndroid %3$s · 架构 %4$s</string>
+    <string name="vs_tips_ok">知道了</string>
 </resources>
 
 
