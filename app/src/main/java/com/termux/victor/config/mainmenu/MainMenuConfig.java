@@ -59,6 +59,7 @@ import com.termux.victor.config.mainmenu.config.ShowCommandClickConfig;
 import com.termux.victor.config.mainmenu.config.ShowX11KeyboardClickConfig;
 import com.termux.victor.config.mainmenu.config.SnowflakeClickConfig;
 import com.termux.victor.config.mainmenu.config.SwitchSourceClickConfig;
+import com.termux.victor.config.mainmenu.config.TipsClickConfig;
 import com.termux.victor.config.mainmenu.config.UbuntuLoginClickConfig;
 import com.termux.victor.config.mainmenu.config.UnInstallClickConfig;
 import com.termux.victor.config.mainmenu.config.VNCClickConfig;
@@ -93,6 +94,7 @@ public class MainMenuConfig implements BaseConfig {
         // 常用功能
         ArrayList<MainMenuClickConfig> commonClicks = new ArrayList<>();
         // 切换源
+        commonClicks.add(new TipsClickConfig());
         commonClicks.add(new SwitchSourceClickConfig());
         commonClicks.add(new ContainerSwitchClickConfig());
         commonClicks.add(new BackupRestoreClickConfig());

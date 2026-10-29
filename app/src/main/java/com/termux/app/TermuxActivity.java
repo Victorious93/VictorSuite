@@ -550,6 +550,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                     if (mTermuxService == null) return; // Activity might have been destroyed.
                     // VictorSuite add {@
                     initCommand();
+                    com.termux.victor.dialog.VsTipsDialog.maybeShowFirstLaunch(TermuxActivity.this);
                     // @}
                     try {
                         boolean launchFailsafe = false;
@@ -1291,7 +1292,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private TextView ip_status;
     private TextView qq_group_tv;
     private TextView telegram_group_tv;
-    private TextView double_tishi;
     private TextView zt_new;
     public FrameLayout xue_fragment;
     public FireworkView firework_view;
@@ -1334,7 +1334,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         xue_fragment = findViewById(R.id.xue_fragment);
         firework_view = findViewById(R.id.firework_view);
         ip_status = findViewById(R.id.ip_status);
-        double_tishi = findViewById(R.id.double_tishi);
         data_card = findViewById(R.id.data_card);
         zt_new = findViewById(R.id.zt_new);
         open_image_data = findViewById(R.id.open_image_data);
@@ -1361,12 +1360,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         // INFO card: "Issues" (qq_group_tv) and "Source" (telegram_group_tv) links, both from VsLinks.
         telegram_group_tv.setOnClickListener(this);
         VsGitHubVersion.create().initZtVersionVisible(zt_new);
-        try {
-            double_tishi.setText(double_tishi.getText() + "\n" + TermuxInstaller.determineTermuxArchName().toUpperCase());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         mTerminalView.setDoubleClickListener(this);
         String xieyi = OtherPrefs.getStringOther("xieyi");
@@ -1459,9 +1452,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             Log.i(TAG, "initStatuexxxxxxxx ztUserBeanShow.isShowCommand(): " + ztUserBeanShow.isShowCommand());
             mTerminalView.setVisibility(ztUserBeanShow.isShowCommand() ? View.VISIBLE : View.INVISIBLE);
             back_color.setVisibility(ztUserBeanShow.isShowCommand() ? View.VISIBLE : View.INVISIBLE);
-            if (!ztUserBeanShow.isShowCommand()) {
-                double_tishi.setVisibility(View.GONE);
-            }
 
             mHandler.sendEmptyMessageDelayed(0, 1000);
         }
@@ -1518,7 +1508,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         ztUserBeanShow.setShowCommand(true);
         if (MainActivity.isConnected()) {
             mTerminalView.setVisibility(View.VISIBLE);
-            double_tishi.setVisibility(View.VISIBLE);
             setExtraKeysViewVisible(true);
             if (mMainActivity != null) {
                 mMainActivity.setTerminalToolbarViewVisible(false);
@@ -1545,7 +1534,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             if (mMainActivity != null) {
                 mMainActivity.setTerminalToolbarViewVisible(true);
             }
-            double_tishi.setVisibility(View.GONE);
             back_color.setVisibility(View.GONE);
             back_img.setVisibility(View.GONE);
             back_video.setVisibility(View.GONE);
@@ -2253,11 +2241,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         });
         mBeautifySettingDialog.setOnTextCheckedChangeListener(change -> {
             Logger.logDebug(LOG_TAG, "setOnTextCheckedChangeListener:" + change);
-            if (change) {
-                double_tishi.setVisibility(View.VISIBLE);
-            } else {
-                double_tishi.setVisibility(View.GONE);
-            }
+            // Background tips overlay removed; tips now live in the side menu (Tips / Gestures).
         });
         mBeautifySettingDialog.setFontColorChange(new BeautifySettingDialog.FontColorChange() {
             @Override
@@ -2683,12 +2667,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void setSummaryVisible() {
-        String change_text_show = OtherPrefs.getStringOther("change_text_show");
-        if ((change_text_show == null || change_text_show.isEmpty() || change_text_show.equals("def"))) {
-            double_tishi.setVisibility(View.VISIBLE);
-        } else {
-            double_tishi.setVisibility(View.GONE);
-        }
+        // Background tips overlay removed; nothing to toggle (see VsTipsDialog).
     }
     // @}
 
