@@ -98,7 +98,7 @@ No Compose. `:app` uses data binding, AppCompat, drawer + RecyclerView menus.
 - AGP **8.13.2**, Kotlin **2.2.0**, JDK **17**.
 - `minSdkVersion` **23**, `targetSdkVersion` **28**, `compileSdkVersion` **36**, NDK **29.0.14206865** (`gradle.properties`).
 - `TERMUX_PACKAGE_VARIANT` default `apt-android-7`.
-- `versionName` **0.118.3.56**, `versionCode` **119**.
+- `versionName` **0.118.3.57**, `versionCode` **120**.
 - Display name placeholder `TERMUX_APP_NAME = "VictorSuite"`; package still `com.termux` via `manifestPlaceholders.TERMUX_PACKAGE_NAME` and `TermuxConstants.TERMUX_PACKAGE_NAME`. There is no explicit `applicationId` in `app/build.gradle`; AGP uses `namespace "com.termux"`.
 - CI: `.github/workflows/android.yml` → `:app:assembleDebug` on `main` (JDK 17, platform-36, NDK 29, `packages: platform-tools`).
 - Signing: committed `phone.jks` with env-overridable passwords in `app/build.gradle` (legacy upstream/UTermux key compatibility). **Owner-approval item** — see §2.1.
