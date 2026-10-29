@@ -17,15 +17,6 @@
         android:alpha="0.9"
         android:background="@drawable/shape_line_2e84e6">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
-            android:id="@+id/close"
-            android:visibility="visible"
-            android:src="@mipmap/close_window"
-            android:layout_height="20dp"/>
-
         <LinearLayout
             android:id="@+id/install_ll"
             android:layout_width="match_parent"
@@ -41,6 +32,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:id="@+id/download_module"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:text="@string/install_module_download"
                 android:textColor="@color/color_48baf3"
                 android:textSize="13sp" />
@@ -145,5 +138,19 @@
                   android:textSize="14sp" />
 
           </RelativeLayout>
+        <!-- Close button is declared last so it is drawn above (and receives touches before)
+             the full-width install_ll / download_module views it used to sit underneath. -->
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@android:string/cancel"
+            android:src="@mipmap/close_window"
+            android:visibility="visible" />
     </RelativeLayout>
 </LinearLayout>

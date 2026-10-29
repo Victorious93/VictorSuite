@@ -18,6 +18,7 @@ class InstallModuleClickConfig: BaseMenuClickConfig() {
     override fun onClick(view: View?, context: Context?) {
         val installModuleDialog = com.zp.z_file.ui.dialog.InstallModuleDialog(mContext as Activity)
         installModuleDialog.show()
-        installModuleDialog.setCancelable(false)
+        // Cancelable so Back / tap-outside also closes it (nothing is running yet here).
+        installModuleDialog.setCancelable(true)
     }
 }

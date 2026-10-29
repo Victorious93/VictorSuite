@@ -37,6 +37,11 @@ class InstallModuleDialog: BaseDialogCentre {
     private var mClose: ImageView? = null
     private var mOk: TextView? = null
     private var mThread: Thread? = null
+    companion object {
+        /** Module download page; set by the app from VsLinks. Null = feature not available yet. */
+        @JvmStatic
+        var moduleDownloadUrl: String? = null
+    }
     constructor(context: Context) : super(context)
     constructor(context: Context, themeResId: Int) : super(context, themeResId)
     //模块包目录
@@ -60,7 +65,13 @@ class InstallModuleDialog: BaseDialogCentre {
                 dismiss()
             }
             download_module?.setOnClickListener {
-                ZFileUUtils.startUrl("https://od.ixcmstudio.cn/repository/main/module/")
+                // z_file can't see the app's VsLinks, so the app injects the URL (see TermuxApplication).
+                val url = moduleDownloadUrl
+                if (url.isNullOrEmpty()) {
+                    android.widget.Toast.makeText(mContext, R.string.install_module_download_unavailable, android.widget.Toast.LENGTH_SHORT).show()
+                } else {
+                    ZFileUUtils.startUrl(url)
+                }
             }
 
             mClose?.setOnClickListener {
