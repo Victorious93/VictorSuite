@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!--   下面重写即可自定义   -->
+    <!--   Override the strings below to customise   -->
     <string name="zfile_title">VictorSuite Files</string>
     <string name="zfile_menu_down">Finish</string>
     <string name="zfile_root_path">Root directory (clickNavigationReturn)</string>
