@@ -68,7 +68,7 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
             boolean mkdirs = mFileHomeFilesGzHome.mkdirs();
 
             if (!mkdirs) {
-                Toast.makeText(getContext(), UUtils.getString(R.string.你没有SD卡权限), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), UUtils.getString(R.string.vs_you_don_t_have_sd_card_permission), Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -83,34 +83,34 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
     public void onClick(View v) {
         if (v.getId() == R.id.boom) {
             boom.setVisibility(View.GONE);
-            mStartBackup.setText(UUtils.getString(R.string.开始备份));
+            mStartBackup.setText(UUtils.getString(R.string.vs_start_backup));
             if (!mFileHomeFilesGzHome.exists()) {
                 boolean mkdirs = mFileHomeFilesGzHome.mkdirs();
                 if (!mkdirs) {
-                    Toast.makeText(getContext(), UUtils.getString(R.string.你没有SD卡权限), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), UUtils.getString(R.string.vs_you_don_t_have_sd_card_permission), Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
             if (!mFileHomeFilesGzHome.exists()) {
                 boolean mkdirs = mFileHomeFilesGzHome.mkdirs();
                 if (!mkdirs) {
-                    Toast.makeText(getContext(), UUtils.getString(R.string.你没有SD卡权限), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), UUtils.getString(R.string.vs_you_don_t_have_sd_card_permission), Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
             YesNoDialog yesNoDialog = new YesNoDialog(getActivity());
-            yesNoDialog.getTitleTv().setText(UUtils.getString(R.string.提示));
-            yesNoDialog.getMsgTv().setText(UUtils.getString(R.string.确定开始));
-            yesNoDialog.getYesTv().setText(UUtils.getString(R.string.默认备份));
+            yesNoDialog.getTitleTv().setText(UUtils.getString(R.string.vs_prompt));
+            yesNoDialog.getMsgTv().setText(UUtils.getString(R.string.vs_make_sure_to_start_backing_up_your_curre));
+            yesNoDialog.getYesTv().setText(UUtils.getString(R.string.vs_default_backup));
             yesNoDialog.getYesTv().setVisibility(View.GONE);
             yesNoDialog.setCancelable(true);
-            yesNoDialog.getNoTv().setText(UUtils.getString(R.string.开始备份));
+            yesNoDialog.getNoTv().setText(UUtils.getString(R.string.vs_start_backup));
             yesNoDialog.getNoTv().setOnClickListener(v2 -> {
                 yesNoDialog.dismiss();
                 if (!(new File("/data/data/com.termux/files/home/storage").exists())){
-                    Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到目录), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.vs_no_directory_found), Toast.LENGTH_SHORT).show();
                     UUtils.getHandler().post(() -> {
-                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.vs_echo_input_enter));
                         com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage ");
                         getActivity().finish();
                     });
@@ -118,7 +118,7 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
                 }
 
                 MyDialog myDialog = new MyDialog(getActivity());
-                myDialog.getDialog_title().setText(UUtils.getString(R.string.强制备份));
+                myDialog.getDialog_title().setText(UUtils.getString(R.string.vs_mandatory_backup));
                 myDialog.getDialog_pro_prog().setVisibility(View.VISIBLE);
                 myDialog.getDialog_pro().setVisibility(View.VISIBLE);
                 myDialog.getDialog_pro_prog().setMax(100);
@@ -131,7 +131,7 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
             yesNoDialog.show();
 
             yesNoDialog.getYesTv().setOnClickListener(v1 -> {
-                Toast.makeText(getContext(), UUtils.getString(R.string.开始), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), UUtils.getString(R.string.vs_begin), Toast.LENGTH_SHORT).show();
 
                 yesNoDialog.dismiss();
                 String cpu = TermuxInstaller.determineTermuxArchName();
@@ -170,7 +170,7 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
                             //do something
                             UUtils.getHandler().post(() -> {
                                 if (!buf.equals("")) {
-                                    SpannableString spannableString = new SpannableString(UUtils.getString(R.string.不要说备份着闪退之类的) + buf);
+                                    SpannableString spannableString = new SpannableString(UUtils.getString(R.string.vs_don_t_talk_about_backing_up_and_crashing) + buf);
                                     spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, 38, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                                     title.setText(spannableString);
                                 }
@@ -181,18 +181,18 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
                             boom.setVisibility(View.VISIBLE);
                             try {
                                 if (mStartBackup != null) {
-                                    mStartBackup.setText(UUtils.getString(R.string.备份完成));
+                                    mStartBackup.setText(UUtils.getString(R.string.vs_backup_complete));
                                 }
                             }catch (Exception e){
-                                Toast.makeText(getContext(), UUtils.getString(R.string.备份完成), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), UUtils.getString(R.string.vs_backup_complete), Toast.LENGTH_SHORT).show();
                             }
                             AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
-                            ab.setTitle(UUtils.getString(R.string.备份完成));
+                            ab.setTitle(UUtils.getString(R.string.vs_backup_complete));
                             ab.setCancelable(false);
-                            ab.setMessage(UUtils.getString(R.string.已成功备份已成功备份));
-                            ab.setNegativeButton(UUtils.getString(R.string.我知道了), (dialog, which) -> getActivity().finish());
+                            ab.setMessage(UUtils.getString(R.string.vs_successfully_backed_up));
+                            ab.setNegativeButton(UUtils.getString(R.string.vs_i_know), (dialog, which) -> getActivity().finish());
                             //Toast.makeText(getContext(), "备份完成!", Toast.LENGTH_SHORT).show();
-                            title.setText(UUtils.getString(R.string.按钮一开始启动您的备份));
+                            title.setText(UUtils.getString(R.string.vs_start_your_backup));
                             ab.show();
                         });
 

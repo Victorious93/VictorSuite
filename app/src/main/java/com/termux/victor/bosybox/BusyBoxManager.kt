@@ -9,8 +9,8 @@ import com.termux.app.TermuxInstaller
 import com.termux.victor.shell.ExeCommand
 import com.termux.victor.url.FileUrl
 import com.termux.victor.utils.Z7ExtracatUtils
-import com.zp.z_file.zerotermux.StartTarGzListener
-import com.zp.z_file.zerotermux.ZTConfig
+import com.zp.z_file.victor.StartTarGzListener
+import com.zp.z_file.victor.VsFileConfig
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
@@ -122,6 +122,6 @@ object BusyBoxManager : StartTarGzListener{
 
     override fun start(inputString: String, outputString: String) {
         un7Z(inputString, outputString)
-        ZTConfig.getCallBackListener()?.call()
+        VsFileConfig.getCallBackListener()?.call()
     }
 }

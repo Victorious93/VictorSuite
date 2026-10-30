@@ -80,10 +80,10 @@ public class MainMenuConfig implements BaseConfig {
     public static final int CODE_X11_FEATURES = 1;
     public static final int CODE_BEAUTIFICATION_FUNCTION = 2;
     public static final int CODE_ONLINE_FEATURES = 3;
-    public static final int CODE_ZT_FEATURES = 4;
-    public static final int CODE_ZT_ROOT = 5;
-    public static final int CODE_ZT_ENGINE = 6;
-    public static final int CODE_ZT_CONFIG = 7;
+    public static final int CODE_VS_FEATURES = 4;
+    public static final int CODE_VS_ROOT = 5;
+    public static final int CODE_VS_ENGINE = 6;
+    public static final int CODE_VS_CONFIG = 7;
     public static final int CODE_LINUX_LOGIN = 9;
     public static final int CODE_SUITE = 8;
 
@@ -134,13 +134,13 @@ public class MainMenuConfig implements BaseConfig {
         engineClicks.add(new KeyDataClickConfig());
         engineClicks.add(new FileBrowserClickConfig());
         engineClicks.add(new X86AlpineDataClickConfig());
-        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.zt_engine), CODE_ZT_ENGINE, engineClicks));
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.vs_engine), CODE_VS_ENGINE, engineClicks));
         // ROOT 功能
         ArrayList<MainMenuClickConfig> rootClicks = new ArrayList<>();
         rootClicks.add(new OpenTurnNetworkAdbClickConfig());
         rootClicks.add(new CloseTurnNetworkAdbClickConfig());
         rootClicks.add(new DockerCheckClickConfig());
-        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.zt_root_fun), CODE_ZT_ROOT, rootClicks));
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.vs_root_fun), CODE_VS_ROOT, rootClicks));
 
         // Linux login (proot-distro containers)
         ArrayList<MainMenuClickConfig> linuxLoginClicks = new ArrayList<>();
@@ -167,29 +167,29 @@ public class MainMenuConfig implements BaseConfig {
         configClicks.add(new ChangStartMsgClickConfig());
         configClicks.add(new CommandDefinitionCLickConfig());
         configClicks.add(new BootCommandClickConfig());
-        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.zt_menu_title_config), CODE_ZT_CONFIG, configClicks));
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.vs_menu_title_config), CODE_VS_CONFIG, configClicks));
 
         // ZT功能
-        ArrayList<MainMenuClickConfig> ztFeaturesClicks = new ArrayList<>();
-        ztFeaturesClicks.add(new InstallModuleClickConfig());
-        ztFeaturesClicks.add(new FtpDataClickConfig());
-        ztFeaturesClicks.add(new CommonlyUsedSoftLinksDataClickConfig());
-        ztFeaturesClicks.add(new MyUsedSoftLinksDataClickConfig());
-        ztFeaturesClicks.add(new UnInstallClickConfig());
-        ztFeaturesClicks.add(new RemoteConnectionClickConfig());
-        ztFeaturesClicks.add(new HeadscaleClickConfig());
-        ztFeaturesClicks.add(new ApkAnalysisClickConfig());
-        ztFeaturesClicks.add(new AndroidIdeClickConfig());
-        ztFeaturesClicks.add(new AiCliSetupClickConfig());
-        ztFeaturesClicks.add(new AiAgentsPackClickConfig());
-        ztFeaturesClicks.add(new WebDataClickConfig());
-        ztFeaturesClicks.add(new PhoneSmsClickConfig());
-        ztFeaturesClicks.add(new ScheduledTaskClickConfig());
-        ztFeaturesClicks.add(new OpenPathClickConfig());
-        ztFeaturesClicks.add(new DataMessageClickConfig());
-        ztFeaturesClicks.add(new LanguageClickConfig());
-        ztFeaturesClicks.add(new GitHubClickConfig());
-        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.zt_features), CODE_ZT_FEATURES, ztFeaturesClicks));
+        ArrayList<MainMenuClickConfig> vsFeaturesClicks = new ArrayList<>();
+        vsFeaturesClicks.add(new InstallModuleClickConfig());
+        vsFeaturesClicks.add(new FtpDataClickConfig());
+        vsFeaturesClicks.add(new CommonlyUsedSoftLinksDataClickConfig());
+        vsFeaturesClicks.add(new MyUsedSoftLinksDataClickConfig());
+        vsFeaturesClicks.add(new UnInstallClickConfig());
+        vsFeaturesClicks.add(new RemoteConnectionClickConfig());
+        vsFeaturesClicks.add(new HeadscaleClickConfig());
+        vsFeaturesClicks.add(new ApkAnalysisClickConfig());
+        vsFeaturesClicks.add(new AndroidIdeClickConfig());
+        vsFeaturesClicks.add(new AiCliSetupClickConfig());
+        vsFeaturesClicks.add(new AiAgentsPackClickConfig());
+        vsFeaturesClicks.add(new WebDataClickConfig());
+        vsFeaturesClicks.add(new PhoneSmsClickConfig());
+        vsFeaturesClicks.add(new ScheduledTaskClickConfig());
+        vsFeaturesClicks.add(new OpenPathClickConfig());
+        vsFeaturesClicks.add(new DataMessageClickConfig());
+        vsFeaturesClicks.add(new LanguageClickConfig());
+        vsFeaturesClicks.add(new GitHubClickConfig());
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.vs_features), CODE_VS_FEATURES, vsFeaturesClicks));
 
         // RootForge (separate app, opened by intent)
         ArrayList<MainMenuClickConfig> suiteClicks = new ArrayList<>();

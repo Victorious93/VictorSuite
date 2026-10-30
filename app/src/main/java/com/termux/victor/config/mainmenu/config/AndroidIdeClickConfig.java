@@ -2,7 +2,7 @@ package com.termux.victor.config.mainmenu.config;
 
 import com.termux.victor.config.VsLinks;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +28,7 @@ public class AndroidIdeClickConfig extends BaseMenuClickConfig {
 
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override

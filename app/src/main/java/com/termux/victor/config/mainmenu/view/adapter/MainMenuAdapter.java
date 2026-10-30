@@ -47,7 +47,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuViewHolder> {
         MainMenuItemAdapter mainMenuItemAdapter = new MainMenuItemAdapter(mContext, mMainMenuCategoryData.get(position).mClickArrayList);
         mainMenuItemAdapters.put(position, mainMenuItemAdapter);
         holder.mItemMenuRec.setAdapter(mainMenuItemAdapter);
-        if (!UserSetManage.Companion.get().getZTUserBean().isCloseFoldMenu()) {
+        if (!UserSetManage.Companion.get().getVsUserBean().isCloseFoldMenu()) {
             holder.mOpenSettings.setVisibility(View.VISIBLE);
             boolean mainMenuItemShow = UserSetManage.Companion.get().getMainMenuItemShow(String.valueOf(id));
             Log.i(TAG, "onBindViewHolder mainMenuItemShow: " + mainMenuItemShow);

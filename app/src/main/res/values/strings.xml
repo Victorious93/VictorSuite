@@ -219,146 +219,146 @@
 
 
 
-    <string name="切换源">Source</string>
-    <string name="容器切换">ContainerSwitching</string>
-    <string name="备份恢复">Backup/restore</string>
-    <string name="发行版本">Release Version</string>
+    <string name="vs_source">Source</string>
+    <string name="vs_containerswitching">Container switching</string>
+    <string name="vs_backup_restore">Backup/restore</string>
+    <string name="vs_release_version">Release Version</string>
     <string name="QEMU">QEMU</string>
-    <string name="命令定义">CommandEditing</string>
-    <string name="短信通话">SMS/Call</string>
-    <string name="打开目录">OpenDirectory</string>
-    <string name="开机启动">Startup(off)</string>
-    <string name="开机启动开">Startup(on)</string>
-    <string name="清华源">QingHuaSource</string>
-    <string name="北京源">BeiJinSource</string>
-    <string name="官方源">OfficialSource</string>
-    <string name="警告">warning</string>
-    <string name="该操作会覆盖您的文件记录">This operation will overwrite your file records, do you want to continue?</string>
-    <string name="确定">determine</string>
-    <string name="无名称系统">UnnamedContainer</string>
-    <string name="删除">delete</string>
-    <string name="切换">Switch</string>
-    <string name="删除完成_需要重进才能刷新">Delete complete_ need to re-enter to refresh</string>
-    <string name="备份">Backup</string>
-    <string name="恢复">restore</string>
-    <string name="设置">Setting</string>
-    <string name="有任务正在进行">There is a task in progress</string>
-    <string name="有任务进行中">There is a task in progress</string>
-    <string name="按钮一开始启动您的备份">Start your backup</string>
-    <string name="开始备份">Start backup</string>
-    <string name="你没有SD卡权限">"You don't have SD card permission"</string>
-    <string name="选择您的备份方式">Choose your backup method</string>
-    <string name="默认备份">Default backup</string>
-    <string name="强制备份">Mandatory backup</string>
-    <string name="没有找到目录">No directory found</string>
-    <string name="这块直接输入回车即可">echo "InPut Enter" \n</string>
-    <string name="开始">begin</string>
-    <string name="不要说备份着闪退之类的">Don’t talk about backing up and crashing</string>
-    <string name="备份完成">Backup complete</string>
-    <string name="已成功备份已成功备份">Successfully backed up </string>
-    <string name="我知道了">I know</string>
-    <string name="开始检测备份环境">Start testing the backup environment</string>
-    <string name="备份环境监测完成">Backup environment monitoring completed</string>
-    <string name="开始检测是否有sd卡软链接">Start to detect whether there is a soft link to the sd card</string>
-    <string name="没有找到storage目录">The storage directory was not found</string>
-    <string name="已检测到软连接">Soft connection detected</string>
-    <string name="秒后开始备份">Start backup in seconds 3</string>
-    <string name="没有SD卡权限">No recoverable files!</string>
-    <string name="恢复方式">Recovery method</string>
-    <string name="默认恢复">Default recovery</string>
-    <string name="强制恢复">Forced recovery</string>
-    <string name="请输入系统名称">Please enter the system name</string>
-    <string name="请稍等此过程禁止切屏">Please wait for this process to prohibit screen cutting</string>
-    <string name="正在搜索多系统">Searching for multiple systems</string>
-    <string name="危险">Danger</string>
-    <string name="恢复设备数据会擦除掉之前所有的数据">Restoring device data will erase all previous data</string>
-    <string name="我清楚我在做什么">"I know what i'm doing"</string>
-    <string name="我在考虑考虑">"I'm considering"</string>
-    <string name="开始清除数据">Start to clear data</string>
-    <string name="恢复完成会自定退出">It will exit automatically after recovery is complete</string>
-    <string name="恢复完成会自定退出擦除">After the recovery is complete, it will exit the erasing automatically</string>
-    <string name="恢复完成会自定退出写入">After the recovery is complete, it will exit writing automatically</string>
-    <string name="恢复完成会自定退出写展开">After the recovery is complete, it will automatically exit the write and expand</string>
-    <string name="恢复完成会自定退出写恢复">After the recovery is complete, it will automatically exit the write recovery</string>
-    <string name="恢复完成请重启APP">Please restart the app after the recovery is complete</string>
-    <string name="恢复成功如果很短">If the recovery is short</string>
-    <string name="你必须重启APP才能使用新的恢复系统">You must restart the app to use the new recovery system</string>
-    <string name="出现了一个错误">An error occurred</string>
-    <string name="确定开始">
+    <string name="vs_commandediting">CommandEditing</string>
+    <string name="vs_sms_call">SMS/Call</string>
+    <string name="vs_opendirectory">OpenDirectory</string>
+    <string name="vs_startup_off">Startup(off)</string>
+    <string name="vs_startup_on">Startup(on)</string>
+    <string name="vs_qinghuasource">QingHuaSource</string>
+    <string name="vs_beijinsource">BeiJinSource</string>
+    <string name="vs_officialsource">OfficialSource</string>
+    <string name="vs_warning">Warning</string>
+    <string name="vs_this_operation_will_overwrite_your_file">This operation will overwrite your file records, do you want to continue?</string>
+    <string name="vs_determine">OK</string>
+    <string name="vs_unnamedcontainer">UnnamedContainer</string>
+    <string name="vs_delete">Delete</string>
+    <string name="vs_switch">Switch</string>
+    <string name="vs_delete_complete_need_to_re_enter_to_refr">Delete complete_ need to re-enter to refresh</string>
+    <string name="vs_backup">Backup</string>
+    <string name="vs_restore">restore</string>
+    <string name="vs_setting">Setting</string>
+    <string name="vs_there_is_a_task_in_progress">There is a task in progress</string>
+    <string name="vs_there_is_a_task_in_progress_2">There is a task in progress</string>
+    <string name="vs_start_your_backup">Start your backup</string>
+    <string name="vs_start_backup">Start backup</string>
+    <string name="vs_you_don_t_have_sd_card_permission">"You don't have SD card permission"</string>
+    <string name="vs_choose_your_backup_method">Choose your backup method</string>
+    <string name="vs_default_backup">Default backup</string>
+    <string name="vs_mandatory_backup">Mandatory backup</string>
+    <string name="vs_no_directory_found">No directory found</string>
+    <string name="vs_echo_input_enter">echo "InPut Enter" \n</string>
+    <string name="vs_begin">begin</string>
+    <string name="vs_don_t_talk_about_backing_up_and_crashing">Don’t talk about backing up and crashing</string>
+    <string name="vs_backup_complete">Backup complete</string>
+    <string name="vs_successfully_backed_up">Successfully backed up </string>
+    <string name="vs_i_know">I know</string>
+    <string name="vs_start_testing_the_backup_environment">Start testing the backup environment</string>
+    <string name="vs_backup_environment_monitoring_completed">Backup environment monitoring completed</string>
+    <string name="vs_start_to_detect_whether_there_is_a_soft_sd">Start to detect whether there is a soft link to the sd card</string>
+    <string name="vs_the_storage_directory_was_not_found">The storage directory was not found</string>
+    <string name="vs_soft_connection_detected">Soft connection detected</string>
+    <string name="vs_start_backup_in_seconds_3">Start backup in seconds 3</string>
+    <string name="vs_no_recoverable_files_sd">No recoverable files!</string>
+    <string name="vs_recovery_method">Recovery method</string>
+    <string name="vs_default_recovery">Default recovery</string>
+    <string name="vs_forced_recovery">Forced recovery</string>
+    <string name="vs_please_enter_the_system_name">Please enter the system name</string>
+    <string name="vs_please_wait_for_this_process_to_prohibit">Please wait for this process to prohibit screen cutting</string>
+    <string name="vs_searching_for_multiple_systems">Searching for multiple systems</string>
+    <string name="vs_danger">Danger</string>
+    <string name="vs_restoring_device_data_will_erase_all_pre">Restoring device data will erase all previous data</string>
+    <string name="vs_i_know_what_i_m_doing">"I know what i'm doing"</string>
+    <string name="vs_i_m_considering">"I'm considering"</string>
+    <string name="vs_start_to_clear_data">Start to clear data</string>
+    <string name="vs_it_will_exit_automatically_after_recover">It will exit automatically after recovery is complete</string>
+    <string name="vs_after_the_recovery_is_complete_it_will_e">After the recovery is complete, it will exit the erasing automatically</string>
+    <string name="vs_after_the_recovery_is_complete_it_will_e_2">After the recovery is complete, it will exit writing automatically</string>
+    <string name="vs_after_the_recovery_is_complete_it_will_a">After the recovery is complete, it will automatically exit the write and expand</string>
+    <string name="vs_after_the_recovery_is_complete_it_will_a_2">After the recovery is complete, it will automatically exit the write recovery</string>
+    <string name="vs_please_restart_the_app_after_the_recover">Please restart the app after the recovery is complete</string>
+    <string name="vs_if_the_recovery_is_short">If the recovery is short</string>
+    <string name="vs_you_must_restart_the_app_to_use_the_new">You must restart the app to use the new recovery system</string>
+    <string name="vs_an_error_occurred">An error occurred</string>
+    <string name="vs_make_sure_to_start_backing_up_your_curre">
 Make sure to start backing up your current system?</string>
-    <string name="提示">prompt</string>
-    <string name="确定要恢复">
+    <string name="vs_prompt">prompt</string>
+    <string name="vs_determine_to_restore_and_create_a_new_co">
 Determine to restore and create a new container system?</string>
-    <string name="海的QEMU">QEMU of the sea</string>
-    <string name="当前为自动">Currently automatic</string>
-    <string name="键盘">keyboard</string>
-    <string name="文件名不能为空">
+    <string name="vs_qemu_of_the_sea">QEMU of the sea</string>
+    <string name="vs_currently_automatic">Currently automatic</string>
+    <string name="vs_keyboard">keyboard</string>
+    <string name="vs_file_name_cannot_be_empty">
 File name cannot be empty</string>
-    <string name="出错了">
+    <string name="vs_error">
 error</string>
-    <string name="添加一个命令">Add a command</string>
-    <string name="添加一个命令解释">Add a command explanation</string>
-    <string name="请选择运行的架构">Please select the running architecture</string>
-    <string name="删除当前命令">Delete current command</string>
-    <string name="修改当前命令">Modify the current command</string>
-    <string name="名称不能为空">Name is required</string>
-    <string name="命令不能为空">Command cannot be empty</string>
-    <string name="添加成功">Added successfully</string>
-    <string name="请输入命令名称">Please enter the command name</string>
-    <string name="请输入您要添加的命令">Please enter the command you want to add</string>
-    <string name="自动回车">Automatic carriage return</string>
-    <string name="保存当前配置">Save the current configuration</string>
-    <string name="好的">Ok</string>
-    <string name="镜像运行结束">End of mirroring operation</string>
-    <string name="您的命令出错了">There was an error in your command</string>
-    <string name="清空">Empty</string>
-    <string name="已完成清空">Completed empty</string>
-    <string name="修改">modify</string>
-    <string name="已完成修改">Modified</string>
-    <string name="修改成功">Successfully modified</string>
-    <string name="请再试一次">please try again</string>
-    <string name="删除成功">successfully deleted</string>
-    <string name="切换成功">Switch successfully</string>
-    <string name="没有找到命令">Command not found</string>
-    <string name="命令出错">Command error</string>
-    <string name="加载中">Loading</string>
-    <string name="回到主目录">Back to main list</string>
-    <string name="返回上层">Return to the upper level</string>
-    <string name="查看文件">check the file</string>
-    <string name="打开">open</string>
-    <string name="运行">run</string>
-    <string name="自动出错">Automatic error</string>
-    <string name="当前目录不在">The current directory is not</string>
-    <string name="会话">Conversation</string>
-    <string name="自动命令">help</string>
-    <string name="搜索文件">Search file</string>
-    <string name="再次输入您要搜索的文件">Enter the file you want to search again</string>
-    <string name="请输入您要查找的命令">Please enter the command you are looking for</string>
-    <string name="恢复默认命令">Restore default command</string>
-    <string name="自定义方案">Custom scheme</string>
-    <string name="导入导出命令">Import and export commands</string>
-    <string name="配置文件出错">Configuration file error</string>
-    <string name="导入">Import</string>
-    <string name="导出">Export</string>
-    <string name="已导入配置文件">Configuration file imported</string>
-    <string name="当前没有数据">No data currently</string>
-    <string name="保存成功">Saved successfully</string>
-    <string name="请选择一个配置文件">Please select a profile</string>
-    <string name="当前目录下没有镜像文件">There is no mirror file in the current directory</string>
-    <string name="使用默认命令">Use default commands</string>
-    <string name="当前目录下没有配置文件">There is no configuration file in the current directory</string>
-    <string name="目录下有一个相同文件">There is a same file in the directory</string>
-    <string name="保存文件">save document</string>
-    <string name="请输入保存的文件名">Please enter the saved file name</string>
-    <string name="安装短信读取工具">SMS/Address Book Tool</string>
-    <string name="该操作有风险">This operation is risky. Your mobile phone may be attacked to leak your SMS and address book. Do you want to continue the installation? (You can turn off the SMS sensitive permission when you are not using it)</string>
-    <string name="您已安装工具">You have already installed the tool, so there is no need to install it again. Use the command(SMS: smsread, address book: readcontacts)</string>
-    <string name="您当前未安装">You are not currently installed</string>
-    <string name="是否安装">Whether to install?</string>
-    <string name="安装完成">The installation is complete, please enter (SMS: smsread, address book: readcontacts) to use</string>
-    <string name="您已安装工具1">You have installed tools</string>
-    <string name="您未安装该插件">The plug-in installation is about to start, do you want to continue?</string>
-    <string name="需要在您的手机">
+    <string name="vs_add_a_command">Add a command</string>
+    <string name="vs_add_a_command_explanation">Add a command explanation</string>
+    <string name="vs_please_select_the_running_architecture">Please select the running architecture</string>
+    <string name="vs_delete_current_command">Delete current command</string>
+    <string name="vs_modify_the_current_command">Modify the current command</string>
+    <string name="vs_name_is_required">Name is required</string>
+    <string name="vs_command_cannot_be_empty">Command cannot be empty</string>
+    <string name="vs_added_successfully">Added successfully</string>
+    <string name="vs_please_enter_the_command_name">Please enter the command name</string>
+    <string name="vs_please_enter_the_command_you_want_to_add">Please enter the command you want to add</string>
+    <string name="vs_automatic_carriage_return">Automatic carriage return</string>
+    <string name="vs_save_the_current_configuration">Save the current configuration</string>
+    <string name="vs_ok">Ok</string>
+    <string name="vs_end_of_mirroring_operation">End of mirroring operation</string>
+    <string name="vs_there_was_an_error_in_your_command">There was an error in your command</string>
+    <string name="vs_empty">Empty</string>
+    <string name="vs_completed_empty">Completed empty</string>
+    <string name="vs_modify">modify</string>
+    <string name="vs_modified">Modified</string>
+    <string name="vs_successfully_modified">Successfully modified</string>
+    <string name="vs_please_try_again">please try again</string>
+    <string name="vs_successfully_deleted">successfully deleted</string>
+    <string name="vs_switch_successfully">Switch successfully</string>
+    <string name="vs_command_not_found">Command not found</string>
+    <string name="vs_command_error">Command error</string>
+    <string name="vs_loading">Loading</string>
+    <string name="vs_back_to_main_list">Back to main list</string>
+    <string name="vs_return_to_the_upper_level">Return to the upper level</string>
+    <string name="vs_check_the_file">check the file</string>
+    <string name="vs_open">open</string>
+    <string name="vs_run">run</string>
+    <string name="vs_automatic_error">Automatic error</string>
+    <string name="vs_the_current_directory_is_not">The current directory is not</string>
+    <string name="vs_conversation">Conversation</string>
+    <string name="vs_help">help</string>
+    <string name="vs_search_file">Search file</string>
+    <string name="vs_enter_the_file_you_want_to_search_again">Enter the file you want to search again</string>
+    <string name="vs_please_enter_the_command_you_are_looking">Please enter the command you are looking for</string>
+    <string name="vs_restore_default_command">Restore default command</string>
+    <string name="vs_custom_scheme">Custom scheme</string>
+    <string name="vs_import_and_export_commands">Import and export commands</string>
+    <string name="vs_configuration_file_error">Configuration file error</string>
+    <string name="vs_import">Import</string>
+    <string name="vs_export">Export</string>
+    <string name="vs_configuration_file_imported">Configuration file imported</string>
+    <string name="vs_no_data_currently">No data currently</string>
+    <string name="vs_saved_successfully">Saved successfully</string>
+    <string name="vs_please_select_a_profile">Please select a profile</string>
+    <string name="vs_there_is_no_mirror_file_in_the_current_d">There is no mirror file in the current directory</string>
+    <string name="vs_use_default_commands">Use default commands</string>
+    <string name="vs_there_is_no_configuration_file_in_the_cu">There is no configuration file in the current directory</string>
+    <string name="vs_there_is_a_same_file_in_the_directory">There is a same file in the directory</string>
+    <string name="vs_save_document">save document</string>
+    <string name="vs_please_enter_the_saved_file_name">Please enter the saved file name</string>
+    <string name="vs_sms_address_book_tool">SMS/Address Book Tool</string>
+    <string name="vs_this_operation_is_risky_your_mobile_phon">This operation is risky. Your mobile phone may be attacked to leak your SMS and address book. Do you want to continue the installation? (You can turn off the SMS sensitive permission when you are not using it)</string>
+    <string name="vs_you_have_already_installed_the_tool_so_t">You have already installed the tool, so there is no need to install it again. Use the command(SMS: smsread, address book: readcontacts)</string>
+    <string name="vs_you_are_not_currently_installed">You are not currently installed</string>
+    <string name="vs_whether_to_install">Whether to install?</string>
+    <string name="vs_the_installation_is_complete_please_ente">The installation is complete, please enter (SMS: smsread, address book: readcontacts) to use</string>
+    <string name="vs_you_have_installed_tools_1">You have installed tools</string>
+    <string name="vs_the_plug_in_installation_is_about_to_sta">The plug-in installation is about to start, do you want to continue?</string>
+    <string name="vs_need_your_internal_storage_permissions_t">
        Need your internal storage permissions!\n
         The following directory needs to be created on your phone:\n
         [Internal storage/xinhao/data/] backup package \n
@@ -375,61 +375,61 @@ error</string>
         [Internal storage/xinhao/web_config/] web temporary directory \n
 
     </string>
-    <string name="版本">version</string>
-    <string name="会话窗口在右侧">Tip: The session window is on the right side\nDouble-click the command window to open the shortcut command\nLicense: Learn to communicate</string>
-    <string name="开源地址">Source code &amp; credits</string>
-    <string name="已打开开机启动命令">The boot command has been opened, restart the APP to take effect</string>
-    <string name="已关闭开机启动命令">The boot command has been turned off and will take effect after restart</string>
-    <string name="悬浮窗口">Floating window</string>
+    <string name="vs_version">version</string>
+    <string name="vs_tip_the_session_window_is_on_the_right_s">Tip: The session window is on the right side\nDouble-click the command window to open the shortcut command\nLicense: Learn to communicate</string>
+    <string name="vs_source_code_credits">Source code &amp; credits</string>
+    <string name="vs_the_boot_command_has_been_opened_restart">The boot command has been opened, restart the APP to take effect</string>
+    <string name="vs_the_boot_command_has_been_turned_off_and">The boot command has been turned off and will take effect after restart</string>
+    <string name="vs_floating_window">Floating window</string>
     <string name="draw_overlay_permission_explanation">This app needs permission to draw overlay。</string>
     <string name="grant_permission">Obtain</string>
     <string name="initial_instruction_toast">Long press to move on the window\n\nLong press to zoom on the window, zoom the window size</string>
     <string name="notification_title">Termux:Suspension</string>
     <string name="notification_message_visible">Touch to hide window。</string>
     <string name="notification_message_hidden">Touch to hide window。</string>
-    <string name="正在载入中">Loading, please wait。</string>
-    <string name="字体选择">Font selection</string>
-    <string name="您一切选择的字体来源于互联网">All the fonts you choose come from the Internet</string>
-    <string name="没有在内部存储">No font files were found in [internal storage/xinhao/font]</string>
-    <string name="Utermux默认字体">VictorSuite Default font</string>
-    <string name="Utermux中文字体">VictorSuite English Fonts</string>
-    <string name="创建文件错误">Error creating file</string>
-    <string name="字体设置成功">The font is set successfully</string>
-    <string name="如果进入终端没有任何显示">If you enter the terminal without any display, it means that your font file is damaged, please reset the font</string>
-    <string name="字体设置">Font settings</string>
-    <string name="局域服务器">Server version</string>
-    <string name="未连接">not connected</string>
-    <string name="公共仓库">Public warehouse</string>
-    <string name="正在连接到自定义服务器">Connecting to custom server</string>
-    <string name="请输入自定义服务器IP">Please enter the custom server IP</string>
-    <string name="默认地址">Server URL</string>
-    <string name="无法连接到自定义服务器">Unable to connect to custom server!</string>
-    <string name="连接">connection</string>
-    <string name="如何创建服务器">How to create a server</string>
-    <string name="服务器数据格式不正确">Server data format is incorrect</string>
-    <string name="服务器">server</string>
-    <string name="地址">address</string>
-    <string name="大小">size</string>
-    <string name="简介">Introduction</string>
-    <string name="剩余">Remaining</string>
-    <string name="第三方服务器上的可执行文件">The executable file on the third-party server may be insecure, determine whether to install it?</string>
-    <string name="下载站">Download station</string>
-    <string name="正在连接到下载站服务器">Connecting to download station server</string>
-    <string name="无法连接到下载站服务器">Unable to connect to the download station server</string>
-    <string name="正在连接">connecting</string>
+    <string name="vs_loading_please_wait">Loading, please wait。</string>
+    <string name="vs_font_selection">Font selection</string>
+    <string name="vs_all_the_fonts_you_choose_come_from_the_i">All the fonts you choose come from the Internet</string>
+    <string name="vs_no_font_files_were_found_in_internal_sto">No font files were found in [internal storage/xinhao/font]</string>
+    <string name="vs_victorsuite_default_font_utermux">VictorSuite Default font</string>
+    <string name="vs_victorsuite_english_fonts_utermux">VictorSuite English Fonts</string>
+    <string name="vs_error_creating_file">Error creating file</string>
+    <string name="vs_the_font_is_set_successfully">The font is set successfully</string>
+    <string name="vs_if_you_enter_the_terminal_without_any_di">If you enter the terminal without any display, it means that your font file is damaged, please reset the font</string>
+    <string name="vs_font_settings">Font settings</string>
+    <string name="vs_server_version">Server version</string>
+    <string name="vs_not_connected">not connected</string>
+    <string name="vs_public_warehouse">Public warehouse</string>
+    <string name="vs_connecting_to_custom_server">Connecting to custom server</string>
+    <string name="vs_please_enter_the_custom_server_ip">Please enter the custom server IP</string>
+    <string name="vs_server_url">Server URL</string>
+    <string name="vs_unable_to_connect_to_custom_server">Unable to connect to custom server!</string>
+    <string name="vs_connection">connection</string>
+    <string name="vs_how_to_create_a_server">How to create a server</string>
+    <string name="vs_server_data_format_is_incorrect">Server data format is incorrect</string>
+    <string name="vs_server">server</string>
+    <string name="vs_address">address</string>
+    <string name="vs_size">size</string>
+    <string name="vs_introduction">Introduction</string>
+    <string name="vs_remaining">Remaining</string>
+    <string name="vs_the_executable_file_on_the_third_party_s">The executable file on the third-party server may be insecure, determine whether to install it?</string>
+    <string name="vs_download_station">Download station</string>
+    <string name="vs_connecting_to_download_station_server">Connecting to download station server</string>
+    <string name="vs_unable_to_connect_to_the_download_statio">Unable to connect to the download station server</string>
+    <string name="vs_connecting">connecting</string>
     <string name="VNC">VNC</string>
-    <string name="快速VNC">Fast VNC</string>
-    <string name="自定VNC">Custom VNC</string>
-    <string name="高级VNC">Advanced VNC</string>
-    <string name="请下载插件">Please download the plugin</string>
-    <string name="请输入地址">Please enter the address</string>
-    <string name="请输入端口">Please enter the port</string>
-    <string name="请输入密码">Please enter the password</string>
-    <string name="连接到自定VNC">Connect to custom VNC</string>
-    <string name="协议">protocol</string>
+    <string name="vs_fast_vnc">Fast VNC</string>
+    <string name="vs_custom_vnc">Custom VNC</string>
+    <string name="vs_advanced_vnc">Advanced VNC</string>
+    <string name="vs_please_download_the_plugin">Please download the plugin</string>
+    <string name="vs_please_enter_the_address">Please enter the address</string>
+    <string name="vs_please_enter_the_port">Please enter the port</string>
+    <string name="vs_please_enter_the_password">Please enter the password</string>
+    <string name="vs_connect_to_custom_vnc">Connect to custom VNC</string>
+    <string name="vs_protocol">protocol</string>
 
 
-    <string name="许可证">Legal Notices:\n
+    <string name="vs_legal_notices_victorsuite_is_a_non_profi">Legal Notices:\n
 
 
 
@@ -490,95 +490,95 @@ error</string>
 
 
     </string>
-    <string name="不同意">disagree</string>
-    <string name="同意">agree</string>
-    <string name="请认真阅读许可协议">Please read the license agreement and the division of responsibilities carefully</string>
-    <string name="无法创建">Unable to create the (internal storage/xinhao/data) folder, please create it manually!</string>
-    <string name="无法创建1">Unable to create (internal storage/xinhao/apk) folder, please create it manually!</string>
-    <string name="已开始打印APP实时delog">Started to print APP real-time log</string>
-    <string name="暂未开放下载">Not yet available for download</string>
-    <string name="雪花关">Snowflake (Off)</string>
-    <string name="雪花开">Snowflakes (open)</string>
-    <string name="官方插件">Official plugin</string>
+    <string name="vs_disagree">disagree</string>
+    <string name="vs_agree">agree</string>
+    <string name="vs_please_read_the_license_agreement_and_th">Please read the license agreement and the division of responsibilities carefully</string>
+    <string name="vs_unable_to_create_the_internal_storage_xi">Unable to create the (internal storage/xinhao/data) folder, please create it manually!</string>
+    <string name="vs_unable_to_create_internal_storage_xinhao_1">Unable to create (internal storage/xinhao/apk) folder, please create it manually!</string>
+    <string name="vs_started_to_print_app_real_time_log_appdelog">Started to print APP real-time log</string>
+    <string name="vs_not_yet_available_for_download">Not yet available for download</string>
+    <string name="vs_snowflake_off">Snowflake (Off)</string>
+    <string name="vs_snowflakes_open">Snowflakes (open)</string>
+    <string name="vs_official_plugin">Official plugin</string>
     <string name="TermuxApi">T…x:Api</string>
     <string name="TermuxTasker">T…x:Tasker</string>
     <string name="TermuxBoot">T…x:Boot</string>
     <string name="TermuxStyling">T…x:Styling</string>
-    <string name="全屏模式">Full screen mode</string>
+    <string name="vs_full_screen_mode">Full screen mode</string>
 
-    <string name="语言切换">Language switch</string>
-    <string name="中文">中文</string>
+    <string name="vs_language_switch">Language switch</string>
+    <string name="vs_chinese">Chinese</string>
     <string name="English">English</string>
-    <string name="取消">Cancel</string>
+    <string name="vs_cancel">Cancel</string>
     <string name="termux_x11">termux-x11</string>
 
-    <string name="本机IP">Local IP</string>
+    <string name="vs_local_ip">Local IP</string>
 
-    <string name="Zero功能">VictorSuite function</string>
-    <string name="VictorSuite内置功能">VictorSuite command area (long press to open author address)</string>
-    <string name="内置nginx">Nginx (built-in)</string>
-    <string name="Nginx开关">Nginx switch</string>
-    <string name="访问linux目录">Access linux directory</string>
-    <string name="访问目录">Access directory (/)</string>
-    <string name="访问目录sd">Access Directory (SD)</string>
-    <string name="WebStart开关">WebStart switch</string>
-    <string name="端口">port</string>
-    <string name="路径">path</string>
-    <string name="访问地址">address</string>
-    <string name="原作者地址">Original author address</string>
-    <string name="项目地址">project address</string>
-    <string name="所选的端口号范围超出65535最大值">The selected port number range exceeds the maximum value of 65535, and the default is changed to port 7766</string>
-    <string name="开启成功">Service opened successfully!</string>
+    <string name="vs_victorsuite_function_label">VictorSuite function</string>
+    <string name="vs_victorsuite_command_area_long_press_to_o">VictorSuite command area (long press to open author address)</string>
+    <string name="vs_nginx_built_in">Nginx (built-in)</string>
+    <string name="vs_nginx_switch">Nginx switch</string>
+    <string name="vs_access_linux_directory">Access linux directory</string>
+    <string name="vs_access_directory">Access directory (/)</string>
+    <string name="vs_access_directory_sd">Access Directory (SD)</string>
+    <string name="vs_webstart_switch">WebStart switch</string>
+    <string name="vs_port">port</string>
+    <string name="vs_path">path</string>
+    <string name="vs_address_2">address</string>
+    <string name="vs_original_author_address">Original author address</string>
+    <string name="vs_project_address">project address</string>
+    <string name="vs_the_selected_port_number_range_exceeds_t_65535">The selected port number range exceeds the maximum value of 65535, and the default is changed to port 7766</string>
+    <string name="vs_service_opened_successfully">Service opened successfully!</string>
 
 
-    <string name="软件开发">SoftwareDevelopment</string>
+    <string name="vs_softwaredevelopment">SoftwareDevelopment</string>
     <string name="MyServer">MyServer</string>
     <string name="Termux_ADB">Termux-ADB</string>
-    <string name="实验功能">ExperimentalFunction</string>
-    <string name="VictorSuite实验功能">VictorSuite ExperimentalFunction</string>
-    <string name="网络ADB">Network ADB(ROOT)</string>
-    <string name="网络ADBNo">Network ADB (no ROOT)</string>
-    <string name="没有找到本机的ROOT权限">The ROOT permission of the machine is not found. Do you want to force it to continue?</string>
-    <string name="运行完成">The command execution is complete, please make sure to execute it under Root\nPlease use:\n \n adb.exe connect</string>
-    <string name="网络ADBClose">Close ADB(ROOT)</string>
-    <string name="关闭成功">ADB command closed successfully</string>
+    <string name="vs_experimentalfunction">ExperimentalFunction</string>
+    <string name="vs_victorsuite_experimentalfunction">VictorSuite ExperimentalFunction</string>
+    <string name="vs_network_adb_root">Network ADB(ROOT)</string>
+    <string name="vs_network_adb_no_root_adbno">Network ADB (no ROOT)</string>
+    <string name="vs_the_root_permission_of_the_machine_is_no">The ROOT permission of the machine is not found. Do you want to force it to continue?</string>
+    <string name="vs_the_command_execution_is_complete_please">The command execution is complete, please make sure to execute it under Root\nPlease use:\n \n adb.exe connect</string>
+    <string name="vs_close_adb_root_adbclose">Close ADB(ROOT)</string>
+    <string name="vs_adb_command_closed_successfully">ADB command closed successfully</string>
 
 
 
-    <string name="欢迎来到windows模拟器页面">Welcome to the windows simulator page</string>
-    <string name="环境">surroundings</string>
-    <string name="qamu环境">qemu environment</string>
-    <string name="qamu环境开">[installed]</string>
-    <string name="qamu环境关">[NotInstalled]</string>
-    <string name="点击安装">Click install</string>
-    <string name="显示环境">Display environment</string>
-    <string name="显示环境开">[installed]</string>
-    <string name="显示环境关">[NotInstalled]</string>
-    <string name="ROOT运行">ROOT Run</string>
-    <string name="ROOT运行1">Please enter tsu in Termux</string>
-    <string name="帮我安装">Help me install</string>
-    <string name="快捷运行">Quick run</string>
-    <string name="警告测dsfsdf">Warning: If [system call bad] appears, please execute [termux-chroot] in the terminal and then enter!</string>
-    <string name="win10系统">win10 system</string>
-    <string name="win7系统">win7 system</string>
-    <string name="winXP系统">winXP system</string>
-    <string name="替换官方版本">Replace the official version</string>
-    <string name="用官版的请点击">For the official version, please click</string>
-    <string name="MAC系统">MAC system</string>
-    <string name="我自己的系统">My own system</string>
-    <string name="打开当前VNC任务">Open the current VNC task</string>
-    <string name="Windows注意">Note: The image will be copied to the working area of UTermux[/Home/UTWindow/]</string>
-    <string name="当前操作镜像">Current operation mirror:</string>
-    <string name="无">Empty</string>
-    <string name="打开操作镜像">Open operation mirror</string>
-    <string name="清空操作镜像">Clear operation mirror</string>
-    <string name="请显示QEMU命令">Please show QEMU commands</string>
-    <string name="请输入QEMU命令">Please enter the QEMU command</string>
-    <string name="清空命令行">Clear the command line</string>
-    <string name="QEMU执行并打开显示器">QEMU executes and turns on the display</string>
-    <string name="QEMU执行">QEMU execution</string>
-    <string name="填充默认命令">Fill default commands</string>
-    <string name="提示dsfsdfmmm">
+    <string name="vs_welcome_to_the_windows_simulator_page">Welcome to the windows simulator page</string>
+    <string name="vs_surroundings">surroundings</string>
+    <string name="vs_qemu_environment_qamu">qemu environment</string>
+    <string name="vs_installed_qamu">[installed]</string>
+    <string name="vs_notinstalled_qamu">[NotInstalled]</string>
+    <string name="vs_click_install">Click install</string>
+    <string name="vs_display_environment">Display environment</string>
+    <string name="vs_installed">[installed]</string>
+    <string name="vs_notinstalled">[NotInstalled]</string>
+    <string name="vs_root_run">ROOT Run</string>
+    <string name="vs_please_enter_tsu_in_termux_root1">Please enter tsu in Termux</string>
+    <string name="vs_help_me_install">Help me install</string>
+    <string name="vs_quick_run">Quick run</string>
+    <string name="vs_warning_if_system_call_bad_appears_pleas_dsfsdf">Warning: If [system call bad] appears, please execute [termux-chroot] in the terminal and then enter!</string>
+    <string name="vs_win10_system">win10 system</string>
+    <string name="vs_win7_system">win7 system</string>
+    <string name="vs_winxp_system">winXP system</string>
+    <string name="vs_replace_the_official_version">Replace the official version</string>
+    <string name="vs_for_the_official_version_please_click">For the official version, please click</string>
+    <string name="vs_mac_system">MAC system</string>
+    <string name="vs_my_own_system">My own system</string>
+    <string name="vs_open_the_current_vnc_task">Open the current VNC task</string>
+    <string name="vs_note_the_image_will_be_copied_to_the_wor_windows">Note: The image will be copied to the working area of UTermux[/Home/UTWindow/]</string>
+    <string name="vs_current_operation_mirror">Current operation mirror:</string>
+    <string name="vs_empty_2">Empty</string>
+    <string name="vs_open_operation_mirror">Open operation mirror</string>
+    <string name="vs_clear_operation_mirror">Clear operation mirror</string>
+    <string name="vs_please_show_qemu_commands">Please show QEMU commands</string>
+    <string name="vs_please_enter_the_qemu_command">Please enter the QEMU command</string>
+    <string name="vs_clear_the_command_line">Clear the command line</string>
+    <string name="vs_qemu_executes_and_turns_on_the_display">QEMU executes and turns on the display</string>
+    <string name="vs_qemu_execution">QEMU execution</string>
+    <string name="vs_fill_default_commands">Fill default commands</string>
+    <string name="vs_it_may_affect_performance_or_cannot_ente_dsfsdfmmm">
        "It may affect performance, or cannot enter the system!!\n
         It may affect performance, or can't enter the system!\n
         If it is slow, please delete it\n
@@ -591,35 +591,35 @@ error</string>
         -drive file=fat:rw:/sdcard/xinhao/share\n
         Command, long press to copy the command"
     </string>
-    <string name="正在疏通所需要的环境">Is dredging the required environment</string>
-    <string name="请输入回车键继续">Please enter the enter key to continue</string>
-    <string name="请选择一个镜像">Please select a mirror</string>
-    <string name="请选择模拟器配置文件">Please select an emulator profile</string>
-    <string name="成功">success</string>
+    <string name="vs_is_dredging_the_required_environment">Is dredging the required environment</string>
+    <string name="vs_please_enter_the_enter_key_to_continue">Please enter the enter key to continue</string>
+    <string name="vs_please_select_a_mirror">Please select a mirror</string>
+    <string name="vs_please_select_an_emulator_profile">Please select an emulator profile</string>
+    <string name="vs_success">success</string>
     <string name="qemu_x86_win">Win/linux/(x64_x86)</string>
     <string name="qemu_i386_win">Win/linux/(i386)</string>
     <string name="qemu_ppc_win">MAC(ppc)</string>
-    <string name="请在下载站下载VNC插件">Please download the VNC plug-in at [download site]</string>
-    <string name="环境不达要求">The environment is not up to the requirements</string>
-    <string name="你没有安装tyu65t6y5u">"You have not installed wget or proot \nDo you want to install it now"</string>
-    <string name="给我安装">Install</string>
-    <string name="不安装">Cancel</string>
-    <string name="错误">error</string>
-    <string name="你没有安装相关环境qemuppp5555p">"You have not installed the relevant environment, please click to install"</string>
-    <string name="在线安装">Online installation</string>
-    <string name="请等待安装完成在进入">Please wait for the installation to complete before entering</string>
-    <string name="稍后">Later</string>
-    <string name="系统初始化失败">System initialization failed</string>
-    <string name="请输入回车键继续55">Please enter the enter key to continue</string>
-    <string name="获取镜像">Extraction code: 6b7w</string>
-    <string name="是否前往下载系统">Whether to go to the download system</string>
-    <string name="前往">Go to</string>
-    <string name="Zero">Windows (QEMU) simulation</string>
-    <string name="一键启动">one-button start</string>
+    <string name="vs_please_download_the_vnc_plug_in_at_downl">Please download the VNC plug-in at [download site]</string>
+    <string name="vs_the_environment_is_not_up_to_the_require">The environment is not up to the requirements</string>
+    <string name="vs_you_have_not_installed_wget_or_proot_do_tyu65t6y5u">"You have not installed wget or proot \nDo you want to install it now"</string>
+    <string name="vs_install">Install</string>
+    <string name="vs_cancel_2">Cancel</string>
+    <string name="vs_error_2">error</string>
+    <string name="vs_you_have_not_installed_the_relevant_envi_qemuppp5555p">"You have not installed the relevant environment, please click to install"</string>
+    <string name="vs_online_installation">Online installation</string>
+    <string name="vs_please_wait_for_the_installation_to_comp">Please wait for the installation to complete before entering</string>
+    <string name="vs_later">Later</string>
+    <string name="vs_system_initialization_failed">System initialization failed</string>
+    <string name="vs_please_enter_the_enter_key_to_continue_55">Please enter the enter key to continue</string>
+    <string name="vs_extraction_code_6b7w">Extraction code: 6b7w</string>
+    <string name="vs_whether_to_go_to_the_download_system">Whether to go to the download system</string>
+    <string name="vs_go_to">Go to</string>
+    <string name="vs_qemu_windows">Windows (QEMU) simulation</string>
+    <string name="vs_one_button_start">one-button start</string>
 
-    <string name="确定重置所有任务">
+    <string name="vs_are_you_sure_to_reset_and_delete_all_tas">
 Are you sure to reset and delete all tasks?\nIf your download status is messy/incorrect, please apply this setting\nNote: The downloaded ones will not be deleted\nThe downloading ones will be deleted</string>
-    <string name="重置成功">
+    <string name="vs_reset_successfully">
 Reset successfully</string>
 
     <!-- Terminal View Preferences -->
@@ -648,30 +648,30 @@ Reset successfully</string>
 
     <string name="VSCODE">VSCODE</string>
     <string name="X86_Alpine">X86_Alpine</string>
-    <string name="请在下载站下载Alpine插件">Please download the Alpine plugin at the download site</string>
-    <string name="没有权限">Without memory permissions, the download station cannot be opened!</string>
+    <string name="vs_please_download_the_alpine_plugin_at_the">Please download the Alpine plugin at the download site</string>
+    <string name="vs_without_memory_permissions_the_download">Without memory permissions, the download station cannot be opened!</string>
 
 
-    <string name="可能检测到OTG设备">The OTG device may be detected, but the reading fails, please unplug the device and try again, or give permission to read OTG!</string>
-    <string name="检测到OTG设备">The OTG device is detected, and the OTG mapping directory will be created\n~/home/xinhaoLink/</string>
-    <string name="下次提示">下次提示</string>
-    <string name="如果下次想继续使用OTG设备">Next time prompt</string>
-    <string name="OTG设备异常">
+    <string name="vs_the_otg_device_may_be_detected_but_the_r">The OTG device may be detected, but the reading fails, please unplug the device and try again, or give permission to read OTG!</string>
+    <string name="vs_the_otg_device_is_detected_and_the_otg_m">The OTG device is detected, and the OTG mapping directory will be created\n~/home/xinhaoLink/</string>
+    <string name="vs_remind_me_next_time">Remind me next time</string>
+    <string name="vs_next_time_prompt_otg">Next time prompt</string>
+    <string name="vs_otg_device_abnormal_unable_to_read_the_u">
        OTG device abnormal\n
         Unable to read the USB (OTG) usable directory\n
         The directory structure is empty!
     </string>
-    <string name="无联系人">No contacts or no permissions</string>
-    <string name="姓名">Name</string>
-    <string name="电话">phone</string>
-    <string name="备注">Remarks</string>
-    <string name="序号">Serial number</string>
+    <string name="vs_no_contacts_or_no_permissions">No contacts or no permissions</string>
+    <string name="vs_name">Name</string>
+    <string name="vs_phone">phone</string>
+    <string name="vs_remarks">Remarks</string>
+    <string name="vs_serial_number">Serial number</string>
 
-    <string name="无权限读取">No permission to read</string>
-    <string name="请等待">Please wait</string>
-    <string name="远程控制下请先安装vim">Please install vim first under remote control, otherwise the program will not create sms.txt and phone.txt</string>
-    <string name="网络访问linux目录">Network DIR</string>
-    <string name="filebrowser已运行">filebrowser is running, port 19951, account: admin password: admin</string>
+    <string name="vs_no_permission_to_read">No permission to read</string>
+    <string name="vs_please_wait">Please wait</string>
+    <string name="vs_please_install_vim_first_under_remote_co">Please install vim first under remote control, otherwise the program will not create sms.txt and phone.txt</string>
+    <string name="vs_network_dir_linux">Network DIR</string>
+    <string name="vs_filebrowser_is_running_port_19951_accoun">filebrowser is running, port 19951, account: admin password: admin</string>
     <string name="WinXp">Windows Xp</string>
 
     <string name="msg_add_termux_debug_info">Add termux debug info to report?</string>
@@ -680,43 +680,43 @@ Reset successfully</string>
     <string name="termux_api_preferences_summary">Preferences for &TERMUX_API_APP_NAME; app</string>
     <!-- TermuxService -->
 
-    <string name="Win7模拟">Win7 simulation</string>
+    <string name="vs_win7_simulation">Win7 simulation</string>
 
-    <string name="选择方式">options</string>
-    <string name="要获取最新版本">To get the latest version, you need to download it online, the old version can choose a local script</string>
-    <string name="获取线上">Get online</string>
-    <string name="线上脚本">Online script</string>
-    <string name="本地脚本">Local script</string>
-    <string name="请双击命令窗口试试">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
-    <string name="Zero论坛">Help &amp; Manual</string>
+    <string name="vs_options">options</string>
+    <string name="vs_to_get_the_latest_version_you_need_to_do">To get the latest version, you need to download it online, the old version can choose a local script</string>
+    <string name="vs_get_online">Get online</string>
+    <string name="vs_online_script">Online script</string>
+    <string name="vs_local_script">Local script</string>
+    <string name="vs_victorsuite_double_click_the_command_win">VictorSuite\nDouble-click the command window to open the shortcut bar\nDouble-click the far left (volume + button)\nRight (volume-button) to open the menu/session bar\nTwo-finger click to open the toolbox\nThe right menu opens the built-in file browser device</string>
+    <string name="vs_help_manual">Help &amp; Manual</string>
     <string name="vs_help_title">VictorSuite Help</string>
-    <string name="VictorSuite论坛">VictorSuite bbs</string>
+    <string name="vs_victorsuite_bbs">VictorSuite bbs</string>
 
-    <string name="在线脚本">Online script</string>
-    <string name="在线脚本服务器名称">Server Name</string>
-    <string name="数据载入中">Data loading</string>
-    <string name="服务器已离线">Server is offline</string>
-    <string name="服务器在线但数据格式出错">The server is online, but the data format is wrong</string>
-    <string name="当前文件下载已被禁止">The current file download has been forbidden</string>
-    <string name="此脚本数据错误">The script data is wrong, please try to contact the administrator</string>
+    <string name="vs_online_script_2">Online script</string>
+    <string name="vs_server_name">Server Name</string>
+    <string name="vs_data_loading">Data loading</string>
+    <string name="vs_server_is_offline">Server is offline</string>
+    <string name="vs_the_server_is_online_but_the_data_format">The server is online, but the data format is wrong</string>
+    <string name="vs_the_current_file_download_has_been_forbi">The current file download has been forbidden</string>
+    <string name="vs_the_script_data_is_wrong_please_try_to_c">The script data is wrong, please try to contact the administrator</string>
 
-    <string name="美化设置">Beautify settings</string>
-    <string name="字体颜色">Font Color</string>
-    <string name="背景颜色">Back Color</string>
-    <string name="字体颜色透明度">Font Color transparency</string>
-    <string name="背景颜色透明度">Back Color transparency</string>
-    <string name="背景颜色半透明">Font Color transparency up pic</string>
-    <string name="背景图片">Back PIC</string>
-    <string name="显示背景字体">Show Back Font</string>
-    <string name="重置">Reset</string>
-    <string name="如果看到该页面">If you see this page, press the back key to exit</string>
+    <string name="vs_beautify_settings">Beautify settings</string>
+    <string name="vs_font_color">Font Color</string>
+    <string name="vs_back_color">Back Color</string>
+    <string name="vs_font_color_transparency">Font Color transparency</string>
+    <string name="vs_back_color_transparency">Back Color transparency</string>
+    <string name="vs_font_color_transparency_up_pic">Font Color transparency up pic</string>
+    <string name="vs_back_pic">Back PIC</string>
+    <string name="vs_show_back_font">Show Back Font</string>
+    <string name="vs_reset">Reset</string>
+    <string name="vs_if_you_see_this_page_press_the_back_key">If you see this page, press the back key to exit</string>
     <string name="nju">NJU</string>
     <string name="ustc">USTC</string>
     <string name="hit">HIT</string>
 
-    <string name="启动器新">Launcher[new]</string>
-    <string name="启动器旧">Launcher[old]</string>
-    <string name="系统切换成功">The launcher is switched successfully, and it will take effect after restarting</string>
+    <string name="vs_launcher_new">Launcher[new]</string>
+    <string name="vs_launcher_old">Launcher[old]</string>
+    <string name="vs_the_launcher_is_switched_successfully_an">The launcher is switched successfully, and it will take effect after restarting</string>
 
     <!-- TermuxService -->
 
@@ -749,7 +749,7 @@ Reset successfully</string>
     <string name="font_name">fontName:</string>
     <string name="font_instance">fontInstance:</string>
     <string name="font_path">fontPath:</string>
-    <string name="instance_zero">VictorSuite|ABCD</string>
+    <string name="vs_font_sample">VictorSuite|ABCD</string>
 
     <string name="clipboard_text">Note: This clipboard will only record the content within the APP</string>
     <string name="clipboard_title">Clipboard Title:</string>
@@ -763,7 +763,7 @@ Reset successfully</string>
 
     <string name="image_size_error">file too large</string>
 
-    <string name="zero_eg_not_install">No engine detected, redirecting to the GitHub page…</string>
+    <string name="vs_engine_not_install">No engine detected, redirecting to the GitHub page…</string>
 
     <string name="install_environment">Install the required environment?</string>
 
@@ -785,11 +785,11 @@ Reset successfully</string>
 
     <string name="opne_in_victorsuite">Opne In Victorsuite</string>
 
-    <string name="move_file_to_zt">Copy File To VictorSuite</string>
+    <string name="move_file_to_vs">Copy File To VictorSuite</string>
 
     <string name="file_name_copy">FileMessage:{file}\n\nSize:{size}\n\nPath:{path}\n\nSuffix:{suffix}\n\ncopyPath:~</string>
 
-    <string name="copy_file_to_zt">copy is complete, the copy is in the path:"~"</string>
+    <string name="copy_file_to_vs">copy is complete, the copy is in the path:"~"</string>
 
     <string name="not_file_msg">File error, cannot be copied into VictorSuite application!</string>
 
@@ -847,7 +847,7 @@ Reset successfully</string>
     <string name="create_data_message">Create Data MSG</string>
     <string name="data_message_hint">Create your package information, provide instructions for using the package. After setting it up, the relevant package information will be displayed in the left sidebar. You can use Markdown syntax.</string>
     <string name="data_message_empty">Data Msg Not Empty</string>
-    <string name="zero_uninstall">unInstall</string>
+    <string name="vs_uninstall_label">unInstall</string>
     <string name="install_module">Install Module</string>
     <string name="install_module_download">Install Module(DownLoad Module)</string>
     <string name="install_module_message">Note: It cannot be uninstalled after installation, and it only takes effect for the current container (if the path has been put into the module package but it is not displayed, please check the SD card permission)</string>
@@ -957,10 +957,10 @@ Reset successfully</string>
     <string name="common_functions">Common Functions</string>
     <string name="beautification_function">Beautification/UI function</string>
     <string name="online_features">online features</string>
-    <string name="zt_features">VictorSuite functions</string>
-    <string name="zt_settings">VictorSuite settings</string>
-    <string name="zt_settings1">VictorSuite settings</string>
-    <string name="zt_settings_note">VictorSuite Related settings options</string>
+    <string name="vs_features">VictorSuite functions</string>
+    <string name="vs_settings">VictorSuite settings</string>
+    <string name="vs_settings1">VictorSuite settings</string>
+    <string name="vs_settings_note">VictorSuite Related settings options</string>
     <string name="container_settings">Container settings</string>
     <string name="container_settings_note">Applications within the application container are only set for the current container.</string>
     <string name="about_victorsuite">About VictorSuite</string>
@@ -969,13 +969,13 @@ Reset successfully</string>
     <string name="termux_settings_note">Enter the Termux native settings content</string>
     <string name="install_termux_software">Install/restore Termux official software</string>
     <string name="install_termux_software_note">Use native Termux, API, X11, etc. with the same signature as VictorSuite installed</string>
-    <string name="zt_download_service">VictorSuite download server</string>
-    <string name="zt_download_service_note">The default port is:19956</string>
-    <string name="zt_download_service_note1">Please note! This function is not protected by account password and can be downloaded by default. Please be careful about personal privacy being leaked after opening it!</string>
-    <string name="zt_sidebar_closes_automatically">Sidebar closes automatically</string>
-    <string name="zt_sidebar_closes_automatically_note">Calling up the input method will automatically close the sidebar (left, right)</string>
-    <string name="zt_landscaping_settings">Click "Beautification Settings" to close the left column</string>
-    <string name="zt_landscaping_settings_note">Open or close the sidebar according to your personal settings.</string>
+    <string name="vs_download_service">VictorSuite download server</string>
+    <string name="vs_download_service_note">The default port is:19956</string>
+    <string name="vs_download_service_note1">Please note! This function is not protected by account password and can be downloaded by default. Please be careful about personal privacy being leaked after opening it!</string>
+    <string name="vs_sidebar_closes_automatically">Sidebar closes automatically</string>
+    <string name="vs_sidebar_closes_automatically_note">Calling up the input method will automatically close the sidebar (left, right)</string>
+    <string name="vs_landscaping_settings">Click "Beautification Settings" to close the left column</string>
+    <string name="vs_landscaping_settings_note">Open or close the sidebar according to your personal settings.</string>
     <string name="toolbox_display_settings">Disable toolbox display</string>
     <string name="toolbox_display_settings_note">Enlarging or reducing the font with two fingers causes gesture conflict, which can be temporarily closed here\n</string>
     <string name="user_bottom_keyboard_settings">Turn on keyboard rules mode</string>
@@ -984,22 +984,22 @@ Reset successfully</string>
     <string name="bottom_keyboard_settings_note">Enter personalized keyboard rules to improve input efficiency</string>
     <string name="log_output">Output LOG to memory card</string>
     <string name="log_output_note">Output the LOG file to\n[/xinhao/VictorSuiteLog/VictorSuite.log]\nIt may affect performance, please enable it with caution!!!!</string>
-    <string name="zt_about">About VictorSuite</string>
-    <string name="zt_about_victorsuite">VictorSuite GITHUB</string>
-    <string name="zt_about_victorsuite_note">Jump to VictorSuite GITHUB page</string>
-    <string name="zt_about_victorsuite_core_manage">ZeroCoreManage GITHUB (extension engine)</string>
-    <string name="zt_about_victorsuite_core_manage_note">Jump to VictorSuite GITHUB page\nAdditional extension engine package for VictorSuite</string>
-    <string name="zt_about_card_title">VictorSuite</string>
-    <string name="zt_about_card_title_note">VictorSuite is a secondary development based on Termux, adding\nauxiliary functions that are not available in Termux, making it easy to get started quickly\nThis software can be equivalent to a mini-linux system and can be additionally installed\nOther distributions such as: Ubuntu, CentOs, etc.</string>
-    <string name="zeroCore_about_card_title">ZeroCoreManage</string>
-    <string name="zeroCore_about_card_title_note">ZeroCoreManage is an expansion pack based on VictorSuite. The purpose of extending the VictorSuite function is to reduce the size of the VictorSuite software package. VictorSuite can still run normally without installing this expansion pack. Extra engine content:\n\n1. Built-in Keyboard\n2. WEB access memory card\n3. X86 Alpine</string>
-    <string name="zt_developer">Development/Contribution</string>
-    <string name="zt_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn etc (in no particular order)</string>
-    <string name="zt_install">Restore/expand official version</string>
-    <string name="zt_install_float">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> Termux Float] to install the plug-in</string>
-    <string name="zt_install_file">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> (VictorSuite)Utermux File Plug] to install the plug-in</string>
-    <string name="zt_volume_function_title">Restore volume +- keys</string>
-    <string name="zt_volume_function_summary">Disable the current use of volume +- keys to pop up the left/right panel</string>
+    <string name="vs_about">About VictorSuite</string>
+    <string name="vs_about_victorsuite">VictorSuite GITHUB</string>
+    <string name="vs_about_victorsuite_note">Jump to VictorSuite GITHUB page</string>
+    <string name="vs_about_victorsuite_core_manage">VsEngineManage GITHUB (extension engine)</string>
+    <string name="vs_about_victorsuite_core_manage_note">Jump to VictorSuite GITHUB page\nAdditional extension engine package for VictorSuite</string>
+    <string name="vs_about_card_title">VictorSuite</string>
+    <string name="vs_about_card_title_note">VictorSuite is a secondary development based on Termux, adding\nauxiliary functions that are not available in Termux, making it easy to get started quickly\nThis software can be equivalent to a mini-linux system and can be additionally installed\nOther distributions such as: Ubuntu, CentOs, etc.</string>
+    <string name="vs_engine_about_card_title">VsEngineManage</string>
+    <string name="vs_engine_about_card_title_note">VsEngineManage is an expansion pack based on VictorSuite. The purpose of extending the VictorSuite function is to reduce the size of the VictorSuite software package. VictorSuite can still run normally without installing this expansion pack. Extra engine content:\n\n1. Built-in Keyboard\n2. WEB access memory card\n3. X86 Alpine</string>
+    <string name="vs_developer">Development/Contribution</string>
+    <string name="vs_developer_note">Kevin Williams、狂吃不胖没办法、SharpIce 锐冰龙、WINLOG \n小潼(XiaoTong6666)、XINHAO_HAN、Xieansecn etc (in no particular order)</string>
+    <string name="vs_install_label">Restore/expand official version</string>
+    <string name="vs_install_float">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> Termux Float] to install the plug-in</string>
+    <string name="vs_install_file">This plugin is not installed! Please go to [Settings -> Install/Restore Termux official software -> (VictorSuite)VictorSuite File Plug] to install the plug-in</string>
+    <string name="vs_volume_function_title">Restore volume +- keys</string>
+    <string name="vs_volume_function_summary">Disable the current use of volume +- keys to pop up the left/right panel</string>
 
     <string-array name="options_resolution_keys">
         <item>1920x1080</item>
@@ -1031,38 +1031,38 @@ Reset successfully</string>
 
     <string name="copy_uri_error">URI duplication error, please wait for the developer to fix it...</string>
 
-    <string name="zt_timer">scheduled tasks</string>
-    <string name="zt_timer_settings">Scheduled task settings(BATE)</string>
+    <string name="vs_timer">scheduled tasks</string>
+    <string name="vs_timer_settings">Scheduled task settings(BATE)</string>
 
-    <string name="zt_timer_start">Start a scheduled task</string>
-    <string name="zt_timer_start_sum">The command code will be executed once when the scheduled task is started.</string>
-    <string name="zt_timer_this_check">Current selection</string>
-    <string name="zt_timer_30_second">30 seconds</string>
-    <string name="zt_timer_1_minute">1 minute</string>
-    <string name="zt_timer_10_minute">10 minute</string>
-    <string name="zt_timer_30_minute">30 minute</string>
-    <string name="zt_timer_minute">minute</string>
-    <string name="zt_timer_1_hour">1 hour</string>
-    <string name="zt_timer_customize">customize</string>
-    <string name="zt_timer_message">The custom unit is seconds\n1 minute = 60 seconds\n1 hour = 60 minutes * 60 seconds = 3600 seconds \n1 day = 24 hours * 60 minutes * 60 seconds = 86400 seconds</string>
+    <string name="vs_timer_start">Start a scheduled task</string>
+    <string name="vs_timer_start_sum">The command code will be executed once when the scheduled task is started.</string>
+    <string name="vs_timer_this_check">Current selection</string>
+    <string name="vs_timer_30_second">30 seconds</string>
+    <string name="vs_timer_1_minute">1 minute</string>
+    <string name="vs_timer_10_minute">10 minute</string>
+    <string name="vs_timer_30_minute">30 minute</string>
+    <string name="vs_timer_minute">minute</string>
+    <string name="vs_timer_1_hour">1 hour</string>
+    <string name="vs_timer_customize">customize</string>
+    <string name="vs_timer_message">The custom unit is seconds\n1 minute = 60 seconds\n1 hour = 60 minutes * 60 seconds = 3600 seconds \n1 day = 24 hours * 60 minutes * 60 seconds = 86400 seconds</string>
 
-    <string name="zt_timer_log">Log directory</string>
-    <string name="zt_timer_log_sum">The LOG directory is:\n~/.timerdir/log/, please check the LOG operation status here.</string>
-    <string name="zt_timer_edit">script directory</string>
-    <string name="zt_timer_edit_sum">Please manually modify the Termux directory:\nVictorSuite environment: ~/.timerdir/termux_timer.sh\nSHELL environment: ~/.timerdir/shell_timer.sh\nAttention! Notice! Note\nPlease do not grant ROOT permission to APP in VictorSuite environment, otherwise it will not run!</string>
+    <string name="vs_timer_log">Log directory</string>
+    <string name="vs_timer_log_sum">The LOG directory is:\n~/.timerdir/log/, please check the LOG operation status here.</string>
+    <string name="vs_timer_edit">script directory</string>
+    <string name="vs_timer_edit_sum">Please manually modify the Termux directory:\nVictorSuite environment: ~/.timerdir/termux_timer.sh\nSHELL environment: ~/.timerdir/shell_timer.sh\nAttention! Notice! Note\nPlease do not grant ROOT permission to APP in VictorSuite environment, otherwise it will not run!</string>
 
-    <string name="zt_timer_environment">Current operating environment</string>
-    <string name="zt_timer_environment_sum">The current operating environment is:</string>
-    <string name="zt_timer_other_title_dialog">Custom time (seconds)</string>
-    <string name="zt_timer_other_input_numer_dialog">Please enter a number or enter a number greater than the maximum value of long (unit is seconds)</string>
-    <string name="zt_timer_notification_timer_title">(VictorSuite) The scheduled task is currently running</string>
-    <string name="zt_timer_notification_timer_sum">Current scheduled interval:</string>
-    <string name="zt_timer_notification_timer_cunt">Current execution count:</string>
-    <string name="zt_timer_notification_timer_kill">Forcefully closing the current task！</string>
-    <string name="zt_env_shell_title">ADB Shell runs Termux</string>
-    <string name="zt_env_shell_sum">Turn this option on to output the sh script to the specified directory\nClose it to cancel this script output</string>
-    <string name="zt_env_shell_sum_msg">Open adb shell and run the following command:\n1.adb shell\n2.</string>
-    <string name="zt_particle_animation">particle animation</string>
+    <string name="vs_timer_environment">Current operating environment</string>
+    <string name="vs_timer_environment_sum">The current operating environment is:</string>
+    <string name="vs_timer_other_title_dialog">Custom time (seconds)</string>
+    <string name="vs_timer_other_input_numer_dialog">Please enter a number or enter a number greater than the maximum value of long (unit is seconds)</string>
+    <string name="vs_timer_notification_timer_title">(VictorSuite) The scheduled task is currently running</string>
+    <string name="vs_timer_notification_timer_sum">Current scheduled interval:</string>
+    <string name="vs_timer_notification_timer_cunt">Current execution count:</string>
+    <string name="vs_timer_notification_timer_kill">Forcefully closing the current task！</string>
+    <string name="vs_env_shell_title">ADB Shell runs Termux</string>
+    <string name="vs_env_shell_sum">Turn this option on to output the sh script to the specified directory\nClose it to cancel this script output</string>
+    <string name="vs_env_shell_sum_msg">Open adb shell and run the following command:\n1.adb shell\n2.</string>
+    <string name="vs_particle_animation">particle animation</string>
 
     <!-- X11 Features Module -->
     <string name="x11_features">X11 Features</string>
@@ -1158,9 +1158,9 @@ Known Issue: Rapid consecutive back operations may cause black screen in Interna
     <string name="content_ssh_alias_ip_not_empty">Alias and IP cannot be empty</string>
     <string name="content_ssh_add_new_ssh_device">+ Add new SSH device</string>
 
-    <string name="zt_command_version">VictorSuite Command Version: 0.2 (2025 ~ 2026)</string>
-    <string name="zt_command_error">Unsupported or unrecognized due to low VictorSuite version: \"</string>
-    <string name="zt_command_help" tools:ignore="TypographyDashes"> Available Commands:\n
+    <string name="vs_command_version">VictorSuite Command Version: 0.2 (2025 ~ 2026)</string>
+    <string name="vs_cmd_error">Unsupported or unrecognized due to low VictorSuite version: \"</string>
+    <string name="vs_command_help" tools:ignore="TypographyDashes"> Available Commands:\n
         VictorSuite Terminal Command Explanation \n
         Version 0.1 \n
         \n
@@ -1225,16 +1225,16 @@ Known Issue: Rapid consecutive back operations may cause black screen in Interna
         \n
         \n</string>
 
-    <string name="zt_command_timeout">Connection Timeout</string>
-    <string name="zt_command_dialog_windows_finish">Window Closed Unexpectedly</string>
-    <string name="zt_command_dialog_finish">Dialog Closed</string>
-    <string name="zt_command_dialog_help">
+    <string name="vs_command_timeout">Connection Timeout</string>
+    <string name="vs_command_dialog_windows_finish">Window Closed Unexpectedly</string>
+    <string name="vs_command_dialog_finish">Dialog Closed</string>
+    <string name="vs_command_dialog_help">
     Usage Help:\n
     -c Confirmation/cancel dialog (OK or Cancel), Example: zt dialog -c -t title -m message content \n
     -s Show dialog (only OK button), Example: zt dialog -s -m message content \n
     -e Show edit dialog, Example: zt dialog -e -t title \n
 </string>
-    <string name="zt_command_image_backgroup">The input background image path is invalid</string>
+    <string name="vs_command_image_backgroup">The input background image path is invalid</string>
     <string name="no_permission">No permission</string>
 
     <string name="deepseek_zs">You are a VictorSuite assistant, helping users of VictorSuite and Termux answer basic Linux knowledge. It is best to use one line for all commands; if there are multiple lines, try to concatenate them into one line using &amp;&amp;.</string>
@@ -1282,14 +1282,14 @@ Enter code recognition parameters separated by commas. These will appear as blue
     <string name="deepseek_settings_ai_get_deepseek_key_4">Enter any name you like.</string>
     <string name="deepseek_settings_ai_get_deepseek_key_5">Copy the key here and paste it into the DeepSeek settings input field in VictorSuite.</string>
 
-    <string name="zt_ssh_improt_fail">Import failed: alias missing</string>
-    <string name="zt_ssh_improt_fail_error">Import failed</string>
-    <string name="zt_ssh_improt_success">Key import successful\nSaved as:</string>
+    <string name="vs_ssh_improt_fail">Import failed: alias missing</string>
+    <string name="vs_ssh_improt_fail_error">Import failed</string>
+    <string name="vs_ssh_improt_success">Key import successful\nSaved as:</string>
 
-    <string name="zt_root_fun">ROOT Function</string>
-    <string name="zt_engine">Requires Plugin/Engine (Please Restart APP After Installation)</string>
-    <string name="zt_data_info_title">Information</string>
-    <string name="zt_data_info_content">
+    <string name="vs_root_fun">ROOT Function</string>
+    <string name="vs_engine">Requires Plugin/Engine (Please Restart APP After Installation)</string>
+    <string name="vs_data_info_title">Information</string>
+    <string name="vs_data_info_content">
             # Information written here \n
             ## Will be backed up to the integrated package \n
             ### and will be directly \n
@@ -1298,23 +1298,23 @@ Enter code recognition parameters separated by commas. These will appear as blue
              [linktext](https://www.baidu.com)
 </string>
 
-    <string name="zt_new">New Version</string>
-    <string name="zt_command_key">Bottom Keyboard</string>
-    <string name="zt_command_edit_h">Enter your terminal bottom code…</string>
-    <string name="zt_command_def">Default</string>
-    <string name="zt_command_key_error">Format Error!</string>
-    <string name="zt_command_path_error">File Operation Failed!</string>
-    <string name="zt_command_path_ok">Save successful, restart APP to take effect</string>
-    <string name="zt_recreate">Please wait, restarting application…</string>
+    <string name="vs_new">New Version</string>
+    <string name="vs_command_key">Bottom Keyboard</string>
+    <string name="vs_command_edit_h">Enter your terminal bottom code…</string>
+    <string name="vs_command_def">Default</string>
+    <string name="vs_command_key_error">Format Error!</string>
+    <string name="vs_command_path_error">File Operation Failed!</string>
+    <string name="vs_command_path_ok">Save successful, restart APP to take effect</string>
+    <string name="vs_recreate">Please wait, restarting application…</string>
 
-    <string name="zt_adb_shell_run_debug">This feature is only available on debug builds. Would you like to download the debug APP to continue using this feature?</string>
-    <string name="zt_fold_menu_close">Disable folding feature</string>
-    <string name="zt_fold_menu_close_summary">(Requires restarting the APP) Enabling this option will keep the menu section on the left always expanded.</string>
-    <string name="zt_app_crash">An error occurred in the application. Please forward the following information to the developer [screenshot]\nIssue tracker: </string>
+    <string name="vs_adb_shell_run_debug">This feature is only available on debug builds. Would you like to download the debug APP to continue using this feature?</string>
+    <string name="vs_fold_menu_close">Disable folding feature</string>
+    <string name="vs_fold_menu_close_summary">(Requires restarting the APP) Enabling this option will keep the menu section on the left always expanded.</string>
+    <string name="vs_app_crash">An error occurred in the application. Please forward the following information to the developer [screenshot]\nIssue tracker: </string>
 
-    <string name="zt_menu_title_config">Configure Terminal</string>
-    <string name="zt_adb_shell_run">SHELL Run</string>
-    <string name="zt_adb_shell_run_summary">
+    <string name="vs_menu_title_config">Configure Terminal</string>
+    <string name="vs_adb_shell_run">SHELL Run</string>
+    <string name="vs_adb_shell_run_summary">
 Run the termux command terminal in the adb shell.
 The file has been successfully written to:\n
 home/termux-adb-shell.sh \n
@@ -1327,20 +1327,20 @@ sh termux-adb-shell.sh \n
 cd ~ &amp;&amp; pkg update -y \n
 </string>
 
-    <string name="zt_xml_menu">No click event configured in XML. After configuring the event, use `zt menu update` to retry or restart the APP.</string>
-    <string name="zt_xml_menu_error">XML format is incorrect. Please modify and retry using the command:\nzt menu update\nOr use the command:\nzt menu update\nto reset.\n\n-Click this error message to directly open the editor-\n\nError details:\n\n</string>
-    <string name="zt_xml_settings_title">Disable Using Configuration File for Left Menu Settings</string>
-    <string name="zt_xml_settings_summary">(Requires APP restart) Enabling this option will prevent loading the XML configuration file as the data source for the left menu.</string>
+    <string name="vs_xml_menu">No click event configured in XML. After configuring the event, use `zt menu update` to retry or restart the APP.</string>
+    <string name="vs_xml_menu_error">XML format is incorrect. Please modify and retry using the command:\nzt menu update\nOr use the command:\nzt menu update\nto reset.\n\n-Click this error message to directly open the editor-\n\nError details:\n\n</string>
+    <string name="vs_xml_settings_title">Disable Using Configuration File for Left Menu Settings</string>
+    <string name="vs_xml_settings_summary">(Requires APP restart) Enabling this option will prevent loading the XML configuration file as the data source for the left menu.</string>
 
-    <string name="zt_usage_habits_title">Usage Habits</string>
-    <string name="zt_usage_habits_content">Note (Usage habit related options can be re-customized in VictorSuite settings)\n
+    <string name="vs_usage_habits_title">Usage Habits</string>
+    <string name="vs_usage_habits_content">Note (Usage habit related options can be re-customized in VictorSuite settings)\n
         Choose a usage habit\n
         termux (Buttons follow the native layout completely)\n
         VictorSuite (Buttons follow the VictorSuite layout completely)\n
         Please select a usage habit</string>
-    <string name="zt_usage_habits_termux">Termux usage habit set successfully. Please go to settings to change the configuration.</string>
-    <string name="zt_usage_habits_ztermux">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
-    <string name="zt_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the VictorSuite usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
+    <string name="vs_usage_habits_termux">Termux usage habit set successfully. Please go to settings to change the configuration.</string>
+    <string name="vs_usage_habits_victorsuite">VictorSuite usage habit set successfully. Please go to settings to change the configuration.</string>
+    <string name="vs_guide">Double-tap the edge of the screen to bring up the left/right menu bar\nIf you have set the VictorSuite usage habit, use the Volume +\- keys\nIf the left/right sidebar cannot close this window\nLong press here to force close</string>
 
     <!-- Plugin manager (com.termux.victor.plugin) -->
     <string name="plugin_manager_title">Plugin Manager</string>
@@ -1457,4 +1457,7 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="vs_tips_body">• Double-tap the terminal to open the shortcut bar.\n• Double-tap the far-left edge (or press Volume +) / far-right edge (or press Volume −) to open the menu / session bar.\n• Two-finger tap to open the toolbox.\n• The right-side drawer is the built-in file browser (VictorSuite Files).\n• You can reopen these tips any time from the side menu → Tips / Gestures.</string>
     <string name="vs_tips_device">Device: %1$s %2$s\nAndroid %3$s · arch %4$s</string>
     <string name="vs_tips_ok">Got it</string>
+    <string name="vs_distro_choose">Install Linux</string>
+    <string name="vs_distro_choose_title">Choose a Linux distribution</string>
+    <string name="vs_distro_skip">Not now</string>
 </resources>

@@ -53,7 +53,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/标题"
+                android:text="@string/vs_title"
                 android:textStyle="bold"
                 android:id="@+id/name"
                 android:textSize="14sp"
@@ -73,7 +73,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/大小"
+                android:text="@string/vs_size"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:id="@+id/size"
@@ -83,7 +83,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/简介"
+                android:text="@string/vs_introduction"
                 android:textStyle="bold"
                 android:layout_marginTop="2dp"
                 android:id="@+id/note"

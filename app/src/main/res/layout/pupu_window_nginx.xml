@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:textSize="15sp"
-            android:text="@string/Nginx开关"
+            android:text="@string/vs_nginx_switch"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 

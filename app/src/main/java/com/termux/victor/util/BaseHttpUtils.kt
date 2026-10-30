@@ -79,7 +79,7 @@ open class BaseHttpUtils {
                         else -> {
                             message.arg1 = RESULT_FAILURE
                             message.obj = response.body()
-                            UUtils.showLog("错误消息2222:" + response.body())
+                            UUtils.showLog("Error message: " + response.body())
                         }
                     }
                     handler.sendMessage(message)

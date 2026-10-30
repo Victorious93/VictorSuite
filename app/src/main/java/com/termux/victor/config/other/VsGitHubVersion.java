@@ -39,7 +39,7 @@ public class VsGitHubVersion {
         return new VsGitHubVersion();
     }
 
-    public void initZtVersionVisible(TextView textView) {
+    public void initVsVersionVisible(TextView textView) {
         OkGo.<String>get(VsLinks.RELEASES_API).tag(UUtils.getContext()).headers(new HttpHeaders())
             .params(new HttpParams()).execute(new StringCallback() {
 

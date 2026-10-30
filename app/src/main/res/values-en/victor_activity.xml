@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="victor_back">Back</string>
-    <string name="victor_close">Close</string>
-    <string name="victor_scan_title">Scan</string>
-    <string name="victor_scan_album">Album</string>
-    <string name="victor_scan_tip">Place the QR code/barcode inside the frame to scan automatically</string>
-    <string name="victor_scan_too_dark">Environment too dark, please turn on flash</string>
-</resources>

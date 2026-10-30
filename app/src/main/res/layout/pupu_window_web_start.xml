@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:textSize="15sp"
-            android:text="@string/WebStart开关"
+            android:text="@string/vs_webstart_switch"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:text="@string/端口"
+            android:text="@string/vs_port"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:text="@string/路径"
+            android:text="@string/vs_path"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:text="@string/访问地址"
+            android:text="@string/vs_address_2"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -172,7 +172,7 @@
             android:layout_width="wrap_content"
             android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:text="@string/原作者地址"
+            android:text="@string/vs_original_author_address"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -185,7 +185,7 @@
             android:id="@+id/code_address"
             android:gravity="center"
             android:textSize="13sp"
-            android:text="@string/项目地址"
+            android:text="@string/vs_project_address"
             android:textColorHint="@color/color_232635"
             android:layout_alignParentRight="true"
             android:layout_height="30dp"/>

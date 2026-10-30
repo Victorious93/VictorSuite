@@ -93,7 +93,7 @@ class BoomCommandDialog : BaseDialogDown {
             minglArrayList!!.addAll(minLBean.data.list)
             mMinLAdapter!!.notifyDataSetChanged()
         } catch (e: Exception) {
-            UUtils.showMsg(UUtils.getString(R.string.配置文件出错))
+            UUtils.showMsg(UUtils.getString(R.string.vs_configuration_file_error))
             e.printStackTrace()
         }
     }

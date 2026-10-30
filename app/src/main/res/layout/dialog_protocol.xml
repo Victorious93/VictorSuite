@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:gravity="center"
-        android:text="@string/协议"
+        android:text="@string/vs_protocol"
         android:textSize="15sp"
         android:textColor="@color/color_ffffff"
         android:textStyle="bold"
@@ -54,7 +54,7 @@
             android:layout_height="35dp"
             android:background="@drawable/shape_r_3dp_553d_all"
             android:gravity="center"
-            android:text="@string/同意"
+            android:text="@string/vs_agree"
             android:textColor="@color/color_ffffff"
             android:textSize="14sp" />
 
@@ -66,7 +66,7 @@
             android:layout_height="35dp"
             android:background="@drawable/shape_r_3dp_553d_all"
             android:gravity="center"
-            android:text="@string/不同意"
+            android:text="@string/vs_disagree"
             android:textColor="@color/color_ffffff"
             android:textSize="14sp" />
 

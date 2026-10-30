@@ -23,7 +23,7 @@ public class DownLoadClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.下载站);
+        return context.getString(R.string.vs_download_station);
     }
 
     @Override

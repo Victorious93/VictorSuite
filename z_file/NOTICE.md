@@ -5,7 +5,7 @@ instead of the prebuilt `app/libs/z_file.aar` it used before.
 
 - **Base:** ZFileManager by zippo88888888 – https://github.com/zippo88888888/ZFileManager – Apache License 2.0
   (as stated by the upstream README; https://www.apache.org/licenses/LICENSE-2.0).
-- **Modifications:** ZeroTermux by hanxinhao000 (`com.zp.z_file.zerotermux.*`, `InstallTarData`, `ModuleInstallUtils`,
+- **Modifications:** ZeroTermux by hanxinhao000 (`com.zp.z_file.victor.*`, `InstallTarData`, `ModuleInstallUtils`,
   `InstallModuleDialog`, backup/restore dialogs, resources) – GPL-3.0.
 - **Source taken from:** the `z_file/` directory of https://github.com/msmt2017/new_ZeroTermux at commit `f68fd87`.
   The upstream source files carry no per-file licence headers; none were removed.

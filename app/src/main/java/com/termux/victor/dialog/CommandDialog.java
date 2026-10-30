@@ -259,7 +259,7 @@ public class CommandDialog extends BaseDialogCentre {
             web_view.loadData(renderer.render(document), "text/html; charset=UTF-8", null);
         } catch (IOException e) {
             e.printStackTrace();
-            UUtils.showMsg(UUtils.getString(R.string.出错了));
+            UUtils.showMsg(UUtils.getString(R.string.vs_error));
         }
     }
 

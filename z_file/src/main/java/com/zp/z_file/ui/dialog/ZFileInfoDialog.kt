@@ -76,18 +76,18 @@ internal class ZFileInfoDialog : ZFileManageDialog(), Runnable {
             is ZFileImageType -> {
                 vb?.zfileDialogInfoMoreBox?.visibility = View.VISIBLE
                 vb?.zfileDialogInfoFileDurationLayout?.visibility = View.GONE
-                vb?.zfileDialogInfoFileOther?.text = "无"
+                vb?.zfileDialogInfoFileOther?.text = "None"
                 val wh = ZFileOtherUtil.getImageWH(filePath)
                 vb?.zfileDialogInfoFileFBL?.text = String.format("%d * %d", wh[0], wh[1])
             }
             is ZFileAudioType -> {
                 vb?.zfileDialogInfoMoreBox?.visibility = View.VISIBLE
                 vb?.zfileDialogInfoFileFBLLayout?.visibility = View.GONE
-                vb?.zfileDialogInfoFileOther?.text = "无"
+                vb?.zfileDialogInfoFileOther?.text = "None"
             }
             is ZFileVideoType -> {
                 vb?.zfileDialogInfoMoreBox?.visibility = View.VISIBLE
-                vb?.zfileDialogInfoFileOther?.text = "无"
+                vb?.zfileDialogInfoFileOther?.text = "None"
             }
             else -> {
                 vb?.zfileDialogInfoMoreBox?.visibility = View.GONE

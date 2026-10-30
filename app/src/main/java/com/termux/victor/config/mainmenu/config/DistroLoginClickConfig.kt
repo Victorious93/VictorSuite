@@ -21,7 +21,7 @@ import java.io.IOException
  * the distribution's shell. The menu loads these by class name with a no-argument constructor,
  * hence one small subclass per distribution.
  */
-open class DistroLoginClickConfig(private val key: String, private val label: String) : BaseMenuClickConfig() {
+open class DistroLoginClickConfig(val key: String, private val label: String) : BaseMenuClickConfig() {
     override fun getType(): Int {
         return MainMenuConfig.CODE_LINUX_LOGIN
     }
@@ -62,6 +62,15 @@ open class DistroLoginClickConfig(private val key: String, private val label: St
 
     companion object {
         private const val SCRIPT_NAME = "distro-login.sh"
+
+        /** The distributions offered on the first-launch / startup screen, in display order. */
+        @JvmStatic
+        fun startupChoices(): Array<DistroLoginClickConfig> = arrayOf(
+            UbuntuLoginClickConfig(),
+            KaliLoginClickConfig(),
+            ParrotLoginClickConfig(),
+            BlackArchLoginClickConfig(),
+        )
     }
 }
 

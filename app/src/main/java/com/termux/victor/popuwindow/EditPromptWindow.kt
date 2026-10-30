@@ -39,17 +39,17 @@ class EditPromptWindow :BasePuPuWindow {
             super.handleMessage(msg)
 
             var i = msg.obj as Int
-            UUtils.showLog("连接测试:开始$i")
+            UUtils.showLog("Connection test: start $i")
             BaseHttpUtils().getUrl("${mList!![i].ip}/repository/main.json",object :HttpResponseListenerBase{
                 override fun onSuccessful(msg: Message, mWhat: Int) {
                     try {
                         val test = Gson().fromJson(msg.obj as String, ZDYDataBean::class.java)
-                        UUtils.showLog("连接测试:成功")
+                        UUtils.showLog("Connection test: success")
                         mList!![i].connection = 1
                     } catch (e: Exception) {
                         e.printStackTrace()
                         mList!![i].connection = 2
-                        UUtils.showLog("连接测试:失败")
+                        UUtils.showLog("Connection test: failed")
                     }
 
                     mEditPromptAdapter!!.notifyDataSetChanged()
@@ -59,7 +59,7 @@ class EditPromptWindow :BasePuPuWindow {
 
                 override fun onFailure(response: Response<String>?, msg: String, mWhat: Int) {
                     try {
-                        UUtils.showLog("连接测试:失败")
+                        UUtils.showLog("Connection test: failed")
                         mList!![i].connection = 2
                         mEditPromptAdapter!!.notifyDataSetChanged()
                     }catch (e:Exception){
@@ -94,17 +94,17 @@ class EditPromptWindow :BasePuPuWindow {
             super.handleMessage(msg)
 
             var i = msg.obj as Int
-            UUtils.showLog("连接测试:开始$i")
+            UUtils.showLog("Connection test: start $i")
             BaseHttpUtils().getUrl("${mList!![i].ip}/repository/main.json",object :HttpResponseListenerBase{
                 override fun onSuccessful(msg: Message, mWhat: Int) {
                     try {
                         val test = Gson().fromJson(msg.obj as String, ZDYDataBean::class.java)
                         mList!![i].connection = 1
-                        UUtils.showLog("连接测试:成功")
+                        UUtils.showLog("Connection test: success")
                     } catch (e: Exception) {
                         e.printStackTrace()
                         mList!![i].connection = 2
-                        UUtils.showLog("连接测试:失败")
+                        UUtils.showLog("Connection test: failed")
                     }
                     mEditPromptAdapter!!.notifyDataSetChanged()
 
@@ -113,7 +113,7 @@ class EditPromptWindow :BasePuPuWindow {
 
                 override fun onFailure(response: Response<String>?, msg: String, mWhat: Int) {
                     try {
-                        UUtils.showLog("连接测试:失败")
+                        UUtils.showLog("Connection test: failed")
                         mList!![i].connection = 2
                         mEditPromptAdapter!!.notifyDataSetChanged()
                     }catch (e:Exception){
@@ -196,7 +196,7 @@ class EditPromptWindow :BasePuPuWindow {
 
         mEditPromptAdapter?.setEditPromptListener(object : EditPromptAdapter.EditPromptListener{
             override fun clickItem(data: EditPromptBean.EditPromptData) {
-                UUtils.showLog("点击事件(内):${data.ip}---${mEditPromptWindowListener}")
+                UUtils.showLog("Click event (inner): ${data.ip}---${mEditPromptWindowListener}")
                 mEditPromptWindowListener?.itemClick(data)
             }
 
@@ -255,7 +255,7 @@ class EditPromptWindow :BasePuPuWindow {
 
             }
 
-            UUtils.showLog("连接测试(列表刷新):${editPromptData.connection}")
+            UUtils.showLog("Connection test (list refresh): ${editPromptData.connection}")
             if(editPromptData.connection == 0){
                 holder.img?.visibility = View.GONE
                 holder.pro?.visibility = View.GONE
@@ -335,7 +335,7 @@ class EditPromptWindow :BasePuPuWindow {
 
                     for (i in 0 until arrayList.size){
 
-                        UUtils.showLog("删除存入:${ip}------${arrayList[i].ip}")
+                        UUtils.showLog("Delete stored: ${ip}------${arrayList[i].ip}")
                         if(ip == arrayList[i].ip){
                             arrayList.removeAt(i)
 
@@ -344,7 +344,7 @@ class EditPromptWindow :BasePuPuWindow {
 
                             val toJson = Gson().toJson(fromJson)
 
-                            UUtils.showLog("删除存入:${toJson}")
+                            UUtils.showLog("Delete stored: ${toJson}")
                             OtherPrefs.saveStringOther("ip_save",toJson)
 
                             return

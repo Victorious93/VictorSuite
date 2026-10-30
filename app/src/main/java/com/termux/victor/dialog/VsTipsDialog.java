@@ -11,7 +11,8 @@ import com.termux.app.TermuxInstaller;
 
 /**
  * Readable "Tips / Gestures" dialog (replaces the faint watermark that used to sit behind the
- * terminal). Opened from the side menu, and shown once automatically on first launch.
+ * terminal). Opened from the side menu, and shown once automatically on first launch. Its
+ * "Install Linux" button opens the proot-distro picker.
  */
 public final class VsTipsDialog {
     private static final String PREFS = "vs_tips";
@@ -39,9 +40,32 @@ public final class VsTipsDialog {
         AlertDialog.Builder b = new AlertDialog.Builder(context)
             .setTitle(R.string.vs_tips_title)
             .setMessage(msg)
-            .setPositiveButton(R.string.vs_tips_ok, (d, w) -> d.dismiss());
+            .setPositiveButton(R.string.vs_tips_ok, (d, w) -> d.dismiss())
+            .setNeutralButton(R.string.vs_distro_choose, (d, w) -> {
+                d.dismiss();
+                showDistroPicker(context);
+            });
         if (firstLaunch) b.setCancelable(true);
         b.show();
+    }
+
+    /**
+     * Lets the user pick a proot-distro Linux distribution (Ubuntu, Kali, Parrot, BlackArch) right
+     * from the startup screen. Uses the same installers as the drawer's Linux Login buttons.
+     */
+    public static void showDistroPicker(Context context) {
+        final com.termux.victor.config.mainmenu.config.DistroLoginClickConfig[] choices =
+            com.termux.victor.config.mainmenu.config.DistroLoginClickConfig.Companion.startupChoices();
+        String[] labels = new String[choices.length];
+        for (int i = 0; i < choices.length; i++) labels[i] = choices[i].getString(context);
+        new AlertDialog.Builder(context)
+            .setTitle(R.string.vs_distro_choose_title)
+            .setItems(labels, (d, which) -> {
+                d.dismiss();
+                choices[which].onClick(null, context);
+            })
+            .setNegativeButton(R.string.vs_distro_skip, (d, w) -> d.dismiss())
+            .show();
     }
 
     /** Show the tips once, the first time the terminal is ready. Safe to call on every start. */

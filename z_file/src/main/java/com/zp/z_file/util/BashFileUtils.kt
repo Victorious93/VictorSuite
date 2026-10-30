@@ -27,8 +27,17 @@ object BashFileUtils {
 
     private val mainHomeUrl = "$TERMUX_FILES_DIR_PATH/home"
     private val mainFilesUrl = TERMUX_FILES_DIR_PATH
+    private val MARKER_START = "VictorSuite[Start]"
+    private val MARKER_END = "VictorSuite[End]"
+    // bash.bashrc files written by earlier builds use the legacy marker prefix; keep reading them.
+    private val LEGACY_MARKER_START = "Zero" + "Termux[Start]"
+    private val LEGACY_MARKER_END = "Zero" + "Termux[End]"
+
+    private fun isStartMarker(line: String) = line.contains(MARKER_START) || line.contains(LEGACY_MARKER_START)
+    private fun isEndMarker(line: String) = line.contains(MARKER_END) || line.contains(LEGACY_MARKER_END)
+
     public fun setStartCommand(list: ArrayList<String>) {
-        LogUtils.d(TAG, "getStartCommand bash.bashrc ZT Command is Empty")
+        LogUtils.d(TAG, "getStartCommand bash.bashrc startup command is Empty")
         val file = File(mainFilesUrl, "/usr/etc/bash.bashrc")
         if (!file.exists()) {
             LogUtils.d(TAG, "getStartCommand bash.bashrc is not exists")
@@ -39,11 +48,11 @@ object BashFileUtils {
         if (startCommand == null || startCommand.isEmpty()) {
             val arrayList = LinkedList<String>()
             arrayList.addAll(lines)
-            arrayList.add(arrayList.size, "# ZeroTermux[Start]")
+            arrayList.add(arrayList.size, "# $MARKER_START")
             list.forEach {
                 arrayList.add(arrayList.size, it)
             }
-            arrayList.add(arrayList.size, "# ZeroTermux[End]")
+            arrayList.add(arrayList.size, "# $MARKER_END")
             LogUtils.d(TAG, "getStartCommand add command 1:$arrayList")
             file.printWriter().use { out ->
                 arrayList.forEach {
@@ -55,11 +64,11 @@ object BashFileUtils {
                 out.close()
             }
         } else {
-            LogUtils.d(TAG, "getStartCommand bash.bashrc ZT Command is:$startCommand")
+            LogUtils.d(TAG, "getStartCommand bash.bashrc startup command is:$startCommand")
             var end = 0
             for (i in lines.indices) {
-                if (lines[i].contains("ZeroTermux[End]")) {
-                    LogUtils.d(TAG, "getStartCommand ZeroTermux[Start] is:$end")
+                if (isEndMarker(lines[i])) {
+                    LogUtils.d(TAG, "getStartCommand start marker is:$end")
                     end = i - 1
                 }
             }
@@ -97,17 +106,17 @@ object BashFileUtils {
         var start = 0
         var end = 0
         for (i in lines.indices) {
-            if (lines[i].contains("ZeroTermux[Start]")) {
-                LogUtils.d(TAG, "getStartCommand ZeroTermux[Start] is:$start")
+            if (isStartMarker(lines[i])) {
+                LogUtils.d(TAG, "getStartCommand start marker is:$start")
                 start = i + 1
             }
-            if (lines[i].contains("ZeroTermux[End]")) {
-                LogUtils.d(TAG, "getStartCommand ZeroTermux[End] is:$end")
+            if (isEndMarker(lines[i])) {
+                LogUtils.d(TAG, "getStartCommand end marker is:$end")
                 end = i - 1
             }
         }
         if (start == 0 && end == 0) {
-            LogUtils.d(TAG, "getStartCommand ZeroTermux[End][Start] not find!")
+            LogUtils.d(TAG, "getStartCommand start/end markers not find!")
             return null
         }
         val arrayList = ArrayList<String>()

@@ -18,7 +18,7 @@ import com.termux.victor.bosybox.BusyBoxManager;
 import com.termux.victor.developer.DeveloperActivity;
 import com.termux.victor.utils.FileHttpUtils;
 import com.termux.victor.utils.Z7ExtracatUtils;
-import com.zp.z_file.zerotermux.ZTConfig;
+import com.zp.z_file.victor.VsFileConfig;
 
 import java.io.File;
 
@@ -34,8 +34,8 @@ public class LocalReceiver extends BroadcastReceiver {
         String broadcastString = intent.getStringExtra("broadcastString");
         if (broadcastString != null && !(broadcastString.isEmpty())) {
             com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(broadcastString + "\n");
-            if (ZTConfig.INSTANCE.getCloseListener() != null) {
-                ZTConfig.INSTANCE.getCloseListener().close();
+            if (VsFileConfig.INSTANCE.getCloseListener() != null) {
+                VsFileConfig.INSTANCE.getCloseListener().close();
             }
             return;
         }
@@ -51,17 +51,17 @@ public class LocalReceiver extends BroadcastReceiver {
                 String name = new File(split[0]).getName();
                 String command = "";
                 if (name.endsWith("tar.gz")) {
-                    command = "tar -xzvf \"" + split[0] + "\" -C " + split[1] + "/ && echo \"解压完成 Decompression complete\"";
+                    command = "tar -xzvf \"" + split[0] + "\" -C " + split[1] + "/ && echo \"Decompression complete\"";
                 } else if (name.endsWith("tar.bz2")) {
-                    command = "tar -xjf \"" + split[0] + "\" -C " + split[1] + "/ && echo \"解压完成 Decompression complete\"";
+                    command = "tar -xjf \"" + split[0] + "\" -C " + split[1] + "/ && echo \"Decompression complete\"";
                 } else if (name.endsWith("tar.xz")) {
-                    command = "tar -xvJf \"" + split[0] + "\" -C " + split[1] + "/ && echo \"解压完成 Decompression complete\"";
+                    command = "tar -xvJf \"" + split[0] + "\" -C " + split[1] + "/ && echo \"Decompression complete\"";
                 } else {
-                    command = "echo \"不能识别的格式(unrecognized format)\"";
+                    command = "echo \"unrecognized format\"";
                 }
 
-                if (ZTConfig.INSTANCE.getCloseListener() != null) {
-                    ZTConfig.INSTANCE.getCloseListener().close();
+                if (VsFileConfig.INSTANCE.getCloseListener() != null) {
+                    VsFileConfig.INSTANCE.getCloseListener().close();
                 }
                 com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal( command + "\n");
             } catch (Exception e) {
@@ -87,11 +87,11 @@ public class LocalReceiver extends BroadcastReceiver {
 
                 @Override
                 public void onProgress(@Nullable String name, long size) {
-                    if (ZTConfig.INSTANCE.getZ7Listener() != null) {
+                    if (VsFileConfig.INSTANCE.getZ7Listener() != null) {
                         UUtils.runOnUIThread(new Runnable() {
                             @Override
                             public void run() {
-                                ZTConfig.INSTANCE.getZ7Listener().decompress(name, false, false);
+                                VsFileConfig.INSTANCE.getZ7Listener().decompress(name, false, false);
                             }
                         });
                     }
@@ -99,11 +99,11 @@ public class LocalReceiver extends BroadcastReceiver {
 
                 @Override
                 public void onError(int errorCode, @Nullable String message) {
-                    if (ZTConfig.INSTANCE.getZ7Listener() != null) {
+                    if (VsFileConfig.INSTANCE.getZ7Listener() != null) {
                        UUtils.runOnUIThread(new Runnable() {
                            @Override
                            public void run() {
-                               ZTConfig.INSTANCE.getZ7Listener().decompress("error:" + message, true, true);
+                               VsFileConfig.INSTANCE.getZ7Listener().decompress("error:" + message, true, true);
                            }
                        });
                     }
@@ -111,11 +111,11 @@ public class LocalReceiver extends BroadcastReceiver {
 
                 @Override
                 public void onSucceed() {
-                    if (ZTConfig.INSTANCE.getZ7Listener() != null) {
+                    if (VsFileConfig.INSTANCE.getZ7Listener() != null) {
                        UUtils.runOnUIThread(new Runnable() {
                            @Override
                            public void run() {
-                               ZTConfig.INSTANCE.getZ7Listener().decompress("", true, false);
+                               VsFileConfig.INSTANCE.getZ7Listener().decompress("", true, false);
                            }
                        });
                     }

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.termux.victor.util.UUtils;
 import com.termux.R;
-import com.termux.victor.config.ztcommand.config.ConfirmedDialogConfig;
+import com.termux.victor.config.vscommand.config.ConfirmedDialogConfig;
 
 public class ShowDialogActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "dialog_title";
@@ -23,7 +23,7 @@ public class ShowDialogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (intent == null) {
-            sendMessageAndFinish(1, UUtils.getString(R.string.取消));
+            sendMessageAndFinish(1, UUtils.getString(R.string.vs_cancel));
             return;
         }
         int intExtra = intent.getIntExtra(EXTRA_TYPE, DIALOG_TYPE_CONFIRMED_CANCEL);
@@ -45,27 +45,27 @@ public class ShowDialogActivity extends AppCompatActivity {
             sendMessageAndFinish(0,  editDialog.getInputSystemName().getText().toString());
         });
         editDialog.setOnDismissListener(dialogInterface -> {
-            sendMessageAndFinish(3, UUtils.getString(R.string.zt_command_dialog_finish));
+            sendMessageAndFinish(3, UUtils.getString(R.string.vs_command_dialog_finish));
         });
         editDialog.getNoTv().setOnClickListener(view -> {
-            sendMessageAndFinish(1, UUtils.getString(R.string.取消));
+            sendMessageAndFinish(1, UUtils.getString(R.string.vs_cancel));
         });
     }
     private void setConfirmedCancelDialog(Intent intent, boolean isShowConfirmed) {
         SwitchDialog switchDialog = switchDialogShow(intent.getStringExtra(EXTRA_TITLE),
             intent.getStringExtra(EXTRA_MESSAGE), isShowConfirmed);
         switchDialog.setOnDismissListener(dialogInterface -> {
-            sendMessageAndFinish(3, UUtils.getString(R.string.zt_command_dialog_finish));
+            sendMessageAndFinish(3, UUtils.getString(R.string.vs_command_dialog_finish));
         });
         if (isShowConfirmed) {
             switchDialog.getCancel().setOnClickListener(view -> {
                 switchDialog.dismiss();
-                sendMessageAndFinish(1, UUtils.getString(R.string.取消));
+                sendMessageAndFinish(1, UUtils.getString(R.string.vs_cancel));
             });
         }
         switchDialog.getOk().setOnClickListener(view -> {
             switchDialog.dismiss();
-            sendMessageAndFinish(0, UUtils.getString(R.string.确定));
+            sendMessageAndFinish(0, UUtils.getString(R.string.vs_determine));
         });
     }
     private SwitchDialog switchDialogShow(String title, String msg, boolean isShowConfirmed) {
@@ -74,9 +74,9 @@ public class ShowDialogActivity extends AppCompatActivity {
         switchDialog.getMsg().setText(msg);
         switchDialog.setCancelable(false);
         switchDialog.getOther().setVisibility(View.GONE);
-        switchDialog.getOk().setText(UUtils.getString(R.string.确定));
+        switchDialog.getOk().setText(UUtils.getString(R.string.vs_determine));
         if (isShowConfirmed) {
-            switchDialog.getCancel().setText(UUtils.getString(R.string.取消));
+            switchDialog.getCancel().setText(UUtils.getString(R.string.vs_cancel));
             switchDialog.getCancel().setVisibility(View.VISIBLE);
         } else {
             switchDialog.getCancel().setVisibility(View.GONE);
@@ -93,6 +93,6 @@ public class ShowDialogActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        sendMessageAndFinish(2, UUtils.getString(R.string.zt_command_dialog_windows_finish));
+        sendMessageAndFinish(2, UUtils.getString(R.string.vs_command_dialog_windows_finish));
     }
 }

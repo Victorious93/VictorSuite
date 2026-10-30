@@ -110,11 +110,11 @@ public class MinLAdapter extends RecyclerView.Adapter<MinLViewHolder> {
                                     String nameString = mingLShowDialog.name_edit.getText().toString();
                                     String commitString = mingLShowDialog.edit_text.getText().toString();
                                     if (nameString == null || nameString.isEmpty()) {
-                                        UUtils.showMsg(UUtils.getString(R.string.名称不能为空));
+                                        UUtils.showMsg(UUtils.getString(R.string.vs_name_is_required));
                                         return;
                                     }
                                     if (commitString == null || commitString.isEmpty()) {
-                                        UUtils.showMsg(UUtils.getString(R.string.命令不能为空));
+                                        UUtils.showMsg(UUtils.getString(R.string.vs_command_cannot_be_empty));
                                         return;
                                     }
 
@@ -136,14 +136,14 @@ public class MinLAdapter extends RecyclerView.Adapter<MinLViewHolder> {
 
                                         String s = new Gson().toJson(minLBean);
                                         SaveData.saveData("commi22", s);
-                                        UUtils.showMsg(UUtils.getString(R.string.修改成功));
+                                        UUtils.showMsg(UUtils.getString(R.string.vs_successfully_modified));
                                         if (mSXListener != null) {
                                             mSXListener.sx();
                                         }
                                         mingLShowDialog.dismiss();
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                        UUtils.showMsg(UUtils.getString(R.string.请再试一次));
+                                        UUtils.showMsg(UUtils.getString(R.string.vs_please_try_again));
                                         mingLShowDialog.dismiss();
                                     }
 
@@ -174,7 +174,7 @@ public class MinLAdapter extends RecyclerView.Adapter<MinLViewHolder> {
                             SaveData.saveData("commi22", s);
 
 
-                            UUtils.showMsg(UUtils.getString(R.string.删除成功));
+                            UUtils.showMsg(UUtils.getString(R.string.vs_successfully_deleted));
                             if (mSXListener != null) {
                                 mSXListener.sx();
                             }

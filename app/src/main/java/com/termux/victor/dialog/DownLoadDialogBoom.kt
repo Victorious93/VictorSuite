@@ -78,7 +78,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
         chongzhi_img?.setOnClickListener {
 
 
-            val switchDialog = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.确定重置所有任务))
+            val switchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_are_you_sure_to_reset_and_delete_all_tas))
 
             switchDialog.cancel!!.setOnClickListener {
 
@@ -92,7 +92,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                 dismiss()
                 switchDialog.dismiss()
                 Aria.download(this).removeAllTask(false)
-                UUtils.showMsg(UUtils.getString(R.string.重置成功))
+                UUtils.showMsg(UUtils.getString(R.string.vs_reset_successfully))
 
 
 
@@ -113,14 +113,14 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
         if (!victorSuiteData.exists()) {
             val mkdirs = victorSuiteData.mkdirs()
             if(!mkdirs){
-                UUtils.showMsg(UUtils.getString(R.string.无法创建))
+                UUtils.showMsg(UUtils.getString(R.string.vs_unable_to_create_the_internal_storage_xi))
                 dismiss()
             }
         }
         if (!victorSuiteApk.exists()) {
             val mkdirs = victorSuiteApk.mkdirs()
             if(!mkdirs){
-                UUtils.showMsg(UUtils.getString(R.string.无法创建1))
+                UUtils.showMsg(UUtils.getString(R.string.vs_unable_to_create_internal_storage_xinhao_1))
                 dismiss()
             }
         }
@@ -169,17 +169,17 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                 tempFile = File("${FileUrl.victorSuiteData}/${data.fileName}.0.part")
             }
 
-            UUtils.showLog("文件查看--------------------------------------------------")
-            UUtils.showLog("文件查看$position:${file.absolutePath}")
+            UUtils.showLog("File view --------------------------------------------------")
+            UUtils.showLog("File view $position: ${file.absolutePath}")
 
             if(file.exists()){
-                holder.size?.text = "${UUtils.getString(R.string.大小)}:${data.size}"
+                holder.size?.text = "${UUtils.getString(R.string.vs_size)}:${data.size}"
             }else{
 
                 if(data.speed != null && data.speed.isNotEmpty()){
-                    holder.size?.text = "${UUtils.getString(R.string.大小)}:(${data.convertCurrentProgress}/${data.size})[${data.speed}] ${UUtils.getString(R.string.剩余)}:${data.timeLeft}"
+                    holder.size?.text = "${UUtils.getString(R.string.vs_size)}:(${data.convertCurrentProgress}/${data.size})[${data.speed}] ${UUtils.getString(R.string.vs_remaining)}:${data.timeLeft}"
                 }else{
-                    holder.size?.text = "${UUtils.getString(R.string.大小)}:${data.size}"
+                    holder.size?.text = "${UUtils.getString(R.string.vs_size)}:${data.size}"
                 }
             }
 
@@ -195,7 +195,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
 
             holder.note?.text = data.note
-            UUtils.showLog("文件查看(存在)$position:${file.exists()}")
+            UUtils.showLog("File view (exists) $position: ${file.exists()}")
             if(file.exists()){
                 holder.number_progress_bar?.visibility = View.GONE
                 if(data.type == "apk"){
@@ -232,7 +232,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                 if(data.isDownload == "1"){
 
-                    UUtils.showMsg(UUtils.getString(R.string.暂未开放下载))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_not_yet_available_for_download))
                     return@setOnClickListener
 
                 }
@@ -402,7 +402,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                         holder.download?.setImageResource(R.mipmap.download)
                         Aria.download(this).load(data.id).stop()
 
-                        UUtils.showLog("任务状态-----------恢复的ID(暂停):${data.id}")
+                        UUtils.showLog("Task status ----------- paused ID: ${data.id}")
                     }else{
                         holder.download?.setImageResource(R.mipmap.jixu_download)
                         data.isRun = true
@@ -423,7 +423,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
 
                                 data.id = toLong
-                                UUtils.showLog("任务状态-----------恢复的ID(恢复):${data.id}")
+                                UUtils.showLog("Task status ----------- resumed ID: ${data.id}")
                                 if(toLong == -1L){
 
                                     Aria.download(this).load(data.id).stop()
@@ -530,7 +530,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                             }else{
                                 OtherPrefs.saveStringOther("$ip${data.download}","${data.id}")
                             }
-                            UUtils.showLog("任务状态------------创建的ID:${data.id}")
+                            UUtils.showLog("Task status ------------ created ID: ${data.id}")
                         }
 
 
@@ -547,12 +547,12 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
             }
 
 
-            UUtils.showLog("列表状态:${data.mDownloadEntity}")
+            UUtils.showLog("List state: ${data.mDownloadEntity}")
             if(data.mDownloadEntity != null && !data.isRun){
                 val progress: Long = data.mDownloadEntity.currentProgress
                 val formatFileSizeProgress = CommonUtil.formatFileSize(progress.toDouble())
                 holder.number_progress_bar?.progress = data.mDownloadEntity.percent
-                holder.size?.text = "${UUtils.getString(R.string.大小)}:(${formatFileSizeProgress}/${data.size})"
+                holder.size?.text = "${UUtils.getString(R.string.vs_size)}:(${formatFileSizeProgress}/${data.size})"
             }
 
 
@@ -567,7 +567,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                     val taskState = Aria.download(this).load(data.id).taskState
 
                     if(taskState == 4 || taskState == -1) {
-                        UUtils.showLog("当前状态:$taskState")
+                        UUtils.showLog("Current state: $taskState")
 
                         Aria.download(this).load(data.id).stop()
                         Aria.download(this).load(data.id).cancel(true);
@@ -613,7 +613,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
             }
 
 
-            UUtils.showLog("是否禁止:${data.isDownload }")
+            UUtils.showLog("Disabled: ${data.isDownload }")
             if(data.isDownload == "1"){
                 holder!!.show_img_jz?.visibility = View.VISIBLE
             }else{
@@ -718,14 +718,14 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    UUtils.showMsg(UUtils.getString(R.string.服务器数据格式不正确))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_server_data_format_is_incorrect))
                     dismiss()
                 }
             }
 
             override fun onFailure(response: Response<String>?, msg: String, mWhat: Int) {
                 pro?.visibility = View.GONE
-                UUtils.showMsg(UUtils.getString(R.string.无法连接到自定义服务器))
+                UUtils.showMsg(UUtils.getString(R.string.vs_unable_to_connect_to_custom_server))
             }
         }, HashMap(), 5555)
     }
@@ -759,10 +759,10 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
             if(formatFileSize != formatFileSizeProgress){
                 tempList.add(taskList[j])
             }
-            UUtils.showLog("任务状态[离线大小]$j:${formatFileSize}---$formatFileSizeProgress")
+            UUtils.showLog("Task status [offline size]$j: ${formatFileSize}---$formatFileSizeProgress")
 
 
-            UUtils.showLog("任务状态[离线状态]$j:${current}")
+            UUtils.showLog("Task status [offline state]$j: ${current}")
 
         }
 
@@ -813,7 +813,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
                 var htttIp = "$ip${mArray!![i].download}"
 
-            UUtils.showLog("任务状态---比较:${htttIp}---${task.key}")
+            UUtils.showLog("Task status --- compare: ${htttIp}---${task.key}")
 
             if(htttIp == task.key){
 
@@ -874,7 +874,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
             var htttIp = "$ip${mArray!![i].download}"
 
-            UUtils.showLog("任务状态---比较:${htttIp}---${task.key}")
+            UUtils.showLog("Task status --- compare: ${htttIp}---${task.key}")
 
             if(htttIp == task.key){
 
@@ -893,7 +893,7 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
 
     private fun installApk(mFile:File) {
         dismiss()
-        val switchDialog1: SwitchDialog = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.第三方服务器上的可执行文件))
+        val switchDialog1: SwitchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_the_executable_file_on_the_third_party_s))
         switchDialog1.cancel!!.setOnClickListener { switchDialog1.dismiss() }
         switchDialog1.ok!!.setOnClickListener {
             switchDialog1.dismiss()
@@ -906,17 +906,17 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
                         if (all) {
                             UUtils.installApk(UUtils.getContext(), mFile.absolutePath)
                         } else {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                         }
                     }
 
                     override fun onDenied(permissions: List<String>, never: Boolean) {
                         if (never) {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                             // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             XXPermissions.startPermissionActivity(mContext, permissions)
                         } else {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                         }
                     }
                 })
@@ -929,8 +929,8 @@ class DownLoadDialogBoom : BaseDialogDown, DownLoadMuTILS.DownLoadMuTILSListener
         switchDialog.title!!.text = title
         switchDialog.msg!!.text = msg
         switchDialog.other!!.visibility = View.GONE
-        switchDialog.ok!!.text = UUtils.getString(R.string.确定)
-        switchDialog.cancel!!.text = UUtils.getString(R.string.取消)
+        switchDialog.ok!!.text = UUtils.getString(R.string.vs_determine)
+        switchDialog.cancel!!.text = UUtils.getString(R.string.vs_cancel)
         switchDialog.show()
         return switchDialog
     }

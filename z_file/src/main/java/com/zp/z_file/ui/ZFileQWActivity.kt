@@ -47,7 +47,7 @@ internal class ZFileQWActivity : ZFileActivity(), ViewPager.OnPageChangeListener
 
     override fun init(savedInstanceState: Bundle?) {
         type = getZFileConfig().filePath!!
-        setBarTitle(if (type == ZFileConfiguration.QQ) "QQ文件" else "微信文件")
+        setBarTitle(if (type == ZFileConfiguration.QQ) "QQ files" else "WeChat files")
         vb.zfileQwToolBar.apply {
             if (getZFileConfig().showBackIcon) setNavigationIcon(R.drawable.zfile_back) else navigationIcon = null
             inflateMenu(R.menu.zfile_qw_menu)
@@ -83,7 +83,7 @@ internal class ZFileQWActivity : ZFileActivity(), ViewPager.OnPageChangeListener
                 selectArray.remove(item.filePath)
             }
         }
-        setBarTitle("已选中${selectArray.size}个文件")
+        setBarTitle("${selectArray.size} files selected")
         isManage = true
         getMenu().isVisible = true
     }
@@ -106,7 +106,7 @@ internal class ZFileQWActivity : ZFileActivity(), ViewPager.OnPageChangeListener
                     }
                     isManage = false
                     getMenu().isVisible = false
-                    setBarTitle(if (getZFileConfig().filePath!! == ZFileConfiguration.QQ) "QQ文件" else "微信文件")
+                    setBarTitle(if (getZFileConfig().filePath!! == ZFileConfiguration.QQ) "QQ files" else "WeChat files")
                     getZFileHelp().getFileClickListener().emptyDataDownClick()
                 } else {
                     setResult(ZFILE_RESULT_CODE, Intent().apply {

@@ -29,7 +29,7 @@
     <TextView
         android:id="@+id/guide_content"
         android:layout_width="wrap_content"
-        android:text="@string/zt_guide"
+        android:text="@string/vs_guide"
         android:textStyle="bold"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"

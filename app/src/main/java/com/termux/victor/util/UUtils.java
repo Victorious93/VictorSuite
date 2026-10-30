@@ -64,7 +64,7 @@ import java.util.TimeZone;
 public final class UUtils {
 
     private static final String TAG = "Termux--Apk:UUtils";
-    private static final String READ_FAILED = "文件加载失败!";
+    private static final String READ_FAILED = "File load failed!";
     private static final int COPY_BUFFER = 1024;
     private static final int PROGRESS_BUFFER = 50 * 1024;
 
@@ -182,9 +182,9 @@ public final class UUtils {
         try {
             ClipboardManager cm = (ClipboardManager) sContext.getSystemService(Context.CLIPBOARD_SERVICE);
             cm.setText(text);
-            showMsg(getString(R.string.复制成功));
+            showMsg(getString(R.string.vs_copied_successfully));
         } catch (Exception e) {
-            showMsg(getString(R.string.复制失败));
+            showMsg(getString(R.string.vs_copy_failed));
         }
     }
 
@@ -251,12 +251,12 @@ public final class UUtils {
     public static boolean installApk(Context context, String path) {
         try {
             if (TextUtils.isEmpty(path)) {
-                Toast.makeText(context, "目录为空？", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Directory is empty?", Toast.LENGTH_SHORT).show();
                 return false;
             }
             File apk = new File(path);
             if (!apk.exists()) {
-                Toast.makeText(context, "没有内存卡权限？" + path, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No storage permission?" + path, Toast.LENGTH_SHORT).show();
                 return false;
             }
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -273,7 +273,7 @@ public final class UUtils {
             return true;
         } catch (Exception | Error e) {
             e.printStackTrace();
-            Toast.makeText(context, "安装失败，请重新下载", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Install failed, please download again", Toast.LENGTH_LONG).show();
             return false;
         }
     }

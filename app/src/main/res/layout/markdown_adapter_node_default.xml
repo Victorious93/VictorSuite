@@ -11,5 +11,5 @@
     android:paddingTop="8dip"
     android:paddingBottom="8dip"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="#000"
+    android:textColor="@color/vs_neon_text"
     android:textSize="12sp" />

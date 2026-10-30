@@ -26,7 +26,7 @@ public class PublicWarehouseClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.公共仓库);
+        return context.getString(R.string.vs_public_warehouse);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class PublicWarehouseClickConfig extends BaseMenuClickConfig {
         TermuxActivity termuxActivity = (TermuxActivity) context;
         EditDialog editDialog = new EditDialog(context);
         EditText edit_text = editDialog.getEdit_text();
-        editDialog.getCancel().setText(UUtils.getString(R.string.如何创建服务器));
+        editDialog.getCancel().setText(UUtils.getString(R.string.vs_how_to_create_a_server));
         editDialog.getCancel().setVisibility(View.GONE);
         editDialog.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override

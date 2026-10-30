@@ -43,9 +43,9 @@ public class XMLMainMenuConfig {
     private static final String TAG = XMLMainMenuConfig.class.getSimpleName();
     private static final String START_WITH_JAVA = "java:";
     private static final String START_WITH_JUMP_URL = "jumpUrl:";
-    private static final String START_WITH_ZT_SHELL = "ztShell:";
+    private static final String START_WITH_VS_SHELL = "ztShell:";
     private static final String START_WITH_IMG_PATH = "imgPath:";
-    private static final String START_WITH_ZT_EDIT_TEXT = "ztEditText:";
+    private static final String START_WITH_VS_EDIT_TEXT = "ztEditText:";
     private static final String START_WITH_START_ACTIVITY = "startActivity:";
     private static final String START_WITH_ACTION_ACTIVITY = "actionActivity:";
     private static final String START_WITH_COMMANDS = "commands:";
@@ -105,8 +105,8 @@ public class XMLMainMenuConfig {
                         intent.setAction(Intent.ACTION_VIEW);
                         context.startActivity(intent);
                     }));
-                } else if (menuItem.clickAction.startsWith(START_WITH_ZT_SHELL)) {
-                    String shell = menuItem.clickAction.replace(START_WITH_ZT_SHELL, "").trim();
+                } else if (menuItem.clickAction.startsWith(START_WITH_VS_SHELL)) {
+                    String shell = menuItem.clickAction.replace(START_WITH_VS_SHELL, "").trim();
                     if (context instanceof TermuxActivity) {
                         TermuxActivity termuxActivity = (TermuxActivity) context;
                         configs.add(getXmlClickConfig(context, name, icon, (view, context1) -> {
@@ -132,8 +132,8 @@ public class XMLMainMenuConfig {
                             }
                         }));
                     }
-                } else if (menuItem.clickAction.startsWith(START_WITH_ZT_EDIT_TEXT)) {
-                    String path = menuItem.clickAction.replace(START_WITH_ZT_EDIT_TEXT, "").trim();
+                } else if (menuItem.clickAction.startsWith(START_WITH_VS_EDIT_TEXT)) {
+                    String path = menuItem.clickAction.replace(START_WITH_VS_EDIT_TEXT, "").trim();
                     configs.add(getXmlClickConfig(context, name, icon, (view, context1) -> {
                         Intent intent = new Intent(context1, EditTextActivity.class);
                         intent.putExtra("edit_path", path);
@@ -226,7 +226,7 @@ public class XMLMainMenuConfig {
                     }));
                 } else {
                     configs.add(getXmlClickConfig(context, name, icon, (view, context1) -> {
-                        Toast.makeText(context1, UUtils.getString(R.string.zt_xml_menu), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context1, UUtils.getString(R.string.vs_xml_menu), Toast.LENGTH_SHORT).show();
                     }));
                 }
             }
@@ -513,7 +513,7 @@ public class XMLMainMenuConfig {
         } catch (Exception e) {
             e.printStackTrace();
             if (xMLErrorMessageListener != null) {
-                xMLErrorMessageListener.Error(UUtils.getString(R.string.zt_xml_menu_error) + e.toString());
+                xMLErrorMessageListener.Error(UUtils.getString(R.string.vs_xml_menu_error) + e.toString());
             }
         }
 

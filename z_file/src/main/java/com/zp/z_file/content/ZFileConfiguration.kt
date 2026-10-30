@@ -98,11 +98,11 @@ class ZFileConfiguration : Serializable {
         /** 样式二 */
         const val STYLE2 = 2
 
-        const val RENAME = "重命名(rename)"
-        const val COPY = "复制(copy)"
-        const val MOVE = "移动(move)"
-        const val DELETE = "删除(delete)"
-        const val INFO = "查看详情(property)"
+        const val RENAME = "Rename"
+        const val COPY = "Copy"
+        const val MOVE = "Move"
+        const val DELETE = "Delete"
+        const val INFO = "Properties"
 
         /** 标题居左 */
         const val TITLE_LEFT = 0
@@ -111,7 +111,7 @@ class ZFileConfiguration : Serializable {
         const val TITLE_CENTER = 1
 
         /** 标题居右 */
-        @Deprecated("肯定没人有这种BT需求，有的话我zhiboduodiao")
+        @Deprecated("Unsupported request")
         const val TITLE_RIGHT = 2
     }
 
@@ -160,7 +160,7 @@ class ZFileConfiguration : Serializable {
     /**
      * 不能选择的文件类型 文字提醒
      */
-    var canNotSelecteFileTypeStr = "您不能选择当前类型的文件"
+    var canNotSelecteFileTypeStr = "You cannot select this file type"
 
     /**
      * 文件选取大小的限制，单位：M
@@ -168,13 +168,13 @@ class ZFileConfiguration : Serializable {
     var maxSize = 10
         set(value) {
             field = value
-            maxSizeStr = "您只能选取小于${field}M的文件"
+            maxSizeStr = "You can only select files smaller than ${field}M"
         }
 
     /**
      * 超过最大选择大小文字提醒
      */
-    var maxSizeStr = "您只能选取小于${maxSize}M的文件"
+    var maxSizeStr = "You can only select files smaller than ${maxSize}M"
 
     /**
      * 最大选取数量
@@ -182,13 +182,13 @@ class ZFileConfiguration : Serializable {
     var maxLength = 9
         set(value) {
             field = value
-            maxLengthStr = "您最多可以选取${field}个文件"
+            maxLengthStr = "You can select at most ${field} files"
         }
 
     /**
      * 超过最大选择数量文字提醒
      */
-    var maxLengthStr = "您最多可以选取${maxLength}个文件"
+    var maxLengthStr = "You can select at most ${maxLength} files"
 
     /**
      * 选中的样式 see [STYLE1]、[STYLE2]

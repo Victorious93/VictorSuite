@@ -1,6 +1,6 @@
 package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -23,7 +23,7 @@ public class LanguageClickConfig extends BaseMenuClickConfig implements MenuLeft
     private static final String TAG = LanguageClickConfig.class.getSimpleName();
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class LanguageClickConfig extends BaseMenuClickConfig implements MenuLeft
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.语言切换);
+        return context.getString(R.string.vs_language_switch);
     }
 
     @Override
     public void onClick(View view, Context context) {
         LogUtils.e(TAG, "onClick Language.");
         ArrayList<MenuLeftPopuListWindow.MenuLeftPopuListData> yuyan_list = new ArrayList<>();
-        MenuLeftPopuListWindow.MenuLeftPopuListData msg_zh = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.zhongwen, UUtils.getString(R.string.中文), 30);
+        MenuLeftPopuListWindow.MenuLeftPopuListData msg_zh = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.zhongwen, UUtils.getString(R.string.vs_chinese), 30);
         yuyan_list.add(msg_zh);
         MenuLeftPopuListWindow.MenuLeftPopuListData msg_en = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.yingwen_ico, UUtils.getString(R.string.English), 31);
         yuyan_list.add(msg_en);
@@ -83,8 +83,9 @@ public class LanguageClickConfig extends BaseMenuClickConfig implements MenuLeft
             case "1":
                 return Locale.ENGLISH;
             case "2":
-            default:
                 return Locale.SIMPLIFIED_CHINESE;
+            default:
+                return Locale.ENGLISH;
         }
     }
 }

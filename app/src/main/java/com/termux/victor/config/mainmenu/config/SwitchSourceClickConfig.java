@@ -32,7 +32,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.切换源);
+        return context.getString(R.string.vs_source);
     }
 
     @Override
@@ -45,13 +45,13 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
         ArrayList<MenuLeftPopuListWindow.MenuLeftPopuListData> menuLeftPopuListData = new ArrayList<>();
 
         //清华
-        MenuLeftPopuListWindow.MenuLeftPopuListData qinghua = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.qinghua_ico, UUtils.getString(R.string.清华源), 1);
+        MenuLeftPopuListWindow.MenuLeftPopuListData qinghua = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.qinghua_ico, UUtils.getString(R.string.vs_qinghuasource), 1);
         menuLeftPopuListData.add(qinghua);
         //北京
-        MenuLeftPopuListWindow.MenuLeftPopuListData beijing = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.beijing, UUtils.getString(R.string.北京源), 2);
+        MenuLeftPopuListWindow.MenuLeftPopuListData beijing = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.beijing, UUtils.getString(R.string.vs_beijinsource), 2);
         menuLeftPopuListData.add(beijing);
         //官方
-        MenuLeftPopuListWindow.MenuLeftPopuListData guanfang = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.guanfang, UUtils.getString(R.string.官方源), 3);
+        MenuLeftPopuListWindow.MenuLeftPopuListData guanfang = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.guanfang, UUtils.getString(R.string.vs_officialsource), 3);
         menuLeftPopuListData.add(guanfang);
         //NJU
         MenuLeftPopuListWindow.MenuLeftPopuListData nju = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.nju_ico, UUtils.getString(R.string.nju), 496);
@@ -84,7 +84,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
         switch (id) {
             //清华
             case 1:
-                SwitchDialog switchDialog = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.该操作会覆盖您的文件记录));
+                SwitchDialog switchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_this_operation_will_overwrite_your_file));
                 switchDialog.getCancel().setOnClickListener(v -> switchDialog.dismiss());
                 switchDialog.getOk().setOnClickListener(v -> {
                     switchDialog.dismiss();
@@ -93,7 +93,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 break;
             //北京
             case 2:
-                SwitchDialog switchDialog1 = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.该操作会覆盖您的文件记录));
+                SwitchDialog switchDialog1 = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_this_operation_will_overwrite_your_file));
                 switchDialog1.getCancel().setOnClickListener(v -> switchDialog1.dismiss());
                 switchDialog1.getOk().setOnClickListener(v -> {
                     switchDialog1.dismiss();
@@ -102,7 +102,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 break;
             //官方
             case 3:
-                SwitchDialog switchDialog2 = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.该操作会覆盖您的文件记录));
+                SwitchDialog switchDialog2 = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_this_operation_will_overwrite_your_file));
                 switchDialog2.getCancel().setOnClickListener(v -> switchDialog2.dismiss());
                 switchDialog2.getOk().setOnClickListener(v -> {
                     switchDialog2.dismiss();
@@ -114,7 +114,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 break;
             //NJU
             case 496:
-                SwitchDialog switchDialog15 = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.该操作会覆盖您的文件记录));
+                SwitchDialog switchDialog15 = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_this_operation_will_overwrite_your_file));
                 switchDialog15.getCancel().setOnClickListener(v -> switchDialog15.dismiss());
                 switchDialog15.getOk().setOnClickListener(v -> {
                     switchDialog15.dismiss();
@@ -124,7 +124,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
 
             //USTC
             case 4666:
-                SwitchDialog ustc = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.该操作会覆盖您的文件记录));
+                SwitchDialog ustc = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_this_operation_will_overwrite_your_file));
                 ustc.getCancel().setOnClickListener(v -> ustc.dismiss());
                 ustc.getOk().setOnClickListener(v -> {
                     ustc.dismiss();
@@ -133,7 +133,7 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
                 break;
             //heb
             case 46667:
-                SwitchDialog heb = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.该操作会覆盖您的文件记录));
+                SwitchDialog heb = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_this_operation_will_overwrite_your_file));
                 heb.getCancel().setOnClickListener(v -> heb.dismiss());
                 heb.getOk().setOnClickListener(v -> {
                     heb.dismiss();
@@ -147,8 +147,8 @@ public class SwitchSourceClickConfig extends BaseMenuClickConfig implements Menu
         switchDialog.getTitle().setText(title);
         switchDialog.getMsg().setText(msg);
         switchDialog.getOther().setVisibility(View.GONE);
-        switchDialog.getOk().setText(UUtils.getString(R.string.确定));
-        switchDialog.getCancel().setText(UUtils.getString(R.string.取消));
+        switchDialog.getOk().setText(UUtils.getString(R.string.vs_determine));
+        switchDialog.getCancel().setText(UUtils.getString(R.string.vs_cancel));
         switchDialog.show();
         return switchDialog;
     }

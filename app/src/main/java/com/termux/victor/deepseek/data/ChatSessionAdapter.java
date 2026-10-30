@@ -80,14 +80,14 @@ public class ChatSessionAdapter extends RecyclerView.Adapter<ChatSessionAdapter.
         input.setText(session.getSessionName());
         builder.setView(input);
 
-        builder.setPositiveButton(UUtils.getString(R.string.确定), (dialog, which) -> {
+        builder.setPositiveButton(UUtils.getString(R.string.vs_determine), (dialog, which) -> {
             String newName = input.getText().toString();
             session.setSessionName(newName);
             dbHelper.updateSession(session.getSessionId(), session.getSessionName());
             notifyDataSetChanged();
         });
 
-        builder.setNegativeButton(R.string.取消, (dialog, which) -> dialog.cancel());
+        builder.setNegativeButton(R.string.vs_cancel, (dialog, which) -> dialog.cancel());
 
         builder.show();
     }

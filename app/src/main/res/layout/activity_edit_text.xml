@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/vs_neon_bg"
     android:layout_height="match_parent"
     tools:context=".victor.activity.EditTextActivity">
 
@@ -53,7 +53,7 @@
             android:background="@drawable/shape_r_3dp_553d_all"
             android:gravity="center"
             android:visibility="gone"
-            android:text="按钮"
+            android:text="Button"
             android:textColor="@color/color_ffffff"
             android:layout_marginRight="5dp"
             android:textSize="14sp" />

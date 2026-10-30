@@ -30,7 +30,7 @@ class VsCommandKeyClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getString(context: Context?): String? {
-        return context?.getString(R.string.zt_command_key)
+        return context?.getString(R.string.vs_command_key)
     }
 
     override fun onClick(view: View?, context: Context?) {
@@ -38,7 +38,7 @@ class VsCommandKeyClickConfig : BaseMenuClickConfig() {
         val mingLShowDialog = MingLShowDialog(context!!)
         mingLShowDialog.mTitleCard.visibility = View.GONE
         mingLShowDialog.mSwitchCard.visibility = View.GONE
-        mingLShowDialog.edit_text.hint = UUtils.getString(R.string.zt_command_edit_h)
+        mingLShowDialog.edit_text.hint = UUtils.getString(R.string.vs_command_edit_h)
         val dataMessageFileString = termuxActivity.getProperties()
             .getInternalPropertyValue(TermuxPropertyConstants.KEY_EXTRA_KEYS, true) as String
         if (!(dataMessageFileString.isNullOrEmpty())) {
@@ -53,10 +53,10 @@ class VsCommandKeyClickConfig : BaseMenuClickConfig() {
                 properties.setProperty(KEY_EXTRA_KEYS, DEFAULT_IVALUE_EXTRA_KEYS)
                 setProperties(properties)
                 reload(context)
-                UUtils.showMsg(UUtils.getString(R.string.zt_command_path_ok))
+                UUtils.showMsg(UUtils.getString(R.string.vs_command_path_ok))
                 mingLShowDialog.dismiss()
             } else {
-                UUtils.showMsg(UUtils.getString(R.string.zt_command_path_error))
+                UUtils.showMsg(UUtils.getString(R.string.vs_command_path_error))
             }
 
         }
@@ -84,18 +84,18 @@ class VsCommandKeyClickConfig : BaseMenuClickConfig() {
             }
             val properties = getProperties()
             if (properties == null) {
-                UUtils.showMsg(UUtils.getString(R.string.zt_command_path_error))
+                UUtils.showMsg(UUtils.getString(R.string.vs_command_path_error))
                 return
             }
             LogUtils.i(TAG, "setKey: $propertiesInfo")
             properties.setProperty(KEY_EXTRA_KEYS, propertiesInfo)
             setProperties(properties)
             mingLShowDialog.dismiss()
-            UUtils.showMsg(UUtils.getString(R.string.zt_command_path_ok))
+            UUtils.showMsg(UUtils.getString(R.string.vs_command_path_ok))
             reload(termuxActivity)
         } catch (e: Exception) {
             e.printStackTrace()
-            UUtils.showMsg(UUtils.getString(R.string.zt_command_key_error))
+            UUtils.showMsg(UUtils.getString(R.string.vs_command_key_error))
         }
     }
 

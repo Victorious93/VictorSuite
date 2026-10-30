@@ -33,7 +33,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:text="@string/zfile_select_forder"
-            android:textColor="@color/zfile_black"
+            android:textColor="@color/zfile_text"
             android:textSize="15sp"  />
 
         <ImageView

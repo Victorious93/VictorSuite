@@ -27,7 +27,7 @@
 
             android:id="@+id/text_input"
             android:padding="5dp"
-            android:hint="@string/请输入您要查找的命令"
+            android:hint="@string/vs_please_enter_the_command_you_are_looking"
             android:textColor="@color/color_FFFFFF"
             android:layout_height="35dp"/>
 

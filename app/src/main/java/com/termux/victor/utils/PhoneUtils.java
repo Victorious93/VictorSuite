@@ -62,7 +62,7 @@ public class PhoneUtils {
 
             if(contacts.isEmpty()){
 
-                return UUtils.getString(R.string.无联系人);
+                return UUtils.getString(R.string.vs_no_contacts_or_no_permissions);
 
             }
 
@@ -73,20 +73,20 @@ public class PhoneUtils {
                 stringBuffer.append("\n");
                 stringBuffer.append("\n");
                 stringBuffer.append("\n");
-                stringBuffer.append(UUtils.getString(R.string.序号));
+                stringBuffer.append(UUtils.getString(R.string.vs_serial_number));
                 stringBuffer.append(":");
                 stringBuffer.append(i);
                 stringBuffer.append("\n");
                 stringBuffer.append("\n");
-                stringBuffer.append(UUtils.getString(R.string.姓名));
+                stringBuffer.append(UUtils.getString(R.string.vs_name));
                 stringBuffer.append(":");
                 stringBuffer.append(contacts.get(i).name);
                 stringBuffer.append("\n");
-                stringBuffer.append(UUtils.getString(R.string.电话));
+                stringBuffer.append(UUtils.getString(R.string.vs_phone));
                 stringBuffer.append(":");
                 stringBuffer.append(contacts.get(i).phone);
                 stringBuffer.append("\n");
-                stringBuffer.append(UUtils.getString(R.string.备注));
+                stringBuffer.append(UUtils.getString(R.string.vs_remarks));
                 stringBuffer.append(":");
                 stringBuffer.append(contacts.get(i).note);
 

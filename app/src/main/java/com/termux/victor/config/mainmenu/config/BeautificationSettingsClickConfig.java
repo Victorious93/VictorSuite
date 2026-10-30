@@ -22,7 +22,7 @@ public class BeautificationSettingsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.美化设置);
+        return context.getString(R.string.vs_beautify_settings);
     }
 
     @Override

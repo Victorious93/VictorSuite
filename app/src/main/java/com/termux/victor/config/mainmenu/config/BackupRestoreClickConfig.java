@@ -24,7 +24,7 @@ public class BackupRestoreClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.备份恢复);
+        return context.getString(R.string.vs_backup_restore);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class BackupRestoreClickConfig extends BaseMenuClickConfig {
             @Override
             public void create() {
                 if (context instanceof TermuxActivity) {
-                    ((TermuxActivity) context).mTermuxTerminalSessionActivityClient.addNewSession(false, "Zero session");
+                    ((TermuxActivity) context).mTermuxTerminalSessionActivityClient.addNewSession(false, "VictorSuite session");
                 }
             }
         });

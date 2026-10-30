@@ -56,7 +56,7 @@ public class VictorSuiteBackLayout extends RelativeLayout {
         back_video = viewLay.findViewById(R.id.back_video);
         x11_view = viewLay.findViewById(R.id.x11_view);
         // 加入是否显示逻辑
-        boolean internalPassage = UserSetManage.Companion.get().getZTUserBean().isInternalPassage();
+        boolean internalPassage = UserSetManage.Companion.get().getVsUserBean().isInternalPassage();
         if (internalPassage) {
             mMainActivity = new MainActivity((Activity) mContext);
             x11_view.addView(mMainActivity);

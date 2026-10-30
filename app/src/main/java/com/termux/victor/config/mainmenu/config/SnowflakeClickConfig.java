@@ -28,31 +28,31 @@ public class SnowflakeClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        if (UserSetManage.Companion.get().getZTUserBean().isSnowflakeShow()) {
-            return context.getString(R.string.雪花开);
+        if (UserSetManage.Companion.get().getVsUserBean().isSnowflakeShow()) {
+            return context.getString(R.string.vs_snowflakes_open);
         } else {
-            return context.getString(R.string.雪花关);
+            return context.getString(R.string.vs_snowflake_off);
         }
     }
 
     @Override
     public void onClick(View view, Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
-        ztUserBean.setRainShow(false);
+        VsUserBean vsUserBean = UserSetManage.Companion.get().getVsUserBean();
+        vsUserBean.setRainShow(false);
         termuxActivity.firework_view.setVisibility(View.GONE);
-        if (!ztUserBean.isSnowflakeShow()) {
-            mTextView.setText(UUtils.getString(R.string.雪花开));
+        if (!vsUserBean.isSnowflakeShow()) {
+            mTextView.setText(UUtils.getString(R.string.vs_snowflakes_open));
             SnowView snowView = new SnowView(termuxActivity);
             termuxActivity.xue_fragment.removeAllViews();
             termuxActivity.xue_fragment.addView(snowView);
-            ztUserBean.setSnowflakeShow(true);
-            UserSetManage.Companion.get().setZTUserBean(ztUserBean);
+            vsUserBean.setSnowflakeShow(true);
+            UserSetManage.Companion.get().setVsUserBean(vsUserBean);
         } else {
-            mTextView.setText(UUtils.getString(R.string.雪花关));
+            mTextView.setText(UUtils.getString(R.string.vs_snowflake_off));
             termuxActivity.xue_fragment.removeAllViews();
-            ztUserBean.setSnowflakeShow(false);
-            UserSetManage.Companion.get().setZTUserBean(ztUserBean);
+            vsUserBean.setSnowflakeShow(false);
+            UserSetManage.Companion.get().setVsUserBean(vsUserBean);
         }
     }
 
@@ -71,12 +71,12 @@ public class SnowflakeClickConfig extends BaseMenuClickConfig {
     @Override
     public void initViewStatus(Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        boolean snowflakeShow = UserSetManage.Companion.get().getZTUserBean().isSnowflakeShow();
+        boolean snowflakeShow = UserSetManage.Companion.get().getVsUserBean().isSnowflakeShow();
         if (!snowflakeShow) {
-            //xue_hua_start.setText(UUtils.getString(R.string.雪花关));
+            //xue_hua_start.setText(UUtils.getString(R.string.vs_snowflake_off));
             termuxActivity.xue_fragment.removeAllViews();
         } else {
-            //xue_hua_start.setText(UUtils.getString(R.string.雪花开));
+            //xue_hua_start.setText(UUtils.getString(R.string.vs_snowflakes_open));
             SnowView snowView = new SnowView(termuxActivity);
             termuxActivity.xue_fragment.removeAllViews();
             termuxActivity.xue_fragment.addView(snowView);

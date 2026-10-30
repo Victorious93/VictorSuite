@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/容器切换"
+        android:text="@string/vs_containerswitching"
         android:textColor="#fff"
         android:textSize="18sp" />
 

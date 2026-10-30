@@ -38,7 +38,7 @@ class MyUsedSoftLinksDataClickConfig: BaseMenuClickConfig() {
                 FileIOUtils.setupFileSymlinks(
                     File(FileIOUtils.getSdcardPath(), "/xinhao/data").absolutePath,
                     "${FileIOUtils.getXinhaoLinkPath(UUtils.getContext())}/xinhao_data")
-                UUtils.showMsg(UUtils.getString(R.string.成功))
+                UUtils.showMsg(UUtils.getString(R.string.vs_success))
             } else {
                 val file =
                     File(FileIOUtils.getSdcardPath(), toString)
@@ -50,7 +50,7 @@ class MyUsedSoftLinksDataClickConfig: BaseMenuClickConfig() {
                 FileIOUtils.setupFileSymlinks(
                     File(FileIOUtils.getSdcardPath(), toString).absolutePath,
                     "${FileIOUtils.getXinhaoLinkPath(UUtils.getContext())}/${toString.replace("/", "_").replace("\\", "_")}")
-                UUtils.showMsg(UUtils.getString(R.string.成功))
+                UUtils.showMsg(UUtils.getString(R.string.vs_success))
             }
         }
         yesNoDialog.noTv.setOnClickListener {

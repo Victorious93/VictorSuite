@@ -28,7 +28,7 @@ public class ReleaseLinuxVersionClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.发行版本);
+        return context.getString(R.string.vs_release_version);
     }
 
     @Override

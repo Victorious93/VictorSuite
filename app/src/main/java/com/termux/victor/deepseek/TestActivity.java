@@ -50,7 +50,7 @@ public class TestActivity extends AppCompatActivity {
         String message = messageInput.getText().toString();
         if (!message.isEmpty()) {
             testText.setText("");
-            sendButton.setText("回答中...");
+            sendButton.setText("Answering...");
             sendButton.setEnabled(false);
 
             reqModel(message);
@@ -63,7 +63,7 @@ public class TestActivity extends AppCompatActivity {
         aiClient.ask(requestMessageItemList, true, new DeepSeekClient.Lis() {
             @Override
             public void error() {
-                System.out.println("\n处理失败（服务器响应超时）");
+                System.out.println("\nFailed (server response timed out)");
                 input();
             }
 
@@ -85,7 +85,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void input(){
         runOnUiThread(()->{
-            sendButton.setText("发送");
+            sendButton.setText("Send");
             sendButton.setEnabled(true);
         });
     }

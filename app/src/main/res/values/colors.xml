@@ -59,4 +59,11 @@
     <color name="main_tx">#FFFFFFFF</color>
     <!--@ }-->
 
+    <!-- VictorSuite fleet dark theme: dark background with neon cyan-to-magenta accents. -->
+    <color name="vs_neon_bg">#FF0B0F1A</color>
+    <color name="vs_neon_surface">#FF141A2B</color>
+    <color name="vs_neon_cyan">#FF00E5FF</color>
+    <color name="vs_neon_magenta">#FFFF2BD6</color>
+    <color name="vs_neon_text">#FFE8F1FF</color>
+    <color name="vs_neon_muted">#FF9AA7BF</color>
 </resources>

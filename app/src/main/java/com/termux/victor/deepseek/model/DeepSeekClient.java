@@ -52,7 +52,7 @@ public class DeepSeekClient {
 
             Request request = new Request.Builder()
                 .url(Config.DEEP_SEEK_URL)
-                .addHeader("Authorization", "Bearer " + UserSetManage.Companion.get().getZTUserBean().getDeepSeekApiKey())
+                .addHeader("Authorization", "Bearer " + UserSetManage.Companion.get().getVsUserBean().getDeepSeekApiKey())
                 .post(body)
                 .build();
 

@@ -10,7 +10,7 @@
         android:id="@+id/msg_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="标题1"
+        android:text="Title 1"
         android:textColor="#fff"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="标题1"
+        android:text="Title 1"
         android:textColor="#fff"
         android:textSize="14sp"
         android:textStyle="bold" />

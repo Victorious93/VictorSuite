@@ -44,7 +44,7 @@ object FileIOUtils {
     //网站默认地址
     public const val HTML_PATH = "/ztlink/html"
     public const val XINHAO_PATH = "/ztlink/xinhao"
-    public const val HTML_ZT_LINK_PATH = "/ztlink"
+    public const val HTML_VS_LINK_PATH = "/ztlink"
 
 
     //VIDEO
@@ -81,7 +81,7 @@ object FileIOUtils {
             list.add(0, dataNum)
             val s = Gson().toJson(minLBean)
             SaveData.saveData(COMMEND_KEY, s)
-            UUtils.showMsg(UUtils.getString(R.string.添加成功))
+            UUtils.showMsg(UUtils.getString(R.string.vs_added_successfully))
         }
 
     }
@@ -483,14 +483,14 @@ object FileIOUtils {
     }
 
     public fun createWebConfig() {
-        val fileZtLinkPATH = File(getHomePath(UUtils.getContext()), HTML_ZT_LINK_PATH)
+        val fileVsLinkPATH = File(getHomePath(UUtils.getContext()), HTML_VS_LINK_PATH)
         val fileHtmlPATH = File(getHomePath(UUtils.getContext()), HTML_PATH)
         val fileXinHaoPATH = File(getHomePath(UUtils.getContext()), XINHAO_PATH)
 
         val file1 = File(FileUrl.victorSuiteHome, "web_config")
 
-        if (!fileZtLinkPATH.exists()) {
-            fileZtLinkPATH.mkdirs()
+        if (!fileVsLinkPATH.exists()) {
+            fileVsLinkPATH.mkdirs()
         }
         if (!file1.exists()) {
             file1.mkdirs()

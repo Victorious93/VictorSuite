@@ -59,7 +59,7 @@ object InstallTarData {
             var mLoadingDialog: LoadingDialog? = null
             ZFileUUtils.runOnUIThread {
                 mLoadingDialog = LoadingDialog(mContext!!)
-                mLoadingDialog?.msg?.text = ZFileUUtils.getString(R.string.正在载入中)
+                mLoadingDialog?.msg?.text = ZFileUUtils.getString(R.string.vs_loading_please_wait)
                 mLoadingDialog?.show()
                 mLoadingDialog?.setCancelable(false)
                 // mCreateConversationListener?.create()

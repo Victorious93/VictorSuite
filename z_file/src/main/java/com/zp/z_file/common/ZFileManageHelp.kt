@@ -31,7 +31,7 @@ class ZFileManageHelp {
     private var imageLoadeListener: ZFileImageListener? = null
     internal fun getImageLoadListener(): ZFileImageListener {
         if (imageLoadeListener == null) {
-            ZFileLog.e("必须手动实现ZFileImageListener，并在调用前使用【ZFileManageHelp.init()】初始化！")
+            ZFileLog.e("ZFileImageListener must be implemented and initialised with ZFileManageHelp.init() before use!")
             throw ZFileException("ZFileImageListener is Null, You need call method \"ZFileManageHelp.init()\"")
         }
         return imageLoadeListener!!
@@ -253,7 +253,7 @@ class ZFileManageHelp {
         when (fragmentOrActivity) {
             is FragmentActivity -> {
                 if (fragmentOrActivity.isDestroyed || fragmentOrActivity.isFinishing) {
-                    ZFileLog.e("FragmentActivity 已被销毁或回收，请确保调用前你的FragmentActivity状态正常！")
+                    ZFileLog.e("FragmentActivity has been destroyed or recycled; make sure it is valid before calling!")
                     throw ZFileException("FragmentActivity isDestroyed or isFinishing！")
                 }
                 addFragment(
@@ -263,7 +263,7 @@ class ZFileManageHelp {
             }
             is Fragment -> {
                 if (fragmentOrActivity.isRemoving || fragmentOrActivity.isDetached) {
-                    ZFileLog.e("Fragment 已被销毁或回收，请确保调用前你的Fragment状态正常！")
+                    ZFileLog.e("Fragment has been destroyed or recycled; make sure it is valid before calling!")
                     throw ZFileException("Fragment isRemoving or isDetached！")
                 }
                 addFragment(

@@ -25,11 +25,11 @@ class VsSettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_zt_settings)
+        setContentView(R.layout.activity_vs_settings)
         findViewById<CardView>(R.id.termux_settings).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
-        findViewById<CardView>(R.id.zt_termux_settings).setOnClickListener {
+        findViewById<CardView>(R.id.vs_termux_settings).setOnClickListener {
             startActivity(Intent(this, VictorSuiteSettingsActivity::class.java))
         }
         findViewById<CardView>(R.id.droidcommand_ai).setOnClickListener {
@@ -38,7 +38,7 @@ class VsSettingsActivity : AppCompatActivity() {
         findViewById<CardView>(R.id.online_sh_server).setOnClickListener {
             startActivity(Intent(this, VsOnlineServerActivity::class.java))
         }
-        findViewById<CardView>(R.id.zt_about_card_view).setOnClickListener {
+        findViewById<CardView>(R.id.vs_about_card_view).setOnClickListener {
             startActivity(Intent(this, VsAboutActivity::class.java))
         }
         findViewById<CardView>(R.id.install_card_view).setOnClickListener {

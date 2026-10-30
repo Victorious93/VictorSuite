@@ -35,15 +35,15 @@ class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
     override fun onBindViewHolder(holder: BoomVictorSuiteViewHolder, position: Int) {
 
-        val zeroRunCommandBean = mList!![position]
+        val vsRunCommandBean = mList!![position]
 
-        if(zeroRunCommandBean.type == 0){
+        if(vsRunCommandBean.type == 0){
 
-            if(zeroRunCommandBean.isShow){
+            if(vsRunCommandBean.isShow){
                 //标题
                 holder.msg_card!!.visibility = View.GONE
                 holder.title!!.visibility = View.VISIBLE
-                holder.title!!.text = zeroRunCommandBean.title
+                holder.title!!.text = vsRunCommandBean.title
             }else{
 
                 holder.msg_card!!.visibility = View.GONE
@@ -56,15 +56,15 @@ class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
             holder.msg_card!!.visibility = View.VISIBLE
             holder.title!!.visibility = View.GONE
-            holder.msg!!.text = zeroRunCommandBean.name
+            holder.msg!!.text = vsRunCommandBean.name
 
             holder.msg_card!!.setOnClickListener {
 
                 mDissListener?.close()
 
-                if(zeroRunCommandBean.isHttpCommand){
+                if(vsRunCommandBean.isHttpCommand){
 
-                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(zeroRunCommandBean.runCommand)
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(vsRunCommandBean.runCommand)
 
                 }else{
 
@@ -74,16 +74,16 @@ class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
                     UUtils.runOnThread {
 
 
-                        UUtils.writerFile(zeroRunCommandBean.assetsName, File(mainHomeUrl, "/${zeroRunCommandBean.fileName}"))
+                        UUtils.writerFile(vsRunCommandBean.assetsName, File(mainHomeUrl, "/${vsRunCommandBean.fileName}"))
 
                         mActivity!!.runOnUiThread {
 
                             loadingDialog.dismiss()
 
-                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(zeroRunCommandBean.runCommand)
+                            com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(vsRunCommandBean.runCommand)
 
-                            if(zeroRunCommandBean.runCommit != null){
-                                zeroRunCommandBean.runCommit.run()
+                            if(vsRunCommandBean.runCommit != null){
+                                vsRunCommandBean.runCommit.run()
                             }
 
 
@@ -106,7 +106,7 @@ class BoomVictorSuiteAdapter : RecyclerView.Adapter<BoomVictorSuiteViewHolder> {
 
 
                 val intent = Intent()
-                intent.data = Uri.parse(zeroRunCommandBean.address) //Url 就是你要打开的网址
+                intent.data = Uri.parse(vsRunCommandBean.address) //Url 就是你要打开的网址
                 intent.action = Intent.ACTION_VIEW
                 mActivity!!.startActivity(intent) //启动浏览器
 

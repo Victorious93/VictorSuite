@@ -43,7 +43,7 @@ public class YesNoDialog extends Dialog {
         dialog_yes = inflate.findViewById(R.id.dialog_yes);
         dialog_no = inflate.findViewById(R.id.dialog_no);
         input_system_name = inflate.findViewById(R.id.input_system_name);
-        input_system_name.setHint("在此输入内容  input here");
+        input_system_name.setHint("Input here");
 
         this.setCancelable(false);
         this.setContentView(inflate);

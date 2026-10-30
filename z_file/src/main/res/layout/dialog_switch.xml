@@ -65,7 +65,7 @@
             android:layout_height="35dp"
             android:background="@drawable/shape_r_3dp_553d_all"
             android:gravity="center"
-            android:text="按钮"
+            android:text="Button"
             android:textColor="@color/color_ffffff"
             android:layout_marginRight="5dp"
             android:textSize="14sp" />
@@ -78,7 +78,7 @@
             android:gravity="center"
             android:id="@+id/ok"
             android:layout_marginRight="5dp"
-            android:text="按钮"
+            android:text="Button"
             android:textColor="@color/color_ffffff"
             android:textSize="14sp" />
 
@@ -89,7 +89,7 @@
             android:background="@drawable/shape_r_3dp_553d_all"
             android:gravity="center"
             android:id="@+id/cancel"
-            android:text="按钮"
+            android:text="Button"
             android:textColor="@color/color_ffffff"
             android:textSize="14sp" />
 

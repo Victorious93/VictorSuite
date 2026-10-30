@@ -20,8 +20,8 @@ and what happened to it.
 | Feature | Old source | Action | Why |
 |---|---|---|---|
 | Telegram group link (main drawer) | `https://t.me/ztcommunity` | Constant deleted, view hidden (`GONE`), click handler removed | Upstream community, not owner-controlled |
-| ZeroCoreManage add-on prompts (File browser, Key data, x86 Alpine menu items) | `https://github.com/hanxinhao000/ZeroCoreManage/releases/tag/0.1.20221116` | No longer opens the download page; shows the existing "not installed" message only | Third-party APK from a personal repo; no trusted replacement |
-| ZeroCoreManage card in About | `https://github.com/hanxinhao000/ZeroCoreManage` | Card hidden | Same as above |
+| VsEngineManage add-on prompts (File browser, Key data, x86 Alpine menu items) | `https://github.com/hanxinhao000/VsEngineManage/releases/tag/0.1.20221116` | No longer opens the download page; shows the existing "not installed" message only | Third-party APK from a personal repo; no trusted replacement |
+| VsEngineManage card in About | `https://github.com/hanxinhao000/VsEngineManage` | Card hidden | Same as above |
 | `assets/linux/termux_toolx_2.sh` | `curl gitee.com/yudezeng/yutools/... \| bash` | Script prints "disabled" and exits 1 | Pipes a script from a personal gitee repo into bash |
 | `CodeString.runMoeSh` ("Moe" Linux installer) | `curl -L gitee.com/mo2/linux/raw/2/2 \| bash` | Removed entirely (dead code) | Personal gitee mirror |
 

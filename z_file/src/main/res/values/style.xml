@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ZFile_BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ZFile_BaseTheme" parent="Theme.AppCompat">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorAccent">@color/zfile_base_color</item>
-        <item name="colorPrimaryDark">@color/zfile_base_color</item>
-        <item name="colorPrimary">@color/zfile_base_color</item>
+        <item name="colorPrimaryDark">@color/zfile_dark_bg</item>
+        <item name="colorPrimary">@color/zfile_surface</item>
         <item name="android:windowBackground">@color/zfile_bgcolor</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentTransitions">true</item>
@@ -47,7 +47,7 @@
     </style>
 
     <style name="ZFile_Select_Folder_Dialog" parent="ZFile_Common_Dialog">
-        <item name="android:windowBackground">@color/zfile_white</item>
+        <item name="android:windowBackground">@color/zfile_surface</item>
         <item name="android:windowAnimationStyle">@style/ZFile_Dialog_Anim</item>
     </style>
 
@@ -61,11 +61,11 @@
         <item name="android:textColorPrimary">@color/zfile_white</item>
     </style>
 
-    <style name="ZFile_ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+    <style name="ZFile_ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Dark">
         <item name="actionOverflowMenuStyle">@style/ZFile_OverflowMenuStyle</item>
     </style>
 
-    <style name="ZFile_OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+    <style name="ZFile_OverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>
     </style>
 

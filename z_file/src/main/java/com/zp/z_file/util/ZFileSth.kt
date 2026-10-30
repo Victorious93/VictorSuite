@@ -29,7 +29,7 @@ internal object ZFileSth {
             COPY_TYPE -> ZFileConfiguration.COPY
             CUT_TYPE -> ZFileConfiguration.MOVE
             DELTE_TYPE -> ZFileConfiguration.DELETE
-            else -> "解压"
+            else -> "Extract"
         }
         (context as? Activity)?.let {
             val dialog = getZFileHelp().getOtherListener()?.getLoadingDialog(it, "${msg}...")
@@ -47,7 +47,7 @@ internal object ZFileSth {
                 }
                 it.runOnUiThread {
                     dialog.dismiss()
-                    it.toast(if (isSuccess) "${msg}OK" else "${msg}文件失败(File operate Error)")
+                    it.toast(if (isSuccess) "${msg}OK" else "${msg} file failed (File operate Error)")
                     block.invoke(isSuccess)
                 }
             }
@@ -85,7 +85,7 @@ internal object ZFileSth {
         }else {
             val outFile = File("${targetFile}/${oldFile.name}")
             if (oldFile.path == outFile.path) {
-                ZFileLog.e("复制文件 --->>> 目录相同，不做任何处理！")
+                ZFileLog.e("Copy file --->>> same directory, nothing to do!")
                 return false
             }
             var inputChannel: FileChannel? = null
@@ -185,18 +185,18 @@ internal object ZFileSth {
                             dest.close()
                             if (total + ZIP_BUFFER_SIZE > maxSize) {
                                 val size = maxSize / 1024 / 1024
-                                ZFileLog.e("Zip压缩包中某个文件已超过最大值：${maxSize}（${size}M），可重写 【R.integer.zfile_zip_max_size】解除该限制")
-                                throw ZFileException("Zip压缩包中某个文件已超过最大值：${maxSize}（${size}M），解压失败")
+                                ZFileLog.e("A file in the zip archive exceeds the maximum: ${maxSize} (${size}M); override R.integer.zfile_zip_max_size to lift this limit")
+                                throw ZFileException("A file in the zip archive exceeds the maximum: ${maxSize} (${size}M); extraction failed")
                             }
                         }
                         zis.closeEntry()
                         count++
                         if (count > maxLength) {
-                            ZFileLog.e("Zip压缩包中数量已超过【${maxLength}】个，可重写 【R.integer.zfile_zip_max_length】解除该限制")
-                            throw ZFileException("Zip压缩包中数量已超过【${maxLength}】个，解压失败")
+                            ZFileLog.e("Zip archive has more than ${maxLength} entries; override R.integer.zfile_zip_max_length to lift this limit")
+                            throw ZFileException("Zip archive has more than ${maxLength} entries; extraction failed")
                         }
                     } else {
-                        throw ZFileException("Zip压缩包解压时不在解压目录中：${outPutDirFile.canonicalPath}")
+                        throw ZFileException("Zip entry is outside the extraction directory: ${outPutDirFile.canonicalPath}")
                     }
                 }
             }

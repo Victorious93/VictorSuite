@@ -22,14 +22,14 @@ class AdbShellRunClickConfig: BaseMenuClickConfig() {
     }
 
     override fun getString(context: Context?): String? {
-        return context?.getString(R.string.zt_adb_shell_run)
+        return context?.getString(R.string.vs_adb_shell_run)
     }
 
     override fun onClick(view: View?, context: Context?) {
         val termuxActivity: TermuxActivity = context as TermuxActivity
         if (isShowDisableIco) {
             val switchDialog = SwitchDialog(termuxActivity)
-            switchDialog.createSwitchDialog(UUtils.getString(R.string.zt_adb_shell_run_debug))
+            switchDialog.createSwitchDialog(UUtils.getString(R.string.vs_adb_shell_run_debug))
             switchDialog.show()
             switchDialog.ok?.setOnClickListener {
                 switchDialog.dismiss()
@@ -45,7 +45,7 @@ class AdbShellRunClickConfig: BaseMenuClickConfig() {
         val mingLShowDialog = MingLShowDialog(context!!)
         mingLShowDialog.mTitleCard.visibility = View.GONE
         mingLShowDialog.mSwitchCard.visibility = View.GONE
-        mingLShowDialog.edit_text.setText(UUtils.getString(R.string.zt_adb_shell_run_summary))
+        mingLShowDialog.edit_text.setText(UUtils.getString(R.string.vs_adb_shell_run_summary))
         mingLShowDialog.start.setOnClickListener {
             mingLShowDialog.dismiss()
         }

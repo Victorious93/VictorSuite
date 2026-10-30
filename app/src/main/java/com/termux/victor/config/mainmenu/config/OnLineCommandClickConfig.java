@@ -25,7 +25,7 @@ public class OnLineCommandClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.在线脚本);
+        return context.getString(R.string.vs_online_script_2);
     }
 
     @Override

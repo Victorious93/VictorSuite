@@ -74,15 +74,15 @@ open class ZFileVideoPlayer : TextureView, TextureView.SurfaceTextureListener {
 
     override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
         player?.setOnPreparedListener {
-            ZFileLog.i("媒体装载完成")
+            ZFileLog.i("Media loaded")
             setVolume()
             videoPrepared?.invoke(it)
         }
         player?.setOnBufferingUpdateListener { _, percent ->
-            ZFileLog.i("缓存中：$percent")
+            ZFileLog.i("Buffering: $percent")
         }
         player?.setOnCompletionListener {
-            ZFileLog.i("播放完成")
+            ZFileLog.i("Playback complete")
             if (completionAutoPlayer) play()
             videoCompletion?.invoke(it)
         }
@@ -92,12 +92,12 @@ open class ZFileVideoPlayer : TextureView, TextureView.SurfaceTextureListener {
             checkViewSizeByMode()
         }
         player?.setOnErrorListener { _, _, _ ->
-            ZFileLog.e("播放失败")
+            ZFileLog.e("Playback failed")
             false
         }
         val s = Surface(surface)
         player?.setSurface(s)
-        ZFileLog.i("播放器初始化....")
+        ZFileLog.i("Player initialising....")
     }
 
     override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) = Unit
@@ -110,7 +110,7 @@ open class ZFileVideoPlayer : TextureView, TextureView.SurfaceTextureListener {
         videoPrepared = null
         videoCompletion = null
         videoPlayError = null
-        ZFileLog.i("播放器被销毁...")
+        ZFileLog.i("Player destroyed...")
         return true
     }
 
@@ -139,7 +139,7 @@ open class ZFileVideoPlayer : TextureView, TextureView.SurfaceTextureListener {
             throw ZFileException("videoPath or assetsVideoName, You can only choose one")
         }
         if (isPlaying()) {
-            ZFileLog.i("视频正在播放...")
+            ZFileLog.i("Video playing...")
             return
         }
         try {
@@ -154,7 +154,7 @@ open class ZFileVideoPlayer : TextureView, TextureView.SurfaceTextureListener {
             playState = IS_PLAYING
         } catch (e: Exception) {
             e.printStackTrace()
-            ZFileLog.e("播放失败！ videoPath --->>> $videoPath <<<===>>> videoName --->>> $assetsVideoName")
+            ZFileLog.e("Playback failed! videoPath --->>> $videoPath <<<===>>> videoName --->>> $assetsVideoName")
             videoPlayError?.invoke(player)
         }
     }

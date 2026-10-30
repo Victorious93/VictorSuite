@@ -69,7 +69,7 @@ public class FontActivity extends BaseThemeActivity {
         if(!(fontFile.exists())){
             boolean mkdirs = fontFile.mkdirs();
             if (!mkdirs){
-                Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.你没有SD卡权限), Toast.LENGTH_SHORT).show();
+                Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.vs_you_don_t_have_sd_card_permission), Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -89,7 +89,7 @@ public class FontActivity extends BaseThemeActivity {
         File[] files = fontFile.listFiles();
 
         if(files == null || files.length == 0){
-            Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有在内部存储), Toast.LENGTH_SHORT).show();
+            Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.vs_no_font_files_were_found_in_internal_sto), Toast.LENGTH_SHORT).show();
             return;
         }
         for (int i = 0; i < files.length; i++) {
@@ -148,11 +148,11 @@ public class FontActivity extends BaseThemeActivity {
 
             if(fondDatdBean.mFile.getName().equals("termux_def.ttf")){
 
-                fontViewHolder.font_st.setText(UUtils.getString(R.string.Utermux默认字体));
+                fontViewHolder.font_st.setText(UUtils.getString(R.string.vs_victorsuite_default_font_utermux));
                 fontViewHolder.font_st.setTypeface(fromAsset);
             }else{
 
-                fontViewHolder.font_st.setText(UUtils.getString(R.string.Utermux中文字体));
+                fontViewHolder.font_st.setText(UUtils.getString(R.string.vs_victorsuite_english_fonts_utermux));
                 fontViewHolder.font_st.setTypeface(fromAsset);
             }
 
@@ -229,7 +229,7 @@ public class FontActivity extends BaseThemeActivity {
             boolean newFile = termuxFontFile.createNewFile();
 
             if(!newFile){
-                Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.创建文件错误), Toast.LENGTH_SHORT).show();
+                Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.vs_error_creating_file), Toast.LENGTH_SHORT).show();
             }
 
 
@@ -252,7 +252,7 @@ public class FontActivity extends BaseThemeActivity {
 
 
 
-            Toast.makeText(FontActivity.this, UUtils.getString(R.string.字体设置成功), Toast.LENGTH_SHORT).show();
+            Toast.makeText(FontActivity.this, UUtils.getString(R.string.vs_the_font_is_set_successfully), Toast.LENGTH_SHORT).show();
 
         /*    Intent intent = new Intent("com.termux.app.reload_style");
             intent.putExtra("com.termux.app.reload_style","font");
@@ -261,7 +261,7 @@ public class FontActivity extends BaseThemeActivity {
 
             //finish();
 
-            SwitchDialog switchDialog1 = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.如果进入终端没有任何显示));
+            SwitchDialog switchDialog1 = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_if_you_enter_the_terminal_without_any_di));
 
             switchDialog1.getCancel().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -300,8 +300,8 @@ public class FontActivity extends BaseThemeActivity {
         switchDialog.getTitle().setText(title);
         switchDialog.getMsg().setText(msg);
         switchDialog.getOther().setVisibility(View.GONE);
-        switchDialog.getOk().setText(UUtils.getString(R.string.确定));
-        switchDialog.getCancel().setText(UUtils.getString(R.string.取消));
+        switchDialog.getOk().setText(UUtils.getString(R.string.vs_determine));
+        switchDialog.getCancel().setText(UUtils.getString(R.string.vs_cancel));
 
         switchDialog.show();
 

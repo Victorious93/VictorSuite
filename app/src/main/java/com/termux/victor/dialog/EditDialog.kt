@@ -65,7 +65,7 @@ class EditDialog : BaseDialogCentre {
 
                 editPromptWindow?.setEditPromptWindowListener(object : EditPromptWindow.EditPromptWindowListener{
                     override fun itemClick(data: EditPromptBean.EditPromptData) {
-                        UUtils.showLog("点击事件(外):${data.ip}")
+                        UUtils.showLog("Click event (outer): ${data.ip}")
                         edit_text?.setText(data.ip)
 
                         try {
@@ -133,7 +133,7 @@ class EditDialog : BaseDialogCentre {
 
                     editPromptWindow?.setEditPromptWindowListener(object : EditPromptWindow.EditPromptWindowListener{
                         override fun itemClick(data: EditPromptBean.EditPromptData) {
-                            UUtils.showLog("点击事件(外):${data.ip}")
+                            UUtils.showLog("Click event (outer): ${data.ip}")
                             edit_text?.setText(data.ip)
 
                             try {

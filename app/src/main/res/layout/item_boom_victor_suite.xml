@@ -73,7 +73,7 @@
                            android:paddingTop="10dp"
                            android:id="@+id/msg"
                            android:paddingBottom="10dp"
-                           android:text="@string/容器切换"
+                           android:text="@string/vs_containerswitching"
                            android:layout_alignParentRight="true"
                            android:textColor="@color/color_ffffff"
                            android:textSize="10sp" />

@@ -121,7 +121,7 @@ object ModuleInstallUtils {
                 } catch (e: Exception) {
                     e.printStackTrace()
                     LogUtils.d(TAG, "installModule  error:$e")
-                    stringBuilder.append("\n").append("${UUtils.getString(R.string.错误)}->[$it], $e").append("\n")
+                    stringBuilder.append("\n").append("${UUtils.getString(R.string.vs_error_2)}->[$it], $e").append("\n")
                     clearData(stringBuilder)
                     mInstallModuleMsg?.msg(stringBuilder.toString(), true, e)
                     return

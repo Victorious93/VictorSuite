@@ -112,7 +112,7 @@ Drawer categories in `MainMenuConfig.init()`:
 | Common | switch source, container switch, backup/restore, QEMU, ZT settings |
 | X11 | X11 settings/environment, install X11, VNC, show/hide extra keys |
 | Beautification | float window, fonts, particles, snowflake, fullscreen |
-| Engine | file browser, Alpine x86, keys (optional `com.xinhao.zerocoremanage` APK via `ZeroCoreManage`) |
+| Engine | file browser, Alpine x86, keys (optional `com.xinhao.zerocoremanage` APK via `VsEngineManage`) |
 | Root | wireless ADB on/off, Docker check |
 | Online | online scripts, BBS, downloads, public warehouse |
 | Config | ADB shell, ZT command keys, bash/start-message, boot command |

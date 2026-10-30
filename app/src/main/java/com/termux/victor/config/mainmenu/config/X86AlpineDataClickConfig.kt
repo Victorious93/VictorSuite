@@ -16,7 +16,7 @@ import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.dialog.SwitchDialog
 import com.termux.victor.utils.FileIOUtils
-import com.termux.victor.zero.engine.ZeroCoreManage
+import com.termux.victor.engine.VsEngineManage
 
 class X86AlpineDataClickConfig: BaseMenuClickConfig() {
     companion object{
@@ -36,24 +36,24 @@ class X86AlpineDataClickConfig: BaseMenuClickConfig() {
             LogUtils.d(TAG, "runQemuOs mContext is null return")
             return
         }
-        val versionName = ZeroCoreManage.getVersionName()
+        val versionName = VsEngineManage.getVersionName()
         if (TextUtils.isEmpty(versionName)) {
-            UUtils.showMsg(UUtils.getString(R.string.zero_eg_not_install))
-            // Do not send users to download the third-party ZeroCoreManage APK from an
+            UUtils.showMsg(UUtils.getString(R.string.vs_engine_not_install))
+            // Do not send users to download the third-party VsEngineManage APK from an
             // upstream personal repo (untrusted binary). Feature stays unavailable.
             return
         }
         if (FileIOUtils.isProotQemu()) {
             val switchDialog = SwitchDialog(mContext as Activity)
             switchDialog.createSwitchDialog(UUtils.getString(R.string.install_environment))
-            switchDialog.ok?.text = UUtils.getString(R.string.确定)
-            switchDialog.cancel?.text = UUtils.getString(R.string.取消)
+            switchDialog.ok?.text = UUtils.getString(R.string.vs_determine)
+            switchDialog.cancel?.text = UUtils.getString(R.string.vs_cancel)
             switchDialog.ok?.setOnClickListener {
                 switchDialog.dismiss()
                 com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg update -y && pkg in wget proot -y && pkg install x11-repo unstable-repo -y && pkg install qemu-utils qemu-system-x86_64-headless  qemu-system-i386-headless -y &&  termux-setup-storage\n")
                 Toast.makeText(
                     UUtils.getContext(),
-                    UUtils.getString(R.string.请等待安装完成在进入),
+                    UUtils.getString(R.string.vs_please_wait_for_the_installation_to_comp),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -70,18 +70,18 @@ class X86AlpineDataClickConfig: BaseMenuClickConfig() {
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
                 when (msg.what) {
-                    ZeroCoreManage.INSTALLING -> {
+                    VsEngineManage.INSTALLING -> {
                         LogUtils.d(TAG, "INSTALLING System os install....")
                         termuxActivity.showDialog(true)
                     }
-                    ZeroCoreManage.INSTALL_COMPLETE -> {
+                    VsEngineManage.INSTALL_COMPLETE -> {
                         LogUtils.d(TAG, "INSTALL_COMPLETE System os install complete.")
                         termuxActivity.showDialog(false)
-                        termuxActivity.vShell(ZeroCoreManage.getEnvironment(), ZeroCoreManage.getProcessArgs())
+                        termuxActivity.vShell(VsEngineManage.getEnvironment(), VsEngineManage.getProcessArgs())
                     }
                 }
             }
         }
-        ZeroCoreManage.install(handler)
+        VsEngineManage.install(handler)
     }
 }

@@ -23,7 +23,7 @@ public class VsSettingsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.zt_settings1);
+        return context.getString(R.string.vs_settings1);
     }
 
     @Override

@@ -45,7 +45,7 @@ class InstallModuleDialog: BaseDialogCentre {
     constructor(context: Context) : super(context)
     constructor(context: Context, themeResId: Int) : super(context, themeResId)
     //模块包目录
-    public var zeroTermuxModule: File? = null
+    public var vsModule: File? = null
 
 
     override fun initViewDialog(mView: View?) {
@@ -79,7 +79,7 @@ class InstallModuleDialog: BaseDialogCentre {
                 dismiss()
             }
         }
-        zeroTermuxModule = File(Environment.getExternalStorageDirectory(), "/xinhao/module")
+        vsModule = File(Environment.getExternalStorageDirectory(), "/xinhao/module")
         initDataAndAdapter()
 
     }
@@ -235,13 +235,13 @@ class InstallModuleDialog: BaseDialogCentre {
 
     //获取模块包路径
     private fun getModuleFiles(): ArrayList<File>? {
-        if (!zeroTermuxModule!!.exists()) {
-            if (!zeroTermuxModule!!.mkdirs()) {
-                LogUtils.d(TAG, "getModuleFiles create folder is fail, path: " + zeroTermuxModule!!.absolutePath)
+        if (!vsModule!!.exists()) {
+            if (!vsModule!!.mkdirs()) {
+                LogUtils.d(TAG, "getModuleFiles create folder is fail, path: " + vsModule!!.absolutePath)
                 return null
             }
         }
-        val listFiles = zeroTermuxModule!!.listFiles()
+        val listFiles = vsModule!!.listFiles()
         if (listFiles == null || listFiles.isEmpty()) {
             LogUtils.d(TAG, "getModuleFiles module listFiles is empty ")
             return null

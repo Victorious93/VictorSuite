@@ -95,7 +95,7 @@ class OnLineShDialog : BaseDialogDown {
                 }catch (e:Exception){
                     e.printStackTrace()
                     UUtils.runOnUIThread {
-                        UUtils.showMsg(UUtils.getString(R.string.服务器在线但数据格式出错))
+                        UUtils.showMsg(UUtils.getString(R.string.vs_the_server_is_online_but_the_data_format))
                         dismiss()
                     }
                 }
@@ -108,7 +108,7 @@ class OnLineShDialog : BaseDialogDown {
             override fun onFailure(response: Response<String>?, msg: String, mWhat: Int) {
 
              UUtils.runOnUIThread {
-                 UUtils.showMsg(UUtils.getString(R.string.服务器已离线))
+                 UUtils.showMsg(UUtils.getString(R.string.vs_server_is_offline))
                  dismiss()
              }
             }
@@ -151,12 +151,12 @@ class OnLineShDialog : BaseDialogDown {
             }
 
             holder.name?.setText(data1.name)
-            holder.size?.text = "${UUtils.getString(R.string.大小)}:1KB~500KB"
+            holder.size?.text = "${UUtils.getString(R.string.vs_size)}:1KB~500KB"
             holder.note?.text = data1.note
             holder.download?.setOnClickListener {
 
                 if(data1.isDownload == "1"){
-                    UUtils.showMsg(UUtils.getString(R.string.当前文件下载已被禁止))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_the_current_file_download_has_been_forbi))
                     return@setOnClickListener
                 }
                 try {
@@ -175,7 +175,7 @@ class OnLineShDialog : BaseDialogDown {
                     })
 
                 }catch (e:Exception){
-                    UUtils.showMsg(UUtils.getString(R.string.当前文件下载已被禁止))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_the_current_file_download_has_been_forbi))
                 }
 
             }

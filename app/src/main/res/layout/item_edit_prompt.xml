@@ -14,7 +14,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="@string/标题"
+        android:text="@string/vs_title"
         android:textSize="12sp"
         android:textStyle="bold"
         android:id="@+id/title"

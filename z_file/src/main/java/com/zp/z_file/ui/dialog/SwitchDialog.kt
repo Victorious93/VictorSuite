@@ -36,10 +36,10 @@ class SwitchDialog : BaseDialogCentre {
 
     public fun createSwitchDialog(msg: String): SwitchDialog {
        // title?.visibility = View.INVISIBLE
-        title?.text = ZFileUUtils.getString(R.string.提示)
+        title?.text = ZFileUUtils.getString(R.string.vs_prompt)
         other?.visibility = View.GONE
-        ok?.text = ZFileUUtils.getString(R.string.确定)
-        cancel?.text = ZFileUUtils.getString(R.string.取消)
+        ok?.text = ZFileUUtils.getString(R.string.vs_determine)
+        cancel?.text = ZFileUUtils.getString(R.string.vs_cancel)
         cancel?.setOnClickListener {
             dismiss()
         }

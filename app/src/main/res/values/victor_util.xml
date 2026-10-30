@@ -6,8 +6,8 @@
     <color name="color_2e84e6">#2e84e6</color>
     <color name="color_6d87a8">#6d87a8</color>
     <color name="color_FD9F3E">#FD9F3E</color>
-    <string name="cancel">取消</string>
-    <string name="复制失败">复制失败</string>
-    <string name="复制成功">复制成功</string>
-    <string name="标题">标题</string>
+    <string name="cancel">Cancel</string>
+    <string name="vs_copy_failed">Copy Failed</string>
+    <string name="vs_copied_successfully">Copied Successfully</string>
+    <string name="vs_title">Title</string>
 </resources>

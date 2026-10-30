@@ -36,10 +36,10 @@ class SwitchDialog : BaseDialogCentre {
 
     public fun createSwitchDialog(msg: String): SwitchDialog {
        // title?.visibility = View.INVISIBLE
-        title?.text = UUtils.getString(R.string.提示)
+        title?.text = UUtils.getString(R.string.vs_prompt)
         other?.visibility = View.GONE
-        ok?.text = UUtils.getString(R.string.确定)
-        cancel?.text = UUtils.getString(R.string.取消)
+        ok?.text = UUtils.getString(R.string.vs_determine)
+        cancel?.text = UUtils.getString(R.string.vs_cancel)
         cancel?.setOnClickListener {
             dismiss()
         }

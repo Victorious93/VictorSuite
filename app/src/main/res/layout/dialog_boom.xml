@@ -25,7 +25,7 @@
                     android:id="@+id/qie_huan_string"
                     android:gravity="center"
                     android:layout_height="match_parent"
-                    android:text="@string/当前为自动"
+                    android:text="@string/vs_currently_automatic"
                     android:textColor="@color/color_FFFFFF"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -95,7 +95,7 @@
                                 android:paddingRight="6dp"
                                 android:gravity="center"
                                 android:layout_height="match_parent"
-                                android:text="@string/键盘"
+                                android:text="@string/vs_keyboard"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
                         </androidx.cardview.widget.CardView>
@@ -122,7 +122,7 @@
                                 android:paddingRight="6dp"
                                 android:gravity="center"
                                 android:layout_height="match_parent"
-                                android:text="@string/会话"
+                                android:text="@string/vs_conversation"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
                         </androidx.cardview.widget.CardView>
@@ -149,7 +149,7 @@
                                 android:paddingRight="6dp"
                                 android:gravity="center"
                                 android:layout_height="match_parent"
-                                android:text="@string/自动命令"
+                                android:text="@string/vs_help"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
                         </androidx.cardview.widget.CardView>
@@ -177,7 +177,7 @@
                                 android:paddingRight="6dp"
                                 android:gravity="center"
                                 android:layout_height="match_parent"
-                                android:text="@string/自动命令"
+                                android:text="@string/vs_help"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="12sp" />
                         </androidx.cardview.widget.CardView>
@@ -218,7 +218,7 @@
                                android:visibility="gone"
                                android:gravity="center"
                                android:layout_height="match_parent"
-                               android:text="@string/搜索文件"
+                               android:text="@string/vs_search_file"
                                android:textColor="@color/color_FFFFFF"
                                android:textSize="12sp" />
                            <EditText
@@ -229,7 +229,7 @@
                                android:textColor="@color/color_FFFFFF"
                                android:textColorHint="#f2f2f2"
                                android:layout_marginLeft="10dp"
-                               android:hint="@string/再次输入您要搜索的文件"
+                               android:hint="@string/vs_enter_the_file_you_want_to_search_again"
                                android:layout_height="match_parent"/>
                        </LinearLayout>
                    </androidx.cardview.widget.CardView>
@@ -257,7 +257,7 @@
                             android:paddingRight="6dp"
                             android:gravity="center"
                             android:layout_height="match_parent"
-                            android:text="@string/搜索文件"
+                            android:text="@string/vs_search_file"
                             android:textColor="@color/color_FFFFFF"
                             android:textSize="12sp" />
                     </androidx.cardview.widget.CardView>
@@ -310,7 +310,7 @@
                 android:padding="20dp"
                 android:id="@+id/title"
                 android:visibility="gone"
-                android:text="@string/自动出错"
+                android:text="@string/vs_automatic_error"
                 android:textColor="@color/color_FFFFFF"
                 android:textSize="12sp" />
             <androidx.recyclerview.widget.RecyclerView

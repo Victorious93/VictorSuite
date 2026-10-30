@@ -120,7 +120,7 @@ class RestoreViewModel {
                         MainScope().launch {
                             withContext(Dispatchers.Main) {
                                 mLoadingDialog = LoadingDialog(mContext!!)
-                                mLoadingDialog?.msg?.text = UUtils.getString(R.string.正在载入中)
+                                mLoadingDialog?.msg?.text = UUtils.getString(R.string.vs_loading_please_wait)
                                 mLoadingDialog?.show()
                                 mLoadingDialog?.setCancelable(false)
                                // mCreateConversationListener?.create()

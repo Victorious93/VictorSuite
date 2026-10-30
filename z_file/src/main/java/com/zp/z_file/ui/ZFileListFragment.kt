@@ -309,7 +309,7 @@ class ZFileListFragment : Fragment() {
                 val yesNoDialog = YesNoDialog(context!!)
                 val createEditDialog = yesNoDialog
                     .createEditDialog(requireContext() getStringById R.string.zfile_git_clone)
-                createEditDialog.inputSystemName.hint = "请输入git网址  input git url"
+                createEditDialog.inputSystemName.hint = "Enter git URL"
                 createEditDialog.yesTv.setOnClickListener {
                     val text = createEditDialog.inputSystemName.text
                     if (text.isNullOrEmpty()) {
@@ -340,7 +340,7 @@ class ZFileListFragment : Fragment() {
                 val yesNoDialog = YesNoDialog(context!!)
                 val createEditDialog = yesNoDialog
                     .createEditDialog(requireContext() getStringById R.string.zfile_git_clone)
-                createEditDialog.inputSystemName.hint = "请输入下载地址  input download url"
+                createEditDialog.inputSystemName.hint = "Enter download URL"
                 createEditDialog.yesTv.setOnClickListener {
                     val text = createEditDialog.inputSystemName.text
                     if (text.isNullOrEmpty()) {
@@ -383,7 +383,7 @@ class ZFileListFragment : Fragment() {
                     sendBroadcast(intent)
                 }
             }
-            R.id.zt_developer -> {
+            R.id.vs_developer -> {
                 LocalBroadcastManager.getInstance(view!!.context).apply {
                     val intent = Intent()
                     intent.action = "localbroadcast"
@@ -519,7 +519,7 @@ class ZFileListFragment : Fragment() {
                     }
                     fileClickListener.itemFileClick(item, v)
                 } else {
-                    ZFileLog.i("进入 ${item.filePath}")
+                    ZFileLog.i("Enter ${item.filePath}")
                     backList.add(item.filePath)
                     filePathAdapter.addItem(filePathAdapter.itemCount, item.toPathBean())
                     vb?.zfileListPathRecyclerView?.scrollToPosition(filePathAdapter.itemCount - 1)
@@ -547,10 +547,10 @@ class ZFileListFragment : Fragment() {
             changeListener = { isManage, size ->
                 if (isManage) {
                     if (barShow) {
-                        setBarTitle("已选中${size}个文件")
+                        setBarTitle("${size} files selected")
                     } else {
                         barShow = true
-                        setBarTitle("已选中0个文件")
+                        setBarTitle("0 files selected")
                         setMenuState()
                     }
                 }
@@ -595,12 +595,12 @@ class ZFileListFragment : Fragment() {
 
     private fun showSelectDialog(index: Int, item: ZFileBean): Boolean {
         AlertDialog.Builder(requireContext()).apply {
-            setTitle("请选择(select)")
+            setTitle("Select")
             setItems(titleArray) { dialog, which ->
                 jumpByWhich(item, which, index)
                 dialog.dismiss()
             }
-            setPositiveButton("取消(cancel)") { dialog, _ -> dialog.dismiss() }
+            setPositiveButton("Cancel") { dialog, _ -> dialog.dismiss() }
             show()
         }
         return true
@@ -644,9 +644,9 @@ class ZFileListFragment : Fragment() {
                     fileListAdapter?.remove(index, nullBlock = {
                         setEmptyState(if (it) View.VISIBLE else View.GONE)
                     })
-                    ZFileLog.i("文件删除成功")
+                    ZFileLog.i("File deleted")
                 } else {
-                    ZFileLog.i("文件删除失败")
+                    ZFileLog.i("File delete failed")
                 }
             }
             ZFileConfiguration.INFO -> ZFileUtil.infoFile(item, requireContext())
@@ -658,10 +658,10 @@ class ZFileListFragment : Fragment() {
         if (type == ZFileConfiguration.COPY) { // 复制文件
             getZFileHelp().getFileOperateListener().copyFile(item.filePath, targetPath, requireContext()) {
                 if (this) {
-                    ZFileLog.i("文件复制成功")
+                    ZFileLog.i("File copied")
                     observer(true)
                 } else {
-                    ZFileLog.e("文件复制失败")
+                    ZFileLog.e("File copy failed")
                 }
             }
         } else { // 移动文件
@@ -670,9 +670,9 @@ class ZFileListFragment : Fragment() {
                     fileListAdapter?.remove(position, nullBlock = {
                         setEmptyState(if (it) View.VISIBLE else View.GONE)
                     })
-                    ZFileLog.i("文件移动成功")
+                    ZFileLog.i("File moved")
                 } else {
-                    ZFileLog.e("文件移动失败")
+                    ZFileLog.e("File move failed")
                 }
             }
         }

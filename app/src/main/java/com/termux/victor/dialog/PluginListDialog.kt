@@ -146,7 +146,7 @@ class PluginListDialog : BaseDialogDown {
                     PluginRegistry.acknowledgeAuthorizedUse(mContext, record.id)
                     doEnable(record)
                 }
-                .setNegativeButton(UUtils.getString(R.string.取消)) { _, _ ->
+                .setNegativeButton(UUtils.getString(R.string.vs_cancel)) { _, _ ->
                     onChanged()
                 }
                 .setCancelable(false)

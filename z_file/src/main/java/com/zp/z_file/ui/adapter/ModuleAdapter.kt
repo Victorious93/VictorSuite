@@ -46,7 +46,7 @@ class ModuleAdapter: RecyclerView.Adapter<RestoreViewHolder> {
             switchDialog.ok?.setOnClickListener {
                 switchDialog.dismiss()
                 if (mList!![position].mFile!!.delete()) {
-                    ZFileUUtils.showMsg(ZFileUUtils.getString(R.string.删除成功))
+                    ZFileUUtils.showMsg(ZFileUUtils.getString(R.string.vs_successfully_deleted))
                     mRestoreRefreshFileListener?.refresh()
                 } else {
                     ZFileUUtils.showMsg(ZFileUUtils.getString(R.string.file_delete_fail))

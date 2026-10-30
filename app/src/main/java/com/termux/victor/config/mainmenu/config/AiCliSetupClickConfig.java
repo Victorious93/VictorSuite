@@ -1,6 +1,6 @@
 package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -32,7 +32,7 @@ public class AiCliSetupClickConfig extends BaseMenuClickConfig {
 
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override

@@ -9,7 +9,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:text="@string/请选择运行的架构"
+        android:text="@string/vs_please_select_the_running_architecture"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:visibility="gone"
@@ -66,7 +66,7 @@
                         android:layout_marginBottom="20dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/导入"
+                        android:text="@string/vs_import"
                         android:textColor="#fff"
                         android:textSize="11sp"
                         android:textStyle="bold" />
@@ -114,7 +114,7 @@
                         android:layout_marginBottom="20dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/导出"
+                        android:text="@string/vs_export"
                         android:textColor="#fff"
                         android:textSize="11sp"
                         android:textStyle="bold" />

@@ -23,7 +23,7 @@
             android:textIsSelectable="true"
             android:textSize="18sp"
             android:id="@+id/error_text"
-            android:text="@string/zt_app_crash"
+            android:text="@string/vs_app_crash"
             android:layout_height="match_parent" />
 
     </ScrollView>

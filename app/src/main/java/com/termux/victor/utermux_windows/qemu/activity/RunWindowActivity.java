@@ -136,8 +136,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
                 if (!mMacRunPath.exists()) {
 
-                    UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续) + "\n");
+                    UUtils.showMsg(UUtils.getString(R.string.vs_is_dredging_the_required_environment));
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.vs_please_enter_the_enter_key_to_continue) + "\n");
                     com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                     finish();
                     return;
@@ -147,14 +147,14 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 FileListDialog fileListDialog1 = new FileListDialog(RunWindowActivity.this);
                 fileListDialog1.show();
                 fileListDialog1.setFilePath(mWinConfig);
-                fileListDialog1.setTitleText(UUtils.getString(R.string.请选择模拟器配置文件));
+                fileListDialog1.setTitleText(UUtils.getString(R.string.vs_please_select_an_emulator_profile));
 
                 fileListDialog1.setBoomBtnVisible(true);
                 fileListDialog1.setOnItemFileClickListener(new FileListDialog.OnItemFileClickListener() {
                     @Override
                     public void onItemClick(File file) {
                         fileListDialog1.dismiss();
-                        UUtils.showLog("获取文件目录:" + file.getAbsolutePath());
+                        UUtils.showLog("Get file directory: " + file.getAbsolutePath());
                         String fileString = UUtils.getFileString(file);
                         EditTextDialog editTextDialog = new EditTextDialog(RunWindowActivity.this);
                         editTextDialog.setStringData(fileString);
@@ -186,7 +186,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         editTextDialog.setEditStartCommand(new EditTextDialog.EditStartCommand() {
                             @Override
                             public void editCommand(String comm) {
-                                UUtils.showMsg(UUtils.getString(R.string.成功));
+                                UUtils.showMsg(UUtils.getString(R.string.vs_success));
                                 SaveData.saveData("mac_config", comm);
                             }
                         });
@@ -244,12 +244,12 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                             FileListDialog fileListDialog1 = new FileListDialog(RunWindowActivity.this);
                             fileListDialog1.show();
                             fileListDialog1.setFilePath(mWinConfig);
-                            fileListDialog1.setTitleText(UUtils.getString(R.string.请选择模拟器配置文件));
+                            fileListDialog1.setTitleText(UUtils.getString(R.string.vs_please_select_an_emulator_profile));
 
                             fileListDialog1.setBoomBtnVisible(true);
                             fileListDialog1.setOnItemFileClickListener(file12 -> {
                                 fileListDialog1.dismiss();
-                                UUtils.showLog("获取文件目录:" + file12.getAbsolutePath());
+                                UUtils.showLog("Get file directory: " + file12.getAbsolutePath());
                                 String fileString = UUtils.getFileString(file12);
                                 EditTextDialog editTextDialog = new EditTextDialog(RunWindowActivity.this);
                                 editTextDialog.setStringData(fileString);
@@ -303,7 +303,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                     startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    UUtils.showMsg(UUtils.getString(R.string.请在下载站下载VNC插件));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_please_download_the_vnc_plug_in_at_downl));
 
                 }
 
@@ -320,11 +320,11 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
             AlertDialog.Builder ab = new AlertDialog.Builder(RunWindowActivity.this);
 
-            ab.setTitle(UUtils.getString(R.string.环境不达要求));
+            ab.setTitle(UUtils.getString(R.string.vs_the_environment_is_not_up_to_the_require));
 
-            ab.setMessage(UUtils.getString(R.string.你没有安装tyu65t6y5u));
+            ab.setMessage(UUtils.getString(R.string.vs_you_have_not_installed_wget_or_proot_do_tyu65t6y5u));
 
-            ab.setNegativeButton(UUtils.getString(R.string.给我安装), new DialogInterface.OnClickListener() {
+            ab.setNegativeButton(UUtils.getString(R.string.vs_install), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("pkg in wget proot -y" + "\n");
@@ -333,7 +333,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 }
             });
 
-            ab.setPositiveButton(UUtils.getString(R.string.不安装), new DialogInterface.OnClickListener() {
+            ab.setPositiveButton(UUtils.getString(R.string.vs_cancel_2), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     ab.create().dismiss();
@@ -352,13 +352,13 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
         if (!mFile2.exists()) {
             androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(this);
 
-            alertDialog.setTitle(UUtils.getString(R.string.错误));
+            alertDialog.setTitle(UUtils.getString(R.string.vs_error_2));
 
             alertDialog.setCancelable(false);
 
-            alertDialog.setMessage(UUtils.getString(R.string.你没有安装相关环境qemuppp5555p));
+            alertDialog.setMessage(UUtils.getString(R.string.vs_you_have_not_installed_the_relevant_envi_qemuppp5555p));
 
-            alertDialog.setNegativeButton(UUtils.getString(R.string.在线安装), new DialogInterface.OnClickListener() {
+            alertDialog.setNegativeButton(UUtils.getString(R.string.vs_online_installation), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     alertDialog.create().dismiss();
@@ -393,7 +393,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                                     com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("y\n");
                                     RunWindowActivity.this.finish();
                                     alertDialog.create().dismiss();
-                                    Toast.makeText(RunWindowActivity.this, UUtils.getString(R.string.请等待安装完成在进入), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RunWindowActivity.this, UUtils.getString(R.string.vs_please_wait_for_the_installation_to_comp), Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             });
@@ -405,7 +405,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 }
             });
 
-            alertDialog.setPositiveButton(UUtils.getString(R.string.稍后), new DialogInterface.OnClickListener() {
+            alertDialog.setPositiveButton(UUtils.getString(R.string.vs_later), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -419,10 +419,10 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
         }
 
         if (mFile.exists() || mFile1.exists()) {
-            qemu_state.setText(UUtils.getString(R.string.qamu环境开));
+            qemu_state.setText(UUtils.getString(R.string.vs_installed_qamu));
             qemu_install.setVisibility(View.GONE);
         } else {
-            qemu_state.setText(UUtils.getString(R.string.qamu环境关));
+            qemu_state.setText(UUtils.getString(R.string.vs_notinstalled_qamu));
             qemu_install.setVisibility(View.VISIBLE);
         }
 
@@ -446,8 +446,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
             if (!mWin7RunPath.exists()) {
 
-                UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
+                UUtils.showMsg(UUtils.getString(R.string.vs_is_dredging_the_required_environment));
+                com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.vs_please_enter_the_enter_key_to_continue_55) + "\n");
                 com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                 finish();
                 return;
@@ -457,14 +457,14 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
             FileListDialog fileListDialog1 = new FileListDialog(RunWindowActivity.this);
             fileListDialog1.show();
             fileListDialog1.setFilePath(mWinConfig);
-            fileListDialog1.setTitleText(UUtils.getString(R.string.请选择模拟器配置文件));
+            fileListDialog1.setTitleText(UUtils.getString(R.string.vs_please_select_an_emulator_profile));
 
             fileListDialog1.setBoomBtnVisible(true);
             fileListDialog1.setOnItemFileClickListener(new FileListDialog.OnItemFileClickListener() {
                 @Override
                 public void onItemClick(File file) {
                     fileListDialog1.dismiss();
-                    UUtils.showLog("获取文件目录:" + file.getAbsolutePath());
+                    UUtils.showLog("Get file directory: " + file.getAbsolutePath());
                     String fileString = UUtils.getFileString(file);
 
                     EditTextDialog editTextDialog = new EditTextDialog(RunWindowActivity.this);
@@ -505,7 +505,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                     editTextDialog.setEditStartCommand(new EditTextDialog.EditStartCommand() {
                         @Override
                         public void editCommand(String comm) {
-                            UUtils.showMsg(UUtils.getString(R.string.成功));
+                            UUtils.showMsg(UUtils.getString(R.string.vs_success));
                             SaveData.saveData("win7_config", comm);
                         }
                     });
@@ -541,8 +541,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
                 if (!mWin10RunPath.exists()) {
 
-                    UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
+                    UUtils.showMsg(UUtils.getString(R.string.vs_is_dredging_the_required_environment));
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.vs_please_enter_the_enter_key_to_continue_55) + "\n");
                     com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                     finish();
                     return;
@@ -552,14 +552,14 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 FileListDialog fileListDialog1 = new FileListDialog(RunWindowActivity.this);
                 fileListDialog1.show();
                 fileListDialog1.setFilePath(mWinConfig);
-                fileListDialog1.setTitleText(UUtils.getString(R.string.请选择模拟器配置文件));
+                fileListDialog1.setTitleText(UUtils.getString(R.string.vs_please_select_an_emulator_profile));
 
                 fileListDialog1.setBoomBtnVisible(true);
                 fileListDialog1.setOnItemFileClickListener(new FileListDialog.OnItemFileClickListener() {
                     @Override
                     public void onItemClick(File file) {
                         fileListDialog1.dismiss();
-                        UUtils.showLog("获取文件目录:" + file.getAbsolutePath());
+                        UUtils.showLog("Get file directory: " + file.getAbsolutePath());
                         String fileString = UUtils.getFileString(file);
 
                         EditTextDialog editTextDialog = new EditTextDialog(RunWindowActivity.this);
@@ -600,7 +600,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         editTextDialog.setEditStartCommand(new EditTextDialog.EditStartCommand() {
                             @Override
                             public void editCommand(String comm) {
-                                UUtils.showMsg(UUtils.getString(R.string.成功));
+                                UUtils.showMsg(UUtils.getString(R.string.vs_success));
                                 SaveData.saveData("win10_config", comm);
                             }
                         });
@@ -636,8 +636,8 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
                 if (!mWinxpRunPath.exists()) {
 
-                    UUtils.showMsg(UUtils.getString(R.string.正在疏通所需要的环境));
-                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.请输入回车键继续55) + "\n");
+                    UUtils.showMsg(UUtils.getString(R.string.vs_is_dredging_the_required_environment));
+                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo " + UUtils.getString(R.string.vs_please_enter_the_enter_key_to_continue_55) + "\n");
                     com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
                     finish();
                     return;
@@ -647,14 +647,14 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                 FileListDialog fileListDialog1 = new FileListDialog(RunWindowActivity.this);
                 fileListDialog1.show();
                 fileListDialog1.setFilePath(mWinConfig);
-                fileListDialog1.setTitleText(UUtils.getString(R.string.请选择模拟器配置文件));
+                fileListDialog1.setTitleText(UUtils.getString(R.string.vs_please_select_an_emulator_profile));
 
                 fileListDialog1.setBoomBtnVisible(true);
                 fileListDialog1.setOnItemFileClickListener(new FileListDialog.OnItemFileClickListener() {
                     @Override
                     public void onItemClick(File file) {
                         fileListDialog1.dismiss();
-                        UUtils.showLog("获取文件目录:" + file.getAbsolutePath());
+                        UUtils.showLog("Get file directory: " + file.getAbsolutePath());
                         String fileString = UUtils.getFileString(file);
 
                         EditTextDialog editTextDialog = new EditTextDialog(RunWindowActivity.this);
@@ -693,7 +693,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                         editTextDialog.setEditStartCommand(new EditTextDialog.EditStartCommand() {
                             @Override
                             public void editCommand(String comm) {
-                                UUtils.showMsg(UUtils.getString(R.string.成功));
+                                UUtils.showMsg(UUtils.getString(R.string.vs_success));
                                 SaveData.saveData("winxp_config", comm);
                             }
                         });
@@ -726,7 +726,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
             @Override
             public void onClick(View v) {
 
-                UUtils.showMsg(UUtils.getString(R.string.请在下载站下载VNC插件));
+                UUtils.showMsg(UUtils.getString(R.string.vs_please_download_the_vnc_plug_in_at_downl));
 
 
             }
@@ -882,12 +882,12 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
                         }
 
-                        Log.e("查看参数", "run: isError:" + isError + "---isStartVnc:" + isStartVnc);
-                        Log.e("查看参数", "run: 总体:" + (isStartVnc && !isError));
+                        Log.e("View parameters", "run: isError:" + isError + "---isStartVnc:" + isStartVnc);
+                        Log.e("View parameters", "run: total:" + (isStartVnc && !isError));
 
                         if (isStartVnc) {
                             try {
-                                Log.e("查看参数", "开始打开vnc");
+                                Log.e("View parameters", "Opening VNC");
                                 Intent intent = new Intent();
                                 intent.setAction("com.utermux.action.vnc");
                                 intent.putExtra("utermux_as", "false");
@@ -895,13 +895,13 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
                                 intent.putExtra("port", "5933");
                                 intent.putExtra("password", "");
                                 startActivity(intent);
-                                Log.e("查看参数", "开始vnc打开结束");
+                                Log.e("View parameters", "VNC open finished");
 
                             } catch (Exception e) {
 
                                 e.printStackTrace();
 
-                                UUtils.showMsg(UUtils.getString(R.string.请在下载站下载VNC插件));
+                                UUtils.showMsg(UUtils.getString(R.string.vs_please_download_the_vnc_plug_in_at_downl));
 
                             }
                         }
@@ -948,11 +948,11 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
 
         AlertDialog.Builder ab = new AlertDialog.Builder(RunWindowActivity.this);
 
-        ab.setTitle(UUtils.getString(R.string.获取镜像));
+        ab.setTitle(UUtils.getString(R.string.vs_extraction_code_6b7w));
 
-        ab.setMessage(UUtils.getString(R.string.是否前往下载系统));
+        ab.setMessage(UUtils.getString(R.string.vs_whether_to_go_to_the_download_system));
 
-        ab.setPositiveButton(UUtils.getString(R.string.前往), new DialogInterface.OnClickListener() {
+        ab.setPositiveButton(UUtils.getString(R.string.vs_go_to), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -968,7 +968,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
             }
         });
 
-        ab.setNegativeButton(UUtils.getString(R.string.取消), new DialogInterface.OnClickListener() {
+        ab.setNegativeButton(UUtils.getString(R.string.vs_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ab.create().dismiss();
@@ -993,7 +993,7 @@ public class RunWindowActivity extends AppCompatActivity implements TermuxData.I
     @Override
     public void error() {
 
-        UUtils.showLog("收到广播...");
+        UUtils.showLog("Broadcast received...");
         isError = true;
 
     }

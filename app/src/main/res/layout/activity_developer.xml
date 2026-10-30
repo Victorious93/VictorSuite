@@ -24,7 +24,7 @@
             <Button
                 android:id="@+id/like_button"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" android:background="#CBECCC"/>
+                android:layout_height="match_parent" android:background="@color/vs_neon_surface"/>
         </LinearLayout>
 
 
@@ -38,50 +38,50 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/color_ffffff"
         android:textSize="16sp"
-        android:text="此页面逻辑可能会造成你的数据丢失"
+        android:text="This page may cause data loss"
         android:layout_height="wrap_content"/>
     <Button
         android:layout_width="wrap_content"
         style="@style/Theme.Termux.Black"
         android:layout_marginTop="10dp"
-        android:text="创捷软连接files"
+        android:text="Create files symlink"
         android:id="@+id/create_files"
         android:layout_height="wrap_content"/>
     <Button
         android:layout_width="wrap_content"
         style="@style/Theme.Termux.Black"
-        android:text="启动samba服务"
+        android:text="Start samba service"
         android:id="@+id/samba_create"
         android:layout_height="wrap_content"/>
     <Button
         android:layout_width="wrap_content"
         style="@style/Theme.Termux.Black"
-        android:text="测试1"
+        android:text="Test 1"
         android:id="@+id/test1"
         android:layout_height="wrap_content"/>
     <Button
         android:layout_width="wrap_content"
         style="@style/Theme.Termux.Black"
-        android:text="测试压缩zip"
+        android:text="Test zip compression"
         android:id="@+id/test_zip"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/test_unzip"
         android:layout_width="wrap_content"
-        android:text="测试解压zip..."
+        android:text="Test zip extraction..."
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/test_rlj"
         android:layout_width="wrap_content"
-        android:text="测试软连接..."
+        android:text="Test symlink..."
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/adb_connect"
         android:layout_width="wrap_content"
-        android:text="ADB 连接框"
+        android:text="ADB connection dialog"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

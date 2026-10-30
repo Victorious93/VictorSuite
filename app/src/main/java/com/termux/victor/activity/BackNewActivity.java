@@ -79,7 +79,7 @@ public class BackNewActivity extends AppCompatActivity implements View.OnClickLi
 
     private boolean isCosumenBackKey() {
         if (mIsRun) {
-            Toast.makeText(this, UUtils.getString(R.string.有任务正在进行), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, UUtils.getString(R.string.vs_there_is_a_task_in_progress), Toast.LENGTH_SHORT).show();
             return true;
         } else {
             // Toast.makeText(this, "返回键被阻拦了，您可以按home键退出再进来", Toast.LENGTH_SHORT).show();
@@ -91,7 +91,7 @@ public class BackNewActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (mIsRun) {
-            Toast.makeText(this, UUtils.getString(R.string.有任务进行中), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, UUtils.getString(R.string.vs_there_is_a_task_in_progress_2), Toast.LENGTH_SHORT).show();
             return;
         }
         if (v.getId() == R.id.backup) {

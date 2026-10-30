@@ -55,7 +55,7 @@ public class MinglingDaoruDaoChuDialog extends BaseDialogCentre {
                     @Override
                     public void onItemClick(File file) {
 
-                        UUtils.showLog("输出文件:" + file.getAbsolutePath());
+                        UUtils.showLog("Output file: " + file.getAbsolutePath());
 
                         String fileString = UUtils.getFileString(file);
 
@@ -65,7 +65,7 @@ public class MinglingDaoruDaoChuDialog extends BaseDialogCentre {
                             if(mSXXXXlistener!= null){
                                 mSXXXXlistener.shuaxin();
                             }
-                            UUtils.showMsg(UUtils.getString(R.string.已导入配置文件));
+                            UUtils.showMsg(UUtils.getString(R.string.vs_configuration_file_imported));
                             fileListConfigDialog.dismiss();
                             dismiss();
                         }catch (Exception e){
@@ -85,7 +85,7 @@ public class MinglingDaoruDaoChuDialog extends BaseDialogCentre {
             public void onClick(View v) {
                 String commi22 = SaveData.getData("commi22");
                 if(commi22 == null || commi22.isEmpty() || commi22.equals("def")){
-                    UUtils.showMsg(UUtils.getString(R.string.当前没有数据));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_no_data_currently));
                     return;
                 }
 
@@ -99,7 +99,7 @@ public class MinglingDaoruDaoChuDialog extends BaseDialogCentre {
                         UUtils.setFileString(new File(file,"" + name + ".txt"),commi22);
                         fileNameMingLDialog.dismiss();
                         dismiss();
-                        UUtils.showMsg(UUtils.getString(R.string.保存成功));
+                        UUtils.showMsg(UUtils.getString(R.string.vs_saved_successfully));
                     }
                 });
 

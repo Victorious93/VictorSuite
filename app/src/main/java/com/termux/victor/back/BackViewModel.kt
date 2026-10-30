@@ -134,7 +134,7 @@ class BackViewModel : BackupClickListener {
             MainScope().launch {
                 withContext(Dispatchers.Main) {
                     mLoadingDialog = LoadingDialog(mContext!!)
-                    mLoadingDialog?.msg?.text = UUtils.getString(R.string.正在载入中)
+                    mLoadingDialog?.msg?.text = UUtils.getString(R.string.vs_loading_please_wait)
                     mLoadingDialog?.show()
                     mLoadingDialog?.setCancelable(false)
                    // mCreateConversationListener?.create()
@@ -146,7 +146,7 @@ class BackViewModel : BackupClickListener {
                     mLoadingDialog?.dismiss()
                     val replace = CommendShellData.getShellBackup(command, FileIOUtils.getTimeFileName(name))
                     sendTextToTerminal(replace)
-                    UUtils.showMsg(UUtils.getString(R.string.开始备份))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_start_backup))
                    // mBackupStoreDialogCloseListener?.backupStoreDismiss()
                 }
 
@@ -171,7 +171,7 @@ class BackViewModel : BackupClickListener {
                 }
 
                 override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
-                    UUtils.showMsg(UUtils.getString(R.string.没有SD卡权限))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_no_recoverable_files_sd))
                 }
 
             });

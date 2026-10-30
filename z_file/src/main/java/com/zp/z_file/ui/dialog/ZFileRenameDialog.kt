@@ -25,7 +25,7 @@ internal class ZFileRenameDialog : ZFileManageDialog(), Runnable {
 
     var reanameDown: (String.() -> Unit)? = null
     private var handler: Handler? = null
-    private var oldName = "请输入文件名称"
+    private var oldName = "Enter a file name"
 
     companion object {
 
@@ -55,7 +55,7 @@ internal class ZFileRenameDialog : ZFileManageDialog(), Runnable {
         }
 
     override fun init(savedInstanceState: Bundle?) {
-        oldName = arguments?.getString("oldName") ?: "请输入文件名称"
+        oldName = arguments?.getString("oldName") ?: "Enter a file name"
         handler = Handler()
         vb?.zfileDialogRenameEdit?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
@@ -75,10 +75,10 @@ internal class ZFileRenameDialog : ZFileManageDialog(), Runnable {
     private fun rename() {
         val newName = vb?.zfileDialogRenameEdit?.text.toString()
         if (newName.isNull()) {
-            context?.toast("请输入文件名")
+            context?.toast("Enter a file name")
         } else {
             if (oldName == newName) {
-                ZFileLog.e("相同名字，不执行重命名操作")
+                ZFileLog.e("Same name, rename skipped")
                 dismiss()
             } else {
                 reanameDown?.invoke(newName)

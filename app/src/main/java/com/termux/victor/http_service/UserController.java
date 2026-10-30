@@ -18,7 +18,7 @@ public class UserController {
 
     @RequestMapping("userls")
     public NanoHTTPD.Response getUserLs() {
-        return setResponse("user列表");
+        return setResponse("user list");
     }
 
     @ResponseBody
@@ -35,18 +35,18 @@ public class UserController {
     @RequestMapping("upload")
     public String upload(NanoHTTPD.IHTTPSession session) {
         FFileUploadUtils.uploadFile(session, FFileUtils.getRootDir(), "file");
-        return "上传成功";
+        return "Upload succeeded";
     }
 
     @RequestMapping("adduser")
     public NanoHTTPD.Response addUser(@RequestBody UserBean userBean) {
         FLogUtils.getInstance().e(userBean);
-        return setResponse("添加成功");
+        return setResponse("Added");
     }
 
     @RequestMapping("edituser")
     public NanoHTTPD.Response editUser(@RequestParam("userName") String userName, @RequestParam("id") int id) {
-        return setResponse("修改成功");
+        return setResponse("Changed successfully");
     }
 
     public static NanoHTTPD.Response setResponse(String res) {

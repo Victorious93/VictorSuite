@@ -22,8 +22,8 @@ import java.io.File
 
 class VictorSuiteSettingsActivity : AppCompatActivity() {
 
-    private val ztDownloadServicesSwitch by lazy {findViewById<SwitchCompat>(R.id.zt_download_services_switch)}
-    private val ztDownloadServicesLl by lazy {findViewById<LinearLayout>(R.id.zt_download_services_ll)}
+    private val vsDownloadServicesSwitch by lazy {findViewById<SwitchCompat>(R.id.vs_download_services_switch)}
+    private val vsDownloadServicesLl by lazy {findViewById<LinearLayout>(R.id.vs_download_services_ll)}
 
     private val inputMethodTriggerCloseSwitch by lazy {findViewById<SwitchCompat>(R.id.input_method_trigger_close_switch)}
     private val inputMethodTriggerCloseLl by lazy {findViewById<LinearLayout>(R.id.input_method_trigger_close_ll)}
@@ -84,7 +84,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        setSwitchStatus(ztDownloadServicesSwitch, ztDownloadServicesLl)
+        setSwitchStatus(vsDownloadServicesSwitch, vsDownloadServicesLl)
         setSwitchStatus(inputMethodTriggerCloseSwitch, inputMethodTriggerCloseLl)
         setSwitchStatus(styleTriggerOffSwitch, styleTriggerOffLl)
         setSwitchStatus(isToolShowSwitch, isToolShowLl)
@@ -101,17 +101,17 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
     }
 
     private fun initStatus() {
-        val ztUserBean = UserSetManage.get().getZTUserBean()
-        ztDownloadServicesSwitch.isChecked = ztUserBean.isOpenDownloadFileServices
-        inputMethodTriggerCloseSwitch.isChecked = ztUserBean.isInputMethodTriggerClose
-        styleTriggerOffSwitch.isChecked = ztUserBean.isStyleTriggerOff
-        isToolShowSwitch.isChecked = ztUserBean.isToolShow
-        forceUseNumpadSwitch.isChecked = ztUserBean.isForceUseNumpad
-        logOutputSwitch.isChecked = ztUserBean.isOutputLOG
+        val vsUserBean = UserSetManage.get().getVsUserBean()
+        vsDownloadServicesSwitch.isChecked = vsUserBean.isOpenDownloadFileServices
+        inputMethodTriggerCloseSwitch.isChecked = vsUserBean.isInputMethodTriggerClose
+        styleTriggerOffSwitch.isChecked = vsUserBean.isStyleTriggerOff
+        isToolShowSwitch.isChecked = vsUserBean.isToolShow
+        forceUseNumpadSwitch.isChecked = vsUserBean.isForceUseNumpad
+        logOutputSwitch.isChecked = vsUserBean.isOutputLOG
         shellTermuxSwitch.isChecked = isShellTermux()
-        volumeFunctionSwitch.isChecked = ztUserBean.isResetVolume
-        foldMenuCloseSwitch.isChecked = ztUserBean.isCloseFoldMenu
-        mainMenuConfigCloseSwitch.isChecked = ztUserBean.isDisableMainConfigMenu
+        volumeFunctionSwitch.isChecked = vsUserBean.isResetVolume
+        foldMenuCloseSwitch.isChecked = vsUserBean.isCloseFoldMenu
+        mainMenuConfigCloseSwitch.isChecked = vsUserBean.isDisableMainConfigMenu
         termuxApiEmbedSwitch.isChecked = TermuxApiEmbed.isEnabled(this)
         victorFilesPanelSwitch.isChecked = VictorFilesPanel.isEnabled(this)
         remoteControlSwitch.isChecked = RemoteControlSettings.isExternalControlEnabled(this) // VictorSuite add
@@ -122,10 +122,10 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
             switchCompat.isChecked = !(switchCompat.isChecked)
         }
         switchCompat.setOnCheckedChangeListener { buttonView, isChecked ->
-            val ztUserBean = UserSetManage.get().getZTUserBean()
+            val vsUserBean = UserSetManage.get().getVsUserBean()
             when (switchCompat) {
-                ztDownloadServicesSwitch -> {
-                    ztUserBean.isOpenDownloadFileServices = switchCompat.isChecked
+                vsDownloadServicesSwitch -> {
+                    vsUserBean.isOpenDownloadFileServices = switchCompat.isChecked
                     Thread {
                         if (isChecked) {
                             if (!get().isServicesRun()) {
@@ -137,19 +137,19 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
                     }.start()
                 }
                 inputMethodTriggerCloseSwitch -> {
-                    ztUserBean.isInputMethodTriggerClose = switchCompat.isChecked
+                    vsUserBean.isInputMethodTriggerClose = switchCompat.isChecked
                 }
                 styleTriggerOffSwitch -> {
-                    ztUserBean.isStyleTriggerOff = switchCompat.isChecked
+                    vsUserBean.isStyleTriggerOff = switchCompat.isChecked
                 }
                 isToolShowSwitch -> {
-                    ztUserBean.isToolShow = switchCompat.isChecked
+                    vsUserBean.isToolShow = switchCompat.isChecked
                 }
                 forceUseNumpadSwitch -> {
-                    ztUserBean.isForceUseNumpad = switchCompat.isChecked
+                    vsUserBean.isForceUseNumpad = switchCompat.isChecked
                 }
                 logOutputSwitch -> {
-                    ztUserBean.isOutputLOG = switchCompat.isChecked
+                    vsUserBean.isOutputLOG = switchCompat.isChecked
                     LogUtils.isShow = switchCompat.isChecked
                 }
                 shellTermuxSwitch -> {
@@ -161,15 +161,15 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
 
                 }
                 volumeFunctionSwitch -> {
-                    ztUserBean.isResetVolume = switchCompat.isChecked
+                    vsUserBean.isResetVolume = switchCompat.isChecked
                 }
                 foldMenuCloseSwitch -> {
-                    ztUserBean.isCloseFoldMenu = switchCompat.isChecked
-                    //Toast.makeText(this, UUtils.getString(R.string.zt_command_path_ok), Toast.LENGTH_SHORT).show()
+                    vsUserBean.isCloseFoldMenu = switchCompat.isChecked
+                    //Toast.makeText(this, UUtils.getString(R.string.vs_command_path_ok), Toast.LENGTH_SHORT).show()
                 }
                 mainMenuConfigCloseSwitch -> {
-                    ztUserBean.isDisableMainConfigMenu = switchCompat.isChecked
-                    //Toast.makeText(this, UUtils.getString(R.string.zt_command_path_ok), Toast.LENGTH_SHORT).show()
+                    vsUserBean.isDisableMainConfigMenu = switchCompat.isChecked
+                    //Toast.makeText(this, UUtils.getString(R.string.vs_command_path_ok), Toast.LENGTH_SHORT).show()
                 }
                 victorFilesPanelSwitch -> {
                     VictorFilesPanel.setEnabled(this, isChecked)
@@ -197,7 +197,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
                     }
                 }
             }
-            UserSetManage.get().setZTUserBean(ztUserBean)
+            UserSetManage.get().setVsUserBean(vsUserBean)
         }
     }
 

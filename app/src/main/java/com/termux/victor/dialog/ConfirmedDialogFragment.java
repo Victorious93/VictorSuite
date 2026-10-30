@@ -35,9 +35,9 @@ public class ConfirmedDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("提示")
-            .setMessage("确定要执行此操作吗？")
-            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setTitle("Notice")
+            .setMessage("Are you sure you want to do this?")
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (listener != null) {
@@ -45,7 +45,7 @@ public class ConfirmedDialogFragment extends DialogFragment {
                     }
                 }
             })
-            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (listener != null) {

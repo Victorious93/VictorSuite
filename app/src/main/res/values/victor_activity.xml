@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="victor_back">返回</string>
-    <string name="victor_close">关闭</string>
-    <string name="victor_scan_title">扫一扫</string>
-    <string name="victor_scan_album">相册</string>
-    <string name="victor_scan_tip">将二维码/条码放入框内，即可自动扫描</string>
-    <string name="victor_scan_too_dark">环境过暗，请打开闪光灯</string>
+    <string name="victor_back">Back</string>
+    <string name="victor_close">Close</string>
+    <string name="victor_scan_title">Scan</string>
+    <string name="victor_scan_album">Album</string>
+    <string name="victor_scan_tip">Place the QR code/barcode inside the frame to scan automatically</string>
+    <string name="victor_scan_too_dark">Environment too dark, please turn on flash</string>
 
     <style name="VictorDayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#fafafa</item>

@@ -26,7 +26,7 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="5dp"
                 android:layout_alignParentRight="true"
-                android:text="@string/zt_timer_settings"
+                android:text="@string/vs_timer_settings"
                 android:layout_height="wrap_content"/>
 
             <androidx.cardview.widget.CardView
@@ -54,7 +54,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_timer_start"
+                            android:text="@string/vs_timer_start"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -63,7 +63,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_timer_start_sum"
+                            android:text="@string/vs_timer_start_sum"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -109,7 +109,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_timer_environment"
+                            android:text="@string/vs_timer_environment"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -119,7 +119,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_timer_environment_sum"
+                            android:text="@string/vs_timer_environment_sum"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -162,7 +162,7 @@
                        android:textColor="@color/color_ffffff"
                        android:textStyle="bold"
                        android:textSize="15sp"
-                       android:text="@string/zt_timer_edit"
+                       android:text="@string/vs_timer_edit"
                        android:layout_height="wrap_content"/>
 
                    <TextView
@@ -171,7 +171,7 @@
                        android:textColor="@color/md_grey_500"
                        android:textStyle="bold"
                        android:textSize="13sp"
-                       android:text="@string/zt_timer_edit_sum"
+                       android:text="@string/vs_timer_edit_sum"
                        android:layout_height="wrap_content"/>
 
                    <TextView
@@ -180,7 +180,7 @@
                        android:textStyle="bold"
                        android:textSize="15sp"
                        android:layout_marginTop="10dp"
-                       android:text="@string/zt_timer_log"
+                       android:text="@string/vs_timer_log"
                        android:layout_height="wrap_content"/>
 
                    <TextView
@@ -189,7 +189,7 @@
                        android:textColor="@color/md_grey_500"
                        android:textStyle="bold"
                        android:textSize="13sp"
-                       android:text="@string/zt_timer_log_sum"
+                       android:text="@string/vs_timer_log_sum"
                        android:layout_height="wrap_content"/>
                </LinearLayout>
 
@@ -220,7 +220,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_timer_this_check"
+                            android:text="@string/vs_timer_this_check"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -230,7 +230,7 @@
                             android:textStyle="bold"
                             android:id="@+id/check_timer_sum"
                             android:textSize="13sp"
-                            android:text="@string/zt_timer_10_minute"
+                            android:text="@string/vs_timer_10_minute"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -297,7 +297,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="6dp"
                                 android:paddingRight="6dp"
-                                android:text="@string/zt_timer_30_second"
+                                android:text="@string/vs_timer_30_second"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
 
@@ -330,7 +330,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="6dp"
                                 android:paddingRight="6dp"
-                                android:text="@string/zt_timer_1_minute"
+                                android:text="@string/vs_timer_1_minute"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
 
@@ -363,7 +363,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="6dp"
                                 android:paddingRight="6dp"
-                                android:text="@string/zt_timer_10_minute"
+                                android:text="@string/vs_timer_10_minute"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
 
@@ -395,7 +395,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="6dp"
                                 android:paddingRight="6dp"
-                                android:text="@string/zt_timer_30_minute"
+                                android:text="@string/vs_timer_30_minute"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
 
@@ -433,7 +433,7 @@
                             android:gravity="center"
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
-                            android:text="@string/zt_timer_customize"
+                            android:text="@string/vs_timer_customize"
                             android:textColor="@color/color_FFFFFF"
                             android:textSize="10sp" />
 
@@ -484,7 +484,7 @@
                         android:textColor="@color/md_grey_500"
                         android:textStyle="bold"
                         android:textSize="13sp"
-                        android:text="@string/zt_timer_message"
+                        android:text="@string/vs_timer_message"
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>

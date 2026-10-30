@@ -37,7 +37,7 @@
                     android:textStyle="bold"
                     android:id="@+id/service_name"
                     android:textColor="@color/color_ffffff"
-                    android:text="@string/在线脚本服务器名称"
+                    android:text="@string/vs_server_name"
                     android:layout_height="wrap_content"/>
 
 
@@ -93,7 +93,7 @@
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
-                android:text="@string/数据载入中"
+                android:text="@string/vs_data_loading"
                 android:textColor="@color/color_ffffff"
                 android:layout_height="wrap_content"/>
 

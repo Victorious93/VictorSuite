@@ -17,11 +17,11 @@ open class ZFileStipulateAsync(
 ) : ZFileAsync(context, block) {
 
     override fun onPreExecute() {
-        ZFileLog.i("根据特定条件 获取文件...")
+        ZFileLog.i("Get files by filter...")
     }
 
     override fun onPostExecute() {
-        ZFileLog.i("根据特定条件 获取文件 完成")
+        ZFileLog.i("Get files by filter done")
     }
 
     /**
@@ -79,7 +79,7 @@ open class ZFileStipulateAsync(
                 } while (cursor.moveToPrevious())
             }
         } catch (e: Exception) {
-            ZFileLog.e("根据特定条件 获取文件 ERROR ...")
+            ZFileLog.e("Get files by filter ERROR ...")
             e.printStackTrace()
         } finally {
             cursor?.close()

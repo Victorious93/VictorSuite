@@ -11,7 +11,7 @@ import com.termux.R
 import com.termux.victor.back.listener.BackupClickListener
 import com.termux.victor.bean.ItemMenuBean
 import com.termux.victor.dialog.view_holder.ItemMenuViewHolder
-import com.termux.victor.zero.engine.ZeroCoreManage
+import com.termux.victor.engine.VsEngineManage
 
 class BackupAdapter : RecyclerView.Adapter<ItemMenuViewHolder>{
     private var mList:ArrayList<ItemMenuBean.Data>? = null
@@ -30,7 +30,7 @@ class BackupAdapter : RecyclerView.Adapter<ItemMenuViewHolder>{
     override fun onBindViewHolder(holder: ItemMenuViewHolder, position: Int) {
         holder.menu_image?.setImageResource(mList!![position].id)
         holder.menu_name?.text = mList!![position].title
-        if (TextUtils.isEmpty(ZeroCoreManage.getVersionName()) && mList!![position].isEg) {
+        if (TextUtils.isEmpty(VsEngineManage.getVersionName()) && mList!![position].isEg) {
             holder.eg_install_tv?.visibility = View.VISIBLE
         } else {
             holder.eg_install_tv?.visibility = View.INVISIBLE

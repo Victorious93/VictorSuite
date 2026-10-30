@@ -9,7 +9,7 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:text="@string/move_file_to_zt"
+        android:text="@string/move_file_to_vs"
         android:textColor="#fff"
         android:gravity="center"
         android:textSize="14sp"

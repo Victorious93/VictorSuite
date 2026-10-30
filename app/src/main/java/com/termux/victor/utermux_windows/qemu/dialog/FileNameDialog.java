@@ -48,7 +48,7 @@ public class FileNameDialog extends BaseDialogCentre {
             public void onClick(View v) {
                 String s = edit_text.getText().toString();
                 if(s.trim().isEmpty()){
-                    UUtils.showMsg(UUtils.getString(R.string.文件名不能为空));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_file_name_cannot_be_empty));
                     return;
                 }
                 File[] files = mWinConfig.listFiles();
@@ -57,7 +57,7 @@ public class FileNameDialog extends BaseDialogCentre {
 
                         File file = files[i];
                         if (file.getName().equals(s)) {
-                            UUtils.showMsg(UUtils.getString(R.string.目录下有一个相同文件));
+                            UUtils.showMsg(UUtils.getString(R.string.vs_there_is_a_same_file_in_the_directory));
                             return;
                         }
 

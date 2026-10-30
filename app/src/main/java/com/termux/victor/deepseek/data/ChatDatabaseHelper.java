@@ -223,9 +223,9 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
     public List<ChatMessage> getMessagesForSession(String sessionId) {
         List<ChatMessage> messages = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        System.out.println("查询：" + sessionId);
+        System.out.println("Query: " + sessionId);
         Cursor cursor = db.query(TABLE_MESSAGES, null, COLUMN_SESSION_REF_ID + "=?", new String[]{sessionId}, null, null, COLUMN_TIMESTAMP + " ASC");
-        System.out.println("cursor大小：" + cursor.getCount());
+        System.out.println("cursor size: " + cursor.getCount());
         while (cursor.moveToNext()) {
             String messageText = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MESSAGE_TEXT));
             boolean isUser = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_IS_USER)) == 1;
