@@ -90,11 +90,11 @@ class EditTextActivity : AppCompatActivity() {
         mSaveText?.setOnClickListener {
             val toString = code_editor!!.text.toString()
             if (toString == null || toString.isEmpty()) {
-               UUtils.showMsg( UUtils.getString(R.string.命令不能为空))
+               UUtils.showMsg( UUtils.getString(R.string.vs_command_cannot_be_empty))
                 return@setOnClickListener
             }
             if (UUtils.setFileString(file, toString)) {
-                UUtils.showMsg( UUtils.getString(R.string.保存成功))
+                UUtils.showMsg( UUtils.getString(R.string.vs_saved_successfully))
                 finish()
             } else {
                 UUtils.showMsg( UUtils.getString(R.string.save_error_))

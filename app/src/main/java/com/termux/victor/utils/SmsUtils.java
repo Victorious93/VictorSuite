@@ -53,19 +53,19 @@ public class SmsUtils {
 
                     String strType = "";
                     if (intType == 1) {
-                        strType = "接收";
+                        strType = "Received";
                     } else if (intType == 2) {
-                        strType = "发送";
+                        strType = "Send";
                     } else if (intType == 3) {
-                        strType = "草稿";
+                        strType = "Drafts";
                     } else if (intType == 4) {
-                        strType = "发件箱";
+                        strType = "Outbox";
                     } else if (intType == 5) {
-                        strType = "发送失败";
+                        strType = "Send failed";
                     } else if (intType == 6) {
-                        strType = "待发送列表";
+                        strType = "Pending list";
                     } else if (intType == 0) {
-                        strType = "所以短信";
+                        strType = "All SMS";
                     } else {
                         strType = "null";
                     }

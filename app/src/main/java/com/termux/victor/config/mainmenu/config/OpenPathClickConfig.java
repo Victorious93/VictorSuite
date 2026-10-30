@@ -1,6 +1,6 @@
 package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ public class OpenPathClickConfig extends BaseMenuClickConfig {
 
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class OpenPathClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.打开目录);
+        return context.getString(R.string.vs_opendirectory);
     }
 
     @Override

@@ -75,7 +75,7 @@ public class RestoreFragment extends BaseFragment {
         File[] files1 = mSdFile.listFiles();
 
         if (files1 == null) {
-            mStartRe.setText(UUtils.getString(R.string.没有SD卡权限));
+            mStartRe.setText(UUtils.getString(R.string.vs_no_recoverable_files_sd));
             return;
         }
 
@@ -92,7 +92,7 @@ public class RestoreFragment extends BaseFragment {
         }
 
         if (files.size() == 0) {
-            mStartRe.setText(UUtils.getString(R.string.没有SD卡权限));
+            mStartRe.setText(UUtils.getString(R.string.vs_no_recoverable_files_sd));
         }
 
 
@@ -113,14 +113,14 @@ public class RestoreFragment extends BaseFragment {
 
                 YesNoDialog yesNoDialog = new YesNoDialog(getActivity());
 
-                yesNoDialog.getTitleTv().setText(UUtils.getString(R.string.恢复方式));
-                yesNoDialog.getMsgTv().setText(UUtils.getString(R.string.确定要恢复));
+                yesNoDialog.getTitleTv().setText(UUtils.getString(R.string.vs_recovery_method));
+                yesNoDialog.getMsgTv().setText(UUtils.getString(R.string.vs_determine_to_restore_and_create_a_new_co));
 
-                yesNoDialog.getYesTv().setText(UUtils.getString(R.string.确定要恢复));
+                yesNoDialog.getYesTv().setText(UUtils.getString(R.string.vs_determine_to_restore_and_create_a_new_co));
                 yesNoDialog.getYesTv().setVisibility(View.GONE);
                 yesNoDialog.setCancelable(true);
 
-                yesNoDialog.getNoTv().setText(UUtils.getString(R.string.恢复));
+                yesNoDialog.getNoTv().setText(UUtils.getString(R.string.vs_restore));
                 yesNoDialog.getNoTv().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -129,14 +129,14 @@ public class RestoreFragment extends BaseFragment {
 
                         if (!(new File("/data/data/com.termux/files/home/storage").exists())){
 
-                            Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到目录), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.vs_no_directory_found), Toast.LENGTH_SHORT).show();
 
                             UUtils.getHandler().post(new Runnable() {
                                 @Override
                                 public void run() {
 
 
-                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.这块直接输入回车即可));
+                                    com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(UUtils.getString(R.string.vs_echo_input_enter));
 
                                     com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage ");
                                     getActivity().finish();
@@ -153,7 +153,7 @@ public class RestoreFragment extends BaseFragment {
                         if(yesNoDialog.getInputSystemName().getText().toString().isEmpty()){
                             yesNoDialog.getInputSystemName().setVisibility(View.VISIBLE);
 
-                            Toast.makeText(getContext(), UUtils.getString(R.string.请输入系统名称), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), UUtils.getString(R.string.vs_please_enter_the_system_name), Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -162,9 +162,9 @@ public class RestoreFragment extends BaseFragment {
 
                         MyDialog myDialog = new MyDialog(getActivity());
 
-                        myDialog.getDialog_title().setText(UUtils.getString(R.string.请稍等此过程禁止切屏));
+                        myDialog.getDialog_title().setText(UUtils.getString(R.string.vs_please_wait_for_this_process_to_prohibit));
 
-                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.正在搜索多系统));
+                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.vs_searching_for_multiple_systems));
                         myDialog.getDialog_pro_prog().setVisibility(View.VISIBLE);
                         myDialog.getDialog_pro().setVisibility(View.VISIBLE);
                         myDialog.getDialog_pro_prog().setMax(100);
@@ -198,17 +198,17 @@ public class RestoreFragment extends BaseFragment {
 
                         AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
 
-                        ab.setTitle(UUtils.getString(R.string.危险));
+                        ab.setTitle(UUtils.getString(R.string.vs_danger));
 
-                        ab.setMessage(UUtils.getString(R.string.恢复设备数据会擦除掉之前所有的数据));
+                        ab.setMessage(UUtils.getString(R.string.vs_restoring_device_data_will_erase_all_pre));
 
-                        ab.setPositiveButton(UUtils.getString(R.string.我清楚我在做什么), new DialogInterface.OnClickListener() {
+                        ab.setPositiveButton(UUtils.getString(R.string.vs_i_know_what_i_m_doing), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
                                 mListView.setVisibility(View.GONE);
                                 mTitle.setVisibility(View.VISIBLE);
-                                Toast.makeText(getContext(), UUtils.getString(R.string.开始), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), UUtils.getString(R.string.vs_begin), Toast.LENGTH_SHORT).show();
                                 ab.create().dismiss();
                                 BackNewActivity.mIsRun = true;
 
@@ -216,7 +216,7 @@ public class RestoreFragment extends BaseFragment {
                             }
                         });
 
-                        ab.setNeutralButton(UUtils.getString(R.string.我在考虑考虑), new DialogInterface.OnClickListener() {
+                        ab.setNeutralButton(UUtils.getString(R.string.vs_i_m_considering), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ab.create().dismiss();

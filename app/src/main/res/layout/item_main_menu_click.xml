@@ -35,7 +35,7 @@
                         android:layout_width="15dp"
                         android:visibility="invisible"
                         android:layout_alignEnd="@+id/code_image"
-                        android:src="@mipmap/zt_shell_disable"
+                        android:src="@mipmap/vs_shell_disable"
                         android:layout_height="15dp"/>
                 </RelativeLayout>
 

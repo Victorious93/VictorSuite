@@ -29,8 +29,8 @@ public class RequestBodyParameter {
 
     public static void main(String[] args) {
         List<RequestMessageItem> requestMessageItemList = new ArrayList<>();
-        requestMessageItemList.add(new RequestMessageItem("user", "你在干什么"));
-        requestMessageItemList.add(new RequestMessageItem("assistant", "我在睡觉"));
+        requestMessageItemList.add(new RequestMessageItem("user", "What are you doing?"));
+        requestMessageItemList.add(new RequestMessageItem("assistant", "Sleeping"));
 
         RequestBodyParameter requestBodyParameter1 = new RequestBodyParameter("deepseek-chat", requestMessageItemList, false);
         System.out.println(requestBodyParameter1);

@@ -48,7 +48,7 @@ internal class ZFileLoadingDialog(
             setPadding(0, padding, 0, 0)
             textSize = 13f
             maxLines = 1
-            setTextColor(context getColorById R.color.zfile_black)
+            setTextColor(context getColorById R.color.zfile_text)
             text = if (title.isNullOrEmpty()) context getStringById R.string.zfile_loading else title
             this
         }

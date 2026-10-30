@@ -19,7 +19,7 @@
            android:textStyle="bold"
            android:id="@+id/service_name"
            android:textColor="@color/color_48baf3"
-           android:text="@string/服务器"
+           android:text="@string/vs_server"
            android:layout_height="wrap_content"/>
 
        <ImageView

@@ -111,7 +111,7 @@ class AdbWindowsDialog  {
             Log.d("TAG", "startConnectAdb: ok")
         } else {
             val message = Message()
-            message.obj = "服务初始化失败!"
+            message.obj = "Service init failed!"
             mHandle.sendMessage(message)
             Log.d("TAG", "startConnectAdb: false")
         }

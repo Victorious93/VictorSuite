@@ -16,7 +16,7 @@ object  SendJoinUtils {
 
         val data = JoinBean.Data()
         data.id = "9f77fc393ec5d4f7"
-        data.name = "服务器1"
+        data.name = "Server 1"
         data.ip = "127.0.0.1"
 
         arrayList.add(data)

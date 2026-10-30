@@ -31,7 +31,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:id="@+id/dialog_title"
-                android:text="正在下载%系统\n下载/安装过程请勿退出!"
+                android:text="Downloading %system\nDo not exit during download/install!"
                 android:textColor="#fff"
                 android:textSize="14sp" />
 

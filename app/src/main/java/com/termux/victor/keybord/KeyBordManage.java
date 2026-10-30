@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.termux.victor.util.UUtils;
-import com.termux.victor.zero.engine.ZeroCoreManage;
+import com.termux.victor.engine.VsEngineManage;
 
 public class KeyBordManage {
 
@@ -35,16 +35,16 @@ public class KeyBordManage {
 
     public View getKeyBordView() {
         if (mKeyBordView == null) {
-            mKeyBordView = ZeroCoreManage.getKeyView();
+            mKeyBordView = VsEngineManage.getKeyView();
         }
         return mKeyBordView;
     }
 
     public void initKeyBord(Handler mHandler) {
-        ZeroCoreManage.setRunHandler(UUtils.getHandler());
-        ZeroCoreManage.setKeyHandler(mHandler);
-        ZeroCoreManage.setEngineContext();
-        ZeroCoreManage.initKeyView();
+        VsEngineManage.setRunHandler(UUtils.getHandler());
+        VsEngineManage.setKeyHandler(mHandler);
+        VsEngineManage.setEngineContext();
+        VsEngineManage.initKeyView();
     }
 
 }

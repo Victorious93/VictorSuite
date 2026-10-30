@@ -24,7 +24,7 @@ public class ScheduledTaskClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.zt_timer);
+        return context.getString(R.string.vs_timer);
     }
 
     @Override

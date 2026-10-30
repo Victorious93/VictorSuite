@@ -12,7 +12,7 @@ import java.io.File
 object LinuxCommandData {
 
 
-    public fun getZeroRunCommandBeanData():ArrayList<VsRunCommandBean>{
+    public fun getVsRunCommandBeanData():ArrayList<VsRunCommandBean>{
 
 
 
@@ -33,7 +33,7 @@ object LinuxCommandData {
 
         rjTitle.type = 0
 
-        rjTitle.title = UUtils.getString(R.string.软件开发)
+        rjTitle.title = UUtils.getString(R.string.vs_softwaredevelopment)
 
         mArrayList.add(rjTitle)
 
@@ -124,7 +124,7 @@ object LinuxCommandData {
 
         vScodeBean.type = 1
 
-        vScodeBean.name = UUtils.getString(R.string.网络访问linux目录)
+        vScodeBean.name = UUtils.getString(R.string.vs_network_dir_linux)
 
         vScodeBean.fileName = "filebrowser.zip"
 
@@ -162,7 +162,7 @@ object LinuxCommandData {
 
              if(!fileString.contains("filebrowser")){
                  fileString += "\n cd ~ > /dev/null && ./.filebrowser/filebrowser -a 0.0.0.0 -p 19951 -r "+FileUrl.mainFilesUrl+" & > /dev/null"
-                 fileString += "\n echo '" + UUtils.getString(R.string.filebrowser已运行) + "'"
+                 fileString += "\n echo '" + UUtils.getString(R.string.vs_filebrowser_is_running_port_19951_accoun) + "'"
                  UUtils.setFileString(smsBashrcFile,fileString)
              }
 
@@ -199,7 +199,7 @@ object LinuxCommandData {
 
         empty1.isShow = false
 
-        empty1.title = UUtils.getString(R.string.软件开发)
+        empty1.title = UUtils.getString(R.string.vs_softwaredevelopment)
 
 
         return empty1

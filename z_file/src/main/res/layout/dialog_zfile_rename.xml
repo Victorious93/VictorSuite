@@ -24,7 +24,7 @@
         android:maxLength="30"
         android:maxLines="1"
         android:inputType="text"
-        android:textColor="@color/zfile_black"
+        android:textColor="@color/zfile_text"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:textSize="15sp" />

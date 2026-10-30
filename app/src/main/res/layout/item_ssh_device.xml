@@ -33,7 +33,7 @@
                     android:id="@+id/tv_alias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="设备别名"
+                    android:text="Device alias"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
@@ -55,7 +55,7 @@
                 android:src="@android:drawable/ic_menu_edit"
                 app:tint="#2196F3"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:contentDescription="编辑" />
+                android:contentDescription="Edit" />
 
         </LinearLayout>
         <View

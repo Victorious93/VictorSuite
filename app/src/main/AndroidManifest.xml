@@ -251,7 +251,7 @@
             android:name=".app.activities.SettingsActivity"
             android:exported="true"
             android:label="@string/title_activity_termux_settings"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/Theme.AppCompat" />
 
         <provider
             android:name="com.github.mjdev.libaums.storageprovider.UsbDocumentProvider"
@@ -285,7 +285,7 @@
             android:theme="@style/ThemeBaseDialog" />
 
         <activity
-            android:name=".victor.config.ztcommand.activity.SocketBaseActivity"
+            android:name=".victor.config.vscommand.activity.SocketBaseActivity"
             android:theme="@style/ThemeBaseDialog" />
         <activity
             android:name="com.lcw.library.imagepicker.activity.BaseActivity"
@@ -385,7 +385,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:name=".victor.config.ztcommand.VsSocketService"/>
+        <service android:name=".victor.config.vscommand.VsSocketService"/>
 
         <service
             android:name=".victor.ftp.new_ftp.services.FtpService"

@@ -42,7 +42,7 @@ public class EncodeUtil {
     public static String getEncode(BufferedInputStream bis, boolean ignoreBom) throws Exception {
         bis.mark(0);
 
-        String encodeType = "未识别";
+        String encodeType = "Unrecognised";
         byte[] head = new byte[3];
         bis.read(head);
         if (head[0] == -1 && head[1] == -2) {

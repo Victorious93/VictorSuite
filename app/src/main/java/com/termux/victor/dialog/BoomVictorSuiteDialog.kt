@@ -30,7 +30,7 @@ class BoomVictorSuiteDialog : BaseDialogDown {
 
         recycler_view!!.layoutManager = GridLayoutManager(mContext,4)
 
-        var mList:ArrayList<VsRunCommandBean> = LinuxCommandData.getZeroRunCommandBeanData()
+        var mList:ArrayList<VsRunCommandBean> = LinuxCommandData.getVsRunCommandBeanData()
 
 
         val boomVictorSuiteAdapter = BoomVictorSuiteAdapter(mList, mContext as Activity)

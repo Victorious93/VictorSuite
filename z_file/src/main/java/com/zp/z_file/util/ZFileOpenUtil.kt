@@ -79,7 +79,7 @@ internal object ZFileOpenUtil {
                 })
             } catch (e: Exception) {
                 e.printStackTrace()
-                ZFileLog.e("ZFileConfiguration.authority 未设置？？？")
+                ZFileLog.e("ZFileConfiguration.authority is not set")
                 it.toast(it getStringById R.string.zfile_no_app_open_file)
             }
         }

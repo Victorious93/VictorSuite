@@ -23,7 +23,7 @@ public class ContainerSwitchClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.容器切换);
+        return context.getString(R.string.vs_containerswitching);
     }
 
     @Override

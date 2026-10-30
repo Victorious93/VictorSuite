@@ -154,7 +154,7 @@ public class TermuxApplication extends Application {
 
         ZFileUUtils.initUUtils(mContext, mHandler);
 
-        LogUtils.isShow = UserSetManage.Companion.get().getZTUserBean().isOutputLOG();
+        LogUtils.isShow = UserSetManage.Companion.get().getVsUserBean().isOutputLOG();
 
         ZFileManageHelp.getInstance().init(new MyFileImageListener());
         ZFileConfiguration.Companion.setMApplicationContext(this);

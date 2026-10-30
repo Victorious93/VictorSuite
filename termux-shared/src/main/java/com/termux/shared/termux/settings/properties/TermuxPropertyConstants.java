@@ -342,7 +342,7 @@ public final class TermuxPropertyConstants {
     public static final String IVALUE_NIGHT_MODE_TRUE = NightMode.TRUE.getName();
     public static final String IVALUE_NIGHT_MODE_FALSE = NightMode.FALSE.getName();
     public static final String IVALUE_NIGHT_MODE_SYSTEM = NightMode.SYSTEM.getName();
-    public static final String DEFAULT_IVALUE_NIGHT_MODE = IVALUE_NIGHT_MODE_SYSTEM;
+    public static final String DEFAULT_IVALUE_NIGHT_MODE = IVALUE_NIGHT_MODE_TRUE; // VictorSuite: dark fleet theme by default
 
     /** Defines the bidirectional map for {@link NightMode} values and their internal values */
     public static final ImmutableBiMap<String, String> MAP_NIGHT_MODE =

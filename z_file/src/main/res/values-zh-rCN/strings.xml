@@ -64,7 +64,7 @@
     <string name="unrecognized_compression_format">不能识别的数据包!</string>
     <string name="system_create_container">创建恢复的系统容器</string>
     <string name="system_create_container_empty">系统容器名称不能为空</string>
-    <string name="正在载入中">正在载入中,请稍后。</string>
+    <string name="vs_loading_please_wait">正在载入中,请稍后。</string>
     <string name="system_create_container_fail">系统创建失败!请重试</string>
     <string name="system_restore_success">系统恢复完成,请在切换系统，切换您的系统</string>
     <string name="input_system_name">请输入新的系统盘名称</string>
@@ -75,7 +75,7 @@
     <string name="install_module_download_unavailable">模块下载暂不可用。请将模块包复制到模块目录后安装。</string>
     <string name="install_module">安装模块</string>
     <string name="install_message">控制台:\n开始安装模块</string>
-    <string name="确定">确定</string>
+    <string name="vs_determine">确定</string>
     <string name="data_file_name">数据包名称:</string>
     <string name="data_file_size">数据包大小:</string>
     <string name="data_file_path">数据包路径:</string>
@@ -87,9 +87,9 @@
     <string name="data_module_size">模块包大小:</string>
     <string name="data_module_path">模块包路径:</string>
     <string name="file_module_msg">确定要永久删除此模块包？删除之后可没有办法恢复噢。</string>
-    <string name="提示">提示</string>
-    <string name="删除成功">删除成功</string>
-    <string name="取消">取消</string>
+    <string name="vs_prompt">提示</string>
+    <string name="vs_successfully_deleted">删除成功</string>
+    <string name="vs_cancel">取消</string>
     <string name="install_module_switch">您确定要安装此模块包?</string>
     <string name="install_module_msg1">正在准备安装模块</string>
     <string name="install_module_msg2">正在展开安装模块</string>
@@ -104,12 +104,12 @@
     <string name="install_module_msg11">检测到权限为空,将跳过设置文件权限</string>
     <string name="module_un7z_">模块展开中...</string>
     <string name="module_install_pro">正在处理命令:</string>
-    <string name="错误">错误</string>
+    <string name="vs_error_2">错误</string>
     <string name="install_module_clear_tempmodule">清空临时文件夹出现异常,请手动删除~/tempmodule文件夹!</string>
     <string name="open_http_files">打开网页文件(端口:19956)</string>
     <string name="close_http_files">关闭网页文件(端口:19956)</string>
     <string name="http_folder">文件夹</string>
     <string name="http_file">文件</string>
     <string name="no_http_msg">似乎没有链接网络?请手动在浏览器打开本机IP:19956</string>
-    <string name="zerotermux_test">测试(开发者)</string>
+    <string name="zfile_developer_test">测试(开发者)</string>
 </resources>

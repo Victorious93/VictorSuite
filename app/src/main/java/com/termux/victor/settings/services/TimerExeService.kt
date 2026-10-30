@@ -74,7 +74,7 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
 
     override fun onCreate() {
         super.onCreate()
-        mTimerBean = TimerSetManage.get().getZTTimerBean()
+        mTimerBean = TimerSetManage.get().getVsTimerBean()
         mLibSuManage = LibSuManage.getInstall()
         mLibSuManage?.setTimerListener(this)
         mLibSuManage?.cunt = 0
@@ -119,8 +119,8 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
        // mLibSuManage?.shellCommandExec("shell_main")
         NotificationUtils.showNotification(applicationContext,
             NOTIFICATION_ID,
-            UUtils.getString(R.string.zt_timer_notification_timer_title),
-            "${UUtils.getString(R.string.zt_timer_notification_timer_sum)} ${getTime()}\n${UUtils.getString(R.string.zt_timer_notification_timer_cunt)} ${mLibSuManage!!.cunt}"
+            UUtils.getString(R.string.vs_timer_notification_timer_title),
+            "${UUtils.getString(R.string.vs_timer_notification_timer_sum)} ${getTime()}\n${UUtils.getString(R.string.vs_timer_notification_timer_cunt)} ${mLibSuManage!!.cunt}"
         )
         startTimerNum()
     }
@@ -131,7 +131,7 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
         }
         var cunt = mLibSuManage!!.cunt
         mLibSuManage!!.cunt = cunt + 1
-        mTimerBean =  TimerSetManage.get().getZTTimerBean()
+        mTimerBean =  TimerSetManage.get().getVsTimerBean()
         if (mTimerBean!!.isVictorSuite) {
             mLibSuManage?.shellCommandExec("shell_VictorSuite")
         } else {
@@ -142,7 +142,7 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
     private fun startTimerNum() {
         mLibSuManage?.stop()
         var time = 0L
-        if (TimerSetManage.get().getZTTimerBean().timerNumber == TimerBean.TIMER_OTHER) {
+        if (TimerSetManage.get().getVsTimerBean().timerNumber == TimerBean.TIMER_OTHER) {
             time = mTimerBean!!.timerOtherNumber
         } else {
             time = mTimerBean!!.timerNumber.toLong()
@@ -161,9 +161,9 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
                 NotificationUtils.updateNotification(
                     applicationContext,
                     NOTIFICATION_ID,
-                    UUtils.getString(R.string.zt_timer_notification_timer_title),
-                    "${UUtils.getString(R.string.zt_timer_notification_timer_sum)} $timeLeftFormatted \n" +
-                        "${UUtils.getString(R.string.zt_timer_notification_timer_cunt)} ${mLibSuManage!!.cunt}"
+                    UUtils.getString(R.string.vs_timer_notification_timer_title),
+                    "${UUtils.getString(R.string.vs_timer_notification_timer_sum)} $timeLeftFormatted \n" +
+                        "${UUtils.getString(R.string.vs_timer_notification_timer_cunt)} ${mLibSuManage!!.cunt}"
                 )
             }
 
@@ -171,8 +171,8 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
                 NotificationUtils.updateNotification(
                     applicationContext,
                     NOTIFICATION_ID,
-                    UUtils.getString(R.string.zt_timer_notification_timer_title),
-                    "${UUtils.getString(R.string.zt_timer_notification_timer_kill)}"
+                    UUtils.getString(R.string.vs_timer_notification_timer_title),
+                    "${UUtils.getString(R.string.vs_timer_notification_timer_kill)}"
                 )
                 LogUtils.e(TAG, "startTimerNum  sendHandler.....")
                 mHandler1.sendMessageDelayed(Message(), 5000)
@@ -186,14 +186,14 @@ class TimerExeService : Service(), LibSuManage.TimerListener {
     }
 
     private fun getTime(): String {
-        if (TimerSetManage.get().getZTTimerBean().timerNumber == TimerBean.TIMER_OTHER) {
+        if (TimerSetManage.get().getVsTimerBean().timerNumber == TimerBean.TIMER_OTHER) {
             if (mTimerBean!!.timerOtherNumber > (60 * 1000)) {
-                return "${mTimerBean!!.timerOtherNumber / 60 / 1000} ${UUtils.getString(R.string.zt_timer_minute)}"
+                return "${mTimerBean!!.timerOtherNumber / 60 / 1000} ${UUtils.getString(R.string.vs_timer_minute)}"
             } else {
-                return "< 1 ${UUtils.getString(R.string.zt_timer_minute)}"
+                return "< 1 ${UUtils.getString(R.string.vs_timer_minute)}"
             }
         } else {
-            return "${mTimerBean!!.timerNumber / 60 / 1000} ${UUtils.getString(R.string.zt_timer_minute)}"
+            return "${mTimerBean!!.timerNumber / 60 / 1000} ${UUtils.getString(R.string.vs_timer_minute)}"
         }
 
     }

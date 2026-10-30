@@ -40,12 +40,12 @@ public class ClaudeClient {
             OkHttpClient client = new OkHttpClient();
             isStream = stream;
 
-            String apiKey = UserSetManage.Companion.get().getZTUserBean().getClaudeApiKey();
-            String url = UserSetManage.Companion.get().getZTUserBean().getClaudeApiUrl();
+            String apiKey = UserSetManage.Companion.get().getVsUserBean().getClaudeApiKey();
+            String url = UserSetManage.Companion.get().getVsUserBean().getClaudeApiUrl();
             if (TextUtils.isEmpty(url)) {
                 url = Config.CLAUDE_URL;
             }
-            String model = UserSetManage.Companion.get().getZTUserBean().getClaudeModel();
+            String model = UserSetManage.Companion.get().getVsUserBean().getClaudeModel();
             if (TextUtils.isEmpty(model)) {
                 model = Config.CLAUDE_DEFAULT_MODEL;
             }

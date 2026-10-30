@@ -94,25 +94,25 @@ const val ZFILE_SELECT_DATA_KEY = "ZFILE_SELECT_RESULT_DATA"
 fun getZFileHelp() = ZFileManageHelp.getInstance()
 fun getZFileConfig() = getZFileHelp().getConfiguration()
 
-@Deprecated("请使用 ZFileAudioType")
+@Deprecated("Use ZFileAudioType")
 typealias AudioType = ZFileAudioType
-@Deprecated("请使用 ZFileImageType")
+@Deprecated("Use ZFileImageType")
 typealias ImageType = ZFileImageType
-@Deprecated("请使用 ZFileOtherType")
+@Deprecated("Use ZFileOtherType")
 typealias OtherType = ZFileOtherType
-@Deprecated("请使用 ZFilePdfType")
+@Deprecated("Use ZFilePdfType")
 typealias PdfType = ZFilePdfType
-@Deprecated("请使用 ZFilePptType")
+@Deprecated("Use ZFilePptType")
 typealias PptType = ZFilePptType
-@Deprecated("请使用 ZFileTxtType")
+@Deprecated("Use ZFileTxtType")
 typealias TxtType = ZFileTxtType
-@Deprecated("请使用 ZFileVideoType")
+@Deprecated("Use ZFileVideoType")
 typealias VideoType = ZFileVideoType
-@Deprecated("请使用 ZFileWordType")
+@Deprecated("Use ZFileWordType")
 typealias WordType = ZFileWordType
-@Deprecated("请使用 ZFileXlsType")
+@Deprecated("Use ZFileXlsType")
 typealias XlsType = ZFileXlsType
-@Deprecated("请使用 ZFileZipType")
+@Deprecated("Use ZFileZipType")
 typealias ZipType = ZFileZipType
 
 // inner ===========================================================================================
@@ -132,7 +132,7 @@ internal const val ZIP_TYPE = 0x2004
 internal const val FILE = 0
 internal const val FOLDER = 1
 
-internal const val PERMISSION_FAILED_TITLE = "自定义权限视图展示：布局文件中某个控件必须要设置ID：zfile_permission_againBtn"
+internal const val PERMISSION_FAILED_TITLE = "Custom permission view: a view in the layout must have the ID zfile_permission_againBtn"
 internal const val PERMISSION_FAILED_TITLE2 = "【ZFileOtherListener.getPermissionFailedLayoutId()】Can't find id [R.id.zfile_permission_againBtn]! " +
         "You must be set view id(zfile_permission_againBtn) in layout"
 
@@ -219,7 +219,7 @@ internal fun Context.toFileManagerPage() {
         startActivity(Intent(action, uri))
     } catch (e: Exception) {
         if (getZFileConfig().showLog) {
-            ZFileLog.e("无法跳转到指定App的【所有文件权限访问】页面，现跳转到列表页，需要用户手动寻找！")
+            ZFileLog.e("Could not open this app's 'All files access' page; opening the list instead, please find the app manually!")
             e.printStackTrace()
         }
         startActivity(Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))

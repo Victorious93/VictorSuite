@@ -59,7 +59,7 @@ class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
          setSwitchStatus(mAiVisibleSwitch, mAiVisibleLayout)
 
         // 设置DeepSeek蓝色点击识别
-        val commandLink = UserSetManage.get().getZTUserBean().commandLink
+        val commandLink = UserSetManage.get().getVsUserBean().commandLink
         if (commandLink.isNullOrEmpty()) {
             mKeyClick.setText(Config.COMMANDS)
         } else {
@@ -82,15 +82,15 @@ class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
                 p2: Int,
                 p3: Int
             ) {
-                val ztUserBean = UserSetManage.get().getZTUserBean()
+                val vsUserBean = UserSetManage.get().getVsUserBean()
                 var command = p0?.toString()
                 if (!TextUtils.isEmpty(command) && command!!.contains("，")) {
                     command = p0?.toString()?.replace("，", ",")
                     mKeyClick.setText(command)
                     mKeyClick.setSelection(command!!.length);
                 }
-                ztUserBean.commandLink = command
-                UserSetManage.get().setZTUserBean(ztUserBean)
+                vsUserBean.commandLink = command
+                UserSetManage.get().setVsUserBean(vsUserBean)
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -100,7 +100,7 @@ class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
         })
 
         // 设置 DeepSeep Key
-        val deepSeekApiKey = UserSetManage.get().getZTUserBean().deepSeekApiKey
+        val deepSeekApiKey = UserSetManage.get().getVsUserBean().deepSeekApiKey
         if (!TextUtils.isEmpty(deepSeekApiKey)) {
             mDeepSeekEdit.setText(deepSeekApiKey)
         }
@@ -118,17 +118,17 @@ class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
                p2: Int,
                p3: Int
            ) {
-               val ztUserBean = UserSetManage.get().getZTUserBean()
+               val vsUserBean = UserSetManage.get().getVsUserBean()
                var deepSeekApiKey = p0?.toString()
-               ztUserBean.deepSeekApiKey = deepSeekApiKey
-               UserSetManage.get().setZTUserBean(ztUserBean)
+               vsUserBean.deepSeekApiKey = deepSeekApiKey
+               UserSetManage.get().setVsUserBean(vsUserBean)
            }
            override fun afterTextChanged(p0: Editable?) {
            }
        })
 
         // 设置 Claude Key
-        val claudeApiKey = UserSetManage.get().getZTUserBean().claudeApiKey
+        val claudeApiKey = UserSetManage.get().getVsUserBean().claudeApiKey
         if (!TextUtils.isEmpty(claudeApiKey)) {
             mClaudeKeyEdit.setText(claudeApiKey)
         }
@@ -136,26 +136,26 @@ class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                val ztUserBean = UserSetManage.get().getZTUserBean()
-                ztUserBean.claudeApiKey = p0?.toString()
-                UserSetManage.get().setZTUserBean(ztUserBean)
+                val vsUserBean = UserSetManage.get().getVsUserBean()
+                vsUserBean.claudeApiKey = p0?.toString()
+                UserSetManage.get().setVsUserBean(vsUserBean)
             }
             override fun afterTextChanged(p0: Editable?) {
             }
         })
 
         mAiProviderSwitch.setOnCheckedChangeListener { _, isChecked ->
-            val ztUserBean = UserSetManage.get().getZTUserBean()
-            ztUserBean.aiProvider = if (isChecked) "claude" else "deepseek"
-            UserSetManage.get().setZTUserBean(ztUserBean)
+            val vsUserBean = UserSetManage.get().getVsUserBean()
+            vsUserBean.aiProvider = if (isChecked) "claude" else "deepseek"
+            UserSetManage.get().setVsUserBean(vsUserBean)
         }
 
     }
 
     private fun initStatus() {
-        val ztUserBean = UserSetManage.get().getZTUserBean()
-        mAiVisibleSwitch.isChecked = ztUserBean.isIsDeepSeekVisibleTerminal
-        mAiProviderSwitch.isChecked = "claude".equals(ztUserBean.aiProvider, ignoreCase = true)
+        val vsUserBean = UserSetManage.get().getVsUserBean()
+        mAiVisibleSwitch.isChecked = vsUserBean.isIsDeepSeekVisibleTerminal
+        mAiProviderSwitch.isChecked = "claude".equals(vsUserBean.aiProvider, ignoreCase = true)
 
         mKeyClickSummary.text = getKeyClickText(UUtils.getString(R.string.deepseek_settings_recognition_edit_keyword),
             UUtils.getString(R.string.deepseek_settings_recognition_edit_info), object : ClickableSpan() {
@@ -198,14 +198,14 @@ class VictorSuiteDeepSeekSettingsActivity : AppCompatActivity() {
             switchCompat.isChecked = !(switchCompat.isChecked)
         }
         switchCompat.setOnCheckedChangeListener { buttonView, isChecked ->
-            val ztUserBean = UserSetManage.get().getZTUserBean()
+            val vsUserBean = UserSetManage.get().getVsUserBean()
             when (switchCompat) {
                 mAiVisibleSwitch -> {
-                     ztUserBean.isIsDeepSeekVisibleTerminal = switchCompat.isChecked
+                     vsUserBean.isIsDeepSeekVisibleTerminal = switchCompat.isChecked
                  }
 
             }
-            UserSetManage.get().setZTUserBean(ztUserBean)
+            UserSetManage.get().setVsUserBean(vsUserBean)
         }
     }
 

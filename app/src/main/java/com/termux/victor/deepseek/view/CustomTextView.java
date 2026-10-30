@@ -121,7 +121,7 @@ public class CustomTextView extends AppCompatTextView {
         // 显示自定义对话框或执行其他操作
         android.widget.Toast.makeText(
             getContext(),
-            "Test操作: " + selectedText,
+            "Test operation: " + selectedText,
             android.widget.Toast.LENGTH_SHORT
         ).show();
     }

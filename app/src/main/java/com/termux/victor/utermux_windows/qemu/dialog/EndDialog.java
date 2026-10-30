@@ -43,7 +43,7 @@ public class EndDialog extends BaseDialogCentre {
             String s1 = split[split.length - 1];
 
 
-            edit_text.setText(UUtils.getString(R.string.镜像运行结束) + "\n" + s4 + "\n" + s3 + "\n" + s2 + "\n" + s1);
+            edit_text.setText(UUtils.getString(R.string.vs_end_of_mirroring_operation) + "\n" + s4 + "\n" + s3 + "\n" + s2 + "\n" + s1);
 
 
         }catch (Exception e){

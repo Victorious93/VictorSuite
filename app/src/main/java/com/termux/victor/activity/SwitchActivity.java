@@ -88,7 +88,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                 CreateSystemBean createSystemBean = new CreateSystemBean();
 
-                createSystemBean.systemName = UUtils.getString(R.string.无名称系统);
+                createSystemBean.systemName = UUtils.getString(R.string.vs_unnamedcontainer);
 
                 createSystemBean.dir = "/data/data/com.termux/files";
 
@@ -131,11 +131,11 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                 //当前系统
 
 
-                String[] strings = {UUtils.getString(R.string.删除), UUtils.getString(R.string.切换)};
+                String[] strings = {UUtils.getString(R.string.vs_delete), UUtils.getString(R.string.vs_switch)};
 
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog
                     .Builder(SwitchActivity.this);
-                builder.setTitle(UUtils.getString(R.string.删除完成_需要重进才能刷新));
+                builder.setTitle(UUtils.getString(R.string.vs_delete_complete_need_to_re_enter_to_refr));
                 // builder.setMessage("这是个滚动列表，往下滑");
                 builder.setItems(strings, new DialogInterface.OnClickListener() {
                     @Override
@@ -146,9 +146,9 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                             builder.create().dismiss();
                             AlertDialog.Builder a = new AlertDialog.Builder(SwitchActivity.this);
-                            a.setTitle("你确定要删除吗");
-                            a.setMessage("请确保你的sd卡权限未被获取!\n否则很可能会清空你SD卡(内部存储)上的所有内容!\n否则很可能会清空你SD卡(内部存储)上的所有内容!\n否则很可能会清空你SD卡(内部存储)上的所有内容!\n你确定要删除掉你的系统吗?\n请慎重,删除后你的数据不可恢复!!!!!!");
-                            a.setNegativeButton("我确定", new DialogInterface.OnClickListener() {
+                            a.setTitle("Are you sure you want to delete?");
+                            a.setMessage("Make sure storage permission is NOT granted!\nOtherwise this may wipe everything on your internal storage!\nAre you sure you want to delete this system?\nBe careful: deleted data cannot be recovered!");
+                            a.setNegativeButton("I'm sure", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     a.create().dismiss();
@@ -160,25 +160,25 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                                                 runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        Toast.makeText(SwitchActivity.this, "你不能删除主系统", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(SwitchActivity.this, "You cannot delete the main system", Toast.LENGTH_SHORT).show();
 
                                                     }
                                                 });
                                                 return;
                                             }
 
-                                            Log.e("XINHAO_HAN", "删除系统: " + mList.get(position).dir);
+                                            Log.e("XINHAO_HAN", "Delete system: " + mList.get(position).dir);
 
                                             runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
                                                     MyDialog myDialog = new MyDialog(SwitchActivity.this);
                                                     myDialog.show();
-                                                    myDialog.getDialog_title().setText("正在删除,请耐心等待...");
-                                                    myDialog.getDialog_pro().setText("时间长短，由您的系统大小决定的");
+                                                    myDialog.getDialog_title().setText("Deleting, please wait...");
+                                                    myDialog.getDialog_pro().setText("Duration depends on the size of your system");
                                                 }
                                             });
-                                            Log.e("XINHAO_HAN", "删除目录: " + mList.get(position).dir);
+                                            Log.e("XINHAO_HAN", "Delete directory: " + mList.get(position).dir);
 
                                             String cpu = TermuxInstaller.determineTermuxArchName();
 
@@ -227,11 +227,11 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                                                 public void run() {
 
                                                     if(new File(mList.get(position).dir).exists()){
-                                                        Toast.makeText(SwitchActivity.this, "正在清除系统残留文件", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(SwitchActivity.this, "Clearing leftover system files", Toast.LENGTH_SHORT).show();
                                                         com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("chmod 777 -R "+mList.get(position).dir+"&& rm -rf " + mList.get(position).dir + " \n");
                                                         finish();
                                                     }else{
-                                                        Toast.makeText(SwitchActivity.this, "删除成功!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(SwitchActivity.this, "Deleted!", Toast.LENGTH_SHORT).show();
                                                         finish();
                                                     }
 
@@ -244,19 +244,19 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                                 }
                             });
-                            a.setPositiveButton("我不删除", new DialogInterface.OnClickListener() {
+                            a.setPositiveButton("Keep it", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     a.create().dismiss();
-                                    Toast.makeText(SwitchActivity.this, "操作忽略", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SwitchActivity.this, "Operation ignored", Toast.LENGTH_SHORT).show();
                                 }
                             });
                             //setNegativeButton
-                            a.setNeutralButton("别删除", new DialogInterface.OnClickListener() {
+                            a.setNeutralButton("Don't delete", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     a.create().dismiss();
-                                    Toast.makeText(SwitchActivity.this, "操作忽略", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SwitchActivity.this, "Operation ignored", Toast.LENGTH_SHORT).show();
                                 }
                             });
                             a.show();
@@ -310,7 +310,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                                     PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(fileOutPathThis)));
                                     printWriter.print(new Gson().toJson(readSystemBean1));
-                                    Log.e("XINHAO_HAN", "写入json: " + new Gson().toJson(readSystemBean1));
+                                    Log.e("XINHAO_HAN", "Write json: " + new Gson().toJson(readSystemBean1));
                                     printWriter.flush();
 
                                     printWriter.close();
@@ -353,7 +353,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
 
                             } catch (Exception e) {
-                                Toast.makeText(SwitchActivity.this, "读取失败!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SwitchActivity.this, "Read failed!", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -365,26 +365,26 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
                             AlertDialog.Builder ab = new AlertDialog.Builder(SwitchActivity.this);
 
-                            ab.setTitle("提示");
+                            ab.setTitle("Notice");
 
                             ab.setCancelable(false);
 
-                            ab.setMessage("切换成功!\n重启APP生效\n需要重启吗\n其实点击需要没用\n自己手动重启\n进入任务管理器,一般点击 '□'这个建，然后滑退APP ");
+                            ab.setMessage("Switched!\nRestart the app to apply.\nPlease restart it manually:\nopen the recent-apps screen (usually the '□' button) and swipe the app away. ");
 
-                            ab.setNegativeButton("需要", new DialogInterface.OnClickListener() {
+                            ab.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(SwitchActivity.this, "请手动退出APP", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SwitchActivity.this, "Please exit the app manually", Toast.LENGTH_SHORT).show();
                                     new Intent(SwitchActivity.this, TermuxService.class).setAction(ACTION_STOP_SERVICE);
                                     System.exit(0);
                                     finish();
                                 }
                             });
 
-                            ab.setPositiveButton("不需要", new DialogInterface.OnClickListener() {
+                            ab.setPositiveButton("No", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(SwitchActivity.this, "设置已生效!请重启APP", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SwitchActivity.this, "Setting applied! Please restart the app", Toast.LENGTH_SHORT).show();
                                     finish();
 
                                 }
@@ -444,7 +444,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                 if (name == null) {
                     new File(files[i],"/xinhao_system.infoJson").delete();
 
-                    Toast.makeText(this, "配置文件已损坏，请重新进入创建,多点几次,直到进入为止", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Config file is corrupted; reopen to recreate it (retry until it opens)", Toast.LENGTH_SHORT).show();
                     finish();
                     return;
                 }
@@ -479,7 +479,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
             File file = new File("/data/data/com.termux/files/xinhao_system.infoJson");
 
             if (!file.exists()) {
-                Toast.makeText(this, "你当前的默认系统没有配置文件", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Your current default system has no config file", Toast.LENGTH_SHORT).show();
                 return;
             }
             String temp;
@@ -497,7 +497,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
             if(createSystemBean == null){
                 createSystemBean = new CreateSystemBean();
                 createSystemBean.dir = "/data/data/com.termux/files/";
-                createSystemBean.systemName = "默认系统";
+                createSystemBean.systemName = "Default system";
             }
 
 
@@ -542,7 +542,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
 
             if(createSystemBean == null){
-                return"损坏的系统";
+                return"Broken system";
             }else{
                 return createSystemBean.systemName;
             }
@@ -555,7 +555,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
         }
 
 
-        return "默认系统";
+        return "Default system";
     }
 
 
@@ -570,16 +570,16 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
     private void createSystemDialog() {
 
         final EditText et = new EditText(this);
-        new AlertDialog.Builder(this).setTitle("请输入新的linux名称")
+        new AlertDialog.Builder(this).setTitle("Enter a new Linux name")
             .setIcon(R.mipmap.linux_new_ico)
             .setView(et)
-            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     //按下确定键后的事件
                     createSystem(et.getText().toString());
                 }
-            }).setNegativeButton("取消", null).show();
+            }).setNegativeButton("Cancel", null).show();
     }
 
     //创建
@@ -611,7 +611,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                 printWriter.close();
 
             } catch (IOException e) {
-                Toast.makeText(this, "系统创建失败!请重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "System creation failed! Please retry", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
                 return;
             } finally {
@@ -647,7 +647,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
 
 
             int max = getMax(arrayList);
-            Log.e("XINHAO_HAN", "最大值: " + max);
+            Log.e("XINHAO_HAN", "Max: " + max);
 
 
             //直接创建
@@ -672,7 +672,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
                 printWriter.close();
 
             } catch (IOException e) {
-                Toast.makeText(this, "系统创建失败!请重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "System creation failed! Please retry", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
                 return;
             } finally {

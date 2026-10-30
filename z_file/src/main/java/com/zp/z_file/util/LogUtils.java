@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class LogUtils {
-    public static String TAG = "ZeroTermux";
+    public static String TAG = "VictorSuite";
 
     public static boolean isShow = false;
     public static void e(String tag, String msg) {
@@ -41,12 +41,12 @@ public class LogUtils {
 
     public static void createLogFile(String msg) {
         try {
-            String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/xinhao/ZeroTermuxLog";
+            String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/xinhao/VictorSuiteLog";
             File logPath = new File(absolutePath);
             if (!logPath.exists()) {
                 logPath.mkdirs();
             }
-            File logFile = new File(absolutePath, "/ZeroTermux.log");
+            File logFile = new File(absolutePath, "/VictorSuite.log");
             if (!logFile.exists()) {
                 try {
                     logFile.createNewFile();

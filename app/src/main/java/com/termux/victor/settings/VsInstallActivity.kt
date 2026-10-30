@@ -22,7 +22,7 @@ class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
     private val TAG = "VsInstallActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ztinstall)
+        setContentView(R.layout.activity_vsinstall)
         findViewById<CardView>(R.id.api).setOnClickListener(this)
         findViewById<CardView>(R.id.boot).setOnClickListener(this)
         findViewById<CardView>(R.id.styling).setOnClickListener(this)
@@ -103,10 +103,10 @@ class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
            }
            R.id.float_card_view -> {
                try {
-                   installApk(getAssets().open("apk/zero_float.ip"), "zeroFloat");
+                   installApk(getAssets().open("apk/vs_float.ip"), "vsFloat");
                } catch (e: IOException) {
                    e.printStackTrace()
-                   LogUtils.e(TAG, "installApk zero_float error! $e")
+                   LogUtils.e(TAG, "installApk vs_float error! $e")
                }
            }
        }
@@ -114,8 +114,8 @@ class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun installApk(inputStream: InputStream, fileName: String) {
         val switchDialog1: SwitchDialog = switchDialogShow(
-            UUtils.getString(R.string.警告),
-            UUtils.getString(R.string.您未安装该插件)
+            UUtils.getString(R.string.vs_warning),
+            UUtils.getString(R.string.vs_the_plug_in_installation_is_about_to_sta)
         )
         switchDialog1.cancel!!.setOnClickListener { switchDialog1.dismiss() }
         switchDialog1.ok!!.setOnClickListener {
@@ -153,7 +153,7 @@ class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
                                 }
                             }.start()
                         } else {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                         }
                     }
 
@@ -162,11 +162,11 @@ class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
                         never: Boolean
                     ) {
                         if (never) {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                             // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             XXPermissions.startPermissionActivity(this@VsInstallActivity, permissions)
                         } else {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                         }
                     }
                 })
@@ -178,8 +178,8 @@ class VsInstallActivity : AppCompatActivity(), View.OnClickListener {
         switchDialog.title!!.text = title
         switchDialog.msg!!.text = msg
         switchDialog.other!!.visibility = View.GONE
-        switchDialog.ok!!.text = UUtils.getString(R.string.确定)
-        switchDialog.cancel!!.text = UUtils.getString(R.string.取消)
+        switchDialog.ok!!.text = UUtils.getString(R.string.vs_determine)
+        switchDialog.cancel!!.text = UUtils.getString(R.string.vs_cancel)
         switchDialog.show()
         return switchDialog
     }

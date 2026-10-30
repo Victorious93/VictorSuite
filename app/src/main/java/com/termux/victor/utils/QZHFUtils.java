@@ -41,7 +41,7 @@ public class QZHFUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.开始检测备份环境));
+                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.vs_start_testing_the_backup_environment));
                         myDialog.getDialog_pro_prog().setProgress(15);
                     }
                 });
@@ -55,7 +55,7 @@ public class QZHFUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.备份环境监测完成));
+                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.vs_backup_environment_monitoring_completed));
                         myDialog.getDialog_pro_prog().setProgress(50);
                     }
                 });
@@ -69,7 +69,7 @@ public class QZHFUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.开始检测是否有sd卡软链接));
+                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.vs_start_to_detect_whether_there_is_a_soft_sd));
                         myDialog.getDialog_pro_prog().setProgress(75);
                     }
                 });
@@ -94,7 +94,7 @@ public class QZHFUtils {
                     UUtils.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.没有找到storage目录), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UUtils.getContext(), UUtils.getString(R.string.vs_the_storage_directory_was_not_found), Toast.LENGTH_SHORT).show();
 
                             myDialog.dismiss();
                             com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
@@ -113,7 +113,7 @@ public class QZHFUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.已检测到软连接));
+                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.vs_soft_connection_detected));
                         myDialog.getDialog_pro_prog().setProgress(80);
                     }
                 });
@@ -127,7 +127,7 @@ public class QZHFUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.秒后开始备份));
+                        myDialog.getDialog_pro().setText(UUtils.getString(R.string.vs_start_backup_in_seconds_3));
                         myDialog.getDialog_pro_prog().setProgress(100);
                     }
                 });
@@ -144,7 +144,7 @@ public class QZHFUtils {
                     public void run() {
                         myDialog.dismiss();
 
-                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -zcvf ./storage/shared/xinhao/data/" + systemName + " /data/data/com.termux/files && echo \"备份完成，备份文件在->内部存储/xinhao/data/|目录下\" \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -zcvf ./storage/shared/xinhao/data/" + systemName + " /data/data/com.termux/files && echo \"Backup complete, backup file is in -> internal storage/xinhao/data/\" \n");
 
 
                         restoreFragment.getActivity().finish();

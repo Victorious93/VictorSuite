@@ -11,13 +11,13 @@ import com.termux.R
 class VsAboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ztabout)
-        findViewById<CardView>(R.id.zt_termux_github_card_view).setOnClickListener {
+        setContentView(R.layout.activity_vsabout)
+        findViewById<CardView>(R.id.vs_termux_github_card_view).setOnClickListener {
             UUtils.startUrl(VsLinks.REPO)
         }
 
-        // The ZeroCoreManage add-on is a third-party APK from an upstream personal
+        // The VsEngineManage add-on is a third-party APK from an upstream personal
         // repo; we no longer link users to download it. Hide its card.
-        findViewById<CardView>(R.id.zt_core_manage_termux_github_card_view).visibility = android.view.View.GONE
+        findViewById<CardView>(R.id.vs_core_manage_termux_github_card_view).visibility = android.view.View.GONE
     }
 }

@@ -30,7 +30,7 @@
               android:textStyle="bold"
               android:id="@+id/service_name"
               android:textColor="@color/color_ffffff"
-              android:text="@string/VictorSuite实验功能"
+              android:text="@string/vs_victorsuite_experimentalfunction"
               android:layout_height="wrap_content"/>
 
 
@@ -91,7 +91,7 @@
                                   android:textStyle="bold"
                                   android:paddingTop="10dp"
                                   android:paddingBottom="10dp"
-                                  android:text="@string/网络ADB"
+                                  android:text="@string/vs_network_adb_root"
                                   android:layout_alignParentRight="true"
                                   android:textColor="@color/color_ffffff"
                                   android:textSize="10sp" />
@@ -161,7 +161,7 @@
                                   android:textStyle="bold"
                                   android:paddingTop="10dp"
                                   android:paddingBottom="10dp"
-                                  android:text="@string/网络ADBClose"
+                                  android:text="@string/vs_close_adb_root_adbclose"
                                   android:layout_alignParentRight="true"
                                   android:textColor="@color/color_ffffff"
                                   android:textSize="10sp" />
@@ -317,7 +317,7 @@
                                   android:paddingLeft="10dp"
                                   android:paddingTop="10dp"
                                   android:paddingBottom="10dp"
-                                  android:text="@string/启动器新"
+                                  android:text="@string/vs_launcher_new"
                                   android:textColor="@color/color_ffffff"
                                   android:textSize="10sp"
                                   android:textStyle="bold" />

@@ -32,20 +32,20 @@ public class DownLoadMuTILS {
         String convertSpeed = task.getConvertSpeed();//转换单位后的下载速度，单位转换需要在配置文件中打开
         task.getSpeed(); //原始byte长度速度
 
-        UUtils.showLog("任务状态(当前执行任务百分比):" + percent);
-        UUtils.showLog("任务状态(当前执行任务下载速度):" + convertSpeed);
+        UUtils.showLog("Task status (current percent):" + percent);
+        UUtils.showLog("Task status (current download speed):" + convertSpeed);
     }
 
     @Download.onTaskComplete
     public void taskComplete( DownloadTask task) {
         //在这里处理任务完成的状态
-        UUtils.showLog("任务状态(当前执行任务):完成");
+        UUtils.showLog("Task status (current): complete");
         mDownLoadMuTILSListener.taskComplete(task);
     }
     @Download.onTaskFail
     public void onTaskFail(DownloadTask task){
         mDownLoadMuTILSListener.onTaskFail(task);
-        UUtils.showLog("任务状态(当前执行任务):失败");
+        UUtils.showLog("Task status (current): failed");
     }
 
     public void setDownLoadMuTILSListener(DownLoadMuTILSListener mDownLoadMuTILSListener){

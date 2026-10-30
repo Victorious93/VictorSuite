@@ -11,7 +11,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:text="@string/字体选择"
+        android:text="@string/vs_font_selection"
         android:gravity="center"
         android:textSize="16sp"
         android:layout_marginTop="20dp"
@@ -21,7 +21,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:text="@string/您一切选择的字体来源于互联网"
+        android:text="@string/vs_all_the_fonts_you_choose_come_from_the_i"
         android:gravity="center"
         android:textSize="12sp"
         android:layout_marginTop="5dp"

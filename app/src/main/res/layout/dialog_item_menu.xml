@@ -46,7 +46,7 @@
                             android:paddingLeft="10dp"
                             android:textStyle="bold"
                             android:paddingTop="10dp"
-                            android:text="@string/切换源"
+                            android:text="@string/vs_source"
                             android:layout_alignParentRight="true"
                             android:textColor="@color/color_ffffff"
                             android:textSize="10sp" />

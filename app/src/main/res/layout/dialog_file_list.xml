@@ -26,7 +26,7 @@
 
                <TextView
                    android:layout_width="match_parent"
-                   android:text="@string/请选择一个镜像"
+                   android:text="@string/vs_please_select_a_mirror"
                    android:layout_marginTop="10dp"
                    android:id="@+id/title"
                    android:gravity="center"
@@ -59,7 +59,7 @@
                            android:textSize="16sp"
                            android:visibility="gone"
                            android:id="@+id/tv_empty"
-                           android:text="@string/当前目录下没有镜像文件"
+                           android:text="@string/vs_there_is_no_mirror_file_in_the_current_d"
                            android:layout_height="match_parent"/>
 
 
@@ -86,7 +86,7 @@
 
                    <TextView
                        android:layout_width="wrap_content"
-                       android:text="@string/使用默认命令"
+                       android:text="@string/vs_use_default_commands"
                        android:textColor="#fff"
                        android:paddingLeft="10dp"
                        android:paddingBottom="3dp"

@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:padding="14dp"
             android:visibility="gone"
-            android:textColor="#333"/>
+            android:textColor="@color/vs_neon_text"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatRecyclerView"

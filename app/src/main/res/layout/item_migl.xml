@@ -67,7 +67,7 @@
                        style="@style/textEllipsis"
                        android:gravity="center"
                        android:id="@+id/name"
-                       android:text="@string/添加一个命令"
+                       android:text="@string/vs_add_a_command"
                        android:textColor="#fff"
                        android:textSize="10sp"
                        android:textStyle="bold" />
@@ -80,7 +80,7 @@
                        android:layout_weight="1"
                        android:id="@+id/value"
                        android:gravity="center"
-                       android:text="@string/添加一个命令解释"
+                       android:text="@string/vs_add_a_command_explanation"
                        android:textColor="#fff"
                        android:textSize="8sp"
                        android:textStyle="bold" />

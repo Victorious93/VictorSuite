@@ -44,10 +44,10 @@ internal object ZFileUtil {
         context: Context,
         block: (Boolean, String) -> Unit
     ) {
-        ZFileLog.i("重命名文件的目录：$filePath")
-        ZFileLog.i("重命名文件的新名字：$newName")
+        ZFileLog.i("Rename file path: $filePath")
+        ZFileLog.i("Rename new name: $newName")
         val activity = context as Activity
-        val title = "重命名中..."
+        val title = "Renaming..."
         val dialog = getZFileHelp().getOtherListener()?.getLoadingDialog(activity, title)
             ?: ZFileLoadingDialog(activity, title).run {
                 setCancelable(false)
@@ -70,7 +70,7 @@ internal object ZFileUtil {
             }
             activity.runOnUiThread {
                 dialog.dismiss()
-                activity.toast(if (isSuccess) "重命名成功" else "重命名失败")
+                activity.toast(if (isSuccess) "Renamed" else "Rename failed")
                 block.invoke(isSuccess, newName)
             }
         }
@@ -80,7 +80,7 @@ internal object ZFileUtil {
      * 删除文件
      */
     fun deleteFile(filePath: String, context: Context, block: Boolean.() -> Unit) {
-        ZFileLog.i("删除文件的目录：$filePath")
+        ZFileLog.i("Delete file path: $filePath")
         ZFileSth.callFileByType(filePath, "", context, DELTE_TYPE, block)
     }
 
@@ -88,8 +88,8 @@ internal object ZFileUtil {
      * 复制文件
      */
     fun copyFile(filePath: String, outPath: String, context: Context, block: Boolean.() -> Unit) {
-        ZFileLog.i("源文件目录：$filePath")
-        ZFileLog.i("复制文件目录：$outPath")
+        ZFileLog.i("Source path: $filePath")
+        ZFileLog.i("Copy target directory: $outPath")
         ZFileSth.callFileByType(filePath, outPath, context, COPY_TYPE, block)
     }
 
@@ -97,8 +97,8 @@ internal object ZFileUtil {
      * 剪切文件
      */
     fun cutFile(filePath: String, outPath: String, context: Context, block: Boolean.() -> Unit) {
-        ZFileLog.i("源文件目录：$filePath")
-        ZFileLog.i("移动目录：$outPath")
+        ZFileLog.i("Source path: $filePath")
+        ZFileLog.i("Move target directory: $outPath")
         ZFileSth.callFileByType(filePath, outPath, context, CUT_TYPE, block)
     }
 
@@ -106,8 +106,8 @@ internal object ZFileUtil {
      * 解压文件
      */
     fun zipFile(filePath: String, outZipPath: String, context: Context, block: Boolean.() -> Unit) {
-        ZFileLog.i("源文件目录：$filePath")
-        ZFileLog.i("解压目录：$outZipPath")
+        ZFileLog.i("Source path: $filePath")
+        ZFileLog.i("Extract directory: $outZipPath")
         ZFileSth.callFileByType(filePath, outZipPath, context, ZIP_TYPE, block)
     }
 

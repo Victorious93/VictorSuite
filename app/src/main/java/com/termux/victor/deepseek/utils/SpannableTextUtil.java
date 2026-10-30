@@ -38,7 +38,7 @@ public class SpannableTextUtil {
         SpannableStringBuilder builder = new SpannableStringBuilder(spanned);
         String fullText = spanned.toString();
 
-        Log.d("SpannableTextUtil", "开始检测代码块，文本长度: " + fullText.length());
+        Log.d("SpannableTextUtil", "Detecting code blocks, text length: " + fullText.length());
 
         // 方法1：检测可能的代码块样式
         detectAndMarkCodeBlocks(builder, spanned, context);
@@ -153,7 +153,7 @@ public class SpannableTextUtil {
         ClickableSpan[] existing = builder.getSpans(start, end, ClickableSpan.class);
         if (existing.length == 0) {
             builder.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            Log.d("SpannableTextUtil", "添加点击事件: " + start + "-" + end + ", 内容: " +
+            Log.d("SpannableTextUtil", "Add click event: " + start + "-" + end + ", content: " +
                     (codeContent.length() > 50 ? codeContent.substring(0, 50) + "..." : codeContent));
         }
     }
@@ -162,7 +162,7 @@ public class SpannableTextUtil {
      * 检查文本是否包含代码特征
      */
     private static boolean containsCodeIndicators(String text) {
-        String commandLink = UserSetManage.Companion.get().getZTUserBean().getCommandLink();
+        String commandLink = UserSetManage.Companion.get().getVsUserBean().getCommandLink();
         String codeLink;
         if (TextUtils.isEmpty(commandLink)) {
             codeLink = Config.COMMANDS;

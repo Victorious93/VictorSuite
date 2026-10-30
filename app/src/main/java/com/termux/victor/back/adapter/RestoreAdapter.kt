@@ -43,7 +43,7 @@ class RestoreAdapter: RecyclerView.Adapter<RestoreViewHolder> {
             switchDialog.ok?.setOnClickListener {
                 switchDialog.dismiss()
                 if (mList!![position].mFile!!.delete()) {
-                    UUtils.showMsg(UUtils.getString(R.string.删除成功))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_successfully_deleted))
                     mRestoreRefreshFileListener?.refresh()
                 } else {
                     UUtils.showMsg(UUtils.getString(R.string.file_delete_fail))

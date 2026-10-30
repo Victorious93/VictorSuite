@@ -37,8 +37,8 @@ class OTGManager {
         }
         if (otgSwitchDialog == null) {
             otgSwitchDialog = switchDialogShow(
-                UUtils.getString(R.string.提示),
-                UUtils.getString(R.string.检测到OTG设备)
+                UUtils.getString(R.string.vs_prompt),
+                UUtils.getString(R.string.vs_the_otg_device_is_detected_and_the_otg_m)
             )
         }
         val devices = UsbMassStorageDevice.getMassStorageDevices(mContext!!)
@@ -130,7 +130,7 @@ class OTGManager {
         }
         UUtils.getHandler().post(Runnable {
             val switchDialog =
-                switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.OTG设备异常))
+                switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_otg_device_abnormal_unable_to_read_the_u))
             switchDialog.cancel!!.setOnClickListener { switchDialog.dismiss() }
             switchDialog.ok!!.setOnClickListener { switchDialog.dismiss() }
         })
@@ -141,8 +141,8 @@ class OTGManager {
         switchDialog.title!!.text = title
         switchDialog.msg!!.text = msg
         switchDialog.other!!.visibility = View.GONE
-        switchDialog.ok!!.text = UUtils.getString(R.string.确定)
-        switchDialog.cancel!!.text = UUtils.getString(R.string.取消)
+        switchDialog.ok!!.text = UUtils.getString(R.string.vs_determine)
+        switchDialog.cancel!!.text = UUtils.getString(R.string.vs_cancel)
         return switchDialog
     }
 }

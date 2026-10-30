@@ -26,7 +26,7 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="5dp"
                 android:layout_alignParentRight="true"
-                android:text="@string/zt_settings"
+                android:text="@string/vs_settings"
                 android:layout_height="wrap_content"/>
 
 
@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:layout_marginRight="70dp"
-                        android:id="@+id/zt_download_services_ll"
+                        android:id="@+id/vs_download_services_ll"
                         android:padding="10dp"
                         android:layout_height="wrap_content">
 
@@ -55,7 +55,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_download_service"
+                            android:text="@string/vs_download_service"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -64,7 +64,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_download_service_note"
+                            android:text="@string/vs_download_service_note"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -77,7 +77,7 @@
                         android:layout_marginRight="10dp">
                      <androidx.appcompat.widget.SwitchCompat
                          android:layout_width="wrap_content"
-                         android:id="@+id/zt_download_services_switch"
+                         android:id="@+id/vs_download_services_switch"
                          android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -110,7 +110,7 @@
                         android:textColor="@color/md_grey_500"
                         android:textStyle="bold"
                         android:textSize="13sp"
-                        android:text="@string/zt_download_service_note1"
+                        android:text="@string/vs_download_service_note1"
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>
@@ -143,7 +143,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_sidebar_closes_automatically"
+                            android:text="@string/vs_sidebar_closes_automatically"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -152,7 +152,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_sidebar_closes_automatically_note"
+                            android:text="@string/vs_sidebar_closes_automatically_note"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -198,7 +198,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_xml_settings_title"
+                            android:text="@string/vs_xml_settings_title"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -207,7 +207,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_xml_settings_summary"
+                            android:text="@string/vs_xml_settings_summary"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -253,7 +253,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_fold_menu_close"
+                            android:text="@string/vs_fold_menu_close"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -262,7 +262,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_fold_menu_close_summary"
+                            android:text="@string/vs_fold_menu_close_summary"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -308,7 +308,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_landscaping_settings"
+                            android:text="@string/vs_landscaping_settings"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -317,7 +317,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_landscaping_settings_note"
+                            android:text="@string/vs_landscaping_settings_note"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -418,7 +418,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_volume_function_title"
+                            android:text="@string/vs_volume_function_title"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -427,7 +427,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_volume_function_summary"
+                            android:text="@string/vs_volume_function_summary"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -452,7 +452,7 @@
                 android:layout_width="match_parent"
                 app:cardElevation="0dp"
                 android:visibility="gone"
-                android:id="@+id/zt_termux_settings"
+                android:id="@+id/vs_termux_settings"
                 android:layout_marginTop="10dp"
                 app:cardBackgroundColor="@color/color_55000000"
                 app:cardCornerRadius="6dp"
@@ -586,7 +586,7 @@
                             android:textColor="@color/color_ffffff"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:text="@string/zt_env_shell_title"
+                            android:text="@string/vs_env_shell_title"
                             android:layout_height="wrap_content"/>
 
                         <TextView
@@ -595,7 +595,7 @@
                             android:textColor="@color/md_grey_500"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:text="@string/zt_env_shell_sum"
+                            android:text="@string/vs_env_shell_sum"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -642,7 +642,7 @@
                         android:textColor="@color/md_grey_500"
                         android:textStyle="bold"
                         android:textSize="13sp"
-                        android:text="@string/zt_download_service_note1"
+                        android:text="@string/vs_download_service_note1"
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>

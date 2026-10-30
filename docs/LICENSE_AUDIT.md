@@ -9,7 +9,7 @@ we have to be able to give out the corresponding source for every GPL object cod
 | Library | Origin | Licence | Used by VictorSuite | Action |
 |---|---|---|---|---|
 | `stub.aar` | Termux:X11 `shell-loader/stub` | GPL-3.0 | Yes, indirectly. `termux-x11.aar` `CmdEntryPoint` needs these hidden-API stubs to compile and link | **Done:** replaced with vendored source module `stub/` (PR #79) |
-| `z_file.aar` | ZFileManager (zippo88888888, Apache-2.0), modified by the ZeroTermux author (hanxinhao000), with a `com.zp.z_file.zerotermux` package added | Apache-2.0 base + GPL-3.0 ZeroTermux changes, so GPL-3.0 as a whole | Yes, in 21 files | **Done:** replaced with vendored source module `z_file/` (see below) |
+| `z_file.aar` | ZFileManager (zippo88888888, Apache-2.0), modified by the ZeroTermux author (hanxinhao000), with a `com.zp.z_file.victor` package added | Apache-2.0 base + GPL-3.0 ZeroTermux changes, so GPL-3.0 as a whole | Yes, in 21 files | **Done:** replaced with vendored source module `z_file/` (see below) |
 | `xh_lib.aar` | ZeroTermux author's private helper library (`com.example.xh_lib` + `com.blockchain.ub`) | No licence stated; the only published source is inside a GPL-3.0 ZeroTermux copy | Heavily, in about 170 files (`UUtils`, `LogUtils`, `SaveData`, dialogs, `BaseHttpUtils`) | **Resolved:** rewritten as VictorSuite-owned code in `com.termux.victor.util`; aar removed |
 | `log4j-1.2.17.jar` | Apache log4j 1.x | Apache-2.0 | Only as the backend of `slf4j-log4j12`, the slf4j binding that Apache FtpServer/MINA log through. No direct imports | **Done:** removed, with slf4j bound to `org.slf4j:slf4j-android` (MIT) (PR #78) |
 
@@ -26,7 +26,7 @@ we have to be able to give out the corresponding source for every GPL object cod
 ## z_file.aar
 
 - Upstream base: https://github.com/zippo88888888/ZFileManager (Apache-2.0, per its README badge). The ZeroTermux build
-  adds `com.zp.z_file.zerotermux.*` (`ZTConfig`, `StartTarGzListener`), `InstallTarData`, `InstallModuleDialog`,
+  adds `com.zp.z_file.victor.*` (`ZTConfig`, `StartTarGzListener`), `InstallTarData`, `InstallModuleDialog`,
   backup/restore dialogs and Chinese/English resources.
 - Matching source: the `z_file/` module in https://github.com/msmt2017/new_ZeroTermux (commit `f68fd87`, a GPL-3.0
   ZeroTermux copy). Every top-level class in the aar has a source file there. The only exceptions are Kotlin classes declared inside other files

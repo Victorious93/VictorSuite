@@ -38,7 +38,7 @@ public class VictorSuiteX11Settings extends AppCompatActivity {
     private TextView msg_title;
     private CardView msg_title_code_view;
     private ImageView x11_settings_img;
-    private CardView zt_termux_x11_settings;
+    private CardView vs_termux_x11_settings;
     private boolean mIsEnable = false;
 
     @Override
@@ -50,10 +50,10 @@ public class VictorSuiteX11Settings extends AppCompatActivity {
         x11_settings_title = findViewById(R.id.x11_settings_title);
         x11_settings_summary = findViewById(R.id.x11_settings_summary);
         x11_settings_img = findViewById(R.id.x11_settings_img);
-        zt_termux_x11_settings = findViewById(R.id.zt_termux_x11_settings);
+        vs_termux_x11_settings = findViewById(R.id.vs_termux_x11_settings);
         msg_title = findViewById(R.id.msg_title);
         msg_title_code_view = findViewById(R.id.msg_title_code_view);
-        boolean internalPassage = UserSetManage.Companion.get().getZTUserBean().isInternalPassage();
+        boolean internalPassage = UserSetManage.Companion.get().getVsUserBean().isInternalPassage();
         switchAisle(internalPassage);
         mIsEnable = internalPassage;
         internal_passage.setOnClickListener(view -> {
@@ -68,10 +68,10 @@ public class VictorSuiteX11Settings extends AppCompatActivity {
                 return;
             }
             switchAisle(true);
-            VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
-            ztUserBean.setInternalPassage(true);
+            VsUserBean vsUserBean = UserSetManage.Companion.get().getVsUserBean();
+            vsUserBean.setInternalPassage(true);
             setX11SettingsEnable(true);
-            UserSetManage.Companion.get().setZTUserBean(ztUserBean);
+            UserSetManage.Companion.get().setVsUserBean(vsUserBean);
         });
         external_channels.setOnClickListener(view -> {
             boolean b = installAisleFile(false, (isSes) -> {
@@ -86,12 +86,12 @@ public class VictorSuiteX11Settings extends AppCompatActivity {
             }
             switchAisle(false);
             setX11SettingsEnable(false);
-            VsUserBean ztUserBean = UserSetManage.Companion.get().getZTUserBean();
-            ztUserBean.setInternalPassage(false);
-            UserSetManage.Companion.get().setZTUserBean(ztUserBean);
+            VsUserBean vsUserBean = UserSetManage.Companion.get().getVsUserBean();
+            vsUserBean.setInternalPassage(false);
+            UserSetManage.Companion.get().setVsUserBean(vsUserBean);
         });
 
-        zt_termux_x11_settings.setOnClickListener(view -> {
+        vs_termux_x11_settings.setOnClickListener(view -> {
             startActivity(new Intent(this, LoriePreferences.class));
         });
     }

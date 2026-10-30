@@ -231,7 +231,7 @@ class TermuxFileReceiverActivity : ComponentActivity() {
                    pro.progress = (l.toFloat() / mFile!!.length() * 100).toInt()
                    msg_pro.text = FileIOUtils.formatFileSize(l)
                } else {
-                   UUtils.showMsg(UUtils.getString(R.string.copy_file_to_zt))
+                   UUtils.showMsg(UUtils.getString(R.string.copy_file_to_vs))
                    finish()
                }
            }

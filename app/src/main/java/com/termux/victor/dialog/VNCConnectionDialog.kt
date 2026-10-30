@@ -23,7 +23,7 @@ class VNCConnectionDialog : BaseDialogCentre {
         title = mView?.findViewById(R.id.title)
         ok = mView?.findViewById(R.id.ok)
         cancel = mView?.findViewById(R.id.cancel)
-        title?.text = UUtils.getString(R.string.连接到自定VNC)
+        title?.text = UUtils.getString(R.string.vs_connect_to_custom_vnc)
         address = mView?.findViewById(R.id.address)
         port = mView?.findViewById(R.id.port)
         password = mView?.findViewById(R.id.password)

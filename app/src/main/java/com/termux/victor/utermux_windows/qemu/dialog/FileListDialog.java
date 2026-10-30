@@ -62,7 +62,7 @@ public class FileListDialog extends BaseDialogCentre {
             list_view.setAdapter(listFileAdapter);
         }else{
             tv_empty.setVisibility(View.VISIBLE);
-            tv_empty.setText(UUtils.getString(R.string.当前目录下没有配置文件));
+            tv_empty.setText(UUtils.getString(R.string.vs_there_is_no_configuration_file_in_the_cu));
             files1Array = new ArrayList<>();
             ListFileAdapter listFileAdapter = new ListFileAdapter(files1Array);
             list_view.setAdapter(listFileAdapter);
@@ -119,7 +119,7 @@ public class FileListDialog extends BaseDialogCentre {
             });
         }else{
             tv_empty.setVisibility(View.VISIBLE);
-            tv_empty.setText(UUtils.getString(R.string.当前目录下没有镜像文件));
+            tv_empty.setText(UUtils.getString(R.string.vs_there_is_no_mirror_file_in_the_current_d));
         }
         def_txt.setOnClickListener(new View.OnClickListener() {
             @Override

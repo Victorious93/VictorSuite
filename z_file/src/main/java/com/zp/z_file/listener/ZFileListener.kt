@@ -27,9 +27,9 @@ import com.zp.z_file.ui.ZFilePicActivity
 import com.zp.z_file.ui.ZFileVideoPlayActivity
 import com.zp.z_file.ui.dialog.*
 import com.zp.z_file.util.*
-import com.zp.z_file.zerotermux.CallBackListener
-import com.zp.z_file.zerotermux.Z7Listener
-import com.zp.z_file.zerotermux.ZTConfig
+import com.zp.z_file.victor.CallBackListener
+import com.zp.z_file.victor.Z7Listener
+import com.zp.z_file.victor.VsFileConfig
 import java.io.File
 import java.io.IOException
 
@@ -180,20 +180,20 @@ open class ZFileOpenListener {
 
     private val textArrays by lazy {
         arrayOf(
-            "编辑(Edit)",
-            "使用VIM打开(open with vim)",
-            "在终端运行(run in terminal)",
-            "设置此文件可执行权限(Set executable permissions for this file)",
-            "使用其它应用程序打开(Open with another application)",
+            "Edit",
+            "Open with vim",
+            "Run in terminal",
+            "Set executable permission for this file",
+            "Open with another application",
         )
     }
     private val otherArrays by lazy {
         arrayOf(
-            "编辑(Edit)",
-            "使用VIM打开(open with vim)",
-            "尝试在终端运行(run in terminal try)",
-            "设置此文件可执行权限(Set executable permissions for this file)",
-            "使用其它应用程序打开(Open with another application)",
+            "Edit",
+            "Open with vim",
+            "Try running in terminal",
+            "Set executable permission for this file",
+            "Open with another application",
         )
     }
     /**
@@ -243,7 +243,7 @@ open class ZFileOpenListener {
                     when (which) {
                         0 -> {
                             val apply = Intent().apply {
-                                action = "com.termux.zerocore.activity.edittextactivity"
+                                action = "com.termux.victor.activity.edittextactivity"
                                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
                                 putExtra("edit_path", filePath)
                             }
@@ -296,8 +296,8 @@ open class ZFileOpenListener {
     open fun openZIP(filePath: String, view: View) {
         view.context?.let {
             AlertDialog.Builder(it).apply {
-                setTitle("请选择(select)")
-                setItems(arrayOf("打开(open)", "解压(decompress)")) { dialog, which ->
+                setTitle("Select")
+                setItems(arrayOf("Open", "Extract")) { dialog, which ->
                     if (which == 0) {
                         ZFileOpenUtil.openZIP(filePath, view)
                     } else {
@@ -305,7 +305,7 @@ open class ZFileOpenListener {
                     }
                     dialog.dismiss()
                 }
-                setPositiveButton("取消(cancel)") { dialog, _ -> dialog.dismiss() }
+                setPositiveButton("Cancel") { dialog, _ -> dialog.dismiss() }
                 show()
             }
         }
@@ -314,8 +314,8 @@ open class ZFileOpenListener {
     open fun openTar(filePath: String, view: View) {
         view.context?.let {
             AlertDialog.Builder(it).apply {
-                setTitle("请选择(select)")
-                setItems(arrayOf("安装此恢复包(Install this recovery package)", "解压(decompress)")) { dialog, which ->
+                setTitle("Select")
+                setItems(arrayOf("Install this recovery package", "Extract")) { dialog, which ->
                     if (which == 0) {
                         InstallTarData.installTar(view.context!!, filePath)
                     } else if (which == 1) {
@@ -323,7 +323,7 @@ open class ZFileOpenListener {
                     }
                     dialog.dismiss()
                 }
-                setPositiveButton("取消") { dialog, _ -> dialog.dismiss() }
+                setPositiveButton("Cancel") { dialog, _ -> dialog.dismiss() }
                 show()
             }
         }
@@ -332,8 +332,8 @@ open class ZFileOpenListener {
     open fun openDeb(filePath: String, view: View) {
         view.context?.let {
             AlertDialog.Builder(it).apply {
-                setTitle("请选择(select)")
-                setItems(arrayOf("安装(Install)", "解压(decompress)")) { dialog, which ->
+                setTitle("Select")
+                setItems(arrayOf("Install", "Extract")) { dialog, which ->
                     if (which == 0) {
                         LocalBroadcastManager.getInstance(view.context).apply {
                             val intent = Intent()
@@ -348,7 +348,7 @@ open class ZFileOpenListener {
                     }
                     dialog.dismiss()
                 }
-                setPositiveButton("取消") { dialog, _ -> dialog.dismiss() }
+                setPositiveButton("Cancel") { dialog, _ -> dialog.dismiss() }
                 show()
             }
         }
@@ -357,8 +357,8 @@ open class ZFileOpenListener {
     open fun open7Z(filePath: String, view: View) {
         view.context?.let {
             AlertDialog.Builder(it).apply {
-                setTitle("请选择(select)")
-                setItems(arrayOf("安装此模块包(Install this modpack)", "解压(decompress)")) { dialog, which ->
+                setTitle("Select")
+                setItems(arrayOf("Install this module package", "Extract")) { dialog, which ->
                     if (which == 0) {
                         val switchDialog = SwitchDialog(view.context)
                         switchDialog.createSwitchDialog(ZFileUUtils.getString(R.string.install_module_switch))
@@ -382,7 +382,7 @@ open class ZFileOpenListener {
                     }
                     dialog.dismiss()
                 }
-                setPositiveButton("取消") { dialog, _ -> dialog.dismiss() }
+                setPositiveButton("Cancel") { dialog, _ -> dialog.dismiss() }
                 show()
             }
         }
@@ -392,7 +392,7 @@ open class ZFileOpenListener {
         Log.e(TAG, "tarSelect: filePath:" + filePath )
         if (context is AppCompatActivity) {
             context.checkFragmentByTag("ZFileSelectFolderDialog")
-            val dialog = ZFileSelectFolderDialog.newInstance("解压")
+            val dialog = ZFileSelectFolderDialog.newInstance("Extract")
             dialog.selectFolder = {
                 val targetFile = this
                 LocalBroadcastManager.getInstance(context).apply {
@@ -406,7 +406,7 @@ open class ZFileOpenListener {
             }
             dialog.show(context.supportFragmentManager, "ZFileSelectFolderDialog")
         } else {
-            ZFileLog.e("文件解压 showDialog 失败")
+            ZFileLog.e("File extraction showDialog failed")
         }
     }
 
@@ -415,12 +415,12 @@ open class ZFileOpenListener {
         Log.e(TAG, "tarSelect: filePath:" + filePath )
         if (context is AppCompatActivity) {
             context.checkFragmentByTag("ZFileSelectFolderDialog")
-            val dialog = ZFileSelectFolderDialog.newInstance("解压")
+            val dialog = ZFileSelectFolderDialog.newInstance("Extract")
             dialog.selectFolder = {
                 val targetFile = this
                 val loadingDialog = LoadingDialog(context)
                 loadingDialog.show()
-                ZTConfig.setZ7Listener(object: Z7Listener{
+                VsFileConfig.setZ7Listener(object: Z7Listener{
                     override fun decompress(text: String, runs: Boolean, error: Boolean) {
                         loadingDialog.msg?.text = text
                         if (error) {
@@ -430,7 +430,7 @@ open class ZFileOpenListener {
                         }
                         if (runs) {
                             loadingDialog.dismiss()
-                            ZFileUUtils.showMsg("解压完成\nSuccessfullyDecompressed")
+                            ZFileUUtils.showMsg("Extraction complete")
                         }
 
                     }
@@ -447,7 +447,7 @@ open class ZFileOpenListener {
             }
             dialog.show(context.supportFragmentManager, "ZFileSelectFolderDialog")
         } else {
-            ZFileLog.e("文件解压 showDialog 失败")
+            ZFileLog.e("File extraction showDialog failed")
         }
     }
 
@@ -455,17 +455,17 @@ open class ZFileOpenListener {
         Log.e(TAG, "tarSelect: filePath:" + filePath )
         if (context is AppCompatActivity) {
             context.checkFragmentByTag("Z7ZFileSelectFolderDialog")
-            val dialog = ZFileSelectFolderDialog.newInstance("解压")
+            val dialog = ZFileSelectFolderDialog.newInstance("Extract")
             dialog.selectFolder = {
                 val targetFile = this
-                ZTConfig.setCallBackListener(object: CallBackListener {
+                VsFileConfig.setCallBackListener(object: CallBackListener {
                     override fun call() {
                         val fragment =
                             context.supportFragmentManager.findFragmentByTag(getZFileConfig().fragmentTag)
                         if (fragment is ZFileListFragment) {
                             fragment.observer(true)
                         } else {
-                            ZFileLog.e("文件解压成功，但是无法立刻刷新界面！")
+                            ZFileLog.e("Extracted, but the view could not be refreshed right away!")
                         }
                     }
 
@@ -480,29 +480,29 @@ open class ZFileOpenListener {
             }
             dialog.show(context.supportFragmentManager, "Z7ZFileSelectFolderDialog")
         } else {
-            ZFileLog.e("文件解压 showDialog 失败")
+            ZFileLog.e("File extraction showDialog failed")
         }
     }
 
     private fun zipSelect(filePath: String, context: Context) {
         if (context is AppCompatActivity) {
             context.checkFragmentByTag("ZFileSelectFolderDialog")
-            val dialog = ZFileSelectFolderDialog.newInstance("解压")
+            val dialog = ZFileSelectFolderDialog.newInstance("Extract")
             dialog.selectFolder = {
                 getZFileHelp().getFileOperateListener().zipFile(filePath, this, context) {
-                    ZFileLog.i(if (this) "解压成功" else "解压失败")
+                    ZFileLog.i(if (this) "Extracted" else "Extraction failed")
                     val fragment =
                         context.supportFragmentManager.findFragmentByTag(getZFileConfig().fragmentTag)
                     if (fragment is ZFileListFragment) {
                         fragment.observer(this)
                     } else {
-                        ZFileLog.e("文件解压成功，但是无法立刻刷新界面！")
+                        ZFileLog.e("Extracted, but the view could not be refreshed right away!")
                     }
                 }
             }
             dialog.show(context.supportFragmentManager, "ZFileSelectFolderDialog")
         } else {
-            ZFileLog.e("文件解压 showDialog 失败")
+            ZFileLog.e("File extraction showDialog failed")
         }
     }
 
@@ -555,7 +555,7 @@ open class ZFileOpenListener {
                     when (which) {
                         0 -> {
                             val apply = Intent().apply {
-                                action = "com.termux.zerocore.activity.edittextactivity"
+                                action = "com.termux.victor.activity.edittextactivity"
                                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
                                 putExtra("edit_path", filePath)
                             }
@@ -713,12 +713,12 @@ open class ZFileOperateListener {
      */
     open fun deleteFile(filePath: String, context: Context, block: Boolean.() -> Unit) {
         AlertDialog.Builder(context).apply {
-            setTitle("注意[Notice]")
-            setMessage("请谨慎执行此操作,目录的软连接删除可能会清除你手机存储所有的文件(软连接文件夹右下角会显示上下箭头的图标)!\nPlease perform this operation carefully, the soft link deletion of the directory may clear all the files stored on your phone (the icon of up and down arrows will be displayed in the lower right corner of the soft link folder)")
-            setPositiveButton("删除[delete]") { _, _ ->
+            setTitle("Notice")
+            setMessage("Please perform this operation carefully: deleting a directory symlink may clear all files on your phone storage (symlinked folders show an up/down arrow icon in the lower right corner)")
+            setPositiveButton("Delete") { _, _ ->
                 ZFileUtil.deleteFile(filePath, context, block)
             }
-            setNegativeButton("取消[no]") { dialog, _ ->
+            setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()
             }
             show()

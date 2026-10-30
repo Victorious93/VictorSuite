@@ -36,7 +36,7 @@
                 android:background="@null"
 
                 android:gravity="top|left"
-                android:hint="@string/请输入命令名称"
+                android:hint="@string/vs_please_enter_the_command_name"
                 android:inputType="text"
                 android:lineSpacingExtra="2dp"
                 android:lineSpacingMultiplier="1.2"
@@ -78,7 +78,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@null"
                 android:gravity="left|top"
-                android:hint="@string/请输入您要添加的命令"
+                android:hint="@string/vs_please_enter_the_command_you_want_to_add"
                 android:inputType="textMultiLine"
                 android:lineSpacingExtra="2dp"
                 android:lineSpacingMultiplier="1.2"
@@ -135,7 +135,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        android:text="@string/zt_command_def"
+                        android:text="@string/vs_command_def"
                         android:textColor="#fff"
                         android:textSize="16sp" />
 
@@ -146,7 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/保存当前配置"
+                    android:text="@string/vs_save_the_current_configuration"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:visibility="gone" />
@@ -189,7 +189,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        android:text="@string/取消"
+                        android:text="@string/vs_cancel"
                         android:textColor="#fff"
                         android:textSize="16sp" />
 
@@ -201,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/保存当前配置"
+                    android:text="@string/vs_save_the_current_configuration"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:visibility="gone" />
@@ -237,7 +237,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:text="@string/好的"
+                    android:text="@string/vs_ok"
                     android:textColor="#fff"
                     android:textSize="16sp" />
 
@@ -281,7 +281,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/自动回车"
+                    android:text="@string/vs_automatic_carriage_return"
                     android:textColor="#fff"
                     android:textSize="12sp" />
 

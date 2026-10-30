@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:text="@string/端口"
+            android:text="@string/vs_port"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:textSize="15sp"
             android:layout_centerVertical="true"
-            android:text="@string/路径"
+            android:text="@string/vs_path"
             android:textColor="@color/color_ffffff"
             android:layout_height="wrap_content"/>
 
@@ -141,7 +141,7 @@
          android:textColor="@color/color_ffffff"
          android:paddingLeft="5dp"
          android:paddingRight="5dp"
-         android:id="@+id/zero_root"
+         android:id="@+id/vs_root"
          android:gravity="center"
          android:textSize="13sp"
          android:text="VictorSuite File"

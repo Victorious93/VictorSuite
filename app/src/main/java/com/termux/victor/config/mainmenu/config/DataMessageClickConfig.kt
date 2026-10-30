@@ -37,7 +37,7 @@ class DataMessageClickConfig: BaseMenuClickConfig() {
         if (!(dataMessageFileString.isNullOrEmpty())) {
             mingLShowDialog.edit_text.setText(dataMessageFileString)
         } else {
-            mingLShowDialog.edit_text.setText(UUtils.getString(R.string.zt_data_info_content))
+            mingLShowDialog.edit_text.setText(UUtils.getString(R.string.vs_data_info_content))
         }
         mingLShowDialog.start.setOnClickListener {
             mingLShowDialog.dismiss()
@@ -51,7 +51,7 @@ class DataMessageClickConfig: BaseMenuClickConfig() {
                     termuxActivity.initDataMsgInfo()
                 }
             }
-            UUtils.showMsg(UUtils.getString(R.string.保存成功))
+            UUtils.showMsg(UUtils.getString(R.string.vs_saved_successfully))
         }
         mingLShowDialog.show()
     }

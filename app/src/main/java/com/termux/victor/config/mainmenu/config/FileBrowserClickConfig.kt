@@ -13,7 +13,7 @@ import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.url.FileUrl
-import com.termux.victor.zero.engine.ZeroCoreManage
+import com.termux.victor.engine.VsEngineManage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,14 +29,14 @@ class FileBrowserClickConfig : BaseMenuClickConfig(){
     }
 
     override fun getString(context: Context?): String? {
-        return UUtils.getString(R.string.网络访问linux目录)
+        return UUtils.getString(R.string.vs_network_dir_linux)
     }
 
     override fun onClick(view: View?, context: Context?) {
-        val versionName = ZeroCoreManage.getVersionName()
+        val versionName = VsEngineManage.getVersionName()
         if (TextUtils.isEmpty(versionName)) {
-            UUtils.showMsg(UUtils.getString(R.string.zero_eg_not_install))
-            // Do not send users to download the third-party ZeroCoreManage APK from an
+            UUtils.showMsg(UUtils.getString(R.string.vs_engine_not_install))
+            // Do not send users to download the third-party VsEngineManage APK from an
             // upstream personal repo (untrusted binary). Feature stays unavailable.
             return
         }
@@ -45,12 +45,12 @@ class FileBrowserClickConfig : BaseMenuClickConfig(){
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
                 LogUtils.d(TAG, "handleMessage handler what: ${msg.what}")
-                if (msg.what == ZeroCoreManage.INSTALL_COMPLETE) {
+                if (msg.what == VsEngineManage.INSTALL_COMPLETE) {
                     val smsBashrcFile = File(FileUrl.smsBashrcFile)
                     var fileString = UUtils.getFileString(smsBashrcFile)
                     if(!fileString.contains("filebrowser")){
                         fileString += "\n cd ~ > /dev/null && ./.filebrowser/filebrowser -a 0.0.0.0 -p 19951 -r "+FileUrl.mainFilesUrl+" & > /dev/null"
-                        fileString += "\n echo '" + UUtils.getString(R.string.filebrowser已运行) + "'"
+                        fileString += "\n echo '" + UUtils.getString(R.string.vs_filebrowser_is_running_port_19951_accoun) + "'"
                         UUtils.setFileString(smsBashrcFile,fileString)
                     }
                     if (msg?.obj != null) {
@@ -67,7 +67,7 @@ class FileBrowserClickConfig : BaseMenuClickConfig(){
 
     private suspend fun installFileBrowserIo(mHandler: Handler) {
         withContext(Dispatchers.IO) {
-            ZeroCoreManage.installFileBrowser(mHandler)
+            VsEngineManage.installFileBrowser(mHandler)
         }
     }
 }

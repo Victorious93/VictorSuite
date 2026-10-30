@@ -32,7 +32,7 @@
                 android:textStyle="bold"
                 android:id="@+id/service_name"
                 android:textColor="@color/color_ffffff"
-                android:text="@string/美化设置"
+                android:text="@string/vs_beautify_settings"
                 android:layout_height="wrap_content"/>
 
             <ScrollView
@@ -51,7 +51,7 @@
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/字体颜色"
+                        android:text="@string/vs_font_color"
                         android:layout_height="wrap_content"/>
 
 
@@ -68,7 +68,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/字体颜色透明度"
+                        android:text="@string/vs_font_color_transparency"
                         android:layout_height="wrap_content"/>
 
                     <com.rtugeek.android.colorseekbar.AlphaSeekBar
@@ -92,7 +92,7 @@
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/背景颜色"
+                        android:text="@string/vs_back_color"
                         android:layout_height="wrap_content"/>
 
                     <com.rtugeek.android.colorseekbar.ColorSeekBar
@@ -108,7 +108,7 @@
                         android:visibility="gone"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/背景颜色透明度"
+                        android:text="@string/vs_back_color_transparency"
                         android:layout_height="wrap_content"/>
 
                     <com.rtugeek.android.colorseekbar.AlphaSeekBar
@@ -124,7 +124,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/背景颜色半透明"
+                        android:text="@string/vs_font_color_transparency_up_pic"
                         android:layout_height="wrap_content"/>
 
                     <Switch
@@ -145,7 +145,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/显示背景字体"
+                        android:text="@string/vs_show_back_font"
                         android:layout_height="wrap_content"/>
 
                     <Switch
@@ -167,7 +167,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/背景图片"
+                        android:text="@string/vs_back_pic"
                         android:layout_height="wrap_content"/>
 
                    <RelativeLayout
@@ -210,7 +210,7 @@
                         android:visibility="gone"
                         android:id="@+id/def_tv"
                         android:textColor="@color/color_ffffff"
-                        android:text="@string/重置"
+                        android:text="@string/vs_reset"
                         android:background="@drawable/shape_r_3dp_2e"
                         android:layout_height="40dp"/>
 

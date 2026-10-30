@@ -23,7 +23,7 @@ public class FloatWindowsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.悬浮窗口);
+        return context.getString(R.string.vs_floating_window);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class FloatWindowsClickConfig extends BaseMenuClickConfig {
             context.startActivity(intent1);
         } catch (Exception e) {
             e.printStackTrace();
-            UUtils.showMsg(UUtils.getString(R.string.zt_install_float));
+            UUtils.showMsg(UUtils.getString(R.string.vs_install_float));
         }
     }
 }

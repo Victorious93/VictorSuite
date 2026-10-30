@@ -28,7 +28,7 @@
                 <TextView
                     android:layout_width="1px"
                     android:layout_alignParentRight="true"
-                    android:background="#fff"
+                    android:background="@color/vs_neon_surface"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
@@ -40,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:layout_marginTop="2dp"
-                        android:background="#fff" />
+                        android:background="@color/vs_neon_surface" />
 
                     <LinearLayout
                         android:id="@+id/backup"
@@ -62,7 +62,7 @@
                             android:layout_marginBottom="20dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="@string/备份"
+                            android:text="@string/vs_backup"
                             android:id="@+id/backup_text"
                             android:textColor="#fff"
                             android:textSize="15sp"
@@ -75,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:layout_marginTop="2dp"
-                        android:background="#fff" />
+                        android:background="@color/vs_neon_surface" />
 
                     <LinearLayout
                         android:id="@+id/restore"
@@ -97,7 +97,7 @@
                             android:layout_marginBottom="20dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="@string/恢复"
+                            android:text="@string/vs_restore"
                             android:id="@+id/restore_text"
                             android:textColor="#fff"
                             android:textSize="15sp"
@@ -110,7 +110,7 @@
                         android:layout_height="1px"
                         android:visibility="gone"
                         android:layout_marginTop="2dp"
-                        android:background="#fff" />
+                        android:background="@color/vs_neon_surface" />
 
                     <LinearLayout
                         android:id="@+id/setting"
@@ -133,7 +133,7 @@
                             android:layout_marginBottom="20dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="@string/设置"
+                            android:text="@string/vs_setting"
                             android:id="@+id/setting_text"
                             android:textColor="#fff"
                             android:textSize="15sp"
@@ -145,7 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:layout_marginTop="2dp"
-                        android:background="#fff" />
+                        android:background="@color/vs_neon_surface" />
 
 
 

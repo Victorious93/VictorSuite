@@ -14,27 +14,27 @@ object StartRunCommandUtils {
     private var isRun = false
     public fun startRun(){
         val smsBashrcFile = File(FileUrl.smsBashrcFile)
-        val smsZeroBashrcFileD = File(FileUrl.smsZeroBashrcFileD)
-        val smsZeroBashrcFile = File(FileUrl.smsZeroBashrcFile)
+        val smsVsBashrcFileD = File(FileUrl.smsVsBashrcFileD)
+        val smsVsBashrcFile = File(FileUrl.smsVsBashrcFile)
 
         if(!smsBashrcFile.exists()){
             return
         }
-        if(!smsZeroBashrcFileD.exists()){
-            smsZeroBashrcFileD.mkdirs()
+        if(!smsVsBashrcFileD.exists()){
+            smsVsBashrcFileD.mkdirs()
         }
         var fileString = UUtils.getFileString(smsBashrcFile)
         fileString += "\n cd ~ > /dev/null && ./.xinhao_history/start_command.sh"
         UUtils.setFileString(smsBashrcFile,fileString)
         OtherPrefs.saveStringOther("start_command","true")
-        UUtils.writerFile("runcommand/start_command.sh",smsZeroBashrcFile)
+        UUtils.writerFile("runcommand/start_command.sh",smsVsBashrcFile)
         com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.runstartSh)
         try {
-            Os.chmod(FileUrl.smsZeroBashrcFile, 448)
+            Os.chmod(FileUrl.smsVsBashrcFile, 448)
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        UUtils.showMsg(UUtils.getString(R.string.已打开开机启动命令))
+        UUtils.showMsg(UUtils.getString(R.string.vs_the_boot_command_has_been_opened_restart))
         isRun = true
 
     }

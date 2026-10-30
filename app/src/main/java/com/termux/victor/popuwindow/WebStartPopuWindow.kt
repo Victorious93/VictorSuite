@@ -109,7 +109,7 @@ class WebStartPopuWindow : BasePuPuWindow {
                     intent.putExtra("address", "")
                     intent.putExtra("port", 7766)
                     activity.startActivity(intent)
-                    UUtils.showMsg(UUtils.getString(R.string.开启成功))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_service_opened_successfully))
 
                 }catch (e:Exception){
                     e.printStackTrace()
@@ -153,7 +153,7 @@ class WebStartPopuWindow : BasePuPuWindow {
 
 
     private fun installApk(inputStream: InputStream, fileName: String) {
-        val switchDialog1: SwitchDialog = switchDialogShow(UUtils.getString(R.string.警告), UUtils.getString(R.string.您未安装该插件))
+        val switchDialog1: SwitchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning), UUtils.getString(R.string.vs_the_plug_in_installation_is_about_to_sta))
         switchDialog1.cancel!!.setOnClickListener { switchDialog1.dismiss() }
         switchDialog1.ok!!.setOnClickListener {
             switchDialog1.dismiss()
@@ -183,17 +183,17 @@ class WebStartPopuWindow : BasePuPuWindow {
                                 })
                             }.start()
                         } else {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                         }
                     }
 
                     override fun onDenied(permissions: List<String>, never: Boolean) {
                         if (never) {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                             // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             XXPermissions.startPermissionActivity(mContext, permissions)
                         } else {
-                            UUtils.showMsg("无权限")
+                            UUtils.showMsg("No permission")
                         }
                     }
                 })
@@ -206,8 +206,8 @@ class WebStartPopuWindow : BasePuPuWindow {
         switchDialog.title!!.text = title
         switchDialog.msg!!.text = msg
         switchDialog.other!!.visibility = View.GONE
-        switchDialog.ok!!.text = UUtils.getString(R.string.确定)
-        switchDialog.cancel!!.text = UUtils.getString(R.string.取消)
+        switchDialog.ok!!.text = UUtils.getString(R.string.vs_determine)
+        switchDialog.cancel!!.text = UUtils.getString(R.string.vs_cancel)
         switchDialog.show()
         return switchDialog
     }

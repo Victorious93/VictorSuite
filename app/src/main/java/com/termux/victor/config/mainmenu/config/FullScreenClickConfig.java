@@ -23,7 +23,7 @@ public class FullScreenClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.全屏模式);
+        return context.getString(R.string.vs_full_screen_mode);
     }
 
     @Override

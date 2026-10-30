@@ -32,6 +32,6 @@ public class AiClient {
     }
 
     private boolean isClaudeSelected() {
-        return "claude".equalsIgnoreCase(UserSetManage.Companion.get().getZTUserBean().getAiProvider());
+        return "claude".equalsIgnoreCase(UserSetManage.Companion.get().getVsUserBean().getAiProvider());
     }
 }

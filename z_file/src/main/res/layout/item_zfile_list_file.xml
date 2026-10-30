@@ -85,7 +85,7 @@
                 android:maxLines="1"
                 android:textColor="@color/zfile_white"
                 android:textSize="14sp"
-                tools:text="文件名称" />
+                tools:text="File name" />
 
             <LinearLayout
                 android:layout_width="match_parent"

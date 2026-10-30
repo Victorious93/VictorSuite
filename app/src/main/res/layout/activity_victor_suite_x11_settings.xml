@@ -181,7 +181,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 app:cardElevation="0dp"
-                android:id="@+id/zt_termux_x11_settings"
+                android:id="@+id/vs_termux_x11_settings"
                 android:layout_marginTop="10dp"
                 app:cardBackgroundColor="@color/color_55000000"
                 app:cardCornerRadius="6dp"

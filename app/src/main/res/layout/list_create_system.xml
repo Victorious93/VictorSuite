@@ -30,7 +30,7 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:id="@+id/title"
-            android:text="标题1"
+            android:text="Title 1"
             android:layout_height="wrap_content" />
 
 

@@ -15,14 +15,14 @@ class VsOnlineServerActivity : AppCompatActivity() {
     private val TAG = "VsInstallActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ztonline)
+        setContentView(R.layout.activity_vsonline)
         initUrlData()
     }
 
     // 拉取本地数据
     private fun initUrlData() {
-        val ztUserBean = UserSetManage.Companion.get().getZTUserBean()
-        var serverJsonString = ztUserBean.serverJsonString
+        val vsUserBean = UserSetManage.Companion.get().getVsUserBean()
+        var serverJsonString = vsUserBean.serverJsonString
         var dataServers: UserSetManage.DataServers? = null
         if (serverJsonString.isNullOrEmpty()) {
             dataServers = UserSetManage.Companion.get().defServerIPName()

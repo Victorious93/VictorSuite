@@ -13,7 +13,7 @@
         android:textColor="#fff"
         android:layout_gravity="center"
         android:layout_marginEnd="3dp"
-        tools:text="根目录" />
+        tools:text="Root directory" />
 
     <ImageView
         android:layout_width="20dp"

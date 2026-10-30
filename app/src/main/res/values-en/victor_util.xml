@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="cancel">Cancel</string>
-    <string name="复制失败">Copy Failed</string>
-    <string name="复制成功">Copied Successfully</string>
-    <string name="标题">Title</string>
-</resources>

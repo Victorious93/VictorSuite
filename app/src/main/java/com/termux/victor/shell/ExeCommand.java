@@ -62,7 +62,7 @@ public class ExeCommand {
         try {
             Log.i("auto", "getResult");
             String s = new String(result);
-            Log.i("日志:", "getResult" + s);
+            Log.i("Log: ", "getResult" + s);
 
             result.setLength(0);
             return s;

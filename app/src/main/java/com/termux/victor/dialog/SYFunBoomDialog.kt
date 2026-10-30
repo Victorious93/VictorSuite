@@ -42,9 +42,9 @@ class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {
 
         val stringOther = OtherPrefs.getStringOther("new_old")
         if (stringOther == null || stringOther.isEmpty() || stringOther == "def") {
-            text_new_old?.text = UUtils.getString(R.string.启动器新)
+            text_new_old?.text = UUtils.getString(R.string.vs_launcher_new)
         } else {
-            text_new_old?.text = UUtils.getString(R.string.启动器旧)
+            text_new_old?.text = UUtils.getString(R.string.vs_launcher_old)
         }
     }
 
@@ -63,7 +63,7 @@ class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {
                     activity.startActivity(intent)
                 }catch (e:Exception){
                     e.printStackTrace()
-                    UUtils.showMsg(UUtils.getString(R.string.请在下载站下载Alpine插件))
+                    UUtils.showMsg(UUtils.getString(R.string.vs_please_download_the_alpine_plugin_at_the))
                     dismiss()
                     val activity = mContext as TermuxActivity
                     activity.startHttp1(VsLinks.FEED_REPOSITORY)
@@ -76,13 +76,13 @@ class SYFunBoomDialog : BaseDialogDown, View.OnClickListener {
                 if (stringOther == null || stringOther.isEmpty() || stringOther == "def") {
                     //旧启动器
                     OtherPrefs.saveStringOther("new_old","true")
-                    text_new_old?.text = UUtils.getString(R.string.启动器旧)
+                    text_new_old?.text = UUtils.getString(R.string.vs_launcher_old)
                 } else {
                     //新启动器
                     OtherPrefs.saveStringOther("new_old","def")
-                    text_new_old?.text = UUtils.getString(R.string.启动器新)
+                    text_new_old?.text = UUtils.getString(R.string.vs_launcher_new)
                 }
-                UUtils.showMsg(UUtils.getString(R.string.系统切换成功))
+                UUtils.showMsg(UUtils.getString(R.string.vs_the_launcher_is_switched_successfully_an))
             }
         }
     }

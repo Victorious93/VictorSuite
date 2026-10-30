@@ -70,7 +70,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="6dp"
                                 android:paddingRight="6dp"
-                                android:text="@string/备份"
+                                android:text="@string/vs_backup"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
 
@@ -102,7 +102,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="6dp"
                                 android:paddingRight="6dp"
-                                android:text="@string/恢复"
+                                android:text="@string/vs_restore"
                                 android:textColor="@color/color_FFFFFF"
                                 android:textSize="10sp" />
 
@@ -157,7 +157,7 @@
                     android:visibility="invisible"
                     android:id="@+id/not_data"
                     android:gravity="center"
-                    android:text="@string/当前没有数据"
+                    android:text="@string/vs_no_data_currently"
                     android:layout_height="match_parent"/>
 
             </RelativeLayout>

@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
-            android:text="@string/欢迎来到windows模拟器页面"
+            android:text="@string/vs_welcome_to_the_windows_simulator_page"
             android:textColor="#fff"
             android:gravity="center"
             android:textStyle="bold"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/环境"
+            android:text="@string/vs_surroundings"
             android:textColor="#fff"
             android:gravity="center"
             android:textStyle="bold"
@@ -58,7 +58,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/qamu环境"
+                android:text="@string/vs_qemu_environment_qamu"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -67,7 +67,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/qamu环境关"
+                android:text="@string/vs_notinstalled_qamu"
                 android:textColor="#fff"
                 android:id="@+id/qemu_state"
                 android:layout_marginLeft="5dp"
@@ -88,7 +88,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/点击安装"
+                        android:text="@string/vs_click_install"
                         android:textColor="#5288D8"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
@@ -119,7 +119,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/显示环境"
+                android:text="@string/vs_display_environment"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -128,7 +128,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/显示环境关"
+                android:text="@string/vs_notinstalled"
                 android:visibility="gone"
                 android:textColor="#fff"
                 android:id="@+id/dis_state"
@@ -151,7 +151,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/点击安装"
+                        android:text="@string/vs_click_install"
                         android:textColor="#5288D8"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
@@ -183,7 +183,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/ROOT运行"
+                android:text="@string/vs_root_run"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -192,7 +192,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/ROOT运行1"
+                android:text="@string/vs_please_enter_tsu_in_termux_root1"
                 android:textColor="#fff"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
@@ -213,7 +213,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/帮我安装"
+                        android:text="@string/vs_help_me_install"
                         android:textColor="#5288D8"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
@@ -246,7 +246,7 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/快捷运行"
+            android:text="@string/vs_quick_run"
             android:textColor="#fff"
             android:gravity="center"
             android:textStyle="bold"
@@ -257,7 +257,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/警告测dsfsdf"
+            android:text="@string/vs_warning_if_system_call_bad_appears_pleas_dsfsdf"
             android:textColor="@color/jinggao"
             android:gravity="center"
             android:textStyle="bold"
@@ -303,7 +303,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/win10系统"
+                    android:text="@string/vs_win10_system"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -336,7 +336,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:id="@+id/zidongtishi"
-                    android:text="@string/win7系统"
+                    android:text="@string/vs_win7_system"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -368,7 +368,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/winXP系统"
+                    android:text="@string/vs_winxp_system"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -422,7 +422,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/全屏模式"
+                    android:text="@string/vs_full_screen_mode"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -450,7 +450,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/替换官方版本"
+                    android:text="@string/vs_replace_the_official_version"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -461,7 +461,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/用官版的请点击"
+                    android:text="@string/vs_for_the_official_version_please_click"
                     android:layout_marginBottom="10dp"
                     android:textColor="#fff"
                     android:textSize="10sp"
@@ -492,7 +492,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="全屏模式\n[再次点击关闭]"
+                    android:text="Full screen\n[tap again to close]"
                     android:textColor="#fff"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -539,7 +539,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/MAC系统"
+                    android:text="@string/vs_mac_system"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -576,7 +576,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
 
-                    android:text="@string/我自己的系统"
+                    android:text="@string/vs_my_own_system"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -609,7 +609,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/打开当前VNC任务"
+                    android:text="@string/vs_open_the_current_vnc_task"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -667,7 +667,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/全屏模式"
+                    android:text="@string/vs_full_screen_mode"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -695,7 +695,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/替换官方版本"
+                    android:text="@string/vs_replace_the_official_version"
                     android:textColor="#fff"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -706,7 +706,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/用官版的请点击"
+                    android:text="@string/vs_for_the_official_version_please_click"
                     android:layout_marginBottom="10dp"
                     android:textColor="#fff"
                     android:textSize="10sp"
@@ -737,7 +737,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="全屏模式\n[再次点击关闭]"
+                    android:text="Full screen\n[tap again to close]"
                     android:textColor="#fff"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -780,7 +780,7 @@
               android:layout_width="wrap_content"
               android:layout_marginTop="10dp"
               android:layout_marginLeft="10dp"
-              android:text="@string/我自己的系统"
+              android:text="@string/vs_my_own_system"
               android:textColor="#5E5E5E"
               android:gravity="center"
               android:textStyle="bold"
@@ -791,7 +791,7 @@
               android:layout_width="wrap_content"
               android:layout_marginTop="10dp"
               android:layout_marginLeft="10dp"
-              android:text="@string/Windows注意"
+              android:text="@string/vs_note_the_image_will_be_copied_to_the_wor_windows"
               android:textColor="#5E5E5E"
               android:textStyle="bold"
               android:textSize="14sp"
@@ -806,7 +806,7 @@
 
               <TextView
                   android:layout_width="wrap_content"
-                  android:text="@string/当前操作镜像"
+                  android:text="@string/vs_current_operation_mirror"
                   android:textColor="#5E5E5E"
                   android:gravity="center"
                   android:textStyle="bold"
@@ -820,7 +820,7 @@
 
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/无"
+                      android:text="@string/vs_empty_2"
                       android:textColor="#5E5E5E"
                       android:layout_marginLeft="5dp"
                       android:gravity="center"
@@ -842,7 +842,7 @@
 
                       <TextView
                           android:layout_width="wrap_content"
-                          android:text="@string/打开操作镜像"
+                          android:text="@string/vs_open_operation_mirror"
                           android:textColor="#5E5E5E"
                           android:layout_marginLeft="5dp"
                           android:gravity="center"
@@ -872,7 +872,7 @@
 
               <TextView
                   android:layout_width="wrap_content"
-                  android:text="@string/清空操作镜像"
+                  android:text="@string/vs_clear_operation_mirror"
                   android:textColor="#5E5E5E"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="10dp"
@@ -894,7 +894,7 @@
               android:textColorHint="#5E5E5E"
               android:gravity="left|top"
               android:padding="5dp"
-              android:hint="@string/请显示QEMU命令"
+              android:hint="@string/vs_please_show_qemu_commands"
               android:layout_marginRight="10dp"
               android:background="@drawable/windows_line"
               android:layout_height="200dp"/>
@@ -909,7 +909,7 @@
               android:textColorHint="#5E5E5E"
               android:gravity="left|top"
               android:padding="5dp"
-              android:hint="@string/请输入QEMU命令"
+              android:hint="@string/vs_please_enter_the_qemu_command"
               android:layout_marginRight="10dp"
               android:background="@drawable/windows_line"
               android:layout_height="200dp"/>
@@ -930,7 +930,7 @@
 
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/清空命令行"
+                      android:text="@string/vs_clear_the_command_line"
                       android:textColor="#5E5E5E"
                       android:paddingLeft="10dp"
                       android:paddingBottom="3dp"
@@ -943,7 +943,7 @@
 
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/QEMU执行并打开显示器"
+                      android:text="@string/vs_qemu_executes_and_turns_on_the_display"
                       android:textColor="#5E5E5E"
                       android:paddingLeft="10dp"
                       android:paddingBottom="3dp"
@@ -956,7 +956,7 @@
                       android:layout_height="wrap_content"/>
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/QEMU执行"
+                      android:text="@string/vs_qemu_execution"
                       android:textColor="#5E5E5E"
                       android:paddingLeft="10dp"
                       android:paddingBottom="3dp"
@@ -994,7 +994,7 @@
 
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/清空命令行"
+                      android:text="@string/vs_clear_the_command_line"
                       android:textColor="#fff"
                       android:paddingLeft="10dp"
                       android:visibility="invisible"
@@ -1008,7 +1008,7 @@
 
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/QEMU执行并打开显示器"
+                      android:text="@string/vs_qemu_executes_and_turns_on_the_display"
                       android:textColor="#fff"
                       android:paddingLeft="10dp"
                       android:visibility="invisible"
@@ -1022,7 +1022,7 @@
                       android:layout_height="wrap_content"/>
                   <TextView
                       android:layout_width="wrap_content"
-                      android:text="@string/填充默认命令"
+                      android:text="@string/vs_fill_default_commands"
                       android:textColor="#5E5E5E"
                       android:paddingLeft="10dp"
                       android:paddingBottom="3dp"
@@ -1057,7 +1057,7 @@
             android:id="@+id/copy_commit"
             android:visibility="gone"
             android:layout_marginLeft="10dp"
-            android:text="@string/提示dsfsdfmmm"
+            android:text="@string/vs_it_may_affect_performance_or_cannot_ente_dsfsdfmmm"
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="10sp"

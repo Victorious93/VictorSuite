@@ -18,7 +18,7 @@
             android:textStyle="bold"
             android:textColor="#A9B7C6"
             android:id="@+id/edit_text"
-            android:text="@string/镜像运行结束"
+            android:text="@string/vs_end_of_mirroring_operation"
             android:lineSpacingExtra="2dp"
             android:lineSpacingMultiplier="1.2"
             android:padding="10dp"
@@ -49,7 +49,7 @@
 
           <TextView
               android:layout_width="match_parent"
-              android:text="@string/恢复默认命令"
+              android:text="@string/vs_restore_default_command"
               android:textColor="#fff"
               android:id="@+id/cancel"
               android:gravity="center"
@@ -75,7 +75,7 @@
 
               <TextView
                   android:layout_width="match_parent"
-                  android:text="@string/修改"
+                  android:text="@string/vs_modify"
                   android:textColor="#fff"
                   android:id="@+id/commit"
                   android:gravity="center"
@@ -83,7 +83,7 @@
                   android:layout_height="wrap_content"/>
               <TextView
                   android:layout_width="match_parent"
-                  android:text="@string/保存当前配置"
+                  android:text="@string/vs_save_the_current_configuration"
                   android:textColor="#fff"
                   android:visibility="gone"
                   android:id="@+id/commit_file"
@@ -106,7 +106,7 @@
 
           <TextView
               android:layout_width="match_parent"
-              android:text="@string/好的"
+              android:text="@string/vs_ok"
               android:textColor="#fff"
               android:gravity="center"
               android:id="@+id/start"

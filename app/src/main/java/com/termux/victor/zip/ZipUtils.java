@@ -64,7 +64,7 @@ public class ZipUtils {
 
         if (!srcFile.exists()) {
 
-            zipNameListener.zip("你没有存储卡权限，请设置权限为：允许[zip]", 0, 0);
+            zipNameListener.zip("No storage permission; please allow storage access [zip]", 0, 0);
 
             return;
         }
@@ -96,7 +96,7 @@ public class ZipUtils {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
                 try {
 
-                    Log.e("XINHAO_HAN", "解压" + entry.getName());
+                    Log.e("XINHAO_HAN", "Extract" + entry.getName());
                     sizeC++;
                     zipNameListener.progress(size, sizeC);
                     zipNameListener.zip(entry.getName(), size, sizeC);
@@ -118,7 +118,7 @@ public class ZipUtils {
                         if (targetFile.isDirectory()) {
                             boolean mkdirs = targetFile.mkdirs();
                             if (!mkdirs) {
-                                Log.e("XINHAO_HAN_ERROR", "创建文件夹失败! " + mTempFile.getAbsolutePath());
+                                Log.e("XINHAO_HAN_ERROR", "Failed to create folder! " + mTempFile.getAbsolutePath());
                             }
                         }
                         targetFile.createNewFile();
@@ -156,16 +156,16 @@ public class ZipUtils {
                 } catch (Exception e) {
 
 
-                    Log.e("XINHAO_HAN", "出错的文件[ " + entry.getName() + "]: " + e.toString());
+                    Log.e("XINHAO_HAN", "Failed file [ " + entry.getName() + "]: " + e.toString());
                 }
 
             }
 
             long end = System.currentTimeMillis();
 
-            System.out.println("解压完成，耗时：" + (end - start) + " ms");
+            System.out.println("Extraction complete, took: " + (end - start) + " ms");
 
-            zipNameListener.zip("解压完成，耗时：" + (end - start) + " ms,请不要离开,正在检查恢复包是否有自运行命令[[命令目录/home/BootCommand]命令之间用'&&'隔开]", size, sizeC);
+            zipNameListener.zip("Extraction complete, took: " + (end - start) + " ms, please stay on this page, checking the restore package for auto-run commands [[command directory /home/BootCommand], commands separated by '&&']", size, sizeC);
 
             zipNameListener.complete();
         } catch (Exception e) {
@@ -222,7 +222,7 @@ public class ZipUtils {
                     @Override
                     public void onStart() {
 
-                        zipNameListener.zip("备份开始!", 0, 0);
+                        zipNameListener.zip("Backup started!", 0, 0);
                     }
 
                     @Override
@@ -239,12 +239,12 @@ public class ZipUtils {
 
                     @Override
                     public void onError(int errorCode, String message) {
-                        zipNameListener.zip("备份出现错误:" + message, 0, 0);
+                        zipNameListener.zip("Backup error: " + message, 0, 0);
                     }
 
                     @Override
                     public void onSucceed() {
-                        zipNameListener.zip("备份完成!", 0, 0);
+                        zipNameListener.zip("Backup complete!", 0, 0);
                         zipNameListener.complete();
                     }
                 });
@@ -263,7 +263,7 @@ public class ZipUtils {
         Z7Extractor.extractFile(srcFile.getAbsolutePath(), destDirPath, new IExtractCallback() {
             @Override
             public void onStart() {
-                zipNameListener.zip("开始解压", 0, 0);
+                zipNameListener.zip("Extracting", 0, 0);
             }
 
             @Override
@@ -295,12 +295,12 @@ public class ZipUtils {
 
             @Override
             public void onError(int errorCode, String message) {
-                zipNameListener.zip("解压失败!" + message, 0, 0);
+                zipNameListener.zip("Extraction failed!" + message, 0, 0);
             }
 
             @Override
             public void onSucceed() {
-                zipNameListener.zip("解压完成!", 0, 0);
+                zipNameListener.zip("Extraction complete!", 0, 0);
                 zipNameListener.complete();
             }
         });
@@ -342,7 +342,7 @@ public class ZipUtils {
 
         // 目录下文件
         if (files.length == 0) {
-            System.out.println(path + "该文件夹下没有文件");
+            System.out.println(path + "No files in this folder");
         }
 
         // 存在文件 遍历 判断
@@ -358,12 +358,12 @@ public class ZipUtils {
                 Log.e("XINHAO_HAN", "recursiveFiles: " + f.getAbsolutePath());
                 size++;
                 fileSize += f.length();
-                zipNameListener.zip("获取文件[" + size + "]：" + f.getAbsolutePath(), 0, 0);
+                zipNameListener.zip("Get file [" + size + "]：" + f.getAbsolutePath(), 0, 0);
                 f.delete();
                 // arrayList.add(f);
             } else {
 
-                zipNameListener.zip("忽略该目录", 0, 0);
+                zipNameListener.zip("Ignore this directory", 0, 0);
             }
 
         }
@@ -388,7 +388,7 @@ public class ZipUtils {
 
         } catch (Exception e) {
             e.printStackTrace();
-            zipNameListener.zip("删除失败!" + e.toString(), 0, 0);
+            zipNameListener.zip("Delete failed!" + e.toString(), 0, 0);
 
             throw new RuntimeException(e);
         }
@@ -409,7 +409,7 @@ public class ZipUtils {
                 UUtils.runOnUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(UUtils.getContext(), "为了数据安全,已强制忽略[sdcard]目录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UUtils.getContext(), "For data safety, the [sdcard] directory is ignored", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -421,7 +421,7 @@ public class ZipUtils {
                 UUtils.runOnUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(UUtils.getContext(), "为了数据安全,已强制忽略[storage]目录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UUtils.getContext(), "For data safety, the [storage] directory is ignored", Toast.LENGTH_SHORT).show();
                     }
                 });
                 return true;
@@ -482,7 +482,7 @@ public class ZipUtils {
 
         // 目录下文件
         if (files.length == 0) {
-            System.out.println(path + "该文件夹下没有文件");
+            System.out.println(path + "No files in this folder");
         }
 
         // 存在文件 遍历 判断
@@ -497,10 +497,10 @@ public class ZipUtils {
                 Log.e("XINHAO_HAN", "recursiveFiles: " + f.getAbsolutePath());
                 size++;
                 fileSize += f.length();
-                zipNameListener.zip("获取文件[" + size + "]：" + f.getAbsolutePath(), 0, 0);
+                zipNameListener.zip("Get file [" + size + "]：" + f.getAbsolutePath(), 0, 0);
                 // arrayList.add(f);
             } else {
-                zipNameListener.zip("快捷方式", 0, 0);
+                zipNameListener.zip("Shortcuts", 0, 0);
             }
         }
     }
@@ -551,7 +551,7 @@ public class ZipUtils {
 
         recursiveFiles(srcDir, zipNameListener);
 
-        zipNameListener.zip("开始压缩", 0, 0);
+        zipNameListener.zip("Compressing", 0, 0);
 
         long start = System.currentTimeMillis();
 
@@ -567,7 +567,7 @@ public class ZipUtils {
 
             long end = System.currentTimeMillis();
 
-            System.out.println("压缩完成，耗时：" + (end - start) + " ms");
+            System.out.println("Compression complete, took: " + (end - start) + " ms");
 
             zipNameListener.complete();
         } catch (Exception e) {

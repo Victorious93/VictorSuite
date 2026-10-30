@@ -71,7 +71,7 @@ internal class ZFileSelectFolderDialog : ZFileManageDialog() {
             selectFolder?.invoke(if (getZFileConfig().filePath.isNullOrEmpty()) SD_ROOT else getZFileConfig().filePath!!)
             dismiss()
         }
-        vb?.zfileSelectFolderTitle?.text = String.format("%s到根目录", tipStr)
+        vb?.zfileSelectFolderTitle?.text = String.format("%s to root directory", tipStr)
         initRecyclerView()
     }
 
@@ -99,9 +99,9 @@ internal class ZFileSelectFolderDialog : ZFileManageDialog() {
     private fun getData() {
         val filePath = getZFileConfig().filePath
         if (filePath.isNullOrEmpty() || filePath == SD_ROOT) {
-            vb?.zfileSelectFolderTitle?.text = String.format("%s到根目录", tipStr)
+            vb?.zfileSelectFolderTitle?.text = String.format("%s to root directory", tipStr)
         } else {
-            vb?.zfileSelectFolderTitle?.text = String.format("%s到%s", tipStr, filePath.toFile().name)
+            vb?.zfileSelectFolderTitle?.text = String.format("%s to %s", tipStr, filePath.toFile().name)
         }
         ZFileUtil.getList(requireContext()) {
             if (isNullOrEmpty()) {

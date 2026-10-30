@@ -32,13 +32,13 @@ class ProtocolDialog : BaseDialogCentre, View.OnFocusChangeListener {
         custom_scroll = mView?.findViewById(R.id.custom_scroll)
         ok = mView?.findViewById(R.id.ok)
         cancel = mView?.findViewById(R.id.cancel)
-        edit_text?.text = UUtils.getString(R.string.许可证)
+        edit_text?.text = UUtils.getString(R.string.vs_legal_notices_victorsuite_is_a_non_profi)
         cancel?.setOnClickListener {
             val intent = Intent(mContext, TermuxService::class.java)
             intent.action = TermuxConstants.TERMUX_APP.TERMUX_SERVICE.ACTION_STOP_SERVICE
             mContext.startService(intent)
             System.exit(1)
-            throw RuntimeException("用户不同意协议,自动退出...")
+            throw RuntimeException("Agreement declined, exiting...")
         }
         ok?.setOnClickListener {
             if (isYD){
@@ -46,7 +46,7 @@ class ProtocolDialog : BaseDialogCentre, View.OnFocusChangeListener {
                 OtherPrefs.saveStringOther("xieyi","true")
                 dismiss()
             }else{
-                UUtils.showMsg(UUtils.getString(R.string.请认真阅读许可协议))
+                UUtils.showMsg(UUtils.getString(R.string.vs_please_read_the_license_agreement_and_th))
             }
         }
         custom_scroll?.setOnScrollChangeListener(object : CustomScrollView.OnScrollChangeListener {
@@ -65,20 +65,20 @@ class ProtocolDialog : BaseDialogCentre, View.OnFocusChangeListener {
     // 使用习惯
     private fun usageHabits() {
         var switchDialog = SwitchDialog(mContext)
-        switchDialog.title?.text = UUtils.getString(R.string.zt_usage_habits_title)
-        switchDialog.msg?.text = UUtils.getString(R.string.zt_usage_habits_content)
+        switchDialog.title?.text = UUtils.getString(R.string.vs_usage_habits_title)
+        switchDialog.msg?.text = UUtils.getString(R.string.vs_usage_habits_content)
         switchDialog.ok?.text = "Termux"
         switchDialog.ok?.setOnClickListener {
-            val ztUserBean = UserSetManage.get().getZTUserBean()
-            ztUserBean.isToolShow = true
-            ztUserBean.isResetVolume = true
-            UserSetManage.get().setZTUserBean(ztUserBean)
-            UUtils.showMsg(UUtils.getString(R.string.zt_usage_habits_termux))
+            val vsUserBean = UserSetManage.get().getVsUserBean()
+            vsUserBean.isToolShow = true
+            vsUserBean.isResetVolume = true
+            UserSetManage.get().setVsUserBean(vsUserBean)
+            UUtils.showMsg(UUtils.getString(R.string.vs_usage_habits_termux))
             switchDialog.dismiss()
         }
         switchDialog.cancel?.text = "VictorSuite"
         switchDialog.cancel?.setOnClickListener {
-            UUtils.showMsg(UUtils.getString(R.string.zt_usage_habits_ztermux))
+            UUtils.showMsg(UUtils.getString(R.string.vs_usage_habits_victorsuite))
             switchDialog.dismiss()
         }
         switchDialog.other?.visibility = View.GONE

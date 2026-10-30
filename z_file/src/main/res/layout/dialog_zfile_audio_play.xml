@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/zfile_white"
+    android:background="@color/zfile_surface"
     android:orientation="vertical">
 
     <LinearLayout
@@ -29,8 +29,8 @@
             android:layout_gravity="center"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/zfile_black"
-            tools:text="我是音频文件.mp3" />
+            android:textColor="@color/zfile_text"
+            tools:text="audio-file.mp3" />
 
     </LinearLayout>
 

@@ -1,6 +1,6 @@
 package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -16,7 +16,7 @@ public class BootCommandClickConfig extends BaseMenuClickConfig {
     private TextView mTextView;
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override
@@ -27,9 +27,9 @@ public class BootCommandClickConfig extends BaseMenuClickConfig {
     @Override
     public String getString(Context context) {
         if (StartRunCommandUtils.INSTANCE.isRun()) {
-            return context.getString(R.string.开机启动开);
+            return context.getString(R.string.vs_startup_on);
         } else {
-            return context.getString(R.string.开机启动);
+            return context.getString(R.string.vs_startup_off);
         }
     }
 
@@ -38,9 +38,9 @@ public class BootCommandClickConfig extends BaseMenuClickConfig {
         LogUtils.e(TAG, "onClick.");
         if (StartRunCommandUtils.INSTANCE.isRun()) {
             StartRunCommandUtils.INSTANCE.endRun();
-            mTextView.setText(context.getString(R.string.开机启动));
+            mTextView.setText(context.getString(R.string.vs_startup_off));
         } else {
-            mTextView.setText(context.getString(R.string.开机启动开));
+            mTextView.setText(context.getString(R.string.vs_startup_on));
             StartRunCommandUtils.INSTANCE.startRun();
         }
     }
@@ -61,9 +61,9 @@ public class BootCommandClickConfig extends BaseMenuClickConfig {
     public void initViewStatus(Context context) {
         super.initViewStatus(context);
         if (StartRunCommandUtils.INSTANCE.isRun()) {
-            mTextView.setText(context.getString(R.string.开机启动开));
+            mTextView.setText(context.getString(R.string.vs_startup_on));
         } else {
-            mTextView.setText(context.getString(R.string.开机启动));
+            mTextView.setText(context.getString(R.string.vs_startup_off));
         }
     }
 }

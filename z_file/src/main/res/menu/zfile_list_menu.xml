@@ -46,8 +46,8 @@
         android:title="@string/close_http_files"
         app:showAsAction="never" />
     <item
-        android:id="@+id/zt_developer"
-        android:title="@string/zerotermux_test"
+        android:id="@+id/vs_developer"
+        android:title="@string/zfile_developer_test"
         app:showAsAction="never" />
 
 

@@ -13,7 +13,7 @@ import com.termux.victor.util.UUtils
 import com.termux.R
 import com.termux.app.TermuxActivity
 import com.termux.victor.keybord.KeyBordManage
-import com.termux.victor.zero.engine.ZeroCoreManage
+import com.termux.victor.engine.VsEngineManage
 
 class KeyDataClickConfig: BaseMenuClickConfig() {
     companion object {
@@ -29,10 +29,10 @@ class KeyDataClickConfig: BaseMenuClickConfig() {
 
     override fun onClick(view: View?, context: Context?) {
         val termuxActivity: TermuxActivity = context as TermuxActivity
-        val versionName = ZeroCoreManage.getVersionName()
+        val versionName = VsEngineManage.getVersionName()
         if (TextUtils.isEmpty(versionName)) {
-            UUtils.showMsg(UUtils.getString(R.string.zero_eg_not_install))
-            // Do not send users to download the third-party ZeroCoreManage APK from an
+            UUtils.showMsg(UUtils.getString(R.string.vs_engine_not_install))
+            // Do not send users to download the third-party VsEngineManage APK from an
             // upstream personal repo (untrusted binary). Feature stays unavailable.
             return
         }

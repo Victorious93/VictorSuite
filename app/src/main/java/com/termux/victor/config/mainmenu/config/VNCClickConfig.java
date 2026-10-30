@@ -1,6 +1,6 @@
 package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class VNCClickConfig extends BaseMenuClickConfig implements MenuLeftPopuListWindow.ItemClickPopuListener {
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override
@@ -41,13 +41,13 @@ public class VNCClickConfig extends BaseMenuClickConfig implements MenuLeftPopuL
     public void onClick(View view, Context context) {
         ArrayList<MenuLeftPopuListWindow.MenuLeftPopuListData> menuLeftPopuListDatavnc = new ArrayList<>();
         //快速vnc
-        MenuLeftPopuListWindow.MenuLeftPopuListData ksvnc = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.dsk, UUtils.getString(R.string.快速VNC), 10);
+        MenuLeftPopuListWindow.MenuLeftPopuListData ksvnc = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.dsk, UUtils.getString(R.string.vs_fast_vnc), 10);
         menuLeftPopuListDatavnc.add(ksvnc);
         //自定vnc
-        MenuLeftPopuListWindow.MenuLeftPopuListData zdvnc = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.dsk, UUtils.getString(R.string.自定VNC), 11);
+        MenuLeftPopuListWindow.MenuLeftPopuListData zdvnc = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.dsk, UUtils.getString(R.string.vs_custom_vnc), 11);
         menuLeftPopuListDatavnc.add(zdvnc);
         /*//高级vnc
-        MenuLeftPopuListWindow.MenuLeftPopuListData gjvnc = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.dsk, UUtils.getString(R.string.高级VNC), 12);
+        MenuLeftPopuListWindow.MenuLeftPopuListData gjvnc = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.dsk, UUtils.getString(R.string.vs_advanced_vnc), 12);
         menuLeftPopuListDatavnc.add(gjvnc);*/
 
         showMenuDialog(menuLeftPopuListDatavnc, view);
@@ -67,7 +67,7 @@ public class VNCClickConfig extends BaseMenuClickConfig implements MenuLeftPopuL
         switch (id) {
             //快速
             case 10:
-                UUtils.showLog("插件:快速");
+                UUtils.showLog("Plugin: quick");
                 try {
                     Intent intent = new Intent(mContext, VncActivity.class);
                     intent.putExtra("com.gaurav.avnc.server_profile",
@@ -76,7 +76,7 @@ public class VNCClickConfig extends BaseMenuClickConfig implements MenuLeftPopuL
                     mContext.startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    UUtils.showLog("插件:" + e.toString());
+                    UUtils.showLog("Plugin: " + e.toString());
                 }
                 break;
             //自定

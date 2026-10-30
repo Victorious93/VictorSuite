@@ -15,7 +15,7 @@ class OpenTurnNetworkAdbClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getString(context: Context?): String? {
-        return context?.getString(R.string.网络ADB)
+        return context?.getString(R.string.vs_network_adb_root)
     }
 
     override fun onClick(view: View?, context: Context?) {
@@ -24,7 +24,7 @@ class OpenTurnNetworkAdbClickConfig : BaseMenuClickConfig() {
             //有ROOT
             runRootAdbHttp()
         } else {
-            val switchDialog = switchDialogShow(UUtils.getString(R.string.警告),UUtils.getString(R.string.没有找到本机的ROOT权限))
+            val switchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning),UUtils.getString(R.string.vs_the_root_permission_of_the_machine_is_no))
             switchDialog.show()
             switchDialog.setCancelable(false)
             switchDialog.cancel!!.setOnClickListener { switchDialog.dismiss() }
@@ -58,7 +58,7 @@ class OpenTurnNetworkAdbClickConfig : BaseMenuClickConfig() {
             }
         }
 
-        val switchDialog = switchDialogShow(UUtils.getString(R.string.警告),"${UUtils.getString(R.string.关闭成功)}\n")
+        val switchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning),"${UUtils.getString(R.string.vs_adb_command_closed_successfully)}\n")
         switchDialog.show()
         switchDialog.setCancelable(false)
         switchDialog.ok!!.setOnClickListener {
@@ -90,7 +90,7 @@ class OpenTurnNetworkAdbClickConfig : BaseMenuClickConfig() {
                 timeString+="\n${run.result}"
             }
         }
-        val switchDialog = switchDialogShow(UUtils.getString(R.string.警告),"${UUtils.getString(R.string.运行完成)}\n${UUtils.getHostIP()}:5555")
+        val switchDialog = switchDialogShow(UUtils.getString(R.string.vs_warning),"${UUtils.getString(R.string.vs_the_command_execution_is_complete_please)}\n${UUtils.getHostIP()}:5555")
         switchDialog.show()
         switchDialog.setCancelable(false)
         switchDialog.ok!!.setOnClickListener {
@@ -106,8 +106,8 @@ class OpenTurnNetworkAdbClickConfig : BaseMenuClickConfig() {
         switchDialog.title!!.text = title
         switchDialog.msg!!.text = msg
         switchDialog.other!!.visibility = View.GONE
-        switchDialog.ok!!.text = UUtils.getString(R.string.确定)
-        switchDialog.cancel!!.text = UUtils.getString(R.string.取消)
+        switchDialog.ok!!.text = UUtils.getString(R.string.vs_determine)
+        switchDialog.cancel!!.text = UUtils.getString(R.string.vs_cancel)
         switchDialog.show()
         return switchDialog
     }

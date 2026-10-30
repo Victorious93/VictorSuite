@@ -151,7 +151,7 @@ public class BoomWindow {
             public void onClick(View v) {
                 String string = file_name.getText().toString();
                 if(string == null || string.isEmpty()){
-                    UUtils.showMsg(UUtils.getString(R.string.文件名不能为空));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_file_name_cannot_be_empty));
                     return;
                 }
                 com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("find / -name " + string);
@@ -170,13 +170,13 @@ public class BoomWindow {
                 String zidong1226 = SaveData.getData("zidong1226");
                 if (zidong1226 == null || zidong1226.isEmpty() || zidong1226.equals("def")){
                     SaveData.saveData("zidong1226","123456");
-                    qie_huan_string.setText(UUtils.getString(R.string.当前为自动));
-                    UUtils.showMsg(UUtils.getString(R.string.切换成功));
+                    qie_huan_string.setText(UUtils.getString(R.string.vs_currently_automatic));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_switch_successfully));
                     popupWindow.dismiss();
                 }else{
                     SaveData.saveData("zidong1226","def");
-                    UUtils.showMsg(UUtils.getString(R.string.切换成功));
-                    qie_huan_string.setText(UUtils.getString(R.string.当前为自动));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_switch_successfully));
+                    qie_huan_string.setText(UUtils.getString(R.string.vs_currently_automatic));
 
                     popupWindow.dismiss();
                 }
@@ -185,9 +185,9 @@ public class BoomWindow {
 
         String zidong12261 = SaveData.getData("zidong1226");
         if (zidong12261 == null || zidong12261.isEmpty() || zidong12261.equals("def")){
-            qie_huan_string.setText(UUtils.getString(R.string.当前为自动));
+            qie_huan_string.setText(UUtils.getString(R.string.vs_currently_automatic));
         }else{
-            qie_huan_string.setText(UUtils.getString(R.string.当前为自动));
+            qie_huan_string.setText(UUtils.getString(R.string.vs_currently_automatic));
         }
         showBoomView(closeLiftListener);
 
@@ -224,14 +224,14 @@ public class BoomWindow {
             String commi22 = SaveData.getData("commi22");
             if (commi22 == null || commi22.isEmpty() || commi22.equals("def")) {
                 title.setVisibility(View.VISIBLE);
-                title.setText(UUtils.getString(R.string.没有找到命令));
+                title.setText(UUtils.getString(R.string.vs_command_not_found));
                 recyclerView.setVisibility(View.GONE);
             }else{
                 try {
                     MinLBean minLBean = new Gson().fromJson(commi22, MinLBean.class);
                     if(minLBean.data.list.size() == 0){
                         title.setVisibility(View.VISIBLE);
-                        title.setText(UUtils.getString(R.string.没有找到命令));
+                        title.setText(UUtils.getString(R.string.vs_command_not_found));
                         recyclerView.setVisibility(View.GONE);
                     }else {
                         topSorting(minLBean.data.list);
@@ -260,7 +260,7 @@ public class BoomWindow {
                     }
                 }catch (Exception e){
                     title.setVisibility(View.VISIBLE);
-                    title.setText(UUtils.getString(R.string.命令出错));
+                    title.setText(UUtils.getString(R.string.vs_command_error));
                     recyclerView.setVisibility(View.GONE);
                     LogUtils.d(TAG, e.toString());
                 }
@@ -379,7 +379,7 @@ public class BoomWindow {
                 String finalCmd = bean.generateConnectCommand();
 
                 if (!android.text.TextUtils.isEmpty(bean.getPassword())) {
-                    UUtils.showMsg(UUtils.getString(R.string.正在连接) + bean.getAlias());
+                    UUtils.showMsg(UUtils.getString(R.string.vs_connecting) + bean.getAlias());
                 }
                 String runCmd = " clear && " + finalCmd;
                 com.zp.z_file.util.LogUtils.d(TAG, "content click ssh:" + runCmd);
@@ -398,7 +398,7 @@ public class BoomWindow {
                 builder.setTitle(UUtils.getString(R.string.content_ssh_remove_device));
                 builder.setMessage(String.format(UUtils.getString(R.string.content_ssh_remove_device_dialog), bean.getAlias(), bean.getHost()));
 
-                builder.setPositiveButton(UUtils.getString(R.string.删除), new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(UUtils.getString(R.string.vs_delete), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finalSshList.remove(position);
@@ -706,10 +706,10 @@ public class BoomWindow {
 
                 if (isEditMode) {
                     updateSSHDevice(editPosition, bean);
-                    UUtils.showMsg(UUtils.getString(R.string.修改成功));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_successfully_modified));
                 } else {
                     saveNewSSHDevice(bean);
-                    UUtils.showMsg(UUtils.getString(R.string.添加成功));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_added_successfully));
                 }
                 showSSHList(closeLiftListener);
 

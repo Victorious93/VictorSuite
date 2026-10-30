@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
-        android:text="@string/保存文件"
+        android:text="@string/vs_save_document"
         android:layout_marginTop="10dp"
         android:id="@+id/title"
         android:gravity="center"
@@ -19,7 +19,7 @@
         android:background="@drawable/windows_line"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:hint="@string/请输入保存的文件名"
+        android:hint="@string/vs_please_enter_the_saved_file_name"
         android:layout_margin="10dp"
         android:textColor="#fff"
         android:textColorHint="#5e5e5e"
@@ -48,7 +48,7 @@
 
           <TextView
               android:layout_width="match_parent"
-              android:text="@string/恢复默认命令"
+              android:text="@string/vs_restore_default_command"
               android:textColor="#fff"
               android:visibility="invisible"
               android:gravity="center"
@@ -73,7 +73,7 @@
 
               <TextView
                   android:layout_width="match_parent"
-                  android:text="@string/确定"
+                  android:text="@string/vs_determine"
                   android:textColor="#fff"
                   android:id="@+id/commit"
                   android:gravity="center"
@@ -81,7 +81,7 @@
                   android:layout_height="wrap_content"/>
               <TextView
                   android:layout_width="match_parent"
-                  android:text="@string/保存当前配置"
+                  android:text="@string/vs_save_the_current_configuration"
                   android:textColor="#fff"
                   android:visibility="gone"
                   android:id="@+id/commit_file"
@@ -104,7 +104,7 @@
 
           <TextView
               android:layout_width="match_parent"
-              android:text="@string/取消"
+              android:text="@string/vs_cancel"
               android:textColor="#fff"
               android:gravity="center"
               android:id="@+id/cancel"

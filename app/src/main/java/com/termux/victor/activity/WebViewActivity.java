@@ -58,7 +58,7 @@ public class WebViewActivity extends BaseThemeActivity {
         }
         setting();
 
-        UUtils.showLog("传入的连接:" + getIntent().getStringExtra("content"));
+        UUtils.showLog("Incoming connection: " + getIntent().getStringExtra("content"));
     }
 
     private void setting() {
@@ -116,7 +116,7 @@ public class WebViewActivity extends BaseThemeActivity {
         public void finishFromJS() {
             runOnUiThread(() -> {
                 if (!isFinishing() && !isDestroyed()) {
-                    UUtils.showLog("执行销毁程序...");
+                    UUtils.showLog("Running cleanup...");
                     finish();
                 }
             });
@@ -136,13 +136,13 @@ public class WebViewActivity extends BaseThemeActivity {
             runOnUiThread(() -> {
                 if (isFinishing() || isDestroyed()) return;
 
-                UUtils.showLog("传入连接:" + url);
+                UUtils.showLog("Incoming connection: " + url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 try {
                     startActivity(intent);
                 } catch (android.content.ActivityNotFoundException e) {
-                    UUtils.showLog("未找到处理该链接的应用: " + url);
+                    UUtils.showLog("No app found to handle this link: " + url);
                     e.printStackTrace();
                 }
             });

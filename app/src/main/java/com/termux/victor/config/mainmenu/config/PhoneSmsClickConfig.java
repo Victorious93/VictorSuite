@@ -1,6 +1,6 @@
 package com.termux.victor.config.mainmenu.config;
 
-import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_ZT_FEATURES;
+import static com.termux.victor.config.mainmenu.MainMenuConfig.CODE_VS_FEATURES;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PhoneSmsClickConfig extends BaseMenuClickConfig implements MenuLeftPopuListWindow.ItemClickPopuListener {
     @Override
     public int getType() {
-        return CODE_ZT_FEATURES;
+        return CODE_VS_FEATURES;
     }
 
     @Override
@@ -32,13 +32,13 @@ public class PhoneSmsClickConfig extends BaseMenuClickConfig implements MenuLeft
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.短信通话);
+        return context.getString(R.string.vs_sms_call);
     }
 
     @Override
     public void onClick(View view, Context context) {
         ArrayList<MenuLeftPopuListWindow.MenuLeftPopuListData> menuphoneMsg = new ArrayList<>();
-        MenuLeftPopuListWindow.MenuLeftPopuListData msg_phone = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.install_msg_phone, UUtils.getString(R.string.安装短信读取工具), 6);
+        MenuLeftPopuListWindow.MenuLeftPopuListData msg_phone = new MenuLeftPopuListWindow.MenuLeftPopuListData(R.mipmap.install_msg_phone, UUtils.getString(R.string.vs_sms_address_book_tool), 6);
         menuphoneMsg.add(msg_phone);
         showMenuDialog(menuphoneMsg, view);
     }
@@ -54,20 +54,20 @@ public class PhoneSmsClickConfig extends BaseMenuClickConfig implements MenuLeft
     public void itemClick(int id, int index, @Nullable MenuLeftPopuListWindow mMenuLeftPopuListWindow) {
         switch (id) {
             case 6:
-                SwitchDialog msg = switchDialogShow(UUtils.getString(R.string.警告),
-                    UUtils.getString(R.string.该操作有风险), mContext);
+                SwitchDialog msg = switchDialogShow(UUtils.getString(R.string.vs_warning),
+                    UUtils.getString(R.string.vs_this_operation_is_risky_your_mobile_phon), mContext);
                 msg.getCancel().setOnClickListener(v -> msg.dismiss());
                 msg.getOk().setOnClickListener(v -> {
                     msg.dismiss();
                     File file = new File(FileUrl.INSTANCE.getSmsUrl());
                     if (file.exists()) {
-                        UUtils.showMsg(UUtils.getString(R.string.您已安装工具));
+                        UUtils.showMsg(UUtils.getString(R.string.vs_you_have_already_installed_the_tool_so_t));
                     } else {
                         UUtils.writerFile("runcommand/smsread", new File(FileUrl.INSTANCE.getSmsUrl()));
                         UUtils.writerFile("runcommand/readcontacts", new File(FileUrl.INSTANCE.getPhoneUrl()));
                         com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunsmsChomdSh());
                         com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(CodeString.INSTANCE.getRunPhoneChomdSh());
-                        UUtils.showMsg(UUtils.getString(R.string.安装完成));
+                        UUtils.showMsg(UUtils.getString(R.string.vs_the_installation_is_complete_please_ente));
                     }
                 });
                 break;

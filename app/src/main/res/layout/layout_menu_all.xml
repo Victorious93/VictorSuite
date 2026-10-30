@@ -78,10 +78,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:id="@+id/zt_new"
+                                    android:id="@+id/vs_new"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/zt_new"
+                                    android:text="@string/vs_new"
                                     android:paddingLeft="5dp"
                                     android:visibility="gone"
                                     android:paddingRight="5dp"
@@ -104,7 +104,7 @@
                                 android:id="@+id/version"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/版本"
+                                android:text="@string/vs_version"
                                 android:textColor="@color/color_ffffff"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
@@ -121,7 +121,7 @@
                                 android:id="@+id/service_status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/正在连接"
+                                android:text="@string/vs_connecting"
                                 android:textColor="@color/color_ffffff"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
@@ -139,7 +139,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/version"
-                                android:text="@string/版本"
+                                android:text="@string/vs_version"
                                 android:textColor="@color/color_ffffff"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
@@ -156,7 +156,7 @@
                                 android:id="@+id/service_eg"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/正在连接"
+                                android:text="@string/vs_connecting"
                                 android:textColor="@color/color_ffffff"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
@@ -225,7 +225,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="5dp"
-                            android:text="@string/正在连接"
+                            android:text="@string/vs_connecting"
                             android:textColor="@color/color_ffffff"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -315,7 +315,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="5dp"
-                        android:text="@string/会话窗口在右侧"
+                        android:text="@string/vs_tip_the_session_window_is_on_the_right_s"
                         android:textColor="@color/color_ffffff"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -352,7 +352,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:text="@string/zt_data_info_title"
+                            android:text="@string/vs_data_info_title"
                             android:textColor="@color/color_ffffff"
                             android:textSize="18sp"
                             android:textStyle="bold" />

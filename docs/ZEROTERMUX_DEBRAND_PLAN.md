@@ -13,7 +13,7 @@ Goal: "This is not ZeroTermux. This is VictorSuite." Remove ZeroTermux/UTermux/"
 | `\bzt` (ZT* classes, `zt_` resources/keys, `ztcommand`) | 100 | 1084 |
 | `ZT_` constants/keys | 77 | 618 (138 distinct `ZT_*`/`"zt_*"` identifiers) |
 | `utermux` (intents `com.utermux.files.action`, `com.utermux.action.vnc`, scripts like `utqemu.sh`) | 23 | 59 |
-| `zerotermux` (README, `com.zp.z_file.zerotermux.*` from z_file.aar) | 5 | 11 |
+| `zerotermux` (README, `com.zp.z_file.victor.*` from z_file.aar) | 5 | 11 |
 | `零` (zh strings) | 11 | 17 |
 | QQ / Telegram (`qq.com`, `t.me/ztcommunity`) | 30 | 75 |
 | Resource files named `*zt*`/`*zero*` (e.g. `zero_fun_ico`, `bbs_zero`) | 9 (12 repo-wide) | – |
@@ -22,7 +22,7 @@ Goal: "This is not ZeroTermux. This is VictorSuite." Remove ZeroTermux/UTermux/"
 | Bundled aars in `app/libs` | xh_lib, z_file, stub, avnc (+ FHttpServer, qrcodecore, zxing, termux-x11) | – |
 | Shared-pref files | `ZeroEngineData`, `xinhao` | – |
 
-Notes: `zero` alone is too noisy (wcwidth `table_zero.py`, `isZero`, etc.) – only branded hits are in scope. `com.zp.z_file.zerotermux.ZTConfig` lives **inside z_file.aar**, so it can't be renamed without rebuilding the aar.
+Notes: `zero` alone is too noisy (wcwidth `table_zero.py`, `isZero`, etc.) – only branded hits are in scope. `com.zp.z_file.victor.ZTConfig` lives **inside z_file.aar**, so it can't be renamed without rebuilding the aar.
 
 ## 2. Rename maps
 
@@ -71,7 +71,7 @@ All URLs go into **one file**: `app/src/main/java/com/termux/victor/config/VsLin
 | Issues | Termux issues | `https://github.com/Victorious93/VictorSuite/issues` |
 | About page | ZT about | `…github.io/VictorSuite/about/` + in-app credits |
 | Update check | `api.github.com/repos/Victorious93/VictorSuite/releases/latest` (already ok) | keep; also expose via VsLinks |
-| ZeroCoreManage releases | `github.com/hanxinhao000/ZeroCoreManage` | remove or own fork/release |
+| VsEngineManage releases | `github.com/hanxinhao000/VsEngineManage` | remove or own fork/release |
 | Module feed | `raw.githubusercontent.com/Victorious93/VictorSuite/main/remote/repository/main.json` | `…github.io/VictorSuite/feeds/repository.json` |
 | Online scripts feed | `…/remote/on_line_sh/main.json` | `…github.io/VictorSuite/feeds/scripts.json` |
 | Plugin feed | `remote/plugins` | `…github.io/VictorSuite/feeds/plugins.json` |
@@ -112,7 +112,7 @@ Third-party project links (filebrowser, swiftp, MyServer, Termux-ADB, termux RUN
 7. **Pref & file migration** – PrefsMigrator, menu config fallback, tests.
 8. **Intents** – new actions + deprecated aliases.
 9. **Plugin system** – feed schema + sha256 + signing, PLUGIN_API.md, plugin intents/permission.
-10. **Feeds move** – repository/scripts/plugins to Pages; remove QQ/Telegram/ZeroCoreManage leftovers.
+10. **Feeds move** – repository/scripts/plugins to Pages; remove QQ/Telegram/VsEngineManage leftovers.
 11. **aars** – replace or rebuild xh_lib/z_file/stub; upgrade log4j.
 12. **Cleanup** – remove deprecated aliases/old prefs after one release.
 

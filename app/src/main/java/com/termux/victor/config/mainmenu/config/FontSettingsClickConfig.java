@@ -23,7 +23,7 @@ public class FontSettingsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.字体设置);
+        return context.getString(R.string.vs_font_settings);
     }
 
     @Override

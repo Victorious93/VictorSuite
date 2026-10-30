@@ -95,7 +95,7 @@ class BackRestoreDialog : BaseDialogDown, BackupStoreDialogCloseListener {
 
                         override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
                             switchDialog.dismiss()
-                            UUtils.showMsg(UUtils.getString(R.string.你没有SD卡权限))
+                            UUtils.showMsg(UUtils.getString(R.string.vs_you_don_t_have_sd_card_permission))
                         }
 
                     });

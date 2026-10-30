@@ -24,7 +24,7 @@ public class VsBBsClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.Zero论坛);
+        return context.getString(R.string.vs_help_manual);
     }
 
     @Override

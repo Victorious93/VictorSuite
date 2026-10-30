@@ -24,32 +24,32 @@ public class ParticleClickConfig extends BaseMenuClickConfig {
 
     @Override
     public String getString(Context context) {
-        return context.getString(R.string.zt_particle_animation);
+        return context.getString(R.string.vs_particle_animation);
     }
 
     @Override
     public void onClick(View view, Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        VsUserBean ztRainUserBean = UserSetManage.Companion.get().getZTUserBean();
-        ztRainUserBean.setSnowflakeShow(false);
+        VsUserBean vsRainUserBean = UserSetManage.Companion.get().getVsUserBean();
+        vsRainUserBean.setSnowflakeShow(false);
         termuxActivity.xue_fragment.removeAllViews();
-        if (!ztRainUserBean.isRainShow()) {
+        if (!vsRainUserBean.isRainShow()) {
             termuxActivity.firework_view.setVisibility(View.VISIBLE);
-            ztRainUserBean.setRainShow(true);
-            UserSetManage.Companion.get().setZTUserBean(ztRainUserBean);
+            vsRainUserBean.setRainShow(true);
+            UserSetManage.Companion.get().setVsUserBean(vsRainUserBean);
         } else {
             termuxActivity.firework_view.setVisibility(View.GONE);
-            ztRainUserBean.setRainShow(false);
-            UserSetManage.Companion.get().setZTUserBean(ztRainUserBean);
+            vsRainUserBean.setRainShow(false);
+            UserSetManage.Companion.get().setVsUserBean(vsRainUserBean);
         }
     }
 
     @Override
     public void initViewStatus(Context context) {
         TermuxActivity termuxActivity = (TermuxActivity) context;
-        VsUserBean ztRainUserBean = UserSetManage.Companion.get().getZTUserBean();
+        VsUserBean vsRainUserBean = UserSetManage.Companion.get().getVsUserBean();
         termuxActivity.xue_fragment.removeAllViews();
-        if (ztRainUserBean.isRainShow()) {
+        if (vsRainUserBean.isRainShow()) {
             termuxActivity.firework_view.setVisibility(View.VISIBLE);
         } else {
             termuxActivity.firework_view.setVisibility(View.GONE);

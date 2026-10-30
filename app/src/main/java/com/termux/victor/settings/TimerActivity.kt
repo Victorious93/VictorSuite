@@ -57,18 +57,18 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
         mM10.setOnClickListener(this)
         mM30.setOnClickListener(this)
         mOther.setOnClickListener(this)
-        val ztTimerBean = TimerSetManage.get().getZTTimerBean()
-        mStartSwitchEnvironmentSwitch.isChecked = TimerSetManage.get().getZTTimerBean().isVictorSuite
+        val vsTimerBean = TimerSetManage.get().getVsTimerBean()
+        mStartSwitchEnvironmentSwitch.isChecked = TimerSetManage.get().getVsTimerBean().isVictorSuite
         mStartTimerSwitch.isChecked = mLibSuManage!!.isRun
-        if (TimerSetManage.get().getZTTimerBean().timerNumber != TimerBean.TIMER_OTHER) {
-            switchIndex(ztTimerBean.timerNumber)
+        if (TimerSetManage.get().getVsTimerBean().timerNumber != TimerBean.TIMER_OTHER) {
+            switchIndex(vsTimerBean.timerNumber)
         } else {
 
             mCheckTimerSum.text = "-"
-            if (ztTimerBean.timerOtherNumber > (60 * 1000)) {
-                mCheckTimerSum.text = "${ztTimerBean.timerOtherNumber / 60 / 1000} ${UUtils.getString(R.string.zt_timer_minute)}"
+            if (vsTimerBean.timerOtherNumber > (60 * 1000)) {
+                mCheckTimerSum.text = "${vsTimerBean.timerOtherNumber / 60 / 1000} ${UUtils.getString(R.string.vs_timer_minute)}"
             } else {
-                mCheckTimerSum.text = "< 1 ${UUtils.getString(R.string.zt_timer_minute)}"
+                mCheckTimerSum.text = "< 1 ${UUtils.getString(R.string.vs_timer_minute)}"
             }
             mS30.setBackgroundResource(R.drawable.shape_line_2e84e6)
             mM1.setBackgroundResource(R.drawable.shape_line_2e84e6)
@@ -109,9 +109,9 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
                     }
                 }
                 mStartSwitchEnvironmentSwitch -> {
-                    val ztTimerBean = TimerSetManage.get().getZTTimerBean()
-                    ztTimerBean.setIsVictorSuite(mStartSwitchEnvironmentSwitch.isChecked)
-                    TimerSetManage.get().setZTTimerBean(ztTimerBean)
+                    val vsTimerBean = TimerSetManage.get().getVsTimerBean()
+                    vsTimerBean.setIsVictorSuite(mStartSwitchEnvironmentSwitch.isChecked)
+                    TimerSetManage.get().setVsTimerBean(vsTimerBean)
                     environmentString()
                 }
             }
@@ -123,11 +123,11 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
     }
 
     private fun environmentString() {
-        val ztTimerBean = TimerSetManage.get().getZTTimerBean()
-        mStartSwitchEnvironmentSum.text = if (ztTimerBean.isVictorSuite) {
-            "${UUtils.getString(R.string.zt_timer_environment_sum)} VictorSuite"
+        val vsTimerBean = TimerSetManage.get().getVsTimerBean()
+        mStartSwitchEnvironmentSum.text = if (vsTimerBean.isVictorSuite) {
+            "${UUtils.getString(R.string.vs_timer_environment_sum)} VictorSuite"
         } else {
-            "${UUtils.getString(R.string.zt_timer_environment_sum)} Shell"
+            "${UUtils.getString(R.string.vs_timer_environment_sum)} Shell"
         }
     }
 
@@ -138,58 +138,58 @@ class TimerActivity : AppCompatActivity(), LibSuManage.TimerListener, View.OnCli
         mM10.setBackgroundResource(R.drawable.shape_line_2e84e6)
         mM30.setBackgroundResource(R.drawable.shape_line_2e84e6)
         mOther.setBackgroundResource(R.drawable.shape_line_2e84e6)
-        val ztUserBean = TimerSetManage.get().getZTTimerBean()
+        val vsUserBean = TimerSetManage.get().getVsTimerBean()
         when (timer) {
             TimerBean.TIMER_30_SECOND -> {
                 mS30.setBackgroundResource(R.drawable.shape_line_8cff5a)
-                ztUserBean.timerNumber = TimerBean.TIMER_30_SECOND
-                mCheckTimerSum.text = UUtils.getString(R.string.zt_timer_30_second)
-                TimerSetManage.get().setZTTimerBean(ztUserBean)
+                vsUserBean.timerNumber = TimerBean.TIMER_30_SECOND
+                mCheckTimerSum.text = UUtils.getString(R.string.vs_timer_30_second)
+                TimerSetManage.get().setVsTimerBean(vsUserBean)
             }
             TimerBean.TIMER_1_MINUTE -> {
                 mM1.setBackgroundResource(R.drawable.shape_line_8cff5a)
-                ztUserBean.timerNumber = TimerBean.TIMER_1_MINUTE
-                mCheckTimerSum.text = UUtils.getString(R.string.zt_timer_1_minute)
-                TimerSetManage.get().setZTTimerBean(ztUserBean)
+                vsUserBean.timerNumber = TimerBean.TIMER_1_MINUTE
+                mCheckTimerSum.text = UUtils.getString(R.string.vs_timer_1_minute)
+                TimerSetManage.get().setVsTimerBean(vsUserBean)
             }
             TimerBean.TIMER_10_MINUTE -> {
                 mM10.setBackgroundResource(R.drawable.shape_line_8cff5a)
-                ztUserBean.timerNumber = TimerBean.TIMER_10_MINUTE
-                mCheckTimerSum.text = UUtils.getString(R.string.zt_timer_10_minute)
-                TimerSetManage.get().setZTTimerBean(ztUserBean)
+                vsUserBean.timerNumber = TimerBean.TIMER_10_MINUTE
+                mCheckTimerSum.text = UUtils.getString(R.string.vs_timer_10_minute)
+                TimerSetManage.get().setVsTimerBean(vsUserBean)
             }
             TimerBean.TIMER_30_MINUTE -> {
                 mM30.setBackgroundResource(R.drawable.shape_line_8cff5a)
-                ztUserBean.timerNumber = TimerBean.TIMER_30_MINUTE
-                mCheckTimerSum.text = UUtils.getString(R.string.zt_timer_30_minute)
-                TimerSetManage.get().setZTTimerBean(ztUserBean)
+                vsUserBean.timerNumber = TimerBean.TIMER_30_MINUTE
+                mCheckTimerSum.text = UUtils.getString(R.string.vs_timer_30_minute)
+                TimerSetManage.get().setVsTimerBean(vsUserBean)
             }
             TimerBean.TIMER_OTHER -> {
                 mOther.setBackgroundResource(R.drawable.shape_line_8cff5a)
-                ztUserBean.timerNumber = TimerBean.TIMER_OTHER
+                vsUserBean.timerNumber = TimerBean.TIMER_OTHER
                 val yesNoDialog = YesNoDialog(this)
 
-                yesNoDialog.titleTv.text = UUtils.getString(R.string.zt_timer_other_title_dialog)
+                yesNoDialog.titleTv.text = UUtils.getString(R.string.vs_timer_other_title_dialog)
                 yesNoDialog.show()
                 yesNoDialog.noTv.setOnClickListener {
                     yesNoDialog.dismiss()
                 }
-                yesNoDialog.createEditDialog(UUtils.getString(R.string.zt_timer_other_title_dialog))
+                yesNoDialog.createEditDialog(UUtils.getString(R.string.vs_timer_other_title_dialog))
                 yesNoDialog.yesTv.setOnClickListener {
                     val text = yesNoDialog.inputSystemName.text.toString()
                     try {
                         val toInt = text.toLong()
-                        ztUserBean.timerOtherNumber = toInt * 1000L
-                        TimerSetManage.get().setZTTimerBean(ztUserBean)
+                        vsUserBean.timerOtherNumber = toInt * 1000L
+                        TimerSetManage.get().setVsTimerBean(vsUserBean)
                         mCheckTimerSum.text = "-"
-                        if (ztUserBean.timerOtherNumber > (60 * 1000)) {
-                            mCheckTimerSum.text = "${ztUserBean.timerOtherNumber / 60 / 1000} ${UUtils.getString(R.string.zt_timer_minute)}"
+                        if (vsUserBean.timerOtherNumber > (60 * 1000)) {
+                            mCheckTimerSum.text = "${vsUserBean.timerOtherNumber / 60 / 1000} ${UUtils.getString(R.string.vs_timer_minute)}"
                         } else {
-                            mCheckTimerSum.text = "< 1 ${UUtils.getString(R.string.zt_timer_minute)}"
+                            mCheckTimerSum.text = "< 1 ${UUtils.getString(R.string.vs_timer_minute)}"
                         }
                         yesNoDialog.dismiss()
                     }catch (e: Exception) {
-                        UUtils.showMsg(UUtils.getString(R.string.zt_timer_other_input_numer_dialog))
+                        UUtils.showMsg(UUtils.getString(R.string.vs_timer_other_input_numer_dialog))
                         return@setOnClickListener
                     }
                 }

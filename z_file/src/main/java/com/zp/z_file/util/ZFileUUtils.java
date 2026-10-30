@@ -194,7 +194,7 @@ public class ZFileUUtils {
      * @param s
      * @return
      */
-    public static String rvZeroAndDot(String s) {
+    public static String rvVsAndDot(String s) {
         if (s.isEmpty()) {
             return null;
         }
@@ -243,14 +243,14 @@ public class ZFileUUtils {
     public static String bigDecimalAdd(String str, String str1, int scale) {
         BigDecimal bd = new BigDecimal(str);
         BigDecimal bd1 = new BigDecimal(str1);
-        return rvZeroAndDot(bd.add(bd1).setScale(scale, BigDecimal.ROUND_DOWN).toPlainString());
+        return rvVsAndDot(bd.add(bd1).setScale(scale, BigDecimal.ROUND_DOWN).toPlainString());
     }
 
     //减法
     public static String bigDecimalSubtract(String str, String str1, int scale) {
         BigDecimal bd = new BigDecimal(str);
         BigDecimal bd1 = new BigDecimal(str1);
-        return rvZeroAndDot(bd.subtract(bd1).setScale(scale, BigDecimal.ROUND_DOWN).toPlainString());
+        return rvVsAndDot(bd.subtract(bd1).setScale(scale, BigDecimal.ROUND_DOWN).toPlainString());
     }
 
     //乘法
@@ -258,9 +258,9 @@ public class ZFileUUtils {
         BigDecimal bd = new BigDecimal(str);
         BigDecimal bd1 = new BigDecimal(str1);
         if (scale == -1) {
-            return rvZeroAndDot(bd.multiply(bd1).toPlainString());
+            return rvVsAndDot(bd.multiply(bd1).toPlainString());
         } else {
-            return rvZeroAndDot(bd.multiply(bd1).setScale(scale, BigDecimal.ROUND_DOWN).toPlainString());
+            return rvVsAndDot(bd.multiply(bd1).setScale(scale, BigDecimal.ROUND_DOWN).toPlainString());
         }
     }
     public static void sleepIgnoreInterrupt(long millis) {
@@ -308,7 +308,7 @@ public class ZFileUUtils {
         }
         BigDecimal bd = new BigDecimal(str);
         BigDecimal bd1 = new BigDecimal(str1);
-        return rvZeroAndDot(bd.divide(bd1, scale, BigDecimal.ROUND_DOWN).toPlainString());
+        return rvVsAndDot(bd.divide(bd1, scale, BigDecimal.ROUND_DOWN).toPlainString());
     }
 
     //比大小    -1小于  0 等于 1 大于
@@ -366,7 +366,7 @@ public class ZFileUUtils {
      * 时间戳转换为时间
      */
     public static String stampToDate4(long timeMillis) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm分ss秒");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm'm' ss's'");
         Date date = new Date(timeMillis);
         return simpleDateFormat.format(date);
     }
@@ -707,7 +707,7 @@ public class ZFileUUtils {
 
 
     public static String getFileStringN(File file){
-      //  UUtils.showLog("获取文件目录:" + file.getAbsolutePath());
+      //  UUtils.showLog("Get file directory: " + file.getAbsolutePath());
         String txt = "";
         String temp = "";
         if (!file.exists()) {
@@ -734,17 +734,17 @@ public class ZFileUUtils {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return "文件加载失败!" + e.toString();
+            return "File load failed!" + e.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            return "文件加载失败!" + e.toString();
+            return "File load failed!" + e.toString();
         }
 
 
     }
 
     public static String getFileString(File file){
-        //  UUtils.showLog("获取文件目录:" + file.getAbsolutePath());
+        //  UUtils.showLog("Get file directory: " + file.getAbsolutePath());
         String txt = "";
         String temp = "";
         if (!file.exists()) {
@@ -771,10 +771,10 @@ public class ZFileUUtils {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return "文件加载失败!" + e.toString();
+            return "File load failed!" + e.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            return "文件加载失败!" + e.toString();
+            return "File load failed!" + e.toString();
         }
 
 
@@ -918,12 +918,12 @@ public class ZFileUUtils {
       //  Toast.makeText(con, "开始安装........:"  + filePath, Toast.LENGTH_SHORT).show();
         try {
             if (TextUtils.isEmpty(filePath)) {
-                Toast.makeText(con, "目录为空？", Toast.LENGTH_SHORT).show();
+                Toast.makeText(con, "Directory is empty?", Toast.LENGTH_SHORT).show();
                 return false;
             }
             File file = new File(filePath);
             if (!file.exists()) {
-                Toast.makeText(con, "没有内存卡权限？" + filePath, Toast.LENGTH_SHORT).show();
+                Toast.makeText(con, "No storage permission?" + filePath, Toast.LENGTH_SHORT).show();
                 return false;
             }
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -935,11 +935,11 @@ public class ZFileUUtils {
             con.startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(con, "安装失败，请重新下载", Toast.LENGTH_LONG).show();
+            Toast.makeText(con, "Install failed, please download again", Toast.LENGTH_LONG).show();
             return false;
         } catch (Error error) {
             error.printStackTrace();
-            Toast.makeText(con, "安装失败，请重新下载", Toast.LENGTH_LONG).show();
+            Toast.makeText(con, "Install failed, please download again", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -987,7 +987,7 @@ public class ZFileUUtils {
                 }
             }
         } catch (SocketException ex) {
-            Log.e("IP获取错误", ex.toString());
+            Log.e("Failed to get IP", ex.toString());
         }
         return "-.-.-.-";
     }

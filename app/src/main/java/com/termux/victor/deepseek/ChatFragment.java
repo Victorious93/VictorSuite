@@ -197,7 +197,7 @@ public class ChatFragment extends Fragment {
         aiClient.ask(requestMessageItemList, true, new DeepSeekClient.Lis() {
             @Override
             public void error() {
-                System.out.println("\n处理失败（服务器响应超时）");
+                System.out.println("\nFailed (server response timed out)");
                 input();
             }
 
@@ -267,7 +267,7 @@ public class ChatFragment extends Fragment {
 
     // 获取终端助手提示语
     private String getPrompt() {
-        boolean isDeepSeekVisibleTerminal = UserSetManage.Companion.get().getZTUserBean().isIsDeepSeekVisibleTerminal();
+        boolean isDeepSeekVisibleTerminal = UserSetManage.Companion.get().getVsUserBean().isIsDeepSeekVisibleTerminal();
         String terminalCommands = com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().getTextToTerminal()
             .replace("$", "")
             .replace("~", "")

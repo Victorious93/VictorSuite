@@ -26,7 +26,7 @@
                 android:id="@+id/title"
                 android:visibility="gone"
                 android:textSize="14sp"
-                android:text="点击[开始恢复]按钮,开始启动您的恢复\n\n不要退出该页面,否则导致恢复失败!" />
+                android:text="Tap [Start restore] to begin your restore\n\nDo not leave this page or the restore will fail!" />
 
 
 
@@ -60,7 +60,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="选择一个,开始恢复"
+                    android:text="Pick one to start restoring"
                     android:textColor="#fff"
                     android:textSize="18sp"
                     android:textStyle="bold"

@@ -24,8 +24,8 @@ class UserSetManage private constructor() {
         public val ITEM_GEON = "0"
     }
 
-    public fun getZTUserBean(): VsUserBean {
-        val zTUserBeanJson = OtherPrefs.getStringOther(VsConstant.ZT_USER_BEAN_KEY)
+    public fun getVsUserBean(): VsUserBean {
+        val zTUserBeanJson = OtherPrefs.getStringOther(VsConstant.VS_USER_BEAN_KEY)
         if (zTUserBeanJson.isNullOrEmpty() || zTUserBeanJson == "def") {
             return VsUserBean()
         }
@@ -37,9 +37,9 @@ class UserSetManage private constructor() {
         }
     }
 
-    public fun setZTUserBean(mZTUserBean: VsUserBean) {
-        val toJson = Gson().toJson(mZTUserBean)
-        OtherPrefs.saveStringOther(VsConstant.ZT_USER_BEAN_KEY, toJson)
+    public fun setVsUserBean(mVsUserBean: VsUserBean) {
+        val toJson = Gson().toJson(mVsUserBean)
+        OtherPrefs.saveStringOther(VsConstant.VS_USER_BEAN_KEY, toJson)
     }
 
     public fun defServerIPName(): DataServers {
@@ -47,9 +47,9 @@ class UserSetManage private constructor() {
         val dataServer = DataServer("def", VsLinks.FEED_BASE)
         arrayList.add(dataServer)
         val dataServers = DataServers(arrayList)
-        val ztUserBean = getZTUserBean()
-        ztUserBean.serverJsonString = Gson().toJson(dataServers)
-        setZTUserBean(ztUserBean)
+        val vsUserBean = getVsUserBean()
+        vsUserBean.serverJsonString = Gson().toJson(dataServers)
+        setVsUserBean(vsUserBean)
         return dataServers
     }
 

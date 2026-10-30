@@ -19,7 +19,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="@string/自定义方案"
+            android:text="@string/vs_custom_scheme"
             android:textStyle="bold"
             android:layout_marginTop="2dp"
             android:textSize="12sp"
@@ -77,7 +77,7 @@
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/添加一个命令"
+                        android:text="@string/vs_add_a_command"
                         android:textColor="#fff"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -88,7 +88,7 @@
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/添加一个命令解释"
+                        android:text="@string/vs_add_a_command_explanation"
                         android:textColor="#fff"
                         android:textSize="8sp"
                         android:textStyle="bold" />
@@ -162,7 +162,7 @@
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/导入导出命令"
+                        android:text="@string/vs_import_and_export_commands"
                         android:textColor="#fff"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -173,7 +173,7 @@
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/导入导出命令"
+                        android:text="@string/vs_import_and_export_commands"
                         android:textColor="#fff"
                         android:textSize="8sp"
                         android:textStyle="bold" />

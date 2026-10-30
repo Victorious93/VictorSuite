@@ -30,7 +30,7 @@ public class QZUtils {
             @Override
             public void run() {
 
-                Log.e("系统:", "run: " + tarFle.getName());
+                Log.e("System: ", "run: " + tarFle.getName());
 
                 try {
                     Thread.sleep(1000);
@@ -41,7 +41,7 @@ public class QZUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText("系统搜索完成!");
+                        myDialog.getDialog_pro().setText("System search complete!");
                         myDialog.getDialog_pro_prog().setProgress(15);
                     }
                 });
@@ -59,7 +59,7 @@ public class QZUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText("开始创建新的系统盘!");
+                        myDialog.getDialog_pro().setText("Creating new system disk!");
                         myDialog.getDialog_pro_prog().setProgress(25);
                     }
                 });
@@ -78,7 +78,7 @@ public class QZUtils {
                     UUtils.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(UUtils.getContext(), "没有找到storage目录,请手动创建", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UUtils.getContext(), "storage directory not found, please create it manually", Toast.LENGTH_SHORT).show();
 
                             myDialog.dismiss();
                             com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("termux-setup-storage");
@@ -95,12 +95,12 @@ public class QZUtils {
                     UUtils.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(UUtils.getContext(), "系统盘创建失败,请使用全手动模式恢复", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UUtils.getContext(), "System disk creation failed, please use full manual restore", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
 
-                Log.e("系统:", "run: " + createFile.getAbsolutePath());
+                Log.e("System: ", "run: " + createFile.getAbsolutePath());
 
                 try {
                     Thread.sleep(1500);
@@ -111,7 +111,7 @@ public class QZUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText("新的系统盘创建完成!");
+                        myDialog.getDialog_pro().setText("New system disk created!");
                         myDialog.getDialog_pro_prog().setProgress(45);
                     }
                 });
@@ -125,7 +125,7 @@ public class QZUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText("处理最后的一些事请!");
+                        myDialog.getDialog_pro().setText("Finishing up!");
                         myDialog.getDialog_pro_prog().setProgress(75);
                     }
                 });
@@ -140,7 +140,7 @@ public class QZUtils {
                 UUtils.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
-                        myDialog.getDialog_pro().setText("3秒后开始恢复!");
+                        myDialog.getDialog_pro().setText("Restore starts in 3 seconds!");
                         myDialog.getDialog_pro_prog().setProgress(100);
                     }
                 });
@@ -156,17 +156,17 @@ public class QZUtils {
                     @Override
                     public void run() {
                         myDialog.dismiss();
-                        Toast.makeText(UUtils.getContext(), "开始恢复..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UUtils.getContext(), "Restoring..", Toast.LENGTH_SHORT).show();
 
-                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo \"----手动恢复开始----\" \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("echo \"----Manual restore started----\" \n");
 
-                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -xzvf ./storage/shared/xinhao/data/" + tarFle.getName().replace(" ","") + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"系统恢复完成,请在切换系统，切换您的系统\" \n");
-                        //com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("tar -xzvf./storage/shared/xinhao/data/" + tarFle.getName() + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"系统恢复完成,请在切换系统，切换您的系统\" \n");
+                        com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("cd ~ && cd ~ && tar -xzvf ./storage/shared/xinhao/data/" + tarFle.getName().replace(" ","") + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"System restore complete. Switch to your system in Container switching\" \n");
+                        //com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal("tar -xzvf./storage/shared/xinhao/data/" + tarFle.getName() + "  -C ../../" + createFile.getName() + " && mv ../../" + createFile.getName() + "/data/data/com.termux/files/home ../../" + createFile.getName() +" && "+ "mv ../../" + createFile.getName() + "/data/data/com.termux/files/usr ../../" + createFile.getName()+" && rm -rf ../../"+createFile.getName()+"/data && echo \"System restore complete. Switch to your system in Container switching\" \n");
 
                         try {
                             restoreFragment.getActivity().finish();
                         }catch (Exception e){
-                            Toast.makeText(UUtils.getContext(), "出现了一个微弱的警告，可忽略", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UUtils.getContext(), "A minor warning occurred; it can be ignored", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -206,7 +206,7 @@ public class QZUtils {
                 printWriter.close();
 
             } catch (IOException e) {
-                Toast.makeText(UUtils.getContext(), "系统创建失败!请重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UUtils.getContext(), "System creation failed! Please retry", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
                 return;
             } finally {
@@ -242,7 +242,7 @@ public class QZUtils {
 
 
             int max = getMax(arrayList);
-            Log.e("XINHAO_HAN", "最大值: " + max);
+            Log.e("XINHAO_HAN", "Max: " + max);
 
 
             //直接创建
@@ -267,7 +267,7 @@ public class QZUtils {
                 printWriter.close();
 
             } catch (IOException e) {
-                Toast.makeText(UUtils.getContext(), "系统创建失败!请重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UUtils.getContext(), "System creation failed! Please retry", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
                 return;
             } finally {

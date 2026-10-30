@@ -74,7 +74,7 @@ public class MingLShowDialog extends BaseDialogCentre {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 MingLShowDialog.this.isChecked = isChecked;
-                UUtils.showLog("自动回车:" + isChecked);
+                UUtils.showLog("Auto enter: " + isChecked);
             }
         });
 
@@ -87,11 +87,11 @@ public class MingLShowDialog extends BaseDialogCentre {
                 String commitString = edit_text.getText().toString();
 
                 if(nameString == null ||nameString.isEmpty()){
-                    UUtils.showMsg(UUtils.getString(R.string.名称不能为空));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_name_is_required));
                     return ;
                 }
                 if(commitString == null ||commitString.isEmpty()){
-                    UUtils.showMsg(UUtils.getString(R.string.命令不能为空));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_command_cannot_be_empty));
                     return ;
                 }
 
@@ -115,7 +115,7 @@ public class MingLShowDialog extends BaseDialogCentre {
 
                     String s = new Gson().toJson(minLBean);
                     SaveData.saveData("commi22",s);
-                    UUtils.showMsg(UUtils.getString(R.string.添加成功));
+                    UUtils.showMsg(UUtils.getString(R.string.vs_added_successfully));
                     if(mAddCommitListener!= null){
                         mAddCommitListener.commit();
                     }
@@ -136,8 +136,8 @@ public class MingLShowDialog extends BaseDialogCentre {
                             mAddCommitListener.commit();
                         }
 
-                        UUtils.showLog("添加命令2:" + s);
-                        UUtils.showMsg(UUtils.getString(R.string.添加成功));
+                        UUtils.showLog("Add command 2: " + s);
+                        UUtils.showMsg(UUtils.getString(R.string.vs_added_successfully));
 
                     }catch (Exception e){
 
@@ -145,20 +145,20 @@ public class MingLShowDialog extends BaseDialogCentre {
                         textShowDialog.show();
                         textShowDialog.setCancelable(false);
                         textShowDialog.tishi_card_view.setVisibility(View.VISIBLE);
-                        textShowDialog.name_edit.setText(UUtils.getString(R.string.您的命令出错了));
+                        textShowDialog.name_edit.setText(UUtils.getString(R.string.vs_there_was_an_error_in_your_command));
                         textShowDialog.commit_ll.setVisibility(View.VISIBLE);
                         textShowDialog.edit_text.setText( SaveData.getData("commi22"));
-                        textShowDialog.commit.setText(UUtils.getString(R.string.清空));
+                        textShowDialog.commit.setText(UUtils.getString(R.string.vs_empty));
                         textShowDialog.commit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 SaveData.saveData("commi22","def");
-                                UUtils.showMsg(UUtils.getString(R.string.已完成清空));
+                                UUtils.showMsg(UUtils.getString(R.string.vs_completed_empty));
                                 textShowDialog.dismiss();
                             }
                         });
                         textShowDialog.diyige_ll.setVisibility(View.VISIBLE);
-                        textShowDialog.cancel.setText(UUtils.getString(R.string.取消));
+                        textShowDialog.cancel.setText(UUtils.getString(R.string.vs_cancel));
                         textShowDialog.cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -166,14 +166,14 @@ public class MingLShowDialog extends BaseDialogCentre {
                             }
                         });
 
-                        textShowDialog.start.setText(UUtils.getString(R.string.修改));
+                        textShowDialog.start.setText(UUtils.getString(R.string.vs_modify));
                         textShowDialog.start.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 SaveData.saveData("commi22",textShowDialog.edit_text.getText().toString());
 
 
-                                UUtils.showMsg(UUtils.getString(R.string.已完成修改));
+                                UUtils.showMsg(UUtils.getString(R.string.vs_modified));
                                 textShowDialog.dismiss();
                             }
                         });

@@ -41,6 +41,10 @@ public final class LegacyPackageNames {
         m.put(settings + "ZT" + "AboutActivity", settings + "VsAboutActivity");
         m.put(settings + "Zt" + "SettingsActivity", settings + "VsSettingsActivity");
         m.put(settings + "ZT" + "OnlineServerActivity", settings + "VsOnlineServerActivity");
+        String oldCmd = CURRENT_PACKAGE + "config." + "zt" + "command.";
+        String cmd = CURRENT_PACKAGE + "config.vscommand.";
+        m.put(oldCmd + "activity.SocketBaseActivity", cmd + "activity.SocketBaseActivity");
+        m.put(oldCmd + "VsSocketService", cmd + "VsSocketService");
         RENAMED_CLASSES = Collections.unmodifiableMap(m);
     }
 

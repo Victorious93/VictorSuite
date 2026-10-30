@@ -55,7 +55,7 @@ class CommonlyUsedSoftLinksDataClickConfig: BaseMenuClickConfig() {
                         FileIOUtils.setupFileSymlinks(qqDownloadPath, "$xinhaoLinkPath/QQDownload")
                         FileIOUtils.setupFileSymlinks(weiXinPath, "$xinhaoLinkPath/WXDownload")
                         FileIOUtils.setupFileSymlinks(weiXinAndroidPath, "$xinhaoLinkPath/WXAndroidDownload")
-                        UUtils.showMsg(UUtils.getString(R.string.成功))
+                        UUtils.showMsg(UUtils.getString(R.string.vs_success))
                     }
 
                     override fun onDenied(permissions: List<String>, never: Boolean) {

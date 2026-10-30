@@ -32,7 +32,7 @@
             android:id="@+id/zfile_dialog_info_fileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/zfile_black"
+            android:textColor="@color/zfile_text"
             tools:text="aaa.mp3" />
 
     </LinearLayout>
@@ -54,7 +54,7 @@
             android:id="@+id/zfile_dialog_info_fileType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/zfile_black"
+            android:textColor="@color/zfile_text"
             tools:text="aaa.mp3" />
 
     </LinearLayout>
@@ -76,7 +76,7 @@
             android:id="@+id/zfile_dialog_info_fileSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/zfile_black"
+            android:textColor="@color/zfile_text"
             tools:text="aaa.mp3" />
 
     </LinearLayout>
@@ -98,7 +98,7 @@
             android:id="@+id/zfile_dialog_info_fileDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/zfile_black"
+            android:textColor="@color/zfile_text"
             tools:text="aaa.mp3" />
 
     </LinearLayout>
@@ -120,7 +120,7 @@
             android:id="@+id/zfile_dialog_info_filePath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/zfile_black"
+            android:textColor="@color/zfile_text"
             tools:text="aaa.mp3" />
 
 
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zfile_info_loadding"
-                android:textColor="@color/zfile_black"
+                android:textColor="@color/zfile_text"
                 tools:text="aaa.mp3" />
 
         </LinearLayout>
@@ -187,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zfile_info_duration"
-                android:textColor="@color/zfile_black"
+                android:textColor="@color/zfile_text"
                 tools:text="aaa.mp3" />
 
         </LinearLayout>
@@ -209,7 +209,7 @@
                 android:id="@+id/zfile_dialog_info_fileOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/zfile_black"
+                android:textColor="@color/zfile_text"
                 tools:text="aaa.mp3" />
 
         </LinearLayout>
