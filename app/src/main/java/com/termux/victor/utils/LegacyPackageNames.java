@@ -34,6 +34,7 @@ public final class LegacyPackageNames {
         Map<String, String> m = new LinkedHashMap<>();
         String menu = CURRENT_PACKAGE + "config.mainmenu.config.";
         String settings = CURRENT_PACKAGE + "settings.";
+        m.put(menu + "AndraxOpenClickConfig", menu + "VictorDraxOpenClickConfig");
         m.put(menu + "ZT" + "CommandKeyClickConfig", menu + "VsCommandKeyClickConfig");
         m.put(menu + "Zero" + "BBsClickConfig", menu + "VsBBsClickConfig");
         m.put(menu + "ZT" + "SettingsClickConfig", menu + "VsSettingsClickConfig");

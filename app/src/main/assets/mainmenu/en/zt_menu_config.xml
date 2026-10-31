@@ -272,4 +272,10 @@
             click="java:com.termux.victor.config.mainmenu.config.RootForgeOpenClickConfig" />
     </group>
 
+    <group name="VictorDrax">
+        <item tag="Open VictorDrax"
+            name="Open VictorDrax"
+            click="java:com.termux.victor.config.mainmenu.config.VictorDraxOpenClickConfig" />
+    </group>
+
 </zt-menu>
