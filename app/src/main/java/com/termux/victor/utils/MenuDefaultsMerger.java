@@ -46,6 +46,7 @@ public class MenuDefaultsMerger {
     private static final String[][] RENAMED_GROUPS = {
         {"ZT Functions", "VictorSuite Functions"},
         {"ZT 功能", "VictorSuite功能"},
+        {"ANDRAX", "VictorDrax"},
     };
 
     public static final class Result {

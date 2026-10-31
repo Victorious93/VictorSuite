@@ -1443,6 +1443,12 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="rootforge_missing_msg">RootForge is a separate app (USB toolkit). Install it, then tap this entry again.</string>
     <string name="rootforge_open_releases">Open download page</string>
     <string name="rootforge_launch_failed">Could not open RootForge</string>
+    <string name="victordrax_category">VictorDrax</string>
+    <string name="victordrax_open_title">Open VictorDrax</string>
+    <string name="victordrax_missing_title">VictorDrax is not installed</string>
+    <string name="victordrax_missing_msg">VictorDrax (com.victorious.victordrax) is a separate app. Install it, then tap this entry again. For authorized testing only.</string>
+    <string name="victordrax_open_releases">Open download page</string>
+    <string name="victordrax_launch_failed">Could not open VictorDrax</string>
     <string name="linux_login_group">Linux Login</string>
     <!-- VictorSuite add: fleet remote-control envelope v1 -->
     <string name="remote_control_title">Fleet remote control</string>
