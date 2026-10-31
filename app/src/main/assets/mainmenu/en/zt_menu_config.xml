@@ -272,4 +272,10 @@
             click="java:com.termux.victor.config.mainmenu.config.RootForgeOpenClickConfig" />
     </group>
 
+    <group name="ANDRAX">
+        <item tag="Open Victorious ANDRAX"
+            name="Open Victorious ANDRAX"
+            click="java:com.termux.victor.config.mainmenu.config.AndraxOpenClickConfig" />
+    </group>
+
 </zt-menu>

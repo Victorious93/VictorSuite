@@ -27,6 +27,8 @@
          The FLEET_THEME_CHANGED receiver is registered at runtime (exported) by FleetThemeClient. -->
     <queries>
         <package android:name="com.victorious.launch" />
+        <!-- Victorious ANDRAX drawer entry (AndraxOpenClickConfig) -->
+        <package android:name="com.victorious.andrax" />
     </queries>
     <!-- @} -->
 

@@ -39,6 +39,8 @@ object VsLinks {
     const val ANDROID_CODE_STUDIO_REPO = "https://github.com/Victorious93/android-code-studio"
     const val ROOTFORGE_RELEASES = "https://github.com/Victorious93/rootforge-os/releases"
     const val DROIDCOMMAND_RELEASES = "https://github.com/Victorious93/droidcommand-ai/releases"
+    /** Placeholder: victorious-andrax is private and has no releases yet; update when one is published. */
+    const val ANDRAX_RELEASES = "https://github.com/Victorious93/victorious-andrax/releases"
 
     // --- AI providers ---
     const val DEEPSEEK_PLATFORM = "https://platform.deepseek.com/"
