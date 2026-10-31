@@ -53,7 +53,7 @@ import com.termux.victor.config.mainmenu.config.PublicWarehouseClickConfig;
 import com.termux.victor.config.mainmenu.config.QEMUClickConfig;
 import com.termux.victor.config.mainmenu.config.ReleaseLinuxVersionClickConfig;
 import com.termux.victor.config.mainmenu.config.RootForgeOpenClickConfig;
-import com.termux.victor.config.mainmenu.config.AndraxOpenClickConfig;
+import com.termux.victor.config.mainmenu.config.VictorDraxOpenClickConfig;
 import com.termux.victor.config.mainmenu.config.RemoteConnectionClickConfig;
 import com.termux.victor.config.mainmenu.config.ScheduledTaskClickConfig;
 import com.termux.victor.config.mainmenu.config.ShowCommandClickConfig;
@@ -197,10 +197,10 @@ public class MainMenuConfig implements BaseConfig {
         suiteClicks.add(new RootForgeOpenClickConfig());
         MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.rootforge_category), CODE_SUITE, suiteClicks));
 
-        // Victorious ANDRAX (separate app, opened by intent)
-        ArrayList<MainMenuClickConfig> andraxClicks = new ArrayList<>();
-        andraxClicks.add(new AndraxOpenClickConfig());
-        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.andrax_category), CODE_SUITE, andraxClicks));
+        // VictorDrax (separate app, opened by intent)
+        ArrayList<MainMenuClickConfig> victorDraxClicks = new ArrayList<>();
+        victorDraxClicks.add(new VictorDraxOpenClickConfig());
+        MAIN_MENU_CATEGORY_DATAS.add(new MainMenuCategoryData(context.getString(R.string.victordrax_category), CODE_SUITE, victorDraxClicks));
     }
 
     public static ArrayList<MainMenuCategoryData> getMainMenuCategoryDatas() {

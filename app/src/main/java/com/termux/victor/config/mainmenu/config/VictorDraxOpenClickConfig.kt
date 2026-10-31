@@ -14,14 +14,14 @@ import com.termux.R
 import com.termux.victor.config.mainmenu.MainMenuConfig
 
 /**
- * Drawer entry that hands off to the separate Victorious ANDRAX app (Victorious93/victorious-andrax,
- * package `com.victorious.andrax`, launcher activity `MainActivity`). Same pattern as
+ * Drawer entry that hands off to the separate VictorDrax app (Victorious93/victordrax,
+ * package `com.victorious.victordrax`, launcher activity `MainActivity`). Same pattern as
  * [RootForgeOpenClickConfig]: launch only, nothing embedded. See docs/PLUGIN_CONTRACT.md.
  *
  * Tries the package's launcher intent first, then the explicit component. If neither resolves,
  * offers the download page instead of failing.
  */
-class AndraxOpenClickConfig : BaseMenuClickConfig() {
+class VictorDraxOpenClickConfig : BaseMenuClickConfig() {
     override fun getType(): Int {
         return MainMenuConfig.CODE_SUITE
     }
@@ -31,7 +31,7 @@ class AndraxOpenClickConfig : BaseMenuClickConfig() {
     }
 
     override fun getString(context: Context?): String? {
-        return context?.getString(R.string.andrax_open_title) ?: "Open Victorious ANDRAX"
+        return context?.getString(R.string.victordrax_open_title) ?: "Open VictorDrax"
     }
 
     override fun onClick(view: View?, context: Context?) {
@@ -50,19 +50,19 @@ class AndraxOpenClickConfig : BaseMenuClickConfig() {
         try {
             context.startActivity(launchIntent)
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(context, R.string.andrax_launch_failed, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.victordrax_launch_failed, Toast.LENGTH_LONG).show()
         } catch (e: SecurityException) {
-            Toast.makeText(context, R.string.andrax_launch_failed, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.victordrax_launch_failed, Toast.LENGTH_LONG).show()
         }
     }
 
     private fun showNotInstalled(context: Context) {
         val dialog = switchDialogShow(
-            context.getString(R.string.andrax_missing_title),
-            context.getString(R.string.andrax_missing_msg),
+            context.getString(R.string.victordrax_missing_title),
+            context.getString(R.string.victordrax_missing_msg),
             context
         )
-        dialog.ok?.text = UUtils.getString(R.string.andrax_open_releases)
+        dialog.ok?.text = UUtils.getString(R.string.victordrax_open_releases)
         dialog.cancel?.setOnClickListener { dialog.dismiss() }
         dialog.ok?.setOnClickListener {
             dialog.dismiss()
@@ -71,15 +71,15 @@ class AndraxOpenClickConfig : BaseMenuClickConfig() {
             try {
                 context.startActivity(intent)
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(context, R.string.andrax_launch_failed, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.victordrax_launch_failed, Toast.LENGTH_LONG).show()
             }
         }
     }
 
     companion object {
-        const val PACKAGE = "com.victorious.andrax"
-        const val LAUNCHER_ACTIVITY = "com.victorious.andrax.MainActivity"
-        const val RELEASES_URL = VsLinks.ANDRAX_RELEASES
+        const val PACKAGE = "com.victorious.victordrax"
+        const val LAUNCHER_ACTIVITY = "com.victorious.victordrax.MainActivity"
+        const val RELEASES_URL = VsLinks.VICTORDRAX_RELEASES
 
         @JvmStatic
         fun explicitIntent(): Intent =

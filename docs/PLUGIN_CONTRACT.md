@@ -19,14 +19,14 @@ hard-coded drawer entry:
 | Download link | a constant in `config/VsLinks.kt` |
 | Strings | `values/strings.xml` and `values-zh-rCN/strings.xml` |
 
-Existing entries: RootForge (`RootForgeOpenClickConfig`), Victorious ANDRAX (`AndraxOpenClickConfig`).
+Existing entries: RootForge (`RootForgeOpenClickConfig`), VictorDrax (`VictorDraxOpenClickConfig`).
 DroidCommand AI uses the same launch logic from a fixed button (`DroidCommandAi.launch`).
 
 ## 2. What the plugin app must provide
 
 - **Launch:** an exported activity with `android.intent.action.MAIN` + `android.intent.category.LAUNCHER`.
   VictorSuite calls `PackageManager.getLaunchIntentForPackage(<package>)` and starts it with
-  `FLAG_ACTIVITY_NEW_TASK`. `AndraxOpenClickConfig` also falls back to an explicit
+  `FLAG_ACTIVITY_NEW_TASK`. `VictorDraxOpenClickConfig` also falls back to an explicit
   `ACTION_MAIN`/`CATEGORY_LAUNCHER` intent for the known component if it resolves.
 - **No extras** are sent. No result is read back.
 - **Package name:** fixed and listed in the click config and in `<queries>`. A `.debug` package may be
@@ -64,25 +64,25 @@ in the app today is for the VictorLaunch theme provider (`FleetThemeProviderVeri
 `PLUGIN_INSTALLED` / `PLUGIN_REMOVED`, `apkSigningCertSha256` pinning, the full-screen unsigned warning,
 and `type: "apk"` catalog installs.
 
-## 8. Victorious ANDRAX (current entry)
+## 8. VictorDrax (current entry)
 
 | Item | Value |
 |---|---|
-| Package | `com.victorious.andrax` |
-| Activity | `com.victorious.andrax.MainActivity`, exported, `MAIN` + `LAUNCHER` (already true in victorious-andrax `main`) |
+| Package | `com.victorious.victordrax` |
+| Activity | `com.victorious.victordrax.MainActivity` (`com.victorious.victordrax/.MainActivity`), exported, `MAIN` + `LAUNCHER` |
 | Intent action VictorSuite sends | `android.intent.action.MAIN` (launcher intent), no extras |
 | Meta-data keys | none required |
 | Icon | none required; drawer uses VictorSuite's `link_ico` |
 | Deep links | none |
 | Signature | not checked |
-| If missing | dialog → `VsLinks.ANDRAX_RELEASES` (`https://github.com/Victorious93/victorious-andrax/releases`, placeholder: repo is private and has no release yet) |
+| If missing | dialog → `VsLinks.VICTORDRAX_RELEASES` (`https://github.com/Victorious93/victordrax/releases`, placeholder: repo is private and has no release yet) |
 
 It is not in `docs/plugins/catalog.json`: catalog entries need a published artifact with a real
 `sha256`, and the official catalog lists only plugins signed with Don's key. Add it once a release exists.
 
-## 9. ANDRAX → VictorSuite: open a terminal session with a command (`RUN_COMMAND`)
+## 9. VictorDrax → VictorSuite: open a terminal session with a command (`RUN_COMMAND`)
 
-ANDRAX uses VictorSuite as its terminal. To enter the ANDRAX-NG chroot (or any other command), ANDRAX
+VictorDrax uses VictorSuite as its terminal. To enter its chroot (or any other command), VictorDrax
 sends the **existing** Termux `RUN_COMMAND` service intent. There is **no**
 `com.victorious.suite.action.RUN_COMMAND` and none was added: the upstream contract already covers a
 foreground session, a session title (`EXTRA_SHELL_NAME`), and working directory. Confirmed against
@@ -119,12 +119,12 @@ From `TERMUX_SERVICE.VALUE_EXTRA_SESSION_ACTION_*` (passed as a stringified int 
 
 | Value | Behaviour |
 |---|---|
-| `0` | Switch to the new session **and** open TermuxActivity (default; use this for ANDRAX) |
+| `0` | Switch to the new session **and** open TermuxActivity (default; use this for VictorDrax) |
 | `1` | Keep the current session selected, still open the activity |
 | `2` | Switch to the new session, do not open the activity |
 | `3` | Keep the current session, do not open the activity |
 
-There is no separate "session title" extra: set `com.termux.RUN_COMMAND_SHELL_NAME` (e.g. `"ANDRAX"`).
+There is no separate "session title" extra: set `com.termux.RUN_COMMAND_SHELL_NAME` (e.g. `"VictorDrax"`).
 
 On Android 10+, bringing TermuxActivity to the foreground from a background service also needs the
 user to have granted VictorSuite **Display over other apps**; otherwise the session is created but
@@ -138,15 +138,15 @@ stays behind the notification until the user taps it.
    ```
    Property name: `TermuxConstants.PROP_ALLOW_EXTERNAL_APPS` (`"allow-external-apps"`). Default is not
    true. If it is not `"true"`, `RunCommandService` fails the command and forces an error notification.
-2. Grant `com.termux.permission.RUN_COMMAND` to ANDRAX at install / runtime (dangerous permission).
+2. Grant `com.termux.permission.RUN_COMMAND` to VictorDrax at install / runtime (dangerous permission).
 3. Restart VictorSuite / reload properties after editing `termux.properties`.
 
-### 9.4 Sample Kotlin intent (ANDRAX side)
+### 9.4 Sample Kotlin intent (VictorDrax side)
 
 ```kotlin
-// Package: com.victorious.andrax. Requires <uses-permission android:name="com.termux.permission.RUN_COMMAND" />
+// Package: com.victorious.victordrax. Requires <uses-permission android:name="com.termux.permission.RUN_COMMAND" />
 // and a <queries> entry for package "com.termux" on targetSdk 30+.
-fun openAndraxChrootInVictorSuite(context: Context, chrootEntryScript: String) {
+fun openVictorDraxChrootInVictorSuite(context: Context, chrootEntryScript: String) {
     val intent = Intent("com.termux.RUN_COMMAND").apply {
         setPackage("com.termux")
         putExtra("com.termux.RUN_COMMAND_PATH", "/data/data/com.termux/files/usr/bin/bash")
@@ -154,8 +154,8 @@ fun openAndraxChrootInVictorSuite(context: Context, chrootEntryScript: String) {
         putExtra("com.termux.RUN_COMMAND_WORKDIR", "/data/data/com.termux/files/home")
         putExtra("com.termux.RUN_COMMAND_BACKGROUND", false)
         putExtra("com.termux.RUN_COMMAND_SESSION_ACTION", "0") // new session + open activity
-        putExtra("com.termux.RUN_COMMAND_SHELL_NAME", "ANDRAX")
-        putExtra("com.termux.RUN_COMMAND_COMMAND_LABEL", "ANDRAX-NG chroot")
+        putExtra("com.termux.RUN_COMMAND_SHELL_NAME", "VictorDrax")
+        putExtra("com.termux.RUN_COMMAND_COMMAND_LABEL", "VictorDrax chroot")
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // harmless on a service start; kept for clarity
     }
     context.startService(intent) // or ContextCompat.startForegroundService on API 26+ if needed
@@ -163,7 +163,7 @@ fun openAndraxChrootInVictorSuite(context: Context, chrootEntryScript: String) {
 ```
 
 `RUN_COMMAND_PATH` must point at a real file VictorSuite can execute; replace the sample paths with the
-actual ANDRAX-NG entry script once it ships under `$PREFIX`. Do **not** put a remote-control envelope
+actual VictorDrax entry script once it ships under `$PREFIX`. Do **not** put a remote-control envelope
 extra (`ai.droidcommand.REMOTE_ENVELOPE_JSON`) on this intent: that path is handled separately and
 never falls through to command execution (`TermuxRemoteEnvelopeBinding`).
 
@@ -176,4 +176,4 @@ never falls through to command execution (`TermuxRemoteEnvelopeBinding`).
 | Working directory | Yes: `EXTRA_WORKDIR` |
 | Permission + user opt-in | Yes: `RUN_COMMAND` permission + `allow-external-apps=true` |
 
-No new action, extra, or permission was added for ANDRAX.
+No new action, extra, or permission was added for VictorDrax.
