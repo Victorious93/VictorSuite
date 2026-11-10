@@ -40,6 +40,8 @@ import com.termux.victor.url.FileUrl;
 import com.termux.victor.utils.SaveData;
 import com.termux.victor.utils.WindowsUtils;
 import com.termux.victor.utils.SSHKeyUtils;
+import com.termux.victor.ssh.PasswordFifo;
+import com.termux.victor.ssh.QuickSshStore;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -56,7 +58,7 @@ public class BoomWindow {
     public static String PENDING_IMPORT_ALIAS = "";
 
     public static String TAG = "BoomWindow";
-    private static final String KEY_SSH_LIST = "ssh_device_list";
+    private static final String KEY_SSH_LIST = QuickSshStore.KEY_SSH_LIST;
     private static boolean isInstallingEnv = false;
     public static boolean SWITCH = true;
 
@@ -301,16 +303,8 @@ public class BoomWindow {
     }
     //快捷ssh
     private void showSSHList(BoomMinLAdapter.CloseLiftListener closeLiftListener) {
-        String json = SaveData.getData(KEY_SSH_LIST);
-        List<SSHDeviceBean> sshList = new ArrayList<>();
-        if (!TextUtils.isEmpty(json) && !json.equals("def")) {
-            try {
-                Type listType = new TypeToken<List<SSHDeviceBean>>(){}.getType();
-                sshList = new Gson().fromJson(json, listType);
-            } catch (Exception e) {
-                LogUtils.e(TAG, "SSH list parse error: " + e);
-            }
-        }
+        // Loads and (once, idempotently) migrates legacy plaintext passwords to Keystore ciphertext.
+        List<SSHDeviceBean> sshList = QuickSshStore.load();
 
         if (sshList.isEmpty()) {
             title.setVisibility(View.VISIBLE);
@@ -350,7 +344,7 @@ public class BoomWindow {
                     }
                 }
                 sshAdapter.notifyItemMoved(fromPosition, toPosition);
-                SaveData.saveData(KEY_SSH_LIST, new Gson().toJson(finalSshList));
+                QuickSshStore.save(finalSshList);
                 return true;
             }
 
@@ -376,14 +370,29 @@ public class BoomWindow {
             //连接
             @Override
             public void onConnect(SSHDeviceBean bean) {
-                String finalCmd = bean.generateConnectCommand();
-
-                if (!android.text.TextUtils.isEmpty(bean.getPassword())) {
-                    UUtils.showMsg(UUtils.getString(R.string.vs_connecting) + bean.getAlias());
+                String passwordFifo = null;
+                if (!bean.isUseKey() && bean.hasPassword()) {
+                    String password = QuickSshStore.getPassword(bean);
+                    if (password == null) {
+                        // Ciphertext unreadable (e.g. Keystore key lost): let ssh prompt instead.
+                        UUtils.showMsg(UUtils.getString(R.string.content_ssh_password_unreadable));
+                    } else {
+                        // One-shot FIFO read by `sshpass -f`; the password never enters the command line.
+                        passwordFifo = PasswordFifo.offer(UUtils.getContext(), password);
+                        UUtils.showMsg(UUtils.getString(R.string.vs_connecting) + bean.getAlias());
+                    }
+                }
+                String finalCmd;
+                try {
+                    finalCmd = QuickSshStore.buildConnectCommand(bean, passwordFifo);
+                } catch (IllegalArgumentException | IllegalStateException e) {
+                    UUtils.showMsg(UUtils.getString(R.string.content_ssh_host_format_error));
+                    return;
                 }
                 String runCmd = " clear && " + finalCmd;
-                com.zp.z_file.util.LogUtils.d(TAG, "content click ssh:" + runCmd);
-                //屏蔽Connection refused用String runCmd = " clear && " + finalCmd + " 2>/dev/null || echo 'err'";
+                // Never log the command or any secret; alias and auth mode only.
+                com.zp.z_file.util.LogUtils.d(TAG, "quick ssh connect: alias=" + bean.getAlias()
+                    + " auth=" + (bean.isUseKey() ? "key" : (passwordFifo != null ? "password" : "prompt")));
 
                 com.termux.victor.utils.SingletonCommunicationUtils.getInstance().getmSingletonCommunicationListener().sendTextToTerminal(runCmd + "\n");
 
@@ -401,8 +410,9 @@ public class BoomWindow {
                 builder.setPositiveButton(UUtils.getString(R.string.vs_delete), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finalSshList.remove(position);
-                        SaveData.saveData(KEY_SSH_LIST, new Gson().toJson(finalSshList));
+                        SSHDeviceBean removed = finalSshList.remove(position);
+                        QuickSshStore.forgetHostKey(removed);
+                        QuickSshStore.save(finalSshList);
                         showSSHList(closeLiftListener);
                         UUtils.showMsg(UUtils.getString(R.string.content_ssh_remove_ok));
                     }
@@ -493,7 +503,10 @@ public class BoomWindow {
         etPass.setSingleLine(true);
         etPass.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
         etPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        if (isEditMode && editBean.getPassword() != null) etPass.setText(editBean.getPassword());
+        if (isEditMode && editBean.hasPassword()) {
+            String existing = QuickSshStore.getPassword(editBean);
+            if (existing != null) etPass.setText(existing);
+        }
 
         final ImageView eyeIcon = new ImageView(mTermuxActivity);
         eyeIcon.setImageResource(android.R.drawable.ic_menu_view);
@@ -548,6 +561,34 @@ public class BoomWindow {
         keyLayout.addView(btnViewPub);
         layout.addView(keyLayout);
 
+        // Host keys are pinned per entry (trust on first use). A changed key is refused by ssh;
+        // the only way to accept a new key is this explicit, confirmed action.
+        if (isEditMode && QuickSshStore.hasPinnedHostKey(editBean)) {
+            android.widget.Button btnForgetHostKey = new android.widget.Button(mTermuxActivity);
+            btnForgetHostKey.setText(UUtils.getString(R.string.content_ssh_forget_host_key));
+            btnForgetHostKey.setTextSize(12);
+            btnForgetHostKey.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(mTermuxActivity)
+                        .setTitle(UUtils.getString(R.string.content_ssh_forget_host_key))
+                        .setMessage(String.format(UUtils.getString(R.string.content_ssh_forget_host_key_confirm), editBean.getHost()))
+                        .setPositiveButton(UUtils.getString(R.string.content_ssh_forget_host_key), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface d, int which) {
+                                if (QuickSshStore.forgetHostKey(editBean)) {
+                                    UUtils.showMsg(UUtils.getString(R.string.content_ssh_forget_host_key_done));
+                                    btnForgetHostKey.setEnabled(false);
+                                }
+                            }
+                        })
+                        .setNegativeButton(UUtils.getString(R.string.edit_cancel), null)
+                        .show();
+                }
+            });
+            layout.addView(btnForgetHostKey);
+        }
+
         // 初始视图状态
         if (cbUseKey.isChecked()) {
             passwordLayout.setVisibility(View.GONE);
@@ -581,7 +622,7 @@ public class BoomWindow {
                 //content_ssh_rsa
                 new AlertDialog.Builder(mTermuxActivity)
                     .setTitle(UUtils.getString(R.string.content_ssh_generate_key))
-                    .setMessage(String.format(UUtils.getString(R.string.content_ssh_rsa), currentAlias.replaceAll("[^a-zA-Z0-9_\\-]", "_")))
+                    .setMessage(String.format(UUtils.getString(R.string.content_ssh_rsa), SSHKeyUtils.safeName(currentAlias)))
                     .setPositiveButton(UUtils.getString(R.string.content_ssh_generate), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -603,7 +644,7 @@ public class BoomWindow {
                     return;
                 }
 
-                File pubKeyFile = new File(SSHKeyUtils.getSSHDir(), currentAlias.replaceAll("[^a-zA-Z0-9_\\-]", "_") + ".key.pub");
+                File pubKeyFile = new File(SSHKeyUtils.getKeyFile(currentAlias).getAbsolutePath() + ".pub");
                 if (!pubKeyFile.exists()) {
                     UUtils.showMsg(UUtils.getString(R.string.content_ssh_key_not_exets));
                     return;
@@ -700,9 +741,17 @@ public class BoomWindow {
                     validHost,
                     port,
                     etUser.getText().toString().trim(),
-                    etPass.getText().toString().trim(),
                     cbUseKey.isChecked()
                 );
+                if (isEditMode && !TextUtils.isEmpty(editBean.getId())) {
+                    bean.setId(editBean.getId()); // keep the pinned host key
+                }
+                // Password is stored only as Keystore ciphertext; key entries store none.
+                String typedPassword = cbUseKey.isChecked() ? "" : etPass.getText().toString().trim();
+                if (!QuickSshStore.setPassword(bean, typedPassword)) {
+                    UUtils.showMsg(UUtils.getString(R.string.content_ssh_password_encrypt_failed));
+                    return;
+                }
 
                 if (isEditMode) {
                     updateSSHDevice(editPosition, bean);
@@ -719,12 +768,8 @@ public class BoomWindow {
     }
     //校验别名
     private boolean isAliasExist(String alias, int excludePosition) {
-        String json = SaveData.getData(KEY_SSH_LIST);
-        if (TextUtils.isEmpty(json) || json.equals("def")) return false;
-
         try {
-            Type listType = new TypeToken<List<SSHDeviceBean>>(){}.getType();
-            List<SSHDeviceBean> list = new Gson().fromJson(json, listType);
+            List<SSHDeviceBean> list = QuickSshStore.load();
 
             for (int i = 0; i < list.size(); i++) {
                 if (i == excludePosition) continue;
@@ -739,27 +784,13 @@ public class BoomWindow {
         return false;
     }
     private void saveNewSSHDevice(SSHDeviceBean newDevice) {
-        String json = SaveData.getData(KEY_SSH_LIST);
-        List<SSHDeviceBean> list = new ArrayList<>();
-        if (!TextUtils.isEmpty(json) && !json.equals("def")) {
-            try {
-                Type listType = new TypeToken<List<SSHDeviceBean>>(){}.getType();
-                list = new Gson().fromJson(json, listType);
-            } catch (Exception e) {}
-        }
+        List<SSHDeviceBean> list = QuickSshStore.load();
         list.add(newDevice);
-        SaveData.saveData(KEY_SSH_LIST, new Gson().toJson(list));
+        QuickSshStore.save(list);
     }
 
     private void updateSSHDevice(int position, SSHDeviceBean newBean) {
-        String json = SaveData.getData(KEY_SSH_LIST);
-        List<SSHDeviceBean> list = new ArrayList<>();
-        if (!android.text.TextUtils.isEmpty(json) && !json.equals("def")) {
-            try {
-                Type listType = new TypeToken<List<SSHDeviceBean>>(){}.getType();
-                list = new Gson().fromJson(json, listType);
-            } catch (Exception e) {}
-        }
+        List<SSHDeviceBean> list = QuickSshStore.load();
         if (position >= 0 && position < list.size()) {
             SSHDeviceBean oldBean = list.get(position);
             // 别名已改，重命名
@@ -778,8 +809,10 @@ public class BoomWindow {
                 }
             }
 
+            // Keep the stored id so the pinned host key (known_hosts/<id>) stays with the entry.
+            if (!TextUtils.isEmpty(oldBean.getId())) newBean.setId(oldBean.getId());
             list.set(position, newBean);
-            SaveData.saveData(KEY_SSH_LIST, new Gson().toJson(list));
+            QuickSshStore.save(list);
         }
     }
     /**

@@ -1141,7 +1141,12 @@ Known Issue: Rapid consecutive back operations may cause black screen in Interna
     <string name="content_ssh_copy_public_key">Copy Public Key</string>
     <string name="content_ssh_alias_summary">Please fill in an alias first. The key file will be named after the alias.</string>
     <string name="content_ssh_generate_key">Generate Key Pair</string>
-    <string name="content_ssh_rsa">"A new RSA key pair will be generated:\n~/.ssh/%s.key\n\nIf the file already exists, it will be overwritten."</string>
+    <string name="content_ssh_rsa">"A new Ed25519 key pair will be generated:\n~/.ssh/%s.key\n\nThe terminal will ask for a passphrase (recommended). If the file already exists, ssh-keygen asks before overwriting it."</string>
+    <string name="content_ssh_forget_host_key">Forget host key</string>
+    <string name="content_ssh_forget_host_key_confirm">"Forget the saved host key for %s?\n\nOnly do this if you know why the server key changed. The next connection will trust whatever key the server presents."</string>
+    <string name="content_ssh_forget_host_key_done">Host key forgotten</string>
+    <string name="content_ssh_password_encrypt_failed">Could not encrypt the password with the Android Keystore. Not saved.</string>
+    <string name="content_ssh_password_unreadable">Saved password could not be decrypted. Enter it when prompted, or edit the device.</string>
     <string name="content_ssh_generate_keying">Generating key in background...</string>
     <string name="content_ssh_please_fill_alias_first">Please fill in an alias first</string>
     <string name="content_ssh_key_not_exets">"Public key file does not exist. Please generate a key pair first."</string>
