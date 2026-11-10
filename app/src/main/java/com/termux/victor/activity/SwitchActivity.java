@@ -570,7 +570,7 @@ public class SwitchActivity extends AppCompatActivity  implements View.OnClickLi
     private void createSystemDialog() {
 
         final EditText et = new EditText(this);
-        new AlertDialog.Builder(this).setTitle("Enter a new Linux name")
+        new AlertDialog.Builder(this).setTitle(R.string.vs_enter_new_linux_name)
             .setIcon(R.mipmap.linux_new_ico)
             .setView(et)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {

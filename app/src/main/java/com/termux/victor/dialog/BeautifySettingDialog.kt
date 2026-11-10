@@ -38,10 +38,8 @@ class BeautifySettingDialog : BaseDialogDown {
     private var def_tv:TextView? = null
     private var show1:ImageView? = null
     private var show2:ImageView? = null
-    private var mOnTextCheckedChangeListener:OnTextCheckedChangeListener? = null
     private var mOnChangeImageFile:OnChangeImageFile? = null
     private var back_ap: Switch? = null
-    private var back_text_show_switch: Switch? = null
 
     private val MAX_ALPHA:Int = 255
     private val MIN_ALPHA:Int = 40
@@ -65,7 +63,6 @@ class BeautifySettingDialog : BaseDialogDown {
         img_rl = mView.findViewById(R.id.img_rl)
         def_tv = mView.findViewById(R.id.def_tv)
         back_ap = mView.findViewById(R.id.back_ap)
-        back_text_show_switch = mView.findViewById(R.id.back_text_show_switch)
         setColorAll()
         initProgress()
     }
@@ -74,7 +71,6 @@ class BeautifySettingDialog : BaseDialogDown {
         val stringOther = OtherPrefs.getStringOther("font_color_progress")
         val back_color_progress = OtherPrefs.getStringOther("back_color_progress")
         val change_text = OtherPrefs.getStringOther("change_text")
-        val change_text_show = OtherPrefs.getStringOther("change_text_show")
         if(!(stringOther == null || stringOther.isEmpty() || stringOther == "def")){
             try {
                 val toInt = stringOther.toInt()
@@ -92,7 +88,6 @@ class BeautifySettingDialog : BaseDialogDown {
             }
         }
         back_ap?.isChecked = !(change_text == null || change_text.isEmpty() || change_text == "def")
-        back_text_show_switch?.isChecked = (change_text_show == null || change_text_show.isEmpty() || change_text_show == "def")
 
         val fileImg = File("${FileUrl.mainConfigImg}/back.jpg")
         Log.e(LOG_TAG, "initProgress: check jpg exists: " + fileImg.exists())
@@ -149,16 +144,6 @@ class BeautifySettingDialog : BaseDialogDown {
             }else{
                 OtherPrefs.saveStringOther("change_text","def")
             }
-        }
-
-        back_text_show_switch?.setOnCheckedChangeListener { compoundButton, b ->
-            mOnTextCheckedChangeListener?.onChange(b)
-            if(b){
-                OtherPrefs.saveStringOther("change_text_show","def")
-            }else{
-                OtherPrefs.saveStringOther("change_text_show","$b")
-            }
-
         }
 
         img_rl?.setOnClickListener {
@@ -218,10 +203,6 @@ class BeautifySettingDialog : BaseDialogDown {
         this.mOnChangeTextView = mOnChangeTextView
     }
 
-    public fun setOnTextCheckedChangeListener(mOnTextCheckedChangeListener:OnTextCheckedChangeListener){
-        this.mOnTextCheckedChangeListener = mOnTextCheckedChangeListener
-    }
-
     public fun setOnChangeImageFile(mOnChangeImageFile:OnChangeImageFile){
         this.mOnChangeImageFile = mOnChangeImageFile
     }
@@ -251,13 +232,6 @@ class BeautifySettingDialog : BaseDialogDown {
 
     public interface OnChangeImageFile{
         fun onChangImage(mFile:File)
-    }
-
-    public interface OnTextCheckedChangeListener{
-
-        fun onChange(change:Boolean)
-
-
     }
 
     override fun getContentView(): Int {

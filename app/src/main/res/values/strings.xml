@@ -236,6 +236,7 @@
     <string name="vs_this_operation_will_overwrite_your_file">This operation will overwrite your file records, do you want to continue?</string>
     <string name="vs_determine">OK</string>
     <string name="vs_unnamedcontainer">UnnamedContainer</string>
+    <string name="vs_enter_new_linux_name">Enter a new Linux name</string>
     <string name="vs_delete">Delete</string>
     <string name="vs_switch">Switch</string>
     <string name="vs_delete_complete_need_to_re_enter_to_refr">Delete complete_ need to re-enter to refresh</string>
@@ -707,8 +708,7 @@ Reset successfully</string>
     <string name="vs_back_color_transparency">Back Color transparency</string>
     <string name="vs_font_color_transparency_up_pic">Font Color transparency up pic</string>
     <string name="vs_back_pic">Back PIC</string>
-    <string name="vs_show_back_font">Show Back Font</string>
-    <string name="vs_reset">Reset</string>
+        <string name="vs_reset">Reset</string>
     <string name="vs_if_you_see_this_page_press_the_back_key">If you see this page, press the back key to exit</string>
     <string name="nju">NJU</string>
     <string name="ustc">USTC</string>
@@ -849,9 +849,9 @@ Reset successfully</string>
     <string name="data_message_empty">Data Msg Not Empty</string>
     <string name="vs_uninstall_label">unInstall</string>
     <string name="install_module">Install Module</string>
-    <string name="install_module_download">Install Module(DownLoad Module)</string>
+    <string name="install_module_download">Install Module (Download)</string>
     <string name="install_module_message">Note: It cannot be uninstalled after installation, and it only takes effect for the current container (if the path has been put into the module package but it is not displayed, please check the SD card permission)</string>
-    <string name="install_empty">sdcard/xinhao/module,no data</string>
+    <string name="install_empty">No modules in /sdcard/xinhao/module</string>
     <string name="install_message">Console:\nStart installing modules</string>
     <string name="delete_module_data">remove this modpack</string>
     <string name="data_module_name">module name:</string>
