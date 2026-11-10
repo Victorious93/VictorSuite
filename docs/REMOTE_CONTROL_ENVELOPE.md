@@ -13,9 +13,9 @@ Frozen specs this follows (in `Victorious93/droidcommand-AI`):
 - `docs/specs/STATUS_TRAY.md` — `node.status.get`
 - `docs/specs/UNIFIED_BACKUP.md` — `config.export` / `config.import` (PR #236)
 
-Code: `app/src/main/java/com/termux/zerocore/remotecontrol/` (pure JVM; no Android
+Code: `app/src/main/java/com/termux/victor/remotecontrol/` (pure JVM; no Android
 imports) and `.../remotecontrol/android/` (thin binding). Tests:
-`app/src/test/java/com/termux/zerocore/remotecontrol/`.
+`app/src/test/java/com/termux/victor/remotecontrol/`.
 
 ---
 
