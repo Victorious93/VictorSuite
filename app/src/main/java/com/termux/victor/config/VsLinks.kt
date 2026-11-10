@@ -1,22 +1,24 @@
 package com.termux.victor.config
 
+import com.termux.shared.termux.VictorSuiteLinks
+
 /**
  * Every external URL the app opens or fetches lives here, so links can be changed in one place.
- * Edit the values below; nothing else in the app should hard-code a URL.
- *
- * (Package will move to com.termux.victor.config in a later debrand batch.)
+ * Edit the values below (or the overlapping ones in VictorSuiteLinks); nothing else in the app
+ * should hard-code a URL.
  */
 object VsLinks {
     // --- VictorSuite project ---
-    const val REPO = "https://github.com/Victorious93/VictorSuite"
-    const val RELEASES = "$REPO/releases"
-    const val ISSUES = "$REPO/issues"
+    // These four are defined in termux-shared so About / crash-report text can use them too.
+    const val REPO = VictorSuiteLinks.REPO
+    const val RELEASES = VictorSuiteLinks.RELEASES
+    const val ISSUES = VictorSuiteLinks.ISSUES
 
-    /** GitHub Pages site built from docs/ (live once Pages is enabled for the repo). */
-    const val DOCS_SITE = "https://victorious93.github.io/VictorSuite/"
+    /** GitHub Pages site built from docs/. */
+    const val DOCS_SITE = VictorSuiteLinks.DOCS_SITE
 
-    /** In-app help / manual. Points at docs/MANUAL.md until the Pages site is live, then switch to DOCS_SITE. */
-    const val HELP = "$REPO/blob/main/docs/MANUAL.md"
+    /** In-app help / manual on the Pages site (MANUAL.html, verified live). */
+    const val HELP = VictorSuiteLinks.HELP
 
     /**
      * Plugin / module catalog, served by GitHub Pages from docs/plugins/catalog.json.

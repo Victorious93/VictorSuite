@@ -21,7 +21,7 @@
         1.click: Calls a JAVA class internal to VictorSuite.
         Example: click="java:com.termux.victor.config.mainmenu.config.SwitchSourceClickConfig"
         2.Or jump to a web page:
-        click="jumpUrl:www.example.com"
+        click="jumpUrl:https://victorious93.github.io/VictorSuite/"
         3.Or execute a shell command:
         click="ztShell:cd ~ && pkg update"
         4.To execute directly, modify this configuration item:
@@ -55,7 +55,7 @@
         <item tag="RedirectURL"
             name="RedirectURL"
             icon=""
-            click="jumpUrl:https://www.google.com" />
+            click="jumpUrl:https://victorious93.github.io/VictorSuite/" />
         <item tag="OccupyAPlaceDoNothing"
             name="PlaceholderMenu"
             icon=""
@@ -96,8 +96,8 @@
         <item tag="OpenTheURLWithinTheApp"
             name="InAppURL"
             icon=""
-            activityTitle="Google"
-            click="appWebUrl:https://www.google.com" />
+            activityTitle="VictorSuite"
+            click="appWebUrl:https://victorious93.github.io/VictorSuite/" />
     </group>
     <!--####################### Can be deleted #########################-->
 

@@ -63,8 +63,9 @@ public class TermuxApplication extends Application {
         mContext = this;
         mHandler = new Handler();
         UUtils.initUUtils(mContext, mHandler);
-        // z_file's module dialog links to our own plugin catalog (was the ZeroTermux module server).
-        com.zp.z_file.ui.dialog.InstallModuleDialog.setModuleDownloadUrl(com.termux.victor.config.VsLinks.PLUGIN_CATALOG);
+        // z_file's module dialog "download" button opens the owned docs site
+        // (no dedicated plugins browse page exists yet; catalog.json is the machine feed).
+        com.zp.z_file.ui.dialog.InstallModuleDialog.setModuleDownloadUrl(com.termux.victor.config.VsLinks.DOCS_SITE);
 
         Context context = getApplicationContext();
 
