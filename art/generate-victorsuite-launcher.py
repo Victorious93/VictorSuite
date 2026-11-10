@@ -199,6 +199,36 @@ def trace_monochrome_vector(mono: Image.Image, canvas_dp: float, safe_dp: float)
     return xml
 
 
+
+def qs_tile_vector(monochrome_xml: str) -> str:
+    """Crop the 108dp monochrome glyph to its 66dp safe zone at 24dp."""
+    import re
+
+    m = re.search(r'android:pathData="([^"]+)"', monochrome_xml)
+    if not m:
+        raise SystemExit("monochrome XML missing pathData")
+    return (
+        '<?xml version="1.0" encoding="utf-8"?>\n'
+        '<vector xmlns:android="http://schemas.android.com/apk/res/android"\n'
+        '    android:width="24dp"\n'
+        '    android:height="24dp"\n'
+        '    android:viewportWidth="66"\n'
+        '    android:viewportHeight="66">\n'
+        "    <!-- Quick Settings / notification small icon: the monochrome glyph cropped\n"
+        "         to the 66dp safe zone so it fills a 24dp tile. Same artwork as\n"
+        "         ic_launcher_monochrome (white-on-transparent, evenOdd). -->\n"
+        "    <group\n"
+        '        android:translateX="-21"\n'
+        '        android:translateY="-21">\n'
+        "        <path\n"
+        '            android:fillColor="#FFFFFFFF"\n'
+        '            android:fillType="evenOdd"\n'
+        f'            android:pathData="{m.group(1)}" />\n'
+        "    </group>\n"
+        "</vector>\n"
+    )
+
+
 ADAPTIVE_XML = """\
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
@@ -255,7 +285,11 @@ def main() -> int:
     drawable = res / "drawable"
     drawable.mkdir(parents=True, exist_ok=True)
     (drawable / "ic_launcher_monochrome.xml").write_text(xml)
-    print("wrote adaptive XMLs and drawable/ic_launcher_monochrome.xml")
+    # 24dp QS / notification glyph: same path, cropped to the 66dp safe zone
+    # so the emblem fills the tile instead of sitting in 108dp of padding.
+    tile = qs_tile_vector(xml)
+    (drawable / "ic_qs_tile_victorsuite.xml").write_text(tile)
+    print("wrote adaptive XMLs, ic_launcher_monochrome.xml, ic_qs_tile_victorsuite.xml")
     return 0
 
 

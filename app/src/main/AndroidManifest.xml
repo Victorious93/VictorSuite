@@ -387,7 +387,7 @@
             android:exported="false" />
         <service
             android:name=".victor.ftp.new_ftp.services.MyTileService"
-            android:icon="@drawable/ic_launcher" />
+            android:icon="@drawable/ic_qs_tile_victorsuite" />
 
         <receiver
             android:name=".shared.activities.ReportActivity$ReportActivityBroadcastReceiver"
