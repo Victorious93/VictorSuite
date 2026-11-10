@@ -58,7 +58,7 @@ class InstallModuleDialog: BaseDialogCentre {
                 dismiss()
             }
             download_module?.setOnClickListener {
-                UUtils.startUrl(VsLinks.FEED_REPOSITORY_BROWSE)
+                UUtils.startUrl(VsLinks.PLUGIN_PAGE)
             }
 
             mClose?.setOnClickListener {

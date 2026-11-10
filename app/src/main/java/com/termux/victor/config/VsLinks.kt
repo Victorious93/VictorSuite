@@ -21,10 +21,19 @@ object VsLinks {
     const val HELP = VictorSuiteLinks.HELP
 
     /**
-     * Plugin / module catalog, served by GitHub Pages from docs/plugins/catalog.json.
-     * Replaces the upstream ZeroTermux module download server.
+     * Human-readable plugin catalog page (docs/plugins/index.md).
+     * GitHub Pages serves this at /plugins/ once this lands on main.
+     */
+    const val PLUGIN_PAGE = "${DOCS_SITE}plugins/"
+
+    /**
+     * Plugin / module catalog feed, served by GitHub Pages from docs/plugins/catalog.json.
+     * Replaces the upstream ZeroTermux module download server. Machine-readable only.
      */
     const val PLUGIN_CATALOG = "${DOCS_SITE}plugins/catalog.json"
+
+    /** Colors and fonts note (docs/styling.md → styling.html on Pages). */
+    const val STYLING = "${DOCS_SITE}styling.html"
 
     /** Release check: newest release including pre-releases (/releases/latest skips pre-releases and 404s). */
     const val RELEASES_API = "https://api.github.com/repos/Victorious93/VictorSuite/releases?per_page=1"
@@ -43,11 +52,6 @@ object VsLinks {
     const val DROIDCOMMAND_RELEASES = "https://github.com/Victorious93/droidcommand-ai/releases"
     /** Placeholder: victordrax is private and has no releases yet; update when one is published. */
     const val VICTORDRAX_RELEASES = "https://github.com/Victorious93/victordrax/releases"
-
-    // --- AI providers ---
-    const val DEEPSEEK_PLATFORM = "https://platform.deepseek.com/"
-    const val DEEPSEEK_API = "https://api.deepseek.com/chat/completions"
-    const val CLAUDE_API = "https://api.anthropic.com/v1/messages"
 
     // --- Third-party downloads and credits ---
     const val TAILSCALE_STABLE = "https://pkgs.tailscale.com/stable/"

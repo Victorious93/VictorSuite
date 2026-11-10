@@ -8,6 +8,8 @@ An Android Linux environment and toolkit: containers, backup/restore, plugins, X
 
 - **Download:** [GitHub Releases](https://github.com/Victorious93/VictorSuite/releases) (pre-releases, not yet device-tested)
 - **Manual:** [MANUAL.md](MANUAL.md)
+- **Plugins:** [plugins](plugins/)
+- **Colors and fonts:** [styling.md](styling.md)
 - **AI coding agents:** [AI_CODING_AGENTS.md](AI_CODING_AGENTS.md) · **AI CLIs:** [AI_CLIS.md](AI_CLIS.md)
 - **Distro installers:** [DISTRO_INSTALLERS.md](DISTRO_INSTALLERS.md)
 - **Source:** [github.com/Victorious93/VictorSuite](https://github.com/Victorious93/VictorSuite)

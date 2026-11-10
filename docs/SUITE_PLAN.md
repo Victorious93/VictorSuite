@@ -118,7 +118,7 @@ Drawer categories in `MainMenuConfig.init()`:
 | Config | ADB shell, ZT command keys, bash/start-message, boot command |
 | ZT features | install module, FTP, soft links, uninstall, remote, Headscale, APK analysis, AndroidIDE, AI CLIs, SMS, timers, language, GitHub |
 
-Other notable packages: `plugin/` (authorized-use gate, encrypted prefs, JSONL audit), `deepseek/` (DeepSeek/Claude chat + SQLite), `back/` (`.tar.gz`/`.bz2`/`.xz`/`.Z`), `ftp/` + `ftp/new_ftp/`, `http_core`/`http_service`, `scrcpy/`, `utermux_windows/qemu/`, `adb/` (`libadb.so` + `com.tananaev:adblib:1.3`), `otg/` (**USB mass-storage** via libaums, not ADB), `bosybox/`, `config/ztcommand/` (`VsSocketService` TCP **19951** JSON commands), `libsu` (topjohnwu 5.2.1).
+Other notable packages: `plugin/` (authorized-use gate, encrypted prefs, JSONL audit), `deepseek/markdown/` (MarkDownAPI used by TermuxActivity), `back/` (`.tar.gz`/`.bz2`/`.xz`/`.Z`), `ftp/` + `ftp/new_ftp/`, `http_core`/`http_service`, `scrcpy/`, `utermux_windows/qemu/`, `adb/` (`libadb.so` + `com.tananaev:adblib:1.3`), `otg/` (**USB mass-storage** via libaums, not ADB), `bosybox/`, `config/ztcommand/` (`VsSocketService` TCP **19951** JSON commands), `libsu` (topjohnwu 5.2.1).
 
 Remote JSON catalogues in `remote/{plugins,repository,on_line_sh}/main.json`.
 
@@ -253,7 +253,7 @@ VictorSuite **already contains** the inherited management layer. Do not import a
 
 The inherited upstream project (GPLv3) adds on top of Termux: graphical panels, backup/restore packs, PRoot/chroot distros, X11/QEMU, download-site restore packs, and (recently) an in-app AI agent / LSP editor.
 
-VictorSuite has the historical inherited management layer (`zerocore`) plus VictorSuite-specific plugins, AI CLI setup, and DeepSeek/Claude chat. It is **behind** current upstream on the AI-agent / LSP work (upstream 0.118.3.63+). This program should **not** fast-forward to that AI agent.
+VictorSuite has the historical inherited management layer (`zerocore`) plus VictorSuite-specific plugins, AI CLI setup, and a DroidCommand AI launcher. It is **behind** current upstream on the AI-agent / LSP work (upstream 0.118.3.63+). This program should **not** fast-forward to that AI agent.
 
 ---
 

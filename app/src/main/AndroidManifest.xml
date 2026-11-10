@@ -108,13 +108,6 @@
             android:name=".victor.settings.VictorSuiteSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".victor.deepseek.activity.VictorSuiteDeepSeekSettingsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-        <activity android:name=".victor.deepseek.activity.VictorSuiteDeepSeekKeyActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
             android:name=".victor.hak5.Hak5CompanionActivity"

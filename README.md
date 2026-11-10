@@ -61,7 +61,7 @@ Documented and present in the codebase (VictorSuite features, under the `com.ter
 - **Embedded services** — FTP server, HTTP/ttyd-style service, file browser integrations.
 - **X11 support** — separately distributed internal-channel X11 AAR; Termux:X11–style desktop workflows.
 - **scrcpy / QEMU / wireless ADB / root shell** — integrations under `victor` (scrcpy, UTermux/QEMU windows, wireless ADB, libsu).
-- **In-app AI chat** — DeepSeek and Claude API clients with SQLite session storage (`victor/deepseek`).
+- **DroidCommand AI** — the AI option in the right drawer and Settings opens the separate DroidCommand AI app (`ai.droidcommand.app`). VictorSuite no longer includes an in-app DeepSeek or Claude chat.
 - **AI CLI setup script** — bundled `scripts/ai-cli-setup.sh` installs pi, Copilot CLI, Codex CLI, and Hugging Face CLI (some via an Ubuntu proot container). **Not yet run on a real device** — see [docs/AI_CLIS.md](docs/AI_CLIS.md).
 - **AI Coding Agents pack** — menu **ZT features → AI Coding Agents** installs Claude Code, Codex CLI, Copilot CLI, and Ollama (local or remote) via `ai-agents-pack.sh`, with `vsphone` (root/Shizuku phone-control bridge + approval gates) and `vstoken` (token minimizer / model routing). See [docs/AI_CODING_AGENTS.md](docs/AI_CODING_AGENTS.md). **Shellchecked + unit-tested locally; not device-tested.**
 - **GitHub Releases** — CI publishes a signed pre-release APK after a successful signed build on `main` (pre-release because not device-tested).

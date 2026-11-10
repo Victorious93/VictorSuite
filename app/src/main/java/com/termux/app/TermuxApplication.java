@@ -63,9 +63,9 @@ public class TermuxApplication extends Application {
         mContext = this;
         mHandler = new Handler();
         UUtils.initUUtils(mContext, mHandler);
-        // z_file's module dialog "download" button opens the owned docs site
-        // (no dedicated plugins browse page exists yet; catalog.json is the machine feed).
-        com.zp.z_file.ui.dialog.InstallModuleDialog.setModuleDownloadUrl(com.termux.victor.config.VsLinks.DOCS_SITE);
+        // z_file's module dialog "download" button opens the owned plugins page.
+        // catalog.json remains the machine-readable feed (VsLinks.PLUGIN_CATALOG).
+        com.zp.z_file.ui.dialog.InstallModuleDialog.setModuleDownloadUrl(com.termux.victor.config.VsLinks.PLUGIN_PAGE);
 
         Context context = getApplicationContext();
 
