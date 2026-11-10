@@ -65,7 +65,6 @@ public class VsLinksUpstreamTest {
             "app/src/main/java/com/termux/app/TermuxApplication.java",
             "app/src/main/java/com/termux/app/TermuxActivity.java",
             "app/src/main/java/com/termux/victor/dialog/InstallModuleDialog.kt",
-            "app/src/main/java/com/termux/victor/deepseek/activity/VictorSuiteDeepSeekKeyActivity.kt",
             "termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java",
             "termux-shared/src/main/java/com/termux/shared/termux/VictorSuiteLinks.java",
             "app/src/main/java/com/termux/victor/config/VsLinks.kt",
@@ -92,6 +91,42 @@ public class VsLinksUpstreamTest {
             }
         }
         assertTrue("upstream or example URLs found in user-facing link files: " + hits, hits.isEmpty());
+    }
+
+    @Test
+    public void noUserFacingDeepSeekPathsRemain() throws IOException {
+        File root = new File("..").getCanonicalFile();
+        List<String> hits = new ArrayList<>();
+        String[] needles = new String[]{
+            "platform.deepseek.com",
+            "api.deepseek.com",
+            "VictorSuiteDeepSeekKeyActivity",
+            "VictorSuiteDeepSeekSettingsActivity",
+            "DeepSeekClient",
+            "Theme.DeepSeek",
+            "DEEPSEEK_API",
+            "DEEPSEEK_PLATFORM"
+        };
+        File[] roots = new File[]{
+            new File(root, "app/src/main"),
+            new File(root, "termux-shared/src/main")
+        };
+        for (File start : roots) {
+            for (String needle : needles) {
+                scan(start, hits, needle);
+            }
+        }
+        assertTrue("user-facing DeepSeek paths found: " + hits, hits.isEmpty());
+    }
+
+    @Test
+    public void droidCommandLauncherUsesExistingPackage() throws IOException {
+        File root = new File("..").getCanonicalFile();
+        File launcher = new File(root, "app/src/main/java/com/termux/victor/droidcommand/DroidCommandAi.kt");
+        assertTrue("missing DroidCommandAi.kt", launcher.isFile());
+        String text = new String(Files.readAllBytes(launcher.toPath()), StandardCharsets.UTF_8);
+        assertTrue(text.contains("\"ai.droidcommand.app\""));
+        assertTrue(text.contains("\"ai.droidcommand.app.debug\""));
     }
 
     private static void scan(File f, List<String> hits, String needle) throws IOException {

@@ -25,62 +25,12 @@ public class VsUserBean {
     private boolean isInternalPassage = false;
     //在线服务器设定本地保存
     private String mServerJsonString;
-    // deepseek 本地蓝色连接字点击
-    private String mCommandLink;
-
-    //DeepSeek api Key
-    private String mDeepSeekApiKey;
-    // DeepSeek url
-    private String mDeepSeekApiUrl;
-    // 是否让DeepSeek 看见你的终端?
-    private boolean mIsDeepSeekVisibleTerminal;
     // 是否折叠菜单
     private boolean isCloseFoldMenu;
     // 是否禁用主菜单配置文件
     private boolean isDisableMainConfigMenu;
     // 是否显示引导页面
     private boolean isHideGuideLayout;
-
-    // AI provider used by the chat assistant: "deepseek" or "claude"
-    private String mAiProvider = "deepseek";
-    // Claude (Anthropic) api key
-    private String mClaudeApiKey;
-    // Claude (Anthropic) api url
-    private String mClaudeApiUrl;
-    // Claude model id
-    private String mClaudeModel;
-
-    public String getAiProvider() {
-        return mAiProvider == null ? "deepseek" : mAiProvider;
-    }
-
-    public void setAiProvider(String mAiProvider) {
-        this.mAiProvider = mAiProvider;
-    }
-
-    public String getClaudeApiKey() {
-        return mClaudeApiKey;
-    }
-
-    public void setClaudeApiKey(String mClaudeApiKey) {
-        this.mClaudeApiKey = mClaudeApiKey;
-    }
-
-    public String getClaudeApiUrl() {
-        return mClaudeApiUrl;
-    }
-
-    public void setClaudeApiUrl(String mClaudeApiUrl) {
-        this.mClaudeApiUrl = mClaudeApiUrl;
-    }
-
-    public String getClaudeModel() {
-        return mClaudeModel;
-    }
-
-    public void setClaudeModel(String mClaudeModel) {
-        this.mClaudeModel = mClaudeModel;
-    }
 
     public boolean isHideGuideLayout() {
         return isHideGuideLayout;
@@ -104,38 +54,6 @@ public class VsUserBean {
 
     public void setCloseFoldMenu(boolean foldMenu) {
         isCloseFoldMenu = foldMenu;
-    }
-
-    public boolean isIsDeepSeekVisibleTerminal() {
-        return mIsDeepSeekVisibleTerminal;
-    }
-
-    public void setIsDeepSeekVisibleTerminal(boolean mIsDeepSeekVisibleTerminal) {
-        this.mIsDeepSeekVisibleTerminal = mIsDeepSeekVisibleTerminal;
-    }
-
-    public String getDeepSeekApiUrl() {
-        return mDeepSeekApiUrl;
-    }
-
-    public void setDeepSeekApiUrl(String mDeepSeekApiUrl) {
-        this.mDeepSeekApiUrl = mDeepSeekApiUrl;
-    }
-
-    public String getDeepSeekApiKey() {
-        return mDeepSeekApiKey;
-    }
-
-    public void setDeepSeekApiKey(String mDeepSeekApiKey) {
-        this.mDeepSeekApiKey = mDeepSeekApiKey;
-    }
-
-    public String getCommandLink() {
-        return mCommandLink;
-    }
-
-    public void setCommandLink(String mCommandLink) {
-        this.mCommandLink = mCommandLink;
     }
 
     public String getServerJsonString() {

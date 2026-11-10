@@ -53,10 +53,6 @@ object VsLinks {
     /** Placeholder: victordrax is private and has no releases yet; update when one is published. */
     const val VICTORDRAX_RELEASES = "https://github.com/Victorious93/victordrax/releases"
 
-    // --- AI providers ---
-    const val DEEPSEEK_API = "https://api.deepseek.com/chat/completions"
-    const val CLAUDE_API = "https://api.anthropic.com/v1/messages"
-
     // --- Third-party downloads and credits ---
     const val TAILSCALE_STABLE = "https://pkgs.tailscale.com/stable/"
     const val FILEBROWSER = "https://github.com/filebrowser/filebrowser"
