@@ -1,20 +1,10 @@
 #!/bin/sh
-
-for DENSITY in mdpi hdpi xhdpi xxhdpi xxxhdpi; do
-	case $DENSITY in
-		mdpi) SIZE=48;;
-		hdpi) SIZE=72;;
-		xhdpi) SIZE=96;;
-		xxhdpi) SIZE=144;;
-		xxxhdpi) SIZE=192;;
-	esac
-
-	FOLDER=../app/src/main/res/mipmap-$DENSITY
-	mkdir -p $FOLDER
-
-	for FILE in ic_launcher ic_launcher_round; do
-		PNG=$FOLDER/$FILE.png
-		rsvg-convert -w $SIZE -h $SIZE $FILE.svg > $PNG
-		zopflipng -y $PNG $PNG
-	done
-done
+# Regenerate VictorSuite launcher mipmaps, adaptive XMLs, and the themed
+# monochrome glyph from art/ic_launcher_source.png (the existing artwork at
+# 1024px). Historical Termux SVG sources (art/ic_launcher.svg and
+# drawable/ic_foreground.xml) are kept for reference and are not used as the
+# app icon.
+set -e -u
+cd "$(dirname "$0")"
+# potracer + numpy are required to rebuild the monochrome vector.
+python3 generate-victorsuite-launcher.py

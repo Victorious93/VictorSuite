@@ -25,7 +25,7 @@ public class NotificationUtils {
         Notification.Builder builder = new Notification.Builder(context)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(R.drawable.ic_launcher);
+            .setSmallIcon(R.drawable.ic_qs_tile_victorsuite);
 
         // 发送通知
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -46,7 +46,7 @@ public class NotificationUtils {
         Notification.Builder builder = new Notification.Builder(context)
             .setContentTitle(updatedTitle)
             .setContentText(updatedMessage)
-            .setSmallIcon(R.drawable.ic_launcher)
+            .setSmallIcon(R.drawable.ic_qs_tile_victorsuite)
             .setSound(null);
 
         // 更新通知

@@ -103,7 +103,7 @@ public class MyTileService extends TileService implements FtpService.OnFTPServic
             notificationManager.createNotificationChannel(channel);
         }
         Notification notification = new NotificationCompat.Builder(this, "attention")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_qs_tile_victorsuite)
                 .setContentTitle(String.valueOf(title))
                 .setContentText(String.valueOf(content))
                 .setAutoCancel(true)

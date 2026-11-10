@@ -397,7 +397,7 @@ public class FtpService extends Service implements NetworkStatusMonitor.NetworkS
                 manager.createNotificationChannel(channel);
             }
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default");
-            builder.setSmallIcon(R.drawable.ic_launcher);
+            builder.setSmallIcon(R.drawable.ic_qs_tile_victorsuite);
             builder.setContentTitle(title);
             builder.setContentText(content);
             Intent stopIntent = new Intent(this, StopServiceReceiver.class);
