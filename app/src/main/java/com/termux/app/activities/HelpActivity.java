@@ -44,8 +44,8 @@ public final class HelpActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.equals(VsLinks.HELP) || url.startsWith(VsLinks.HELP + "/")) {
-                    // Inline help.
+                if (isOwnedDocsUrl(url)) {
+                    // Keep Pages docs (manual and other docs/ pages) inside the help WebView.
                     setContentView(progressLayout);
                     return false;
                 }
@@ -66,6 +66,14 @@ public final class HelpActivity extends AppCompatActivity {
             }
         });
         mWebView.loadUrl(VsLinks.HELP);
+    }
+
+    private static boolean isOwnedDocsUrl(String url) {
+        if (url == null) return false;
+        if (url.equals(VsLinks.HELP) || url.startsWith(VsLinks.HELP + "#") || url.startsWith(VsLinks.HELP + "?")) {
+            return true;
+        }
+        return url.equals(VsLinks.DOCS_SITE) || url.startsWith(VsLinks.DOCS_SITE);
     }
 
     @Override

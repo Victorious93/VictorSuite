@@ -21,7 +21,7 @@
         1.click: 调用VictorSuite内部的 JAVA 类
         示例: click="java:com.termux.victor.config.mainmenu.config.SwitchSourceClickConfig"
         2.或跳转到网址页
-        click="jumpUrl:www.example.com"
+        click="jumpUrl:https://victorious93.github.io/VictorSuite/"
         3.或执行shell语句
         click="ztShell:cd ~ && pkg update"
         4.如果需要直接执行,请修改此配置项
@@ -57,7 +57,7 @@
         <item tag="跳转网址"
             name="跳转网址"
             icon=""
-            click="jumpUrl:https://www.example.com" />
+            click="jumpUrl:https://victorious93.github.io/VictorSuite/" />
         <item tag="占位,什么都不做"
             name="占位菜单"
             icon=""
@@ -100,7 +100,7 @@
             name="应用内URL"
             icon=""
             activityTitle="百度一下"
-            click="appWebUrl:https://www.example.com" />
+            click="appWebUrl:https://victorious93.github.io/VictorSuite/" />
 
     </group>
     <!--#######################可删除#########################-->

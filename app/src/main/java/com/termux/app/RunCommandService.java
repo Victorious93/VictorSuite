@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.IBinder;
 
 import com.termux.R;
+import com.termux.victor.config.VsLinks;
 import com.termux.shared.data.DataUtils;
 import com.termux.shared.data.IntentUtils;
 import com.termux.shared.termux.plugins.TermuxPluginUtils;
@@ -32,7 +33,7 @@ import com.termux.victor.remotecontrol.android.TermuxRemoteEnvelopeBinding; // V
  * plugins that contains info on command execution and forwards the extras to {@link TermuxService}
  * for the actual execution.
  *
- * Check https://github.com/termux/termux-app/wiki/RUN_COMMAND-Intent for more info.
+ * See VsLinks.HELP (the VictorSuite manual) for more info on RUN_COMMAND.
  */
 public class RunCommandService extends Service {
 
@@ -67,7 +68,7 @@ public class RunCommandService extends Service {
         Logger.logVerboseExtended(LOG_TAG, "Intent Received:\n" + IntentUtils.getIntentString(intent));
 
         ExecutionCommand executionCommand = new ExecutionCommand();
-        executionCommand.pluginAPIHelp = this.getString(R.string.error_run_command_service_api_help, RUN_COMMAND_SERVICE.RUN_COMMAND_API_HELP_URL);
+        executionCommand.pluginAPIHelp = this.getString(R.string.error_run_command_service_api_help, VsLinks.HELP);
 
         Error error;
         String errmsg;
