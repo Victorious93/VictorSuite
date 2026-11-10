@@ -1,13 +1,28 @@
 package com.termux.victor.bean;
 
 import java.io.Serializable;
+import java.util.UUID;
 
+/**
+ * One quick-SSH device, stored as JSON in {@code SharedPreferences("xinhao")} / {@code ssh_device_list}.
+ *
+ * <p>Passwords are stored only as Keystore ciphertext in {@link #passwordEnc}
+ * (see {@code com.termux.victor.ssh.QuickSshStore}). {@link #password} is the legacy plaintext
+ * field: it is only read from data written by older versions, is migrated away on first load,
+ * and is never written by this version.
+ */
 public class SSHDeviceBean implements Serializable {
+    /** Stable id; names the per-entry known_hosts file. */
+    private String id;
     private String alias;
     private String host;
     private int port = 22;
     private String username;
+    /** Legacy plaintext password (pre-migration data only). Never set by new code. */
+    @Deprecated
     private String password;
+    /** Keystore AES-GCM ciphertext of the password, or null. */
+    private String passwordEnc;
     private String keyPath;
     private String command;
     private boolean useKey = false;
@@ -15,13 +30,21 @@ public class SSHDeviceBean implements Serializable {
     public SSHDeviceBean() {
     }
 
-    public SSHDeviceBean(String alias, String host, int port, String username, String password, boolean useKey) {
+    public SSHDeviceBean(String alias, String host, int port, String username, boolean useKey) {
+        this.id = UUID.randomUUID().toString();
         this.alias = alias;
         this.host = host;
         this.port = port;
         this.username = username;
-        this.password = password;
         this.useKey = useKey;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAlias() {
@@ -56,12 +79,27 @@ public class SSHDeviceBean implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
+    /** Legacy plaintext password from unmigrated data, or null. */
+    @Deprecated
+    public String getLegacyPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Deprecated
+    public void clearLegacyPassword() {
+        this.password = null;
+    }
+
+    public String getPasswordEnc() {
+        return passwordEnc;
+    }
+
+    public void setPasswordEnc(String passwordEnc) {
+        this.passwordEnc = passwordEnc;
+    }
+
+    public boolean hasPassword() {
+        return (passwordEnc != null && !passwordEnc.isEmpty()) || (password != null && !password.isEmpty());
     }
 
     public String getKeyPath() {
@@ -86,24 +124,5 @@ public class SSHDeviceBean implements Serializable {
 
     public void setUseKey(boolean useKey) {
         this.useKey = useKey;
-    }
-    public String generateConnectCommand() {
-        StringBuilder cmdBuilder = new StringBuilder();
-
-        if (useKey) {
-            cmdBuilder.append("ssh -p ").append(port).append(" ");
-            String safeName = alias.replaceAll("[^a-zA-Z0-9_\\-]", "_");
-            String autoKeyPath = "/data/data/com.termux/files/home/.ssh/" + safeName + ".key";
-            cmdBuilder.append("-i ").append(autoKeyPath).append(" ");
-
-        } else {
-            if (password != null && !password.isEmpty()) {
-                cmdBuilder.append("sshpass -p '").append(password).append("' ");
-            }
-            //sshpass -p '1314' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 xinhao@192.168.31.121
-            cmdBuilder.append("ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null").append(" -p ").append(port).append(" ");
-        }
-        cmdBuilder.append(username).append("@").append(host);
-        return cmdBuilder.toString();
     }
 }

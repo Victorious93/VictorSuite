@@ -1121,7 +1121,7 @@
     <string name="content_ssh_copy_public_key">复制公钥</string>
     <string name="content_ssh_alias_summary">请先填写别名，密钥文件将以别名命名</string>
     <string name="content_ssh_generate_key">生成密钥</string>
-    <string name="content_ssh_rsa">"将生成新的RSA密钥对：\n~/.ssh/%s.key\n\n如果该文件已存在，将被覆盖"</string>
+    <string name="content_ssh_rsa">"将生成新的Ed25519密钥对：\n~/.ssh/%s.key\n\n终端会提示输入密码短语（推荐）。如果该文件已存在，ssh-keygen 会先询问是否覆盖"</string>
     <string name="content_ssh_generate_keying">正在后台生成密钥...</string>
     <string name="content_ssh_please_fill_alias_first">请先填写别名</string>
     <string name="content_ssh_key_not_exets">"公钥文件不存在，请先点击生成密钥"</string>
