@@ -15,11 +15,11 @@ the shared spec.
 
 | Topic | Decision |
 |---|---|
-| Android on the PC | **Unconfirmed.** Waydroid and AVD emulator support are optional and **auto-detected** by the script. No ADB setup unless one is found. ADB only through an SSH local forward limited by `permitopen`; **no LAN listener** by default. |
-| PC OS | Ubuntu **24.04 LTS** and **22.04 LTS**. 24.04 (and 22.10+) uses `ssh.socket` activation: port/listen changes need the socket unit, not just `sshd_config`. |
-| Remote path | Default: VictorSuite's built-in userspace `tailscaled` (proxy `127.0.0.1:1055`). The official Tailscale app is also supported (auto-detected). **LAN must work with Tailscale off.** |
-| Connect UX | One tap, **no biometric prompt by default**. Biometric-bound key is an opt-in toggle. **Hard stop only on a host-key change** — no "accept anyway". |
-| Fleet keys | **One separate key per app.** VictorSuite enrolls consumer keys on the PC through `PcEnrollService`. The signing broker (VictorSuite signs for other apps) is **rejected for v1**. |
+| Android on the PC | **Unknown (Don, Nov 10).** Waydroid and AVD emulator support are optional and **auto-detected** by the script. No ADB setup unless one is found. ADB only through an SSH local forward limited by `permitopen`; **no LAN listener** by default. |
+| PC OS | **Ubuntu 24.04 LTS is the primary target** (Don's PC; confirmed Nov 10). 24.04 uses `ssh.socket` activation by default: port/listen changes need a socket override, not just `sshd_config`. **22.04 LTS is best effort** (classic `ssh.service`), tested if time allows. |
+| Remote path | **Confirmed** default: VictorSuite's built-in userspace `tailscaled` (proxy `127.0.0.1:1055`). The official Tailscale app is also supported (auto-detected). **LAN must work with Tailscale off.** |
+| Connect UX | **Confirmed:** one tap, **no biometric prompt by default**. Biometric-bound key is an opt-in toggle. **Hard stop only on a host-key change** — no "accept anyway". |
+| Fleet keys | **Confirmed: one separate key per app.** VictorSuite enrolls consumer keys on the PC through `PcEnrollService`. The signing broker (VictorSuite signs for other apps) is **rejected for v1**. |
 
 ## 2. What the repo already has (verified on `ea51fad`)
 
@@ -86,10 +86,11 @@ the shared spec.
 
 ## 6. PC setup script (`pc/victor-pc-setup.sh`)
 
-1. Preflight: Ubuntu 22.04 / 24.04 (warn otherwise), `sudo`. **Lockout guard**: refuses to turn password login off unless a working key is already in `authorized_keys` or `--pair` is completing now, unless `--i-have-console`.
+1. Preflight: Ubuntu 24.04 (primary); 22.04 best effort with a warning; anything else refused unless `--force`, `sudo`. **Lockout guard**: refuses to turn password login off unless a working key is already in `authorized_keys` or `--pair` is completing now, unless `--i-have-console`.
 2. `apt install openssh-server` (+ `avahi-daemon`, `qrencode`, `python3` if missing; degrade to text without qrencode).
 3. Drop-in `/etc/ssh/sshd_config.d/10-victorpc.conf`: `PasswordAuthentication no`, `KbdInteractiveAuthentication no`, `PermitRootLogin no`, `PubkeyAuthentication yes`, `AllowUsers <user>`, `PubkeyAcceptedAlgorithms +ecdsa-sha2-nistp256`. Check the main config `Include`s the drop-in dir; `sshd -t` before reload.
-   - **24.04:** `ssh.socket` is active by default → `systemctl daemon-reload && systemctl restart ssh.socket` (port changes go in a socket override, not `Port`). **22.04:** `systemctl reload ssh`.
+   - **24.04 (primary):** `ssh.socket` is active by default → apply with `systemctl daemon-reload && systemctl restart ssh.socket`; a non-22 port goes in `/etc/systemd/system/ssh.socket.d/10-victorpc.conf` (`ListenStream=`), not `Port`. The script detects socket mode with `systemctl is-active ssh.socket` rather than by version.
+   - **22.04 (best effort):** `systemctl reload ssh`.
 4. Firewall (ufw if present): allow 22/tcp and the pairing port only from the LAN subnet, `100.64.0.0/10`, and `tailscale0`. Never touch the router; no UPnP.
 5. `--tailscale`: Tailscale's signed apt repo, `tailscale up [--login-server]`; add 100.x / MagicDNS names to `h`.
 6. `--pair`: token + manual key, start `victorpc-pair.py` on specific IPs, print terminal QR (`qrencode -t ansiutf8`), `~/victorpc-pair.png`, the manual code and the host key (spec §2.1). Token removed on exit (`trap`).
@@ -115,11 +116,11 @@ About 13–15 dev-days, plus Don's device tests after PRs 4, 6 and 8. The separa
 ## 8. Risks
 
 - **Same-UID access to keys.** Code in the `com.termux` UID (Termux shell, RUN_COMMAND scripts) could use the Keystore via `termux-keystore` or the agent socket. Mitigations: `victorpc.` alias guard, agent only during a user-started session and only for userauth data, optional biometric key. Residual risk is inherent to a Termux fork; documented.
-- **Lockout** when password login goes off: preflight guard + printed rollback (`sudo rm /etc/ssh/sshd_config.d/10-victorpc.conf && sudo systemctl restart ssh.socket` on 24.04 / `reload ssh` on 22.04).
+- **Lockout** when password login goes off: preflight guard + printed rollback (`sudo rm /etc/ssh/sshd_config.d/10-victorpc.conf && sudo systemctl restart ssh.socket` on 24.04 / `sudo systemctl reload ssh` on 22.04).
 - **Token replay / guessing:** single use, 10-minute expiry, 3 bad MACs, nonce-bound HMAC both ways, listener on LAN/tailnet IPs only; the 50-bit manual key works only online.
 - **Host-key pinning:** hard stop on change; reinstalling the PC means re-pairing.
 - **Keystore realities:** P-256 only; keys are device-bound (uninstall / clear data / reset → re-pair; keep console access). Biometric off by default trades protection for one-tap.
-- **ssh.socket on 24.04:** a `Port` change in `sshd_config` is ignored under socket activation; the script must use a socket override.
+- **ssh.socket on 24.04 (Don's PC):** a `Port` change in `sshd_config` is ignored under socket activation; the script must use a socket override.
 - **Waydroid / AVD ADB:** not confirmed to exist; container IP varies; ADB authorization prompt needs a display; ADB is root-equivalent on the container → SSH forward only, `permitopen`-limited. scrcpy through the forward is **[unverified]**.
 - **Tailscale:** userspace `tailscaled` drains battery if left running (My PC stops what it started); the official app's VPN conflicts with other VPNs; default-Tailscale (non-headscale) login via `HeadscaleClickConfig` **[unverified]**. The loopback proxy is reachable by any local app, so it is not a fleet contract.
 - **Headless PC:** QR readable only via a terminal Don can see (SSH from another device) or the PNG; the manual code covers the rest. No avahi → subnet scan.
