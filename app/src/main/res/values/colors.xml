@@ -66,4 +66,9 @@
     <color name="vs_neon_magenta">#FFFF2BD6</color>
     <color name="vs_neon_text">#FFE8F1FF</color>
     <color name="vs_neon_muted">#FF9AA7BF</color>
+
+    <!-- Adaptive-icon background, sampled from the existing logo dark field
+         (dominant #00020E). This is darker than vs_neon_bg (#0B0F1A) and must
+         stay in sync with the artwork, not the in-app theme. -->
+    <color name="ic_launcher_background">#FF00020E</color>
 </resources>
