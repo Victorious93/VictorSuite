@@ -127,7 +127,7 @@ public class MenuDefaultsMergerTest {
             + "</zt-menu>";
         MenuDefaultsMerger.Result r = MenuDefaultsMerger.merge(old, "<zt-menu/>", new HashSet<>());
         assertTrue(has(r.xml, "name=\"VictorSuite Functions\""));
-        assertTrue(has(r.xml, "name=\"VictorSuite功能\""));
+        assertTrue(has(r.xml, "name=\"VictorSuite 功能\""));
         assertTrue(has(r.xml, "name=\"My ZT Functions\""));
         assertFalse(has(r.xml, "name=\"ZT Functions\""));
     }

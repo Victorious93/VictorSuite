@@ -48,7 +48,7 @@ public class VsSocketService extends Service {
         } catch (Exception e) {
             // Any failure (I/O, SecurityException, unexpected runtime error): without a token
             // every request would be refused, so do not open the socket at all, and never crash.
-            LogUtils.e(TAG, "ZT token unavailable, command socket disabled: " + e);
+            LogUtils.e(TAG, "Command auth token unavailable, command socket disabled: " + e);
             return;
         }
         // @}

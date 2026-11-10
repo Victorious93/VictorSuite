@@ -2240,10 +2240,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 back_color.setAlpha(1f);
             }
         });
-        mBeautifySettingDialog.setOnTextCheckedChangeListener(change -> {
-            Logger.logDebug(LOG_TAG, "setOnTextCheckedChangeListener:" + change);
-            // Background tips overlay removed; tips now live in the side menu (Tips / Gestures).
-        });
         mBeautifySettingDialog.setFontColorChange(new BeautifySettingDialog.FontColorChange() {
             @Override
             public void onColorChange(int color) {

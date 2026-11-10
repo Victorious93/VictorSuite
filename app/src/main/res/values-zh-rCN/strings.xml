@@ -229,6 +229,7 @@
     <string name="vs_this_operation_will_overwrite_your_file">该操作会覆盖您的文件记录,是否继续?</string>
     <string name="vs_determine">确定</string>
     <string name="vs_unnamedcontainer">无名称容器</string>
+    <string name="vs_enter_new_linux_name">请输入新的 Linux 名称</string>
     <string name="vs_delete">删除</string>
     <string name="vs_switch">切换</string>
     <string name="vs_delete_complete_need_to_re_enter_to_refr">删除完成_需要重进才能刷新</string>
@@ -696,8 +697,7 @@
     <string name="vs_back_color_transparency">背景颜色透明度</string>
     <string name="vs_font_color_transparency_up_pic">背景颜色半透明(可与背景图片叠加)</string>
     <string name="vs_back_pic">背景图片</string>
-    <string name="vs_show_back_font">显示背景字体</string>
-    <string name="vs_reset">重置</string>
+        <string name="vs_reset">重置</string>
     <string name="vs_if_you_see_this_page_press_the_back_key">如果看到该页面，请按下返回键退出</string>
     <string name="nju">NJU</string>
     <string name="ustc">USTC</string>
@@ -838,9 +838,9 @@
     <string name="data_message_empty">数据包简介不能为空</string>
     <string name="vs_uninstall_label">卸载</string>
     <string name="install_module">安装模块</string>
-    <string name="install_module_download">安装模块(下载模块)</string>
+    <string name="install_module_download">安装模块（下载）</string>
     <string name="install_module_message">注意:安装后不能卸载,只对当前容器生效(如果路径已经放入模块包但是不显示，请检查SD卡权限)</string>
-    <string name="install_empty">内部存储/xinhao/module,没有模块包</string>
+    <string name="install_empty">/sdcard/xinhao/module 中没有模块包</string>
     <string name="install_message">控制台:\n开始安装模块</string>
     <string name="delete_module_data">删除此模块包</string>
     <string name="data_module_name">模块包名称:</string>
