@@ -102,6 +102,8 @@
 
     <string name="error_styling_not_installed">The &TERMUX_STYLING_APP_NAME; Plugin App is not installed.</string>
     <string name="action_styling_install">Install</string>
+    <string name="vs_styling_notes_message">You can change fonts and colors in VictorSuite without a separate styling app. Font settings are in the side menu under Beautification/UI Functions. Terminal colors go in ~/.termux/colors.properties.</string>
+    <string name="vs_styling_notes_open">Styling notes</string>
 
 
 
@@ -1274,9 +1276,8 @@ Enter code recognition parameters separated by commas. These will appear as blue
     <string name="deepseek_settings_ai_see_summary">No need to input terminal errors in the session; simply say: terminal error. AI will automatically read your terminal content (AI can only read up to the last 600 characters recorded).</string>
     <string name="deepseek_settings_ai_session_name">Edit Session Name</string>
     <string name="deepseek_settings_ai_get_deepseek_key">Obtain DeepSeek Key</string>
-    <string name="deepseek_settings_ai_get_deepseek_key_1">To obtain DeepSeek, first open the DeepSeek official website: Tap here to open, then follow the steps below.</string>
+    <string name="deepseek_settings_ai_get_deepseek_key_1">Paste a DeepSeek API key into the DeepSeek settings field in VictorSuite. This screen does not open an external website.</string>
     <string name="deepseek_settings_ai_get_deepseek_key_1_keyword">Tap here to open</string>
-    <string name="deepseek_settings_ai_get_deepseek_key_1_url">https://platform.deepseek.com/</string>
     <string name="deepseek_settings_ai_get_deepseek_key_2">After logging in, tap API Keys in the left sidebar.</string>
     <string name="deepseek_settings_ai_get_deepseek_key_3">Then tap "Create API keys".</string>
     <string name="deepseek_settings_ai_get_deepseek_key_4">Enter any name you like.</string>

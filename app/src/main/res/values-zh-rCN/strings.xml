@@ -102,6 +102,8 @@
 
     <string name="error_styling_not_installed">这个 &TERMUX_STYLING_APP_NAME; 未安装插件应用程序.</string>
     <string name="action_styling_install">安装</string>
+    <string name="vs_styling_notes_message">无需单独的样式应用即可在 VictorSuite 中更改字体和颜色。字体设置在侧边菜单的“美化/界面功能”下。终端颜色写在 ~/.termux/colors.properties。</string>
+    <string name="vs_styling_notes_open">样式说明</string>
 
 
 
@@ -1266,9 +1268,8 @@
     <string name="deepseek_settings_ai_session_name">编辑会话名称</string>
 
     <string name="deepseek_settings_ai_get_deepseek_key">获取 DeepSeek Key</string>
-    <string name="deepseek_settings_ai_get_deepseek_key_1">获取DeepSeek,先打开DeepSeek官方网站点击此处打开,然后如下图</string>
+    <string name="deepseek_settings_ai_get_deepseek_key_1">请将 DeepSeek API 密钥粘贴到 VictorSuite 的 DeepSeek 设置输入框。此页面不会打开外部网站。</string>
     <string name="deepseek_settings_ai_get_deepseek_key_1_keyword">点击此处打开</string>
-    <string name="deepseek_settings_ai_get_deepseek_key_1_url">https://platform.deepseek.com/</string>
     <string name="deepseek_settings_ai_get_deepseek_key_2">登录账号之后，点击左侧栏的 API Keys</string>
     <string name="deepseek_settings_ai_get_deepseek_key_3">然后点击 “创建 API keys”</string>
     <string name="deepseek_settings_ai_get_deepseek_key_4">随意输入一个名称就行</string>
