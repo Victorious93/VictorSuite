@@ -47,6 +47,25 @@ jobs:
       - name: Run unit tests
         run: ./gradlew :app:testDebugUnitTest --stacktrace
 
+      # Gradle exiting 0 is not proof tests ran (a filtered or crashed run can leave zero or truncated
+      # results). Require parseable result files, no failures/errors, and a minimum test count.
+      - name: Verify unit test results (reject zero/incomplete/failed runs)
+        run: python3 scripts/ci/verify_test_results.py app/build/test-results/testDebugUnitTest --min-tests 250
+
+      - name: Verify debug APK matches source (id, version, targetSdk, native libs)
+        run: |
+          for apk in app/build/outputs/apk/debug/*.apk; do
+            echo "== $apk"
+            case "$apk" in
+              *arm64-v8a*) abi=arm64-v8a ;;
+              *armeabi-v7a*) abi=armeabi-v7a ;;
+              *x86_64*) abi=x86_64 ;;
+              *x86*) abi=x86 ;;
+              *) abi="" ;;
+            esac
+            scripts/ci/verify_apk.sh "$apk" "$abi"
+          done
+
       - name: Upload unit test reports
         if: failure()
         continue-on-error: true
@@ -68,9 +87,12 @@ jobs:
 
   release:
     # Signed release build. Runs on pushes to main and on manual dispatch only, so PR
-    # debug checks stay unchanged. Signing material comes ONLY from repo secrets:
+    # debug checks stay unchanged. `needs: build` makes a signed release impossible unless the
+    # build + unit-test + verification job above passed for this same commit (both jobs check out
+    # github.sha). Signing material comes ONLY from repo secrets:
     #   SIGNING_KEYSTORE_BASE64, KEY_ALIAS, KEY_PASSWORD, STORE_PASSWORD
     # If the secrets are not configured the job skips the build instead of failing.
+    needs: build
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
@@ -132,6 +154,28 @@ jobs:
           ./gradlew :app:downloadBootstraps
           ./gradlew :app:assembleRelease --stacktrace
 
+      - name: Verify release APKs and write SHA256SUMS
+        if: env.HAS_SIGNING_SECRETS == 'true'
+        run: |
+          cd app/build/outputs/apk/release
+          shopt -s nullglob
+          apks=(*.apk)
+          [ ${#apks[@]} -gt 0 ] || { echo "::error::no release APKs"; exit 1; }
+          cd - >/dev/null
+          for apk in app/build/outputs/apk/release/*.apk; do
+            case "$apk" in
+              *arm64-v8a*) abi=arm64-v8a ;;
+              *armeabi-v7a*) abi=armeabi-v7a ;;
+              *x86_64*) abi=x86_64 ;;
+              *x86*) abi=x86 ;;
+              *) abi="" ;;
+            esac
+            scripts/ci/verify_apk.sh "$apk" "$abi" | tee -a "$RUNNER_TEMP/apk-verify.txt"
+            # A release APK must carry a verifiable signature.
+            "$ANDROID_HOME"/build-tools/36.0.0/apksigner verify "$apk"
+          done
+          (cd app/build/outputs/apk/release && sha256sum *.apk > SHA256SUMS && cat SHA256SUMS)
+
       - name: Remove decoded keystore
         if: always() && env.HAS_SIGNING_SECRETS == 'true'
         run: rm -f "$RUNNER_TEMP/release.jks"
@@ -142,7 +186,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: VictorSuite-release-apks
-          path: app/build/outputs/apk/release/*.apk
+          path: |
+            app/build/outputs/apk/release/*.apk
+            app/build/outputs/apk/release/SHA256SUMS
           retention-days: 14
 
       # Publishes a pre-release for the versionName in app/build.gradle. Pushes to main only,
@@ -166,14 +212,14 @@ jobs:
             exit 0
           fi
           shopt -s nullglob
-          APKS=(app/build/outputs/apk/release/*.apk)
+          APKS=(app/build/outputs/apk/release/*.apk app/build/outputs/apk/release/SHA256SUMS)
           if [ ${#APKS[@]} -eq 0 ]; then
             echo "::error::No release APKs found to attach"
             exit 1
           fi
           PREV=$(git describe --tags --abbrev=0 2>/dev/null || true)
           {
-            echo "Built and signed by CI from commit $GITHUB_SHA. Not device-tested."
+            echo "Built and signed by CI from commit $GITHUB_SHA after unit tests and APK checks passed for that commit. Not device-tested; see docs/STABILITY_RELEASE_REPORT.md for what is and is not runtime-verified."
             echo
             echo "Prefer the ABI-specific APK for your device; use universal only if needed."
             echo
