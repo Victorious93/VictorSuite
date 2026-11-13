@@ -180,8 +180,8 @@ android {
         // VictorSuite modify {@
         // versionCode 118
         // versionName "0.118.0"
-        versionCode 124
-        versionName "0.118.3.62"
+        versionCode 125
+        versionName "0.118.3.63"
         // @}
         if (appVersionName) versionName = appVersionName
         validateVersionName(versionName)

@@ -2097,10 +2097,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (VictorFilesPanel.isActive(this) && VictorFilesPanel.launch(this)) {
             return;
         }
-        Intent launchIntent = resolveVictoriousFileManagerLaunchIntent();
-        if (launchIntent != null) {
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(launchIntent);
+        if (VictorFilesPanel.launchApp(this) == VictorFilesPanel.LaunchResult.STARTED) {
             return;
         }
         Toast.makeText(this, R.string.victorious_file_manager_not_installed, Toast.LENGTH_SHORT).show();
@@ -2108,17 +2105,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         fragmentManager(0);
     }
 
-    /** Release package first, then the debug build's {@code .debug} suffix. Null if neither is installed. */
-    private Intent resolveVictoriousFileManagerLaunchIntent() {
-        PackageManager packageManager = getPackageManager();
-        for (String packageName : new String[]{"ai.victorious.filemanager", "ai.victorious.filemanager.debug"}) {
-            Intent launchIntent = packageManager.getLaunchIntentForPackage(packageName);
-            if (launchIntent != null) {
-                return launchIntent;
-            }
-        }
-        return null;
-    }
     // @}
 
     // VictorSuite add {@
