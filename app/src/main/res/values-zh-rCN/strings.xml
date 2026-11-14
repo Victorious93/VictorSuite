@@ -1106,6 +1106,11 @@
     <string name="content_ssh_list_toast_hint">正在初始化中，请耐心等待...</string>
     <string name="content_ssh_list_toast_ssh_hint">初次使用，正在初始化SSH环境...</string>
     <string name="content_ssh_list_toast_ssh_wait">环境尚未就绪，请稍候...</string>
+    <string name="content_ssh_forget_host_key">忘记主机密钥</string>
+    <string name="content_ssh_forget_host_key_confirm">"要忘记 %s 已保存的主机密钥吗？\n\n仅在你清楚服务器密钥为何变化时才这样做。下次连接将信任服务器出示的任何密钥。"</string>
+    <string name="content_ssh_forget_host_key_done">已忘记主机密钥</string>
+    <string name="content_ssh_password_encrypt_failed">无法使用 Android Keystore 加密密码，未保存。</string>
+    <string name="content_ssh_password_unreadable">无法解密已保存的密码。请在提示时输入，或编辑该设备。</string>
     <string name="content_ssh_remove_device">删除设备</string>
     <string name="content_ssh_remove_device_dialog">"确定要删除'%s'吗？\n(IP: '%s')"</string>
     <string name="content_ssh_remove_ok">已删除</string>
