@@ -3,7 +3,9 @@
 # shellcheck disable=SC2015 # "A && B || fail" is the intended assertion form here
 set -u
 VS="$(cd "$(dirname "$0")/../.." && pwd)/scripts/vsphone"
-export HOME; HOME="$(mktemp -d)"
+qa_test_root="$(mktemp -d)"
+trap 'rm -rf -- "$qa_test_root"' EXIT
+export XDG_STATE_HOME="$qa_test_root/state"
 fail=0
 expect() { # SAFE|RISKY args...
     local want="$1"; shift
@@ -62,7 +64,7 @@ out="$(VSPHONE_BACKEND=root "$VS" --dry-run input tap 1 2 </dev/null 2>&1)"; rc=
 # Audit log: exists, mode 600, redacts input text and settings values.
 VSPHONE_BACKEND=root "$VS" --dry-run input text 'supersecretpw' </dev/null >/dev/null 2>&1
 VSPHONE_BACKEND=root "$VS" --dry-run settings put system screen_brightness 77 </dev/null >/dev/null 2>&1
-log="$HOME/.local/state/victorsuite/vsphone-audit.log"
+log="$XDG_STATE_HOME/victorsuite/vsphone-audit.log"
 [ "$(stat -c %a "$log")" = 600 ] || { echo "FAIL: audit log mode"; fail=1; }
 grep -q supersecretpw "$log" && { echo "FAIL: input text leaked to audit log"; fail=1; }
 grep -qw 77 "$log" && { echo "FAIL: settings value leaked to audit log"; fail=1; }

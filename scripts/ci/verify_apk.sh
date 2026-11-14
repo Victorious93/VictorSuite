@@ -19,10 +19,23 @@ chk applicationId "$pkg" com.termux
 chk versionName "$name" "$want_name"
 chk versionCode "$code" "$want_code"
 chk targetSdk "$tsdk" 28
+entries=$(unzip -Z -1 "$apk")
 if [ -n "$abi" ]; then
-  n=$(unzip -l "$apk" | grep -c "lib/$abi/.*\.so" || true)
-  if [ "$n" -lt 1 ]; then echo "FAIL: no lib/$abi/*.so in $apk"; fail=1; else echo "ok   lib/$abi ($n .so)"; fi
+  abis=("$abi")
+else
+  # A universal APK must be usable on every supported architecture.
+  abis=(arm64-v8a armeabi-v7a x86 x86_64)
 fi
+for expected_abi in "${abis[@]}"; do
+  for library in libtermux.so libtermux-bootstrap.so liblocal-socket.so libtermux-api-helper.so; do
+    entry="lib/$expected_abi/$library"
+    if grep -Fxq "$entry" <<<"$entries"; then
+      echo "ok   $entry"
+    else
+      echo "FAIL: required native library missing: $entry"; fail=1
+    fi
+  done
+done
 if "$bt/apksigner" verify --print-certs "$apk" > /tmp/apksigner.out 2>&1; then
   grep "certificate SHA-256" /tmp/apksigner.out | head -1
 else

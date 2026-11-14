@@ -110,6 +110,29 @@ Confidence labels: **[Certain]** = checked directly against the linked source on
 | Output truncation / log summary | Yes: `vstoken trunc` | Collapses repeats, keeps head, tail and error/warning lines, optional token cap |
 | Token and cost tracking + daily budget | Yes: `vstoken track/report` | Prices come only from config (`prices_per_mtok`). Unpriced models are reported as such, never guessed |
 
+Context discovery excludes `.env`, `.env.*`, `*.env`, and `*.env.*` at every depth, including
+sanitized template names such as `.env.example`: templates are denied by default rather than guessed
+safe. Symlinked files and directory paths are skipped, including aliases to files inside the repository.
+Reads use relative no-follow file access on Termux/Linux; unsupported platforms fail with a clear error.
+Files that disappear or exceed 200 KB are skipped. `.aiignore` must itself be safely readable.
+
+Ignore protections also apply to already tracked files. Directory patterns in `.aiignore` match
+descendants at any depth. Unreadable or symlinked `.gitignore` files cause context extraction to
+fail closed instead of accepting Git's warning and exposing the protected contents. Undecodable
+POSIX filenames are skipped, while other valid files remain available.
+
+Git applies `.gitignore` rules even for non-Git folders using an isolated temporary index; no Git
+metadata is created in the source folder. Without Git, a folder containing `.gitignore` is refused
+instead of silently including ignored files. The basic fallback still honors `.aiignore` and the
+sensitive-file denylist when no `.gitignore` is present.
+
+Line and token limits must be positive. The complete output, including task, map, headers, excerpts,
+and truncation markers, stays within the selected token metric. A task that alone exceeds the context
+budget is rejected with an actionable message. Very small truncation budgets prioritize the tail,
+and omit a final newline if it would exceed the budget. Router prompts retain their task prefix
+instead of using the log-tail clipping policy. Counts use `tiktoken:o200k_base` when available
+or explicitly labeled `estimate:chars/4` otherwise; they are not a guarantee of a provider's billed tokens.
+
 **Prompt caching**
 
 - [Certain] Anthropic: `cache_control: {type: "ephemeral"}`, either top-level (automatic) or on blocks.
