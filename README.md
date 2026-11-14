@@ -105,7 +105,7 @@ cd VictorSuite
 
 CI (`.github/workflows/android.yml`) runs `:app:assembleDebug` on pushes/PRs to `main`.
 
-Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.63** / **125**.
+Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.64** / **126**.
 
 ## Usage
 
