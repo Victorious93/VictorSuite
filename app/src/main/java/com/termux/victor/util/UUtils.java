@@ -513,12 +513,21 @@ public final class UUtils {
         File copy = null;
         try (Cursor c = resolver.query(uri, null, null, null, null)) {
             if (c != null && c.moveToFirst()) {
-                String name = c.getString(c.getColumnIndex("_display_name"));
+                int nameIndex = c.getColumnIndex("_display_name");
+                String name = nameIndex >= 0 ? c.getString(nameIndex) : null;
+                // Keep only the last path segment: the provider controls this string.
+                name = name == null ? "file" : new File(name).getName();
                 try (InputStream in = resolver.openInputStream(uri)) {
                     File cacheDir = context.getExternalCacheDir();
+                    if (in == null || cacheDir == null) return null;
                     copy = new File(cacheDir.getAbsolutePath(), Math.round((Math.random() + 1) * 1000) + name);
                     try (OutputStream out = new FileOutputStream(copy)) {
-                        android.os.FileUtils.copy(in, out);
+                        // android.os.FileUtils.copy needs API 29; minSdk is 23.
+                        byte[] buffer = new byte[8192];
+                        int read;
+                        while ((read = in.read(buffer)) != -1) {
+                            out.write(buffer, 0, read);
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
