@@ -45,12 +45,20 @@ jobs:
         run: ./gradlew :app:assembleDebug --stacktrace
 
       - name: Run unit tests
-        run: ./gradlew :app:testDebugUnitTest --stacktrace
+        run: ./gradlew :app:testDebugUnitTest :terminal-emulator:testDebugUnitTest --continue --stacktrace
 
       # Gradle exiting 0 is not proof tests ran (a filtered or crashed run can leave zero or truncated
       # results). Require parseable result files, no failures/errors, and a minimum test count.
       - name: Verify unit test results (reject zero/incomplete/failed runs)
-        run: python3 scripts/ci/verify_test_results.py app/build/test-results/testDebugUnitTest --min-tests 250
+        run: |
+          python3 scripts/ci/verify_test_results.py app/build/test-results/testDebugUnitTest --min-tests 250
+          python3 scripts/ci/verify_test_results.py terminal-emulator/build/test-results/testDebugUnitTest --min-tests 137
+
+      - name: Run AI helper script regressions
+        run: |
+          python3 -m unittest discover -s tests/ai-agents -p 'test_*.py' -v
+          python3 -m unittest discover -s tests/ci -p 'test_*.py' -v
+          bash tests/ai-agents/test_vsphone_gate.sh
 
       - name: Verify debug APK matches source (id, version, targetSdk, native libs)
         run: |
@@ -65,6 +73,7 @@ jobs:
             esac
             scripts/ci/verify_apk.sh "$apk" "$abi"
           done
+          python3 tests/ci/check_apk_helper.py app/build/outputs/apk/debug/*.apk
 
       - name: Upload unit test reports
         if: failure()
@@ -72,7 +81,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: VictorSuite-unit-test-reports
-          path: app/build/reports/tests/testDebugUnitTest
+          path: |
+            app/build/reports/tests/testDebugUnitTest
+            terminal-emulator/build/reports/tests/testDebugUnitTest
           retention-days: 7
 
       - name: Upload debug APKs

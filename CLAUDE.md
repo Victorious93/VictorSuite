@@ -11,10 +11,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Single-module build
 ./gradlew :termux-shared:assembleDebug
 
-# Unit tests (JVM only — no device required). Only :app has unit tests
-# (app/src/test: remote-control, hak5, ZT socket auth, FTP permissions, plus the two
-# upstream activity tests). Run in CI after the debug build.
-./gradlew :app:testDebugUnitTest
+# Unit tests (JVM only — no device required). App and terminal modules both have suites.
+./gradlew :app:testDebugUnitTest :terminal-emulator:testDebugUnitTest --continue
+
+# Script regressions (temporary fixtures; no model calls or privileged device commands)
+python3 -m unittest discover -s tests/ai-agents -p 'test_*.py' -v
+python3 -m unittest discover -s tests/ci -p 'test_*.py' -v
+bash tests/ai-agents/test_vsphone_gate.sh
 
 # Instrumented tests (requires a connected device or emulator; termux-shared/src/androidTest)
 ./gradlew :termux-shared:connectedAndroidTest
@@ -29,7 +32,7 @@ Checkstyle: `config/android-checkstyle.gradle` defines a `checkstyle` task (`ign
 
 SDK levels (`gradle.properties`): minSdk 23, **targetSdk 28 (intentional: keeps Termux exec / `$PREFIX` working; do not raise it)**, compileSdk 36, NDK 29.0.14206865. App version `0.118.3.63` (versionCode 125) in `app/build.gradle`.
 
-CI (`.github/workflows/android.yml`, "Build") runs `:app:assembleDebug --stacktrace` and then `:app:testDebugUnitTest --stacktrace` on push to `main`, PRs targeting `main`, and manual dispatch, using JDK 17, Android SDK platform-36 / build-tools-36.0.0, NDK 29.0.14206865. Lint and instrumented tests are not run in CI. APK upload is `continue-on-error` so artifact quota can't fail the job. A second job, `release`, runs on push to `main` and manual dispatch and builds signed release APKs only if the repo secrets `SIGNING_KEYSTORE_BASE64`, `KEY_ALIAS`, `KEY_PASSWORD` and `STORE_PASSWORD` are set (they are). On a push to `main` it also creates the pre-release `v<versionName>` with the APKs attached, using the `versionName` in `app/build.gradle`; if that release already exists it skips, so **bump `versionName`/`versionCode` to publish a new release**. Manual dispatch builds and uploads the 14-day artifact but never publishes. Latest `main` runs passed (checked 2026-10-24; `v0.118.3.55` was published by this job).
+CI (`.github/workflows/android.yml`, "Build") runs `:app:assembleDebug --stacktrace`, both JVM suites, and the Python/shell regressions on push to `main`, PRs targeting `main`, and manual dispatch, using JDK 17, Android SDK platform-36 / build-tools-36.0.0, NDK 29.0.14206865. The JUnit XML gates cover both modules, and APK checks require the embedded API helper and core libraries for every supported ABI. Lint and instrumented tests are not run in CI. APK upload is `continue-on-error` so artifact quota can't fail the job. A second job, `release`, depends on successful build validation and runs on push to `main` and manual dispatch, building signed release APKs only if the repo secrets `SIGNING_KEYSTORE_BASE64`, `KEY_ALIAS`, `KEY_PASSWORD` and `STORE_PASSWORD` are set. On a push to `main` it also creates the pre-release `v<versionName>` with the APKs attached, using the `versionName` in `app/build.gradle`; if that release already exists it skips, so **bump `versionName`/`versionCode` to publish a new release**. Manual dispatch builds and uploads the 14-day artifact but never publishes. See `docs/STABILITY_REPAIRS.md` for the latest local validation and its runtime limits.
 
 ## Architecture overview
 
@@ -81,8 +84,8 @@ Under `app/src/main/java/com/termux/`:
 - `TermuxApiReceiver` and `SocketListener` refuse requests while the setting is off.
 - Upstream's launcher/main/settings activities and `TermuxAPIApplication` were removed. Local changes are marked `// VictorSuite add {@` / `modify {@`; to update from upstream, follow `termux-api-lib/UPSTREAM.md`.
 - The manifest merges Termux:API's 33 permissions (SMS send, call, camera, mic, location, all-files, ...) into the APK whether or not the switch is on. Not Play-compatible.
-- Helper: the `termux-api` shell helper (`pkg install termux-api`, MIT, separate repo) connects to the socket `com.termux.api://listen` first on Android below 14, and the embedded `SocketListener` binds that name, so it should work there unmodified. On Android 14+ (or when the app process is not running) it falls back to `am broadcast -n com.termux.api/.TermuxApiReceiver`, which does not exist here. That retarget is not done yet.
-- Untested on a device as of this writing: only the CI build has run.
+- Helper: after `pkg install termux-api`, enabling the embed installs the APK's customized `libtermux-api-helper.so` executable into `$PREFIX/libexec`. Its receiver target is the embedded `com.termux` component, including the Android 14+ broadcast path. `buildTermuxApiHelper` is an explicit dependency of each app variant's JNI source merge, and APK checks require its output in every ABI. The standalone companion app is not the embedded helper's target.
+- Build/JVM/packaging validation does not establish that embedded API commands work on a device. Device execution is still unverified; see `docs/STABILITY_REPAIRS.md`.
 
 ### Remote JSON manifests
 

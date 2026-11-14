@@ -21,9 +21,11 @@ ext {
 // jniLibs/<abi>/libadb.so. TermuxApiEmbed copies it into $PREFIX/libexec. Uses ProcessBuilder because
 // Project.exec is gone in Gradle 9.
 def termuxApiHelperOutDir = layout.buildDirectory.dir("generated/termuxApiHelper/jniLibs")
-tasks.register("buildTermuxApiHelper") {
+def termuxApiHelperTask = tasks.register("buildTermuxApiHelper") {
     def helperSrcDir = file("src/main/cpp/termux-api-helper")
     inputs.dir(helperSrcDir)
+    inputs.property("minSdkVersion", project.properties.minSdkVersion)
+    inputs.property("ndkVersion", System.getenv("JITPACK_NDK_VERSION") ?: project.properties.ndkVersion)
     outputs.dir(termuxApiHelperOutDir)
     doLast {
         def ndk = android.ndkDirectory
@@ -54,6 +56,11 @@ tasks.register("buildTermuxApiHelper") {
         }
     }
 }
+// A source directory alone did not schedule generation in fresh builds.
+// Make every variant's JNI source merge wait explicitly for the helper task.
+tasks.matching { it.name.startsWith("merge") && it.name.endsWith("JniLibFolders") }.configureEach {
+    dependsOn(termuxApiHelperTask)
+}
 // @}
 
 android {
@@ -62,7 +69,7 @@ android {
             // Bundles scripts/ai-cli-setup.sh for the "AI CLIs" menu entry (AiCliSetupClickConfig).
             assets.srcDirs += ['../scripts']
             // VictorSuite add {@
-            jniLibs.srcDir(files(termuxApiHelperOutDir) { builtBy("buildTermuxApiHelper") })
+            jniLibs.srcDir(termuxApiHelperOutDir)
             // @}
         }
     }

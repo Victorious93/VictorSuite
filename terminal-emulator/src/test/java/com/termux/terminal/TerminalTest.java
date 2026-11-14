@@ -165,7 +165,7 @@ public class TerminalTest extends TerminalTestCase {
 		assertEquals(129, mTerminal.mBackColor);
 
 		// Multiple parameters at once:
-		enterString("\033[38;5;178;48;5;179;m");
+		enterString("\033[38;5;178;48;5;179m");
 		assertEquals(178, mTerminal.mForeColor);
 		assertEquals(179, mTerminal.mBackColor);
 
@@ -192,6 +192,14 @@ public class TerminalTest extends TerminalTestCase {
 		enterString("\033[38;2;300;127;2;48;2;1;300;254m");
 		assertEquals(expectedForeground, mTerminal.mForeColor);
 		assertEquals(expectedBackground, mTerminal.mBackColor);
+	}
+
+	public void testTrailingEmptyGraphicsParameterResetsRendition() {
+		withTerminalSized(5, 5);
+		// ECMA-48: an empty parameter after a trailing separator invokes the default (SGR 0).
+		enterString("\033[38;5;178;48;5;179;m");
+		assertEquals(TextStyle.COLOR_INDEX_FOREGROUND, mTerminal.mForeColor);
+		assertEquals(TextStyle.COLOR_INDEX_BACKGROUND, mTerminal.mBackColor);
 	}
 
 	public void testBackgroundColorErase() {

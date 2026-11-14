@@ -13,7 +13,7 @@ Subcommands:
 Config: $VSTOKEN_CONFIG or ~/.config/victorsuite/ai-agents/vstoken.json (see vstoken.example.json).
 Logs (no secrets, no prompt text): ~/.local/state/victorsuite/vstoken-{routes,usage}.jsonl
 """
-import argparse, datetime as dt, fnmatch, json, os, re, shlex, subprocess, sys, urllib.request
+import argparse, datetime as dt, fnmatch, json, os, re, shlex, stat, subprocess, sys, tempfile, urllib.request
 
 HOME = os.path.expanduser("~")
 CFG_PATH = os.environ.get("VSTOKEN_CONFIG", os.path.join(HOME, ".config/victorsuite/ai-agents/vstoken.json"))
@@ -50,28 +50,112 @@ def _append(name, rec):
 
 # ------------------------------------------------------------------ context
 DEFAULT_IGNORE = ["*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.apk", "*.jar", "*.so", "*.zip",
-                  "*.keystore", "*.jks", "*.pem", "*.key", ".env", "*.env", "*.bin", "*.ttf", "*.otf",
-                  "gradlew", "gradlew.bat", "*.lock"]
+                  "*.keystore", "*.jks", "*.pem", "*.key", ".env", ".env.*", "*.env", "*.env.*",
+                  "*.bin", "*.ttf", "*.otf", ".git", "gradlew", "gradlew.bat", "*.lock"]
 STOP = set("the a an and or to of in on for with is it this that be as at by from add fix make use new".split())
 
-def repo_files(repo):
-    """git ls-files respects .gitignore; then .aiignore + defaults are applied."""
+def _safe_repo_path(repo, path):
+    root = os.path.realpath(repo)
+    target = os.path.abspath(os.path.join(root, path))
     try:
-        out = subprocess.run(["git", "-C", repo, "ls-files", "-co", "--exclude-standard"],
-                             capture_output=True, text=True, check=True).stdout.split("\n")
-    except Exception:
-        out = [os.path.relpath(os.path.join(d, f), repo) for d, _, fs in os.walk(repo) for f in fs]
+        return (os.path.commonpath([root, target]) == root and target != root
+                and os.path.realpath(target) == target and not os.path.islink(target)
+                and os.path.isfile(target))
+    except (OSError, ValueError):
+        return False
+
+def _read_repo_file(repo, path):
+    """Read a bounded regular file without following links, including directory links.
+
+    Opening each component relative to an already opened directory also prevents a link
+    swapped in after discovery from escaping the repository. Termux/Linux provide these APIs.
+    """
+    if not _safe_repo_path(repo, path):
+        return None
+    if os.open not in os.supports_dir_fd or not hasattr(os, "O_NOFOLLOW"):
+        raise ValueError("safe context reads require a platform with relative no-follow file access")
+    root = os.path.realpath(repo)
+    parts = os.path.relpath(os.path.abspath(os.path.join(root, path)), root).split(os.sep)
+    directory = None
+    try:
+        directory = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        for component in parts[:-1]:
+            child = os.open(component, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
+            os.close(directory)
+            directory = child
+        fd = os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
+        with os.fdopen(fd, "rb") as stream:
+            info = os.fstat(stream.fileno())
+            if not stat.S_ISREG(info.st_mode) or info.st_size > 200_000:
+                return None
+            data = stream.read(200_001)
+            return data.decode("utf-8", errors="replace") if len(data) <= 200_000 else None
+    except OSError:
+        return None  # disappeared, inaccessible, or a link replaced a component
+    finally:
+        if directory is not None:
+            os.close(directory)
+
+def repo_files(repo):
+    """Honor Git ignore semantics even for a directory without a Git repository."""
+    repo = os.path.realpath(repo)
+    if not os.path.isdir(repo):
+        raise ValueError("repository directory does not exist")
+    try:
+        command = ["git", "-C", repo, "ls-files", "-co", "--exclude-standard", "-z"]
+        result = subprocess.run(command, capture_output=True)
+        ignored_tracked = set()
+        if result.returncode:
+            # An empty temporary Git index lets Git apply nested .gitignore rules without
+            # creating metadata in, or modifying, the user's non-Git directory.
+            with tempfile.TemporaryDirectory(prefix="vstoken-git-") as metadata:
+                subprocess.run(["git", "init", "--bare", "-q", metadata], check=True,
+                               capture_output=True)
+                result = subprocess.run(["git", "--git-dir=" + metadata, "--work-tree=" + repo,
+                                         "ls-files", "--others", "--exclude-standard", "-z"],
+                                        check=True, capture_output=True)
+        else:
+            # --exclude-standard only filters the untracked (-o) part of ls-files.
+            # Respect ignore protections for files already present in the index too.
+            ignored = subprocess.run(["git", "-C", repo, "ls-files", "--cached", "--ignored",
+                                      "--exclude-standard", "-z"], capture_output=True, check=True)
+            if ignored.stderr:
+                raise ValueError("Git could not safely read ignore rules; check their permissions and symlinks")
+            ignored_tracked = set(ignored.stdout.split(b"\0"))
+        # Git can succeed while warning that .gitignore could not be read. That removes
+        # a privacy boundary, so refuse the context rather than accepting partial rules.
+        if result.stderr:
+            raise ValueError("Git could not safely read ignore rules; check their permissions and symlinks")
+        out = [os.fsdecode(path) for path in result.stdout.split(b"\0") if path not in ignored_tracked]
+    except FileNotFoundError:
+        out = []
+        for directory, subdirs, names in os.walk(repo, followlinks=False):
+            subdirs[:] = [n for n in subdirs if n != ".git" and not os.path.islink(os.path.join(directory, n))]
+            if ".gitignore" in names:
+                raise ValueError("Git is required to honor .gitignore; install Git before building context")
+            out.extend(os.path.relpath(os.path.join(directory, n), repo) for n in names)
+    except subprocess.CalledProcessError as error:
+        raise ValueError("could not safely enumerate repository files with Git") from error
+    # Apply the same raw-name policy to Git enumeration and the Git-missing fallback.
+    out = [path for path in out if not any(0xD800 <= ord(char) <= 0xDFFF for char in path)]
     pats = list(DEFAULT_IGNORE)
     ai = os.path.join(repo, ".aiignore")
-    if os.path.exists(ai):
-        pats += [l.strip() for l in open(ai) if l.strip() and not l.startswith("#")]
+    if os.path.lexists(ai):
+        content = _read_repo_file(repo, ".aiignore")
+        if content is None:
+            raise ValueError("cannot safely read .aiignore")
+        pats += [line.strip() for line in content.splitlines() if line.strip() and not line.lstrip().startswith("#")]
     def ignored(p):
+        directories = p.split("/")[:-1]
         for pat in pats:
             pp = pat.rstrip("/")
             if fnmatch.fnmatch(p, pp) or fnmatch.fnmatch(os.path.basename(p), pp) or p.startswith(pp + "/"):
                 return True
+            if any(fnmatch.fnmatch(component, pp) or fnmatch.fnmatch("/".join(directories[:index + 1]), pp)
+                   for index, component in enumerate(directories)):
+                return True
         return False
-    return [p for p in out if p and not ignored(p)]
+    return sorted({p for p in out if p and not ignored(p) and _safe_repo_path(repo, p)})
 
 def keywords(task):
     words = re.findall(r"[A-Za-z_][A-Za-z0-9_]{2,}", task)
@@ -88,12 +172,10 @@ def keywords(task):
 
 def score(repo, path, kws):
     s = sum(4 for k in kws if k in path.lower())
-    try:
-        if os.path.getsize(os.path.join(repo, path)) > 200_000:
-            return 0
-        body = open(os.path.join(repo, path), errors="ignore").read().lower()
-    except Exception:
+    body = _read_repo_file(repo, path)
+    if body is None:
         return 0
+    body = body.lower()
     return s + sum(min(body.count(k), 5) for k in kws)
 
 def summarize_roadmap(text, kws, limit_lines=25):
@@ -106,39 +188,95 @@ def summarize_roadmap(text, kws, limit_lines=25):
     return "\n".join(keep[:limit_lines])
 
 def build_context(task, repo, max_tokens, roadmap):
+    _positive_limit(max_tokens, "max_tokens")
     kws = keywords(task)
-    parts = [f"# Task\n{task}\n"]
+    text = f"# Task\n{task}\n"
+    if count_tokens(text)[0] > max_tokens:
+        raise ValueError("task alone exceeds --max-tokens; shorten it or increase the budget")
     if roadmap and os.path.exists(roadmap):
-        parts.append("# Fleet ROADMAP (filtered)\n" + summarize_roadmap(open(roadmap, errors="ignore").read(), kws) + "\n")
+        try:
+            with open(roadmap, errors="replace") as stream:
+                lines = summarize_roadmap(stream.read(200_000), kws).splitlines()
+            section = "\n# Fleet ROADMAP (filtered)\n"
+            for line in lines:
+                if count_tokens(text + section + line + "\n")[0] > max_tokens:
+                    break
+                section += line + "\n"
+            if section != "\n# Fleet ROADMAP (filtered)\n":
+                text += section
+        except OSError:
+            pass
     files = repo_files(repo)
     ranked = sorted(((score(repo, p, kws), p) for p in files), reverse=True)
-    parts.append("# Repo map (top-level)\n" + " ".join(sorted({p.split('/')[0] for p in files})) + "\n")
-    used, _ = count_tokens("\n".join(parts))
+    names = sorted({p.split('/')[0] for p in files})
+    visible = []
+    for name in names:
+        candidate = "\n# Repo map (top-level)\n" + " ".join(visible + [name]) + "\n"
+        if count_tokens(text + candidate)[0] > max_tokens:
+            break
+        visible.append(name)
+    if visible:
+        suffix = " …\n" if len(visible) < len(names) else "\n"
+        while visible and count_tokens(text + "\n# Repo map (top-level)\n" + " ".join(visible) + suffix)[0] > max_tokens:
+            visible.pop()
+        if visible:
+            text += "\n# Repo map (top-level)\n" + " ".join(visible) + suffix
     included = []
     for sc, p in ranked:
         if sc <= 0:
             break
-        body = open(os.path.join(repo, p), errors="ignore").read()
-        chunk = f"## {p}\n```\n{body}\n```\n"
-        n, _ = count_tokens(chunk)
-        if used + n > max_tokens:
+        body = _read_repo_file(repo, p)
+        if body is None:
+            continue
+        chunk = f"\n## {p}\n```\n{body}\n```\n"
+        if count_tokens(text + chunk)[0] > max_tokens:
             # include only lines around keyword hits
             lines = body.splitlines()
             hits = [i for i, l in enumerate(lines) if any(k in l.lower() for k in kws)]
             sel = sorted({j for i in hits for j in range(max(0, i - 3), min(len(lines), i + 4))})
             snippet = "\n".join(f"{j+1}: {lines[j]}" for j in sel[:80])
-            chunk = f"## {p} (excerpt)\n```\n{snippet}\n```\n"
-            n, _ = count_tokens(chunk)
-            if used + n > max_tokens:
+            chunk = f"\n## {p} (excerpt)\n```\n{snippet}\n```\n"
+            if count_tokens(text + chunk)[0] > max_tokens:
                 continue
-        parts.append(chunk); used += n; included.append(p)
+        text += chunk
+        included.append(p)
         if len(included) >= 12:
             break
-    return "\n".join(parts), included
+    return text, included
 
 # ------------------------------------------------------------------ truncation
 ERR_RE = re.compile(r"(error|fail|exception|warning: |FAILED|BUILD FAILED|What went wrong|Caused by|panic|Traceback)", re.I)
-def truncate(text, max_lines=120, max_tokens=None):
+
+def _positive_limit(value, name):
+    if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+        raise ValueError(f"{name} must be a positive integer")
+    return value
+
+def _clip_tokens(text, budget, keep_tail):
+    if count_tokens(text)[0] <= budget:
+        return text
+    # Logs need their result tail; model requests need their instruction prefix.
+    marker = ("… " if keep_tail else " …")
+    if count_tokens(marker)[0] > budget:
+        marker = ""
+
+    def clipped(size):
+        body = (text[len(text) - size:] if keep_tail else text[:size]) if size else ""
+        return marker + body if keep_tail else body + marker
+
+    low, high = 0, len(text)
+    while low < high:
+        size = (low + high + 1) // 2
+        if count_tokens(clipped(size))[0] <= budget:
+            low = size
+        else:
+            high = size - 1
+    return clipped(low)
+
+def truncate(text, max_lines=120, max_tokens=None, keep_tail=True):
+    _positive_limit(max_lines, "max_lines")
+    if max_tokens is not None:
+        _positive_limit(max_tokens, "max_tokens")
     lines = text.splitlines()
     # collapse exact repeats
     out, prev, rep = [], None, 0
@@ -152,14 +290,19 @@ def truncate(text, max_lines=120, max_tokens=None):
         out.append(f"  … (previous line repeated {rep}x)")
     lines = out
     if len(lines) > max_lines:
-        head, tail = lines[: max_lines // 4], lines[-max_lines // 2:]
-        mid = [l for l in lines[max_lines // 4: -max_lines // 2] if ERR_RE.search(l)][: max_lines // 4]
-        lines = head + [f"… [{len(out) - len(head) - len(tail)} lines omitted; {len(mid)} error/warning lines kept] …"] + mid + ["…"] + tail
+        if max_lines == 1:
+            lines = lines[-1:]
+        elif max_lines == 2:
+            lines = [lines[0], lines[-1]]
+        else:
+            slots = max_lines - 1  # one line is reserved for the omission marker
+            head_count, tail_count = slots // 4, max(1, slots // 2)
+            head, tail = lines[:head_count], lines[-tail_count:]
+            mid = [line for line in lines[head_count:-tail_count] if ERR_RE.search(line)][:slots - len(head) - len(tail)]
+            omitted = len(lines) - len(head) - len(mid) - len(tail)
+            lines = head + [f"… [{omitted} lines omitted; {len(mid)} error/warning lines kept] …"] + mid + tail
     res = "\n".join(lines)
-    if max_tokens:
-        while count_tokens(res)[0] > max_tokens and len(res) > 200:
-            res = res[: int(len(res) * 0.8)] + "\n… [truncated to token budget]"
-    return res
+    return _clip_tokens(res, max_tokens, keep_tail) if max_tokens is not None else res
 
 # ------------------------------------------------------------------ classifier / router
 HARD = ["refactor", "architecture", "architect", "redesign", "debug", "race condition", "deadlock", "crash",
@@ -235,7 +378,7 @@ def route(args):
     tier, reasons = (args.tier, ["manual --tier"]) if args.tier else classify(args.task)
     if args.model:
         reasons.append("manual --model")
-    prompt = truncate(args.task, max_lines=400, max_tokens=cfg.get("max_prompt_tokens", 8000))
+    prompt = truncate(args.task, max_lines=400, max_tokens=cfg.get("max_prompt_tokens", 8000), keep_tail=False)
     attempt = 0
     while tier:
         attempt += 1
@@ -303,14 +446,20 @@ def read_usage(days):
 
 # ------------------------------------------------------------------ main
 def main(argv=None):
+    def positive_int(value):
+        try:
+            return _positive_limit(int(value), "limit")
+        except ValueError as error:
+            raise argparse.ArgumentTypeError(str(error)) from error
+
     ap = argparse.ArgumentParser(prog="vstoken", description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("context"); c.add_argument("task"); c.add_argument("--repo", default=".")
-    c.add_argument("--max-tokens", type=int, default=6000)
+    c.add_argument("--max-tokens", type=positive_int, default=6000)
     c.add_argument("--roadmap", default=os.environ.get("VS_FLEET_ROADMAP",
                    os.path.join(HOME, ".local/share/victorsuite/fleet-manifest/ROADMAP.md")))
     c.add_argument("--stats", action="store_true")
-    t = sub.add_parser("trunc"); t.add_argument("--max-lines", type=int, default=120); t.add_argument("--max-tokens", type=int)
+    t = sub.add_parser("trunc"); t.add_argument("--max-lines", type=positive_int, default=120); t.add_argument("--max-tokens", type=positive_int)
     k = sub.add_parser("classify"); k.add_argument("task")
     r = sub.add_parser("route"); r.add_argument("task"); r.add_argument("--tier", choices=TIERS)
     r.add_argument("--model"); r.add_argument("--check"); r.add_argument("--dry-run", action="store_true")
@@ -320,12 +469,18 @@ def main(argv=None):
     n = sub.add_parser("count"); n.add_argument("file", nargs="?")
     a = ap.parse_args(argv)
     if a.cmd == "context":
-        text, inc = build_context(a.task, a.repo, a.max_tokens, a.roadmap)
-        print(text)
+        try:
+            text, inc = build_context(a.task, a.repo, a.max_tokens, a.roadmap)
+        except ValueError as error:
+            ap.error(str(error))
+        sys.stdout.write(text)
         if a.stats:
             print(f"[vstoken] {count_tokens(text)} files={inc}", file=sys.stderr)
     elif a.cmd == "trunc":
-        print(truncate(sys.stdin.read(), a.max_lines, a.max_tokens))
+        text = truncate(sys.stdin.read(), a.max_lines, a.max_tokens)
+        if a.max_tokens is None or count_tokens(text + "\n")[0] <= a.max_tokens:
+            text += "\n"
+        sys.stdout.write(text)
     elif a.cmd == "classify":
         tier, why = classify(a.task); print(tier, "; ".join(why))
     elif a.cmd == "route":
