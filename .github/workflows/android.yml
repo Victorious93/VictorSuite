@@ -245,7 +245,8 @@ jobs:
           echo "published=true" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
-      # Release retention policy: keep only the release just published. Every other
+      # Release retention policy: keep the release just published and the one before it
+      # (a rollback set while the newest build is not device-tested). Every older
       # release (and any older draft) is deleted. Git tags are KEPT (no --cleanup-tag)
       # so every published build stays traceable to its source for GPL compliance.
       # Runs only when the step above actually created a release.
@@ -266,7 +267,8 @@ jobs:
             echo "::warning::Newest release ($NEWEST) is not the one just published ($KEEP_TAG); skipping prune."
             exit 0
           fi
-          for t in "${TAGS[@]:1}"; do
+          # TAGS[0] is the new release and TAGS[1] the previous one; both are kept.
+          for t in "${TAGS[@]:2}"; do
             [ -z "$t" ] || [ "$t" = "$KEEP_TAG" ] && continue
             echo "Deleting outdated release $t (tag kept)"
             gh release delete "$t" --yes
