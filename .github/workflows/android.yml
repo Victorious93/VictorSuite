@@ -59,6 +59,7 @@ jobs:
           python3 -m unittest discover -s tests/ai-agents -p 'test_*.py' -v
           python3 -m unittest discover -s tests/ci -p 'test_*.py' -v
           bash tests/ai-agents/test_vsphone_gate.sh
+          bash tests/ai-agents/test_bridge_rish_doctor.sh
 
       - name: Verify debug APK matches source (id, version, targetSdk, native libs)
         run: |

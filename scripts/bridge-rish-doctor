@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# bridge-rish-doctor - set up and troubleshoot `rish` (a shell that runs through Victorious Bridge).
+#
+# Usage: bridge-rish-doctor [--dir DIR] [--timeout SECONDS]
+#
+# What it checks, in order, and what each failure means:
+#   1. the terminal app's own package id, derived from $PREFIX (never hard-coded);
+#   2. that `rish` and `rish_shizuku.dex` exist side by side and the dex is read-only (Android 14+ requires it);
+#   3. RISH_APPLICATION_ID (set to the terminal app's package so the Bridge can verify who is asking);
+#   4. a real probe: `rish -c 'id -u'`, whose stderr carries the privilege line Victorious Bridge prints.
+# It reports the privilege actually in use: root, ADB (shell), or "ordinary app" when rish does not work.
+# It changes nothing except making the dex read-only, which it says when it does.
+#
+# rish is a LEGACY full-access client of Victorious Bridge: the owner must approve this terminal app in the
+# Bridge's Apps screen, under that label. Nothing here grants access.
+set -u
+
+dir="${HOME:-.}/bridge"
+timeout_s=15
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --dir) dir="$2"; shift 2 ;;
+        --timeout) timeout_s="$2"; shift 2 ;;
+        -h|--help) sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        *) echo "unknown option: $1" >&2; exit 2 ;;
+    esac
+done
+
+problems=0
+say() { printf '%s\n' "$*"; }
+bad() { printf 'PROBLEM: %s\n' "$*"; problems=$((problems + 1)); }
+
+# 1. package id from the actual install location: /data/data/<package>/files/usr
+pkg=""
+case "${PREFIX:-}" in
+    /data/data/*) pkg="${PREFIX#/data/data/}"; pkg="${pkg%%/*}" ;;
+    /data/user/*/*) pkg="${PREFIX#/data/user/*/}"; pkg="${pkg%%/*}" ;;
+esac
+if [ -z "$pkg" ]; then
+    pkg="${RISH_APPLICATION_ID:-}"
+fi
+if [ -z "$pkg" ] || [ "$pkg" = "PKG" ]; then
+    bad "cannot tell which app this terminal is. Set RISH_APPLICATION_ID to this app's package name."
+    say "terminal app: unknown"
+else
+    say "terminal app: $pkg"
+fi
+
+# 2. files
+rish_bin=""
+if [ -x "$dir/rish" ] || [ -f "$dir/rish" ]; then rish_bin="$dir/rish"
+elif command -v rish >/dev/null 2>&1; then rish_bin="$(command -v rish)"; fi
+if [ -z "$rish_bin" ]; then
+    bad "rish not found in $dir or on PATH. In Victorious Bridge open Use in terminal apps -> export, then copy rish and rish_shizuku.dex into $dir."
+else
+    say "rish: $rish_bin"
+    dex="$(dirname "$rish_bin")/rish_shizuku.dex"
+    if [ ! -f "$dex" ]; then
+        bad "rish_shizuku.dex is missing next to rish ($dex). Export both files together."
+    elif [ -w "$dex" ]; then
+        # uid 0 can always write, so for it the permission bits are the only observable fact.
+        if chmod 400 "$dex" 2>/dev/null && { [ ! -w "$dex" ] || { [ "$(id -u)" = 0 ] && [ "$(stat -c %a "$dex" 2>/dev/null)" = 400 ]; }; }; then
+            say "made $dex read-only (Android 14+ will not load a writable dex)"
+        else
+            bad "$dex is writable and could not be made read-only. Copy it into this app's private storage and chmod 400."
+        fi
+    else
+        say "dex: read-only"
+    fi
+fi
+
+# 3. identity variable
+if [ -n "$pkg" ] && [ "$pkg" != "PKG" ]; then
+    export RISH_APPLICATION_ID="${RISH_APPLICATION_ID:-$pkg}"
+    if [ "$RISH_APPLICATION_ID" != "$pkg" ]; then
+        bad "RISH_APPLICATION_ID is '$RISH_APPLICATION_ID' but this terminal is '$pkg'. The Bridge checks the package against the calling uid and will refuse a mismatch."
+    fi
+fi
+
+# 4. probe
+priv="ordinary app (rish not working)"
+if [ -n "$rish_bin" ] && [ "$problems" -eq 0 ]; then
+    err="$(mktemp)"; out="$(mktemp)"
+    trap 'rm -f -- "$err" "$out"' EXIT
+    if command -v timeout >/dev/null 2>&1; then
+        RISH_QUIET=0 timeout "$timeout_s" sh "$rish_bin" -c 'id -u' >"$out" 2>"$err"; rc=$?
+    else
+        RISH_QUIET=0 sh "$rish_bin" -c 'id -u' >"$out" 2>"$err"; rc=$?
+    fi
+    uid="$(tr -d '[:space:]' <"$out")"
+    if [ "$rc" -eq 0 ] && [ "$uid" = "0" ]; then priv="root"
+    elif [ "$rc" -eq 0 ] && [ "$uid" = "2000" ]; then priv="ADB (shell user)"
+    elif [ "$rc" -eq 0 ] && [ -n "$uid" ]; then priv="uid $uid"
+    else
+        e="$(cat "$err")"
+        case "$e" in
+            *"Permission denied"*) bad "the Bridge has not approved this terminal. In Victorious Bridge > Apps choose $pkg and allow Legacy full access (read the warning first)." ;;
+            *"Request timeout"*|*"may be blocked"*) bad "no answer from Victorious Bridge. Is it running? Also disable battery optimisation for both $pkg and Victorious Bridge." ;;
+            *"RISH_APPLICATION_ID"*) bad "RISH_APPLICATION_ID is not set. Run: export RISH_APPLICATION_ID=$pkg" ;;
+            *"Server is not running"*) bad "Victorious Bridge service is not running. Start it in the app (Diagnostics shows the last start result)." ;;
+            *"requires server"*) bad "the running service is too old for rish. Update Victorious Bridge and restart the service." ;;
+            *) if [ "$rc" -eq 124 ]; then bad "rish did not finish within ${timeout_s}s."; else bad "rish failed (exit $rc). stderr: $(printf '%s' "$e" | head -c 200)"; fi ;;
+        esac
+    fi
+    if [ -s "$err" ] && grep -q "through Victorious Bridge" "$err"; then say "bridge says: $(grep 'through Victorious Bridge' "$err" | head -1)"; fi
+fi
+
+say "privilege in use: $priv"
+if [ "$problems" -eq 0 ]; then say "OK"; exit 0; fi
+say "$problems problem(s) found"
+exit 1
