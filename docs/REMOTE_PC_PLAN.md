@@ -2,6 +2,8 @@
 
 > **Status: DESIGN ONLY (PR 1 of 9).** No app code. Do not merge without Don's approval.
 > Shared wire formats and contracts: [`docs/specs/VICTORPC_PAIRING.md`](specs/VICTORPC_PAIRING.md) (frozen v1).
+> Related (additive, docs only): [`docs/VICTORLINUX_INTEGRATION_PLAN.md`](VICTORLINUX_INTEGRATION_PLAN.md) —
+> VictorLinux as an optional victorpc v1 host. Ubuntu PC pairing is unchanged.
 > Written Nov 10, 2026 against `main` @ `ea51fad` (v0.118.3.61). **[unverified]** = not confirmed in the repo or upstream.
 
 ## 0. Goal

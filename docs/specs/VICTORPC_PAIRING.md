@@ -7,6 +7,10 @@ Consumers: **Victorious File Manager** (PC pane) and **droidcommand-AI** (hub ti
 Changes to v1 are additive only (new optional keys / columns / extras). Anything that changes the
 meaning of an existing field is v2 and needs a new `v` / `schema_version`.
 
+Additive VictorLinux host profile (optional hint, ignorable by v1 parsers; no v1 field changes
+meaning): [`VICTORPC_PAIRING_ADDENDUM_VICTORLINUX.md`](VICTORPC_PAIRING_ADDENDUM_VICTORLINUX.md).
+Design: [`docs/VICTORLINUX_INTEGRATION_PLAN.md`](../VICTORLINUX_INTEGRATION_PLAN.md).
+
 Words: **MUST**, **MUST NOT**, **SHOULD** as in RFC 2119.
 
 ---
