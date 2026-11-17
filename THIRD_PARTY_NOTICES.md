@@ -15,6 +15,18 @@ unchanged; this file adds credits, it does not replace any of them.
 | Terminal Emulator for Android (`terminal-view`, `terminal-emulator`) | Jack Palevich | Apache-2.0 | https://github.com/jackpal/Android-Terminal-Emulator |
 | libcore/ojluni (`com.termux.shared.file`) | The Android Open Source Project / Oracle | GPLv2 with Classpath exception | https://cs.android.com/android/platform/superproject/+/android-11.0.0_r3:libcore/ojluni/ |
 | libsuperuser (`StreamGobbler`) | Chainfire | Apache-2.0 | https://github.com/Chainfire/libsuperuser |
+| scrcpy (screen mirroring client; installed on the user's PC by the optional `pc/victor-pc-setup.sh --scrcpy` step, not bundled) | Genymobile (Romain Vimont and contributors) | Apache-2.0 | https://github.com/Genymobile/scrcpy |
+
+### scrcpy (Genymobile)
+
+scrcpy is Copyright (C) Genymobile, licensed under the Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+VictorSuite does **not** vendor or bundle any scrcpy binary. The optional PC step (`pc/victor-pc-setup.sh --scrcpy`,
+off by default) downloads the official release from https://github.com/Genymobile/scrcpy/releases on the user's PC
+(checksum pinned in the script, GPG signature checked when `gpg` is available) or installs the Ubuntu package, and
+the release tarball carries its own `LICENSE` file. The release also includes an `adb` binary from the Android platform-tools (AOSP; the Android SDK terms apply to
+that binary), which stays inside the downloaded scrcpy directory. The My PC screen only shows setup guidance and
+command lines for the stock Genymobile scrcpy client. The older in-app viewer under `victor/scrcpy` is not part of
+this notice; its provenance has not been audited here.
 
 Application icons in the historical ZeroTermux project are credited to the Alibaba Iconfont library.
 

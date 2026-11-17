@@ -18,6 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 python3 -m unittest discover -s tests/ai-agents -p 'test_*.py' -v
 python3 -m unittest discover -s tests/ci -p 'test_*.py' -v
 bash tests/ai-agents/test_vsphone_gate.sh
+bash tests/pc/test_victor_pc_setup.sh
 
 # Instrumented tests (requires a connected device or emulator; termux-shared/src/androidTest)
 ./gradlew :termux-shared:connectedAndroidTest
@@ -66,6 +67,7 @@ Under `app/src/main/java/com/termux/`:
 - **`deepseek/markdown/`** — `MarkDownAPI` (plus link-resolver helpers) used by `TermuxActivity` to render markdown in the info sidebar. The former in-app DeepSeek/Claude chat, key/settings screens, and API clients were removed. The drawer AI button and Settings AI entry launch DroidCommand AI via `victor/droidcommand/DroidCommandAi` (`ai.droidcommand.app`).
 - **`back/`** — backup/restore UI (`BackViewModel`, `RestoreViewModel`). Supports `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.tar.Z` archives.
 - **`theme/`** — read-only fleet theme client for VictorLaunch's `content://com.victorious.launch.theme/current` (spec: `Victorious93/victorlaunch` `docs/specs/FLEET_THEME.md`). `FleetThemeClient` verifies the provider owner + cert pin (`FleetThemePins`) before and after each query, listens with a ContentObserver + runtime exported receiver, and falls back to the built-in theme on any failure. `FleetThemeApplier` recolours only View/XML chrome (both drawers, `VsSettingsActivity`, `VictorSuiteSettingsActivity`, stock `SettingsActivity` action bar), never terminal colours. Pure logic (`FleetThemeParser`, `FleetThemePins`, `FleetThemeRoleMap`) has JVM tests in `app/src/test/.../theme/`.
+- **`pc/`** — "My PC" (PC mirrors and controls this phone with scrcpy over wireless ADB on Wi-Fi/Tailscale). `MyPcActivity` is a guidance screen behind a mandatory warning; it opens no listener, and `PcMirrorNet`/`PcMirrorCommands` only accept private-LAN or Tailscale IPv4 addresses. It is the opposite direction of the in-app `scrcpy/` viewer ("ADB Remote Connection") and shares no classes or ports with it. The rest of the Remote PC plan (`docs/REMOTE_PC_PLAN.md`) is still unimplemented. The Ubuntu side is `pc/victor-pc-setup.sh` (`--scrcpy` is opt-in; tests in `tests/pc/`).
 - **`http/`** — `NanoHttpdServer`. **`otg/`** — `OTGManager`. Other dirs not listed here exist too (`shell/`, `zip/`, `developer/`, `keybord/`, `bosybox/`, etc.); inspect before assuming.
 - **`ftp/`** — embedded FTP server: `new_ftp/` (Apache FtpServer via `FtpService`). The old SwiFTP-based `FsService` was removed (it was never started and had an always-true guest-login check).
 - **`http_service/`** — embedded HTTP/ttyd service.

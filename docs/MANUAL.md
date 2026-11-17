@@ -136,3 +136,78 @@ It also installs two helpers:
   (`… | vstoken trunc`), tracks token spend (`vstoken report`) and has an opt-in model router.
 
 Details, licences and confidence labels: [AI_CODING_AGENTS.md](AI_CODING_AGENTS.md).
+
+## My PC: let your PC mirror and control this phone (optional, off by default)
+
+Menu **VictorSuite Functions → My PC** lets a trusted Ubuntu PC show this phone's screen and control it
+with the mouse and keyboard. The PC runs the scrcpy client; the phone is the device being mirrored. It
+uses Android's own wireless debugging (ADB) over **Wi-Fi or Tailscale**. Nothing is on until you turn
+it on, and VictorSuite opens no network port for it.
+
+> **Warning.** Wireless ADB and scrcpy give the paired PC full screen access and input control of the
+> phone. ADB is powerful: it can install apps, read and change data and run commands. Use it only on a
+> trusted LAN or over Tailscale. **Never expose ADB to the internet** (no router port forwarding, no
+> public IP address). Turn Wireless debugging off when you are done.
+
+This is the opposite direction of the **ADB Remote Connection** menu item, which makes this phone a
+viewer of another device. That item is unchanged.
+
+### 1. Install scrcpy on the PC (optional step)
+
+The PC setup script lives in `pc/victor-pc-setup.sh` and runs on Ubuntu 24.04 (22.04 best effort). It
+installs nothing unless you pass `--scrcpy`:
+
+```sh
+./pc/victor-pc-setup.sh --scrcpy --dry-run   # show what would happen, change nothing
+./pc/victor-pc-setup.sh --scrcpy             # install scrcpy
+./pc/victor-pc-setup.sh --status             # what is installed
+```
+
+By default it installs the official Genymobile release (currently v5.0.1, x86_64) under `~/.local`
+without root. The download is checked against a pinned SHA-256 and, when `gpg` is installed, against the
+release signature. `--scrcpy-method apt` uses the Ubuntu package instead; Genymobile marks that package
+obsolete and it may not work with recent Android. Running the script twice is safe.
+
+### 2. Enable the My PC option on the phone
+
+1. Open **My PC**, read the warning and tap **I understand - unlock setup**. Until then the setup
+   buttons stay locked.
+2. Tap **Open Developer options** and turn on **Wireless debugging**. Tap **Pair device with pairing
+   code** to see the pairing address, port and 6-digit code.
+3. The **Phone status** panel shows whether Wireless debugging is on, and warns if the old
+   `adb tcpip` listener (no pairing step) is open. **This phone's addresses** lists the Wi-Fi/LAN and
+   Tailscale addresses the app will accept.
+4. Enter the phone address and the ports shown on the Wireless debugging screen, tap **Build PC
+   commands**, then **Copy**. The app only accepts private LAN addresses (10.x, 172.16-31.x, 192.168.x)
+   and Tailscale addresses (100.64-127.x); public addresses are refused.
+
+### 3. Wi-Fi or Tailscale
+
+- **Wi-Fi:** phone and PC on the same trusted network. Android only offers Wireless debugging while the
+  phone is on Wi-Fi.
+- **Tailscale:** sign both devices into the same tailnet and use the phone's `100.x` address. Wireless
+  debugging itself must still be switched on. Whether it is reachable over Tailscale depends on the
+  device and has not been verified on every phone.
+
+### 4. Start mirroring (on the PC)
+
+```sh
+adb pair <phone-ip>:<pairing-port>      # first time only; enter the 6-digit code
+adb connect <phone-ip>:<adb-port>
+scrcpy -s <phone-ip>:<adb-port>
+```
+
+### 5. Stop
+
+1. Close the scrcpy window on the PC (or press Ctrl+C).
+2. On the PC: `adb disconnect <phone-ip>:<adb-port>`.
+3. On the phone, turn **Wireless debugging** off (My PC → **Stop** → **Open Developer options**; this
+   button is always available).
+4. If a PC is no longer trusted, forget it under Wireless debugging → **Paired devices**.
+
+Not verified: no live phone-to-PC scrcpy session has been run for this feature. The setup script was
+run on Ubuntu 24.04 only.
+
+scrcpy is by [Genymobile](https://github.com/Genymobile/scrcpy), licensed under Apache-2.0. VictorSuite
+does not bundle it; the setup script downloads the official release when you ask for it. See
+[THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
