@@ -1,45 +1,25 @@
-<!-- victorious-fleet-readme-refresh:start -->
-<p align="center">
-  <img src="assets/logo.png" alt="VictorSuite logo" width="200">
-</p>
-
-# VictorSuite
-
-Android Linux environment suite for the Victorious fleet (host/shell tooling via TERMUX_IPC).
-
-**Package id:** `com.termux`
-
-> **Package note:** From `app/build.gradle` / manifest (`TERMUX_PACKAGE_NAME` / `namespace`). Display name is VictorSuite — do not refer to this app as Termux.
-
-**Status:** CI green / not device-tested *(from [fleet-manifest ROADMAP](https://github.com/Victorious93/fleet-manifest/blob/main/ROADMAP.md))*
-
-## Install / build
-
-Prebuilt, signed APKs are attached to [GitHub Releases](https://github.com/Victorious93/VictorSuite/releases). Pick the `arm64-v8a` APK for most phones (`universal` only if needed). Releases are built by CI and are marked pre-release because they have not been device-tested.
-
-To build from source: Gradle Android app under `app/`. JDK 17; see `gradle.properties` for SDK/NDK. Typical: `./gradlew :app:assembleDebug`.
-
-_Steps above are taken from this repo’s build files / existing docs; anything not exercised in this refresh is unlabeled as verified on a device._
-
-## Victorious fleet
-
-- Monorepo: [https://github.com/Victorious93/victorious-fleet](https://github.com/Victorious93/victorious-fleet)
-- Fleet site: [https://victorious-framework.pages.dev](https://victorious-framework.pages.dev)
-
-<!-- victorious-fleet-readme-refresh:end -->
-
 <div align="center">
+
+<img src="docs/assets/banner.png" alt="VictorSuite — An Android Linux environment and toolkit. Part of the Victorious Framework fleet" width="1280" />
 
 # VictorSuite
 
 **An Android Linux environment and toolkit — containers, backup/restore, plugins, X11, AI coding agents and automation.**
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
-![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
-![Language](https://img.shields.io/badge/language-Java%20%2F%20Kotlin-orange)
-![Status](https://img.shields.io/badge/status-private%20fork-lightgrey)
+Works on its own; fleet integration (droidcommand-AI) is optional
+
+VictorSuite also works fully without VictorLinux or other fleet apps.
+
+<p>
+  <a href="https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.64"><img src="https://img.shields.io/github/v/release/Victorious93/VictorSuite?include_prereleases&amp;style=flat-square&amp;label=Release&amp;labelColor=0B0F1A&amp;color=00E5FF" alt="Latest release" /></a>
+  <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-GPLv3-FF2BD6?style=flat-square&amp;labelColor=0B0F1A" alt="License: GPL v3" /></a>
+  <a href="https://github.com/Victorious93/VictorSuite/actions"><img src="https://img.shields.io/github/actions/workflow/status/Victorious93/VictorSuite/android.yml?style=flat-square&amp;label=CI&amp;labelColor=0B0F1A&amp;color=00E5FF" alt="CI" /></a>
+  <a href="https://victorious-framework.pages.dev"><img src="https://img.shields.io/badge/Fleet-Victorious_Framework-FF2BD6?style=flat-square&amp;labelColor=0B0F1A" alt="Victorious Framework fleet" /></a>
+</p>
 
 </div>
+
+**Package id:** `com.termux` (display name is VictorSuite — do not refer to this app as Termux). VictorSuite and upstream Termux cannot be installed on the same device.
 
 VictorSuite is an Android Linux environment maintained by Victorious93. It keeps Termux’s `applicationId` (`com.termux`) and the public `RUN_COMMAND` contract so existing Termux tooling and intents still work.
 
@@ -78,6 +58,17 @@ Upstream Termux capabilities (terminal emulator, packages via bootstrap, `RUN_CO
 |---|---|---|---|---|---|
 | *TODO* | *TODO* | *TODO* | *TODO* | *TODO* | *TODO* |
 
+## Install / download
+
+Pre-release builds signed by CI — **not device-tested**. Install only if you understand the risk.
+
+The current release is **[v0.118.3.64](https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.64)** (published 11:13 AM EST, Nov 14, 2026). It matches `versionName` `0.118.3.64` / `versionCode` `126` on `main`. All published GitHub releases are pre-releases, so [github.com/Victorious93/VictorSuite/releases/latest](https://github.com/Victorious93/VictorSuite/releases/latest) is not a valid link (it returns 404).
+
+- APK for most phones (`arm64-v8a`): [`termux-app_apt-android-7-release_arm64-v8a.apk`](https://github.com/Victorious93/VictorSuite/releases/download/v0.118.3.64/termux-app_apt-android-7-release_arm64-v8a.apk)
+- Other ABIs and a `universal` APK are on the same release page. Prefer the ABI-specific APK; use `universal` only if needed.
+- Checksums: [`SHA256SUMS`](https://github.com/Victorious93/VictorSuite/releases/download/v0.118.3.64/SHA256SUMS)
+- Release list: <https://github.com/Victorious93/VictorSuite/releases>
+
 ## Requirements
 
 - Android device with **API 23+** (`minSdkVersion` 23; `targetSdkVersion` 28; `compileSdkVersion` 36)
@@ -105,7 +96,11 @@ cd VictorSuite
 
 CI (`.github/workflows/android.yml`) runs `:app:assembleDebug` on pushes/PRs to `main`.
 
-Current `versionName` / `versionCode` (from `app/build.gradle`): **0.118.3.64** / **126**.
+Current `versionName` / `versionCode` (from `app/build.gradle`): **[0.118.3.64](https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.64)** / **126**.
+
+## Manual
+
+How-to: [docs/MANUAL.md](docs/MANUAL.md)
 
 ## Usage
 
