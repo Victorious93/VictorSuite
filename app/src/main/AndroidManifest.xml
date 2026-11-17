@@ -116,6 +116,12 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
+            android:name=".victor.pc.MyPcActivity"
+            android:exported="false"
+            android:label="@string/my_pc_title"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
             android:name=".victor.hak5.Hak5CommandLogActivity"
             android:exported="false"
             android:label="@string/hak5_command_log_title"

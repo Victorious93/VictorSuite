@@ -244,6 +244,9 @@
             click="java:com.termux.victor.config.mainmenu.config.UnInstallClickConfig" />
         <item tag="ADB 远程链接"
             click="java:com.termux.victor.config.mainmenu.config.RemoteConnectionClickConfig" />
+        <item tag="My PC"
+            name="My PC"
+            click="java:com.termux.victor.config.mainmenu.config.MyPcClickConfig" />
         <item tag="Headscale"
             click="java:com.termux.victor.config.mainmenu.config.HeadscaleClickConfig" />
         <item tag="APK Analysis"

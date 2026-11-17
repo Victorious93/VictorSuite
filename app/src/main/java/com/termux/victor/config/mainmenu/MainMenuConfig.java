@@ -42,6 +42,7 @@ import com.termux.victor.config.mainmenu.config.KaliLoginClickConfig;
 import com.termux.victor.config.mainmenu.config.KeyDataClickConfig;
 import com.termux.victor.config.mainmenu.config.LanguageClickConfig;
 import com.termux.victor.config.mainmenu.config.MainMenuClickConfig;
+import com.termux.victor.config.mainmenu.config.MyPcClickConfig;
 import com.termux.victor.config.mainmenu.config.MyUsedSoftLinksDataClickConfig;
 import com.termux.victor.config.mainmenu.config.OnLineCommandClickConfig;
 import com.termux.victor.config.mainmenu.config.OpenPathClickConfig;
@@ -178,6 +179,7 @@ public class MainMenuConfig implements BaseConfig {
         vsFeaturesClicks.add(new MyUsedSoftLinksDataClickConfig());
         vsFeaturesClicks.add(new UnInstallClickConfig());
         vsFeaturesClicks.add(new RemoteConnectionClickConfig());
+        vsFeaturesClicks.add(new MyPcClickConfig());
         vsFeaturesClicks.add(new HeadscaleClickConfig());
         vsFeaturesClicks.add(new ApkAnalysisClickConfig());
         vsFeaturesClicks.add(new AndroidIdeClickConfig());
