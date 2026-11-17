@@ -12,6 +12,10 @@ and have **not** been verified in this repository.
 The design discussion, Don's open questions, and UI notes live in
 [`docs/VICTORLINUX_INTEGRATION_PLAN.md`](../VICTORLINUX_INTEGRATION_PLAN.md).
 
+The six open questions in the plan were **resolved Nov 16, 2026**: Don chose
+option A for all of them. This addendum is unchanged in its wire rules; only
+the question-5 pointer in §E is updated to record that decision.
+
 ---
 
 ## A. What is unchanged
@@ -101,4 +105,7 @@ column; the label is VictorSuite-local until a later additive change is approved
 
 A Termux OpenAI-compatible client using model `victor-local` is a UI shortcut on a
 tagged profile only. It is not a v1 QR/provider field. Its base URL is not specified
-here because it is **[unverified]**; see the plan, question 5.
+here because it is **[unverified]**. Don chose plan question 5 option A on
+Nov 16, 2026: confirm the base URL against VictorLinux docs before any feature
+code; if VL documents one (for example a path on the `:8080` gateway), use that
+with the stored Bearer token; do not invent a path in frozen v1.

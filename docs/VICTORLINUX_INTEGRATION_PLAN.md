@@ -9,6 +9,11 @@
 > **not** on main yet; this plan does not depend on them landing first, but the features
 > it describes would ship after (or with) that series.
 >
+> **Decisions (Nov 16, 2026):** Don chose **option A** for all six open questions in
+> §9. Those questions are marked resolved below. This file was updated after #107
+> landed on `main` (`b836e21`; `main` is now `9138004` including #108). The frozen
+> v1 spec is unchanged.
+>
 > Shared wire formats: [`docs/specs/VICTORPC_PAIRING.md`](specs/VICTORPC_PAIRING.md)
 > (frozen v1). Additive host profile:
 > [`docs/specs/VICTORPC_PAIRING_ADDENDUM_VICTORLINUX.md`](specs/VICTORPC_PAIRING_ADDENDUM_VICTORLINUX.md).
@@ -254,12 +259,16 @@ All of frozen v1 §10 still applies. In addition:
 - **Standalone broken by accident:** a failed health check MUST NOT block SSH; a
   missing VictorSuite MUST NOT break VL.
 
-## 9. Open questions for Don
+## 9. Open questions for Don (resolved)
+
+**Resolved Nov 16, 2026:** Don chose **option A** for all six questions. The
+original wording is kept for the record; each chosen option is marked
+**Chosen**. First option was the recommendation in every case.
 
 First option is the recommendation.
 
 1. **How should the first VictorLinux pair work, given VL has no pairing protocol yet?**
-   - **A (recommended):** VictorLinux later implements the same v1 HMAC listener and QR.
+   - **A (recommended) — Chosen Nov 16, 2026:** VictorLinux later implements the same v1 HMAC listener and QR.
      VictorSuite stays on one protocol. No feature code until that VL work is approved.
    - **B:** A temporary out-of-band path (paste the phone's pubkey, or an `ssh-copy-id`
      helper over a console session) until VL adds the listener.
@@ -267,7 +276,7 @@ First option is the recommendation.
      keep this document as a mapping only.
 
 2. **How should VictorSuite get the gateway Bearer token?**
-   - **A (recommended):** Never in the QR. After a successful SSH pair, optional paste
+   - **A (recommended) — Chosen Nov 16, 2026:** Never in the QR. After a successful SSH pair, optional paste
      once, or fetch over the pinned SSH session from a path VL documents. Stored
      Keystore-encrypted. Skipping it means no tag and no inference shortcut; SSH still
      works.
@@ -276,7 +285,7 @@ First option is the recommendation.
      inference wait for a later VL story.
 
 3. **When should the phone call `/victor/health`?**
-   - **A (recommended):** Only if the optional `src=victorlinux` hint is present, a
+   - **A (recommended) — Chosen Nov 16, 2026:** Only if the optional `src=victorlinux` hint is present, a
      token is stored, and SSH to that host already succeeded. Never probe Ubuntu
      profiles.
    - **B:** Probe `:8080` on every reachable profile and tag only if the response looks
@@ -285,13 +294,13 @@ First option is the recommendation.
      then probe.
 
 4. **If `/victor/health` returns 503 (present but unhealthy)?**
-   - **A (recommended):** Still show the VictorLinux tag, in a muted "unavailable"
+   - **A (recommended) — Chosen Nov 16, 2026:** Still show the VictorLinux tag, in a muted "unavailable"
      state.
    - **B:** Treat 503 like unreachable (tag absent).
    - **C:** Show the tag and a blocking error that interrupts SSH/SFTP.
 
 5. **What is the OpenAI-compatible base URL for model `victor-local`?**
-   - **A (recommended):** Confirm with VictorLinux docs before any feature code. If VL
+   - **A (recommended) — Chosen Nov 16, 2026:** Confirm with VictorLinux docs before any feature code. If VL
      documents a base URL (for example a path on the `:8080` gateway), use that with
      the stored Bearer token. Do not invent a path in frozen v1.
    - **B:** Hard-code a guessed path in the design now (risky; the path is unverified).
@@ -299,7 +308,7 @@ First option is the recommendation.
      edit.
 
 6. **Should File Manager or DroidCommand see the tag through `PcProfileProvider`?**
-   - **A (recommended for keeping v1 frozen):** Not in this increment. The tag stays
+   - **A (recommended for keeping v1 frozen) — Chosen Nov 16, 2026:** Not in this increment. The tag stays
      internal to VictorSuite's My PC UI. An additive optional `tags` column can be a
      later PR if those apps need it.
    - **B:** Add an optional `tags` column in the addendum now (additive, ignorable by
@@ -325,8 +334,9 @@ Reuse `FleetThemeApplier` on My PC when that screen exists (Remote PC plan §3).
 
 ## 11. Suggested later work (not in this PR)
 
-Docs only today. If Don approves the recommendations, later PRs (each their own
-review, no merge without his yes) would be:
+Docs only today. Don approved the recommendations (option A for Q1–Q6) on
+Nov 16, 2026. Later PRs (each their own review, no merge without a later yes)
+would be:
 
 1. VictorLinux-side v1 listener / QR (owned by VictorLinux, not this repo).
 2. After Remote PC PRs that land pairing on the phone: store `src`, encrypted gateway
