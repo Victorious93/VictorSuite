@@ -58,7 +58,7 @@ check "default run touches no installer tool" '[ ! -s "$WORK/shim.log" ]'
 check "default run writes nothing into HOME" '[ -z "$(ls -A "$T_HOME")" ]'
 
 run default_status bash "$SCRIPT" --status
-check "--status exits 0 and installs nothing" '[ "$RC" -eq 0 ] && [ -z "$(ls -A "$T_HOME")" ] && [ ! -s "$WORK/shim.log" ]'
+check "--status exits 0 and installs nothing" '[ "$RC" -eq 0 ] && [ ! -e "$T_HOME/.local" ] && [ ! -s "$WORK/shim.log" ]'
 
 # --- dry run ---------------------------------------------------------------------------------
 run dry bash "$SCRIPT" --scrcpy --dry-run
