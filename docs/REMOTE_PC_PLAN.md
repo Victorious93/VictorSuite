@@ -4,6 +4,8 @@
 > Shared wire formats and contracts: [`docs/specs/VICTORPC_PAIRING.md`](specs/VICTORPC_PAIRING.md) (frozen v1).
 > Related (additive, docs only): [`docs/VICTORLINUX_INTEGRATION_PLAN.md`](VICTORLINUX_INTEGRATION_PLAN.md) —
 > VictorLinux as an optional victorpc v1 host. Ubuntu PC pairing is unchanged.
+> Update (scrcpy PR): `pc/victor-pc-setup.sh` now exists with only `--scrcpy`, `--status` and `--dry-run`, and a small My PC
+> screen (`victor/pc/MyPcActivity`) covers PC-mirrors-phone over wireless ADB. Everything else below is still planned.
 > Written Nov 10, 2026 against `main` @ `ea51fad` (v0.118.3.61). **[unverified]** = not confirmed in the repo or upstream.
 
 ## 0. Goal
