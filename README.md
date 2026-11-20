@@ -11,7 +11,7 @@ Works on its own; fleet integration (droidcommand-AI) is optional
 VictorSuite also works fully without VictorLinux or other fleet apps.
 
 <p>
-  <a href="https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.64"><img src="https://img.shields.io/github/v/release/Victorious93/VictorSuite?include_prereleases&amp;style=flat-square&amp;label=Release&amp;labelColor=0B0F1A&amp;color=00E5FF" alt="Latest release" /></a>
+  <a href="https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.65"><img src="https://img.shields.io/github/v/release/Victorious93/VictorSuite?include_prereleases&amp;style=flat-square&amp;label=Release&amp;labelColor=0B0F1A&amp;color=00E5FF" alt="Latest release" /></a>
   <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-GPLv3-FF2BD6?style=flat-square&amp;labelColor=0B0F1A" alt="License: GPL v3" /></a>
   <a href="https://github.com/Victorious93/VictorSuite/actions"><img src="https://img.shields.io/github/actions/workflow/status/Victorious93/VictorSuite/android.yml?style=flat-square&amp;label=CI&amp;labelColor=0B0F1A&amp;color=00E5FF" alt="CI" /></a>
   <a href="https://victorious-framework.pages.dev"><img src="https://img.shields.io/badge/Fleet-Victorious_Framework-FF2BD6?style=flat-square&amp;labelColor=0B0F1A" alt="Victorious Framework fleet" /></a>
@@ -62,11 +62,11 @@ Upstream Termux capabilities (terminal emulator, packages via bootstrap, `RUN_CO
 
 Pre-release builds signed by CI — **not device-tested**. Install only if you understand the risk.
 
-The current release is **[v0.118.3.64](https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.64)** (published 11:13 AM EST, Nov 14, 2026). It matches `versionName` `0.118.3.64` / `versionCode` `126` on `main`. All published GitHub releases are pre-releases, so [github.com/Victorious93/VictorSuite/releases/latest](https://github.com/Victorious93/VictorSuite/releases/latest) is not a valid link (it returns 404).
+The current release is **[v0.118.3.65](https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.65)** (published 1:34 PM EST, Nov 19, 2026). It matches `versionName` `0.118.3.65` / `versionCode` `127` on `main`. All published GitHub releases are pre-releases, so [github.com/Victorious93/VictorSuite/releases/latest](https://github.com/Victorious93/VictorSuite/releases/latest) is not a valid link (it returns 404).
 
-- APK for most phones (`arm64-v8a`): [`termux-app_apt-android-7-release_arm64-v8a.apk`](https://github.com/Victorious93/VictorSuite/releases/download/v0.118.3.64/termux-app_apt-android-7-release_arm64-v8a.apk)
+- APK for most phones (`arm64-v8a`): [`termux-app_apt-android-7-release_arm64-v8a.apk`](https://github.com/Victorious93/VictorSuite/releases/download/v0.118.3.65/termux-app_apt-android-7-release_arm64-v8a.apk)
 - Other ABIs and a `universal` APK are on the same release page. Prefer the ABI-specific APK; use `universal` only if needed.
-- Checksums: [`SHA256SUMS`](https://github.com/Victorious93/VictorSuite/releases/download/v0.118.3.64/SHA256SUMS)
+- Checksums: [`SHA256SUMS`](https://github.com/Victorious93/VictorSuite/releases/download/v0.118.3.65/SHA256SUMS)
 - Release list: <https://github.com/Victorious93/VictorSuite/releases>
 
 ## Requirements
@@ -96,7 +96,7 @@ cd VictorSuite
 
 CI (`.github/workflows/android.yml`) runs `:app:assembleDebug` on pushes/PRs to `main`.
 
-Current `versionName` / `versionCode` (from `app/build.gradle`): **[0.118.3.64](https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.64)** / **126**.
+Current `versionName` / `versionCode` (from `app/build.gradle`): **[0.118.3.65](https://github.com/Victorious93/VictorSuite/releases/tag/v0.118.3.65)** / **127**.
 
 ## Manual
 
