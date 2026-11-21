@@ -43,6 +43,8 @@ import com.termux.victor.config.mainmenu.config.KeyDataClickConfig;
 import com.termux.victor.config.mainmenu.config.LanguageClickConfig;
 import com.termux.victor.config.mainmenu.config.MainMenuClickConfig;
 import com.termux.victor.config.mainmenu.config.MyPcClickConfig;
+import com.termux.victor.config.mainmenu.config.ShellBrokerClickConfig; // VictorSuite add
+import com.termux.victor.config.mainmenu.config.RemoteShellClickConfig; // VictorSuite add
 import com.termux.victor.config.mainmenu.config.MyUsedSoftLinksDataClickConfig;
 import com.termux.victor.config.mainmenu.config.OnLineCommandClickConfig;
 import com.termux.victor.config.mainmenu.config.OpenPathClickConfig;
@@ -180,6 +182,8 @@ public class MainMenuConfig implements BaseConfig {
         vsFeaturesClicks.add(new UnInstallClickConfig());
         vsFeaturesClicks.add(new RemoteConnectionClickConfig());
         vsFeaturesClicks.add(new MyPcClickConfig());
+        vsFeaturesClicks.add(new ShellBrokerClickConfig()); // VictorSuite add
+        vsFeaturesClicks.add(new RemoteShellClickConfig()); // VictorSuite add
         vsFeaturesClicks.add(new HeadscaleClickConfig());
         vsFeaturesClicks.add(new ApkAnalysisClickConfig());
         vsFeaturesClicks.add(new AndroidIdeClickConfig());

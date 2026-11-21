@@ -115,6 +115,30 @@
             android:label="@string/hak5_companion_title"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!-- VictorSuite add {@ Shell broker: the single entry point for fleet shell actions (terminal / one-shot). -->
+        <service
+            android:name=".victor.shellbroker.android.ShellBrokerService"
+            android:exported="true" />
+        <activity
+            android:name=".victor.shellbroker.android.ShellApprovalActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:showWhenLocked="false"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog" />
+        <!-- Remote shell (PC): rustdeskV's Terminal button also opens this, handing over its already-open session. Exported so rustdeskV can launch it;
+             it trusts nothing from the intent beyond a peer/session id: the transport provider is pinned (package + certificate) before it is bound. -->
+        <activity
+            android:name=".victor.shellbroker.android.RemoteTerminalActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <activity
+            android:name=".victor.shellbroker.android.ShellBrokerSettingsActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault" />
+        <!-- @} -->
+
         <activity
             android:name=".victor.pc.MyPcActivity"
             android:exported="false"
