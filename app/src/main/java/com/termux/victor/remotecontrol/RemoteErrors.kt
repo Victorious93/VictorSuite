@@ -30,6 +30,8 @@ enum class RemoteErrorCategory(val wire: String) {
 class RemoteControlException(
     val category: RemoteErrorCategory,
     message: String,
+    /** Optional machine-readable extras, e.g. `{"approvalId": "..."}` for confirmation_required. Additive; old peers ignore it. */
+    val details: com.google.gson.JsonObject? = null,
 ) : RuntimeException(message)
 
 internal fun invalid(message: String): Nothing =

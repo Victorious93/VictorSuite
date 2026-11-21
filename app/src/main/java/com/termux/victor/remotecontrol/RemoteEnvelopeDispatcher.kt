@@ -34,6 +34,10 @@ class RemoteActionRegistry(actions: List<RemoteAction> = DEFAULT_ACTIONS) {
             RemoteAction(OpDescriptor("node.ping", OpKind.READ, remoteAllowed = true, requiresConfirm = false)) {
                 JsonObject().apply { addProperty("pong", true) }
             },
+            // Read-only: the proposing peer fetches its approved command's state/output. Served by the dispatcher (needs the caller).
+            RemoteAction(OpDescriptor("command.result", OpKind.READ, remoteAllowed = true, requiresConfirm = false)) {
+                throw RemoteControlException(RemoteErrorCategory.UNSUPPORTED_OP, "command.result is not enabled on this node")
+            },
             RemoteAction(OpDescriptor("shell.exec", OpKind.DESTRUCTIVE, remoteAllowed = true, requiresConfirm = true)) {
                 throw RemoteControlException(RemoteErrorCategory.CONFIRMATION_REQUIRED, "shell.exec needs on-device confirmation")
             },
@@ -49,6 +53,7 @@ data class RemoteResponse(
     val result: JsonObject? = null,
     val errorCategory: RemoteErrorCategory? = null,
     val errorMessage: String? = null,
+    val errorDetails: JsonObject? = null,
 ) {
     fun toJson(): String = JsonObject().apply {
         addProperty("protocol_major", FleetProtocol.PROTOCOL_MAJOR)
@@ -59,6 +64,7 @@ data class RemoteResponse(
         else add("error", JsonObject().apply {
             addProperty("category", (errorCategory ?: RemoteErrorCategory.INTERNAL).wire)
             addProperty("message", errorMessage ?: "")
+            if (errorDetails != null) add("details", errorDetails)
         })
     }.toString()
 }
@@ -83,6 +89,8 @@ class RemoteEnvelopeDispatcher(
     private val actions: RemoteActionRegistry = RemoteActionRegistry(),
     private val configSource: NodeConfigSource? = null,
     private val configSink: NodeConfigSink? = null,
+    /** When set, remote `shell.exec` becomes an on-device-approved one-shot (see [ShellApprovalQueue]); null keeps it blocked. */
+    private val shellQueue: ShellApprovalQueue? = null,
 ) {
 
     /** Remote entry point (RUN_COMMAND binding). Caller identity is transport-derived only. */
@@ -98,10 +106,10 @@ class RemoteEnvelopeDispatcher(
             requestId = env.requestId
             replayGuard.checkAndRecord(identity.sourceNodeRef, env)
             requireTarget(env.targetNodeRef)
-            val result = dispatch(env.operation, env, remote = true, confirmed = false, aead = null)
+            val result = dispatch(env.operation, env, remote = true, confirmed = false, aead = null, caller = identity)
             RemoteResponse(requestId, nodeId, ok = true, result = result)
         } catch (e: RemoteControlException) {
-            RemoteResponse(requestId, nodeId, ok = false, errorCategory = e.category, errorMessage = e.message)
+            RemoteResponse(requestId, nodeId, ok = false, errorCategory = e.category, errorMessage = e.message, errorDetails = e.details)
         } catch (e: Exception) {
             RemoteResponse(requestId, nodeId, ok = false, errorCategory = RemoteErrorCategory.INTERNAL, errorMessage = "internal error")
         }
@@ -126,7 +134,7 @@ class RemoteEnvelopeDispatcher(
         }
     }
 
-    private fun dispatch(op: String, env: FleetEnvelope, remote: Boolean, confirmed: Boolean, aead: FleetBackupAead?): JsonObject {
+    private fun dispatch(op: String, env: FleetEnvelope, remote: Boolean, confirmed: Boolean, aead: FleetBackupAead?, caller: SourceIdentity? = null): JsonObject {
         val d = NodeCapabilities.descriptor(op)
             ?: throw RemoteControlException(RemoteErrorCategory.UNSUPPORTED_OP, "unsupported op '$op'")
         if (remote && !d.remoteAllowed) {
@@ -135,7 +143,7 @@ class RemoteEnvelopeDispatcher(
         return when (op) {
             FleetProtocol.OP_CAPABILITIES_GET -> capabilities()
             FleetProtocol.OP_NODE_STATUS_GET -> nodeStatus(env.params)
-            FleetProtocol.OP_REMOTE_COMMAND -> remoteCommand(env.actionRef, env.params, remote, confirmed)
+            FleetProtocol.OP_REMOTE_COMMAND -> shellOrCommand(env, remote, confirmed, caller)
             FleetProtocol.OP_MACRO_STEP -> macroStep(env, remote, confirmed)
             FleetProtocol.OP_MACRO_RUN -> macroRun(env, remote, confirmed)
             FleetProtocol.OP_CONFIG_EXPORT -> configExport(env.params, aead)
@@ -167,6 +175,34 @@ class RemoteEnvelopeDispatcher(
         val kind = ActionClassifier.effectiveKind(actionRef, action.descriptor.kind)
         val confirm = action.descriptor.requiresConfirm || kind == OpKind.DESTRUCTIVE
         return action to action.descriptor.copy(kind = kind, requiresConfirm = confirm)
+    }
+
+    /**
+     * `shell.exec` / `command.result` need the authenticated caller, so they are handled here and never from macros
+     * (a macro step still hits the legacy confirmation_required block). Everything else is the unchanged path.
+     */
+    private fun shellOrCommand(env: FleetEnvelope, remote: Boolean, confirmed: Boolean, caller: SourceIdentity?): JsonObject {
+        val q = shellQueue
+        if (q == null || !remote || caller == null || (env.actionRef != SHELL_EXEC && env.actionRef != COMMAND_RESULT)) {
+            return remoteCommand(env.actionRef, env.params, remote, confirmed)
+        }
+        if (env.actionRef == COMMAND_RESULT) {
+            val id = env.params["approvalId"] ?: invalid("approvalId is required")
+            val a = q.result(id, caller) ?: throw RemoteControlException(RemoteErrorCategory.NOT_FOUND, "no such command for this caller")
+            return JsonObject().apply {
+                addProperty("approvalId", a.id); addProperty("state", a.state.name.lowercase())
+                a.result?.let { r ->
+                    addProperty("exitCode", r.exitCode); addProperty("stdout", r.stdout); addProperty("stderr", r.stderr); addProperty("timedOut", r.timedOut)
+                }
+            }
+        }
+        val argvJson = try { JsonParser.parseString(env.params["argv"] ?: invalid("argv is required")).asJsonArray } catch (e: RemoteControlException) { throw e } catch (e: Exception) { invalid("argv must be a JSON array of strings") }
+        val argv = argvJson.map { if (it.isJsonPrimitive && it.asJsonPrimitive.isString) it.asString else invalid("argv must be strings") }
+        val priv = ShellPrivilege.fromWire(env.params["privilege"] ?: "user") ?: invalid("unknown privilege")
+        val target = env.params["target"] ?: invalid("target is required: name the one node this command is for")
+        val a = q.submit(caller, target, argv, priv)
+        throw RemoteControlException(RemoteErrorCategory.CONFIRMATION_REQUIRED, "shell.exec is waiting for approval on the device",
+            JsonObject().apply { addProperty("approvalId", a.id); addProperty("expiresMs", a.expiresMs); addProperty("privilege", a.privilege.wire) })
     }
 
     private fun remoteCommand(actionRef: String, params: Map<String, String>, remote: Boolean, confirmed: Boolean): JsonObject {
@@ -320,3 +356,6 @@ class RemoteEnvelopeDispatcher(
         }
     }
 }
+
+private const val SHELL_EXEC = "shell.exec"
+private const val COMMAND_RESULT = "command.result"
