@@ -211,3 +211,18 @@ run on Ubuntu 24.04 only.
 scrcpy is by [Genymobile](https://github.com/Genymobile/scrcpy), licensed under Apache-2.0. VictorSuite
 does not bundle it; the setup script downloads the official release when you ask for it. See
 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+
+## Terminal assistant (`??`) — building block, not yet wired into the terminal
+
+The offline matcher behind the plain-English `??` prefix is in the app, but nothing in the terminal calls it yet
+(the Settings toggle and the shell hook come in a later release). Once wired:
+
+- `?? cpu temp` or `?? magisk modules` is turned into a real command by an on-device intent table.
+  It works fully offline; there is no cloud and no LLM in this version.
+- The exact command is always shown before it runs. Anything that could delete data, write to system
+  partitions, reboot, kill processes or use `su` needs a second, clearly labelled **Run anyway** confirmation.
+  There is no "don't ask again" for those.
+- If the best answer needs root and root is not available, the command is shown with an explanation
+  and is not run. If nothing matches, you get a short "I don't know" with suggestions.
+- Your requests stay on the device and are not written to logcat.
+- Android 16 caveat: thermal sysfs files are often unreadable, so `cpu temp` asks the thermal service first.

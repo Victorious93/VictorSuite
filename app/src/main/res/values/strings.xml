@@ -1478,4 +1478,9 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="my_pc_stop_section">Stop</string>
     <string name="my_pc_stop_body">1. Close the scrcpy window on the PC (or press Ctrl+C).\n2. On the PC run: adb disconnect (the same address:port).\n3. On this phone turn Wireless debugging off in Developer options.\n4. If the PC is no longer yours or trusted, remove it under Wireless debugging, then \"Paired devices\", and choose Forget.</string>
     <string name="my_pc_credit">scrcpy is by Genymobile (Apache-2.0): https://github.com/Genymobile/scrcpy. VictorSuite does not bundle scrcpy on the PC side; the setup script downloads the official release when you ask for it.</string>
+    <string name="vs_assistant_title_run">Run this command?</string>
+    <string name="vs_assistant_title_destructive">Confirm destructive command</string>
+    <string name="vs_assistant_cancel">Cancel</string>
+    <string name="vs_assistant_run">Run</string>
+    <string name="vs_assistant_run_anyway">Run anyway</string>
 </resources>

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "intents": [
+    {
+      "id": "cpu_temp",
+      "title": "CPU / device temperature",
+      "keywords": ["cpu temp", "cpu temperature", "device temperature", "phone temp", "how hot"],
+      "aliases": ["thermal status", "temperature"],
+      "command_user": "dumpsys thermalservice",
+      "command_root": "for z in /sys/class/thermal/thermal_zone*; do echo \"$(cat $z/type): $(cat $z/temp)\"; done",
+      "explain": "Shows thermal sensor readings from Android's thermal service.",
+      "android_note": "On Android 16 the thermal sysfs files are often unreadable even for the shell user; the thermal service output is tried first. Which zone is the CPU is device-specific."
+    },
+    {
+      "id": "magisk_modules",
+      "title": "Magisk modules",
+      "keywords": ["magisk modules", "list magisk modules", "installed modules"],
+      "aliases": ["magisk module list"],
+      "command_root": "ls /data/adb/modules",
+      "explain": "Lists installed Magisk modules. Needs root.",
+      "android_note": "KernelSU and APatch keep modules in different places."
+    },
+    {
+      "id": "disk_usage",
+      "title": "Disk usage",
+      "keywords": ["disk usage", "disk space", "free space", "storage space", "storage usage"],
+      "aliases": ["df"],
+      "command_user": "df -h",
+      "explain": "Shows used and free space per filesystem."
+    },
+    {
+      "id": "memory_usage",
+      "title": "Memory usage",
+      "keywords": ["memory usage", "free memory", "ram usage", "how much ram"],
+      "aliases": ["ram"],
+      "command_user": "free -h",
+      "explain": "Shows total, used and free RAM."
+    },
+    {
+      "id": "battery_status",
+      "title": "Battery status",
+      "keywords": ["battery status", "battery level", "battery health", "battery info"],
+      "aliases": ["battery"],
+      "command_user": "dumpsys battery",
+      "explain": "Shows charge level, temperature and health from the battery service."
+    }
+  ]
+}
