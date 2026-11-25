@@ -131,6 +131,10 @@ art/                    Icon / banner generation helpers
 
 VictorSuite changes in upstream Termux files are wrapped in `// VictorSuite add {@` / `// VictorSuite modify {@` markers. Prefer **Kotlin** for new `victor` code.
 
+## Victorious fleet
+
+VictorSuite is part of the [Victorious Framework](https://victorious-framework.pages.dev), a family of Android and PC tools by Don Victor. **It works standalone; fleet integrations are optional.** Related: [droidcommand-AI](https://github.com/Victorious93/droidcommand-AI), [VictorLinux](https://github.com/Victorious93/VictorLinux), [File-Manager](https://github.com/Victorious93/File-Manager). The roster is in [victorious-fleet](https://github.com/Victorious93/victorious-fleet) and live status is in [fleet-manifest](https://github.com/Victorious93/fleet-manifest).
+
 ## Contributing
 
 This repository is private. If you have access:
