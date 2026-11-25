@@ -16,8 +16,9 @@ data class RemoteAction(
 /**
  * `remote.command` actionRefs on this node. v1 ships:
  *  - `node.ping`   read, remote-allowed, returns `{ "pong": true }`
- *  - `shell.exec`  destructive, always `confirmation_required` (no on-device confirm flow yet,
- *                  so it never executes from a remote trigger)
+ *  - `shell.exec`  destructive. Without a [ShellExecApprover] it is always `confirmation_required`. With one, the phone's owner is asked
+ *                  ON THE DEVICE and the real output/exit status is returned; envelope fields (`confirmed`, `destructive`, `trigger`)
+ *                  never approve anything. Macros can never run it.
  */
 class RemoteActionRegistry(actions: List<RemoteAction> = DEFAULT_ACTIONS) {
     private val byName = actions.associateBy { it.descriptor.name }
@@ -39,6 +40,19 @@ class RemoteActionRegistry(actions: List<RemoteAction> = DEFAULT_ACTIONS) {
             },
         )
     }
+}
+
+/** Result of an owner-approved one-shot command. [exitStatus] is the real status of the process that ran. */
+data class ShellExecResult(val exitStatus: Int, val stdout: String, val stderr: String, val truncated: Boolean)
+
+/**
+ * The on-device confirmation flow for `shell.exec` (the action that used to always answer confirmation_required).
+ * Implementations MUST ask the phone's owner on the device (never trust anything in the envelope: its `confirmed`, `destructive`
+ * and `trigger` fields are advisory/ignored), run the command through the VictorSuite shell broker only, and throw
+ * [RemoteControlException] with CONFIRMATION_REQUIRED when the owner declines or does not answer.
+ */
+fun interface ShellExecApprover {
+    fun approveAndRun(caller: SourceIdentity, requestId: String, target: String, command: String): ShellExecResult
 }
 
 /** Frozen BridgeResponse shape: `{ protocol_major, request_id, node_id, ok, result | error{category,message} }`. */
@@ -83,14 +97,15 @@ class RemoteEnvelopeDispatcher(
     private val actions: RemoteActionRegistry = RemoteActionRegistry(),
     private val configSource: NodeConfigSource? = null,
     private val configSink: NodeConfigSink? = null,
+    private val shellExec: ShellExecApprover? = null,
 ) {
 
     /** Remote entry point (RUN_COMMAND binding). Caller identity is transport-derived only. */
-    fun handleRemote(callingPackage: String?, callerCertSha256: String?, rawEnvelope: String?): RemoteResponse {
+    fun handleRemote(callingPackage: String?, callerCertSha256: String?, rawEnvelope: String?, callerUid: Int? = null): RemoteResponse {
         var requestId: String? = bestEffortRequestId(rawEnvelope)
         return try {
             val cfg = config()
-            val identity = cfg.pairingTable().authenticate(callingPackage, callerCertSha256)
+            val identity = cfg.pairingTable().authenticate(callingPackage, callerCertSha256).copy(uid = callerUid)
             if (!cfg.externalControlEnabled) {
                 throw RemoteControlException(RemoteErrorCategory.EXTERNAL_CONTROL_DISABLED, "external control is off on this node")
             }
@@ -98,7 +113,7 @@ class RemoteEnvelopeDispatcher(
             requestId = env.requestId
             replayGuard.checkAndRecord(identity.sourceNodeRef, env)
             requireTarget(env.targetNodeRef)
-            val result = dispatch(env.operation, env, remote = true, confirmed = false, aead = null)
+            val result = dispatch(env.operation, env, remote = true, confirmed = false, aead = null, identity = identity)
             RemoteResponse(requestId, nodeId, ok = true, result = result)
         } catch (e: RemoteControlException) {
             RemoteResponse(requestId, nodeId, ok = false, errorCategory = e.category, errorMessage = e.message)
@@ -126,7 +141,7 @@ class RemoteEnvelopeDispatcher(
         }
     }
 
-    private fun dispatch(op: String, env: FleetEnvelope, remote: Boolean, confirmed: Boolean, aead: FleetBackupAead?): JsonObject {
+    private fun dispatch(op: String, env: FleetEnvelope, remote: Boolean, confirmed: Boolean, aead: FleetBackupAead?, identity: SourceIdentity? = null): JsonObject {
         val d = NodeCapabilities.descriptor(op)
             ?: throw RemoteControlException(RemoteErrorCategory.UNSUPPORTED_OP, "unsupported op '$op'")
         if (remote && !d.remoteAllowed) {
@@ -135,7 +150,7 @@ class RemoteEnvelopeDispatcher(
         return when (op) {
             FleetProtocol.OP_CAPABILITIES_GET -> capabilities()
             FleetProtocol.OP_NODE_STATUS_GET -> nodeStatus(env.params)
-            FleetProtocol.OP_REMOTE_COMMAND -> remoteCommand(env.actionRef, env.params, remote, confirmed)
+            FleetProtocol.OP_REMOTE_COMMAND -> remoteCommand(env.actionRef, env.params, remote, confirmed, identity, env.requestId)
             FleetProtocol.OP_MACRO_STEP -> macroStep(env, remote, confirmed)
             FleetProtocol.OP_MACRO_RUN -> macroRun(env, remote, confirmed)
             FleetProtocol.OP_CONFIG_EXPORT -> configExport(env.params, aead)
@@ -169,7 +184,7 @@ class RemoteEnvelopeDispatcher(
         return action to action.descriptor.copy(kind = kind, requiresConfirm = confirm)
     }
 
-    private fun remoteCommand(actionRef: String, params: Map<String, String>, remote: Boolean, confirmed: Boolean): JsonObject {
+    private fun remoteCommand(actionRef: String, params: Map<String, String>, remote: Boolean, confirmed: Boolean, identity: SourceIdentity? = null, requestId: String? = null): JsonObject {
         if (actionRef in FleetProtocol.KNOWN_OPS) {
             invalid("'$actionRef' is a standalone operation, not a remote.command actionRef")
         }
@@ -177,6 +192,9 @@ class RemoteEnvelopeDispatcher(
         if (remote && !d.remoteAllowed) throw RemoteControlException(RemoteErrorCategory.CAPABILITY_OFF, "'$actionRef' is not remote-allowed")
         // Advisory envelope `destructive` and any params (e.g. "confirmed":"true") are ignored here.
         // A remote trigger never carries an on-device confirmation.
+        if (actionRef == SHELL_EXEC && remote && identity != null && requestId != null && shellExec != null) {
+            return shellExecWithOwner(identity, requestId, params)         // owner decides ON THE DEVICE; nothing in the envelope can approve
+        }
         if (d.requiresConfirm && (remote || !confirmed)) {
             throw RemoteControlException(RemoteErrorCategory.CONFIRMATION_REQUIRED, "'$actionRef' requires on-device confirmation")
         }
@@ -187,6 +205,20 @@ class RemoteEnvelopeDispatcher(
         return JsonObject().apply {
             addProperty("actionRef", actionRef)
             add("output", action.run(params))
+        }
+    }
+
+    private fun shellExecWithOwner(identity: SourceIdentity, requestId: String, params: Map<String, String>): JsonObject {
+        val command = params["command"]?.takeIf { it.isNotBlank() } ?: invalid("shell.exec needs params.command")
+        if (command.length > MAX_SHELL_COMMAND) invalid("command too long")
+        // Only an ordinary shell here. A privileged shell is a separate broker grant and is never reachable through this envelope path.
+        if (params["privilege"]?.let { it != "user" } == true) throw RemoteControlException(RemoteErrorCategory.CAPABILITY_OFF, "privileged shells are not available through remote.command")
+        val r = shellExec!!.approveAndRun(identity, requestId, nodeId, command)
+        return JsonObject().apply {
+            addProperty("actionRef", SHELL_EXEC)
+            add("output", JsonObject().apply {
+                addProperty("exit_status", r.exitStatus); addProperty("stdout", r.stdout); addProperty("stderr", r.stderr); addProperty("truncated", r.truncated)
+            })
         }
     }
 
@@ -308,6 +340,11 @@ class RemoteEnvelopeDispatcher(
         val policy = BackupConflictPolicy.fromWire(env.params["conflictPolicy"]) ?: invalid("unknown conflictPolicy")
         val report = NodeConfigBackup.import(env.params["bundle"], source, configSink, aead, policy, env.dryRun, confirmed)
         return report.toJson()
+    }
+
+    private companion object {
+        const val SHELL_EXEC = "shell.exec"
+        const val MAX_SHELL_COMMAND = 4096
     }
 
     private fun bestEffortRequestId(raw: String?): String? {

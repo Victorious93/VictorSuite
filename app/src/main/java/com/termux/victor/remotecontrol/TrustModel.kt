@@ -10,6 +10,8 @@ data class SourceIdentity(
     val sourceNodeRef: String,
     val packageName: String?,
     val certSha256: String? = null,
+    /** Binder/PendingIntent-attested uid of the caller when the transport provides one (used to tie a shell session to its requester). */
+    val uid: Int? = null,
 ) {
     init {
         require(sourceNodeRef.isNotBlank()) { "sourceNodeRef is required" }

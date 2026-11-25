@@ -1,0 +1,23 @@
+{
+  "msg_id": "m-topen-2",
+  "payload": {
+    "binding": "bd34106547863f8450d2285b6e8571b7d680229c41776388a8031963803c7d66",
+    "cols": 80,
+    "command": "ls -l",
+    "desktop": "victorlinux:owner@host",
+    "expires_ms": 1790000120000,
+    "mode": "oneshot",
+    "nonce": "00112233445566778899aabbccddeeff",
+    "privilege": "user",
+    "rows": 24,
+    "session_id": "term-fedcba9876543210"
+  },
+  "protocol": {
+    "major": 1,
+    "minor": 1
+  },
+  "sender": "coordinator",
+  "sent_at": 1790000000000,
+  "target": "dev-0123456789ab",
+  "type": "terminal_open"
+}

@@ -237,6 +237,7 @@ android {
     buildFeatures {
         dataBinding true
         buildConfig true
+        aidl true   // VictorSuite add: shell broker AIDL (IShellBroker)
     }
     // @}
 

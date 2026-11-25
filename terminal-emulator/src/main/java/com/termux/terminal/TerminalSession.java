@@ -79,6 +79,23 @@ public final class TerminalSession extends TerminalOutput {
 
     private static final String LOG_TAG = "TerminalSession";
 
+    // VictorSuite add {@
+    /**
+     * Transport for a REMOTE terminal (the shell runs on another machine, e.g. a VictorLinux PC reached through rustdeskV's
+     * authenticated session). The emulator and view are unchanged; bytes just come from / go to this transport instead of a local pty.
+     */
+    public interface RemoteTransport {
+        /** Keyboard bytes typed by the user. Never called after {@link #close()}. */
+        void write(byte[] data, int offset, int count);
+        /** Terminal size changed. */
+        void resize(int columns, int rows);
+        /** User or session ended the terminal; release the transport. */
+        void close();
+    }
+
+    private final RemoteTransport mRemote;
+    // @}
+
     public TerminalSession(String shellPath, String cwd, String[] args, String[] env, Integer transcriptRows, TerminalSessionClient client) {
         this.mShellPath = shellPath;
         this.mCwd = cwd;
@@ -86,7 +103,36 @@ public final class TerminalSession extends TerminalOutput {
         this.mEnv = env;
         this.mTranscriptRows = transcriptRows;
         this.mClient = client;
+        this.mRemote = null; // VictorSuite add
     }
+
+    // VictorSuite add {@
+    /** A terminal whose shell is remote: see {@link RemoteTransport}. */
+    public TerminalSession(RemoteTransport remote, Integer transcriptRows, TerminalSessionClient client) {
+        this.mShellPath = "";
+        this.mCwd = "";
+        this.mArgs = new String[0];
+        this.mEnv = new String[0];
+        this.mTranscriptRows = transcriptRows;
+        this.mClient = client;
+        this.mRemote = remote;
+    }
+
+    public boolean isRemote() { return mRemote != null; }
+
+    /** Feed bytes received from the remote shell (any thread). */
+    public void appendRemoteOutput(byte[] data, int length) {
+        if (mRemote == null || length <= 0) return;
+        mProcessToTerminalIOQueue.write(data, 0, length);
+        mMainThreadHandler.sendEmptyMessage(MSG_NEW_INPUT);
+    }
+
+    /** The remote shell ended with [exitCode] (any thread). */
+    public void remoteExited(int exitCode) {
+        if (mRemote == null) return;
+        mMainThreadHandler.sendMessage(mMainThreadHandler.obtainMessage(MSG_PROCESS_EXITED, exitCode));
+    }
+    // @}
 
     /**
      * @param client The {@link TerminalSessionClient} interface implementation to allow
@@ -104,7 +150,10 @@ public final class TerminalSession extends TerminalOutput {
         if (mEmulator == null) {
             initializeEmulator(columns, rows, cellWidthPixels, cellHeightPixels);
         } else {
-            JNI.setPtyWindowSize(mTerminalFileDescriptor, rows, columns, cellWidthPixels, cellHeightPixels);
+            // VictorSuite modify {@
+            if (mRemote != null) mRemote.resize(columns, rows);
+            else JNI.setPtyWindowSize(mTerminalFileDescriptor, rows, columns, cellWidthPixels, cellHeightPixels);
+            // @}
             mEmulator.resize(columns, rows, cellWidthPixels, cellHeightPixels);
         }
     }
@@ -122,6 +171,14 @@ public final class TerminalSession extends TerminalOutput {
      */
     public void initializeEmulator(int columns, int rows, int cellWidthPixels, int cellHeightPixels) {
         mEmulator = new TerminalEmulator(this, columns, rows, cellWidthPixels, cellHeightPixels, mTranscriptRows, mClient);
+
+        // VictorSuite add {@
+        if (mRemote != null) {
+            mShellPid = 1; // "running" marker only; never used as a process id (see finishIfRunning/getCwd)
+            mRemote.resize(columns, rows);
+            return;
+        }
+        // @}
 
         int[] processId = new int[1];
         mTerminalFileDescriptor = JNI.createSubprocess(mShellPath, mCwd, mArgs, mEnv, processId, rows, columns, cellWidthPixels, cellHeightPixels);
@@ -176,6 +233,9 @@ public final class TerminalSession extends TerminalOutput {
     /** Write data to the shell process. */
     @Override
     public void write(byte[] data, int offset, int count) {
+        // VictorSuite modify {@
+        if (mRemote != null) { if (mShellPid > 0) mRemote.write(data, offset, count); return; }
+        // @}
         if (mShellPid > 0) mTerminalToProcessIOQueue.write(data, offset, count);
     }
 
@@ -233,6 +293,9 @@ public final class TerminalSession extends TerminalOutput {
 
     /** Finish this terminal session by sending SIGKILL to the shell. */
     public void finishIfRunning() {
+        // VictorSuite add {@
+        if (mRemote != null) { if (isRunning()) mRemote.close(); return; }
+        // @}
         if (isRunning()) {
             try {
                 Os.kill(mShellPid, OsConstants.SIGKILL);
@@ -252,7 +315,7 @@ public final class TerminalSession extends TerminalOutput {
         // Stop the reader and writer threads, and close the I/O streams
         mTerminalToProcessIOQueue.close();
         mProcessToTerminalIOQueue.close();
-        JNI.close(mTerminalFileDescriptor);
+        if (mRemote == null) JNI.close(mTerminalFileDescriptor); // VictorSuite modify
     }
 
     @Override
@@ -295,7 +358,7 @@ public final class TerminalSession extends TerminalOutput {
 
     /** Returns the shell's working directory or null if it was unavailable. */
     public String getCwd() {
-        if (mShellPid < 1) {
+        if (mShellPid < 1 || mRemote != null) { // VictorSuite modify: a remote shell has no local /proc entry
             return null;
         }
         try {

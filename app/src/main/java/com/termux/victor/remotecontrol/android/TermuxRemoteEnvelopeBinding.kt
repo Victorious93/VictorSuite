@@ -120,7 +120,7 @@ object TermuxRemoteEnvelopeBinding {
         }
         val cert = PackageUtils.getSigningCertificateSHA256DigestForPackage(app, creatorPackage!!)
         Logger.logInfo(LOG_TAG, "Remote envelope from $creatorPackage")
-        return dispatcher(app).handleRemote(creatorPackage, cert, raw)
+        return dispatcher(app).handleRemote(creatorPackage, cert, raw, pending.creatorUid)
     }
 
     @Synchronized
@@ -136,6 +136,8 @@ object TermuxRemoteEnvelopeBinding {
             statusProvider = { now -> AndroidNodeStatus.snapshot(app, now) },
             configSource = AndroidNodeConfig.Source(app),
             configSink = AndroidNodeConfig.Sink(app),
+            // VictorSuite add: on-device owner approval for shell.exec, through the shell broker only.
+            shellExec = com.termux.victor.shellbroker.BrokerShellExecApprover(com.termux.victor.shellbroker.android.BrokerHolder.get(app)),
         )
         dispatcher = d
         return d
