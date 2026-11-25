@@ -284,6 +284,12 @@
         <activity
             android:name=".victor.dialog.ShowDialogActivity"
             android:theme="@style/ThemeBaseDialog" />
+        <activity
+            android:name=".victor.assistant.AssistantAskActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@style/ThemeBaseDialog" />
 
         <activity
             android:name=".victor.config.vscommand.activity.SocketBaseActivity"

@@ -1982,6 +1982,12 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             UUtils.writerFile("runcommand/zt", zt);
             UUtils.chmod(zt);
             // @}
+            // VictorSuite add {@ terminal assistant (??)
+            try {
+                com.termux.victor.assistant.AssistantInstaller.install(this);
+            } catch (Exception ignored) {
+            }
+            // @}
         }
         //写入主菜单信息
         writerMainMenuConfig(false);

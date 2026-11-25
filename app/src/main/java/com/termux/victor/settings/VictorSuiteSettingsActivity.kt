@@ -11,6 +11,7 @@ import com.termux.victor.util.UUtils
 import com.termux.api.TermuxApiEmbed
 import com.termux.R
 import com.termux.victor.victorfiles.VictorFilesPanel
+import com.termux.victor.assistant.AssistantSettings
 import com.termux.victor.theme.FleetThemeBinding // VictorSuite add: fleet theme
 import com.termux.victor.remotecontrol.android.RemoteControlSettings // VictorSuite add
 import com.termux.victor.ftp.utils.UserSetManage
@@ -57,6 +58,10 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
 
     private val victorFilesPanelSwitch by lazy {findViewById<SwitchCompat>(R.id.victorfiles_panel_switch)}
     private val victorFilesPanelLl by lazy {findViewById<LinearLayout>(R.id.victorfiles_panel_ll)}
+    // VictorSuite add {@ terminal assistant (??)
+    private val assistantSwitch by lazy {findViewById<SwitchCompat>(R.id.assistant_switch)}
+    private val assistantLl by lazy {findViewById<LinearLayout>(R.id.assistant_ll)}
+    // @}
     // VictorSuite add {@ fleet remote-control envelope v1
     private val remoteControlSwitch by lazy {findViewById<SwitchCompat>(R.id.remote_control_switch)}
     private val remoteControlLl by lazy {findViewById<LinearLayout>(R.id.remote_control_ll)}
@@ -96,6 +101,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         setSwitchStatus(mainMenuConfigCloseSwitch, mainMenuConfigCloseLl)
         setSwitchStatus(termuxApiEmbedSwitch, termuxApiEmbedLl)
         setSwitchStatus(victorFilesPanelSwitch, victorFilesPanelLl)
+        setSwitchStatus(assistantSwitch, assistantLl) // VictorSuite add: ?? assistant
         setSwitchStatus(remoteControlSwitch, remoteControlLl) // VictorSuite add
         remoteControlPairingsLl.setOnClickListener { showPairingsDialog() } // VictorSuite add
     }
@@ -114,6 +120,7 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
         mainMenuConfigCloseSwitch.isChecked = vsUserBean.isDisableMainConfigMenu
         termuxApiEmbedSwitch.isChecked = TermuxApiEmbed.isEnabled(this)
         victorFilesPanelSwitch.isChecked = VictorFilesPanel.isEnabled(this)
+        assistantSwitch.isChecked = AssistantSettings.isEnabled(this) // VictorSuite add
         remoteControlSwitch.isChecked = RemoteControlSettings.isExternalControlEnabled(this) // VictorSuite add
     }
 
@@ -173,6 +180,16 @@ class VictorSuiteSettingsActivity : AppCompatActivity() {
                 }
                 victorFilesPanelSwitch -> {
                     VictorFilesPanel.setEnabled(this, isChecked)
+                }
+                assistantSwitch -> {
+                    if (isChecked != AssistantSettings.isEnabled(this)) {
+                        AssistantSettings.setEnabled(this, isChecked)
+                        Toast.makeText(
+                            this,
+                            UUtils.getString(if (isChecked) R.string.vs_assistant_on_toast else R.string.vs_assistant_off_toast),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
                 remoteControlSwitch -> {
                     // VictorSuite add: only act on a real change (also fires on initial state).

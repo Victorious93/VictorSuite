@@ -1,0 +1,337 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# VictorSuite ?? helper. Offline only; does not log the query or the command.
+# Confirmation: native dark-neon dialog when the confirm Activity can be shown
+# (typical in-app session); otherwise a terminal prompt (SSH or if am start fails).
+# The optional LLM is not wired in this version.
+
+set -eu
+
+PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
+TABLE_DIR="${VS_ASK_TABLE_DIR:-$PREFIX/share/victorsuite/assistant}"
+DISABLED_FILE="${VS_ASK_DISABLED:-$TABLE_DIR/disabled}"
+IDX_FILE="${VS_ASK_IDX:-$TABLE_DIR/intents.idx}"
+PKG="${VS_ASK_PKG:-com.termux}"
+AM_BIN="${VS_ASK_AM:-am}"
+
+usage() {
+    printf '%s\n' "Usage: ?? <request>     example: ?? cpu temp" >&2
+    printf '%s\n' "Offline terminal assistant. Turn it off in VictorSuite Settings." >&2
+}
+
+is_root_available() {
+    case "${VS_ASK_ROOT-}" in
+        1|true|yes) return 0 ;;
+        0|false|no) return 1 ;;
+    esac
+    if command -v su >/dev/null 2>&1; then
+        return 0
+    fi
+    set -- /system/bin/su /system/xbin/su /sbin/su /debug_ramdisk/su
+    for p in "$@"; do
+        if [ -x "$p" ] || [ -e "$p" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Resolve the request. Prints a VSASK record on stdout. Returns 0 if a record was produced.
+resolve_record() {
+    query=$1
+    root=0
+    if is_root_available; then
+        root=1
+    fi
+    if [ -n "${VS_ASK_RESOLVE-}" ]; then
+        VS_ASK_ROOT="$root" VS_ASK_TABLE_DIR="$TABLE_DIR" "$VS_ASK_RESOLVE" "$query"
+        return $?
+    fi
+    if resolve_via_app "$query" "$root"; then
+        return 0
+    fi
+    resolve_via_idx "$query" "$root"
+}
+
+resolve_via_app() {
+    query=$1
+    root=$2
+    if [ -n "${VS_ASK_SKIP_APP-}" ]; then
+        return 1
+    fi
+    paths=$(pm path "$PKG" 2>/dev/null | cut -d: -f2 | tr '\n' ':') || return 1
+    paths=${paths%:}
+    [ -n "$paths" ] || return 1
+    app_process_bin=/system/bin/app_process
+    [ -x "$app_process_bin" ] || return 1
+    CLASSPATH="$paths" VS_ASK_TABLE_DIR="$TABLE_DIR" VS_ASK_ROOT="$root" \
+        "$app_process_bin" /system/bin com.termux.victor.assistant.VsAskCli "$query"
+}
+
+# Tab-separated fallback index (id title keywords|aliases user_cmd root_cmd explain note).
+# Exact phrase hits win; otherwise a simple token overlap is used. Conservative: no command
+# is proposed unless the score is clearly high.
+resolve_via_idx() {
+    query=$1
+    root=$2
+    if [ ! -f "$IDX_FILE" ]; then
+        return 1
+    fi
+    awk -F '\t' -v q="$query" -v root="$root" '
+        BEGIN {
+            nq = split(tolower(q), qt, /[^a-z0-9]+/)
+            # drop empty
+            j = 0
+            for (i = 1; i <= nq; i++) if (qt[i] != "") { j++; Q[j] = qt[i] }
+            nq = j
+        }
+        NF >= 5 {
+            id=$1; title=$2; keys=$3; user=$4; rcmd=$5
+            explain=""; note=""
+            if (NF>=6) explain=$6
+            if (NF>=7) note=$7
+            nkeys = split(tolower(keys), kp, /\|/)
+            best = 0
+            exact = 0
+            for (k = 1; k <= nkeys; k++) {
+                phrase = kp[k]
+                gsub(/^ +| +$/, "", phrase)
+                if (phrase == "") continue
+                if (index(tolower(q), phrase) && length(phrase) >= 3) {
+                    sc = 1.0
+                } else {
+                    nk = split(phrase, pt, /[^a-z0-9]+/)
+                    hit = 0; tot = 0
+                    for (p = 1; p <= nk; p++) {
+                        if (pt[p] == "") continue
+                        tot++
+                        for (t = 1; t <= nq; t++) if (Q[t] == pt[p]) { hit++; break }
+                    }
+                    sc = (tot == 0) ? 0 : hit / tot
+                }
+                if (sc > best) best = sc
+                if (sc == 1.0) exact = 1
+            }
+            if (best > bscore) { bscore=best; bexact=exact; bid=id; btitle=title; buser=user; brcmd=rcmd; bexplain=explain; bnote=note }
+        }
+        END {
+            if (bscore < 0.75) {
+                print "STATUS=NO_MATCH"
+                print "COMMAND"
+                exit 0
+            }
+            cmd = buser
+            uses_root = 0
+            sq = sprintf("%c", 39)
+            if (root == 1 && brcmd != "") { cmd = "su -c " sq brcmd sq; uses_root = 1 }
+            if (cmd == "" && brcmd != "") {
+                print "STATUS=NEEDS_ROOT"
+                print "ID=" bid
+                print "TITLE=" btitle
+                print "EXPLAIN=" bexplain
+                print "NOTE=" bnote
+                print "COMMAND"
+                print "su -c " sq brcmd sq
+                exit 0
+            }
+            dest = (uses_root == 1) ? "1" : "0"
+            print "STATUS=PROPOSED"
+            print "DESTRUCTIVE=" dest
+            print "USES_ROOT=" dest
+            print "ID=" bid
+            print "TITLE=" btitle
+            print "EXPLAIN=" bexplain
+            print "NOTE=" bnote
+            if (uses_root == 1) print "REASON=This would run with root privileges (su)"
+            print "COMMAND"
+            print cmd
+        }
+    ' "$IDX_FILE"
+}
+
+field() {
+    rec=$1
+    key=$2
+    printf '%s\n' "$rec" | awk -v k="$key" 'BEGIN{p=k"="} index($0,p)==1 {print substr($0,length(p)+1); exit}'
+}
+
+command_body() {
+    rec=$1
+    printf '%s\n' "$rec" | awk 'f{print} $0=="COMMAND"{f=1}'
+}
+
+print_preview() {
+    rec=$1
+    status=$(field "$rec" STATUS)
+    title=$(field "$rec" TITLE)
+    explain=$(field "$rec" EXPLAIN)
+    note=$(field "$rec" NOTE)
+    reason=$(field "$rec" REASON)
+    cmd=$(command_body "$rec")
+    case "$status" in
+        NO_MATCH)
+            printf '%s\n' "I don't know that one. Try ?? cpu temp, ?? battery status, ?? disk space, ?? memory usage, ?? magisk modules, ?? root check, ?? ip address, ?? processes, ?? android version or ?? kernel."
+            return
+            ;;
+        NEEDS_ROOT)
+            printf '%s\n' "This needs root, which is not available."
+            if [ -n "$title" ]; then printf '%s\n' "Intent: $title"; fi
+            if [ -n "$explain" ]; then printf '%s\n' "$explain"; fi
+            if [ -n "$note" ]; then printf '%s\n' "$note"; fi
+            printf '%s\n' "Command (not run):"
+            printf '%s\n' "$cmd"
+            return
+            ;;
+    esac
+    if [ -n "$title" ]; then printf '%s\n' "Intent: $title"; fi
+    if [ -n "$explain" ]; then printf '%s\n' "$explain"; fi
+    if [ -n "$note" ]; then printf '%s\n' "$note"; fi
+    if [ -n "$reason" ]; then printf '%s\n' "$reason"; fi
+    printf '%s\n' "Command:"
+    printf '%s\n' "$cmd"
+}
+
+# Try the native confirm Activity. Writes STATUS=RUN or STATUS=CANCEL to stdout on success.
+try_native_confirm() {
+    query=$1
+    cmd=$2
+    destructive=$3
+    tmpdir="${TMPDIR:-$PREFIX/tmp}"
+    mkdir -p "$tmpdir" || return 1
+    result=$tmpdir/vs-ask.$$
+    : >"$result" || return 1
+    if ! "$AM_BIN" start --user 0 -n "$PKG/com.termux.victor.assistant.AssistantAskActivity" \
+        --es com.termux.victor.assistant.QUERY "$query" \
+        --es com.termux.victor.assistant.COMMAND "$cmd" \
+        --ez com.termux.victor.assistant.DESTRUCTIVE "$destructive" \
+        --es com.termux.victor.assistant.RESULT "$result" >/dev/null 2>&1; then
+        rm -f "$result"
+        return 1
+    fi
+    i=0
+    # Wait up to 5 minutes for a decision (the user may be reading the dialog).
+    while [ "$i" -lt 1500 ]; do
+        if [ -s "$result" ]; then
+            cat "$result"
+            rm -f "$result"
+            return 0
+        fi
+        sleep 0.2
+        i=$((i + 1))
+    done
+    rm -f "$result"
+    return 1
+}
+
+terminal_confirm() {
+    destructive=$1
+    if [ "${VS_ASK_CONFIRM-}" = "auto-yes" ]; then
+        return 0
+    fi
+    if [ "${VS_ASK_CONFIRM-}" = "auto-no" ]; then
+        return 1
+    fi
+    if [ "$destructive" = "1" ]; then
+        printf '%s\n' "Confirm destructive command."
+        printf '%s\n' "Type 'run anyway' to run, or press Enter to cancel."
+        printf '%s' "> "
+        IFS= read -r ans || return 1
+        case "$ans" in
+            "run anyway"|"RUN ANYWAY") return 0 ;;
+            *) return 1 ;;
+        esac
+    else
+        printf '%s' "Run this command? [Y/n] "
+        IFS= read -r ans || return 1
+        case "$ans" in
+            ""|y|Y|yes|YES) return 0 ;;
+            *) return 1 ;;
+        esac
+    fi
+}
+
+# --- main ------------------------------------------------------------------------------------
+if [ "${1-}" = "-h" ] || [ "${1-}" = "--help" ]; then
+    usage
+    exit 0
+fi
+
+if [ -e "$DISABLED_FILE" ]; then
+    printf '%s\n' "The ?? assistant is turned off. Turn it back on in VictorSuite Settings."
+    exit 1
+fi
+
+if [ "$#" -eq 0 ]; then
+    usage
+    exit 1
+fi
+
+# "$*" is the English request. Do not log it.
+query="$*"
+
+if ! rec=$(resolve_record "$query"); then
+    printf '%s\n' "I don't know that one (the matcher could not run). Open VictorSuite once to install it, then try again." >&2
+    exit 1
+fi
+
+status=$(field "$rec" STATUS)
+print_preview "$rec"
+
+case "$status" in
+    NO_MATCH) exit 1 ;;
+    NEEDS_ROOT) exit 2 ;;
+    PROPOSED) ;;
+    *)
+        printf '%s\n' "Unexpected matcher result." >&2
+        exit 1
+        ;;
+esac
+
+cmd=$(command_body "$rec")
+if [ -z "$cmd" ]; then
+    printf '%s\n' "No command to run." >&2
+    exit 1
+fi
+
+destructive=$(field "$rec" DESTRUCTIVE)
+[ -n "$destructive" ] || destructive=0
+# A root variant always confirms (it runs through su), even if the index said otherwise.
+uses_root=$(field "$rec" USES_ROOT)
+if [ "$uses_root" = "1" ]; then
+    destructive=1
+fi
+
+confirmed=0
+if [ "${VS_ASK_CONFIRM-}" = "auto-yes" ] || [ "${VS_ASK_CONFIRM-}" = "auto-no" ]; then
+    if terminal_confirm "$destructive"; then
+        confirmed=1
+    fi
+elif [ "$destructive" = "1" ]; then
+    if dec=$(try_native_confirm "$query" "$cmd" true); then
+        dec_status=$(field "$dec" STATUS)
+        if [ "$dec_status" = "RUN" ]; then
+            confirmed=1
+        fi
+    else
+        if terminal_confirm 1; then
+            confirmed=1
+        fi
+    fi
+else
+    # Non-destructive: in-terminal preview is enough; still require an explicit accept.
+    if terminal_confirm 0; then
+        confirmed=1
+    fi
+fi
+
+if [ "$confirmed" -ne 1 ]; then
+    printf '%s\n' "Cancelled."
+    exit 1
+fi
+
+if [ "${VS_ASK_DRY_RUN-}" = "1" ]; then
+    printf '%s\n' "Would run: $cmd"
+    exit 0
+fi
+
+# shellcheck disable=SC2294
+sh -c "$cmd"
