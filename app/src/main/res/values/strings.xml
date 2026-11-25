@@ -1483,4 +1483,8 @@ cd ~ &amp;&amp; pkg update -y \n
     <string name="vs_assistant_cancel">Cancel</string>
     <string name="vs_assistant_run">Run</string>
     <string name="vs_assistant_run_anyway">Run anyway</string>
+    <string name="vs_assistant_settings_title">Terminal assistant (??)</string>
+    <string name="vs_assistant_settings_summary">Turn a plain-English request such as ?? cpu temp into a command, offline. The command is always shown first. Destructive commands need confirmation. Off here disables the ?? helper.</string>
+    <string name="vs_assistant_on_toast">Terminal assistant on. New and current sessions can use ??.</string>
+    <string name="vs_assistant_off_toast">Terminal assistant off. ?? will refuse to run, including in sessions that are already open.</string>
 </resources>

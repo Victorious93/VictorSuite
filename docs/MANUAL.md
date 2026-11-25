@@ -212,17 +212,31 @@ scrcpy is by [Genymobile](https://github.com/Genymobile/scrcpy), licensed under 
 does not bundle it; the setup script downloads the official release when you ask for it. See
 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
-## Terminal assistant (`??`) — building block, not yet wired into the terminal
+## Terminal assistant (`??`)
 
-The offline matcher behind the plain-English `??` prefix is in the app, but nothing in the terminal calls it yet
-(the Settings toggle and the shell hook come in a later release). Once wired:
+A line that starts with `??` (then a space) is a plain-English request, not a shell command.
+Examples: `?? cpu temp`, `?? magisk modules`, `?? android version`.
 
-- `?? cpu temp` or `?? magisk modules` is turned into a real command by an on-device intent table.
-  It works fully offline; there is no cloud and no LLM in this version.
-- The exact command is always shown before it runs. Anything that could delete data, write to system
-  partitions, reboot, kill processes or use `su` needs a second, clearly labelled **Run anyway** confirmation.
-  There is no "don't ask again" for those.
-- If the best answer needs root and root is not available, the command is shown with an explanation
+- The matcher is **on by default**. Turn it off in VictorSuite settings → **Terminal assistant (??)**.
+  That takes effect immediately, including in sessions that are already open. A new session is only
+  needed if the hook itself has not been installed yet (open VictorSuite once after install or update).
+- It works fully offline. There is no cloud, and the optional LLM is **off** and not wired in this
+  version. If that is added later, it will be an opt-in hand-off to DroidCommand AI only.
+- The exact command is always shown in the terminal before it runs. Non-destructive commands then
+  ask `Run this command? [Y/n]` (Enter runs it). Anything that could delete data, write to system
+  partitions, reboot, kill processes or use `su` needs a second, clearly labelled confirmation:
+  a native dark-neon dialog (**Cancel** is the default, then **Run anyway**) when VictorSuite can
+  show one (typical in-app session). If the dialog cannot be shown (for example an SSH session, or
+  if the app is in the background), the terminal asks you to type `run anyway`. There is no
+  "don't ask again".
+- If the best answer needs root and `su` is not available, the command is shown with an explanation
   and is not run. If nothing matches, you get a short "I don't know" with suggestions.
-- Your requests stay on the device and are not written to logcat.
-- Android 16 caveat: thermal sysfs files are often unreadable, so `cpu temp` asks the thermal service first.
+- Your requests stay on the device and are not written to logcat. The helper does not use the network.
+- Android 16 caveat: thermal sysfs files are often unreadable, so `?? cpu temp` asks the thermal
+  service first.
+- The hook is a small function in the VictorSuite block of `bash.bashrc`. A bare `??` is also a
+  glob for two-character filenames; the hook turns globbing off before the helper runs, so `??`
+  never expands to those names. Type `?? cpu`, not `??cpu` (the latter is a normal command name).
+- User and plugin overlays may be added as JSON under `$PREFIX/share/victorsuite/assistant/overlays.d/`.
+  They can add or override entries by id, but they cannot weaken the destructive classifier, and
+  an app update does not delete them.

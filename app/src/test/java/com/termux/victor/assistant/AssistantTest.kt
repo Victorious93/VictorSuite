@@ -34,6 +34,11 @@ class AssistantTest {
         assertEquals("disk_usage", top("disk space"))
         assertEquals("memory_usage", top("memory usage"))
         assertEquals("battery_status", top("battery status"))
+        assertEquals("root_check", top("am i rooted"))
+        assertEquals("ip_addresses", top("ip address"))
+        assertEquals("processes", top("running processes"))
+        assertEquals("android_version", top("android version"))
+        assertEquals("kernel", top("kernel version"))
     }
 
     @Test fun fuzzyTypoStillMatches() {
@@ -127,10 +132,10 @@ class AssistantTest {
     @Test fun overlayAddsAndOverridesById() {
         val overlay = """{"intents":[
           {"id":"disk_usage","title":"x","keywords":["disk usage"],"command_user":"df"},
-          {"id":"uptime","title":"Uptime","keywords":["uptime"],"command_user":"uptime"}]}"""
+          {"id":"brand_new_overlay","title":"Brand new","keywords":["brand new overlay"],"command_user":"echo overlay"}]}"""
         val t = table.withOverlay(overlay)
         assertEquals("df", t.intents.first { it.id == "disk_usage" }.commandUser)
-        assertTrue(t.intents.any { it.id == "uptime" })
+        assertTrue(t.intents.any { it.id == "brand_new_overlay" })
         assertEquals(table.intents.size + 1, t.intents.size)
     }
 

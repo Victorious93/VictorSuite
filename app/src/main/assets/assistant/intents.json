@@ -12,6 +12,30 @@
       "android_note": "On Android 16 the thermal sysfs files are often unreadable even for the shell user; the thermal service output is tried first. Which zone is the CPU is device-specific."
     },
     {
+      "id": "battery_status",
+      "title": "Battery status",
+      "keywords": ["battery status", "battery level", "battery health", "battery info", "battery temp", "battery temperature"],
+      "aliases": ["battery", "charge level"],
+      "command_user": "dumpsys battery",
+      "explain": "Shows charge level, temperature and health from the battery service."
+    },
+    {
+      "id": "disk_usage",
+      "title": "Disk usage",
+      "keywords": ["disk usage", "disk space", "free space", "storage space", "storage usage"],
+      "aliases": ["df", "storage"],
+      "command_user": "df -h",
+      "explain": "Shows used and free space per filesystem."
+    },
+    {
+      "id": "memory_usage",
+      "title": "Memory usage",
+      "keywords": ["memory usage", "free memory", "ram usage", "how much ram"],
+      "aliases": ["ram", "memory"],
+      "command_user": "free -h",
+      "explain": "Shows total, used and free RAM."
+    },
+    {
       "id": "magisk_modules",
       "title": "Magisk modules",
       "keywords": ["magisk modules", "list magisk modules", "installed modules"],
@@ -21,28 +45,89 @@
       "android_note": "KernelSU and APatch keep modules in different places."
     },
     {
-      "id": "disk_usage",
-      "title": "Disk usage",
-      "keywords": ["disk usage", "disk space", "free space", "storage space", "storage usage"],
-      "aliases": ["df"],
-      "command_user": "df -h",
-      "explain": "Shows used and free space per filesystem."
+      "id": "root_check",
+      "title": "Root check",
+      "keywords": ["root check", "am i rooted", "is my phone rooted", "do i have root", "check root"],
+      "aliases": ["is su available"],
+      "command_user": "ls -d /system/bin/su /system/xbin/su /sbin/su /debug_ramdisk/su 2>/dev/null || true; type su 2>/dev/null || echo 'no su on PATH'",
+      "command_root": "id",
+      "explain": "Looks for common su locations without asking for root. The root variant runs id and should print uid=0.",
+      "android_note": "Say 'as root' only if you want to actually request root; your root manager may show a prompt."
     },
     {
-      "id": "memory_usage",
-      "title": "Memory usage",
-      "keywords": ["memory usage", "free memory", "ram usage", "how much ram"],
-      "aliases": ["ram"],
-      "command_user": "free -h",
-      "explain": "Shows total, used and free RAM."
+      "id": "ip_addresses",
+      "title": "IP addresses",
+      "keywords": ["ip address", "ip addresses", "my ip", "local ip", "show ip", "network interfaces"],
+      "aliases": ["what is my ip"],
+      "command_user": "ip -o -4 addr show 2>/dev/null || ifconfig 2>/dev/null",
+      "explain": "Lists the IPv4 addresses on this phone's network interfaces.",
+      "android_note": "Newer Android versions may hide 'ip addr' from apps; the command then falls back to ifconfig. This only shows local addresses and sends nothing over the network."
     },
     {
-      "id": "battery_status",
-      "title": "Battery status",
-      "keywords": ["battery status", "battery level", "battery health", "battery info"],
-      "aliases": ["battery"],
-      "command_user": "dumpsys battery",
-      "explain": "Shows charge level, temperature and health from the battery service."
+      "id": "processes",
+      "title": "Running processes",
+      "keywords": ["running processes", "list processes", "show processes", "what is running"],
+      "aliases": ["processes", "process list"],
+      "command_user": "ps -A 2>/dev/null | head -n 40 || ps | head -n 40",
+      "command_root": "ps -A | head -n 80",
+      "explain": "Lists running processes (first lines only).",
+      "android_note": "Without root, Android only shows this app's processes."
+    },
+    {
+      "id": "android_version",
+      "title": "Android version",
+      "keywords": ["android version", "which android", "what android", "security patch", "android release"],
+      "aliases": ["sdk version"],
+      "command_user": "echo \"Android $(getprop ro.build.version.release) (SDK $(getprop ro.build.version.sdk)), security patch $(getprop ro.build.version.security_patch)\"",
+      "explain": "Reads the Android release, SDK level and security patch date from system properties."
+    },
+    {
+      "id": "kernel",
+      "title": "Kernel version",
+      "keywords": ["kernel version", "which kernel", "what kernel", "kernel info"],
+      "aliases": ["uname", "kernel"],
+      "command_user": "uname -a",
+      "explain": "Prints the kernel name, release and build string."
+    },
+    {
+      "id": "device_info",
+      "title": "Device model",
+      "keywords": ["device info", "phone model", "which phone", "what phone", "device model"],
+      "aliases": ["manufacturer"],
+      "command_user": "echo \"$(getprop ro.product.manufacturer) $(getprop ro.product.model) ($(getprop ro.product.device))\"",
+      "explain": "Reads the manufacturer, model and device name from system properties."
+    },
+    {
+      "id": "cpu_info",
+      "title": "CPU details",
+      "keywords": ["cpu info", "cpu cores", "how many cores", "what processor", "which cpu", "cpu architecture"],
+      "aliases": ["processor"],
+      "command_user": "grep -m1 -E 'Hardware|model name' /proc/cpuinfo; echo \"cores: $(nproc 2>/dev/null || echo unknown)\"; uname -m",
+      "explain": "Shows the CPU name when available, the number of cores and the architecture."
+    },
+    {
+      "id": "uptime",
+      "title": "Uptime",
+      "keywords": ["uptime", "how long has my phone been on", "how long since reboot", "last boot"],
+      "aliases": ["time since boot"],
+      "command_user": "uptime -p 2>/dev/null || cat /proc/uptime",
+      "explain": "Shows how long the phone has been running since its last boot."
+    },
+    {
+      "id": "selinux",
+      "title": "SELinux mode",
+      "keywords": ["selinux", "selinux status", "is selinux enforcing", "selinux mode"],
+      "aliases": ["getenforce"],
+      "command_user": "getenforce",
+      "explain": "Prints Enforcing or Permissive."
+    },
+    {
+      "id": "termux_info",
+      "title": "Termux environment info",
+      "keywords": ["termux info", "termux version", "about termux", "environment info"],
+      "aliases": ["termux"],
+      "command_user": "termux-info",
+      "explain": "Prints details about this Termux install and device for bug reports."
     }
   ]
 }

@@ -60,7 +60,10 @@ jobs:
           python3 -m unittest discover -s tests/ci -p 'test_*.py' -v
           bash tests/ai-agents/test_vsphone_gate.sh
           bash tests/pc/test_victor_pc_setup.sh
+          bash tests/assistant/test_vs_ask.sh
           shellcheck pc/victor-pc-setup.sh tests/pc/test_victor_pc_setup.sh
+          shellcheck -s sh app/src/main/assets/runcommand/vs-ask
+          shellcheck -s bash app/src/main/assets/assistant/bashrc-hook.sh tests/assistant/test_vs_ask.sh
 
       - name: Verify debug APK matches source (id, version, targetSdk, native libs)
         run: |
