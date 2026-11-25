@@ -7,7 +7,8 @@ buildscript {
         google()
         // VictorSuite add {@
         maven { url 'https://jitpack.io' }
-        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/" }
+        // Only Eclipse Paho may come from here, so an outage of this snapshot repo cannot fail unrelated resolution (PR #114 CI: 503).
+        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/"; content { includeGroup "org.eclipse.paho" } }
         //maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { setUrl("https://maven.aliyun.com/repository/public") }
         maven { setUrl("https://maven.aliyun.com/repository/google") }
@@ -30,7 +31,8 @@ allprojects {
         mavenCentral()
         maven { url "https://jitpack.io" }
         // VictorSuite add {@
-        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/" }
+        // Only Eclipse Paho may come from here, so an outage of this snapshot repo cannot fail unrelated resolution (PR #114 CI: 503).
+        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/"; content { includeGroup "org.eclipse.paho" } }
         //maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { setUrl("https://maven.aliyun.com/repository/public") }
         maven { setUrl("https://maven.aliyun.com/repository/google") }
