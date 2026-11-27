@@ -29,6 +29,8 @@
         <package android:name="com.victorious.launch" />
         <!-- VictorDrax drawer entry (VictorDraxOpenClickConfig) -->
         <package android:name="com.victorious.victordrax" />
+        <!-- RustDeskV: application ID differs from its Kotlin service namespace. -->
+        <package android:name="com.victorious.rustdeskv" />
     </queries>
     <!-- @} -->
 
