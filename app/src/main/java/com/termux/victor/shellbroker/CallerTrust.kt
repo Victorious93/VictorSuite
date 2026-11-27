@@ -1,5 +1,11 @@
 package com.termux.victor.shellbroker
 
+/** RustDeskV installs beside stock RustDesk; its service retains the original Kotlin namespace. */
+object RustDeskVTransport {
+    const val PACKAGE = "com.victorious.rustdeskv"
+    const val SERVICE = "com.carriez.flutter_hbb.VictorTerminalTransportService"
+}
+
 /** One trusted app: package + the SHA-256 of its signing certificate (both must match) + what it may do. */
 data class TrustedCaller(val packageName: String, val certSha256: String, val scopes: Set<Scope>, val label: String = packageName)
 

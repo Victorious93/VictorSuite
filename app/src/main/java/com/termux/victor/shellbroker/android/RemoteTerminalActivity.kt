@@ -22,6 +22,7 @@ import com.termux.victor.shellbroker.CallerVerifier
 import com.termux.victor.shellbroker.IRemoteTerminalCallback
 import com.termux.victor.shellbroker.IRemoteTerminalTransport
 import com.termux.victor.shellbroker.Verification
+import com.termux.victor.shellbroker.RustDeskVTransport
 
 /**
  * "Remote shell": a terminal for ONE named remote peer (e.g. a VictorLinux PC), rendered by VictorSuite's terminal view, carried by
@@ -59,7 +60,7 @@ class RemoteTerminalActivity : Activity() {
         // Trust gate first: nothing is bound or started until the owner's pinned transport is verified.
         val verifier = CallerVerifier(AndroidPackageIdentity(this), BrokerHolder.also { BrokerHolder.get(this) }.trust)
         when (val v = verifier.verifyProvider(TRANSPORT_PKG)) {
-            is Verification.Rejected -> { status?.text = "Remote shell is not available: ${v.reason}\n\nTrust rustdesk in VictorSuite → Remote shell access (enable 'terminal transport')."; return }
+            is Verification.Rejected -> { status?.text = "Remote shell is not available: ${v.reason}\n\nTrust RustDeskV ($TRANSPORT_PKG) in VictorSuite → Remote shell access (enable 'terminal transport')."; return }
             is Verification.Ok -> Unit
         }
         val bind = Intent().setComponent(ComponentName(TRANSPORT_PKG, TRANSPORT_SERVICE))
@@ -161,7 +162,7 @@ class RemoteTerminalActivity : Activity() {
 
     companion object {
         const val EXTRA_PEER = "peer_id"; const val EXTRA_PEER_NAME = "peer_name"; const val EXTRA_SESSION = "session_id"
-        const val TRANSPORT_PKG = "com.carriez.flutter_hbb"
-        const val TRANSPORT_SERVICE = "com.carriez.flutter_hbb.VictorTerminalTransportService"
+        const val TRANSPORT_PKG = RustDeskVTransport.PACKAGE
+        const val TRANSPORT_SERVICE = RustDeskVTransport.SERVICE
     }
 }

@@ -253,15 +253,21 @@ class ShellBrokerTest {
 class TransportProviderTrustTest {
     private val cert = "ab".repeat(32)
     private fun verifier(scopes: Set<Scope>, certOnDevice: String? = cert): CallerVerifier {
-        val trust = InMemoryTrustStore(listOf(TrustedCaller("com.carriez.flutter_hbb", cert, scopes, "rustdesk")))
+        val trust = InMemoryTrustStore(listOf(TrustedCaller(RustDeskVTransport.PACKAGE, cert, scopes, "rustdesk")))
         val ids = object : PackageIdentity { override fun packagesForUid(uid: Int) = emptyList<String>(); override fun certSha256(packageName: String) = certOnDevice }
         return CallerVerifier(ids, trust)
     }
 
-    @Test fun trustedProviderWithScopeIsAccepted() = assertTrue(verifier(setOf(Scope.TRANSPORT_PROVIDER)).verifyProvider("com.carriez.flutter_hbb") is Verification.Ok)
+    @Test fun trustedProviderWithScopeIsAccepted() = assertTrue(verifier(setOf(Scope.TRANSPORT_PROVIDER)).verifyProvider(RustDeskVTransport.PACKAGE) is Verification.Ok)
+    @Test fun rebrandedPackageAndServiceMatchRustDeskV() {
+        assertEquals("com.victorious.rustdeskv", RustDeskVTransport.PACKAGE)
+        assertEquals("com.carriez.flutter_hbb.VictorTerminalTransportService", RustDeskVTransport.SERVICE)
+    }
+    @Test fun oldStockPackageDoesNotInheritRustDeskVTrust() =
+        assertEquals(RejectCode.UNKNOWN_CALLER, (verifier(setOf(Scope.TRANSPORT_PROVIDER)).verifyProvider("com.carriez.flutter_hbb") as Verification.Rejected).code)
     @Test fun unknownPackageRefused() = assertEquals(RejectCode.UNKNOWN_CALLER, (verifier(setOf(Scope.TRANSPORT_PROVIDER)).verifyProvider("evil.rustdesk") as Verification.Rejected).code)
     @Test fun repackagedProviderWithDifferentCertificateRefused() =
-        assertEquals(RejectCode.UNTRUSTED_CERT, (verifier(setOf(Scope.TRANSPORT_PROVIDER), "cd".repeat(32)).verifyProvider("com.carriez.flutter_hbb") as Verification.Rejected).code)
+        assertEquals(RejectCode.UNTRUSTED_CERT, (verifier(setOf(Scope.TRANSPORT_PROVIDER), "cd".repeat(32)).verifyProvider(RustDeskVTransport.PACKAGE) as Verification.Rejected).code)
     @Test fun terminalScopeAloneDoesNotMakeAnAppATransport() =
-        assertEquals(RejectCode.SCOPE_NOT_GRANTED, (verifier(setOf(Scope.TERMINAL, Scope.ONESHOT)).verifyProvider("com.carriez.flutter_hbb") as Verification.Rejected).code)
+        assertEquals(RejectCode.SCOPE_NOT_GRANTED, (verifier(setOf(Scope.TERMINAL, Scope.ONESHOT)).verifyProvider(RustDeskVTransport.PACKAGE) as Verification.Rejected).code)
 }
